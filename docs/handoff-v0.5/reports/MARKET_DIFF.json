@@ -1,0 +1,260 @@
+{
+  "from": "pre-market risk-updatedv0.5",
+  "to": "v0.5 problem-solution/market/frequency research update03Oct2026",
+  "changes": [
+    {
+      "path": "AGENTS.md",
+      "change": "MODIFIED",
+      "before_sha256": "95c59f778f33c8f9aaaf20747a095a17ca558a6427c3749e9d0112c63e52b8ea",
+      "after_sha256": "bdb6994092452c0232b86e73515a21f18c285e3dcbec8496aaf78b7dc9a0c57e"
+    },
+    {
+      "path": "CLAUDE.md",
+      "change": "MODIFIED",
+      "before_sha256": "5de7cc491e48ad4b723293a899b3c7e150f43acd8419356ee856d1c5d912649e",
+      "after_sha256": "d27aa3ddb9653799da3ea783a5c81299692fa0f703f75a510a6d7a39517e7160"
+    },
+    {
+      "path": "PRODUCT.md",
+      "change": "MODIFIED",
+      "before_sha256": "953cac89a0fd1f191ca4e4d9cbb4929e36cdc8615c4ef03ddff25d2f867da002",
+      "after_sha256": "ab4de93cb48e76610820e0064c42fb6dcc7eda6b3d1c493535ac0459ae7fe10d"
+    },
+    {
+      "path": "README.md",
+      "change": "MODIFIED",
+      "before_sha256": "b73e7b70dd7ad5fe5941dd3e3cd9b59daacc44acd9786d779e7c367c00dae3dd",
+      "after_sha256": "edc48efb25e0c2365db35f402df9af00ec58013346f169314f61e45eb9071fbd"
+    },
+    {
+      "path": "START_HERE.md",
+      "change": "MODIFIED",
+      "before_sha256": "89bf974798c17b9388755f4efb995a73419e49239e75875f97355d3636823c7f",
+      "after_sha256": "324e4b8d30d19190a9d481dfe5d5aabe62433095af949a5fcf646a21e97da95b"
+    },
+    {
+      "path": "docs/01_Product_Vision_and_Executive_Summary.md",
+      "change": "MODIFIED",
+      "before_sha256": "657c7b0c1f998b1f9eac7a122ab3daf717ef28f23442a07126b261724efaefee",
+      "after_sha256": "399e95557d54ab873cc14444392db8da5bea3b7bfd6e92429456bbf095ae4d8a"
+    },
+    {
+      "path": "docs/02_Problem_Analysis_and_Opportunity.md",
+      "change": "MODIFIED",
+      "before_sha256": "b51f8b0722d4dd60191887cecd645ef545070774fb646679cda296c228c67ceb",
+      "after_sha256": "3d121c4d7a0f71d65c8c676cf8bdd3dfac8c288b161d017ea8a5b66e5dc41eb1"
+    },
+    {
+      "path": "docs/05_User_Personas.md",
+      "change": "MODIFIED",
+      "before_sha256": "98d8938dbc8e6c2cd5e34e0d5c446dc9be72c6aa0bbbfa25a8a8c4ba538e8fca",
+      "after_sha256": "8edf3e783907d000374875d977c204d66b2129fb8343f26aeb1ba5442d181097"
+    },
+    {
+      "path": "docs/10_Data_Requirements_and_Provider_Matrix.md",
+      "change": "MODIFIED",
+      "before_sha256": "ac3d3eabfd5c36a0d7c6f0e94af2a40aa41da70f16033347426ae5b692655f71",
+      "after_sha256": "16a3cfc595580099cd8079e913085d76cbff987792fa51ecef661da0fce9ca30"
+    },
+    {
+      "path": "docs/11_Literature_Review.md",
+      "change": "MODIFIED",
+      "before_sha256": "4f3b659756e801426af9ade0d89ee165e03888bf5e628e67ee54b3d3156834e6",
+      "after_sha256": "c520ee2880d33c17acb83b0c78ffe2b176f646200443fd9e5e2638510f96acfc"
+    },
+    {
+      "path": "docs/12_Anomaly_Catalog.md",
+      "change": "MODIFIED",
+      "before_sha256": "35ba9040db5f129a178f20a35cd8732c47cb43afe6ffc2ac0a8493a1fd424792",
+      "after_sha256": "fb7357c8b261a1da06a918c383f42ae2dab1e87cdb2372e7029172fc845a9aef"
+    },
+    {
+      "path": "docs/20_Test_and_Validation_Strategy.md",
+      "change": "MODIFIED",
+      "before_sha256": "9c9e0bd54922008ee6aa82a4779c1a29d31e8b6344a8514ce73ddf1b08683698",
+      "after_sha256": "7a2403c089259979e4dc47a8a1967220c23bd1f2107db922511dc2fdb9a68da5"
+    },
+    {
+      "path": "docs/21_Implementation_Backlog_and_Traceability.md",
+      "change": "MODIFIED",
+      "before_sha256": "b917195a919e278e460bbe3eedca8d2e1f436a187a45993cdb1dea777195b208",
+      "after_sha256": "4b8133d93f8a7d10f253c907bbef2e620601443ebb3659644715cb6f07e0f6ee"
+    },
+    {
+      "path": "docs/23_Startup_Validation_and_Demo.md",
+      "change": "MODIFIED",
+      "before_sha256": "4249d868cf8c51a19d7be8c2b594d61e9d7d1175ca98b05edaff16ef0bf0e651",
+      "after_sha256": "385d4d27241ef1dd5d961433a0f2dcda8bfa597561dc086b4004ea2768d81f56"
+    },
+    {
+      "path": "docs/24_Competitor_Evidence_and_Positioning.md",
+      "change": "MODIFIED",
+      "before_sha256": "a2dc60ce2bb235f238e9deb6b61cb00fd85bd5e5766a800f71d2a9da1355f579",
+      "after_sha256": "0a5dbe15d99b9dd9c38cf2c1e66433b16886572a0b374481ba0168e93f95447e"
+    },
+    {
+      "path": "docs/25_Release_Gates_and_Open_Decisions.md",
+      "change": "MODIFIED",
+      "before_sha256": "c6b4861fbac5ace3c920b59f55fcbbd56667044f281afaacf662667761dd61ef",
+      "after_sha256": "369c9bc7bd20e16e76e7369a100d1d938699dd66f70b15ba5e296bab453eeb4b"
+    },
+    {
+      "path": "prompts/CLAUDE_CODE_START.md",
+      "change": "MODIFIED",
+      "before_sha256": "6ba7be9e31c4a9c0c9c9537689a087ae113372635cd1cb534683299b5f8bb55f",
+      "after_sha256": "d520d273b4ffc3e618d2fdb2ade1663aacb1c75bb120ef88c824191c3de857b7"
+    },
+    {
+      "path": "prompts/CODEX_START.md",
+      "change": "MODIFIED",
+      "before_sha256": "671d5a8d21cc1241ca5658b663740ed26909423e3740ebd05acbeeb106714c06",
+      "after_sha256": "ecd17366d0ce8b53f0d6fbf3b31ad267f9cd446bf19aa7b4e9398c3f4d34d33b"
+    },
+    {
+      "path": "reports/MARKET_BASELINE_HASHES.json",
+      "change": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "2a881d268e9e057a90a06093b6199099bfbedb3758b41b16b96b78941782df45"
+    },
+    {
+      "path": "reports/MARKET_EXECUTION.json",
+      "change": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "234870453b1b05d95128f3aad3d4daaddb7dd0304cc563cd2367162ea9e57760"
+    },
+    {
+      "path": "reports/PROBLEM_MARKET_RESEARCH.md",
+      "change": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "750d971a9a8ae3743afb960c3f30e9c134a96fe1b80b96acf565ebbb73b7c899"
+    },
+    {
+      "path": "reports/RESEARCH_REPORT.md",
+      "change": "MODIFIED",
+      "before_sha256": "1fa83fb00a38785262ff4e2b396465d86799af0d872a56f2b290f95b01f75add",
+      "after_sha256": "2577c474ad02fd3438b2d5ef6713e0bf48d7ac6c6c3585297ceea8b51c701835"
+    },
+    {
+      "path": "reports/VALIDATION_EXECUTION.md",
+      "change": "MODIFIED",
+      "before_sha256": "e68cfbed7b42bf68f0f7e74eee77d534feaa35c95324a8a8a9c10f32789f9248",
+      "after_sha256": "840cfd62a0f34f03757588d43815ffb7195a3fbf75af98f206dda980d4277b7a"
+    },
+    {
+      "path": "reports/VALIDATION_REPORT.md",
+      "change": "MODIFIED",
+      "before_sha256": "2e799d0f2fd147f7b34546d3ced2bd7574a5bd95fa5e7ef3382c6a70bbe751d9",
+      "after_sha256": "3f7fcbba2c64b59efb72cb653e8ba68c572b283d25df74413b86227c2b2edd38"
+    },
+    {
+      "path": "reports/contract_regression_results.json",
+      "change": "MODIFIED",
+      "before_sha256": "66329e5f2a9049e148e96be62c8d4ad12fe53c024801cc9e6b6cbb248348c131",
+      "after_sha256": "9f7033ece8b95cd3c84899bd7584bf276ec14011774211aa406bbc9b40ca6457"
+    },
+    {
+      "path": "reports/validation_results.json",
+      "change": "MODIFIED",
+      "before_sha256": "01f970c838a2dec115649bec1eff96c8fcfce9e412eb792fec1cce43287a7635",
+      "after_sha256": "938e3aeca7dc3245813209ea3a1bd3250b91ab09fb47d86a69973872f3ac6d07"
+    },
+    {
+      "path": "research/problem_market/ANOMALY_FREQUENCY_MAP.json",
+      "change": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "759e979c74bd2a56a5a8819618b98d57d4483c7acf27ff9b769a64956a0bd705"
+    },
+    {
+      "path": "research/problem_market/BIST_FREQUENCY_EVIDENCE.md",
+      "change": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "539dfd546c14d2ccfc1a58baaa831ee93a6cbd987d9821708535f990812ccaf5"
+    },
+    {
+      "path": "research/problem_market/CROSS_MARKET_FREQUENCY.md",
+      "change": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "36077bd2e2f81a6409cf13fc9c47ad4d03cf5a2b9c3b5b0205cc70c9479a9dbc"
+    },
+    {
+      "path": "research/problem_market/MARKET_PEER_REVIEW.md",
+      "change": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "419f3dc8f007e167e5bd0f57cea43d67ab27029b9a14899248a661562a6ccc15"
+    },
+    {
+      "path": "research/problem_market/OFFICIAL_INCIDENT_CASES.md",
+      "change": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "fe569d886fea74932e39496dd08e0234d23ef8d048875742506b1dddd71b3589"
+    },
+    {
+      "path": "research/problem_market/PROBLEM_AND_SOLUTION_EVIDENCE.md",
+      "change": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "785b4de517cbfc9ee80d3eab4a5a0472efe5c950606ae9779621492f35e32c1a"
+    },
+    {
+      "path": "research/problem_market/PROBLEM_SOLUTION_HYPOTHESES.json",
+      "change": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "b7c80e91c04f61138a7969737d281c8b579984c9679d3c54cba2e11d0d51363b"
+    },
+    {
+      "path": "research/problem_market/RETRIEVAL_LIMITS.json",
+      "change": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "ec0c68f2b95d6cd5c59029e6143e343cb361be6da726faf4166409bcc29dc459"
+    },
+    {
+      "path": "research/problem_market/ROOT_SOURCE_VERIFICATION.json",
+      "change": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "40623be03785ff4fd8272fbaf0ff64a1e4074ee361b140853cef0910161c5c4b"
+    },
+    {
+      "path": "research/problem_market/TURKEY_MARKET_EVIDENCE.md",
+      "change": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "0db6206f2f78421e0b96f57fa1a82b8bb377f922ac1d111561ba7b1deecbbf1a"
+    },
+    {
+      "path": "research/problem_market/bist_frequency_sources.json",
+      "change": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "f663f4b1d7f493a2e22ad69128c40e19190a7b06d2cec73f4dab7bf2c60ebfca"
+    },
+    {
+      "path": "research/problem_market/cross_market_sources.json",
+      "change": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "26e5d252d9c261ce450d8c7f183badac5bee2d308ac7473c476ebc6b75064ffb"
+    },
+    {
+      "path": "research/problem_market/incident_case_sources.json",
+      "change": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "4573e0ed8aa6b1d0025213677e7c32a9808dbdee52c09e68c4d5c636c36a8dd4"
+    },
+    {
+      "path": "research/problem_market/problem_solution_sources.json",
+      "change": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "61d0dcbeec086aa11efc67af6723601c28deb09788c8d39fb449489b2782c077"
+    },
+    {
+      "path": "research/problem_market/turkey_market_sources.json",
+      "change": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "2f3a3280ce8b6774e604f007095dba7a92cdf42c013028b54a6a4f035d07d595"
+    }
+  ],
+  "deleted_files": [],
+  "excluded": [
+    "MANIFEST.json",
+    "reports/MARKET_DIFF.json",
+    "__pycache__"
+  ],
+  "prior_diff_and_execution_records": "Historical original scopes remain unchanged; MARKET_DIFF/EXECUTION describe this extension.",
+  "immutable_core_and_prior_labs_preserved": true
+}

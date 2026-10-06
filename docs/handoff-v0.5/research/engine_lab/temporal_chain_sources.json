@@ -1,0 +1,503 @@
+{
+  "experiment": "temporal-chain-lab-v1",
+  "checked_date_utc": "2026-10-02",
+  "origin": "RESEARCH_METADATA",
+  "scope": "Official protocol and temporal methodology reading plus deterministic synthetic local experiment; no chain RPC, live payloads, account provisioning, installs, spending, external sends or deployments.",
+  "citation_note": "retrieval_refs identify observed tool retrievals; URLs and sections make source review independently inspectable. Source facts are paraphrases. Inferences are explicitly separated.",
+  "source_count": 15,
+  "sources": [
+    {
+      "id": "TC-S01",
+      "title": "MariaDB bitemporal tables",
+      "url": "https://mariadb.com/docs/server/reference/sql-structure/temporal-tables/bitemporal-tables",
+      "primary": true,
+      "checked_date_utc": "2026-10-02",
+      "retrieval_refs": [
+        "turn73view0"
+      ],
+      "review_depth": "FULL_SHORT_PAGE",
+      "sections_reviewed": [
+        "System-versioning and application-time combination; temporal periods"
+      ],
+      "supported_facts": [
+        "Bitemporal tables combine system-versioned history with application-time periods."
+      ],
+      "project_inferences": [
+        "Separate domain time and knowledge history; product availability still needs separate evidence."
+      ],
+      "not_verified": [
+        "Provider capability/entitlement/coverage",
+        "Live-chain or production behavior"
+      ]
+    },
+    {
+      "id": "TC-S02",
+      "title": "MariaDB system-versioned tables",
+      "url": "https://mariadb.com/docs/server/reference/sql-structure/temporal-tables/system-versioned-tables",
+      "primary": true,
+      "checked_date_utc": "2026-10-02",
+      "retrieval_refs": [
+        "turn73view1"
+      ],
+      "review_depth": "SELECTED_SECTIONS",
+      "sections_reviewed": [
+        "History introduction; historical AS OF queries; transaction-precise history caveat"
+      ],
+      "supported_facts": [
+        "System-versioned tables retain historical row states; AS OF selects a previous state."
+      ],
+      "project_inferences": [
+        "An operational database update history alone does not verify historical public availability."
+      ],
+      "not_verified": [
+        "Provider capability/entitlement/coverage",
+        "Live-chain or production behavior"
+      ]
+    },
+    {
+      "id": "TC-S03",
+      "title": "Ethereum JSON-RPC",
+      "url": "https://ethereum.org/developers/docs/apis/json-rpc/",
+      "primary": true,
+      "checked_date_utc": "2026-10-02",
+      "retrieval_refs": [
+        "turn95view0",
+        "turn96view0",
+        "turn97view1"
+      ],
+      "review_depth": "SELECTED_SECTIONS",
+      "sections_reviewed": [
+        "Block parameter tags (lines 325-343); eth_getFilterChanges removed/log provenance fields (lines 1805-1834); filter timeout"
+      ],
+      "supported_facts": [
+        "Block parameters distinguish latest, safe and finalized.",
+        "A removed log indicates removal due to a chain reorganization; logs include transaction/block provenance."
+      ],
+      "project_inferences": [
+        "Retain original log evidence and dated reorg conclusions; no universal EVM finality inheritance."
+      ],
+      "not_verified": [
+        "Provider capability/entitlement/coverage",
+        "Live-chain or production behavior"
+      ]
+    },
+    {
+      "id": "TC-S04",
+      "title": "Ethereum proof of stake",
+      "url": "https://ethereum.org/developers/docs/consensus-mechanisms/pos/",
+      "primary": true,
+      "checked_date_utc": "2026-10-02",
+      "retrieval_refs": [
+        "turn95view1",
+        "turn97view0"
+      ],
+      "review_depth": "SELECTED_SECTIONS",
+      "sections_reviewed": [
+        "Checkpoint finality and stake votes; economic consequences of finalized reversion; finality stall (lines 300-329)"
+      ],
+      "supported_facts": [
+        "Checkpoint finality depends on stake-voting rules.",
+        "Reverting finalized history has slashable-stake consequences; finality can stall."
+      ],
+      "project_inferences": [
+        "Do not promise zero finality risk or a fixed universal completion delay."
+      ],
+      "not_verified": [
+        "Provider capability/entitlement/coverage",
+        "Live-chain or production behavior"
+      ]
+    },
+    {
+      "id": "TC-S05",
+      "title": "ERC-20 token standard",
+      "url": "https://eips.ethereum.org/EIPS/eip-20",
+      "primary": true,
+      "checked_date_utc": "2026-10-02",
+      "retrieval_refs": [
+        "turn95view2",
+        "turn96view2",
+        "turn96view3"
+      ],
+      "review_depth": "SELECTED_STANDARD_SECTIONS",
+      "sections_reviewed": [
+        "decimals optional (lines 62-68); Transfer event (lines 114-122)"
+      ],
+      "supported_facts": [
+        "decimals is optional metadata.",
+        "Transfer event specifies from, to and raw value, including required zero-value event handling."
+      ],
+      "project_inferences": [
+        "Transfer fields alone do not establish consideration, sale price or beneficial ownership; missing precision remains unknown."
+      ],
+      "not_verified": [
+        "Provider capability/entitlement/coverage",
+        "Live-chain or production behavior"
+      ]
+    },
+    {
+      "id": "TC-S06",
+      "title": "Solana RPC overview",
+      "url": "https://solana.com/docs/rpc",
+      "primary": true,
+      "checked_date_utc": "2026-10-02",
+      "retrieval_refs": [
+        "turn95view3",
+        "turn96view4"
+      ],
+      "review_depth": "SELECTED_SECTIONS",
+      "sections_reviewed": [
+        "Public endpoint caveats; processed/confirmed/finalized commitments (lines 32-49)"
+      ],
+      "supported_facts": [
+        "Processed observations may roll back; confirmed and finalized are distinct commitment levels.",
+        "Public endpoints are shared, can return rate-limit or access-block responses, and are not intended as production capacity."
+      ],
+      "project_inferences": [
+        "Persist explicit commitment and provider coverage; confirmed is not finalized and endpoint documentation is not entitlement proof."
+      ],
+      "not_verified": [
+        "Provider capability/entitlement/coverage",
+        "Live-chain or production behavior"
+      ]
+    },
+    {
+      "id": "TC-S07",
+      "title": "Solana create token account",
+      "url": "https://solana.com/docs/tokens/basics/create-token-account",
+      "primary": true,
+      "checked_date_utc": "2026-10-02",
+      "retrieval_refs": [
+        "turn95view4",
+        "turn96view5"
+      ],
+      "review_depth": "SELECTED_SECTIONS",
+      "sections_reviewed": [
+        "Token account definition, owner fields and ATA/non-ATA distinction (lines 35-163)"
+      ],
+      "supported_facts": [
+        "Token accounts hold a mint balance with token-operation authority distinct from base account program ownership.",
+        "Custom token accounts exist beyond the associated-account convention."
+      ],
+      "project_inferences": [
+        "Multiple accounts can share one direct authority; neither account nor authority count is a person count."
+      ],
+      "not_verified": [
+        "Provider capability/entitlement/coverage",
+        "Live-chain or production behavior"
+      ]
+    },
+    {
+      "id": "TC-S08",
+      "title": "Solana transfer tokens",
+      "url": "https://solana.com/docs/tokens/basics/transfer-tokens",
+      "primary": true,
+      "checked_date_utc": "2026-10-02",
+      "retrieval_refs": [
+        "turn95view5",
+        "turn96view6"
+      ],
+      "review_depth": "SELECTED_SECTIONS",
+      "sections_reviewed": [
+        "Transfer/TransferChecked; owner/delegate/permanent-delegate signing semantics (lines 41-53)"
+      ],
+      "supported_facts": [
+        "Token transfers move token balances; TransferChecked checks expected mint precision.",
+        "Owner or authorized delegate permissions can authorize transfers."
+      ],
+      "project_inferences": [
+        "A token transfer instruction alone does not establish an economic sale."
+      ],
+      "not_verified": [
+        "Provider capability/entitlement/coverage",
+        "Live-chain or production behavior"
+      ]
+    },
+    {
+      "id": "TC-S09",
+      "title": "Solana token model",
+      "url": "https://solana.com/docs/tokens",
+      "primary": true,
+      "checked_date_utc": "2026-10-02",
+      "retrieval_refs": [
+        "turn97view2",
+        "turn98view4"
+      ],
+      "review_depth": "SELECTED_SECTIONS",
+      "sections_reviewed": [
+        "Mint supply/precision and mint/freeze authority; token account fields (lines 60-119)"
+      ],
+      "supported_facts": [
+        "Mint and freeze authority have separate permission roles.",
+        "Token account authority is distinct from mint authority."
+      ],
+      "project_inferences": [
+        "Permission role labels are not human or beneficial-owner labels."
+      ],
+      "not_verified": [
+        "Provider capability/entitlement/coverage",
+        "Live-chain or production behavior"
+      ]
+    },
+    {
+      "id": "TC-S10",
+      "title": "Solana terminology",
+      "url": "https://solana.com/docs/references/terminology",
+      "primary": true,
+      "checked_date_utc": "2026-10-02",
+      "retrieval_refs": [
+        "turn97view3",
+        "turn98view5",
+        "turn98view6"
+      ],
+      "review_depth": "SELECTED_GLOSSARY_ENTRIES",
+      "sections_reviewed": [
+        "Finality (lines 168-170); root (345-347); signer/PDA (365-368); finalized transaction (461-463)"
+      ],
+      "supported_facts": [
+        "Rooted history and finality relate to consensus and lockout.",
+        "PDA signing uses program authorization rather than an ordinary private key signature."
+      ],
+      "project_inferences": [
+        "A queried authority can be a program-derived authority; raw authority does not identify an independent person."
+      ],
+      "not_verified": [
+        "Provider capability/entitlement/coverage",
+        "Live-chain or production behavior"
+      ]
+    },
+    {
+      "id": "TC-S11",
+      "title": "Solana getTokenLargestAccounts",
+      "url": "https://solana.com/docs/rpc/http/gettokenlargestaccounts",
+      "primary": true,
+      "checked_date_utc": "2026-10-02",
+      "retrieval_refs": [
+        "turn97view4",
+        "turn98view2"
+      ],
+      "review_depth": "SELECTED_METHOD_SPECIFICATION",
+      "sections_reviewed": [
+        "Method result limit (line 17); commitment configuration; response context slot and balance fields"
+      ],
+      "supported_facts": [
+        "Method returns the 20 largest token accounts for a mint with response context."
+      ],
+      "project_inferences": [
+        "A top-20 response is partial coverage, not a full mint owner universe."
+      ],
+      "not_verified": [
+        "Provider capability/entitlement/coverage",
+        "Live-chain or production behavior"
+      ]
+    },
+    {
+      "id": "TC-S12",
+      "title": "Solana getTokenAccountsByOwner",
+      "url": "https://solana.com/docs/rpc/http/gettokenaccountsbyowner",
+      "primary": true,
+      "checked_date_utc": "2026-10-02",
+      "retrieval_refs": [
+        "turn97view5",
+        "turn98view3"
+      ],
+      "review_depth": "SELECTED_METHOD_SPECIFICATION",
+      "sections_reviewed": [
+        "Owner/mint/program parameters; commitment/minContextSlot; response context and parsed owner fields (lines 17-55,157,200)"
+      ],
+      "supported_facts": [
+        "Method filters by owner and mint or program, and returns a context slot.",
+        "Outer account owner and parsed token-data owner have distinct roles."
+      ],
+      "project_inferences": [
+        "Owner-filtered accounts do not establish beneficial-owner census; a minimum context bound does not select an exact historic state."
+      ],
+      "not_verified": [
+        "Provider capability/entitlement/coverage",
+        "Live-chain or production behavior"
+      ]
+    },
+    {
+      "id": "TC-S13",
+      "title": "Solana SetAuthority",
+      "url": "https://solana.com/docs/tokens/basics/set-authority",
+      "primary": true,
+      "checked_date_utc": "2026-10-02",
+      "retrieval_refs": [
+        "turn101view1",
+        "turn102view0"
+      ],
+      "review_depth": "SELECTED_SECTIONS",
+      "sections_reviewed": [
+        "Authority changes and separate roles; instruction/source reference (lines 35-53)"
+      ],
+      "supported_facts": [
+        "SetAuthority changes or revokes particular authority roles on mint/token accounts."
+      ],
+      "project_inferences": [
+        "Current authority must not silently substitute for point-in-time historical authority."
+      ],
+      "not_verified": [
+        "Provider capability/entitlement/coverage",
+        "Live-chain or production behavior"
+      ]
+    },
+    {
+      "id": "TC-S14",
+      "title": "Official Solana Token Program documentation",
+      "url": "https://www.solana-program.com/docs/token",
+      "primary": true,
+      "checked_date_utc": "2026-10-02",
+      "retrieval_refs": [
+        "turn98view0",
+        "turn101view0"
+      ],
+      "review_depth": "SELECTED_SECTIONS",
+      "sections_reviewed": [
+        "Auxiliary token accounts (lines 124-134,182-208); Multisig usage (258-286)"
+      ],
+      "supported_facts": [
+        "Auxiliary accounts exist; multisig authorities can govern mint and token-account permission roles."
+      ],
+      "project_inferences": [
+        "A single authority address can represent a signer set, without establishing economic beneficial owners."
+      ],
+      "not_verified": [
+        "Provider capability/entitlement/coverage",
+        "Live-chain or production behavior"
+      ]
+    },
+    {
+      "id": "TC-S15",
+      "title": "Official Token Program state.rs at pinned revision",
+      "url": "https://github.com/solana-program/token/blob/6d18ff73b1dd30703a30b1ca941cb0f1d18c2b2a/program/src/state.rs",
+      "primary": true,
+      "checked_date_utc": "2026-10-02",
+      "retrieval_refs": [
+        "turn98view1",
+        "turn102view1",
+        "turn102view2"
+      ],
+      "review_depth": "PINNED_SOURCE_SELECTED_FIELDS",
+      "sections_reviewed": [
+        "Mint fields (retrieval lines 1191-1218); Account (1325-1366); AccountState (1512-1534); Multisig (1541-1559)"
+      ],
+      "supported_facts": [
+        "Mint, Account and Multisig encode different authority, balance, precision, state and signer fields."
+      ],
+      "project_inferences": [
+        "Use protocol-field meanings explicitly; source inspection does not validate a live account or prove economic ownership."
+      ],
+      "not_verified": [
+        "Provider capability/entitlement/coverage",
+        "Live-chain or production behavior"
+      ]
+    }
+  ],
+  "local_authority_read": [
+    {
+      "file": "AGENTS.md",
+      "depth": "FULL",
+      "relevant_lines": "3-8,15-31,36-40"
+    },
+    {
+      "file": "START_HERE.md",
+      "depth": "FULL"
+    },
+    {
+      "file": "PRODUCT.md",
+      "depth": "FULL"
+    },
+    {
+      "file": "DESIGN.md",
+      "depth": "FULL"
+    },
+    {
+      "file": "docs/00_Decisions_and_Corrections.md",
+      "depth": "FULL",
+      "relevant_decisions": [
+        "DEC-009",
+        "DEC-015",
+        "DEC-018",
+        "DEC-019",
+        "DEC-020",
+        "DEC-021"
+      ]
+    },
+    {
+      "file": "docs/25_Release_Gates_and_Open_Decisions.md",
+      "depth": "FULL"
+    },
+    {
+      "file": "research/USER_DECISIONS_2026-10-02.md",
+      "depth": "FULL",
+      "relevant_lines": "7-16"
+    },
+    {
+      "file": "docs/13_Decision_Confidence_and_Validation.md",
+      "depth": "FULL",
+      "relevant_lines": "42-50,59-67"
+    },
+    {
+      "file": "docs/15_Domain_Model_and_Persistence.md",
+      "depth": "FULL",
+      "relevant_lines": "7-9,36-40,51-54,69"
+    },
+    {
+      "file": "docs/07_Functional_Requirements.md",
+      "depth": "SELECTED_RG_CONTEXT",
+      "requirements": [
+        "FR-018",
+        "FR-019",
+        "FR-041",
+        "FR-042",
+        "FR-043",
+        "FR-044",
+        "FR-089",
+        "FR-108",
+        "FR-109"
+      ]
+    },
+    {
+      "file": "docs/08_Non_Functional_Requirements.md",
+      "depth": "SELECTED_RG_CONTEXT",
+      "requirements": [
+        "NFR-001",
+        "NFR-004",
+        "NFR-036",
+        "NFR-037",
+        "NFR-038"
+      ]
+    },
+    {
+      "file": "reports/OPEN_DECISIONS.md",
+      "depth": "FULL"
+    },
+    {
+      "file": "reports/CORRECTION_LOG.md",
+      "depth": "FULL"
+    },
+    {
+      "file": "reports/AUDIT_REPORT.md",
+      "depth": "SELECTED_FIRST_9000_CHARACTERS"
+    },
+    {
+      "file": "reports/REVIEW_COVERAGE.md",
+      "depth": "SELECTED_READ_NOT_COMPREHENSIVE"
+    }
+  ],
+  "verification": {
+    "command": "python experiments/temporal_chain.py --output research/engine_lab/temporal_chain_results.json",
+    "actual_output": "PASS 29/29 synthetic checks; external sends=0; output=research/engine_lab/temporal_chain_results.json",
+    "additional_runs": 2,
+    "additional_runs_byte_identical_to_saved_results": true,
+    "network_or_external_sends": 0,
+    "production_or_historical_accuracy_claim": false
+  },
+  "limitations": [
+    "No primary source was comprehensively audited except the short bitemporal page.",
+    "No chain payload, source availability archive, historical market sample, database migration or provider entitlement was verified.",
+    "Official method semantics do not guarantee provider retention, historic completeness, data rights or timely finality.",
+    "Pinned Token Program source was inspected but not compiled or executed.",
+    "MariaDB reading supplies conceptual temporal context; the project PostgreSQL architecture remains unchanged."
+  ]
+}

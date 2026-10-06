@@ -1,0 +1,243 @@
+{
+  "agent": "data_competitors",
+  "audit_date": "2026-10-02",
+  "baseline_root": "/workspace/scratch/cda839272ca3/received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3",
+  "mutations_to_baseline": false,
+  "reads": [
+    {
+      "path": "AGENTS.md",
+      "depth": "FULL_TEXT_READ",
+      "line_ranges": [
+        [
+          1,
+          37
+        ]
+      ],
+      "line_count": 37,
+      "sha256": "4cbf0829f1bc2f31538335e2d6a33b14a74aadbbecd2df46e79cd31f19e8c1b8"
+    },
+    {
+      "path": "docs/00_Decisions_and_Corrections.md",
+      "depth": "FULL_TEXT_READ",
+      "line_ranges": [
+        [
+          1,
+          45
+        ]
+      ],
+      "line_count": 45,
+      "sha256": "934ad05efc97296dad7e57964a19cc56fcb3451c8b214b1ff0aa156b88cdfec8"
+    },
+    {
+      "path": "docs/02_Problem_Analysis_and_Opportunity.md",
+      "depth": "FULL_TEXT_READ",
+      "line_ranges": [
+        [
+          1,
+          40
+        ]
+      ],
+      "line_count": 40,
+      "sha256": "b51f8b0722d4dd60191887cecd645ef545070774fb646679cda296c228c67ceb"
+    },
+    {
+      "path": "docs/10_Data_Requirements_and_Provider_Matrix.md",
+      "depth": "FULL_TEXT_READ",
+      "line_ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "line_count": 60,
+      "sha256": "3462ba1d84707caae517f930f2e220a4b364742a996819795135f11a38381161"
+    },
+    {
+      "path": "docs/24_Competitor_Evidence_and_Positioning.md",
+      "depth": "FULL_TEXT_READ",
+      "line_ranges": [
+        [
+          1,
+          27
+        ]
+      ],
+      "line_count": 27,
+      "sha256": "bcac4c33b0f28d2dbf22734c2fd28fa3b4f128829ca570400750d1d6ff651a6d"
+    },
+    {
+      "path": "research/sources.json",
+      "depth": "FULL_TEXT_READ",
+      "line_ranges": [
+        [
+          1,
+          494
+        ]
+      ],
+      "line_count": 494,
+      "sha256": "f7d5c1c1126b7cc12dacc3a76d8f41606777254708ead4fa8645dd4044c92947"
+    },
+    {
+      "path": "research/SOURCE_REGISTER.md",
+      "depth": "FULL_TEXT_READ",
+      "line_ranges": [
+        [
+          1,
+          291
+        ]
+      ],
+      "line_count": 291,
+      "sha256": "9dd8b0f6625dd6b0c1b8c13e72fca65c6b2a1bee2fa0ffbca3a05d76cf5acb59"
+    },
+    {
+      "path": "research/USER_SUPPLIED_EVENT_CONTEXT.md",
+      "depth": "FULL_TEXT_READ",
+      "line_ranges": [
+        [
+          1,
+          13
+        ]
+      ],
+      "line_count": 13,
+      "sha256": "76b3920cb3ceb0b741baf19d6cd5331d462604a8f918858650453cd27fbcfac1"
+    },
+    {
+      "path": "config/admin_settings.json",
+      "depth": "FULL_TEXT_READ",
+      "line_ranges": [
+        [
+          1,
+          44
+        ]
+      ],
+      "line_count": 44,
+      "sha256": "3eb64d5e0f1d7f9106344f64bb1737122c74a298ef735f711f17bfe60fcbe163"
+    },
+    {
+      "path": "config/detection_defaults.json",
+      "depth": "FULL_TEXT_READ",
+      "line_ranges": [
+        [
+          1,
+          22
+        ]
+      ],
+      "line_count": 22,
+      "sha256": "4aefaba9af70475a8c5c188dc250004047a04553d3c0b6a84219c6125073085f"
+    },
+    {
+      "path": "config/anomaly_catalog.json",
+      "depth": "FULL_TEXT_READ",
+      "line_ranges": [
+        [
+          1,
+          403
+        ]
+      ],
+      "line_count": 403,
+      "sha256": "f1fc124e866443f66e4e1a4a5336dad4aa8338ea4528ebaa4be2bee175236a5d"
+    },
+    {
+      "path": "templates/PROVIDER_SPIKE.md",
+      "depth": "FULL_TEXT_READ",
+      "line_ranges": [
+        [
+          1,
+          16
+        ]
+      ],
+      "line_count": 16,
+      "sha256": "7de8631fbe35b4f9806694f1f75da4b2ad192c50651c6446a9367b0fb736468c"
+    },
+    {
+      "path": "templates/RIGHTS_INVENTORY.md",
+      "depth": "FULL_TEXT_READ",
+      "line_ranges": [
+        [
+          1,
+          16
+        ]
+      ],
+      "line_count": 16,
+      "sha256": "4712a38d5254c346c9131709c25ca246db9718342160525932c470f1fa0f34fe"
+    },
+    {
+      "path": "docs/07_Functional_Requirements.md",
+      "depth": "EXCERPT_READ",
+      "line_ranges": [
+        [
+          260,
+          410
+        ]
+      ],
+      "line_count": 920,
+      "sha256": "3d8f4386a4bf4d9d914c152ad6bfa52409e0ca3753a0857865aa6acc9c52f6c3"
+    },
+    {
+      "path": "archive/v0.2/02_Problem_Analysis_and_Opportunity.md",
+      "depth": "HISTORICAL_EXCERPT_READ_NOT_AUTHORITY",
+      "line_ranges": [
+        [
+          200,
+          235
+        ]
+      ],
+      "line_count": 518,
+      "sha256": "daa04cf2614938e1239a2fe06899dada88e15d29c7b8ce5e6761983cb5b4063f"
+    },
+    {
+      "path": "requirements_registry.json",
+      "depth": "FULL_JSON_PARSED_SELECTED_REQUIREMENTS_READ",
+      "manually_reviewed_requirement_ids": [
+        "FR-031",
+        "FR-032",
+        "FR-033",
+        "FR-034",
+        "FR-035",
+        "FR-036",
+        "FR-037",
+        "FR-038",
+        "FR-039",
+        "FR-040",
+        "FR-041",
+        "FR-042",
+        "FR-043",
+        "FR-044",
+        "FR-045",
+        "FR-046",
+        "FR-047",
+        "FR-048",
+        "FR-050",
+        "FR-051",
+        "FR-052",
+        "FR-053",
+        "FR-055",
+        "FR-070",
+        "FR-103",
+        "NFR-042",
+        "NFR-043",
+        "NFR-044"
+      ],
+      "sha256": "a979c75b5afef630b1c438b1cde7c6211f5def09aa31ee3ec4d3a4e88c6194d9"
+    }
+  ],
+  "search_only": {
+    "command_scope": "rg across baseline for provider/source/competitor/fund-statistic terms; results are discovery evidence, not full-file reading",
+    "files_with_matched_excerpts": [
+      "docs/23_Startup_Validation_and_Demo.md",
+      "docs/19_Security_Privacy_and_Compliance.md",
+      "docs/12_Anomaly_Catalog.md",
+      "reports/PACKAGE_AUDIT.md",
+      "docs/08_Non_Functional_Requirements.md",
+      "archive/v0.2/01_Product_Vision_and_Executive_Summary.md",
+      "archive/v0.2/03_Product_Scope_and_Core_Principles.md",
+      "archive/v0.2/04_MVP_Techstars_Startup_Weekend_Scope.md"
+    ]
+  },
+  "not_performed": [
+    "live upstream API tests",
+    "paid or authenticated competitor use",
+    "rights approval",
+    "deployed app verification",
+    "scientific paper full-text revalidation"
+  ]
+}

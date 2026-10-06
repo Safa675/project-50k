@@ -1,0 +1,7 @@
+{
+  "tests_run": 11,
+  "failures": 16,
+  "errors": 5,
+  "successful": false,
+  "scope": "Selected new regression methods against disposable baseline engine; failures/errors expected before correction."
+}

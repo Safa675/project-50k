@@ -1,0 +1,56 @@
+test_fatal_gate (test_reference.ConfidenceTests.test_fatal_gate) ... ok
+test_missing_component (test_reference.ConfidenceTests.test_missing_component) ... ok
+test_nan_component (test_reference.ConfidenceTests.test_nan_component) ... ok
+test_not_probability (test_reference.ConfidenceTests.test_not_probability) ... ok
+test_out_of_range (test_reference.ConfidenceTests.test_out_of_range) ... ok
+test_allocation_shift (test_reference.FundTests.test_allocation_shift) ... ok
+test_distribution_unknown (test_reference.FundTests.test_distribution_unknown) ... ok
+test_incomplete_allocation_rejected (test_reference.FundTests.test_incomplete_allocation_rejected) ... ok
+test_inflow (test_reference.FundTests.test_inflow) ... ok
+test_misaligned_dates (test_reference.FundTests.test_misaligned_dates) ... ok
+test_nan_aum (test_reference.FundTests.test_nan_aum) ... ok
+test_outflow (test_reference.FundTests.test_outflow) ... ok
+test_placeholders_missing (test_reference.FundTests.test_placeholders_missing) ... ok
+test_price_only_decline (test_reference.FundTests.test_price_only_decline) ... ok
+test_signed_allocation_rejected (test_reference.FundTests.test_signed_allocation_rejected) ... ok
+test_unknown_category_map (test_reference.FundTests.test_unknown_category_map) ... ok
+test_zero_nav (test_reference.FundTests.test_zero_nav) ... ok
+test_absolute_floor (test_reference.MarketTests.test_absolute_floor) ... ok
+test_boolean_rejected (test_reference.MarketTests.test_boolean_rejected) ... ok
+test_incomplete_bar (test_reference.MarketTests.test_incomplete_bar) ... ok
+test_infinite_return (test_reference.MarketTests.test_infinite_return) ... ok
+test_mixed_feed (test_reference.MarketTests.test_mixed_feed) ... ok
+test_nan_volume (test_reference.MarketTests.test_nan_volume) ... ok
+test_negative_volume (test_reference.MarketTests.test_negative_volume) ... ok
+test_return_candidate (test_reference.MarketTests.test_return_candidate) ... ok
+test_return_unadjusted (test_reference.MarketTests.test_return_unadjusted) ... ok
+test_return_zero_mad (test_reference.MarketTests.test_return_zero_mad) ... ok
+test_short_baseline (test_reference.MarketTests.test_short_baseline) ... ok
+test_volume_candidate (test_reference.MarketTests.test_volume_candidate) ... ok
+test_volume_normal (test_reference.MarketTests.test_volume_normal) ... ok
+test_zero_volume (test_reference.MarketTests.test_zero_volume) ... ok
+test_daily_cap (test_reference.NotificationTests.test_daily_cap) ... ok
+test_disabled_sender (test_reference.NotificationTests.test_disabled_sender) ... ok
+test_duplicate (test_reference.NotificationTests.test_duplicate) ... ok
+test_global_approved (test_reference.NotificationTests.test_global_approved) ... ok
+test_medium_no_immediate (test_reference.NotificationTests.test_medium_no_immediate) ... ok
+test_no_evidence (test_reference.NotificationTests.test_no_evidence) ... ok
+test_no_global_opt_in (test_reference.NotificationTests.test_no_global_opt_in) ... ok
+test_no_global_release (test_reference.NotificationTests.test_no_global_release) ... ok
+test_personal_high (test_reference.NotificationTests.test_personal_high) ... ok
+test_replay_never_email (test_reference.NotificationTests.test_replay_never_email) ... ok
+test_stable_key (test_reference.NotificationTests.test_stable_key) ... ok
+test_synthetic_never_email (test_reference.NotificationTests.test_synthetic_never_email) ... ok
+test_unknown_mode (test_reference.NotificationTests.test_unknown_mode) ... ok
+test_unsubscribe_recheck (test_reference.NotificationTests.test_unsubscribe_recheck) ... ok
+test_update_needs_id (test_reference.NotificationTests.test_update_needs_id) ... ok
+test_future_publication_excluded (test_reference.TemporalTests.test_future_publication_excluded) ... ok
+test_naive_rejected (test_reference.TemporalTests.test_naive_rejected) ... ok
+test_offsets_equivalent (test_reference.TemporalTests.test_offsets_equivalent) ... ok
+test_replay_future_excluded (test_reference.TemporalTests.test_replay_future_excluded) ... ok
+test_unknown_availability_excluded (test_reference.TemporalTests.test_unknown_availability_excluded) ... ok
+
+----------------------------------------------------------------------
+Ran 51 tests in 0.005s
+
+OK

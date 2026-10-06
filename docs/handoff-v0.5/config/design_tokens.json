@@ -1,0 +1,55 @@
+{
+  "status": "PROPOSED_DESIGNER_REVIEW_REQUIRED",
+  "principles": [
+    "editorial hierarchy",
+    "evidence before decoration",
+    "financial numeric clarity",
+    "mobile-ready",
+    "no template skin"
+  ],
+  "color": {
+    "canvas": "#F7F8FA",
+    "surface": "#FFFFFF",
+    "text": "#172330",
+    "muted": "#536271",
+    "border": "#D6DDE4",
+    "accent": "#1D4E75",
+    "positive": "#176546",
+    "negative": "#A52C3B",
+    "attention": "#855B00",
+    "focus": "#1D4E75"
+  },
+  "typography": {
+    "body_family": "system-ui, sans-serif",
+    "numeric_variant": "tabular-nums",
+    "body_size_rem": 1,
+    "small_size_rem": 0.875,
+    "body_line_height": 1.55,
+    "display_weight": 600
+  },
+  "spacing_px": [
+    4,
+    8,
+    12,
+    16,
+    24,
+    32,
+    48,
+    64
+  ],
+  "radii_px": {
+    "input": 6,
+    "panel": 8,
+    "dialog": 12
+  },
+  "motion_ms": {
+    "short": 120,
+    "standard": 180
+  },
+  "breakpoints_px": {
+    "small": 640,
+    "medium": 960,
+    "large": 1280
+  },
+  "disclaimer": "No font files included. Test contrast in actual contexts; tokens are not a WCAG certificate."
+}

@@ -1,0 +1,92 @@
+{
+  "status": "ANSWERED",
+  "answer_tr": "Bu yalnızca örnek verilerle hazırlanmış bir gösterimdir. İşlem hacmi 600 birim, karşılaştırma medyanı 100 birim olduğu için hacim oranı 6 kattır. Bu ölçüm, tek başına manipülasyon veya alım fırsatı anlamına gelmez.",
+  "as_of": "2026-10-01T10:15:03Z",
+  "origin": "SYNTHETIC",
+  "thread_id": "00000000-0000-4000-8000-000000000301",
+  "request_id": "00000000-0000-4000-8000-000000000401",
+  "claims": [
+    {
+      "claim_id": "C1",
+      "text_tr": "İşlem hacmi 600 birim, karşılaştırma medyanı 100 birimdir.",
+      "evidence_ids": [
+        "00000000-0000-4000-8000-000000000201"
+      ],
+      "support": "DIRECT",
+      "calculation_id": null
+    },
+    {
+      "claim_id": "C2",
+      "text_tr": "Hacim oranı 6 kattır.",
+      "evidence_ids": [
+        "00000000-0000-4000-8000-000000000201"
+      ],
+      "support": "DERIVED",
+      "calculation_id": "synthetic-calc-001"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "00000000-0000-4000-8000-000000000201",
+      "source_id": "synthetic-generator-v1",
+      "kind": "MARKET_OBSERVATION",
+      "title": "Synthetic completed-bar volume and prior-slot median",
+      "locator": "fixture://synthetic-market-001",
+      "origin": "SYNTHETIC",
+      "observed_at": "2026-10-01T10:15:00Z",
+      "published_at": null,
+      "available_at": "2026-10-01T10:15:01Z",
+      "ingested_at": "2026-10-01T10:15:02Z",
+      "availability_provenance": "OBSERVED",
+      "source_version": "synthetic-v1",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "rights_status": "SYNTHETIC",
+      "values": {
+        "current_volume": "600",
+        "prior_slot_median": "100",
+        "relative_volume": "6"
+      },
+      "units": {
+        "current_volume": "shares",
+        "prior_slot_median": "shares",
+        "relative_volume": "ratio"
+      },
+      "limitations": [
+        "Constructed inputs. No actual listed issuer. Not historical performance evidence."
+      ]
+    }
+  ],
+  "limitations": [
+    "Gerçek piyasa araştırması yapılmadı; örnek yanıt elle hazırlanmıştır."
+  ],
+  "tool_usage": {
+    "calls": 0,
+    "web_searches": 0,
+    "elapsed_ms": 0
+  },
+  "asset_id": "00000000-0000-4000-8000-000000000001",
+  "replay_cutoff": null,
+  "calculations": [
+    {
+      "calculation_id": "synthetic-calc-001",
+      "operation": "RATIO",
+      "operands": [
+        {
+          "evidence_id": "00000000-0000-4000-8000-000000000201",
+          "field": "current_volume"
+        },
+        {
+          "evidence_id": "00000000-0000-4000-8000-000000000201",
+          "field": "prior_slot_median"
+        }
+      ],
+      "result": "6",
+      "unit": "ratio",
+      "method_version": "decimal-ratio-v1"
+    }
+  ],
+  "replay_bundle_id": null
+}

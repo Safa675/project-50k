@@ -1,0 +1,752 @@
+[
+  {
+    "id": "AN-MKT-001",
+    "name": "Relative volume",
+    "phase": "CORE",
+    "inputs": "Final bar volume; 20 previous comparable session-slot volumes; venue and unit",
+    "method": "RVOL = current / median(previous same-slot volumes). Candidate at RVOL >= 3 with at least 20 valid observations. Threshold is provisional.",
+    "guard": "Exclude opening/closing auctions, half-days, unit changes and nonpositive baselines. A news-driven increase is still unusual but not misconduct.",
+    "label_tr": "İşlem hacminde sıra dışı artış",
+    "sources": [
+      "R02"
+    ],
+    "requirement": "FR-049",
+    "threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+    "source_roles": {
+      "method": [],
+      "data": [],
+      "background": [
+        "R02"
+      ],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "source_role_note": "R02 motivates intraday volatility seasonality; it does not supply the same-slot median-volume formula, RVOL3 threshold or20-observation rule."
+  },
+  {
+    "id": "AN-MKT-002",
+    "name": "Robust return deviation",
+    "phase": "CORE",
+    "inputs": "Completed closes; corporate actions; prior same-interval log returns",
+    "method": "r=ln(Ct/Ct-1); z=(r-median(history))/(1.4826*MAD(history)). Candidate |z|>=4 and |simple return|>=1%, after 20 valid references.",
+    "guard": "Exclude corporate-action discontinuities; zero MAD means abstain, not infinity. No sigma-to-probability conversion.",
+    "label_tr": "Fiyatta olağandışı hareket",
+    "sources": [
+      "R01",
+      "R02"
+    ],
+    "requirement": "FR-050",
+    "threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+    "source_roles": {
+      "method": [],
+      "data": [],
+      "background": [
+        "R01",
+        "R02"
+      ],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "source_role_note": "Financial stylized facts and intraday-volatility context motivate robust baselines; MAD scale, z4,1%floor and20-reference rule are project design."
+  },
+  {
+    "id": "AN-MKT-003",
+    "name": "Benchmark divergence",
+    "phase": "CORE",
+    "inputs": "Aligned asset and benchmark returns; point-in-time benchmark mapping",
+    "method": "Default residual e=asset log return-benchmark log return (beta=1 explicitly). Flag robust residual |z|>=4; fitted alpha/beta is later.",
+    "guard": "A beta-one baseline is approximate; reject mismatched time windows or stale benchmark. No claim that benchmark fully explains causality.",
+    "label_tr": "Endeksten belirgin ayrışma",
+    "sources": [
+      "R01"
+    ],
+    "requirement": "FR-052",
+    "threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+    "source_roles": {
+      "method": [],
+      "data": [],
+      "background": [
+        "R01"
+      ],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "source_role_note": "R01 is contextual financial behavior evidence; beta-one benchmark subtraction and robust residual threshold are project rules."
+  },
+  {
+    "id": "AN-MKT-004",
+    "name": "Realized volatility shift",
+    "phase": "NEXT",
+    "inputs": "Final returns over current and preceding equal-size windows",
+    "method": "Compare sqrt(sum(r^2)) for equal-duration comparable windows; investigate high past-distribution quantile.",
+    "guard": "Overlapping windows are dependent; remove overnight gaps and adjust for missing bars.",
+    "label_tr": "Fiyat dalgalanması arttı",
+    "sources": [
+      "R02",
+      "R04"
+    ],
+    "requirement": "FR-051",
+    "threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+    "source_roles": {
+      "method": [],
+      "data": [],
+      "background": [
+        "R02",
+        "R04"
+      ],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "source_role_note": "R02 concerns intraday dynamics. R04 documents online changepoint inference, but the catalog uses sqrt(sum(r^2)) window comparison rather than implementing that algorithm; neither derives its quantile rule."
+  },
+  {
+    "id": "AN-MKT-005",
+    "name": "Joint price and volume event",
+    "phase": "CORE",
+    "inputs": "AN-MKT-001 and 002; optional 003; same completed window",
+    "method": "Join qualifying signals within one bar interval into one event; default HIGH, not CRITICAL.",
+    "guard": "Treat return/momentum/volatility as one market-price family; syndicated news does not provide independent confirmation.",
+    "label_tr": "Fiyat ve işlem hacminde olağandışı hareket",
+    "sources": [
+      "R11"
+    ],
+    "requirement": "FR-053",
+    "threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+    "source_roles": {
+      "method": [
+        "R11"
+      ],
+      "data": [],
+      "background": [],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "source_role_note": "R11 supports general joint price/volume anomaly screening. The robust-score/RVOL adaptation, one-bar merge and HIGH severity are project rules; R11 does not validate their thresholds."
+  },
+  {
+    "id": "AN-MKT-006",
+    "name": "Spread/liquidity deterioration",
+    "phase": "LATER",
+    "inputs": "Licensed synchronized bid/ask observations; quote age; tick size",
+    "method": "Relative spread=(ask-bid)/mid; compare same-slot distribution and persistence.",
+    "guard": "Trades/OHLCV cannot reconstruct a spread; crossed/stale quotes are data errors.",
+    "label_tr": "Alış-satış farkı genişledi",
+    "sources": [
+      "R01"
+    ],
+    "requirement": "FR-048",
+    "threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+    "source_roles": {
+      "method": [],
+      "data": [],
+      "background": [
+        "R01"
+      ],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "source_role_note": "R01 supplies broad financial context, not a validated spread/liquidity detector."
+  },
+  {
+    "id": "AN-MKT-007",
+    "name": "Cross-venue price divergence",
+    "phase": "LATER",
+    "inputs": "Simultaneous prices of identical economic asset, FX and fees",
+    "method": "Compare FX-normalized robust venue differences against own baseline.",
+    "guard": "Bridged/wrapped assets, stale books and transfer restrictions can explain differences. Not an arbitrage recommendation.",
+    "label_tr": "Piyasalar arasında fiyat farkı arttı",
+    "sources": [
+      "R01"
+    ],
+    "requirement": "FR-048",
+    "threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+    "source_roles": {
+      "method": [],
+      "data": [],
+      "background": [
+        "R01"
+      ],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "source_role_note": "Cross-venue FX/fee normalization and robust difference baseline are project design; R01 is background only."
+  },
+  {
+    "id": "AN-FND-001",
+    "name": "Fund NAV/category divergence",
+    "phase": "NEXT",
+    "inputs": "Published NAV total returns; dated category membership; comparable peers",
+    "method": "Compare matched valuation dates and currencies; median peer return plus robust residual, minimum 10 eligible peers.",
+    "guard": "Foreign-market valuation lag, FX, mandate and distributions can explain differences; daily not intraday NAV.",
+    "label_tr": "Fon getirisi benzerlerinden ayrıştı",
+    "sources": [
+      "R10"
+    ],
+    "requirement": "FR-036",
+    "threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+    "source_roles": {
+      "method": [],
+      "data": [],
+      "background": [
+        "R10"
+      ],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "source_role_note": "R10 studies fund-flow/search/performance relationships, not this median-peer divergence or10-peer threshold."
+  },
+  {
+    "id": "AN-FND-002",
+    "name": "Return-adjusted net-flow estimate",
+    "phase": "CONDITIONAL",
+    "inputs": "Two aligned AUM and NAV observations; distribution and unit-change status",
+    "method": "Estimated flow=At-Aprev*(NAVt/NAVprev); rate=flow/Aprev. Investigate |rate|>=10% only after historical baseline checks.",
+    "guard": "No dates, placeholders or corporate restructuring => abstain. End-period approximation, not reported cash flow. Investor counts do not measure flow.",
+    "label_tr": "Tahmini net fon akışında belirgin değişim",
+    "sources": [
+      "R10"
+    ],
+    "requirement": "FR-037",
+    "threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+    "source_roles": {
+      "method": [],
+      "data": [],
+      "background": [
+        "R10"
+      ],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "source_role_note": "R10 motivates flow context; its abstract-only inspected depth does not establish this exact NAV-ratio/distribution convention. Return adjustment and10%trigger are project design."
+  },
+  {
+    "id": "AN-FND-003",
+    "name": "Investor count change",
+    "phase": "CONDITIONAL",
+    "inputs": "At least two dated valid investor counts; history of comparable frequency",
+    "method": "Percent and absolute change against past distribution; use provisional absolute percentage change >=10% plus absolute count change >=100 investors as a review trigger.",
+    "guard": "Source defaults zero are missing; count definition changes/mergers cause breaks. Does not measure capital moved.",
+    "label_tr": "Yatırımcı sayısında belirgin değişim",
+    "sources": [
+      "R10"
+    ],
+    "requirement": "FR-034",
+    "threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+    "source_roles": {
+      "method": [],
+      "data": [],
+      "background": [
+        "R10"
+      ],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "source_role_note": "R10 is fund-flow context; it does not validate investor-count changes as monetary flows or the10%/100-investor rule."
+  },
+  {
+    "id": "AN-FND-004",
+    "name": "Asset-type allocation shift",
+    "phase": "CORE",
+    "inputs": "Two comparable published allocation snapshots; stable category mapping",
+    "method": "For nonnegative distributions summing to one: D=0.5*sum(abs(wt-wprev)); candidate D>=0.20 or single category >=20 percentage points.",
+    "guard": "Price effects may change weights without trades. Negative/leverage weights use a separate signed exposure model; do not normalize them away.",
+    "label_tr": "Fonun varlık dağılımında belirgin değişim",
+    "sources": [
+      "S06"
+    ],
+    "requirement": "FR-035",
+    "threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+    "source_roles": {
+      "method": [],
+      "data": [
+        "S06"
+      ],
+      "background": [],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "source_role_note": "S06 is maintainer provider implementation evidence about field/interface behavior, not mathematical validation or an independently tested/entitled endpoint. Total variation and0.20threshold are project design."
+  },
+  {
+    "id": "AN-FND-005",
+    "name": "Fund access/regulatory event",
+    "phase": "CORE",
+    "inputs": "Official decision; exact affected fund identities; publication/effective dates",
+    "method": "Structured extraction and entity validation; classify access restriction, liquidation notice or material prospectus change.",
+    "guard": "Notice is a verified event, not a statistical anomaly or verdict on unlisted funds. Current status requires subsequent updates.",
+    "label_tr": "Fonun işlem koşullarında önemli değişiklik",
+    "sources": [
+      "S02",
+      "S03"
+    ],
+    "requirement": "FR-055",
+    "threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+    "source_roles": {
+      "method": [],
+      "data": [
+        "S02",
+        "S03"
+      ],
+      "background": [],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "source_role_note": "Official SPK notices provide factual context/source class; exact per-fund identity/action/status must come from the relevant decision. Extraction/entity validation is project process, not a validated model."
+  },
+  {
+    "id": "AN-FND-006",
+    "name": "Reported holding concentration",
+    "phase": "LATER",
+    "inputs": "Security-level published holdings and reporting dates",
+    "method": "Compute sum of top positions or HHI over verified comparable security weights.",
+    "guard": "Asset-type allocation cannot supply this signal; stale holdings and fund-of-fund look-through must be labeled.",
+    "label_tr": "Son açıklanan portföyde yoğunlaşma",
+    "sources": [
+      "R10"
+    ],
+    "requirement": "FR-038",
+    "threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+    "source_roles": {
+      "method": [],
+      "data": [],
+      "background": [
+        "R10"
+      ],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "source_role_note": "R10 is not an HHI/holding-concentration method reference. Top-position/HHI definitions and publication freshness rules are project design."
+  },
+  {
+    "id": "AN-FND-007",
+    "name": "Potential liquidity mismatch",
+    "phase": "LATER",
+    "inputs": "Dated holdings, redemption terms and licensed underlying liquidity measures",
+    "method": "Review weighted illiquid exposure against disclosed redemption horizon.",
+    "guard": "Without reliable holdings and terms, insufficient evidence; not a claim of inability to redeem.",
+    "label_tr": "Likidite açısından incelenmesi gereken durum",
+    "sources": [
+      "S03"
+    ],
+    "requirement": "FR-038",
+    "threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+    "source_roles": {
+      "method": [],
+      "data": [],
+      "background": [
+        "S03"
+      ],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "source_role_note": "S03 is regulatory contextual evidence; it does not supply licensed holdings liquidity, redemption terms or validate weighted liquidity mismatch."
+  },
+  {
+    "id": "AN-EVT-001",
+    "name": "Material issuer disclosure",
+    "phase": "CORE",
+    "inputs": "KAP text; amount/currency/period; matching financial scale",
+    "method": "LLM extracts structured claims; deterministic math computes disclosed contract/TTM sales ratio if comparable.",
+    "guard": "Multi-year contract is not current-year revenue; currency/date/tax context required; no contract-profit inference.",
+    "label_tr": "Şirketten önemli açıklama",
+    "sources": [
+      "S34",
+      "R13"
+    ],
+    "requirement": "FR-055",
+    "threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+    "source_roles": {
+      "method": [],
+      "data": [
+        "S34"
+      ],
+      "background": [
+        "R13"
+      ],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "source_role_note": "R13 motivates retrieval-augmented language generation, not the contract/TTM ratio or materiality judgement. Existing S09(SEC EDGAR) is excluded because it does not document KAP. KAP subscriber documentation S34 supplies the relevant Turkish interface; entitlement remains open."
+  },
+  {
+    "id": "AN-EVT-002",
+    "name": "US filing/earnings context",
+    "phase": "NEXT",
+    "inputs": "SEC accession and acceptance time; valid financial-period facts",
+    "method": "Classify event, retrieve prior comparable period and calculate supported differences.",
+    "guard": "GAAP/non-GAAP, cumulative periods and revised facts cannot be mixed. No EPS surprise without licensed point-in-time consensus.",
+    "label_tr": "Finansal sonuçlar açıklandı",
+    "sources": [
+      "S09"
+    ],
+    "requirement": "FR-047",
+    "threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+    "source_roles": {
+      "method": [],
+      "data": [
+        "S09"
+      ],
+      "background": [],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "source_role_note": "SEC submission/XBRL API documentation addresses retrieval and dated filings, not correctness of automatic classification, period comparison or EPS surprises."
+  },
+  {
+    "id": "AN-EVT-003",
+    "name": "Profit/cash-flow divergence",
+    "phase": "LATER",
+    "inputs": "Comparable filed income/cash-flow statements; sector and accounting regime",
+    "method": "Compare earnings, operating cash flow and receivables using period-consistent ratios.",
+    "guard": "Negative denominators, inflation restatements, seasonality and bank accounting require separate models. Not accounting fraud.",
+    "label_tr": "Kâr ve nakit akışı farklı yönlerde değişti",
+    "sources": [
+      "S09"
+    ],
+    "requirement": "FR-048",
+    "threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+    "source_roles": {
+      "method": [],
+      "data": [
+        "S09"
+      ],
+      "background": [],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "source_role_note": "SEC APIs address retrieval of filed facts; accounting divergence ratios/sector rules are project design, not validated fraud inference."
+  },
+  {
+    "id": "AN-EVT-004",
+    "name": "Source correction/material update",
+    "phase": "CORE",
+    "inputs": "Prior and new official document versions; affected event IDs",
+    "method": "Content/version diff; revalidate citations and update or invalidate dependent events.",
+    "guard": "Do not erase original record; correction notifications require separate dedup class.",
+    "label_tr": "Önceki gelişmeyle ilgili düzeltme",
+    "sources": [
+      "R15"
+    ],
+    "requirement": "FR-070",
+    "threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+    "source_roles": {
+      "method": [
+        "R15"
+      ],
+      "data": [],
+      "background": [],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "source_role_note": "R15 supports citation completeness/entailment evaluation only. Document-version diff, event invalidation and correction lifecycle are project process; no source-accuracy guarantee follows."
+  },
+  {
+    "id": "AN-ONC-001",
+    "name": "Large finalized transfer",
+    "phase": "CONDITIONAL",
+    "inputs": "Verified chain/contract, decimals, finalized tx/log; supply or past transfer baseline",
+    "method": "Compare transfer size with known supply/past sizes. MVP may display fact only where baseline absent.",
+    "guard": "Transfer is not sale; exchange attribution unknown unless dated label evidence. Internal treasury transfers and bridges are alternatives.",
+    "label_tr": "Büyük tutarlı zincir üstü transfer",
+    "sources": [
+      "S11",
+      "R12"
+    ],
+    "requirement": "FR-043",
+    "threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+    "source_roles": {
+      "method": [],
+      "data": [
+        "S11"
+      ],
+      "background": [
+        "R12"
+      ],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "source_role_note": "S11 supplies raw RPC transaction/log data concepts; identity and sale inference do not follow. R12 concerns exchange/channel pump events, not a validated large-transfer detector."
+  },
+  {
+    "id": "AN-ONC-002",
+    "name": "Token-account concentration",
+    "phase": "CONDITIONAL",
+    "inputs": "Mint/contract supply and verified account balances; account roles where known",
+    "method": "Compute observed top-account share; Solana top 20 is partial account coverage.",
+    "guard": "Exchanges, liquidity pools, vesting and burn accounts are not independent beneficial owners. No wallet clustering claim.",
+    "label_tr": "Token hesaplarında yoğunlaşma",
+    "sources": [
+      "S12"
+    ],
+    "requirement": "FR-043",
+    "threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+    "source_roles": {
+      "method": [],
+      "data": [
+        "S12"
+      ],
+      "background": [],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "source_role_note": "S12 documents largest token accounts(top20), not20 beneficial owners. Top-account/supply ratio and account-role caveats are project design."
+  },
+  {
+    "id": "AN-ONC-003",
+    "name": "Pool-liquidity change",
+    "phase": "LATER",
+    "inputs": "Comparable same-pool reserve/supply snapshots and prices",
+    "method": "Separate reserve-unit changes from mark-to-market USD changes; compare against own history.",
+    "guard": "Single current snapshot cannot establish prior withdrawal; V3 liquidity ranges and rebalancing need specialized handling.",
+    "label_tr": "Havuz likiditesinde belirgin değişim",
+    "sources": [
+      "S13"
+    ],
+    "requirement": "FR-043",
+    "threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+    "source_roles": {
+      "method": [],
+      "data": [
+        "S13"
+      ],
+      "background": [],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "source_role_note": "S13 documents pair-level API snapshots, not assumed history or a validated liquidity-withdrawal detector; reserve/price separation is project design."
+  },
+  {
+    "id": "AN-ONC-004",
+    "name": "Token authority/contract change",
+    "phase": "LATER",
+    "inputs": "Known ABI/program capability and finalized verified state transitions",
+    "method": "Compare supported mint/freeze/upgrade/admin permissions across versions.",
+    "guard": "Permission existence alone is not exploit evidence; proxy/Token-2022 semantics require explicit support.",
+    "label_tr": "Token yetkilerinde değişiklik",
+    "sources": [
+      "S11",
+      "S12"
+    ],
+    "requirement": "FR-043",
+    "threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+    "source_roles": {
+      "method": [],
+      "data": [
+        "S11"
+      ],
+      "background": [
+        "S12"
+      ],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "source_role_note": "S11 offers base RPC capabilities but not contract/proxy permission semantics. S12(getTokenLargestAccounts) is an ecosystem/account-data entrypoint, not authority/Token2022 documentation."
+  },
+  {
+    "id": "AN-ONC-005",
+    "name": "Scheduled supply unlock",
+    "phase": "LATER",
+    "inputs": "Verified issuer vesting schedule; circulating supply; revisions",
+    "method": "Calculate dated scheduled unlock share and relevance; label scheduled, not observed transfer.",
+    "guard": "Schedule can change; already liquid allocations differ from new supply. No forecasted price effect.",
+    "label_tr": "Token kilit açılışı yaklaşıyor",
+    "sources": [
+      "R12"
+    ],
+    "requirement": "FR-043",
+    "threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+    "source_roles": {
+      "method": [],
+      "data": [],
+      "background": [
+        "R12"
+      ],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "source_role_note": "R12 is manipulation background only; it does not document issuer vesting schedules or validate supply unlock alerts."
+  },
+  {
+    "id": "AN-CMP-001",
+    "name": "Market/on-chain contextual event",
+    "phase": "CONDITIONAL",
+    "inputs": "Qualified market event plus finalized on-chain observation with matching asset/window",
+    "method": "Create one event with separate evidence families; LLM investigates plausible links and alternatives.",
+    "guard": "Temporal co-occurrence is not causal coordination; combined magnitude alone cannot become global CRITICAL.",
+    "label_tr": "Piyasa ve zincir üstü verilerde eş zamanlı hareket",
+    "sources": [
+      "R11",
+      "R12",
+      "R14"
+    ],
+    "requirement": "FR-044",
+    "threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+    "source_roles": {
+      "method": [
+        "R11",
+        "R14"
+      ],
+      "data": [],
+      "background": [
+        "R12"
+      ],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "source_role_note": "R11 supports market screening only; R14 supports interleaved tool interaction at a conceptual level. Neither validates market/on-chain causal linkage, timing, severity or confidence; R12 explains excluded coordination evidence."
+  },
+  {
+    "id": "AN-CMP-002",
+    "name": "Fund/share relationship event",
+    "phase": "LATER",
+    "inputs": "Published security holdings, fund event, licensed stock event, availability timestamps",
+    "method": "Relate historical disclosed exposure to contemporaneous market evidence.",
+    "guard": "Never infer present-day holdings or directional causation from old allocation classes.",
+    "label_tr": "Fonun açıklanan yatırımlarında önemli gelişme",
+    "sources": [
+      "S03"
+    ],
+    "requirement": "FR-038",
+    "threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+    "source_roles": {
+      "method": [],
+      "data": [],
+      "background": [
+        "S03"
+      ],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "source_role_note": "S03 supplies regulatory context, not a point-in-time security-level exposure/stock relationship detector."
+  },
+  {
+    "id": "AN-DQ-001",
+    "name": "Stale or failed source",
+    "phase": "CORE",
+    "inputs": "Expected calendar/cadence; heartbeat; last valid observation",
+    "method": "Compare last valid availability against source schedule; set stale/circuit-open.",
+    "guard": "Weekends and unreleased NAV are not outages. Operational warning, not asset financial severity.",
+    "label_tr": "Bu veri kaynağı güncel değil",
+    "sources": [
+      "S04"
+    ],
+    "requirement": "FR-103",
+    "threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+    "source_roles": {
+      "method": [],
+      "data": [
+        "S04"
+      ],
+      "background": [],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "source_role_note": "S04 is an official fund-value discovery page; it does not establish a tested publication cadence/heartbeat contract. Schedule-aware staleness rules are project design."
+  },
+  {
+    "id": "AN-DQ-002",
+    "name": "Missing/placeholder/invalid observation",
+    "phase": "CORE",
+    "inputs": "Provider raw record and schema; field-level quality",
+    "method": "Flag null/default placeholders, inconsistent units, invalid OHLC or unidentified dates.",
+    "guard": "Do not convert missing into zero. Quarantine record; skip dependent detector.",
+    "label_tr": "Bu gösterge için yeterli veri yok",
+    "sources": [
+      "S06"
+    ],
+    "requirement": "FR-048",
+    "threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+    "source_roles": {
+      "method": [],
+      "data": [
+        "S06"
+      ],
+      "background": [],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "source_role_note": "S06 provides maintainer code evidence about placeholder/default behavior, not a guarantee for every live field or provider. Quarantine/schema/unit rules are project design."
+  },
+  {
+    "id": "AN-DQ-003",
+    "name": "Corporate-action/session break",
+    "phase": "CORE",
+    "inputs": "Action calendar, adjusted-state metadata, session calendar",
+    "method": "Mark baseline-incompatible periods and suppress mechanically induced discontinuities.",
+    "guard": "Price split is not a crash; unresolved adjustment means no claim, not guessed correction.",
+    "label_tr": "Hesaplama için veri düzeltmesi gerekiyor",
+    "sources": [
+      "R01",
+      "R02"
+    ],
+    "requirement": "FR-050",
+    "threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+    "source_roles": {
+      "method": [],
+      "data": [],
+      "background": [
+        "R01",
+        "R02"
+      ],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "source_role_note": "Stylized financial behavior and session dynamics are background; corporate-action calendars, adjustment-state checks and suppression are project process."
+  }
+]

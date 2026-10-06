@@ -1,0 +1,2 @@
+# Fixture provenance
+All files in this directory are SYNTHETIC or manually authored test specifications. No real security/fund history, investor data, private conversation or claimed model-generated answer is included. Fixed UUIDs are fictional. Never label these records live or real historical. External email is forbidden for these origins. Passing their tests proves only the stated mechanical behavior.

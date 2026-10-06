@@ -1,0 +1,5 @@
+# Local documentation validation only. Resolve/lock actual supported versions
+# during implementation; not the application's dependency file.
+PyYAML>=6.0,<7
+jsonschema>=4.20,<5
+referencing>=0.30,<1

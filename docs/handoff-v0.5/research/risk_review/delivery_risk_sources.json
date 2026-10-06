@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "review_date_utc": "2026-10-02",
+  "scope": "delivery and operations risks for owner-confirmed four markets plus meaningful on-chain",
+  "source_policy": "Current project records only; no external sources or browsing used. Engineering failure modes are labeled inferences, not observed application incidents.",
+  "risk_count": 8,
+  "sources": [
+    {
+      "id": "D01",
+      "kind": "current_project_primary_record",
+      "path": "docs/14_Architecture_and_ADRs.md",
+      "read_date_utc": "2026-10-02",
+      "depth": "full document read; listed sections used",
+      "sections_used": [
+        "1. Chosen implementation stack",
+        "4. Worker and durable jobs",
+        "5. Repository target"
+      ],
+      "supports": [
+        "unprovisioned candidate stack",
+        "one PostgreSQL worker",
+        "transactional publication/outbox and lease ownership are specifications"
+      ],
+      "sha256": "b20b152cb39eed6cc8066a1d516abf5a3dee407925bb1ba0236ed009a18ba296",
+      "url": null,
+      "web_ref_ids": []
+    },
+    {
+      "id": "D02",
+      "kind": "current_project_primary_record",
+      "path": "docs/20_Test_and_Validation_Strategy.md",
+      "read_date_utc": "2026-10-02",
+      "depth": "full document read; listed sections used",
+      "sections_used": [
+        "1. What this package validates",
+        "2. Test pyramid and ownership",
+        "3. Named acceptance cases",
+        "v0.5 research continuation"
+      ],
+      "supports": [
+        "reference tests are not application/integration tests",
+        "freshness/cold-start/notification acceptance",
+        "empirical research and real AI testing remain pending"
+      ],
+      "sha256": "5a95f7853da5ca7eb8e854703933dc7920917b4811946c32e1b6c44b0663db43",
+      "url": null,
+      "web_ref_ids": []
+    },
+    {
+      "id": "D03",
+      "kind": "current_project_primary_record",
+      "path": "docs/21_Implementation_Backlog_and_Traceability.md",
+      "read_date_utc": "2026-10-02",
+      "depth": "full document read; listed sections used",
+      "sections_used": [
+        "1. Scope rule",
+        "2. Vertical slices",
+        "4. Weekend checkpoints",
+        "v0.5 research continuation"
+      ],
+      "supports": [
+        "one developer integration burden",
+        "full required markets/on-chain remain selected target",
+        "no application tasks completed by research"
+      ],
+      "sha256": "450920c9cf04ded9969fbc60aeb76f8ed72d60226f074411ebb2992701491943",
+      "url": null,
+      "web_ref_ids": []
+    },
+    {
+      "id": "D04",
+      "kind": "current_project_primary_record",
+      "path": "docs/22_Deployment_Operations_and_Costs.md",
+      "read_date_utc": "2026-10-02",
+      "depth": "full document read; listed sections used",
+      "sections_used": [
+        "0. Confirmed ceiling and account baseline",
+        "1. Candidate topology",
+        "4. Observability",
+        "5. Failure runbook",
+        "6. Cost model — illustrative variables, not vendor quotes",
+        "7. Rollback and retention"
+      ],
+      "supports": [
+        "cumulative budget and no provisioned accounts",
+        "browser/cache and shared explanation policies",
+        "monitoring and separate pauses",
+        "restore and correction policies",
+        "provisional tool/deadline caps"
+      ],
+      "sha256": "a5577c40793811605c54210fc0162401cce7e740641404e1a95d997af3e8ce98",
+      "url": null,
+      "web_ref_ids": []
+    },
+    {
+      "id": "D05",
+      "kind": "current_project_primary_record",
+      "path": "docs/25_Release_Gates_and_Open_Decisions.md",
+      "read_date_utc": "2026-10-02",
+      "depth": "full document read; listed sections used",
+      "sections_used": [
+        "1. Actual status",
+        "2. Gate register",
+        "3. Decisions requiring user input later"
+      ],
+      "supports": [
+        "no delivered app or entitled provider connection",
+        "stage-specific release/account/data gates",
+        "G01 before competition use, preparation authorized"
+      ],
+      "sha256": "77ebbc40c30a2d19c96fa7eac6078c9146ea91abc46ccebfbc232a2b75e02776",
+      "url": null,
+      "web_ref_ids": []
+    },
+    {
+      "id": "D06",
+      "kind": "current_project_primary_record",
+      "path": "research/USER_DECISIONS_2026-10-02.md",
+      "read_date_utc": "2026-10-02",
+      "depth": "full document read; listed sections used",
+      "sections_used": [
+        "Owner decision table",
+        "Preparation and external gates"
+      ],
+      "supports": [
+        "four-market target and meaningful on-chain",
+        "no service accounts",
+        "TRY 5000 cumulative ceiling",
+        "preparation authorization distinct from competition eligibility"
+      ],
+      "sha256": "7ab53c23e33c5c459b72a714312fd5eb629e3a9da977929247bf84c291c7ff3a",
+      "url": null,
+      "web_ref_ids": []
+    },
+    {
+      "id": "D07",
+      "kind": "current_project_primary_record",
+      "path": "AGENTS.md",
+      "read_date_utc": "2026-10-02",
+      "depth": "full document read; listed sections used",
+      "sections_used": [
+        "Build style",
+        "Non-negotiable integrity",
+        "Auth, tools and privacy",
+        "Completion report for every task"
+      ],
+      "supports": [
+        "catalog versus active monitoring",
+        "unknown is not safe",
+        "no universal exactly-once delivery",
+        "scoped truthful completion reporting"
+      ],
+      "sha256": "057ebd4c88ffe8bac2a22af691880804a65d1d62f49212da75c1d3d44764b7bf",
+      "url": null,
+      "web_ref_ids": []
+    },
+    {
+      "id": "D08",
+      "kind": "current_project_primary_record",
+      "path": "research/engine_lab/ENGINE_SYSTEM_DESIGN.md",
+      "read_date_utc": "2026-10-02",
+      "depth": "full document read; listed sections used",
+      "sections_used": [
+        "Module responsibilities",
+        "Two replay questions",
+        "Investigation and rendering",
+        "Attention and cumulative cost",
+        "Evaluation ladder before stronger claims"
+      ],
+      "supports": [
+        "module-specific admission and cadence/finality",
+        "official facts need not require anomaly history",
+        "corrections/exact revision",
+        "semantic extraction and real evaluation unimplemented"
+      ],
+      "sha256": "a7adad4a185cfe9e8390fbea38f1797222431b64454ce76b0009feb908a3e2b8",
+      "url": null,
+      "web_ref_ids": []
+    },
+    {
+      "id": "D09",
+      "kind": "current_project_primary_record",
+      "path": "reports/OPEN_DECISIONS.md",
+      "read_date_utc": "2026-10-02",
+      "depth": "full document read; listed sections used",
+      "sections_used": [
+        "Answered immediate decisions",
+        "Remaining stage-specific gates",
+        "Next-task readiness and sequence"
+      ],
+      "supports": [
+        "owner answers not reopened",
+        "exact active universes/networks unresolved",
+        "external gates remain open"
+      ],
+      "sha256": "59c36f9c2fd16aaba327c79b723d2e36f547a62b07c100866e66866e80d16401",
+      "url": null,
+      "web_ref_ids": []
+    }
+  ],
+  "verification": {
+    "application_failure_injection_executed": false,
+    "external_calls_executed": false,
+    "tests_in_report": "planned acceptance probes only",
+    "product_requirements_completed": 0
+  }
+}

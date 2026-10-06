@@ -1,0 +1,218 @@
+{
+  "schema_version": 1,
+  "review_date_utc": "2026-10-03",
+  "sources": [
+    {
+      "id": "F01",
+      "url": "https://www.mkk.com.tr/sites/default/files/2026-04/MKK_2025.pdf",
+      "publisher": "Merkezi Kayit Kurulusu",
+      "document_period": "2025 annual activity",
+      "publication_date": "not verified; URL directory says 2026-04",
+      "refs": [
+        "turn158view0",
+        "turn163view0",
+        "turn163view3"
+      ],
+      "depth": "Report introduction and complete KAP statistics section read; not full101page report. Numeric table reconciled. Screenshot result did not provide a usable inspected image.",
+      "location": {
+        "pdf_page_index": 31,
+        "printed_page": 31,
+        "lines": "1067-1084"
+      },
+      "role": "primary annual aggregate",
+      "retrieved_date_utc": "2026-10-03"
+    },
+    {
+      "id": "F02",
+      "url": "https://www.mkk.com.tr/sites/default/files/2026-06/MKK-2025.pdf",
+      "publisher": "Merkezi Kayit Kurulusu",
+      "document_period": "2025 annual activity",
+      "publication_date": "not verified; URL directory says 2026-06",
+      "refs": [
+        "turn158view1",
+        "turn163view1",
+        "turn163view2"
+      ],
+      "depth": "Selected KAP description/statistics sections read; not full168page report.5categories and totals match F01.",
+      "location": {
+        "pdf_page_index": 31,
+        "printed_page": 30,
+        "lines": "1510-1528"
+      },
+      "extraction_caution": "After the matching total line, extraction also emits extra Total139.803144.792 line. Not used; F01clean table and5row sums establish cited totals. Screenshot request errored.",
+      "role": "official alternate layout corroboration; not independent population",
+      "retrieved_date_utc": "2026-10-03"
+    },
+    {
+      "id": "F03",
+      "url": "https://www.borsaistanbul.com/piyasalar/pay-piyasasi/piyasa-isleyisi",
+      "publisher": "Borsa Istanbul",
+      "publication_date": "undated current page",
+      "refs": [
+        "turn167view0",
+        "turn178view0"
+      ],
+      "depth": "Circuit-breaker sections lines558-611 read. Historical table and later operational override coexist; use explicitly stated downward-only5% override and current6%index rule.",
+      "role": "current event definition, not annual activation count",
+      "retrieved_date_utc": "2026-10-03"
+    },
+    {
+      "id": "F04",
+      "url": "https://www.borsaistanbul.com/files/duyuru-38860-TR.pdf",
+      "publisher": "Borsa Istanbul",
+      "publication_date": "2025-08-29",
+      "effective_date": "2025-09-01",
+      "refs": [
+        "turn167view1",
+        "turn178view1"
+      ],
+      "depth": "Entire2page notice extracted/read; key rule change lines13-16 and effective date line31.",
+      "role": "primary historical regime change",
+      "retrieved_date_utc": "2026-10-03"
+    },
+    {
+      "id": "F05",
+      "url": "https://kap.org.tr/tr/api/about/content-file/402832a195b3017d0195bd17e2e07e9a",
+      "publisher": "KAP/MKK",
+      "publication_date": "not verified",
+      "refs": [
+        "turn178view2",
+        "turn187view0"
+      ],
+      "depth": "Detailed query/export sections lines90-160 and search-scope lines187-190 read; not whole21page guide.",
+      "role": "official retrieval method, not actual exported population",
+      "retrieved_date_utc": "2026-10-03"
+    },
+    {
+      "id": "F06",
+      "url": "https://www.kap.org.tr/tr/bildirim-sorgu-sonuc?member=219472C133F101E0E0530A4AC92590EC",
+      "publisher": "KAP/MKK",
+      "publication_date": "dynamic listing",
+      "refs": [
+        "turn178view3"
+      ],
+      "depth": "Open failed; peer retrieval hit4MB reader limit. No complete listing or defined-period sample retained.",
+      "role": "uncollected circuit-breaker candidate series; cannot compute frequency",
+      "retrieved_date_utc": "2026-10-03"
+    },
+    {
+      "id": "F07",
+      "url": "https://www.borsaistanbul.com/files/faaliyet-raporu-2025.pdf",
+      "publisher": "Borsa Istanbul",
+      "document_period": "2025-01-01/2025-12-31",
+      "publication_date": "not verified",
+      "refs": [
+        "turn144view0",
+        "turn148view0",
+        "turn148view1",
+        "turn155view0",
+        "turn163view4",
+        "turn178view4"
+      ],
+      "depth": "Initial excerpts PDFindices0-15 read. Later targetedfind/open repeatedlyfailed; indexedsnippet turn155search31 suggests rule discussion but not an activation count. Not full178page report read.",
+      "role": "annualreport consulted; no usable activation numerator from inspected material",
+      "retrieved_date_utc": "2026-10-03"
+    },
+    {
+      "id": "P01",
+      "kind": "current_project_record",
+      "path": "docs/12_Anomaly_Catalog.md",
+      "sha256": "35ba9040db5f129a178f20a35cd8732c47cb43afe6ffc2ac0a8493a1fd424792",
+      "depth": "full catalog read; all28validation lists empty and thresholds provisional",
+      "retrieved_date_utc": "2026-10-03",
+      "refs": []
+    },
+    {
+      "id": "P02",
+      "kind": "current_project_record",
+      "path": "research/engine_lab/MARKET_STATISTICS.md",
+      "sha256": "56f9157bf5846b35a89dbc31423eeec7a38d99edfcbb250ea534e8a80ed76142",
+      "depth": "previously authored/read full lab; synthetic distribution-conditional rates, no financial observations",
+      "retrieved_date_utc": "2026-10-03",
+      "refs": []
+    }
+  ],
+  "published_aggregate": {
+    "source_ids": [
+      "F01",
+      "F02"
+    ],
+    "period_start": "2025-01-01",
+    "period_end_inclusive": "2025-12-31",
+    "population": "KAP published notifications across report categories, not BISTlistedstocks alone",
+    "unit": "notification",
+    "complete_individual_record_export": false,
+    "raw_numeric_rows": [
+      {
+        "category": "fund_notifications",
+        "raw_2025_cell": "79.357",
+        "raw_2024_cell": "60.742",
+        "count_2025": 79357,
+        "count_2024": 60742
+      },
+      {
+        "category": "special_disclosures",
+        "raw_2025_cell": "35.944",
+        "raw_2024_cell": "32.902",
+        "count_2025": 35944,
+        "count_2024": 32902
+      },
+      {
+        "category": "regulatory_notifications",
+        "raw_2025_cell": "16.920",
+        "raw_2024_cell": "17.716",
+        "count_2025": 16920,
+        "count_2024": 17716
+      },
+      {
+        "category": "other",
+        "raw_2025_cell": "15.426",
+        "raw_2024_cell": "15.385",
+        "count_2025": 15426,
+        "count_2024": 15385
+      },
+      {
+        "category": "financial_reports",
+        "raw_2025_cell": "14.112",
+        "raw_2024_cell": "13.058",
+        "count_2025": 14112,
+        "count_2024": 13058
+      }
+    ],
+    "reported_total_2025": 161759,
+    "reported_total_2024": 139803,
+    "row_sum_checks": "PASS for2025 and2024",
+    "calendar_day_denominator": 365,
+    "derived_rates": [
+      {
+        "numerator": 161759,
+        "denominator": 365,
+        "formula": "161759/365",
+        "value": 443.17534246575343,
+        "rounded_2dp": 443.18,
+        "unit": "total notifications/calendar day"
+      },
+      {
+        "numerator": 35944,
+        "denominator": 365,
+        "formula": "35944/365",
+        "value": 98.47671232876712,
+        "rounded_2dp": 98.48,
+        "unit": "special disclosures/calendar day"
+      }
+    ],
+    "interpretation": "annual average publication throughput only; not daily observations, distinct events, anomaly/fraud prevalence or user demand"
+  },
+  "unmeasured": {
+    "complete2025circuitbreaker_activation_count": null,
+    "distinct2025assetdays_with_breaker": null,
+    "2025marketwidebreaker_days": null,
+    "project_catalog_real_trigger_frequency": null,
+    "reason": "no complete defined individual-event series or entitled frozen detector cohort evaluated"
+  },
+  "actions": {
+    "external_accounts_contacts_payments": false,
+    "code_edits": false,
+    "complete_event_sample_created": false
+  }
+}

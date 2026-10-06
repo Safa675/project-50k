@@ -1,0 +1,20 @@
+{
+  "version": "notification-policy-v1",
+  "allow_external_email": false,
+  "dry_run": true,
+  "default_personal_email": false,
+  "default_global_critical_email": false,
+  "default_digest": "OFF",
+  "default_sensitivity": "IMPORTANT",
+  "global_requires_admin_release": true,
+  "replay_external_send": false,
+  "synthetic_external_send": false,
+  "timezone": "Europe/Istanbul",
+  "provisional_per_user_email_daily_cap": 5,
+  "cooldown_minutes_per_event_family": 60,
+  "chat_turns_per_user_daily": 10,
+  "chat_web_searches_max": 2,
+  "chat_tool_calls_max": 6,
+  "chat_sources_max": 8,
+  "chat_deadline_seconds": 45
+}

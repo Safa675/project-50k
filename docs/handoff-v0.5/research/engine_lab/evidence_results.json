@@ -1,0 +1,4254 @@
+{
+  "schema_version": "evidence-lab-v1",
+  "origin": "SYNTHETIC",
+  "generated_at_utc": "2026-10-02T20:51:40.907849+00:00",
+  "python": "3.12.14",
+  "script_sha256": "90540d4ab2c2f2cedd91948eb0e3ff5fc0a298a6c6f3d8aae924b728e482974e",
+  "seed": null,
+  "determinism": "Hand-authored fixtures; no stochastic generation.",
+  "requirements": [
+    "FR-055",
+    "FR-057",
+    "FR-058",
+    "FR-061",
+    "FR-067",
+    "FR-068",
+    "FR-096",
+    "FR-097",
+    "NFR-026",
+    "NFR-027",
+    "NFR-028",
+    "NFR-029",
+    "NFR-031",
+    "NFR-081"
+  ],
+  "case_count": 32,
+  "graph_policy_oracle_matches": 32,
+  "summary": {
+    "EXISTENCE_ARITHMETIC": {
+      "answer_status_counts": {
+        "ANSWERED": 29,
+        "INSUFFICIENT_EVIDENCE": 3
+      },
+      "emitted_claim_count": 32,
+      "unsupported_fixture_claims_emitted": [
+        "E02:wrong",
+        "E03:cause",
+        "E05:corroborated",
+        "E07:official",
+        "E08:cyc1",
+        "E08:cyc2",
+        "E10:official",
+        "E12:official",
+        "E13:official",
+        "E15:absence",
+        "E18:ratio",
+        "E20:wrong",
+        "E20:child",
+        "E21:official",
+        "E23:price",
+        "E24:official",
+        "E25:laundered",
+        "E26:official",
+        "E27:association",
+        "E28:official",
+        "E29:ratio",
+        "E30:ratio",
+        "E31:official",
+        "E32:ratio"
+      ],
+      "known_world_false_but_source_supported_claims_emitted": [
+        "E06:corroborated"
+      ],
+      "unvalidated_prose_cases_published": [
+        "E14"
+      ]
+    },
+    "TYPED_SCOPE": {
+      "answer_status_counts": {
+        "ANSWERED": 14,
+        "INSUFFICIENT_EVIDENCE": 16,
+        "PARTIAL": 2
+      },
+      "emitted_claim_count": 17,
+      "unsupported_fixture_claims_emitted": [
+        "E05:corroborated",
+        "E07:official",
+        "E08:cyc1",
+        "E08:cyc2",
+        "E20:child",
+        "E21:official",
+        "E26:official",
+        "E28:official",
+        "E31:official"
+      ],
+      "known_world_false_but_source_supported_claims_emitted": [
+        "E06:corroborated"
+      ],
+      "unvalidated_prose_cases_published": [
+        "E14"
+      ]
+    },
+    "GRAPH_RENDER": {
+      "answer_status_counts": {
+        "ANSWERED": 6,
+        "INSUFFICIENT_EVIDENCE": 24,
+        "PARTIAL": 1,
+        "REVIEW_REQUIRED": 1
+      },
+      "emitted_claim_count": 7,
+      "unsupported_fixture_claims_emitted": [],
+      "known_world_false_but_source_supported_claims_emitted": [
+        "E06:corroborated"
+      ],
+      "unvalidated_prose_cases_published": []
+    }
+  },
+  "cases": [
+    {
+      "id": "E01",
+      "description": "Supported raw price fact",
+      "input": {
+        "sources": [
+          {
+            "id": "market",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "close",
+                "value": "120",
+                "period": "window-1",
+                "unit": "TRY"
+              },
+              {
+                "subject": "asset-A",
+                "predicate": "prior_close",
+                "value": "100",
+                "period": "window-1",
+                "unit": "TRY"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [],
+            "origin_key": "venue-observation",
+            "kind": "OBSERVATION",
+            "authenticated": true
+          }
+        ],
+        "claims": [
+          {
+            "id": "price",
+            "kind": "FACT",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "close",
+                "value": "120",
+                "period": "window-1",
+                "unit": "TRY"
+              }
+            ],
+            "source_ids": [
+              "market"
+            ],
+            "calculation_id": null,
+            "depends_on": [],
+            "minimum_original_roots": 1,
+            "baseline_count": null
+          }
+        ],
+        "calculations": [],
+        "cutoff": 100,
+        "answer_override": null
+      },
+      "oracle": {
+        "graph_answer": "ANSWERED",
+        "accepted_ids": [
+          "price"
+        ],
+        "unsupported_ids": [],
+        "world_false_ids": []
+      },
+      "outcomes": {
+        "EXISTENCE_ARITHMETIC": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "price"
+          ],
+          "emitted_claim_ids": [
+            "price"
+          ],
+          "claim_reasons": {
+            "price": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[price] asset-A/close=120 TRY (window-1)"
+        },
+        "TYPED_SCOPE": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "price"
+          ],
+          "emitted_claim_ids": [
+            "price"
+          ],
+          "claim_reasons": {
+            "price": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[price] asset-A/close=120 TRY (window-1)"
+        },
+        "GRAPH_RENDER": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "price"
+          ],
+          "emitted_claim_ids": [
+            "price"
+          ],
+          "claim_reasons": {
+            "price": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[price] asset-A/close=120 TRY (window-1)"
+        }
+      },
+      "graph_policy_oracle_match": true,
+      "limit": ""
+    },
+    {
+      "id": "E02",
+      "description": "Existing source ID with unsupported numeric premise",
+      "input": {
+        "sources": [
+          {
+            "id": "market",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "close",
+                "value": "120",
+                "period": "window-1",
+                "unit": "TRY"
+              },
+              {
+                "subject": "asset-A",
+                "predicate": "prior_close",
+                "value": "100",
+                "period": "window-1",
+                "unit": "TRY"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [],
+            "origin_key": "venue-observation",
+            "kind": "OBSERVATION",
+            "authenticated": true
+          }
+        ],
+        "claims": [
+          {
+            "id": "wrong",
+            "kind": "FACT",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "close",
+                "value": "999",
+                "period": "window-1",
+                "unit": "TRY"
+              }
+            ],
+            "source_ids": [
+              "market"
+            ],
+            "calculation_id": null,
+            "depends_on": [],
+            "minimum_original_roots": 1,
+            "baseline_count": null
+          }
+        ],
+        "calculations": [],
+        "cutoff": 100,
+        "answer_override": null
+      },
+      "oracle": {
+        "graph_answer": "INSUFFICIENT_EVIDENCE",
+        "accepted_ids": [],
+        "unsupported_ids": [
+          "wrong"
+        ],
+        "world_false_ids": []
+      },
+      "outcomes": {
+        "EXISTENCE_ARITHMETIC": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "wrong"
+          ],
+          "emitted_claim_ids": [
+            "wrong"
+          ],
+          "claim_reasons": {
+            "wrong": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[wrong] asset-A/close=999 TRY (window-1)"
+        },
+        "TYPED_SCOPE": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "wrong": [
+              "UNSUPPORTED_TYPED_PREMISE"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        },
+        "GRAPH_RENDER": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "wrong": [
+              "UNSUPPORTED_TYPED_PREMISE"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        }
+      },
+      "graph_policy_oracle_match": true,
+      "limit": ""
+    },
+    {
+      "id": "E03",
+      "description": "Correct ratio plus unsupported causal explanation",
+      "input": {
+        "sources": [
+          {
+            "id": "market",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "close",
+                "value": "120",
+                "period": "window-1",
+                "unit": "TRY"
+              },
+              {
+                "subject": "asset-A",
+                "predicate": "prior_close",
+                "value": "100",
+                "period": "window-1",
+                "unit": "TRY"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [],
+            "origin_key": "venue-observation",
+            "kind": "OBSERVATION",
+            "authenticated": true
+          },
+          {
+            "id": "doc",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "disclosure_published",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [],
+            "origin_key": "issuer-release",
+            "kind": "OFFICIAL",
+            "authenticated": true
+          }
+        ],
+        "claims": [
+          {
+            "id": "ratio",
+            "kind": "DERIVED",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "close_ratio",
+                "value": "1.2",
+                "period": "window-1",
+                "unit": "ratio"
+              }
+            ],
+            "source_ids": [
+              "market"
+            ],
+            "calculation_id": "ratio-1",
+            "depends_on": [],
+            "minimum_original_roots": 1,
+            "baseline_count": null
+          },
+          {
+            "id": "cause",
+            "kind": "CAUSAL",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "disclosure_caused_return",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "source_ids": [
+              "market",
+              "doc"
+            ],
+            "calculation_id": null,
+            "depends_on": [],
+            "minimum_original_roots": 1,
+            "baseline_count": null
+          }
+        ],
+        "calculations": [
+          {
+            "id": "ratio-1",
+            "operands": [
+              [
+                "market",
+                {
+                  "subject": "asset-A",
+                  "predicate": "close",
+                  "value": "120",
+                  "period": "window-1",
+                  "unit": "TRY"
+                }
+              ],
+              [
+                "market",
+                {
+                  "subject": "asset-A",
+                  "predicate": "prior_close",
+                  "value": "100",
+                  "period": "window-1",
+                  "unit": "TRY"
+                }
+              ]
+            ],
+            "result": "1.2",
+            "operation": "RATIO"
+          }
+        ],
+        "cutoff": 100,
+        "answer_override": null
+      },
+      "oracle": {
+        "graph_answer": "PARTIAL",
+        "accepted_ids": [
+          "ratio"
+        ],
+        "unsupported_ids": [
+          "cause"
+        ],
+        "world_false_ids": []
+      },
+      "outcomes": {
+        "EXISTENCE_ARITHMETIC": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "ratio",
+            "cause"
+          ],
+          "emitted_claim_ids": [
+            "ratio",
+            "cause"
+          ],
+          "claim_reasons": {
+            "ratio": [],
+            "cause": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[ratio] asset-A/close_ratio=1.2 ratio (window-1)\n[cause] asset-A/disclosure_caused_return=yes fact (window-1)"
+        },
+        "TYPED_SCOPE": {
+          "answer_status": "PARTIAL",
+          "accepted_claim_ids": [
+            "ratio"
+          ],
+          "emitted_claim_ids": [
+            "ratio"
+          ],
+          "claim_reasons": {
+            "ratio": [],
+            "cause": [
+              "CAUSAL_NOT_ESTABLISHED"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": "[ratio] asset-A/close_ratio=1.2 ratio (window-1)"
+        },
+        "GRAPH_RENDER": {
+          "answer_status": "PARTIAL",
+          "accepted_claim_ids": [
+            "ratio"
+          ],
+          "emitted_claim_ids": [
+            "ratio"
+          ],
+          "claim_reasons": {
+            "ratio": [],
+            "cause": [
+              "CAUSAL_NOT_ESTABLISHED"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": "[ratio] asset-A/close_ratio=1.2 ratio (window-1)"
+        }
+      },
+      "graph_policy_oracle_match": true,
+      "limit": ""
+    },
+    {
+      "id": "E04",
+      "description": "Incorrect computed ratio",
+      "input": {
+        "sources": [
+          {
+            "id": "market",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "close",
+                "value": "120",
+                "period": "window-1",
+                "unit": "TRY"
+              },
+              {
+                "subject": "asset-A",
+                "predicate": "prior_close",
+                "value": "100",
+                "period": "window-1",
+                "unit": "TRY"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [],
+            "origin_key": "venue-observation",
+            "kind": "OBSERVATION",
+            "authenticated": true
+          }
+        ],
+        "claims": [
+          {
+            "id": "ratio",
+            "kind": "DERIVED",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "close_ratio",
+                "value": "1.9",
+                "period": "window-1",
+                "unit": "ratio"
+              }
+            ],
+            "source_ids": [
+              "market"
+            ],
+            "calculation_id": "ratio-1",
+            "depends_on": [],
+            "minimum_original_roots": 1,
+            "baseline_count": null
+          }
+        ],
+        "calculations": [
+          {
+            "id": "ratio-1",
+            "operands": [
+              [
+                "market",
+                {
+                  "subject": "asset-A",
+                  "predicate": "close",
+                  "value": "120",
+                  "period": "window-1",
+                  "unit": "TRY"
+                }
+              ],
+              [
+                "market",
+                {
+                  "subject": "asset-A",
+                  "predicate": "prior_close",
+                  "value": "100",
+                  "period": "window-1",
+                  "unit": "TRY"
+                }
+              ]
+            ],
+            "result": "1.9",
+            "operation": "RATIO"
+          }
+        ],
+        "cutoff": 100,
+        "answer_override": null
+      },
+      "oracle": {
+        "graph_answer": "INSUFFICIENT_EVIDENCE",
+        "accepted_ids": [],
+        "unsupported_ids": [
+          "ratio"
+        ],
+        "world_false_ids": []
+      },
+      "outcomes": {
+        "EXISTENCE_ARITHMETIC": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "ratio": [
+              "INCORRECT_CALCULATION"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        },
+        "TYPED_SCOPE": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "ratio": [
+              "INCORRECT_CALCULATION"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        },
+        "GRAPH_RENDER": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "ratio": [
+              "INCORRECT_CALCULATION"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        }
+      },
+      "graph_policy_oracle_match": true,
+      "limit": ""
+    },
+    {
+      "id": "E05",
+      "description": "Two syndication copies are one origin",
+      "input": {
+        "sources": [
+          {
+            "id": "original",
+            "atoms": [
+              {
+                "subject": "fund-A",
+                "predicate": "access_restricted",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [],
+            "origin_key": "one-news-story",
+            "kind": "OBSERVATION",
+            "authenticated": true
+          },
+          {
+            "id": "copy1",
+            "atoms": [
+              {
+                "subject": "fund-A",
+                "predicate": "access_restricted",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [
+              "original"
+            ],
+            "origin_key": null,
+            "kind": "OBSERVATION",
+            "authenticated": true
+          },
+          {
+            "id": "copy2",
+            "atoms": [
+              {
+                "subject": "fund-A",
+                "predicate": "access_restricted",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [
+              "original"
+            ],
+            "origin_key": null,
+            "kind": "OBSERVATION",
+            "authenticated": true
+          }
+        ],
+        "claims": [
+          {
+            "id": "corroborated",
+            "kind": "FACT",
+            "atoms": [
+              {
+                "subject": "fund-A",
+                "predicate": "access_restricted",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "source_ids": [
+              "copy1",
+              "copy2"
+            ],
+            "calculation_id": null,
+            "depends_on": [],
+            "minimum_original_roots": 2,
+            "baseline_count": null
+          }
+        ],
+        "calculations": [],
+        "cutoff": 100,
+        "answer_override": null
+      },
+      "oracle": {
+        "graph_answer": "INSUFFICIENT_EVIDENCE",
+        "accepted_ids": [],
+        "unsupported_ids": [
+          "corroborated"
+        ],
+        "world_false_ids": []
+      },
+      "outcomes": {
+        "EXISTENCE_ARITHMETIC": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "corroborated"
+          ],
+          "emitted_claim_ids": [
+            "corroborated"
+          ],
+          "claim_reasons": {
+            "corroborated": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[corroborated] fund-A/access_restricted=yes fact (window-1)"
+        },
+        "TYPED_SCOPE": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "corroborated"
+          ],
+          "emitted_claim_ids": [
+            "corroborated"
+          ],
+          "claim_reasons": {
+            "corroborated": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[corroborated] fund-A/access_restricted=yes fact (window-1)"
+        },
+        "GRAPH_RENDER": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "corroborated": [
+              "INSUFFICIENT_DISTINCT_ORIGINS"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        }
+      },
+      "graph_policy_oracle_match": true,
+      "limit": ""
+    },
+    {
+      "id": "E06",
+      "description": "Independent reports agree but the hidden world oracle says false",
+      "input": {
+        "sources": [
+          {
+            "id": "i1",
+            "atoms": [
+              {
+                "subject": "fund-A",
+                "predicate": "access_restricted",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [],
+            "origin_key": "independent-report-1",
+            "kind": "OBSERVATION",
+            "authenticated": true
+          },
+          {
+            "id": "i2",
+            "atoms": [
+              {
+                "subject": "fund-A",
+                "predicate": "access_restricted",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [],
+            "origin_key": "independent-report-2",
+            "kind": "OBSERVATION",
+            "authenticated": true
+          }
+        ],
+        "claims": [
+          {
+            "id": "corroborated",
+            "kind": "FACT",
+            "atoms": [
+              {
+                "subject": "fund-A",
+                "predicate": "access_restricted",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "source_ids": [
+              "i1",
+              "i2"
+            ],
+            "calculation_id": null,
+            "depends_on": [],
+            "minimum_original_roots": 2,
+            "baseline_count": null
+          }
+        ],
+        "calculations": [],
+        "cutoff": 100,
+        "answer_override": null
+      },
+      "oracle": {
+        "graph_answer": "ANSWERED",
+        "accepted_ids": [
+          "corroborated"
+        ],
+        "unsupported_ids": [],
+        "world_false_ids": [
+          "corroborated"
+        ]
+      },
+      "outcomes": {
+        "EXISTENCE_ARITHMETIC": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "corroborated"
+          ],
+          "emitted_claim_ids": [
+            "corroborated"
+          ],
+          "claim_reasons": {
+            "corroborated": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[corroborated] fund-A/access_restricted=yes fact (window-1)"
+        },
+        "TYPED_SCOPE": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "corroborated"
+          ],
+          "emitted_claim_ids": [
+            "corroborated"
+          ],
+          "claim_reasons": {
+            "corroborated": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[corroborated] fund-A/access_restricted=yes fact (window-1)"
+        },
+        "GRAPH_RENDER": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "corroborated"
+          ],
+          "emitted_claim_ids": [
+            "corroborated"
+          ],
+          "claim_reasons": {
+            "corroborated": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[corroborated] fund-A/access_restricted=yes fact (window-1)"
+        }
+      },
+      "graph_policy_oracle_match": true,
+      "limit": "Source-supported does not imply world-true; gate cannot discover the hidden falsehood."
+    },
+    {
+      "id": "E07",
+      "description": "Circular source citations without an original",
+      "input": {
+        "sources": [
+          {
+            "id": "a",
+            "atoms": [
+              {
+                "subject": "fund-A",
+                "predicate": "access_restricted",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [
+              "b"
+            ],
+            "origin_key": null,
+            "kind": "OBSERVATION",
+            "authenticated": true
+          },
+          {
+            "id": "b",
+            "atoms": [
+              {
+                "subject": "fund-A",
+                "predicate": "access_restricted",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [
+              "a"
+            ],
+            "origin_key": null,
+            "kind": "OBSERVATION",
+            "authenticated": true
+          }
+        ],
+        "claims": [
+          {
+            "id": "official",
+            "kind": "FACT",
+            "atoms": [
+              {
+                "subject": "fund-A",
+                "predicate": "access_restricted",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "source_ids": [
+              "a"
+            ],
+            "calculation_id": null,
+            "depends_on": [],
+            "minimum_original_roots": 1,
+            "baseline_count": null
+          }
+        ],
+        "calculations": [],
+        "cutoff": 100,
+        "answer_override": null
+      },
+      "oracle": {
+        "graph_answer": "INSUFFICIENT_EVIDENCE",
+        "accepted_ids": [],
+        "unsupported_ids": [
+          "official"
+        ],
+        "world_false_ids": []
+      },
+      "outcomes": {
+        "EXISTENCE_ARITHMETIC": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "official"
+          ],
+          "emitted_claim_ids": [
+            "official"
+          ],
+          "claim_reasons": {
+            "official": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[official] fund-A/access_restricted=yes fact (window-1)"
+        },
+        "TYPED_SCOPE": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "official"
+          ],
+          "emitted_claim_ids": [
+            "official"
+          ],
+          "claim_reasons": {
+            "official": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[official] fund-A/access_restricted=yes fact (window-1)"
+        },
+        "GRAPH_RENDER": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "official": [
+              "CIRCULAR_SOURCE_LINEAGE"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        }
+      },
+      "graph_policy_oracle_match": true,
+      "limit": ""
+    },
+    {
+      "id": "E08",
+      "description": "Claim dependency cycle with individually cited atoms",
+      "input": {
+        "sources": [
+          {
+            "id": "market",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "close",
+                "value": "120",
+                "period": "window-1",
+                "unit": "TRY"
+              },
+              {
+                "subject": "asset-A",
+                "predicate": "prior_close",
+                "value": "100",
+                "period": "window-1",
+                "unit": "TRY"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [],
+            "origin_key": "venue-observation",
+            "kind": "OBSERVATION",
+            "authenticated": true
+          }
+        ],
+        "claims": [
+          {
+            "id": "cyc1",
+            "kind": "FACT",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "close",
+                "value": "120",
+                "period": "window-1",
+                "unit": "TRY"
+              }
+            ],
+            "source_ids": [
+              "market"
+            ],
+            "calculation_id": null,
+            "depends_on": [
+              "cyc2"
+            ],
+            "minimum_original_roots": 1,
+            "baseline_count": null
+          },
+          {
+            "id": "cyc2",
+            "kind": "FACT",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "close",
+                "value": "120",
+                "period": "window-1",
+                "unit": "TRY"
+              }
+            ],
+            "source_ids": [
+              "market"
+            ],
+            "calculation_id": null,
+            "depends_on": [
+              "cyc1"
+            ],
+            "minimum_original_roots": 1,
+            "baseline_count": null
+          }
+        ],
+        "calculations": [],
+        "cutoff": 100,
+        "answer_override": null
+      },
+      "oracle": {
+        "graph_answer": "INSUFFICIENT_EVIDENCE",
+        "accepted_ids": [],
+        "unsupported_ids": [
+          "cyc1",
+          "cyc2"
+        ],
+        "world_false_ids": []
+      },
+      "outcomes": {
+        "EXISTENCE_ARITHMETIC": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "cyc1",
+            "cyc2"
+          ],
+          "emitted_claim_ids": [
+            "cyc1",
+            "cyc2"
+          ],
+          "claim_reasons": {
+            "cyc1": [],
+            "cyc2": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[cyc1] asset-A/close=120 TRY (window-1)\n[cyc2] asset-A/close=120 TRY (window-1)"
+        },
+        "TYPED_SCOPE": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "cyc1",
+            "cyc2"
+          ],
+          "emitted_claim_ids": [
+            "cyc1",
+            "cyc2"
+          ],
+          "claim_reasons": {
+            "cyc1": [],
+            "cyc2": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[cyc1] asset-A/close=120 TRY (window-1)\n[cyc2] asset-A/close=120 TRY (window-1)"
+        },
+        "GRAPH_RENDER": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "cyc1": [
+              "CIRCULAR_CLAIM_DEPENDENCY"
+            ],
+            "cyc2": [
+              "CIRCULAR_CLAIM_DEPENDENCY"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        }
+      },
+      "graph_policy_oracle_match": true,
+      "limit": ""
+    },
+    {
+      "id": "E09",
+      "description": "Verified official access fact without any market baseline",
+      "input": {
+        "sources": [
+          {
+            "id": "notice",
+            "atoms": [
+              {
+                "subject": "fund-A",
+                "predicate": "access_restricted",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [],
+            "origin_key": "regulator-decision",
+            "kind": "OFFICIAL",
+            "authenticated": true
+          }
+        ],
+        "claims": [
+          {
+            "id": "official",
+            "kind": "FACT",
+            "atoms": [
+              {
+                "subject": "fund-A",
+                "predicate": "access_restricted",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "source_ids": [
+              "notice"
+            ],
+            "calculation_id": null,
+            "depends_on": [],
+            "minimum_original_roots": 1,
+            "baseline_count": null
+          }
+        ],
+        "calculations": [],
+        "cutoff": 100,
+        "answer_override": null
+      },
+      "oracle": {
+        "graph_answer": "ANSWERED",
+        "accepted_ids": [
+          "official"
+        ],
+        "unsupported_ids": [],
+        "world_false_ids": []
+      },
+      "outcomes": {
+        "EXISTENCE_ARITHMETIC": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "official"
+          ],
+          "emitted_claim_ids": [
+            "official"
+          ],
+          "claim_reasons": {
+            "official": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[official] fund-A/access_restricted=yes fact (window-1)"
+        },
+        "TYPED_SCOPE": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "official"
+          ],
+          "emitted_claim_ids": [
+            "official"
+          ],
+          "claim_reasons": {
+            "official": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[official] fund-A/access_restricted=yes fact (window-1)"
+        },
+        "GRAPH_RENDER": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "official"
+          ],
+          "emitted_claim_ids": [
+            "official"
+          ],
+          "claim_reasons": {
+            "official": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[official] fund-A/access_restricted=yes fact (window-1)"
+        }
+      },
+      "graph_policy_oracle_match": true,
+      "limit": "Verified factual notice needs identity/time/authenticity; a market anomaly baseline is irrelevant."
+    },
+    {
+      "id": "E10",
+      "description": "Official citation for the wrong fund",
+      "input": {
+        "sources": [
+          {
+            "id": "notice",
+            "atoms": [
+              {
+                "subject": "fund-A",
+                "predicate": "access_restricted",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [],
+            "origin_key": "regulator-decision",
+            "kind": "OFFICIAL",
+            "authenticated": true
+          }
+        ],
+        "claims": [
+          {
+            "id": "official",
+            "kind": "FACT",
+            "atoms": [
+              {
+                "subject": "fund-B",
+                "predicate": "access_restricted",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "source_ids": [
+              "notice"
+            ],
+            "calculation_id": null,
+            "depends_on": [],
+            "minimum_original_roots": 1,
+            "baseline_count": null
+          }
+        ],
+        "calculations": [],
+        "cutoff": 100,
+        "answer_override": null
+      },
+      "oracle": {
+        "graph_answer": "INSUFFICIENT_EVIDENCE",
+        "accepted_ids": [],
+        "unsupported_ids": [
+          "official"
+        ],
+        "world_false_ids": []
+      },
+      "outcomes": {
+        "EXISTENCE_ARITHMETIC": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "official"
+          ],
+          "emitted_claim_ids": [
+            "official"
+          ],
+          "claim_reasons": {
+            "official": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[official] fund-B/access_restricted=yes fact (window-1)"
+        },
+        "TYPED_SCOPE": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "official": [
+              "UNSUPPORTED_TYPED_PREMISE"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        },
+        "GRAPH_RENDER": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "official": [
+              "UNSUPPORTED_TYPED_PREMISE"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        }
+      },
+      "graph_policy_oracle_match": true,
+      "limit": ""
+    },
+    {
+      "id": "E11",
+      "description": "Stale contradiction must not invalidate a current official fact",
+      "input": {
+        "sources": [
+          {
+            "id": "notice",
+            "atoms": [
+              {
+                "subject": "fund-A",
+                "predicate": "access_restricted",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [],
+            "origin_key": "regulator-decision",
+            "kind": "OFFICIAL",
+            "authenticated": true
+          },
+          {
+            "id": "stale",
+            "atoms": [
+              {
+                "subject": "fund-A",
+                "predicate": "access_restricted",
+                "value": "no",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "available": 40,
+            "valid_from": 0,
+            "valid_until": 80,
+            "parents": [],
+            "origin_key": "old-decision",
+            "kind": "OBSERVATION",
+            "authenticated": true
+          }
+        ],
+        "claims": [
+          {
+            "id": "official",
+            "kind": "FACT",
+            "atoms": [
+              {
+                "subject": "fund-A",
+                "predicate": "access_restricted",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "source_ids": [
+              "notice"
+            ],
+            "calculation_id": null,
+            "depends_on": [],
+            "minimum_original_roots": 1,
+            "baseline_count": null
+          }
+        ],
+        "calculations": [],
+        "cutoff": 100,
+        "answer_override": null
+      },
+      "oracle": {
+        "graph_answer": "ANSWERED",
+        "accepted_ids": [
+          "official"
+        ],
+        "unsupported_ids": [],
+        "world_false_ids": []
+      },
+      "outcomes": {
+        "EXISTENCE_ARITHMETIC": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "official"
+          ],
+          "emitted_claim_ids": [
+            "official"
+          ],
+          "claim_reasons": {
+            "official": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[official] fund-A/access_restricted=yes fact (window-1)"
+        },
+        "TYPED_SCOPE": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "official"
+          ],
+          "emitted_claim_ids": [
+            "official"
+          ],
+          "claim_reasons": {
+            "official": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[official] fund-A/access_restricted=yes fact (window-1)"
+        },
+        "GRAPH_RENDER": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "official"
+          ],
+          "emitted_claim_ids": [
+            "official"
+          ],
+          "claim_reasons": {
+            "official": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[official] fund-A/access_restricted=yes fact (window-1)"
+        }
+      },
+      "graph_policy_oracle_match": true,
+      "limit": ""
+    },
+    {
+      "id": "E12",
+      "description": "Unresolved current contradiction",
+      "input": {
+        "sources": [
+          {
+            "id": "notice",
+            "atoms": [
+              {
+                "subject": "fund-A",
+                "predicate": "access_restricted",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [],
+            "origin_key": "regulator-decision",
+            "kind": "OFFICIAL",
+            "authenticated": true
+          },
+          {
+            "id": "conflict",
+            "atoms": [
+              {
+                "subject": "fund-A",
+                "predicate": "access_restricted",
+                "value": "no",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "available": 99,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [],
+            "origin_key": "old-decision",
+            "kind": "OBSERVATION",
+            "authenticated": true
+          }
+        ],
+        "claims": [
+          {
+            "id": "official",
+            "kind": "FACT",
+            "atoms": [
+              {
+                "subject": "fund-A",
+                "predicate": "access_restricted",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "source_ids": [
+              "notice"
+            ],
+            "calculation_id": null,
+            "depends_on": [],
+            "minimum_original_roots": 1,
+            "baseline_count": null
+          }
+        ],
+        "calculations": [],
+        "cutoff": 100,
+        "answer_override": null
+      },
+      "oracle": {
+        "graph_answer": "INSUFFICIENT_EVIDENCE",
+        "accepted_ids": [],
+        "unsupported_ids": [
+          "official"
+        ],
+        "world_false_ids": []
+      },
+      "outcomes": {
+        "EXISTENCE_ARITHMETIC": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "official"
+          ],
+          "emitted_claim_ids": [
+            "official"
+          ],
+          "claim_reasons": {
+            "official": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[official] fund-A/access_restricted=yes fact (window-1)"
+        },
+        "TYPED_SCOPE": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "official": [
+              "UNRESOLVED_CURRENT_CONTRADICTION"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        },
+        "GRAPH_RENDER": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "official": [
+              "UNRESOLVED_CURRENT_CONTRADICTION"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        }
+      },
+      "graph_policy_oracle_match": true,
+      "limit": ""
+    },
+    {
+      "id": "E13",
+      "description": "Publication unavailable at replay cutoff",
+      "input": {
+        "sources": [
+          {
+            "id": "notice",
+            "atoms": [
+              {
+                "subject": "fund-A",
+                "predicate": "access_restricted",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "available": 101,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [],
+            "origin_key": "regulator-decision",
+            "kind": "OFFICIAL",
+            "authenticated": true
+          }
+        ],
+        "claims": [
+          {
+            "id": "official",
+            "kind": "FACT",
+            "atoms": [
+              {
+                "subject": "fund-A",
+                "predicate": "access_restricted",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "source_ids": [
+              "notice"
+            ],
+            "calculation_id": null,
+            "depends_on": [],
+            "minimum_original_roots": 1,
+            "baseline_count": null
+          }
+        ],
+        "calculations": [],
+        "cutoff": 100,
+        "answer_override": null
+      },
+      "oracle": {
+        "graph_answer": "INSUFFICIENT_EVIDENCE",
+        "accepted_ids": [],
+        "unsupported_ids": [
+          "official"
+        ],
+        "world_false_ids": []
+      },
+      "outcomes": {
+        "EXISTENCE_ARITHMETIC": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "official"
+          ],
+          "emitted_claim_ids": [
+            "official"
+          ],
+          "claim_reasons": {
+            "official": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[official] fund-A/access_restricted=yes fact (window-1)"
+        },
+        "TYPED_SCOPE": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "official": [
+              "NO_ELIGIBLE_SOURCE"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        },
+        "GRAPH_RENDER": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "official": [
+              "NO_ELIGIBLE_SOURCE"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        }
+      },
+      "graph_policy_oracle_match": true,
+      "limit": ""
+    },
+    {
+      "id": "E14",
+      "description": "Correct claim list with an omitted causal sentence in prose",
+      "input": {
+        "sources": [
+          {
+            "id": "market",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "close",
+                "value": "120",
+                "period": "window-1",
+                "unit": "TRY"
+              },
+              {
+                "subject": "asset-A",
+                "predicate": "prior_close",
+                "value": "100",
+                "period": "window-1",
+                "unit": "TRY"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [],
+            "origin_key": "venue-observation",
+            "kind": "OBSERVATION",
+            "authenticated": true
+          }
+        ],
+        "claims": [
+          {
+            "id": "ratio",
+            "kind": "DERIVED",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "close_ratio",
+                "value": "1.2",
+                "period": "window-1",
+                "unit": "ratio"
+              }
+            ],
+            "source_ids": [
+              "market"
+            ],
+            "calculation_id": "ratio-1",
+            "depends_on": [],
+            "minimum_original_roots": 1,
+            "baseline_count": null
+          }
+        ],
+        "calculations": [
+          {
+            "id": "ratio-1",
+            "operands": [
+              [
+                "market",
+                {
+                  "subject": "asset-A",
+                  "predicate": "close",
+                  "value": "120",
+                  "period": "window-1",
+                  "unit": "TRY"
+                }
+              ],
+              [
+                "market",
+                {
+                  "subject": "asset-A",
+                  "predicate": "prior_close",
+                  "value": "100",
+                  "period": "window-1",
+                  "unit": "TRY"
+                }
+              ]
+            ],
+            "result": "1.2",
+            "operation": "RATIO"
+          }
+        ],
+        "cutoff": 100,
+        "answer_override": "[ratio] asset-A/close_ratio=1.2 ratio (window-1)\nThe issuer caused this rise."
+      },
+      "oracle": {
+        "graph_answer": "REVIEW_REQUIRED",
+        "accepted_ids": [
+          "ratio"
+        ],
+        "unsupported_ids": [],
+        "world_false_ids": []
+      },
+      "outcomes": {
+        "EXISTENCE_ARITHMETIC": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "ratio"
+          ],
+          "emitted_claim_ids": [
+            "ratio"
+          ],
+          "claim_reasons": {
+            "ratio": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[ratio] asset-A/close_ratio=1.2 ratio (window-1)"
+        },
+        "TYPED_SCOPE": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "ratio"
+          ],
+          "emitted_claim_ids": [
+            "ratio"
+          ],
+          "claim_reasons": {
+            "ratio": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[ratio] asset-A/close_ratio=1.2 ratio (window-1)"
+        },
+        "GRAPH_RENDER": {
+          "answer_status": "REVIEW_REQUIRED",
+          "accepted_claim_ids": [
+            "ratio"
+          ],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "ratio": []
+          },
+          "render_error": "UNVALIDATED_MATERIAL_PROSE",
+          "rendered_lab_text": ""
+        }
+      },
+      "graph_policy_oracle_match": true,
+      "limit": "Only a closed renderer makes complete material-sentence coverage mechanical; no free-prose classifier was tested."
+    },
+    {
+      "id": "E15",
+      "description": "Bounded search result promoted to no news anywhere",
+      "input": {
+        "sources": [
+          {
+            "id": "doc",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "disclosure_published",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [],
+            "origin_key": "issuer-release",
+            "kind": "OFFICIAL",
+            "authenticated": true
+          }
+        ],
+        "claims": [
+          {
+            "id": "absence",
+            "kind": "ABSENCE",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "no_news_exists",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "source_ids": [
+              "doc"
+            ],
+            "calculation_id": null,
+            "depends_on": [],
+            "minimum_original_roots": 1,
+            "baseline_count": null
+          }
+        ],
+        "calculations": [],
+        "cutoff": 100,
+        "answer_override": null
+      },
+      "oracle": {
+        "graph_answer": "INSUFFICIENT_EVIDENCE",
+        "accepted_ids": [],
+        "unsupported_ids": [
+          "absence"
+        ],
+        "world_false_ids": []
+      },
+      "outcomes": {
+        "EXISTENCE_ARITHMETIC": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "absence"
+          ],
+          "emitted_claim_ids": [
+            "absence"
+          ],
+          "claim_reasons": {
+            "absence": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[absence] asset-A/no_news_exists=yes fact (window-1)"
+        },
+        "TYPED_SCOPE": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "absence": [
+              "BOUNDED_SEARCH_IS_NOT_GLOBAL_ABSENCE"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        },
+        "GRAPH_RENDER": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "absence": [
+              "BOUNDED_SEARCH_IS_NOT_GLOBAL_ABSENCE"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        }
+      },
+      "graph_policy_oracle_match": true,
+      "limit": ""
+    },
+    {
+      "id": "E16",
+      "description": "No usable evidence",
+      "input": {
+        "sources": [],
+        "claims": [
+          {
+            "id": "price",
+            "kind": "FACT",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "close",
+                "value": "120",
+                "period": "window-1",
+                "unit": "TRY"
+              }
+            ],
+            "source_ids": [],
+            "calculation_id": null,
+            "depends_on": [],
+            "minimum_original_roots": 1,
+            "baseline_count": null
+          }
+        ],
+        "calculations": [],
+        "cutoff": 100,
+        "answer_override": null
+      },
+      "oracle": {
+        "graph_answer": "INSUFFICIENT_EVIDENCE",
+        "accepted_ids": [],
+        "unsupported_ids": [
+          "price"
+        ],
+        "world_false_ids": []
+      },
+      "outcomes": {
+        "EXISTENCE_ARITHMETIC": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "price": [
+              "MISSING_SOURCE_ID"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        },
+        "TYPED_SCOPE": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "price": [
+              "MISSING_SOURCE_ID"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        },
+        "GRAPH_RENDER": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "price": [
+              "MISSING_SOURCE_ID"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        }
+      },
+      "graph_policy_oracle_match": true,
+      "limit": ""
+    },
+    {
+      "id": "E17",
+      "description": "Attribution is a fact; the attributed cause is not established",
+      "input": {
+        "sources": [
+          {
+            "id": "attributed",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "issuer_reports_cause",
+                "value": "disclosure",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [],
+            "origin_key": "issuer-comment",
+            "kind": "OFFICIAL",
+            "authenticated": true
+          }
+        ],
+        "claims": [
+          {
+            "id": "attribution",
+            "kind": "FACT",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "issuer_reports_cause",
+                "value": "disclosure",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "source_ids": [
+              "attributed"
+            ],
+            "calculation_id": null,
+            "depends_on": [],
+            "minimum_original_roots": 1,
+            "baseline_count": null
+          }
+        ],
+        "calculations": [],
+        "cutoff": 100,
+        "answer_override": null
+      },
+      "oracle": {
+        "graph_answer": "ANSWERED",
+        "accepted_ids": [
+          "attribution"
+        ],
+        "unsupported_ids": [],
+        "world_false_ids": []
+      },
+      "outcomes": {
+        "EXISTENCE_ARITHMETIC": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "attribution"
+          ],
+          "emitted_claim_ids": [
+            "attribution"
+          ],
+          "claim_reasons": {
+            "attribution": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[attribution] asset-A/issuer_reports_cause=disclosure fact (window-1)"
+        },
+        "TYPED_SCOPE": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "attribution"
+          ],
+          "emitted_claim_ids": [
+            "attribution"
+          ],
+          "claim_reasons": {
+            "attribution": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[attribution] asset-A/issuer_reports_cause=disclosure fact (window-1)"
+        },
+        "GRAPH_RENDER": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "attribution"
+          ],
+          "emitted_claim_ids": [
+            "attribution"
+          ],
+          "claim_reasons": {
+            "attribution": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[attribution] asset-A/issuer_reports_cause=disclosure fact (window-1)"
+        }
+      },
+      "graph_policy_oracle_match": true,
+      "limit": ""
+    },
+    {
+      "id": "E18",
+      "description": "Numerically correct ratio with mixed currencies",
+      "input": {
+        "sources": [
+          {
+            "id": "market",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "close",
+                "value": "120",
+                "period": "window-1",
+                "unit": "TRY"
+              },
+              {
+                "subject": "asset-A",
+                "predicate": "prior_close",
+                "value": "100",
+                "period": "window-1",
+                "unit": "USD"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [],
+            "origin_key": "venue-observation",
+            "kind": "OBSERVATION",
+            "authenticated": true
+          }
+        ],
+        "claims": [
+          {
+            "id": "ratio",
+            "kind": "DERIVED",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "close_ratio",
+                "value": "1.2",
+                "period": "window-1",
+                "unit": "ratio"
+              }
+            ],
+            "source_ids": [
+              "market"
+            ],
+            "calculation_id": "ratio-1",
+            "depends_on": [],
+            "minimum_original_roots": 1,
+            "baseline_count": null
+          }
+        ],
+        "calculations": [
+          {
+            "id": "ratio-1",
+            "operands": [
+              [
+                "market",
+                {
+                  "subject": "asset-A",
+                  "predicate": "close",
+                  "value": "120",
+                  "period": "window-1",
+                  "unit": "TRY"
+                }
+              ],
+              [
+                "market",
+                {
+                  "subject": "asset-A",
+                  "predicate": "prior_close",
+                  "value": "100",
+                  "period": "window-1",
+                  "unit": "USD"
+                }
+              ]
+            ],
+            "result": "1.2",
+            "operation": "RATIO"
+          }
+        ],
+        "cutoff": 100,
+        "answer_override": null
+      },
+      "oracle": {
+        "graph_answer": "INSUFFICIENT_EVIDENCE",
+        "accepted_ids": [],
+        "unsupported_ids": [
+          "ratio"
+        ],
+        "world_false_ids": []
+      },
+      "outcomes": {
+        "EXISTENCE_ARITHMETIC": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "ratio"
+          ],
+          "emitted_claim_ids": [
+            "ratio"
+          ],
+          "claim_reasons": {
+            "ratio": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[ratio] asset-A/close_ratio=1.2 ratio (window-1)"
+        },
+        "TYPED_SCOPE": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "ratio": [
+              "OPERAND_SCOPE_OR_UNIT_MISMATCH"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        },
+        "GRAPH_RENDER": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "ratio": [
+              "OPERAND_SCOPE_OR_UNIT_MISMATCH"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        }
+      },
+      "graph_policy_oracle_match": true,
+      "limit": ""
+    },
+    {
+      "id": "E19",
+      "description": "Two factual observations in one window without causal promotion",
+      "input": {
+        "sources": [
+          {
+            "id": "market",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "close",
+                "value": "120",
+                "period": "window-1",
+                "unit": "TRY"
+              },
+              {
+                "subject": "asset-A",
+                "predicate": "prior_close",
+                "value": "100",
+                "period": "window-1",
+                "unit": "TRY"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [],
+            "origin_key": "venue-observation",
+            "kind": "OBSERVATION",
+            "authenticated": true
+          },
+          {
+            "id": "doc",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "disclosure_published",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [],
+            "origin_key": "issuer-release",
+            "kind": "OFFICIAL",
+            "authenticated": true
+          }
+        ],
+        "claims": [
+          {
+            "id": "association",
+            "kind": "ASSOCIATION",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "close",
+                "value": "120",
+                "period": "window-1",
+                "unit": "TRY"
+              },
+              {
+                "subject": "asset-A",
+                "predicate": "disclosure_published",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "source_ids": [
+              "market",
+              "doc"
+            ],
+            "calculation_id": null,
+            "depends_on": [],
+            "minimum_original_roots": 1,
+            "baseline_count": null
+          }
+        ],
+        "calculations": [],
+        "cutoff": 100,
+        "answer_override": null
+      },
+      "oracle": {
+        "graph_answer": "ANSWERED",
+        "accepted_ids": [
+          "association"
+        ],
+        "unsupported_ids": [],
+        "world_false_ids": []
+      },
+      "outcomes": {
+        "EXISTENCE_ARITHMETIC": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "association"
+          ],
+          "emitted_claim_ids": [
+            "association"
+          ],
+          "claim_reasons": {
+            "association": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[association] asset-A/close=120 TRY (window-1); asset-A/disclosure_published=yes fact (window-1)"
+        },
+        "TYPED_SCOPE": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "association"
+          ],
+          "emitted_claim_ids": [
+            "association"
+          ],
+          "claim_reasons": {
+            "association": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[association] asset-A/close=120 TRY (window-1); asset-A/disclosure_published=yes fact (window-1)"
+        },
+        "GRAPH_RENDER": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "association"
+          ],
+          "emitted_claim_ids": [
+            "association"
+          ],
+          "claim_reasons": {
+            "association": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[association] asset-A/close=120 TRY (window-1); asset-A/disclosure_published=yes fact (window-1)"
+        }
+      },
+      "graph_policy_oracle_match": true,
+      "limit": ""
+    },
+    {
+      "id": "E20",
+      "description": "Directly supported child depends on a rejected material premise",
+      "input": {
+        "sources": [
+          {
+            "id": "market",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "close",
+                "value": "120",
+                "period": "window-1",
+                "unit": "TRY"
+              },
+              {
+                "subject": "asset-A",
+                "predicate": "prior_close",
+                "value": "100",
+                "period": "window-1",
+                "unit": "TRY"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [],
+            "origin_key": "venue-observation",
+            "kind": "OBSERVATION",
+            "authenticated": true
+          }
+        ],
+        "claims": [
+          {
+            "id": "wrong",
+            "kind": "FACT",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "close",
+                "value": "999",
+                "period": "window-1",
+                "unit": "TRY"
+              }
+            ],
+            "source_ids": [
+              "market"
+            ],
+            "calculation_id": null,
+            "depends_on": [],
+            "minimum_original_roots": 1,
+            "baseline_count": null
+          },
+          {
+            "id": "child",
+            "kind": "FACT",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "close",
+                "value": "120",
+                "period": "window-1",
+                "unit": "TRY"
+              }
+            ],
+            "source_ids": [
+              "market"
+            ],
+            "calculation_id": null,
+            "depends_on": [
+              "wrong"
+            ],
+            "minimum_original_roots": 1,
+            "baseline_count": null
+          }
+        ],
+        "calculations": [],
+        "cutoff": 100,
+        "answer_override": null
+      },
+      "oracle": {
+        "graph_answer": "INSUFFICIENT_EVIDENCE",
+        "accepted_ids": [],
+        "unsupported_ids": [
+          "wrong",
+          "child"
+        ],
+        "world_false_ids": []
+      },
+      "outcomes": {
+        "EXISTENCE_ARITHMETIC": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "wrong",
+            "child"
+          ],
+          "emitted_claim_ids": [
+            "wrong",
+            "child"
+          ],
+          "claim_reasons": {
+            "wrong": [],
+            "child": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[wrong] asset-A/close=999 TRY (window-1)\n[child] asset-A/close=120 TRY (window-1)"
+        },
+        "TYPED_SCOPE": {
+          "answer_status": "PARTIAL",
+          "accepted_claim_ids": [
+            "child"
+          ],
+          "emitted_claim_ids": [
+            "child"
+          ],
+          "claim_reasons": {
+            "wrong": [
+              "UNSUPPORTED_TYPED_PREMISE"
+            ],
+            "child": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[child] asset-A/close=120 TRY (window-1)"
+        },
+        "GRAPH_RENDER": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "wrong": [
+              "UNSUPPORTED_TYPED_PREMISE"
+            ],
+            "child": [
+              "UNSUPPORTED_CLAIM_DEPENDENCY"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        }
+      },
+      "graph_policy_oracle_match": true,
+      "limit": ""
+    },
+    {
+      "id": "E21",
+      "description": "Unknown origin cannot assert independent corroboration",
+      "input": {
+        "sources": [
+          {
+            "id": "notice",
+            "atoms": [
+              {
+                "subject": "fund-A",
+                "predicate": "access_restricted",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": null,
+            "origin_key": null,
+            "kind": "OFFICIAL",
+            "authenticated": true
+          }
+        ],
+        "claims": [
+          {
+            "id": "official",
+            "kind": "FACT",
+            "atoms": [
+              {
+                "subject": "fund-A",
+                "predicate": "access_restricted",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "source_ids": [
+              "notice"
+            ],
+            "calculation_id": null,
+            "depends_on": [],
+            "minimum_original_roots": 1,
+            "baseline_count": null
+          }
+        ],
+        "calculations": [],
+        "cutoff": 100,
+        "answer_override": null
+      },
+      "oracle": {
+        "graph_answer": "INSUFFICIENT_EVIDENCE",
+        "accepted_ids": [],
+        "unsupported_ids": [
+          "official"
+        ],
+        "world_false_ids": []
+      },
+      "outcomes": {
+        "EXISTENCE_ARITHMETIC": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "official"
+          ],
+          "emitted_claim_ids": [
+            "official"
+          ],
+          "claim_reasons": {
+            "official": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[official] fund-A/access_restricted=yes fact (window-1)"
+        },
+        "TYPED_SCOPE": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "official"
+          ],
+          "emitted_claim_ids": [
+            "official"
+          ],
+          "claim_reasons": {
+            "official": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[official] fund-A/access_restricted=yes fact (window-1)"
+        },
+        "GRAPH_RENDER": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "official": [
+              "UNKNOWN_ORIGIN_LINEAGE"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        }
+      },
+      "graph_policy_oracle_match": true,
+      "limit": ""
+    },
+    {
+      "id": "E22",
+      "description": "Zero denominator",
+      "input": {
+        "sources": [
+          {
+            "id": "market",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "close",
+                "value": "120",
+                "period": "window-1",
+                "unit": "TRY"
+              },
+              {
+                "subject": "asset-A",
+                "predicate": "prior_close",
+                "value": "0",
+                "period": "window-1",
+                "unit": "TRY"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [],
+            "origin_key": "venue-observation",
+            "kind": "OBSERVATION",
+            "authenticated": true
+          }
+        ],
+        "claims": [
+          {
+            "id": "ratio",
+            "kind": "DERIVED",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "close_ratio",
+                "value": "1.2",
+                "period": "window-1",
+                "unit": "ratio"
+              }
+            ],
+            "source_ids": [
+              "market"
+            ],
+            "calculation_id": "ratio-1",
+            "depends_on": [],
+            "minimum_original_roots": 1,
+            "baseline_count": null
+          }
+        ],
+        "calculations": [
+          {
+            "id": "ratio-1",
+            "operands": [
+              [
+                "market",
+                {
+                  "subject": "asset-A",
+                  "predicate": "close",
+                  "value": "120",
+                  "period": "window-1",
+                  "unit": "TRY"
+                }
+              ],
+              [
+                "market",
+                {
+                  "subject": "asset-A",
+                  "predicate": "prior_close",
+                  "value": "0",
+                  "period": "window-1",
+                  "unit": "TRY"
+                }
+              ]
+            ],
+            "result": "1.2",
+            "operation": "RATIO"
+          }
+        ],
+        "cutoff": 100,
+        "answer_override": null
+      },
+      "oracle": {
+        "graph_answer": "INSUFFICIENT_EVIDENCE",
+        "accepted_ids": [],
+        "unsupported_ids": [
+          "ratio"
+        ],
+        "world_false_ids": []
+      },
+      "outcomes": {
+        "EXISTENCE_ARITHMETIC": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "ratio": [
+              "INVALID_NUMERIC_OPERAND"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        },
+        "TYPED_SCOPE": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "ratio": [
+              "INVALID_NUMERIC_OPERAND"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        },
+        "GRAPH_RENDER": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "ratio": [
+              "INVALID_NUMERIC_OPERAND"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        }
+      },
+      "graph_policy_oracle_match": true,
+      "limit": ""
+    },
+    {
+      "id": "E23",
+      "description": "Raw fact promoted to anomaly without reference history",
+      "input": {
+        "sources": [
+          {
+            "id": "market",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "close",
+                "value": "120",
+                "period": "window-1",
+                "unit": "TRY"
+              },
+              {
+                "subject": "asset-A",
+                "predicate": "prior_close",
+                "value": "100",
+                "period": "window-1",
+                "unit": "TRY"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [],
+            "origin_key": "venue-observation",
+            "kind": "OBSERVATION",
+            "authenticated": true
+          }
+        ],
+        "claims": [
+          {
+            "id": "price",
+            "kind": "ANOMALY",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "close",
+                "value": "120",
+                "period": "window-1",
+                "unit": "TRY"
+              }
+            ],
+            "source_ids": [
+              "market"
+            ],
+            "calculation_id": null,
+            "depends_on": [],
+            "minimum_original_roots": 1,
+            "baseline_count": 0
+          }
+        ],
+        "calculations": [],
+        "cutoff": 100,
+        "answer_override": null
+      },
+      "oracle": {
+        "graph_answer": "INSUFFICIENT_EVIDENCE",
+        "accepted_ids": [],
+        "unsupported_ids": [
+          "price"
+        ],
+        "world_false_ids": []
+      },
+      "outcomes": {
+        "EXISTENCE_ARITHMETIC": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "price"
+          ],
+          "emitted_claim_ids": [
+            "price"
+          ],
+          "claim_reasons": {
+            "price": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[price] asset-A/close=120 TRY (window-1)"
+        },
+        "TYPED_SCOPE": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "price": [
+              "NO_APPROVED_BASELINE"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        },
+        "GRAPH_RENDER": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "price": [
+              "NO_APPROVED_BASELINE"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        }
+      },
+      "graph_policy_oracle_match": true,
+      "limit": ""
+    },
+    {
+      "id": "E24",
+      "description": "High score cannot repair unauthenticated official evidence",
+      "input": {
+        "sources": [
+          {
+            "id": "notice",
+            "atoms": [
+              {
+                "subject": "fund-A",
+                "predicate": "access_restricted",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [],
+            "origin_key": "regulator-decision",
+            "kind": "OFFICIAL",
+            "authenticated": false
+          }
+        ],
+        "claims": [
+          {
+            "id": "official",
+            "kind": "FACT",
+            "atoms": [
+              {
+                "subject": "fund-A",
+                "predicate": "access_restricted",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "source_ids": [
+              "notice"
+            ],
+            "calculation_id": null,
+            "depends_on": [],
+            "minimum_original_roots": 1,
+            "baseline_count": null
+          }
+        ],
+        "calculations": [],
+        "cutoff": 100,
+        "answer_override": null
+      },
+      "oracle": {
+        "graph_answer": "INSUFFICIENT_EVIDENCE",
+        "accepted_ids": [],
+        "unsupported_ids": [
+          "official"
+        ],
+        "world_false_ids": []
+      },
+      "outcomes": {
+        "EXISTENCE_ARITHMETIC": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "official"
+          ],
+          "emitted_claim_ids": [
+            "official"
+          ],
+          "claim_reasons": {
+            "official": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[official] fund-A/access_restricted=yes fact (window-1)"
+        },
+        "TYPED_SCOPE": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "official": [
+              "NO_ELIGIBLE_SOURCE"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        },
+        "GRAPH_RENDER": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "official": [
+              "NO_ELIGIBLE_SOURCE"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        }
+      },
+      "graph_policy_oracle_match": true,
+      "limit": ""
+    },
+    {
+      "id": "E25",
+      "description": "Causal proposition laundered through the FACT label",
+      "input": {
+        "sources": [
+          {
+            "id": "causal_source",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "disclosure_caused_return",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [],
+            "origin_key": "issuer-assertion",
+            "kind": "OBSERVATION",
+            "authenticated": true
+          }
+        ],
+        "claims": [
+          {
+            "id": "laundered",
+            "kind": "FACT",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "disclosure_caused_return",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "source_ids": [
+              "causal_source"
+            ],
+            "calculation_id": null,
+            "depends_on": [],
+            "minimum_original_roots": 1,
+            "baseline_count": null
+          }
+        ],
+        "calculations": [],
+        "cutoff": 100,
+        "answer_override": null
+      },
+      "oracle": {
+        "graph_answer": "INSUFFICIENT_EVIDENCE",
+        "accepted_ids": [],
+        "unsupported_ids": [
+          "laundered"
+        ],
+        "world_false_ids": []
+      },
+      "outcomes": {
+        "EXISTENCE_ARITHMETIC": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "laundered"
+          ],
+          "emitted_claim_ids": [
+            "laundered"
+          ],
+          "claim_reasons": {
+            "laundered": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[laundered] asset-A/disclosure_caused_return=yes fact (window-1)"
+        },
+        "TYPED_SCOPE": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "laundered": [
+              "UNAPPROVED_FACT_PREDICATE"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        },
+        "GRAPH_RENDER": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "laundered": [
+              "UNAPPROVED_FACT_PREDICATE"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        }
+      },
+      "graph_policy_oracle_match": true,
+      "limit": "A server-owned predicate registry, not the model's FACT label, supplies the lab distinction."
+    },
+    {
+      "id": "E26",
+      "description": "Eligible-looking copy has a future original ancestor",
+      "input": {
+        "sources": [
+          {
+            "id": "original",
+            "atoms": [
+              {
+                "subject": "fund-A",
+                "predicate": "access_restricted",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "available": 101,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [],
+            "origin_key": "one-news-story",
+            "kind": "OBSERVATION",
+            "authenticated": true
+          },
+          {
+            "id": "copy1",
+            "atoms": [
+              {
+                "subject": "fund-A",
+                "predicate": "access_restricted",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [
+              "original"
+            ],
+            "origin_key": null,
+            "kind": "OBSERVATION",
+            "authenticated": true
+          }
+        ],
+        "claims": [
+          {
+            "id": "official",
+            "kind": "FACT",
+            "atoms": [
+              {
+                "subject": "fund-A",
+                "predicate": "access_restricted",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "source_ids": [
+              "copy1"
+            ],
+            "calculation_id": null,
+            "depends_on": [],
+            "minimum_original_roots": 1,
+            "baseline_count": null
+          }
+        ],
+        "calculations": [],
+        "cutoff": 100,
+        "answer_override": null
+      },
+      "oracle": {
+        "graph_answer": "INSUFFICIENT_EVIDENCE",
+        "accepted_ids": [],
+        "unsupported_ids": [
+          "official"
+        ],
+        "world_false_ids": []
+      },
+      "outcomes": {
+        "EXISTENCE_ARITHMETIC": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "official"
+          ],
+          "emitted_claim_ids": [
+            "official"
+          ],
+          "claim_reasons": {
+            "official": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[official] fund-A/access_restricted=yes fact (window-1)"
+        },
+        "TYPED_SCOPE": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "official"
+          ],
+          "emitted_claim_ids": [
+            "official"
+          ],
+          "claim_reasons": {
+            "official": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[official] fund-A/access_restricted=yes fact (window-1)"
+        },
+        "GRAPH_RENDER": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "official": [
+              "INELIGIBLE_SOURCE_ANCESTOR"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        }
+      },
+      "graph_policy_oracle_match": true,
+      "limit": ""
+    },
+    {
+      "id": "E27",
+      "description": "Individually supported facts combined as misaligned temporal association",
+      "input": {
+        "sources": [
+          {
+            "id": "market",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "close",
+                "value": "120",
+                "period": "window-1",
+                "unit": "TRY"
+              },
+              {
+                "subject": "asset-A",
+                "predicate": "prior_close",
+                "value": "100",
+                "period": "window-1",
+                "unit": "TRY"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [],
+            "origin_key": "venue-observation",
+            "kind": "OBSERVATION",
+            "authenticated": true
+          },
+          {
+            "id": "doc",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "disclosure_published",
+                "value": "yes",
+                "period": "window-0",
+                "unit": "fact"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [],
+            "origin_key": "issuer-release",
+            "kind": "OFFICIAL",
+            "authenticated": true
+          }
+        ],
+        "claims": [
+          {
+            "id": "association",
+            "kind": "ASSOCIATION",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "close",
+                "value": "120",
+                "period": "window-1",
+                "unit": "TRY"
+              },
+              {
+                "subject": "asset-A",
+                "predicate": "disclosure_published",
+                "value": "yes",
+                "period": "window-0",
+                "unit": "fact"
+              }
+            ],
+            "source_ids": [
+              "market",
+              "doc"
+            ],
+            "calculation_id": null,
+            "depends_on": [],
+            "minimum_original_roots": 1,
+            "baseline_count": null
+          }
+        ],
+        "calculations": [],
+        "cutoff": 100,
+        "answer_override": null
+      },
+      "oracle": {
+        "graph_answer": "INSUFFICIENT_EVIDENCE",
+        "accepted_ids": [],
+        "unsupported_ids": [
+          "association"
+        ],
+        "world_false_ids": []
+      },
+      "outcomes": {
+        "EXISTENCE_ARITHMETIC": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "association"
+          ],
+          "emitted_claim_ids": [
+            "association"
+          ],
+          "claim_reasons": {
+            "association": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[association] asset-A/close=120 TRY (window-1); asset-A/disclosure_published=yes fact (window-0)"
+        },
+        "TYPED_SCOPE": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "association": [
+              "MISALIGNED_ASSOCIATION"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        },
+        "GRAPH_RENDER": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "association": [
+              "MISALIGNED_ASSOCIATION"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        }
+      },
+      "graph_policy_oracle_match": true,
+      "limit": ""
+    },
+    {
+      "id": "E28",
+      "description": "Unrelated citation cannot pad corroboration origins for a premise",
+      "input": {
+        "sources": [
+          {
+            "id": "notice",
+            "atoms": [
+              {
+                "subject": "fund-A",
+                "predicate": "access_restricted",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [],
+            "origin_key": "regulator-decision",
+            "kind": "OFFICIAL",
+            "authenticated": true
+          },
+          {
+            "id": "doc",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "disclosure_published",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [],
+            "origin_key": "issuer-release",
+            "kind": "OFFICIAL",
+            "authenticated": true
+          }
+        ],
+        "claims": [
+          {
+            "id": "official",
+            "kind": "FACT",
+            "atoms": [
+              {
+                "subject": "fund-A",
+                "predicate": "access_restricted",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "source_ids": [
+              "notice",
+              "doc"
+            ],
+            "calculation_id": null,
+            "depends_on": [],
+            "minimum_original_roots": 2,
+            "baseline_count": null
+          }
+        ],
+        "calculations": [],
+        "cutoff": 100,
+        "answer_override": null
+      },
+      "oracle": {
+        "graph_answer": "INSUFFICIENT_EVIDENCE",
+        "accepted_ids": [],
+        "unsupported_ids": [
+          "official"
+        ],
+        "world_false_ids": []
+      },
+      "outcomes": {
+        "EXISTENCE_ARITHMETIC": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "official"
+          ],
+          "emitted_claim_ids": [
+            "official"
+          ],
+          "claim_reasons": {
+            "official": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[official] fund-A/access_restricted=yes fact (window-1)"
+        },
+        "TYPED_SCOPE": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "official"
+          ],
+          "emitted_claim_ids": [
+            "official"
+          ],
+          "claim_reasons": {
+            "official": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[official] fund-A/access_restricted=yes fact (window-1)"
+        },
+        "GRAPH_RENDER": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "official": [
+              "INSUFFICIENT_DISTINCT_ORIGINS"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        }
+      },
+      "graph_policy_oracle_match": true,
+      "limit": ""
+    },
+    {
+      "id": "E29",
+      "description": "Correct ratio cannot license a causal result predicate",
+      "input": {
+        "sources": [
+          {
+            "id": "market",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "close",
+                "value": "120",
+                "period": "window-1",
+                "unit": "TRY"
+              },
+              {
+                "subject": "asset-A",
+                "predicate": "prior_close",
+                "value": "100",
+                "period": "window-1",
+                "unit": "TRY"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [],
+            "origin_key": "venue-observation",
+            "kind": "OBSERVATION",
+            "authenticated": true
+          }
+        ],
+        "claims": [
+          {
+            "id": "ratio",
+            "kind": "DERIVED",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "disclosure_caused_ratio",
+                "value": "1.2",
+                "period": "window-1",
+                "unit": "ratio"
+              }
+            ],
+            "source_ids": [
+              "market"
+            ],
+            "calculation_id": "ratio-1",
+            "depends_on": [],
+            "minimum_original_roots": 1,
+            "baseline_count": null
+          }
+        ],
+        "calculations": [
+          {
+            "id": "ratio-1",
+            "operands": [
+              [
+                "market",
+                {
+                  "subject": "asset-A",
+                  "predicate": "close",
+                  "value": "120",
+                  "period": "window-1",
+                  "unit": "TRY"
+                }
+              ],
+              [
+                "market",
+                {
+                  "subject": "asset-A",
+                  "predicate": "prior_close",
+                  "value": "100",
+                  "period": "window-1",
+                  "unit": "TRY"
+                }
+              ]
+            ],
+            "result": "1.2",
+            "operation": "RATIO"
+          }
+        ],
+        "cutoff": 100,
+        "answer_override": null
+      },
+      "oracle": {
+        "graph_answer": "INSUFFICIENT_EVIDENCE",
+        "accepted_ids": [],
+        "unsupported_ids": [
+          "ratio"
+        ],
+        "world_false_ids": []
+      },
+      "outcomes": {
+        "EXISTENCE_ARITHMETIC": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "ratio"
+          ],
+          "emitted_claim_ids": [
+            "ratio"
+          ],
+          "claim_reasons": {
+            "ratio": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[ratio] asset-A/disclosure_caused_ratio=1.2 ratio (window-1)"
+        },
+        "TYPED_SCOPE": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "ratio": [
+              "UNAPPROVED_CALCULATION_METRIC"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        },
+        "GRAPH_RENDER": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "ratio": [
+              "UNAPPROVED_CALCULATION_METRIC"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        }
+      },
+      "graph_policy_oracle_match": true,
+      "limit": ""
+    },
+    {
+      "id": "E30",
+      "description": "Correct arithmetic with reversed metric operands",
+      "input": {
+        "sources": [
+          {
+            "id": "market",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "close",
+                "value": "125",
+                "period": "window-1",
+                "unit": "TRY"
+              },
+              {
+                "subject": "asset-A",
+                "predicate": "prior_close",
+                "value": "100",
+                "period": "window-1",
+                "unit": "TRY"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [],
+            "origin_key": "venue-observation",
+            "kind": "OBSERVATION",
+            "authenticated": true
+          }
+        ],
+        "claims": [
+          {
+            "id": "ratio",
+            "kind": "DERIVED",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "close_ratio",
+                "value": "0.8",
+                "period": "window-1",
+                "unit": "ratio"
+              }
+            ],
+            "source_ids": [
+              "market"
+            ],
+            "calculation_id": "ratio-1",
+            "depends_on": [],
+            "minimum_original_roots": 1,
+            "baseline_count": null
+          }
+        ],
+        "calculations": [
+          {
+            "id": "ratio-1",
+            "operands": [
+              [
+                "market",
+                {
+                  "subject": "asset-A",
+                  "predicate": "prior_close",
+                  "value": "100",
+                  "period": "window-1",
+                  "unit": "TRY"
+                }
+              ],
+              [
+                "market",
+                {
+                  "subject": "asset-A",
+                  "predicate": "close",
+                  "value": "125",
+                  "period": "window-1",
+                  "unit": "TRY"
+                }
+              ]
+            ],
+            "result": "0.8",
+            "operation": "RATIO"
+          }
+        ],
+        "cutoff": 100,
+        "answer_override": null
+      },
+      "oracle": {
+        "graph_answer": "INSUFFICIENT_EVIDENCE",
+        "accepted_ids": [],
+        "unsupported_ids": [
+          "ratio"
+        ],
+        "world_false_ids": []
+      },
+      "outcomes": {
+        "EXISTENCE_ARITHMETIC": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "ratio"
+          ],
+          "emitted_claim_ids": [
+            "ratio"
+          ],
+          "claim_reasons": {
+            "ratio": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[ratio] asset-A/close_ratio=0.8 ratio (window-1)"
+        },
+        "TYPED_SCOPE": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "ratio": [
+              "UNAPPROVED_CALCULATION_METRIC"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        },
+        "GRAPH_RENDER": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "ratio": [
+              "UNAPPROVED_CALCULATION_METRIC"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        }
+      },
+      "graph_policy_oracle_match": true,
+      "limit": ""
+    },
+    {
+      "id": "E31",
+      "description": "Cited ancestor does not assert the copied premise",
+      "input": {
+        "sources": [
+          {
+            "id": "doc",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "disclosure_published",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [],
+            "origin_key": "issuer-release",
+            "kind": "OFFICIAL",
+            "authenticated": true
+          },
+          {
+            "id": "unsupported_copy",
+            "atoms": [
+              {
+                "subject": "fund-A",
+                "predicate": "access_restricted",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [
+              "doc"
+            ],
+            "origin_key": null,
+            "kind": "OBSERVATION",
+            "authenticated": true
+          }
+        ],
+        "claims": [
+          {
+            "id": "official",
+            "kind": "FACT",
+            "atoms": [
+              {
+                "subject": "fund-A",
+                "predicate": "access_restricted",
+                "value": "yes",
+                "period": "window-1",
+                "unit": "fact"
+              }
+            ],
+            "source_ids": [
+              "unsupported_copy"
+            ],
+            "calculation_id": null,
+            "depends_on": [],
+            "minimum_original_roots": 1,
+            "baseline_count": null
+          }
+        ],
+        "calculations": [],
+        "cutoff": 100,
+        "answer_override": null
+      },
+      "oracle": {
+        "graph_answer": "INSUFFICIENT_EVIDENCE",
+        "accepted_ids": [],
+        "unsupported_ids": [
+          "official"
+        ],
+        "world_false_ids": []
+      },
+      "outcomes": {
+        "EXISTENCE_ARITHMETIC": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "official"
+          ],
+          "emitted_claim_ids": [
+            "official"
+          ],
+          "claim_reasons": {
+            "official": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[official] fund-A/access_restricted=yes fact (window-1)"
+        },
+        "TYPED_SCOPE": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "official"
+          ],
+          "emitted_claim_ids": [
+            "official"
+          ],
+          "claim_reasons": {
+            "official": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[official] fund-A/access_restricted=yes fact (window-1)"
+        },
+        "GRAPH_RENDER": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "official": [
+              "UNSUPPORTED_SOURCE_ANCESTOR"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        }
+      },
+      "graph_policy_oracle_match": true,
+      "limit": "The check uses supplied atomic assertions; real quotation/paraphrase lineage extraction is not tested."
+    },
+    {
+      "id": "E32",
+      "description": "Correct calculation depends on a currently contradicted operand",
+      "input": {
+        "sources": [
+          {
+            "id": "market",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "close",
+                "value": "120",
+                "period": "window-1",
+                "unit": "TRY"
+              },
+              {
+                "subject": "asset-A",
+                "predicate": "prior_close",
+                "value": "100",
+                "period": "window-1",
+                "unit": "TRY"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [],
+            "origin_key": "venue-observation",
+            "kind": "OBSERVATION",
+            "authenticated": true
+          },
+          {
+            "id": "price_conflict",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "close",
+                "value": "130",
+                "period": "window-1",
+                "unit": "TRY"
+              }
+            ],
+            "available": 90,
+            "valid_from": 0,
+            "valid_until": 120,
+            "parents": [],
+            "origin_key": "conflicting-venue-record",
+            "kind": "OBSERVATION",
+            "authenticated": true
+          }
+        ],
+        "claims": [
+          {
+            "id": "ratio",
+            "kind": "DERIVED",
+            "atoms": [
+              {
+                "subject": "asset-A",
+                "predicate": "close_ratio",
+                "value": "1.2",
+                "period": "window-1",
+                "unit": "ratio"
+              }
+            ],
+            "source_ids": [
+              "market"
+            ],
+            "calculation_id": "ratio-1",
+            "depends_on": [],
+            "minimum_original_roots": 1,
+            "baseline_count": null
+          }
+        ],
+        "calculations": [
+          {
+            "id": "ratio-1",
+            "operands": [
+              [
+                "market",
+                {
+                  "subject": "asset-A",
+                  "predicate": "close",
+                  "value": "120",
+                  "period": "window-1",
+                  "unit": "TRY"
+                }
+              ],
+              [
+                "market",
+                {
+                  "subject": "asset-A",
+                  "predicate": "prior_close",
+                  "value": "100",
+                  "period": "window-1",
+                  "unit": "TRY"
+                }
+              ]
+            ],
+            "result": "1.2",
+            "operation": "RATIO"
+          }
+        ],
+        "cutoff": 100,
+        "answer_override": null
+      },
+      "oracle": {
+        "graph_answer": "INSUFFICIENT_EVIDENCE",
+        "accepted_ids": [],
+        "unsupported_ids": [
+          "ratio"
+        ],
+        "world_false_ids": []
+      },
+      "outcomes": {
+        "EXISTENCE_ARITHMETIC": {
+          "answer_status": "ANSWERED",
+          "accepted_claim_ids": [
+            "ratio"
+          ],
+          "emitted_claim_ids": [
+            "ratio"
+          ],
+          "claim_reasons": {
+            "ratio": []
+          },
+          "render_error": null,
+          "rendered_lab_text": "[ratio] asset-A/close_ratio=1.2 ratio (window-1)"
+        },
+        "TYPED_SCOPE": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "ratio": [
+              "UNRESOLVED_CURRENT_CONTRADICTION"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        },
+        "GRAPH_RENDER": {
+          "answer_status": "INSUFFICIENT_EVIDENCE",
+          "accepted_claim_ids": [],
+          "emitted_claim_ids": [],
+          "claim_reasons": {
+            "ratio": [
+              "UNRESOLVED_CURRENT_CONTRADICTION"
+            ]
+          },
+          "render_error": null,
+          "rendered_lab_text": ""
+        }
+      },
+      "graph_policy_oracle_match": true,
+      "limit": ""
+    }
+  ],
+  "budget_plans": {
+    "bounded_retrieve_extract_review": {
+      "accepted_stages": [
+        "internal_retrieve",
+        "extract_draft",
+        "targeted_search",
+        "calculate",
+        "review_material_claims"
+      ],
+      "rejected_before_call": null,
+      "exceeded": [],
+      "used": {
+        "calls": 5,
+        "searches": 1,
+        "sources": 6,
+        "reserved_tokens": 3400,
+        "simulated_ms": 13120
+      },
+      "caps": {
+        "calls": 6,
+        "searches": 2,
+        "sources": 8,
+        "reserved_tokens": 8000,
+        "simulated_ms": 45000
+      }
+    },
+    "repeated_self_checks": {
+      "accepted_stages": [
+        "internal_retrieve",
+        "extract_draft",
+        "targeted_search",
+        "calculate",
+        "review_material_claims",
+        "self_check_1"
+      ],
+      "rejected_before_call": "self_check_2",
+      "exceeded": [
+        "calls"
+      ],
+      "used": {
+        "calls": 6,
+        "searches": 1,
+        "sources": 6,
+        "reserved_tokens": 4800,
+        "simulated_ms": 16120
+      },
+      "caps": {
+        "calls": 6,
+        "searches": 2,
+        "sources": 8,
+        "reserved_tokens": 8000,
+        "simulated_ms": 45000
+      }
+    },
+    "third_search": {
+      "accepted_stages": [
+        "search_1",
+        "search_2"
+      ],
+      "rejected_before_call": "search_3",
+      "exceeded": [
+        "searches"
+      ],
+      "used": {
+        "calls": 2,
+        "searches": 2,
+        "sources": 4,
+        "reserved_tokens": 0,
+        "simulated_ms": 12000
+      },
+      "caps": {
+        "calls": 6,
+        "searches": 2,
+        "sources": 8,
+        "reserved_tokens": 8000,
+        "simulated_ms": 45000
+      }
+    },
+    "source_overrun": {
+      "accepted_stages": [],
+      "rejected_before_call": "retrieve_nine_sources",
+      "exceeded": [
+        "sources"
+      ],
+      "used": {
+        "calls": 0,
+        "searches": 0,
+        "sources": 0,
+        "reserved_tokens": 0,
+        "simulated_ms": 0
+      },
+      "caps": {
+        "calls": 6,
+        "searches": 2,
+        "sources": 8,
+        "reserved_tokens": 8000,
+        "simulated_ms": 45000
+      }
+    },
+    "timeout_reservation": {
+      "accepted_stages": [],
+      "rejected_before_call": "slow_fetch",
+      "exceeded": [
+        "simulated_ms"
+      ],
+      "used": {
+        "calls": 0,
+        "searches": 0,
+        "sources": 0,
+        "reserved_tokens": 0,
+        "simulated_ms": 0
+      },
+      "caps": {
+        "calls": 6,
+        "searches": 2,
+        "sources": 8,
+        "reserved_tokens": 8000,
+        "simulated_ms": 45000
+      }
+    }
+  },
+  "budget_assertions": {
+    "bounded_plan_fits": true,
+    "seventh_call_rejected": true,
+    "third_search_rejected": true,
+    "ninth_source_rejected": true,
+    "timeout_rejected": true
+  },
+  "budget_semantics": "Conservative combined stage-call cap is a laboratory proposal; the existing tool-call cap alone does not cap model requests. Reserved tokens and milliseconds are invented caps, not measured consumption.",
+  "score_counterexample": {
+    "case": "E06",
+    "components": {
+      "Q": 1,
+      "F": 1,
+      "I": 1,
+      "C": 1
+    },
+    "heuristic_score": 100,
+    "calibrated_probability": null,
+    "world_truth_oracle": false,
+    "interpretation": "Perfect rubric components can coexist with a world-false assertion."
+  },
+  "limitations": [
+    "No LLM, NLI, provider, real document, customer or market evaluation.",
+    "Typed atoms/authentication/time/provenance are manually supplied, not established by this experiment.",
+    "Known origin count prevents duplicate counting; it is not statistical/causal independence or source truth.",
+    "The closed renderer avoids unlisted prose; arbitrary natural-language entailment remains untested.",
+    "Budget durations/tokens are invented scenario reservations, not actual model latency or measured expenditure.",
+    "No USD/TRY price, real hallucination rate, precision, calibration or financial benefit is inferred."
+  ],
+  "external_calls_executed": 0,
+  "paid_runtime_cost": 0,
+  "actual_model_latency_ms": null,
+  "actual_model_token_usage": null,
+  "wall_seconds_local": 0.005597,
+  "passed": true
+}

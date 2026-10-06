@@ -1,0 +1,512 @@
+{
+  "agent": "data_competitors",
+  "audit_date": "2026-10-02",
+  "all_results_documentation_only": true,
+  "source_rows": [
+    {
+      "source_id": "S01",
+      "url": "https://www.borsaistanbul.com/sss/veri-dagitim-ve-endeks-lisanslama",
+      "accessed": "2026-10-02",
+      "review_depth": "PRIMARY_PUBLIC_RELEVANT_SECTIONS_READ",
+      "web_refs": [
+        "turn3view2",
+        "turn6view4"
+      ],
+      "result": "Non-display and derived-data contract requirements corroborated; source access does not grant permission.",
+      "failure_or_limit": null,
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "source_id": "S02",
+      "url": "https://spk.gov.tr/duyurular/basin-duyurulari/2026/tasfiye-konusu-fonlardaki-yatirimci-sayisina-iliskin-aciklama",
+      "accessed": "2026-10-02",
+      "review_depth": "PRIMARY_PUBLIC_RELEVANT_SECTIONS_READ",
+      "web_refs": [
+        "turn3view0"
+      ],
+      "result": "23 September statement; 17 September decisions; 131 funds, seven PYŞ, MKK unique investors 455,758. No loss estimate.",
+      "failure_or_limit": null,
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "source_id": "S03",
+      "url": "https://spk.gov.tr/duyurular/basin-duyurulari/2026/yatirim-fonlarina-iliskin-rehber-duzenleme-surecine-iliskin-aciklama",
+      "accessed": "2026-10-02",
+      "review_depth": "PRIMARY_PUBLIC_RELEVANT_SECTIONS_READ",
+      "web_refs": [
+        "turn3view1"
+      ],
+      "result": "18 September official process/observations context corroborated; not product predictive validation.",
+      "failure_or_limit": null,
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "source_id": "S04",
+      "url": "https://spk.gov.tr/kurumlar/fonlar/yatirim-fonlari/menkul-kiymet-yatirim-fonlari/portfoy-degerleri",
+      "accessed": "2026-10-02",
+      "review_depth": "PRIMARY_PUBLIC_RELEVANT_SECTIONS_READ",
+      "web_refs": [
+        "turn6view1",
+        "turn26view0"
+      ],
+      "result": "Official daily/consolidated fund fields and links corroborated; endpoint schema/history not tested.",
+      "failure_or_limit": null,
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "source_id": "S05",
+      "url": "https://github.com/saidsurucu/borsapy",
+      "accessed": "2026-10-02",
+      "review_depth": "PRIMARY_MAINTAINER_README_SECTIONS_READ",
+      "web_refs": [
+        "turn6view0",
+        "turn11view6",
+        "turn11view7"
+      ],
+      "result": "Maintainer README personal/educational restriction warning and TradingView-source delay claim read. Apache code licensing does not grant upstream rights.",
+      "failure_or_limit": null,
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "source_id": "S06",
+      "url": "https://github.com/saidsurucu/borsapy/blob/master/borsapy/_providers/tefas.py",
+      "accessed": "2026-10-02",
+      "review_depth": "PRIMARY_MAINTAINER_SOURCE_CODE_SECTIONS_INSPECTED",
+      "web_refs": [
+        "turn3view3",
+        "turn6view6",
+        "turn6view7",
+        "turn6view8",
+        "turn11view9"
+      ],
+      "result": "TEFAS source sections confirm price-history placeholders; allocation date fallback and TLS disabled default require adapter gates.",
+      "failure_or_limit": "Mutable master URL; supplied blob SHA not recovered from page. No endpoint live test.",
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "source_id": "S07",
+      "url": "https://ws.spk.gov.tr/help/index.html",
+      "accessed": "2026-10-02",
+      "review_depth": "PRIMARY_URL_OPEN_FAILED_CONTENT_RECOVERY",
+      "web_refs": [
+        "turn6view2"
+      ],
+      "result": "Page located, schema unrecovered.",
+      "failure_or_limit": "Zero readable lines; no endpoint schema/sample response.",
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "source_id": "S08",
+      "url": "https://docs.alpaca.markets/us/docs/about-market-data-api",
+      "accessed": "2026-10-02",
+      "review_depth": "PRIMARY_PUBLIC_RELEVANT_SECTIONS_READ",
+      "web_refs": [
+        "turn6view3",
+        "turn11view8"
+      ],
+      "result": "Basic IEX, 30-symbol stream and distinction from all-US exchange coverage corroborated; subscription/redistribution scope unknown.",
+      "failure_or_limit": null,
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "source_id": "S09",
+      "url": "https://www.sec.gov/search-filings/edgar-application-programming-interfaces",
+      "accessed": "2026-10-02",
+      "review_depth": "PRIMARY_PUBLIC_RELEVANT_SECTIONS_READ",
+      "web_refs": [
+        "turn11view0",
+        "turn23view3",
+        "turn23view4"
+      ],
+      "result": "Unauthenticated submissions/XBRL, no CORS, typical update delays and nightly bulk documentation corroborated.",
+      "failure_or_limit": null,
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "source_id": "S10",
+      "url": "https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams",
+      "accessed": "2026-10-02",
+      "review_depth": "PRIMARY_PUBLIC_KLINE_SCHEMA_SECTIONS_READ",
+      "web_refs": [
+        "turn11view1",
+        "turn26view5",
+        "turn29view1"
+      ],
+      "result": "Redirected official documentation exposes kline closed flag, event/time/pair and separate base/quote volumes.",
+      "failure_or_limit": "Current redirected page did not expose searched 24-hour/1024-stream limits; those values are not asserted by this audit.",
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "source_id": "S11",
+      "url": "https://ethereum.org/en/developers/docs/apis/json-rpc/",
+      "accessed": "2026-10-02",
+      "review_depth": "PRIMARY_PUBLIC_RELEVANT_SECTIONS_READ",
+      "web_refs": [
+        "turn11view2",
+        "turn26view8",
+        "turn26view9"
+      ],
+      "result": "Safe/finalized block tags and removed logs on reorganization corroborated. RPC outputs do not establish identity labels.",
+      "failure_or_limit": null,
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "source_id": "S12",
+      "url": "https://solana.com/docs/rpc/http/gettokenlargestaccounts",
+      "accessed": "2026-10-02",
+      "review_depth": "PRIMARY_PUBLIC_RELEVANT_SECTIONS_READ",
+      "web_refs": [
+        "turn11view3",
+        "turn23view7"
+      ],
+      "result": "20 largest token accounts for an SPL Token mint and commitment parameter corroborated.",
+      "failure_or_limit": null,
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "source_id": "S13",
+      "url": "https://docs.dexscreener.com/api/reference",
+      "accessed": "2026-10-02",
+      "review_depth": "PRIMARY_PUBLIC_REFERENCE_EMBEDDED_SCHEMA_READ",
+      "web_refs": [
+        "turn11view4",
+        "turn26view10",
+        "turn29view0"
+      ],
+      "result": "Pair schema includes liquidity base/quote/USD, nullable fields, identity and pairCreatedAt; history inference from one snapshot remains unsupported.",
+      "failure_or_limit": "Some endpoint schemas represented by linked OpenAPI rather than inline documentation; no sample observed-time semantics or service test.",
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "source_id": "S14",
+      "url": "https://docs.coingecko.com/reference/coins-markets",
+      "accessed": "2026-10-02",
+      "review_depth": "PRIMARY_PUBLIC_RELEVANT_SECTIONS_READ",
+      "web_refs": [
+        "turn11view5",
+        "turn26view11",
+        "turn32view6"
+      ],
+      "result": "Coin IDs, market-cap ordering and last_updated schema corroborated. Contract/mint identity requires additional coins-detail/platform metadata route.",
+      "failure_or_limit": null,
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "source_id": "S23",
+      "url": "https://tradingview.github.io/lightweight-charts/",
+      "accessed": "2026-10-02",
+      "review_depth": "PRIMARY_PUBLIC_RELEVANT_SECTIONS_READ",
+      "web_refs": [
+        "turn12view3"
+      ],
+      "result": "Chart library documentation located/read; does not establish TradingView consumer data-feed entitlement.",
+      "failure_or_limit": null,
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "source_id": "S30",
+      "url": "https://www.tradingview.com/support/solutions/43000739708-watchlist-alerts/",
+      "accessed": "2026-10-02",
+      "review_depth": "PRIMARY_PUBLIC_RELEVANT_SECTIONS_READ",
+      "web_refs": [
+        "turn12view0"
+      ],
+      "result": "Official independent per-symbol watchlist-alert conditions and dynamic watchlist membership documented.",
+      "failure_or_limit": null,
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "source_id": "S31",
+      "url": "https://www.koyfin.com/features/alerts/",
+      "accessed": "2026-10-02",
+      "review_depth": "PRIMARY_PUBLIC_RELEVANT_SECTIONS_READ",
+      "web_refs": [
+        "turn12view1",
+        "turn23view10"
+      ],
+      "result": "Official price/technical/valuation/news/filing alerts and watchlist/portfolio delivery documented.",
+      "failure_or_limit": null,
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "source_id": "S32",
+      "url": "https://www.forinvest.com/business?lang=en",
+      "accessed": "2026-10-02",
+      "review_depth": "PRIMARY_PUBLIC_PRODUCT_AND_SERVICE_TERMS_SECTIONS_READ",
+      "web_refs": [
+        "turn12view2",
+        "turn33view0",
+        "turn38view1"
+      ],
+      "result": "Official business ecosystem corroborated; published ForMind terms also describe natural-language financial analysis inputs.",
+      "failure_or_limit": "Exact current retail tier/workflow and observed task outcomes not tested.",
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "source_id": "ADD-KAP-REST",
+      "url": "https://kap.org.tr/tr/api/about/content-file/8a019492945fbe080194b26d8bed4873",
+      "accessed": "2026-10-02",
+      "review_depth": "PRIMARY_OFFICIAL_ONE_PAGE_PDF_TEXT_READ",
+      "web_refs": [
+        "turn19search7",
+        "turn23view1"
+      ],
+      "result": "Official KAP subscriber REST service requires BIST contract and MKK authorization; high-volume requests directed to authorized API.",
+      "failure_or_limit": null,
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "source_id": "ADD-SPK-0928",
+      "url": "https://spk.gov.tr/duyurular/basin-duyurulari/2026/tasfiye-suresine-iliskin-basin-duyurusu",
+      "accessed": "2026-10-02",
+      "review_depth": "PRIMARY_PUBLIC_RELEVANT_SECTIONS_READ",
+      "web_refs": [
+        "turn19view0"
+      ],
+      "result": "28 September notice corroborates 17 September fund access closure and liquidation mechanics.",
+      "failure_or_limit": null,
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "source_id": "ADD-SPK-1001",
+      "url": "https://spk.gov.tr/duyurular/basin-duyurulari/2026/tasfiyedeki-fonlara-iliskin-ara-odeme-duyurusu",
+      "accessed": "2026-10-02",
+      "review_depth": "PRIMARY_PUBLIC_RELEVANT_SECTIONS_READ",
+      "web_refs": [
+        "turn19view1",
+        "turn23view0"
+      ],
+      "result": "1 October notice describes interim payments for specified managers/funds after reconciliation, capped per investor per fund and credited against final liquidation amount.",
+      "failure_or_limit": null,
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "source_id": "ADD-FINTABLES",
+      "url": "https://fintables.com/uyelik-paketleri",
+      "accessed": "2026-10-02",
+      "review_depth": "PRIMARY_PUBLIC_RELEVANT_SECTIONS_READ",
+      "web_refs": [
+        "turn18view0"
+      ],
+      "result": "Official fund comparison/filtering/positions, price-alarm and Evo AI overlap documented; estimated price is not observed NAV.",
+      "failure_or_limit": null,
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "source_id": "ADD-FINTABLES-RETURNS",
+      "url": "https://fintables.com/fonlar/getiri",
+      "accessed": "2026-10-02",
+      "review_depth": "PRIMARY_PUBLIC_RELEVANT_SECTIONS_READ",
+      "web_refs": [
+        "turn32view2"
+      ],
+      "result": "Official fund return comparison route documented.",
+      "failure_or_limit": null,
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "source_id": "ADD-NANSEN",
+      "url": "https://nansen.ai/",
+      "accessed": "2026-10-02",
+      "review_depth": "PRIMARY_PUBLIC_RELEVANT_SECTIONS_READ",
+      "web_refs": [
+        "turn18view1"
+      ],
+      "result": "Official labeled-wallet monitoring/activity-alert and AI on-chain product claims documented; quality/coverage not tested.",
+      "failure_or_limit": null,
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "source_id": "ADD-BUBBLEMAPS",
+      "url": "https://bubblemaps.io/",
+      "accessed": "2026-10-02",
+      "review_depth": "PRIMARY_PUBLIC_RELEVANT_SECTIONS_READ",
+      "web_refs": [
+        "turn18view2",
+        "turn33view1"
+      ],
+      "result": "Official token distribution/clusters/history investigative product claims documented.",
+      "failure_or_limit": null,
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "source_id": "ADD-BUBBLEMAPS-WIKI",
+      "url": "https://wiki.bubblemaps.io/bubblemaps-v2/how-does-it-work",
+      "accessed": "2026-10-02",
+      "review_depth": "PRIMARY_PUBLIC_RELEVANT_SECTIONS_READ",
+      "web_refs": [
+        "turn32view1",
+        "turn33view4"
+      ],
+      "result": "Official transfer-link and top-holder map description read; clusters framed as investigative patterns.",
+      "failure_or_limit": null,
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "source_id": "ADD-TOKENSNIFFER",
+      "url": "https://tokensniffer.readme.io/reference/introduction",
+      "accessed": "2026-10-02",
+      "review_depth": "PRIMARY_PUBLIC_RELEVANT_SECTIONS_READ",
+      "web_refs": [
+        "turn18view3",
+        "turn33view2"
+      ],
+      "result": "Official API features include contract/security info and optional top-holder/liquidity/score outputs. Accuracy marketing is not independently verified.",
+      "failure_or_limit": null,
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "source_id": "ADD-TOKENSNIFFER-OWNER",
+      "url": "https://www.soliduslabs.com/tokensniffer/api",
+      "accessed": "2026-10-02",
+      "review_depth": "PRIMARY_PUBLIC_RELEVANT_SECTIONS_READ",
+      "web_refs": [
+        "turn32view0",
+        "turn33view3"
+      ],
+      "result": "Owner page links API documentation and plan capabilities; documentation evidence only.",
+      "failure_or_limit": null,
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "source_id": "ADD-MIDAS",
+      "url": "https://www.getmidas.com/destek/midas-ile-yatirima-baslarken/midas-ile-neler-yapabilirim/hisseler-icin-nasil-fiyat-alarmi-kurabilirsin",
+      "accessed": "2026-10-02",
+      "review_depth": "PRIMARY_PUBLIC_RELEVANT_SECTIONS_READ",
+      "web_refs": [
+        "turn34view0"
+      ],
+      "result": "Official price/percentage alarm setup and notification workflow documented.",
+      "failure_or_limit": null,
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "source_id": "ADD-INVESTING",
+      "url": "https://www.investing.com/alerts/",
+      "accessed": "2026-10-02",
+      "review_depth": "PRIMARY_PUBLIC_RELEVANT_SECTIONS_READ",
+      "web_refs": [
+        "turn34view1"
+      ],
+      "result": "Official price/economic-event alerts and desktop/smartphone management documented.",
+      "failure_or_limit": null,
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "source_id": "ADD-UNUSUAL-WHALES",
+      "url": "https://unusualwhales.com/lp/automated-options-flow-alerts",
+      "accessed": "2026-10-02",
+      "review_depth": "PRIMARY_PUBLIC_RELEVANT_SECTIONS_READ",
+      "web_refs": [
+        "turn34view2",
+        "turn38view0",
+        "turn38view3"
+      ],
+      "result": "Official custom criteria options monitoring and notification/quiet-hour features documented; marketing latency not measured.",
+      "failure_or_limit": null,
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "source_id": "ADD-BTCTURK-INDEX",
+      "url": "https://docs.btcturk.com/docs/category/public-endpoints/",
+      "accessed": "2026-10-02",
+      "review_depth": "PRIMARY_PUBLIC_RELEVANT_SECTIONS_READ",
+      "web_refs": [
+        "turn26view2"
+      ],
+      "result": "Official public ticker/orderbook/OHLC documentation index read; alternative route still untested and entitlement unknown.",
+      "failure_or_limit": null,
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "source_id": "ADD-BTCTURK-RATES",
+      "url": "https://docs.btcturk.com/docs/private-endpoints/rate-limits/",
+      "accessed": "2026-10-02",
+      "review_depth": "PRIMARY_PUBLIC_RELEVANT_SECTIONS_READ",
+      "web_refs": [
+        "turn26view3",
+        "turn32view5"
+      ],
+      "result": "Official graph OHLC/IP quota documentation read.",
+      "failure_or_limit": null,
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "source_id": "FAILED-BTCTURK-GUESS",
+      "url": "https://docs.btcturk.com/docs/public-endpoints/ohlc-data/",
+      "accessed": "2026-10-02",
+      "review_depth": "FAILED_OPEN",
+      "web_refs": [
+        "turn29view2"
+      ],
+      "result": "Not evidence; guessed URL did not yield usable content.",
+      "failure_or_limit": "Tool internal error; recovered official index/rate pages instead.",
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "source_id": "ADD-COINGECKO-ID",
+      "url": "https://docs.coingecko.com/reference/coins-id",
+      "accessed": "2026-10-02",
+      "review_depth": "PRIMARY_PUBLIC_METADATA_SCHEMA_SECTIONS_READ",
+      "web_refs": [
+        "turn41view0"
+      ],
+      "result": "Official ID-detail metadata documents platforms/detail_platforms contract identity; native coin fields may be null or empty.",
+      "failure_or_limit": "No live schema response/identity matching test or entitlement.",
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "source_id": "ADD-COINGECKO-LIST",
+      "url": "https://docs.coingecko.com/reference/coins-list",
+      "accessed": "2026-10-02",
+      "review_depth": "PRIMARY_PUBLIC_METADATA_SCHEMA_SECTIONS_READ",
+      "web_refs": [
+        "turn41view1"
+      ],
+      "result": "Official coin-list metadata documentation located/read; use platform-enabled identity mapping route alongside market ranking snapshots.",
+      "failure_or_limit": "No live schema response/identity matching test or entitlement.",
+      "live_api_tested": false,
+      "rights_approved": false
+    }
+  ],
+  "scope_limits": [
+    "No live APIs; no account provisioning/contact/spend/rights assumption",
+    "S15-22/S24-29/S33 and R01-R15 current accuracy left to other audit workstreams",
+    "Official-domain TEFAS commercial-use rights searches returned no clear permission; status unknown"
+  ]
+}

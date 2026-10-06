@@ -1,0 +1,22 @@
+{
+  "origin": "SYNTHETIC",
+  "claim_limit": "Arithmetic examples only; no actual fund observations.",
+  "cases": [
+    {
+      "id": "nav_only_change",
+      "aum_previous": "1000",
+      "aum_current": "900",
+      "nav_previous": "10",
+      "nav_current": "9",
+      "expected_estimated_flow": "0"
+    },
+    {
+      "id": "estimated_outflow",
+      "aum_previous": "1000",
+      "aum_current": "700",
+      "nav_previous": "10",
+      "nav_current": "9",
+      "expected_estimated_flow": "-200"
+    }
+  ]
+}

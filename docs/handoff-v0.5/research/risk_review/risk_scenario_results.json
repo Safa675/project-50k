@@ -1,0 +1,397 @@
+{
+  "experiment": "Project risk arithmetic sensitivity",
+  "origin": "SYNTHETIC",
+  "rates_are_assumptions": true,
+  "prices_are_assumptions": true,
+  "actual_provider_quotes": false,
+  "real_observations": 0,
+  "external_calls": 0,
+  "code_sha256": "51941da11e451f89d928c53cda3c7786bfea192b8b4e4893da120b5088aafbab",
+  "assumptions": "A binary target and population conditional rates are specified by hand; PPV is a ratio of expected counts/Bayes population quantity, not mean realized finite-sample precision. No temporal independence is needed for expected point counts; dependence and episode grouping matter for distribution and event/notification counts, which are not inferred.",
+  "precision_cases": [
+    {
+      "prevalence": "0.0001",
+      "sensitivity": "0.8",
+      "false_positive_rate": "0.0001",
+      "decision_opportunities": 100000,
+      "expected_true_positive_count": "8",
+      "expected_false_positive_count": "9.999",
+      "expected_false_negative_count": "2",
+      "population_positive_predictive_value": "0.444469137174287460414467470415"
+    },
+    {
+      "prevalence": "0.0001",
+      "sensitivity": "0.8",
+      "false_positive_rate": "0.001",
+      "decision_opportunities": 100000,
+      "expected_true_positive_count": "8",
+      "expected_false_positive_count": "99.99",
+      "expected_false_negative_count": "2",
+      "population_positive_predictive_value": "0.0740809334197610889897212704880"
+    },
+    {
+      "prevalence": "0.0001",
+      "sensitivity": "0.8",
+      "false_positive_rate": "0.01",
+      "decision_opportunities": 100000,
+      "expected_true_positive_count": "8",
+      "expected_false_positive_count": "999.9",
+      "expected_false_negative_count": "2",
+      "population_positive_predictive_value": "0.00793729536660382974501438634785"
+    },
+    {
+      "prevalence": "0.0001",
+      "sensitivity": "0.8",
+      "false_positive_rate": "0.05",
+      "decision_opportunities": 100000,
+      "expected_true_positive_count": "8",
+      "expected_false_positive_count": "4999.5",
+      "expected_false_negative_count": "2",
+      "population_positive_predictive_value": "0.00159760359460808786819770344483"
+    },
+    {
+      "prevalence": "0.001",
+      "sensitivity": "0.8",
+      "false_positive_rate": "0.0001",
+      "decision_opportunities": 100000,
+      "expected_true_positive_count": "80",
+      "expected_false_positive_count": "9.99",
+      "expected_false_negative_count": "20",
+      "population_positive_predictive_value": "0.888987665296144016001777975331"
+    },
+    {
+      "prevalence": "0.001",
+      "sensitivity": "0.8",
+      "false_positive_rate": "0.001",
+      "decision_opportunities": 100000,
+      "expected_true_positive_count": "80",
+      "expected_false_positive_count": "99.9",
+      "expected_false_negative_count": "20",
+      "population_positive_predictive_value": "0.444691495275152862701500833797"
+    },
+    {
+      "prevalence": "0.001",
+      "sensitivity": "0.8",
+      "false_positive_rate": "0.01",
+      "decision_opportunities": 100000,
+      "expected_true_positive_count": "80",
+      "expected_false_positive_count": "999",
+      "expected_false_negative_count": "20",
+      "population_positive_predictive_value": "0.0741427247451343836886005560704"
+    },
+    {
+      "prevalence": "0.001",
+      "sensitivity": "0.8",
+      "false_positive_rate": "0.05",
+      "decision_opportunities": 100000,
+      "expected_true_positive_count": "80",
+      "expected_false_positive_count": "4995",
+      "expected_false_negative_count": "20",
+      "population_positive_predictive_value": "0.0157635467980295566502463054187"
+    },
+    {
+      "prevalence": "0.01",
+      "sensitivity": "0.8",
+      "false_positive_rate": "0.0001",
+      "decision_opportunities": 100000,
+      "expected_true_positive_count": "800",
+      "expected_false_positive_count": "9.9",
+      "expected_false_negative_count": "200",
+      "population_positive_predictive_value": "0.987776268675145079639461661934"
+    },
+    {
+      "prevalence": "0.01",
+      "sensitivity": "0.8",
+      "false_positive_rate": "0.001",
+      "decision_opportunities": 100000,
+      "expected_true_positive_count": "800",
+      "expected_false_positive_count": "99",
+      "expected_false_negative_count": "200",
+      "population_positive_predictive_value": "0.889877641824249165739710789766"
+    },
+    {
+      "prevalence": "0.01",
+      "sensitivity": "0.8",
+      "false_positive_rate": "0.01",
+      "decision_opportunities": 100000,
+      "expected_true_positive_count": "800",
+      "expected_false_positive_count": "990",
+      "expected_false_negative_count": "200",
+      "population_positive_predictive_value": "0.446927374301675977653631284916"
+    },
+    {
+      "prevalence": "0.01",
+      "sensitivity": "0.8",
+      "false_positive_rate": "0.05",
+      "decision_opportunities": 100000,
+      "expected_true_positive_count": "800",
+      "expected_false_positive_count": "4950",
+      "expected_false_negative_count": "200",
+      "population_positive_predictive_value": "0.139130434782608695652173913043"
+    },
+    {
+      "prevalence": "0.05",
+      "sensitivity": "0.8",
+      "false_positive_rate": "0.0001",
+      "decision_opportunities": 100000,
+      "expected_true_positive_count": "4000",
+      "expected_false_positive_count": "9.5",
+      "expected_false_negative_count": "1000",
+      "population_positive_predictive_value": "0.997630627260256889886519516149"
+    },
+    {
+      "prevalence": "0.05",
+      "sensitivity": "0.8",
+      "false_positive_rate": "0.001",
+      "decision_opportunities": 100000,
+      "expected_true_positive_count": "4000",
+      "expected_false_positive_count": "95",
+      "expected_false_negative_count": "1000",
+      "population_positive_predictive_value": "0.976800976800976800976800976801"
+    },
+    {
+      "prevalence": "0.05",
+      "sensitivity": "0.8",
+      "false_positive_rate": "0.01",
+      "decision_opportunities": 100000,
+      "expected_true_positive_count": "4000",
+      "expected_false_positive_count": "950",
+      "expected_false_negative_count": "1000",
+      "population_positive_predictive_value": "0.808080808080808080808080808081"
+    },
+    {
+      "prevalence": "0.05",
+      "sensitivity": "0.8",
+      "false_positive_rate": "0.05",
+      "decision_opportunities": 100000,
+      "expected_true_positive_count": "4000",
+      "expected_false_positive_count": "4750",
+      "expected_false_negative_count": "1000",
+      "population_positive_predictive_value": "0.457142857142857142857142857143"
+    }
+  ],
+  "point_candidate_burden": [
+    {
+      "eligible_assets": 100,
+      "eligible_completed_observations_per_asset_day": 1,
+      "all_null_assumption": true,
+      "false_positive_rate_assumption": "0.001",
+      "eligible_observation_decisions": 100,
+      "expected_false_point_candidates": "0.1",
+      "event_or_notification_count": null
+    },
+    {
+      "eligible_assets": 100,
+      "eligible_completed_observations_per_asset_day": 1,
+      "all_null_assumption": true,
+      "false_positive_rate_assumption": "0.01",
+      "eligible_observation_decisions": 100,
+      "expected_false_point_candidates": "1",
+      "event_or_notification_count": null
+    },
+    {
+      "eligible_assets": 100,
+      "eligible_completed_observations_per_asset_day": 78,
+      "all_null_assumption": true,
+      "false_positive_rate_assumption": "0.001",
+      "eligible_observation_decisions": 7800,
+      "expected_false_point_candidates": "7.8",
+      "event_or_notification_count": null
+    },
+    {
+      "eligible_assets": 100,
+      "eligible_completed_observations_per_asset_day": 78,
+      "all_null_assumption": true,
+      "false_positive_rate_assumption": "0.01",
+      "eligible_observation_decisions": 7800,
+      "expected_false_point_candidates": "78",
+      "event_or_notification_count": null
+    },
+    {
+      "eligible_assets": 1000,
+      "eligible_completed_observations_per_asset_day": 1,
+      "all_null_assumption": true,
+      "false_positive_rate_assumption": "0.001",
+      "eligible_observation_decisions": 1000,
+      "expected_false_point_candidates": "1",
+      "event_or_notification_count": null
+    },
+    {
+      "eligible_assets": 1000,
+      "eligible_completed_observations_per_asset_day": 1,
+      "all_null_assumption": true,
+      "false_positive_rate_assumption": "0.01",
+      "eligible_observation_decisions": 1000,
+      "expected_false_point_candidates": "10",
+      "event_or_notification_count": null
+    },
+    {
+      "eligible_assets": 1000,
+      "eligible_completed_observations_per_asset_day": 78,
+      "all_null_assumption": true,
+      "false_positive_rate_assumption": "0.001",
+      "eligible_observation_decisions": 78000,
+      "expected_false_point_candidates": "78",
+      "event_or_notification_count": null
+    },
+    {
+      "eligible_assets": 1000,
+      "eligible_completed_observations_per_asset_day": 78,
+      "all_null_assumption": true,
+      "false_positive_rate_assumption": "0.01",
+      "eligible_observation_decisions": 78000,
+      "expected_false_point_candidates": "780",
+      "event_or_notification_count": null
+    }
+  ],
+  "cumulative_budget_scenarios": [
+    {
+      "ceiling_TRY": "5000",
+      "invented_upfront_TRY": "1000",
+      "invented_reserved_TRY": "500",
+      "remaining_for_recurring_TRY": "3500",
+      "invented_all_in_monthly_TRY": "0",
+      "modeled_fractional_months": null,
+      "whole_months_fundable": null,
+      "zero_burn_interpretation": "No finite modeled limit from this term alone; not free-operation proof"
+    },
+    {
+      "ceiling_TRY": "5000",
+      "invented_upfront_TRY": "1000",
+      "invented_reserved_TRY": "500",
+      "remaining_for_recurring_TRY": "3500",
+      "invented_all_in_monthly_TRY": "200",
+      "modeled_fractional_months": "17.5",
+      "whole_months_fundable": 17,
+      "zero_burn_interpretation": null
+    },
+    {
+      "ceiling_TRY": "5000",
+      "invented_upfront_TRY": "1000",
+      "invented_reserved_TRY": "500",
+      "remaining_for_recurring_TRY": "3500",
+      "invented_all_in_monthly_TRY": "1000",
+      "modeled_fractional_months": "3.5",
+      "whole_months_fundable": 3,
+      "zero_burn_interpretation": null
+    },
+    {
+      "ceiling_TRY": "5000",
+      "invented_upfront_TRY": "1000",
+      "invented_reserved_TRY": "500",
+      "remaining_for_recurring_TRY": "3500",
+      "invented_all_in_monthly_TRY": "3000",
+      "modeled_fractional_months": "1.16666666666666666666666666667",
+      "whole_months_fundable": 1,
+      "zero_burn_interpretation": null
+    }
+  ],
+  "chat_quota_pressure": [
+    {
+      "active_users_assumption": 10,
+      "daily_turns_per_user_assumption": 2,
+      "days_assumption": 30,
+      "turns": 600,
+      "remaining_after_invented_setup_reserve_TRY": "3500",
+      "max_average_cost_TRY_per_turn_if_ALL_remaining_were_used_for_chat": "5.83333333333333333333333333333",
+      "excluded_further_expenses_warning": "This maximum leaves no remaining recurring data/hosting/email costs unless already included in assumptions; event investigations and retries are additional workload."
+    },
+    {
+      "active_users_assumption": 10,
+      "daily_turns_per_user_assumption": 10,
+      "days_assumption": 30,
+      "turns": 3000,
+      "remaining_after_invented_setup_reserve_TRY": "3500",
+      "max_average_cost_TRY_per_turn_if_ALL_remaining_were_used_for_chat": "1.16666666666666666666666666667",
+      "excluded_further_expenses_warning": "This maximum leaves no remaining recurring data/hosting/email costs unless already included in assumptions; event investigations and retries are additional workload."
+    },
+    {
+      "active_users_assumption": 100,
+      "daily_turns_per_user_assumption": 2,
+      "days_assumption": 30,
+      "turns": 6000,
+      "remaining_after_invented_setup_reserve_TRY": "3500",
+      "max_average_cost_TRY_per_turn_if_ALL_remaining_were_used_for_chat": "0.583333333333333333333333333333",
+      "excluded_further_expenses_warning": "This maximum leaves no remaining recurring data/hosting/email costs unless already included in assumptions; event investigations and retries are additional workload."
+    },
+    {
+      "active_users_assumption": 100,
+      "daily_turns_per_user_assumption": 10,
+      "days_assumption": 30,
+      "turns": 30000,
+      "remaining_after_invented_setup_reserve_TRY": "3500",
+      "max_average_cost_TRY_per_turn_if_ALL_remaining_were_used_for_chat": "0.116666666666666666666666666667",
+      "excluded_further_expenses_warning": "This maximum leaves no remaining recurring data/hosting/email costs unless already included in assumptions; event investigations and retries are additional workload."
+    }
+  ],
+  "arithmetic_invariants": [
+    {
+      "name": "Zero population positive probability is undefined precision, not perfect or zero",
+      "passed": true
+    },
+    {
+      "name": "Zero sample opportunities do not change defined population PPV",
+      "passed": true
+    },
+    {
+      "name": "Zero false-positive rate with positive sensitivity gives precision one",
+      "passed": true
+    },
+    {
+      "name": "Zero sensitivity with nonzero false positives gives precision zero",
+      "passed": true
+    },
+    {
+      "name": "Precision decreases with FPR at prevalence 0.0001",
+      "passed": true
+    },
+    {
+      "name": "Precision decreases with FPR at prevalence 0.001",
+      "passed": true
+    },
+    {
+      "name": "Precision decreases with FPR at prevalence 0.01",
+      "passed": true
+    },
+    {
+      "name": "Precision decreases with FPR at prevalence 0.05",
+      "passed": true
+    },
+    {
+      "name": "Precision increases with prevalence at FPR 0.0001",
+      "passed": true
+    },
+    {
+      "name": "Precision increases with prevalence at FPR 0.001",
+      "passed": true
+    },
+    {
+      "name": "Precision increases with prevalence at FPR 0.01",
+      "passed": true
+    },
+    {
+      "name": "Precision increases with prevalence at FPR 0.05",
+      "passed": true
+    },
+    {
+      "name": "100 users at quota cap produce 30000 monthly turns",
+      "passed": true
+    },
+    {
+      "name": "Cumulative budget is not reset per month",
+      "passed": true
+    },
+    {
+      "name": "Zero recurring term does not assert actual unlimited lifetime",
+      "passed": true
+    }
+  ],
+  "not_established": [
+    "Real prevalence, sensitivity or false-positive rate",
+    "Notification precision or expected user harm",
+    "Unseen detector validity",
+    "Market-data rights or provider eligibility",
+    "Actual price, tokens, latency or project runway",
+    "Customer demand or willingness to pay"
+  ]
+}

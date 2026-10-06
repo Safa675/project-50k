@@ -1,0 +1,53 @@
+{
+  "scope": "Pre-risk v0.5 document snapshots; hashes identify review inputs, not current appended files. Original pre-risk ZIP is preserved in the current outer handoff.",
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "057ebd4c88ffe8bac2a22af691880804a65d1d62f49212da75c1d3d44764b7bf"
+    },
+    {
+      "path": "PRODUCT.md",
+      "sha256": "953cac89a0fd1f191ca4e4d9cbb4929e36cdc8615c4ef03ddff25d2f867da002"
+    },
+    {
+      "path": "docs/10_Data_Requirements_and_Provider_Matrix.md",
+      "sha256": "017a9020df2e20931aba3426319879446faffa04023758b0b82acb5257013478"
+    },
+    {
+      "path": "docs/14_Architecture_and_ADRs.md",
+      "sha256": "b20b152cb39eed6cc8066a1d516abf5a3dee407925bb1ba0236ed009a18ba296"
+    },
+    {
+      "path": "docs/19_Security_Privacy_and_Compliance.md",
+      "sha256": "6d867930374c66e0c93b3df0b0716c6c0ff6fa61085e66fab810e34339e94964"
+    },
+    {
+      "path": "docs/20_Test_and_Validation_Strategy.md",
+      "sha256": "5a95f7853da5ca7eb8e854703933dc7920917b4811946c32e1b6c44b0663db43"
+    },
+    {
+      "path": "docs/21_Implementation_Backlog_and_Traceability.md",
+      "sha256": "450920c9cf04ded9969fbc60aeb76f8ed72d60226f074411ebb2992701491943"
+    },
+    {
+      "path": "docs/22_Deployment_Operations_and_Costs.md",
+      "sha256": "a5577c40793811605c54210fc0162401cce7e740641404e1a95d997af3e8ce98"
+    },
+    {
+      "path": "docs/23_Startup_Validation_and_Demo.md",
+      "sha256": "ae43859eca6231ff27775c3c8682b16bfb14b64ee9ecac5d12c7eb1d1c8d62f7"
+    },
+    {
+      "path": "docs/24_Competitor_Evidence_and_Positioning.md",
+      "sha256": "3e4a51c6d773056077ab76e86b45262bd6b9a443c64107e11ec93ba35b654a99"
+    },
+    {
+      "path": "docs/25_Release_Gates_and_Open_Decisions.md",
+      "sha256": "77ebbc40c30a2d19c96fa7eac6078c9146ea91abc46ccebfbc232a2b75e02776"
+    },
+    {
+      "path": "reports/OPEN_DECISIONS.md",
+      "sha256": "59c36f9c2fd16aaba327c79b723d2e36f547a62b07c100866e66866e80d16401"
+    }
+  ]
+}

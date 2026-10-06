@@ -1,0 +1,137 @@
+{
+  "reviewed_on": "2026-10-02",
+  "scope": "Bounded primary publisher desk review plus existing local specification/lab limitations",
+  "hands_on_tested": false,
+  "customer_study_executed": false,
+  "contact_executed": false,
+  "payment_or_spend_executed": false,
+  "sources": [
+    {
+      "id": "PR-S01",
+      "publisher_page": "Fintables Evo",
+      "url": "https://fintables.com/evo/nedir",
+      "depth": "PRIMARY_RELEVANT_SECTIONS_READ",
+      "supported_description": "Share/fund/KAP conversational research; sources, follow-up, calculation workflow and MCP link advertised.",
+      "limits": "Publisher description only; no product task, accuracy or commercial backend entitlement verified.",
+      "retrieval_ref": "turn133view0",
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "id": "PR-S02",
+      "publisher_page": "Fintables packages",
+      "url": "https://fintables.com/uyelik-paketleri",
+      "depth": "PRIMARY_PRODUCT_SECTIONS_READ",
+      "supported_description": "Fund comparison/filtering/positions, price alarms and Evo availability advertised.",
+      "limits": "Tier table checkmarks were not fully represented by extraction; no exact all-tier comparison or payment test claimed.",
+      "retrieval_ref": "turn113view0",
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "id": "PR-S03",
+      "publisher_page": "TradingView watchlist alerts",
+      "url": "https://www.tradingview.com/support/solutions/43000739708-watchlist-alerts-your-trading-edge/",
+      "depth": "PRIMARY_RELEVANT_HELP_SECTIONS_READ",
+      "supported_description": "Independent per-symbol triggers, dynamic list membership and session setting documented.",
+      "limits": "No hands-on setup, exact tier entitlement or Turkish fund coverage tested.",
+      "retrieval_ref": "turn113view2",
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "id": "PR-S04",
+      "publisher_page": "Koyfin alerts",
+      "url": "https://www.koyfin.com/features/alerts/",
+      "depth": "PRIMARY_PRODUCT_SECTIONS_READ",
+      "supported_description": "Price/technical/valuation/news/filing watchlist alerts and email/mobile channels advertised.",
+      "limits": "No live timing, false-alert behavior, entitlements or Turkish fund experience tested.",
+      "retrieval_ref": "turn113view3",
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "id": "PR-S05",
+      "publisher_page": "ForInvest ForMind service terms",
+      "url": "https://www.forinvest.com/pro-plan",
+      "depth": "PRIMARY_FORMIND_SERVICE_DESCRIPTION_AND_LIMITATIONS_READ",
+      "supported_description": "Terms sections2-3 describe natural-language financial analysis and potential market/financial/disclosure/news inputs.",
+      "limits": "This page describes a service contract, not observed functionality or exact product-tier coverage.",
+      "retrieval_ref": "turn117view0",
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "id": "PR-S06",
+      "publisher_page": "Nansen",
+      "url": "https://nansen.ai/",
+      "depth": "PRIMARY_RELEVANT_PRODUCT_SECTIONS_READ",
+      "supported_description": "Labeled-wallet activity alerts and on-chain AI advertised.",
+      "limits": "Marketing label-count, accuracy, speed and trading claims are not adopted as measured results.",
+      "retrieval_ref": "turn113view4",
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "id": "PR-S07",
+      "publisher_page": "Bubblemaps V2 documentation",
+      "url": "https://wiki.bubblemaps.io/bubblemaps-v2/how-does-it-work",
+      "depth": "PRIMARY_FULL_TEXT_READ_71_LINES",
+      "supported_description": "Top-holder map and transfer links described; connections are investigative patterns and node types can differ.",
+      "limits": "No map, attribution, beneficial ownership, historical completeness or advertised freshness was independently tested.",
+      "retrieval_ref": "turn113view5",
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "id": "PR-S08",
+      "publisher_page": "Fintables extra terms",
+      "url": "https://fintables.com/legal/ek-kullanim-kosullari",
+      "depth": "PRIMARY_RELEVANT_AUTOMATION_REDISTRIBUTION_AND_AI_SECTIONS_READ",
+      "supported_description": "Sections2-3 and7 restrict unapproved automation and commercial redistribution of Evo outputs.",
+      "limits": "A consumer MCP feature does not establish our upstream rights; this is a published-term boundary, not a legal opinion.",
+      "retrieval_ref": "turn133view1",
+      "live_api_tested": false,
+      "rights_approved": false
+    },
+    {
+      "id": "PR-F01",
+      "publisher_page": "ForMind landing",
+      "url": "https://formind.forinvest.com/",
+      "depth": "FAILED_DIRECT_RETRIEVAL",
+      "supported_description": "Direct open returned HTTP403.",
+      "limits": "Search returned an official indexed description; no full-page feature claim is based on it.",
+      "retrieval_ref": "turn113view1",
+      "live_api_tested": false,
+      "rights_approved": false
+    }
+  ],
+  "retrieval_notes": [
+    "Initial recency-filtered official-domain queries were noisy; substantive competitor claims use the direct official pages recorded here.",
+    "ForMind landing403 is retained as a failure; official ForInvest service terms supplied a narrower primary description.",
+    "Feature absence from marketing is not treated as feature absence; issuer materials do not measure quality or product superiority."
+  ],
+  "local_files_reviewed": [
+    "PRODUCT.md",
+    "docs/23_Startup_Validation_and_Demo.md",
+    "docs/24_Competitor_Evidence_and_Positioning.md",
+    "research/engine_lab/EVALUATION_METRICS.md",
+    "research/engine_lab/PEER_REVIEW.md",
+    "research/brand_lab/DESIGN_EXPLORATION.md (previously authored/read; limitations retained)"
+  ],
+  "local_evidence_boundary": "Constructed experiments and mathematical/color policy checks are not live market performance, alert fatigue, user comprehension or customer validation.",
+  "hypothesis_status": {
+    "contradicted": "An absence-based pitch that the general alert/AI/Turkish-fund/source/on-chain categories have no competitors.",
+    "untested": [
+      "Comparative effort/value",
+      "Proactive investigation usefulness",
+      "Real alert burden/missed events",
+      "Calibrated user trust",
+      "Cross-persona comprehension",
+      "Repeat use/retention",
+      "Willingness to pay",
+      "Acquisition economics",
+      "Defensibility"
+    ]
+  }
+}

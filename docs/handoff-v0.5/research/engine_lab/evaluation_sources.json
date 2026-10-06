@@ -1,0 +1,14 @@
+{
+  "checked_date": "2026-10-02",
+  "source_type": "PRIMARY_PUBLISHER_PAPER",
+  "title": "Towards a Rigorous Evaluation of Time-Series Anomaly Detection",
+  "authors": ["Siwon Kim", "Kukjin Choi", "Hyun-Soo Choi", "Byunghan Lee", "Sungroh Yoon"],
+  "published": "2022-06-28",
+  "doi": "10.1609/aaai.v36i7.20680",
+  "url": "https://ojs.aaai.org/index.php/AAAI/article/view/20680",
+  "pdf": "https://cdn.aaai.org/ojs/20680/20680-13-24693-1-2-20220628.pdf",
+  "retrieval_refs": ["turn109view0", "turn109view1"],
+  "review_depth": "Publisher metadata/abstract and selected PDF introduction/point-adjustment protocol discussion read; no complete proof audit or benchmark replication.",
+  "role": "Evaluation-method caveat; experiment is independently constructed, not paper numerical results.",
+  "does_not_support": "Any financial model/threshold performance, calibrated alert probability or product predictive accuracy."
+}

@@ -1,0 +1,44 @@
+{
+  "retrieved_on": "2026-10-03",
+  "scope": "Additional root rereads of central source passages, not independent observations",
+  "sources": [
+    {
+      "url": "https://www.vap.org.tr/",
+      "ref": "turn211view0",
+      "depth": "Selected date/equity/fund/crypto and individual/activity fields; dated02Oct2026."
+    },
+    {
+      "url": "https://www.mkk.com.tr/sites/default/files/2026-04/MKK_2025.pdf",
+      "refs": [
+        "turn211view1",
+        "turn212view0",
+        "turn215view0"
+      ],
+      "depth": "Selected KAPtable/search-count passage and screenshot PDFindex31; table categories/date visually reconciled, not full101pages."
+    },
+    {
+      "url": "https://link.springer.com/content/pdf/10.1007/s42521-024-00116-1.pdf",
+      "refs": [
+        "turn211view2",
+        "turn212view1",
+        "turn215view1"
+      ],
+      "depth": "Selected Table4/neighboring method passages and screenshot PDFindex22; jumps/test-day labels visually confirmed, not full37pages."
+    },
+    {
+      "url": "https://arxiv.org/pdf/0803.1769",
+      "ref": "turn211view3",
+      "depth": "Opened original paper; selected definition/count content read; no independent raw-data replication."
+    },
+    {
+      "url": "https://spk.gov.tr/duyurular/basin-duyurulari/2026/tasfiye-konusu-fonlardaki-yatirimci-sayisina-iliskin-aciklama",
+      "ref": "turn216view0",
+      "depth": "Full substantive23Sep2026statement; conflicting reports/131/7/455758."
+    },
+    {
+      "url": "https://www.kap.org.tr/tr/about/genel-bilgi",
+      "ref": "turn216view1",
+      "depth": "Official service statements including personalized follow/instant notifications/free archive; no hands-on benchmark."
+    }
+  ]
+}

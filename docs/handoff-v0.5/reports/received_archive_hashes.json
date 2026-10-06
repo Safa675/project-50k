@@ -1,0 +1,57 @@
+[
+  {
+    "path": "archive/v0.2/01_Product_Vision_and_Executive_Summary.md",
+    "bytes": 21058,
+    "sha256": "32aaa57d95ae640e3703e354ab5f529fe2b4be883e544bb10f1acdcbf9f4e857"
+  },
+  {
+    "path": "archive/v0.2/02_Problem_Analysis_and_Opportunity.md",
+    "bytes": 19300,
+    "sha256": "daa04cf2614938e1239a2fe06899dada88e15d29c7b8ce5e6761983cb5b4063f"
+  },
+  {
+    "path": "archive/v0.2/03_Product_Scope_and_Core_Principles.md",
+    "bytes": 19558,
+    "sha256": "c1568f5b214319c67c70219de2a918142dd756229a68c053068687fd4e9d3d4b"
+  },
+  {
+    "path": "archive/v0.2/04_MVP_Techstars_Startup_Weekend_Scope.md",
+    "bytes": 24052,
+    "sha256": "d9dff78684842cf5b39ddd48a04377d182c149fe6e2004c6e31b292ab70f083b"
+  },
+  {
+    "path": "archive/v0.2/05_User_Personas.md",
+    "bytes": 13122,
+    "sha256": "8fdf28c6d7cc084297defa4be2e3b1c7faac401768d362e2f0136bed8d2bba82"
+  },
+  {
+    "path": "archive/v0.2/06_User_Requirements.md",
+    "bytes": 16603,
+    "sha256": "a7f9a12f2997c57ade6cc18c85c458cf0147bc0b2bf22818e0b693db733f545a"
+  },
+  {
+    "path": "archive/v0.2/07_Functional_Requirements.md",
+    "bytes": 28176,
+    "sha256": "2e77b1c2a8d96eecdf00c80d4636a64acb4376b33b6711c8f6f391acc41b23f4"
+  },
+  {
+    "path": "archive/v0.2/08_Non_Functional_Requirements.md",
+    "bytes": 18398,
+    "sha256": "36dfacf4ac03d22a20895efc38506d6419c7cd96db6526a2baf23477e75c7f99"
+  },
+  {
+    "path": "archive/v0.2/09_Requirements_Traceability_Matrix.md",
+    "bytes": 4403,
+    "sha256": "5cd9e382558a34edef2101e8a1ed7fb4a450344f186a77a98385d38ee9010e4e"
+  },
+  {
+    "path": "archive/v0.2/README.md",
+    "bytes": 2288,
+    "sha256": "fef09d6a359a4e5e24ba050d3ab94888f3143ef92347d449b5dc3c2997fabd49"
+  },
+  {
+    "path": "archive/v0.2/VERSION_v0.2.md",
+    "bytes": 396,
+    "sha256": "560490e40113596cade7f67aa4854e761c157b18647cb54602a8f8e83da364de"
+  }
+]

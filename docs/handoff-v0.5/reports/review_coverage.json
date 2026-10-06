@@ -1,0 +1,947 @@
+{
+  "audit_date": "2026-10-02",
+  "baseline_file_count": 97,
+  "active_full_content_count": 86,
+  "active_docs_full_count": 26,
+  "files": [
+    {
+      "path": ".env.example",
+      "received_sha256": "8bd66e04a0c25b6306d0dbda03cea2cc31995dbda458acebc42dc1d84ad1b0fe",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW",
+        "TARGETED_TEXT_SEARCH"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": ".gitignore",
+      "received_sha256": "3be14a918af00508397f4b73a0a4dce5cdf48a9d44cdb90f170dbc2ae02dd22a",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW_ROOT"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "AGENTS.md",
+      "received_sha256": "4cbf0829f1bc2f31538335e2d6a33b14a74aadbbecd2df46e79cd31f19e8c1b8",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_TEXT_READ",
+        "FULL_CONTENT_REVIEW",
+        "FULL_CONTENT_REVIEW",
+        "FULL_TEXT_READ"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "received_sha256": "da644f089be70f93a84551174ce993d52cde5a9e4a047d5fa6b6a3d26d432dec",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW_ROOT"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "CLAUDE.md",
+      "received_sha256": "700939c905a3839a50611d58e0b12274d84ad812b4253c6a0da05db6d2eaff58",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "DESIGN.md",
+      "received_sha256": "17bdf4b0766811a89b76f0a394feedbd3206a64f9d5698d81f1c78117f12e418",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW",
+        "FULL_TEXT_READ",
+        "FULL_TEXT_SEMANTIC_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "MANIFEST.json",
+      "received_sha256": "dd0cfbbb2b83c15c9792d63c33db3d069ccb16aa8b66001e79735b5f25d3e66e",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "ALL_96_ROWS_AND_METADATA_REVIEWED_HASH_VERIFIED"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "PRODUCT.md",
+      "received_sha256": "287c8fbc4c1c240adbc48103901b9e9001e4f8db208b52da358917d9806f3c2d",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW",
+        "FULL_TEXT_READ",
+        "FULL_TEXT_SEMANTIC_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "README.md",
+      "received_sha256": "03f061495111f204b2e9a09c24116fc7dc0fcfbf4c90bfb67903def68b60d16b",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW",
+        "BYTE_IDENTITY_PROVENANCE_CHECK"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "START_HERE.md",
+      "received_sha256": "8db7f00bd76f5246d0a80486cc1b98952d59f1a32e1289b42c244a71f54e5f8f",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW",
+        "FULL_CONTENT_REVIEW",
+        "FULL_TEXT_READ",
+        "BYTE_IDENTITY_PROVENANCE_CHECK"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "archive/v0.2/01_Product_Vision_and_Executive_Summary.md",
+      "received_sha256": "32aaa57d95ae640e3703e354ab5f529fe2b4be883e544bb10f1acdcbf9f4e857",
+      "reviewed_full_active_content": false,
+      "review_depths": [
+        "BYTE_FOR_BYTE_ARCHIVE_PRESERVATION_NOT_REREVIEWED_AS_AUTHORITY"
+      ],
+      "scope": "historical archive"
+    },
+    {
+      "path": "archive/v0.2/02_Problem_Analysis_and_Opportunity.md",
+      "received_sha256": "daa04cf2614938e1239a2fe06899dada88e15d29c7b8ce5e6761983cb5b4063f",
+      "reviewed_full_active_content": false,
+      "review_depths": [
+        "BYTE_FOR_BYTE_ARCHIVE_PRESERVATION_NOT_REREVIEWED_AS_AUTHORITY"
+      ],
+      "scope": "historical archive"
+    },
+    {
+      "path": "archive/v0.2/03_Product_Scope_and_Core_Principles.md",
+      "received_sha256": "c1568f5b214319c67c70219de2a918142dd756229a68c053068687fd4e9d3d4b",
+      "reviewed_full_active_content": false,
+      "review_depths": [
+        "BYTE_FOR_BYTE_ARCHIVE_PRESERVATION_NOT_REREVIEWED_AS_AUTHORITY"
+      ],
+      "scope": "historical archive"
+    },
+    {
+      "path": "archive/v0.2/04_MVP_Techstars_Startup_Weekend_Scope.md",
+      "received_sha256": "d9dff78684842cf5b39ddd48a04377d182c149fe6e2004c6e31b292ab70f083b",
+      "reviewed_full_active_content": false,
+      "review_depths": [
+        "BYTE_FOR_BYTE_ARCHIVE_PRESERVATION_NOT_REREVIEWED_AS_AUTHORITY"
+      ],
+      "scope": "historical archive"
+    },
+    {
+      "path": "archive/v0.2/05_User_Personas.md",
+      "received_sha256": "8fdf28c6d7cc084297defa4be2e3b1c7faac401768d362e2f0136bed8d2bba82",
+      "reviewed_full_active_content": false,
+      "review_depths": [
+        "BYTE_FOR_BYTE_ARCHIVE_PRESERVATION_NOT_REREVIEWED_AS_AUTHORITY"
+      ],
+      "scope": "historical archive"
+    },
+    {
+      "path": "archive/v0.2/06_User_Requirements.md",
+      "received_sha256": "a7f9a12f2997c57ade6cc18c85c458cf0147bc0b2bf22818e0b693db733f545a",
+      "reviewed_full_active_content": false,
+      "review_depths": [
+        "BYTE_FOR_BYTE_ARCHIVE_PRESERVATION_NOT_REREVIEWED_AS_AUTHORITY"
+      ],
+      "scope": "historical archive"
+    },
+    {
+      "path": "archive/v0.2/07_Functional_Requirements.md",
+      "received_sha256": "2e77b1c2a8d96eecdf00c80d4636a64acb4376b33b6711c8f6f391acc41b23f4",
+      "reviewed_full_active_content": false,
+      "review_depths": [
+        "BYTE_FOR_BYTE_ARCHIVE_PRESERVATION_NOT_REREVIEWED_AS_AUTHORITY"
+      ],
+      "scope": "historical archive"
+    },
+    {
+      "path": "archive/v0.2/08_Non_Functional_Requirements.md",
+      "received_sha256": "36dfacf4ac03d22a20895efc38506d6419c7cd96db6526a2baf23477e75c7f99",
+      "reviewed_full_active_content": false,
+      "review_depths": [
+        "BYTE_FOR_BYTE_ARCHIVE_PRESERVATION_NOT_REREVIEWED_AS_AUTHORITY"
+      ],
+      "scope": "historical archive"
+    },
+    {
+      "path": "archive/v0.2/09_Requirements_Traceability_Matrix.md",
+      "received_sha256": "5cd9e382558a34edef2101e8a1ed7fb4a450344f186a77a98385d38ee9010e4e",
+      "reviewed_full_active_content": false,
+      "review_depths": [
+        "BYTE_FOR_BYTE_ARCHIVE_PRESERVATION_NOT_REREVIEWED_AS_AUTHORITY"
+      ],
+      "scope": "historical archive"
+    },
+    {
+      "path": "archive/v0.2/README.md",
+      "received_sha256": "fef09d6a359a4e5e24ba050d3ab94888f3143ef92347d449b5dc3c2997fabd49",
+      "reviewed_full_active_content": false,
+      "review_depths": [
+        "BYTE_FOR_BYTE_ARCHIVE_PRESERVATION_NOT_REREVIEWED_AS_AUTHORITY"
+      ],
+      "scope": "historical archive"
+    },
+    {
+      "path": "archive/v0.2/VERSION_v0.2.md",
+      "received_sha256": "560490e40113596cade7f67aa4854e761c157b18647cb54602a8f8e83da364de",
+      "reviewed_full_active_content": false,
+      "review_depths": [
+        "BYTE_FOR_BYTE_ARCHIVE_PRESERVATION_NOT_REREVIEWED_AS_AUTHORITY"
+      ],
+      "scope": "historical archive"
+    },
+    {
+      "path": "config/admin_settings.json",
+      "received_sha256": "3eb64d5e0f1d7f9106344f64bb1737122c74a298ef735f711f17bfe60fcbe163",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_TEXT_READ",
+        "FULL_CONTENT_REVIEW",
+        "FULL_CONTENT_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "config/anomaly_catalog.json",
+      "received_sha256": "f1fc124e866443f66e4e1a4a5336dad4aa8338ea4528ebaa4be2bee175236a5d",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_TEXT_READ",
+        "FULL_CONTENT_REVIEW",
+        "Full local file read; config additionally parsed against all28 catalog entries. Bibliography R01\u2013R15 checked against primary sources with explicit depth/failure limits."
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "config/design_tokens.json",
+      "received_sha256": "900bc358a03ba231077e6eceb2a53afc427ad99b0b31048d35edeb2e5a4d6916",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_TEXT_READ"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "config/detection_defaults.json",
+      "received_sha256": "4aefaba9af70475a8c5c188dc250004047a04553d3c0b6a84219c6125073085f",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_TEXT_READ",
+        "FULL_CONTENT_REVIEW",
+        "Full local file read; config additionally parsed against all28 catalog entries. Bibliography R01\u2013R15 checked against primary sources with explicit depth/failure limits."
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "config/notification_defaults.json",
+      "received_sha256": "b27ffbd479470c30c413a8e8394b1fc8337b52214896d37d99b62f3b595d8c72",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW",
+        "FULL_CONTENT_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "contracts/ai_answer.schema.json",
+      "received_sha256": "067886f533a776cc403cc00b07c67039558e3f629ee90469c7d05bf264698b79",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "contracts/domain_tables.json",
+      "received_sha256": "808ed216ccd4023bed6f2488aa0644a14d17d52d4c3b2567dc8e4171d424632d",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "contracts/event.schema.json",
+      "received_sha256": "50e11680ff9de0a48a2e83048dae9971ad55fc10369eb2dc4cb9351136297058",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW",
+        "FULL_CONTENT_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "contracts/evidence.schema.json",
+      "received_sha256": "58c662f1ca2d932c4246f05b4dfac7744495d7eedd953052d10224d68a0e2438",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW",
+        "FULL_CONTENT_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "contracts/investigation_packet.schema.json",
+      "received_sha256": "45c499e1e27c89ed955e0ac372f5c59c28354b5334f61b36fc7c764b3161b7ca",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "contracts/openapi.yaml",
+      "received_sha256": "1018384ed0800a8b9c1bbcaf146dba9c4ec1cbcb61cb68e80d02fe850a3b3a62",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "contracts/traceability.json",
+      "received_sha256": "04c5ea75581d0b622a4f9d8cfbd5bc7b5e2f85219eabcc90ef526199a7ff2a5a",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_PARSE_AND_MAPPING_REVIEW",
+        "ALL_ROWS_REVIEWED_VIA_MARKDOWN_AND_ALL_OBJECTS_PARSED"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "docs/00_Decisions_and_Corrections.md",
+      "received_sha256": "934ad05efc97296dad7e57964a19cc56fcb3451c8b214b1ff0aa156b88cdfec8",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_TEXT_READ",
+        "FULL_CONTENT_REVIEW",
+        "FULL_CONTENT_REVIEW",
+        "FULL_TEXT_READ",
+        "FULL_TEXT_SEMANTIC_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "docs/01_Product_Vision_and_Executive_Summary.md",
+      "received_sha256": "657c7b0c1f998b1f9eac7a122ab3daf717ef28f23442a07126b261724efaefee",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_TEXT_READ"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "docs/02_Problem_Analysis_and_Opportunity.md",
+      "received_sha256": "b51f8b0722d4dd60191887cecd645ef545070774fb646679cda296c228c67ceb",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_TEXT_READ",
+        "FULL_TEXT_READ"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "docs/03_Product_Scope_and_Core_Principles.md",
+      "received_sha256": "bb2416ca4691c3b10091113fc5f605f47005c1a38a6c3be8e1e020f98dbd0198",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_TEXT_READ"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "docs/04_MVP_Techstars_Startup_Weekend_Scope.md",
+      "received_sha256": "9fc88b48cf97ecbf74547ca0c4443f3380f27264fd6a750ccead6af2bb042c12",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_TEXT_READ",
+        "FULL_TEXT_SEMANTIC_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "docs/05_User_Personas.md",
+      "received_sha256": "98d8938dbc8e6c2cd5e34e0d5c446dc9be72c6aa0bbbfa25a8a8c4ba538e8fca",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_TEXT_READ"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "docs/06_User_Requirements.md",
+      "received_sha256": "153a0ea0113d1affb92a17cd2f34b5daf77ebc0c9a8f6926794fea019921f0ba",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_TEXT_READ"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "docs/07_Functional_Requirements.md",
+      "received_sha256": "3d8f4386a4bf4d9d914c152ad6bfa52409e0ca3753a0857865aa6acc9c52f6c3",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "EXCERPT_READ",
+        "RELEVANT_SECTIONS_ONLY",
+        "FULL_TEXT_READ"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "docs/08_Non_Functional_Requirements.md",
+      "received_sha256": "8d2a8693a0e1c48ffa75e580042816bfbf2b9a10bd7b44b6743a04410997c4b2",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "RELEVANT_SECTIONS_ONLY",
+        "FULL_TEXT_READ"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "docs/09_Requirements_Traceability_Matrix.md",
+      "received_sha256": "ae3d9168dabcea34743b2ead55c76efa7743d02e07617e394351b78743bed74f",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_TEXT_READ"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "docs/10_Data_Requirements_and_Provider_Matrix.md",
+      "received_sha256": "3462ba1d84707caae517f930f2e220a4b364742a996819795135f11a38381161",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_TEXT_READ"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "docs/11_Literature_Review.md",
+      "received_sha256": "bd9b7e136e3a23c422dac40348f0170c63b99138ef7de483f57dba9d2b6a10cd",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "Full local file read; config additionally parsed against all28 catalog entries. Bibliography R01\u2013R15 checked against primary sources with explicit depth/failure limits."
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "docs/12_Anomaly_Catalog.md",
+      "received_sha256": "0e11537262b74020de8a0783441c6d8c983a4a9c0fb36c44697aede4b750ceea",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "Full local file read; config additionally parsed against all28 catalog entries. Bibliography R01\u2013R15 checked against primary sources with explicit depth/failure limits."
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "docs/13_Decision_Confidence_and_Validation.md",
+      "received_sha256": "659d8afe1e625a9dfeb75968999f3496d85cd4f9a0f68a688e2cdea9e11ca780",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW",
+        "Full local file read; config additionally parsed against all28 catalog entries. Bibliography R01\u2013R15 checked against primary sources with explicit depth/failure limits.",
+        "FULL_CONTENT_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "docs/14_Architecture_and_ADRs.md",
+      "received_sha256": "1f30c426d2be632e250ab7fd308e1149d98567c3f5931864b571b2158fcf95cc",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW",
+        "FULL_TEXT_SEMANTIC_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "docs/15_Domain_Model_and_Persistence.md",
+      "received_sha256": "a638bcf21a70247281808baaf4eba409628b5f8b62767515ce6778d3f0cc5703",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "docs/16_API_Specification.md",
+      "received_sha256": "80a21ab901fccb1cff8b403d3fabda392504061658a3fbff7e67b9df944e6435",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "docs/17_AI_Tools_and_Runtime_Prompts.md",
+      "received_sha256": "0dcde85500be5d8fd99d1b4b75c61579bf9880c13ffa727887206b10b731fd9c",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "docs/18_UX_Design_and_Turkish_Content.md",
+      "received_sha256": "e3a3721bd7fb99f0223459ad8bc58149d4876d8bdfba85ca64f30d04f5abe047",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_TEXT_READ",
+        "FULL_TEXT_SEMANTIC_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "docs/19_Security_Privacy_and_Compliance.md",
+      "received_sha256": "6d867930374c66e0c93b3df0b0716c6c0ff6fa61085e66fab810e34339e94964",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW",
+        "TARGETED_TEXT_SEARCH"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "docs/20_Test_and_Validation_Strategy.md",
+      "received_sha256": "40644f3c3358d9cc0db64012fe8058fdfc98dd0fc0f77c02da7bd1fb992977e7",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW",
+        "Full local file read; config additionally parsed against all28 catalog entries. Bibliography R01\u2013R15 checked against primary sources with explicit depth/failure limits.",
+        "FULL_CONTENT_REVIEW",
+        "FULL_TEXT_READ",
+        "TARGETED_TEXT_SEARCH"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "docs/21_Implementation_Backlog_and_Traceability.md",
+      "received_sha256": "3d5547ada4d8370d404b1a2190dcdc0483e5416ac50875637cb81847b6eeaaf0",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_TEXT_READ"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "docs/22_Deployment_Operations_and_Costs.md",
+      "received_sha256": "a42a407321d74d4da0bddb246bf8860b79450a6bf597735ad149b9f701a2f988",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW",
+        "FULL_TEXT_SEMANTIC_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "docs/23_Startup_Validation_and_Demo.md",
+      "received_sha256": "3e4d0cf0c8b0d342452eac0611395d33358ab2fa177e0b91f10d101a602555f3",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_TEXT_READ"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "docs/24_Competitor_Evidence_and_Positioning.md",
+      "received_sha256": "bcac4c33b0f28d2dbf22734c2fd28fa3b4f128829ca570400750d1d6ff651a6d",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_TEXT_READ"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "docs/25_Release_Gates_and_Open_Decisions.md",
+      "received_sha256": "51157188a19ca7bc54fdeb842235a7605776e2d546d592d155cd6038b8dc1bda",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW",
+        "FULL_CONTENT_REVIEW",
+        "FULL_TEXT_READ",
+        "FULL_TEXT_SEMANTIC_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "fixtures/README.md",
+      "received_sha256": "46adde061887d19357bb0e5be0e1b4006841e739ec9517519512f15fc065aecc",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "fixtures/ai_adversarial_cases.json",
+      "received_sha256": "945a7699ca5b793f8cab05224aade95b70ed541cdefca7de26d2d8a0e6251a5a",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "fixtures/synthetic_ai_answer.json",
+      "received_sha256": "f99fde68d2f3b88a4e3732c1a4c3054ae43fbe3b93f416738547d2f80d7a6a3a",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW",
+        "FULL_CONTENT_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "fixtures/synthetic_event.json",
+      "received_sha256": "e246b582cf2c2ac93a1a53bbaa621dd414cafe1232fa4e37879bab335c7d38f9",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW",
+        "FULL_CONTENT_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "fixtures/synthetic_fund_cases.json",
+      "received_sha256": "4565b8469746b823d99f7cf49cfecaf1f53cfef5e39b8d4b113801940c2ea242",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "prompts/CLAUDE_CODE_START.md",
+      "received_sha256": "d39d4fc406036920d478b6a0ffeb357520151d2a396d82c505d1b6ef4de3f7f3",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW",
+        "BYTE_IDENTITY_PROVENANCE_CHECK"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "prompts/CODEX_START.md",
+      "received_sha256": "8d9292ac5ba2e6019790a108007abbb56c20a4ed7cb7eae6e0fcfc9275633766",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW",
+        "BYTE_IDENTITY_PROVENANCE_CHECK"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "prompts/DESIGN_REVIEW.md",
+      "received_sha256": "c298b449a6700a7d9dcaa9257a40a8abdac239a5f0f1d04600a130e5ee4a4a89",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW",
+        "FULL_TEXT_SEMANTIC_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "prompts/IMPLEMENT_ONE_SLICE.md",
+      "received_sha256": "9a7ed4c21da720d74659dfbbb464613e6c0ba427d5b5acfa7ae47f950f90e774",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "prompts/RUNTIME_ASSET_ASSISTANT.md",
+      "received_sha256": "9300b1dc3cabe3af6255299a7a9fffde0bdccdf379ae13d61a18d6dfc6dcc595",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "prompts/RUNTIME_EVIDENCE_REVIEWER.md",
+      "received_sha256": "9fad948a98b45e33545bc95e46b5d5f9620b45c5c53b384c9aa54af65c4780e0",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "prompts/RUNTIME_INVESTIGATOR.md",
+      "received_sha256": "1c84e7cd919fd9e93e3133856436d82072f66c4a0a22407ebfa3125888e2e676",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "prompts/SECURITY_AND_RELEASE_REVIEW.md",
+      "received_sha256": "f5930dab54766a6efcfd669d670a7c252035fa4b88208befcdfb9cd1ec96e848",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "reference/__init__.py",
+      "received_sha256": "d2defb03ddc68f2edfbaa0cec1ad0bc6370dc0ac7351a5ac0455fc3b8b71132f",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW_ROOT"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "reference/engine.py",
+      "received_sha256": "5042b7a97bc01cd076aa2a50b684875ca6a5f33e80cbca323e9edecac883b8a6",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW",
+        "PARTIAL_CONTENT_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "reports/PACKAGE_AUDIT.md",
+      "received_sha256": "e29a1d75cea21b5e09dae2230d9f38fc8e1ce42124192a4abe69bfe8bf2d93eb",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW",
+        "BYTE_IDENTITY_PROVENANCE_CHECK"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "reports/VALIDATION_REPORT.md",
+      "received_sha256": "1547d3b59cce0b290772d9c02955deef1a8a49416e3a3b1db63e29e7d7fbbb61",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "BYTE_IDENTITY_PROVENANCE_CHECK",
+        "FULL_CONTENT_REVIEW_ROOT"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "reports/reference_test_output.txt",
+      "received_sha256": "a27081fc9d69df1f24964fd87c5e6767f1595bf4073f5b753cc885e5fc40e2ad",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW_ROOT"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "reports/validation_results.json",
+      "received_sha256": "07112c261b6b6353488cea95af1bae6161870ca5ae558b10f291ede27ad7bcc5",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW_ROOT"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "requirements-validation.txt",
+      "received_sha256": "a3e2e6cb5c04d99671140bb192807d0188090b88e861a831036935a6156deaa2",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW",
+        "TARGETED_TEXT_SEARCH"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "requirements_registry.json",
+      "received_sha256": "a979c75b5afef630b1c438b1cde7c6211f5def09aa31ee3ec4d3a4e88c6194d9",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_JSON_PARSED_SELECTED_REQUIREMENTS_READ",
+        "FULL_PARSE_SELECTED_SEMANTIC_REVIEW",
+        "ALL_OBJECTS_PARSED_AND_SOURCE_BODY_IDENTITY_CHECKED"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "research/SOURCE_REGISTER.md",
+      "received_sha256": "9dd8b0f6625dd6b0c1b8c13e72fca65c6b2a1bee2fa0ffbca3a05d76cf5acb59",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_TEXT_READ",
+        "Full local file read; config additionally parsed against all28 catalog entries. Bibliography R01\u2013R15 checked against primary sources with explicit depth/failure limits.",
+        "SELECTIVE_SOURCE_ENTRY_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "research/USER_SUPPLIED_EVENT_CONTEXT.md",
+      "received_sha256": "76b3920cb3ceb0b741baf19d6cd5331d462604a8f918858650453cd27fbcfac1",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_TEXT_READ",
+        "FULL_TEXT_SEMANTIC_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "research/references.bib",
+      "received_sha256": "7de7e07de8435e26dc9b123bedd0b0eacdf5079677dfa1d77adaf739b3c2965f",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "Full local file read; config additionally parsed against all28 catalog entries. Bibliography R01\u2013R15 checked against primary sources with explicit depth/failure limits."
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "research/sources.json",
+      "received_sha256": "f7d5c1c1126b7cc12dacc3a76d8f41606777254708ead4fa8645dd4044c92947",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_TEXT_READ",
+        "Full local file read; config additionally parsed against all28 catalog entries. Bibliography R01\u2013R15 checked against primary sources with explicit depth/failure limits.",
+        "SELECTIVE_SOURCE_ENTRY_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "scripts/make_manifest.py",
+      "received_sha256": "89be14f05de70bc7e625c2aa3f2ef95d85c92c56475932e654eff30b0c60a6d5",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "scripts/validate_package.py",
+      "received_sha256": "8a71bb662eecde470e2f76f11cdfd430ba17137b9626df156664b8362dfd62ff",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW",
+        "PARTIAL_CONTENT_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "templates/COST_WORKSHEET.md",
+      "received_sha256": "c4721adf4187fa5e06cd79acb99ccfcd188b88e0e26fe112fab37b9bed89d664",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "templates/DATA_CARD.md",
+      "received_sha256": "686bcf7ef24e1289e902cdda831641b6b942d74fbd75478759fffc49d32bb2a7",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "templates/DESIGN_ACCEPTANCE.md",
+      "received_sha256": "0fb10ddcff14ba838cf88f4ee23dc60a8b190cc0aacb10e3e9363be85858240c",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_TEXT_READ",
+        "FULL_TEXT_SEMANTIC_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "templates/MODEL_CARD.md",
+      "received_sha256": "c2cc5c84dcaee1ed02ea70f53dfbd28a100619d26c9f4b8fcb3208c050ff8710",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "templates/ORGANIZER_CLARIFICATION.md",
+      "received_sha256": "99dc22ec6b24f40075465da8a1024feffb8c02598cabc02940567fcc4624f17d",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_TEXT_SEMANTIC_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "templates/PROVIDER_SPIKE.md",
+      "received_sha256": "7de8631fbe35b4f9806694f1f75da4b2ad192c50651c6446a9367b0fb736468c",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_TEXT_READ",
+        "FULL_CONTENT_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "templates/RELEASE_CHECKLIST.md",
+      "received_sha256": "3b00199b747431fd062b48d6d055b7bec4be4ef72763e1a28d15b9603d45cfe6",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "templates/RIGHTS_INVENTORY.md",
+      "received_sha256": "4712a38d5254c346c9131709c25ca246db9718342160525932c470f1fa0f34fe",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_TEXT_READ",
+        "FULL_CONTENT_REVIEW"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "templates/TASK.md",
+      "received_sha256": "ed3bb4d1182a01a2942bad8777d226fe87afa8b43842de091c523f6ea4e6738d",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW",
+        "FULL_TEXT_READ"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "templates/USER_INTERVIEW.md",
+      "received_sha256": "125750bd40ff7d93c1d98e99870d13c400de687e263097bc942dd3ac1598037a",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_TEXT_READ"
+      ],
+      "scope": "active received asset"
+    },
+    {
+      "path": "tests/test_reference.py",
+      "received_sha256": "21aa2fba666bf2609e7b9af288f575516352d4ce5dcbfdc3a8c14380cd45646c",
+      "reviewed_full_active_content": true,
+      "review_depths": [
+        "FULL_CONTENT_REVIEW"
+      ],
+      "scope": "active received asset"
+    }
+  ],
+  "limits": "Local content review is distinct from external factual verification and implementation tests."
+}

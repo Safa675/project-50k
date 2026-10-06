@@ -1,0 +1,650 @@
+{
+  "experiment": "temporal-chain-lab-v1",
+  "origin": "SYNTHETIC",
+  "seed": 50000,
+  "scope": "Deterministic local event-log/snapshot and dry-run state experiment; no RPC, live market data, email, deployed consensus or production concurrency.",
+  "input_hash": "88ee654dffe16176be21d1fdee931bff9d0443499215c6c9a2edf385eceefba5",
+  "config": {
+    "version": "temporal-chain-lab-v1",
+    "rvol_threshold": "3",
+    "chain_delivery_minimum": "FINALIZED"
+  },
+  "checks": [
+    {
+      "id": "C01_future_revision_excluded",
+      "passed": true
+    },
+    {
+      "id": "C02_current_rows_change_past_signal",
+      "passed": true
+    },
+    {
+      "id": "C03_late_original_cannot_roll_back_current_revision",
+      "passed": true
+    },
+    {
+      "id": "C04_late_available_document_not_claimed_actually_ingested",
+      "passed": true
+    },
+    {
+      "id": "C05_archived_backfill_basis_is_explicit",
+      "passed": true
+    },
+    {
+      "id": "C06_unknown_availability_excluded",
+      "passed": true
+    },
+    {
+      "id": "C07_frozen_actual_bundle_unchanged",
+      "passed": true
+    },
+    {
+      "id": "C08_new_archival_evidence_requires_distinct_bundle",
+      "passed": true
+    },
+    {
+      "id": "C09_content_tampering_detected",
+      "passed": true
+    },
+    {
+      "id": "C10_conflicting_revision_quarantined",
+      "passed": true
+    },
+    {
+      "id": "C11_reorg_cancels_pending_evidence_intent",
+      "passed": true
+    },
+    {
+      "id": "C12_already_accepted_requires_correction",
+      "passed": true
+    },
+    {
+      "id": "C13_confirmed_is_not_finalized",
+      "passed": true
+    },
+    {
+      "id": "C14_finalized_evidence_local_dry_run_only",
+      "passed": true
+    },
+    {
+      "id": "C15_payload_hash_mismatch_blocks",
+      "passed": true
+    },
+    {
+      "id": "C16_revision_cancels_stale_market_intent",
+      "passed": true
+    },
+    {
+      "id": "C17_reordering_invariant",
+      "passed": true
+    },
+    {
+      "id": "C18_transfer_does_not_establish_sale",
+      "passed": true
+    },
+    {
+      "id": "C19_token_accounts_are_not_people",
+      "passed": true
+    },
+    {
+      "id": "C20_future_effective_notice_retained_as_upcoming",
+      "passed": true
+    },
+    {
+      "id": "C21_missing_decimals_prevents_amount_notional",
+      "passed": true
+    },
+    {
+      "id": "C22_policy_config_part_of_bundle_identity",
+      "passed": true
+    },
+    {
+      "id": "C23_stored_policy_controls_frozen_score",
+      "passed": true
+    },
+    {
+      "id": "C24_retracted_self_binding_blocks_without_finality_gate",
+      "passed": true
+    },
+    {
+      "id": "C25_invalidated_self_binding_blocks_without_finality_gate",
+      "passed": true
+    },
+    {
+      "id": "C26_unknown_self_binding_blocks_without_finality_gate",
+      "passed": true
+    },
+    {
+      "id": "C27_orphaned_self_binding_blocks_without_finality_gate",
+      "passed": true
+    },
+    {
+      "id": "C28_future_finalization_does_not_leak_to_cutoff",
+      "passed": true
+    },
+    {
+      "id": "C29_kind_state_mismatch_blocks",
+      "passed": true
+    }
+  ],
+  "summary": {
+    "passed": 29,
+    "total": 29,
+    "records_including_duplicate": 14,
+    "unique_key_revision_pairs": 13,
+    "actual_ingested_record_count_at_cutoff": 4,
+    "source_available_reconstruction_record_count_at_cutoff": 6,
+    "shuffle_trials": 100,
+    "guarded_snapshot_same_hash_trials": 100,
+    "naive_last_arrival_revision_rollback_trials": 65,
+    "external_sends": 0
+  },
+  "historical_comparison": {
+    "cutoff": "2026-10-01T10:03:00Z",
+    "actual_signal": {
+      "outcome": "CANDIDATE",
+      "ratio": "6",
+      "threshold": "3",
+      "evidence_revision": 1,
+      "note": "Constructed arithmetic only; no empirically validated threshold."
+    },
+    "naive_current_row_signal_for_past": {
+      "outcome": "NOT_FLAGGED",
+      "ratio": "1.2",
+      "threshold": "3",
+      "evidence_revision": 2,
+      "note": "Constructed arithmetic only; no empirically validated threshold."
+    },
+    "naive_last_arrival_current_signal": {
+      "outcome": "CANDIDATE",
+      "ratio": "6",
+      "threshold": "3",
+      "evidence_revision": 1,
+      "note": "Constructed arithmetic only; no empirically validated threshold."
+    },
+    "guarded_current_signal": {
+      "outcome": "NOT_FLAGGED",
+      "ratio": "1.2",
+      "threshold": "3",
+      "evidence_revision": 2,
+      "note": "Constructed arithmetic only; no empirically validated threshold."
+    },
+    "actual_keys": [
+      "bist-demo:volume-bar-0900",
+      "evm:1:tx-A:log-0:block-A",
+      "issuer-demo:future-effective-01",
+      "solana:DEMO_GENESIS:signature-S:instruction-0:slot-501"
+    ],
+    "source_available_reconstruction_keys": [
+      "archive-demo:bar-0930",
+      "bist-demo:volume-bar-0900",
+      "evm:1:tx-A:log-0:block-A",
+      "issuer-demo:future-effective-01",
+      "issuer-demo:notice-01",
+      "solana:DEMO_GENESIS:signature-S:instruction-0:slot-501"
+    ],
+    "actual_bundle_hash": "f367c3a49a005325c0a804c685544c23134545a9cb8cfe445f20d7cc7e260875",
+    "same_actual_bundle_after_late_records_hash": "f367c3a49a005325c0a804c685544c23134545a9cb8cfe445f20d7cc7e260875",
+    "archival_bundle_before_backfill_hash": "707b475dfd70aaa4ef2d6d1d5b43263ed8127c7dc1158ca2c6dc11b6db546d9c",
+    "archival_bundle_after_backfill_hash": "f03767f5645f0a162572d4505063876e6c4b50d7efc7608abfaae1de3a738870",
+    "warning": "A source-available reconstruction can use verified archive material not ingested by the historical engine. It cannot prove actual live detection at that time; a changed evidence manifest makes a new bundle."
+  },
+  "delivery_transitions": [
+    {
+      "before": "QUEUED",
+      "after": "SUPPRESSED",
+      "reason": "STALE_REVISION_OR_PAYLOAD",
+      "dependency_key": "bist-demo:volume-bar-0900",
+      "dependency_revision": 1,
+      "current_revision": 2,
+      "external_send": false,
+      "channel": "LOCAL_DRY_RUN"
+    },
+    {
+      "before": "QUEUED",
+      "after": "SUPPRESSED",
+      "reason": "STALE_REVISION_OR_PAYLOAD",
+      "dependency_key": "evm:1:tx-A:log-0:block-A",
+      "dependency_revision": 1,
+      "current_revision": 2,
+      "external_send": false,
+      "channel": "LOCAL_DRY_RUN"
+    },
+    {
+      "before": "SIMULATED_ACCEPTED",
+      "after": "CORRECTION_REQUIRED",
+      "reason": "STALE_REVISION_OR_PAYLOAD",
+      "dependency_key": "evm:1:tx-A:log-0:block-A",
+      "dependency_revision": 1,
+      "current_revision": 2,
+      "external_send": false,
+      "channel": "LOCAL_DRY_RUN"
+    },
+    {
+      "before": "QUEUED",
+      "after": "SUPPRESSED",
+      "reason": "NOT_FINALIZED",
+      "dependency_key": "solana:DEMO_GENESIS:signature-S:instruction-0:slot-501",
+      "dependency_revision": 2,
+      "current_revision": 2,
+      "external_send": false,
+      "channel": "LOCAL_DRY_RUN"
+    },
+    {
+      "before": "QUEUED",
+      "after": "SIMULATED_ACCEPTED",
+      "reason": "ELIGIBLE_FOR_LOCAL_DRY_RUN_ONLY",
+      "dependency_key": "evm:1:tx-B:log-0:block-B",
+      "dependency_revision": 2,
+      "current_revision": 2,
+      "external_send": false,
+      "channel": "LOCAL_DRY_RUN"
+    },
+    {
+      "before": "QUEUED",
+      "after": "SIMULATED_ACCEPTED",
+      "reason": "ELIGIBLE_FOR_LOCAL_DRY_RUN_ONLY",
+      "dependency_key": "solana:DEMO_GENESIS:signature-S:instruction-0:slot-501",
+      "dependency_revision": 3,
+      "current_revision": 3,
+      "external_send": false,
+      "channel": "LOCAL_DRY_RUN"
+    }
+  ],
+  "denied_state_gates": [
+    {
+      "state": "RETRACTED",
+      "allowed": false,
+      "reason": "STATE_NOT_ADMITTED"
+    },
+    {
+      "state": "INVALIDATED",
+      "allowed": false,
+      "reason": "STATE_NOT_ADMITTED"
+    },
+    {
+      "state": "UNKNOWN",
+      "allowed": false,
+      "reason": "STATE_NOT_ADMITTED"
+    },
+    {
+      "state": "ORPHANED",
+      "allowed": false,
+      "reason": "STATE_NOT_ADMITTED"
+    }
+  ],
+  "kind_state_gates": [
+    {
+      "kind": "MARKET",
+      "state": "FINALIZED",
+      "allowed": false
+    },
+    {
+      "kind": "CHAIN",
+      "state": "ACTIVE",
+      "allowed": false
+    }
+  ],
+  "policy_counterexample": {
+    "original_policy_score": {
+      "outcome": "CANDIDATE",
+      "ratio": "6",
+      "threshold": "3",
+      "evidence_revision": 1,
+      "note": "Constructed arithmetic only; no empirically validated threshold."
+    },
+    "alternate_policy_score": {
+      "outcome": "NOT_FLAGGED",
+      "ratio": "6",
+      "threshold": "7",
+      "evidence_revision": 1,
+      "note": "Constructed arithmetic only; no empirically validated threshold."
+    },
+    "alternate_policy_bundle_hash": "6b4f49f305d226b81c298b1d2ef899058d6b20857ee6b872b66ee6c873820af5"
+  },
+  "collision_quarantine": [
+    {
+      "key": "bist-demo:volume-bar-0900",
+      "revision": 2,
+      "reason": "CONFLICTING_IDENTITY_PAYLOAD"
+    }
+  ],
+  "onchain_semantics": {
+    "origin": "SYNTHETIC",
+    "erc20_transfer": {
+      "network": "evm:1",
+      "contract": "TOKEN_CONTRACT_DEMO",
+      "transaction": "tx-B",
+      "log_index": 0,
+      "from": "address-X",
+      "to": "address-Y",
+      "raw_amount": "500000000",
+      "token_decimals": null,
+      "human_token_amount": null,
+      "monetary_notional": null,
+      "sale_status": "NOT_ESTABLISHED",
+      "beneficial_owner_from": null,
+      "beneficial_owner_to": null,
+      "statement_tr": "Örnek zincir kaydında bir token transferi görülüyor. Satış ve gerçek kişi sahipliği bu kayıttan belirlenemez."
+    },
+    "compatible_but_unproven_contexts": [
+      "custody movement",
+      "exchange deposit without sale",
+      "settlement of a separately verified trade"
+    ],
+    "solana_token_accounts": [
+      {
+        "address": "token-A1",
+        "program_owner": "SPL_TOKEN_PROGRAM_DEMO",
+        "token_authority": "authority-W1",
+        "mint": "MINT_DEMO",
+        "raw_balance": "400"
+      },
+      {
+        "address": "token-A2",
+        "program_owner": "SPL_TOKEN_PROGRAM_DEMO",
+        "token_authority": "authority-W1",
+        "mint": "MINT_DEMO",
+        "raw_balance": "300"
+      },
+      {
+        "address": "token-A3",
+        "program_owner": "SPL_TOKEN_PROGRAM_DEMO",
+        "token_authority": "authority-W2",
+        "mint": "MINT_DEMO",
+        "raw_balance": "200"
+      },
+      {
+        "address": "token-A4",
+        "program_owner": "SPL_TOKEN_PROGRAM_DEMO",
+        "token_authority": "authority-PDA_OR_MULTISIG",
+        "mint": "MINT_DEMO",
+        "raw_balance": "100"
+      }
+    ],
+    "naive_beneficial_owner_count": 4,
+    "distinct_direct_token_authorities": 3,
+    "program_owners": [
+      "SPL_TOKEN_PROGRAM_DEMO"
+    ],
+    "beneficial_owner_count": null,
+    "authority_aggregation": {
+      "authority-W1": "700",
+      "authority-W2": "200",
+      "authority-PDA_OR_MULTISIG": "100"
+    },
+    "boundary": "Authority/address concentration is observable in this complete toy mint snapshot; person/cluster ownership is unresolved. Real largest-account RPC coverage is partial unless all accounts and supply semantics are established."
+  },
+  "bundles": {
+    "frozen_actual_at_cutoff": {
+      "bundle_hash": "f367c3a49a005325c0a804c685544c23134545a9cb8cfe445f20d7cc7e260875",
+      "content_json": "{\"basis\":\"ACTUALLY_INGESTED\",\"config\":{\"chain_delivery_minimum\":\"FINALIZED\",\"rvol_threshold\":\"3\",\"version\":\"temporal-chain-lab-v1\"},\"conflicts\":[],\"cutoff\":\"2026-10-01T10:03:00Z\",\"format\":\"synthetic-bundle-v1\",\"origin\":\"SYNTHETIC\",\"records\":[{\"asset\":\"BIST_DEMO\",\"availability_provenance\":\"OBSERVED\",\"available_at\":\"2026-10-01T10:00:00Z\",\"block_ref\":null,\"effective_at\":\"2026-10-01T09:00:00Z\",\"ingested_at\":\"2026-10-01T10:01:00Z\",\"key\":\"bist-demo:volume-bar-0900\",\"kind\":\"MARKET\",\"network\":null,\"origin\":\"SYNTHETIC\",\"published_at\":\"2026-10-01T10:00:00Z\",\"revision\":1,\"state\":\"ACTIVE\",\"values\":{\"prior_slot_median\":\"100\",\"volume\":\"600\"}},{\"asset\":\"TOKEN_DEMO\",\"availability_provenance\":\"OBSERVED\",\"available_at\":\"2026-10-01T10:02:00Z\",\"block_ref\":\"block-A:height-100\",\"effective_at\":\"2026-10-01T10:02:00Z\",\"ingested_at\":\"2026-10-01T10:02:00Z\",\"key\":\"evm:1:tx-A:log-0:block-A\",\"kind\":\"CHAIN\",\"network\":\"evm:1\",\"origin\":\"SYNTHETIC\",\"published_at\":null,\"revision\":1,\"state\":\"PROVISIONAL\",\"values\":{\"raw_amount\":\"1000000000\"}},{\"asset\":\"BIST_DEMO\",\"availability_provenance\":\"OBSERVED\",\"available_at\":\"2026-10-01T10:02:00Z\",\"block_ref\":null,\"effective_at\":\"2026-10-01T11:00:00Z\",\"ingested_at\":\"2026-10-01T10:02:00Z\",\"key\":\"issuer-demo:future-effective-01\",\"kind\":\"DOCUMENT\",\"network\":null,\"origin\":\"SYNTHETIC\",\"published_at\":\"2026-10-01T10:02:00Z\",\"revision\":1,\"state\":\"ACTIVE\",\"values\":{\"classification\":\"UPCOMING_ACTION\"}},{\"asset\":\"TOKEN_DEMO\",\"availability_provenance\":\"OBSERVED\",\"available_at\":\"2026-10-01T10:03:00Z\",\"block_ref\":\"slot-501:block-S\",\"effective_at\":\"2026-10-01T10:02:00Z\",\"ingested_at\":\"2026-10-01T10:03:00Z\",\"key\":\"solana:DEMO_GENESIS:signature-S:instruction-0:slot-501\",\"kind\":\"CHAIN\",\"network\":\"solana:DEMO_GENESIS\",\"origin\":\"SYNTHETIC\",\"published_at\":null,\"revision\":2,\"state\":\"CONFIRMED\",\"values\":{\"raw_amount\":\"700000000\"}}]}"
+    },
+    "source_available_at_cutoff": {
+      "bundle_hash": "f03767f5645f0a162572d4505063876e6c4b50d7efc7608abfaae1de3a738870",
+      "content_json": "{\"basis\":\"SOURCE_AVAILABLE_RECONSTRUCTION\",\"config\":{\"chain_delivery_minimum\":\"FINALIZED\",\"rvol_threshold\":\"3\",\"version\":\"temporal-chain-lab-v1\"},\"conflicts\":[],\"cutoff\":\"2026-10-01T10:03:00Z\",\"format\":\"synthetic-bundle-v1\",\"origin\":\"SYNTHETIC\",\"records\":[{\"asset\":\"BIST_DEMO\",\"availability_provenance\":\"ARCHIVE_VERIFIED\",\"available_at\":\"2026-10-01T09:31:00Z\",\"block_ref\":null,\"effective_at\":\"2026-10-01T09:30:00Z\",\"ingested_at\":\"2026-10-01T10:08:00Z\",\"key\":\"archive-demo:bar-0930\",\"kind\":\"MARKET\",\"network\":null,\"origin\":\"SYNTHETIC\",\"published_at\":\"2026-10-01T09:31:00Z\",\"revision\":1,\"state\":\"ACTIVE\",\"values\":{\"prior_slot_median\":\"100\",\"volume\":\"100\"}},{\"asset\":\"BIST_DEMO\",\"availability_provenance\":\"OBSERVED\",\"available_at\":\"2026-10-01T10:00:00Z\",\"block_ref\":null,\"effective_at\":\"2026-10-01T09:00:00Z\",\"ingested_at\":\"2026-10-01T10:01:00Z\",\"key\":\"bist-demo:volume-bar-0900\",\"kind\":\"MARKET\",\"network\":null,\"origin\":\"SYNTHETIC\",\"published_at\":\"2026-10-01T10:00:00Z\",\"revision\":1,\"state\":\"ACTIVE\",\"values\":{\"prior_slot_median\":\"100\",\"volume\":\"600\"}},{\"asset\":\"TOKEN_DEMO\",\"availability_provenance\":\"OBSERVED\",\"available_at\":\"2026-10-01T10:02:00Z\",\"block_ref\":\"block-A:height-100\",\"effective_at\":\"2026-10-01T10:02:00Z\",\"ingested_at\":\"2026-10-01T10:02:00Z\",\"key\":\"evm:1:tx-A:log-0:block-A\",\"kind\":\"CHAIN\",\"network\":\"evm:1\",\"origin\":\"SYNTHETIC\",\"published_at\":null,\"revision\":1,\"state\":\"PROVISIONAL\",\"values\":{\"raw_amount\":\"1000000000\"}},{\"asset\":\"BIST_DEMO\",\"availability_provenance\":\"OBSERVED\",\"available_at\":\"2026-10-01T10:02:00Z\",\"block_ref\":null,\"effective_at\":\"2026-10-01T11:00:00Z\",\"ingested_at\":\"2026-10-01T10:02:00Z\",\"key\":\"issuer-demo:future-effective-01\",\"kind\":\"DOCUMENT\",\"network\":null,\"origin\":\"SYNTHETIC\",\"published_at\":\"2026-10-01T10:02:00Z\",\"revision\":1,\"state\":\"ACTIVE\",\"values\":{\"classification\":\"UPCOMING_ACTION\"}},{\"asset\":\"BIST_DEMO\",\"availability_provenance\":\"OBSERVED\",\"available_at\":\"2026-10-01T10:02:00Z\",\"block_ref\":null,\"effective_at\":\"2026-10-01T10:02:00Z\",\"ingested_at\":\"2026-10-01T10:07:00Z\",\"key\":\"issuer-demo:notice-01\",\"kind\":\"DOCUMENT\",\"network\":null,\"origin\":\"SYNTHETIC\",\"published_at\":\"2026-10-01T10:02:00Z\",\"revision\":1,\"state\":\"ACTIVE\",\"values\":{\"classification\":\"ISSUER_NOTICE\"}},{\"asset\":\"TOKEN_DEMO\",\"availability_provenance\":\"OBSERVED\",\"available_at\":\"2026-10-01T10:03:00Z\",\"block_ref\":\"slot-501:block-S\",\"effective_at\":\"2026-10-01T10:02:00Z\",\"ingested_at\":\"2026-10-01T10:03:00Z\",\"key\":\"solana:DEMO_GENESIS:signature-S:instruction-0:slot-501\",\"kind\":\"CHAIN\",\"network\":\"solana:DEMO_GENESIS\",\"origin\":\"SYNTHETIC\",\"published_at\":null,\"revision\":2,\"state\":\"CONFIRMED\",\"values\":{\"raw_amount\":\"700000000\"}}]}"
+    },
+    "alternate_policy_at_cutoff": {
+      "bundle_hash": "6b4f49f305d226b81c298b1d2ef899058d6b20857ee6b872b66ee6c873820af5",
+      "content_json": "{\"basis\":\"ACTUALLY_INGESTED\",\"config\":{\"chain_delivery_minimum\":\"FINALIZED\",\"rvol_threshold\":\"7\",\"version\":\"temporal-chain-lab-v1\"},\"conflicts\":[],\"cutoff\":\"2026-10-01T10:03:00Z\",\"format\":\"synthetic-bundle-v1\",\"origin\":\"SYNTHETIC\",\"records\":[{\"asset\":\"BIST_DEMO\",\"availability_provenance\":\"OBSERVED\",\"available_at\":\"2026-10-01T10:00:00Z\",\"block_ref\":null,\"effective_at\":\"2026-10-01T09:00:00Z\",\"ingested_at\":\"2026-10-01T10:01:00Z\",\"key\":\"bist-demo:volume-bar-0900\",\"kind\":\"MARKET\",\"network\":null,\"origin\":\"SYNTHETIC\",\"published_at\":\"2026-10-01T10:00:00Z\",\"revision\":1,\"state\":\"ACTIVE\",\"values\":{\"prior_slot_median\":\"100\",\"volume\":\"600\"}},{\"asset\":\"TOKEN_DEMO\",\"availability_provenance\":\"OBSERVED\",\"available_at\":\"2026-10-01T10:02:00Z\",\"block_ref\":\"block-A:height-100\",\"effective_at\":\"2026-10-01T10:02:00Z\",\"ingested_at\":\"2026-10-01T10:02:00Z\",\"key\":\"evm:1:tx-A:log-0:block-A\",\"kind\":\"CHAIN\",\"network\":\"evm:1\",\"origin\":\"SYNTHETIC\",\"published_at\":null,\"revision\":1,\"state\":\"PROVISIONAL\",\"values\":{\"raw_amount\":\"1000000000\"}},{\"asset\":\"BIST_DEMO\",\"availability_provenance\":\"OBSERVED\",\"available_at\":\"2026-10-01T10:02:00Z\",\"block_ref\":null,\"effective_at\":\"2026-10-01T11:00:00Z\",\"ingested_at\":\"2026-10-01T10:02:00Z\",\"key\":\"issuer-demo:future-effective-01\",\"kind\":\"DOCUMENT\",\"network\":null,\"origin\":\"SYNTHETIC\",\"published_at\":\"2026-10-01T10:02:00Z\",\"revision\":1,\"state\":\"ACTIVE\",\"values\":{\"classification\":\"UPCOMING_ACTION\"}},{\"asset\":\"TOKEN_DEMO\",\"availability_provenance\":\"OBSERVED\",\"available_at\":\"2026-10-01T10:03:00Z\",\"block_ref\":\"slot-501:block-S\",\"effective_at\":\"2026-10-01T10:02:00Z\",\"ingested_at\":\"2026-10-01T10:03:00Z\",\"key\":\"solana:DEMO_GENESIS:signature-S:instruction-0:slot-501\",\"kind\":\"CHAIN\",\"network\":\"solana:DEMO_GENESIS\",\"origin\":\"SYNTHETIC\",\"published_at\":null,\"revision\":2,\"state\":\"CONFIRMED\",\"values\":{\"raw_amount\":\"700000000\"}}]}"
+    }
+  },
+  "records": [
+    {
+      "key": "bist-demo:volume-bar-0900",
+      "revision": 1,
+      "kind": "MARKET",
+      "asset": "BIST_DEMO",
+      "effective_at": "2026-10-01T09:00:00Z",
+      "published_at": "2026-10-01T10:00:00Z",
+      "available_at": "2026-10-01T10:00:00Z",
+      "ingested_at": "2026-10-01T10:01:00Z",
+      "availability_provenance": "OBSERVED",
+      "state": "ACTIVE",
+      "network": null,
+      "block_ref": null,
+      "values": {
+        "prior_slot_median": "100",
+        "volume": "600"
+      },
+      "origin": "SYNTHETIC"
+    },
+    {
+      "key": "evm:1:tx-A:log-0:block-A",
+      "revision": 1,
+      "kind": "CHAIN",
+      "asset": "TOKEN_DEMO",
+      "effective_at": "2026-10-01T10:02:00Z",
+      "published_at": null,
+      "available_at": "2026-10-01T10:02:00Z",
+      "ingested_at": "2026-10-01T10:02:00Z",
+      "availability_provenance": "OBSERVED",
+      "state": "PROVISIONAL",
+      "network": "evm:1",
+      "block_ref": "block-A:height-100",
+      "values": {
+        "raw_amount": "1000000000"
+      },
+      "origin": "SYNTHETIC"
+    },
+    {
+      "key": "solana:DEMO_GENESIS:signature-S:instruction-0:slot-501",
+      "revision": 1,
+      "kind": "CHAIN",
+      "asset": "TOKEN_DEMO",
+      "effective_at": "2026-10-01T10:02:00Z",
+      "published_at": null,
+      "available_at": "2026-10-01T10:02:00Z",
+      "ingested_at": "2026-10-01T10:02:00Z",
+      "availability_provenance": "OBSERVED",
+      "state": "PROCESSED",
+      "network": "solana:DEMO_GENESIS",
+      "block_ref": "slot-501:block-S",
+      "values": {
+        "raw_amount": "700000000"
+      },
+      "origin": "SYNTHETIC"
+    },
+    {
+      "key": "issuer-demo:future-effective-01",
+      "revision": 1,
+      "kind": "DOCUMENT",
+      "asset": "BIST_DEMO",
+      "effective_at": "2026-10-01T11:00:00Z",
+      "published_at": "2026-10-01T10:02:00Z",
+      "available_at": "2026-10-01T10:02:00Z",
+      "ingested_at": "2026-10-01T10:02:00Z",
+      "availability_provenance": "OBSERVED",
+      "state": "ACTIVE",
+      "network": null,
+      "block_ref": null,
+      "values": {
+        "classification": "UPCOMING_ACTION"
+      },
+      "origin": "SYNTHETIC"
+    },
+    {
+      "key": "solana:DEMO_GENESIS:signature-S:instruction-0:slot-501",
+      "revision": 2,
+      "kind": "CHAIN",
+      "asset": "TOKEN_DEMO",
+      "effective_at": "2026-10-01T10:02:00Z",
+      "published_at": null,
+      "available_at": "2026-10-01T10:03:00Z",
+      "ingested_at": "2026-10-01T10:03:00Z",
+      "availability_provenance": "OBSERVED",
+      "state": "CONFIRMED",
+      "network": "solana:DEMO_GENESIS",
+      "block_ref": "slot-501:block-S",
+      "values": {
+        "raw_amount": "700000000"
+      },
+      "origin": "SYNTHETIC"
+    },
+    {
+      "key": "evm:1:tx-A:log-0:block-A",
+      "revision": 2,
+      "kind": "CHAIN",
+      "asset": "TOKEN_DEMO",
+      "effective_at": "2026-10-01T10:02:00Z",
+      "published_at": null,
+      "available_at": "2026-10-01T10:04:00Z",
+      "ingested_at": "2026-10-01T10:04:00Z",
+      "availability_provenance": "OBSERVED",
+      "state": "ORPHANED",
+      "network": "evm:1",
+      "block_ref": "block-A:height-100",
+      "values": {
+        "raw_amount": "1000000000"
+      },
+      "origin": "SYNTHETIC"
+    },
+    {
+      "key": "evm:1:tx-B:log-0:block-B",
+      "revision": 1,
+      "kind": "CHAIN",
+      "asset": "TOKEN_DEMO",
+      "effective_at": "2026-10-01T10:04:00Z",
+      "published_at": null,
+      "available_at": "2026-10-01T10:04:00Z",
+      "ingested_at": "2026-10-01T10:04:00Z",
+      "availability_provenance": "OBSERVED",
+      "state": "PROVISIONAL",
+      "network": "evm:1",
+      "block_ref": "block-B:height-100",
+      "values": {
+        "raw_amount": "500000000"
+      },
+      "origin": "SYNTHETIC"
+    },
+    {
+      "key": "bist-demo:volume-bar-0900",
+      "revision": 2,
+      "kind": "MARKET",
+      "asset": "BIST_DEMO",
+      "effective_at": "2026-10-01T09:00:00Z",
+      "published_at": "2026-10-01T10:05:00Z",
+      "available_at": "2026-10-01T10:05:00Z",
+      "ingested_at": "2026-10-01T10:05:00Z",
+      "availability_provenance": "OBSERVED",
+      "state": "ACTIVE",
+      "network": null,
+      "block_ref": null,
+      "values": {
+        "prior_slot_median": "100",
+        "volume": "120"
+      },
+      "origin": "SYNTHETIC"
+    },
+    {
+      "key": "solana:DEMO_GENESIS:signature-S:instruction-0:slot-501",
+      "revision": 3,
+      "kind": "CHAIN",
+      "asset": "TOKEN_DEMO",
+      "effective_at": "2026-10-01T10:02:00Z",
+      "published_at": null,
+      "available_at": "2026-10-01T10:05:00Z",
+      "ingested_at": "2026-10-01T10:05:00Z",
+      "availability_provenance": "OBSERVED",
+      "state": "FINALIZED",
+      "network": "solana:DEMO_GENESIS",
+      "block_ref": "slot-501:block-S",
+      "values": {
+        "raw_amount": "700000000"
+      },
+      "origin": "SYNTHETIC"
+    },
+    {
+      "key": "issuer-demo:notice-01",
+      "revision": 1,
+      "kind": "DOCUMENT",
+      "asset": "BIST_DEMO",
+      "effective_at": "2026-10-01T10:02:00Z",
+      "published_at": "2026-10-01T10:02:00Z",
+      "available_at": "2026-10-01T10:02:00Z",
+      "ingested_at": "2026-10-01T10:07:00Z",
+      "availability_provenance": "OBSERVED",
+      "state": "ACTIVE",
+      "network": null,
+      "block_ref": null,
+      "values": {
+        "classification": "ISSUER_NOTICE"
+      },
+      "origin": "SYNTHETIC"
+    },
+    {
+      "key": "archive-demo:bar-0930",
+      "revision": 1,
+      "kind": "MARKET",
+      "asset": "BIST_DEMO",
+      "effective_at": "2026-10-01T09:30:00Z",
+      "published_at": "2026-10-01T09:31:00Z",
+      "available_at": "2026-10-01T09:31:00Z",
+      "ingested_at": "2026-10-01T10:08:00Z",
+      "availability_provenance": "ARCHIVE_VERIFIED",
+      "state": "ACTIVE",
+      "network": null,
+      "block_ref": null,
+      "values": {
+        "prior_slot_median": "100",
+        "volume": "100"
+      },
+      "origin": "SYNTHETIC"
+    },
+    {
+      "key": "unknown-demo:history-01",
+      "revision": 1,
+      "kind": "DOCUMENT",
+      "asset": "BIST_DEMO",
+      "effective_at": "2026-10-01T08:00:00Z",
+      "published_at": null,
+      "available_at": "2026-10-01T08:00:00Z",
+      "ingested_at": "2026-10-01T10:08:00Z",
+      "availability_provenance": "UNKNOWN",
+      "state": "ACTIVE",
+      "network": null,
+      "block_ref": null,
+      "values": {
+        "classification": "UNVERIFIED_BACKFILL"
+      },
+      "origin": "SYNTHETIC"
+    },
+    {
+      "key": "evm:1:tx-B:log-0:block-B",
+      "revision": 2,
+      "kind": "CHAIN",
+      "asset": "TOKEN_DEMO",
+      "effective_at": "2026-10-01T10:04:00Z",
+      "published_at": null,
+      "available_at": "2026-10-01T10:08:00Z",
+      "ingested_at": "2026-10-01T10:08:00Z",
+      "availability_provenance": "OBSERVED",
+      "state": "FINALIZED",
+      "network": "evm:1",
+      "block_ref": "block-B:height-100",
+      "values": {
+        "raw_amount": "500000000"
+      },
+      "origin": "SYNTHETIC"
+    },
+    {
+      "key": "bist-demo:volume-bar-0900",
+      "revision": 1,
+      "kind": "MARKET",
+      "asset": "BIST_DEMO",
+      "effective_at": "2026-10-01T09:00:00Z",
+      "published_at": "2026-10-01T10:00:00Z",
+      "available_at": "2026-10-01T10:00:00Z",
+      "ingested_at": "2026-10-01T10:01:00Z",
+      "availability_provenance": "OBSERVED",
+      "state": "ACTIVE",
+      "network": null,
+      "block_ref": null,
+      "values": {
+        "prior_slot_median": "100",
+        "volume": "600"
+      },
+      "origin": "SYNTHETIC"
+    }
+  ]
+}

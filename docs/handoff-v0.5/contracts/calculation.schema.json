@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://project50k.invalid/contracts/calculation.schema.json",
+  "title": "Server-computed ratio provenance v1",
+  "type": "object",
+  "properties": {
+    "calculation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "operation": {
+      "const": "RATIO"
+    },
+    "operands": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "evidence_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "field": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "evidence_id",
+          "field"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "result": {
+      "type": "string",
+      "pattern": "^-?\\d+(\\.\\d+)?$"
+    },
+    "unit": {
+      "const": "ratio"
+    },
+    "method_version": {
+      "const": "decimal-ratio-v1"
+    }
+  },
+  "required": [
+    "calculation_id",
+    "operation",
+    "operands",
+    "result",
+    "unit",
+    "method_version"
+  ],
+  "additionalProperties": false
+}

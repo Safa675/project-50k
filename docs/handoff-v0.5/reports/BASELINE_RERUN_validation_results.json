@@ -1,0 +1,217 @@
+{
+  "run_at_utc": "2026-10-02T11:20:25.444007+00:00",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "All JSON files parse",
+      "passed": true,
+      "detail": "19 files"
+    },
+    {
+      "name": "Requirement counts stable",
+      "passed": true,
+      "detail": "{'UR': 80, 'FR': 122, 'NFR': 82}"
+    },
+    {
+      "name": "Requirement IDs unique",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "UR headings match registry",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "FR headings match registry",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "NFR headings match registry",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Traceability covers each requirement",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Traceability related references exist",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "No product implementation falsely marked complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Source IDs unique",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Research source count",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "28 anomaly definitions",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Anomaly source references resolve",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Anomaly requirement references resolve",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "JSON Schema 2020-12 structural validity",
+      "passed": true,
+      "detail": "4 schemas"
+    },
+    {
+      "name": "Fixture validates fixtures/synthetic_event.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Fixture validates fixtures/synthetic_ai_answer.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "AI example citations resolve",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Example provenance is synthetic",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Example confidence not a probability",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Synthetic event not approved for global send",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "OpenAPI version 3.1.0",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "OpenAPI local references resolve",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "OpenAPI operation IDs unique",
+      "passed": true,
+      "detail": "25 operations"
+    },
+    {
+      "name": "OpenAPI path params/admin declarations",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Unsubscribe and deletion contracts present",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Active Markdown local links exist",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Email safe defaults",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "AI quota consistent",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Confidence enum consistent",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Example evidence score matches configured formula",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Original archive unmodified when source directory available",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Agent entry material exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Handoff deferred as requested",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Reference unit suite",
+      "passed": true,
+      "detail": "51 tests, exit=0"
+    },
+    {
+      "name": "No actual environment secret file",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "No font binaries",
+      "passed": true,
+      "detail": ""
+    }
+  ],
+  "errors": [],
+  "reference_tests_run": 51,
+  "openapi_operations": 25,
+  "counts": {
+    "requirements": {
+      "UR": 80,
+      "FR": 122,
+      "NFR": 82
+    },
+    "anomalies": 28,
+    "sources": 48,
+    "scientific_references": 15
+  },
+  "not_tested": [
+    "Live APIs/provider entitlements",
+    "Complete OpenAPI conformance validator",
+    "Application E2E/auth/RLS",
+    "Hosted deployment",
+    "LLM runtime behavior",
+    "Empirical historical anomaly performance/calibration",
+    "Impeccable or rendered UI/accessibility"
+  ],
+  "notes": [
+    "OpenAPI QA is YAML parsing/reference/parameter/security-declaration checking, not full OpenAPI conformance certification.",
+    "The reference harness is not the production application."
+  ]
+}

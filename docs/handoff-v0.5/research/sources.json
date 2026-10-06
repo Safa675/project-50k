@@ -1,0 +1,855 @@
+[
+  {
+    "id": "S01",
+    "title": "Borsa İstanbul — data distribution and non-display licensing",
+    "url": "https://www.borsaistanbul.com/sss/veri-dagitim-ve-endeks-lisanslama",
+    "kind": "official",
+    "review_depth": "read",
+    "note": "A public page or delayed feed is not a redistribution or non-display license.",
+    "accessed": "2026-10-02"
+  },
+  {
+    "id": "S02",
+    "title": "SPK — investors in funds subject to liquidation, 23 September 2026",
+    "url": "https://spk.gov.tr/duyurular/basin-duyurulari/2026/tasfiye-konusu-fonlardaki-yatirimci-sayisina-iliskin-aciklama",
+    "kind": "official",
+    "review_depth": "read",
+    "note": "131 funds, seven portfolio managers, 455,758 unique investors according to MKK; not a loss estimate.",
+    "accessed": "2026-10-02"
+  },
+  {
+    "id": "S03",
+    "title": "SPK — fund guideline preparation explanation, 18 September 2026",
+    "url": "https://spk.gov.tr/duyurular/basin-duyurulari/2026/yatirim-fonlarina-iliskin-rehber-duzenleme-surecine-iliskin-aciklama",
+    "kind": "official",
+    "review_depth": "read",
+    "note": "Attribute observations about fund/share activity to SPK; no predictive validation of this product.",
+    "accessed": "2026-10-02"
+  },
+  {
+    "id": "S04",
+    "title": "SPK — investment-fund portfolio values",
+    "url": "https://spk.gov.tr/kurumlar/fonlar/yatirim-fonlari/menkul-kiymet-yatirim-fonlari/portfoy-degerleri",
+    "kind": "official",
+    "review_depth": "read",
+    "note": "Discovery entry point; available fields and time-series coverage require endpoint testing.",
+    "accessed": "2026-10-02"
+  },
+  {
+    "id": "S05",
+    "title": "borsapy repository README",
+    "url": "https://github.com/saidsurucu/borsapy",
+    "kind": "maintainer",
+    "review_depth": "read",
+    "note": "Unofficial wrapper; personal/educational-use warning; code license does not grant data rights.",
+    "accessed": "2026-10-02"
+  },
+  {
+    "id": "S06",
+    "title": "borsapy TEFAS provider implementation",
+    "url": "https://github.com/saidsurucu/borsapy/blob/master/borsapy/_providers/tefas.py",
+    "kind": "maintainer",
+    "review_depth": "code inspected",
+    "note": "Current mutable source sections corroborate history placeholders, TLS verification disabled by default and allocation-date parse fallback to local current date. Prior reported blob hash was not independently recovered; pin immutable source before integration. No endpoint live test.",
+    "accessed": "2026-10-02",
+    "prior_review_note": "GitHub blob SHA 7b5974ab0eee3a07808a5a8b8439d4d693caa26c; history inserts FundSize=NaN, Investors=0; endpoints are not independently live-tested.",
+    "audit_status": "CODE_SECTIONS_REVIEWED_MUTABLE_REF_ONLY"
+  },
+  {
+    "id": "S07",
+    "title": "SPK web-service help",
+    "url": "https://ws.spk.gov.tr/help/index.html",
+    "kind": "official",
+    "review_depth": "page located; schema not recovered",
+    "note": "Do not invent paths or promise coverage. A schema/sample-response spike remains open.",
+    "accessed": "2026-10-02"
+  },
+  {
+    "id": "S08",
+    "title": "Alpaca Market Data overview",
+    "url": "https://docs.alpaca.markets/us/docs/about-market-data-api",
+    "kind": "official",
+    "review_depth": "read",
+    "note": "IEX versus consolidated coverage; subscription and redistribution rights require separate review.",
+    "accessed": "2026-10-02"
+  },
+  {
+    "id": "S09",
+    "title": "SEC EDGAR APIs",
+    "url": "https://www.sec.gov/search-filings/edgar-application-programming-interfaces",
+    "kind": "official",
+    "review_depth": "read",
+    "note": "Submission/XBRL APIs, no authentication; server-side retrieval and access-policy compliance.",
+    "accessed": "2026-10-02"
+  },
+  {
+    "id": "S10",
+    "title": "Binance spot WebSocket streams",
+    "url": "https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams",
+    "kind": "official",
+    "review_depth": "read",
+    "note": "Venue-specific public market streams; access/terms must be checked for deployment region.",
+    "accessed": "2026-10-02"
+  },
+  {
+    "id": "S11",
+    "title": "Ethereum JSON-RPC",
+    "url": "https://ethereum.org/en/developers/docs/apis/json-rpc/",
+    "kind": "official",
+    "review_depth": "read",
+    "note": "Raw logs/transactions are not wallet-identity or beneficial-owner labels.",
+    "accessed": "2026-10-02"
+  },
+  {
+    "id": "S12",
+    "title": "Solana getTokenLargestAccounts",
+    "url": "https://solana.com/docs/rpc/http/gettokenlargestaccounts",
+    "kind": "official",
+    "review_depth": "read",
+    "note": "Returns 20 token accounts, not 20 independent persons.",
+    "accessed": "2026-10-02"
+  },
+  {
+    "id": "S13",
+    "title": "DEX Screener API",
+    "url": "https://docs.dexscreener.com/api/reference",
+    "kind": "official",
+    "review_depth": "read",
+    "note": "Pair-level data; snapshot and historical support must be distinguished.",
+    "accessed": "2026-10-02"
+  },
+  {
+    "id": "S14",
+    "title": "CoinGecko coins markets",
+    "url": "https://docs.coingecko.com/reference/coins-markets",
+    "kind": "official",
+    "review_depth": "read",
+    "note": "Candidate universe metadata and rankings; use provider IDs and dated snapshots.",
+    "accessed": "2026-10-02"
+  },
+  {
+    "id": "S15",
+    "title": "Next.js installation",
+    "url": "https://nextjs.org/docs/app/getting-started/installation",
+    "kind": "official",
+    "review_depth": "read",
+    "note": "Official page displayed 16.3.8 when checked on 2026-10-02; compatibility not installed/tested; resolve and lock at build start.",
+    "accessed": "2026-10-02"
+  },
+  {
+    "id": "S16",
+    "title": "Supabase Google authentication",
+    "url": "https://supabase.com/docs/guides/auth/social-login/auth-google",
+    "kind": "official",
+    "review_depth": "read",
+    "note": "Provider configuration required; no infrastructure was provisioned here.",
+    "accessed": "2026-10-02"
+  },
+  {
+    "id": "S17",
+    "title": "Supabase SSR client guidance",
+    "url": "https://supabase.com/docs/guides/auth/server-side/creating-a-client?queryGroups=framework&framework=nextjs",
+    "kind": "official",
+    "review_depth": "read",
+    "note": "Verified claims/user lookup, cookie refresh and private response cache protections required; no auth implementation tested.",
+    "accessed": "2026-10-02",
+    "original_url": "https://supabase.com/docs/guides/auth/server-side/nextjs"
+  },
+  {
+    "id": "S18",
+    "title": "Supabase row-level security",
+    "url": "https://supabase.com/docs/guides/database/postgres/row-level-security",
+    "kind": "official",
+    "review_depth": "read",
+    "note": "Service-role credentials bypass RLS; browser use is forbidden.",
+    "accessed": "2026-10-02"
+  },
+  {
+    "id": "S19",
+    "title": "OpenAI web search tool",
+    "url": "https://developers.openai.com/api/docs/guides/tools-web-search",
+    "kind": "official",
+    "review_depth": "read",
+    "note": "Responses web-search tool and clickable citation annotations; availability must be verified for selected model/account.",
+    "accessed": "2026-10-02"
+  },
+  {
+    "id": "S20",
+    "title": "Codex AGENTS.md guidance",
+    "url": "https://developers.openai.com/codex/guides/agents-md",
+    "kind": "official",
+    "review_depth": "read",
+    "note": "Repository instructions for coding agents.",
+    "accessed": "2026-10-02"
+  },
+  {
+    "id": "S21",
+    "title": "Claude Code memory and project instructions",
+    "url": "https://code.claude.com/docs/en/memory",
+    "kind": "official",
+    "review_depth": "read",
+    "note": "CLAUDE.md project instructions; import AGENTS.md rather than duplicating rules.",
+    "accessed": "2026-10-02"
+  },
+  {
+    "id": "S22",
+    "title": "Impeccable",
+    "url": "https://impeccable.style/",
+    "kind": "official",
+    "review_depth": "read",
+    "note": "Official tool documentation checked on 2026-10-02: Codex $impeccable versus slash integrations; Node22.18+ design-tool requirement must be rechecked at installation. No tool installation/audit run.",
+    "accessed": "2026-10-02"
+  },
+  {
+    "id": "S23",
+    "title": "TradingView Lightweight Charts",
+    "url": "https://tradingview.github.io/lightweight-charts/",
+    "kind": "official",
+    "review_depth": "read",
+    "note": "Chart library, not data feed; comply with notices and attribution.",
+    "accessed": "2026-10-02"
+  },
+  {
+    "id": "S24",
+    "title": "FastAPI tutorial",
+    "url": "https://fastapi.tiangolo.com/tutorial/",
+    "kind": "official",
+    "review_depth": "read",
+    "note": "Typed Python API foundation.",
+    "accessed": "2026-10-02"
+  },
+  {
+    "id": "S25",
+    "title": "Resend API",
+    "url": "https://resend.com/docs/api-reference/introduction",
+    "kind": "official",
+    "review_depth": "read",
+    "note": "Email integration candidate, sender/domain setup required.",
+    "accessed": "2026-10-02"
+  },
+  {
+    "id": "S26",
+    "title": "Resend idempotency keys",
+    "url": "https://resend.com/docs/dashboard/emails/idempotency-keys",
+    "kind": "official",
+    "review_depth": "read",
+    "note": "Provider idempotency supplements rather than replaces durable application deduplication.",
+    "accessed": "2026-10-02"
+  },
+  {
+    "id": "S27",
+    "title": "OWASP LLM application risks",
+    "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+    "kind": "official",
+    "review_depth": "read",
+    "note": "Prompt injection and unsafe tool/data flows inform threat model.",
+    "accessed": "2026-10-02"
+  },
+  {
+    "id": "S28",
+    "title": "WCAG 2.2",
+    "url": "https://www.w3.org/TR/WCAG22/",
+    "kind": "official",
+    "review_depth": "read",
+    "note": "Accessibility reference; project targets are not an accessibility certification.",
+    "accessed": "2026-10-02"
+  },
+  {
+    "id": "S29",
+    "title": "KVKK standard contracts announcement",
+    "url": "https://www.kvkk.gov.tr/Icerik/7938/Standart-Sozlesmeler-ve-Baglayici-Sirket-Kurallarina-Iliskin-Dokumanlar-Hakkinda-Kamuoyu-Duyurusu",
+    "kind": "official",
+    "review_depth": "read",
+    "note": "Cross-border processing requires a legally reviewed transfer arrangement; consent is not a universal workaround.",
+    "accessed": "2026-10-02"
+  },
+  {
+    "id": "S30",
+    "title": "TradingView watchlist alerts",
+    "url": "https://www.tradingview.com/support/solutions/43000739708-watchlist-alerts/",
+    "kind": "official",
+    "review_depth": "read",
+    "note": "Proactive/watchlist alerting already exists; not a unique selling point by itself.",
+    "accessed": "2026-10-02"
+  },
+  {
+    "id": "S31",
+    "title": "Koyfin alerts",
+    "url": "https://www.koyfin.com/features/alerts/",
+    "kind": "official",
+    "review_depth": "read",
+    "note": "Alerts across price, technical, valuation, news and filing dimensions.",
+    "accessed": "2026-10-02"
+  },
+  {
+    "id": "S32",
+    "title": "ForInvest business products",
+    "url": "https://www.forinvest.com/business?lang=en",
+    "kind": "official",
+    "review_depth": "read",
+    "note": "Local data/analytics ecosystem; exact comparable consumer features need hands-on verification.",
+    "accessed": "2026-10-02"
+  },
+  {
+    "id": "S33",
+    "title": "Techstars Startup Weekend",
+    "url": "https://www.techstars.com/communities/startup-weekend",
+    "kind": "official",
+    "review_depth": "read",
+    "note": "General program only. Local schedule and pre-work rule are from user-provided materials.",
+    "accessed": "2026-10-02"
+  },
+  {
+    "id": "R01",
+    "title": "Empirical properties of asset returns: stylized facts and statistical issues",
+    "authors": "Rama Cont",
+    "year": 2001,
+    "venue": "Quantitative Finance",
+    "url": "https://www.tandfonline.com/doi/abs/10.1080/713665670",
+    "review_depth": "Publisher metadata and author manuscript indexed abstract excerpts only; no body read.",
+    "contribution": "Return distributions and volatility behavior motivate robust, regime-aware baselines.",
+    "limitation": "Broad financial-market evidence, not a calibrated BIST fraud classifier.",
+    "project_decision": "Use robust scores and validate tails locally; never map a sigma value directly to a fraud probability.",
+    "accessed": "2026-10-02",
+    "prior_review_depth": "publisher abstract/search excerpt",
+    "bibliographic_fields": {
+      "title": "Empirical properties of asset returns: stylized facts and statistical issues",
+      "author": "Rama Cont",
+      "year": "2001",
+      "url": "https://www.tandfonline.com/doi/abs/10.1080/713665670",
+      "journal": "Quantitative Finance",
+      "volume": "1",
+      "number": "2",
+      "pages": "223--236",
+      "doi": "10.1080/713665670"
+    },
+    "versions": [],
+    "audit_failures": [
+      "Publisher abstract HTTP403 (turn0view0).",
+      "Author manuscript timeout/502 (turn7view0, turn16view1, turn37view0).",
+      "Publisher full URL inaccessible (turn37view1)."
+    ],
+    "unresolved_metadata": []
+  },
+  {
+    "id": "R02",
+    "title": "Intraday periodicity and volatility persistence in financial markets",
+    "authors": "Torben G. Andersen; Tim Bollerslev",
+    "year": 1997,
+    "venue": "Journal of Empirical Finance",
+    "url": "https://www.sciencedirect.com/science/article/pii/S0927539897000042",
+    "review_depth": "Author-institution abstract and metadata; publisher indexed metadata; no full text.",
+    "contribution": "Intraday periodicity materially affects volatility dynamics.",
+    "limitation": "Different markets and historical periods; proposed local thresholds are not supplied by the paper.",
+    "project_decision": "Compare the same session slot; separate auctions, overnight gaps and continuous trading.",
+    "accessed": "2026-10-02",
+    "prior_review_depth": "publisher abstract",
+    "bibliographic_fields": {
+      "title": "Intraday periodicity and volatility persistence in financial markets",
+      "author": "Torben G. Andersen and Tim Bollerslev",
+      "year": "1997",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0927539897000042",
+      "journal": "Journal of Empirical Finance",
+      "volume": "4",
+      "number": "2--3",
+      "pages": "115--158",
+      "doi": "10.1016/S0927-5398(97)00004-2"
+    },
+    "versions": [],
+    "audit_failures": [
+      "Publisher direct HTTP403 (turn0view1)."
+    ],
+    "unresolved_metadata": []
+  },
+  {
+    "id": "R03",
+    "title": "Isolation Forest",
+    "authors": "Fei Tony Liu; Kai Ming Ting; Zhi-Hua Zhou",
+    "year": 2008,
+    "venue": "IEEE ICDM",
+    "url": "https://ieeexplore.ieee.org/document/4781136",
+    "review_depth": "Publisher conference-date excerpt; author PDF abstract/introduction selectively inspected (first two pages), not exhaustive methods/experiments.",
+    "contribution": "Random isolation offers a multivariate anomaly approach.",
+    "limitation": "An anomaly score is not a supervised probability; contamination and features change results.",
+    "project_decision": "Challenger only after baselines; train on past data, record seed, features and training cutoff.",
+    "accessed": "2026-10-02",
+    "prior_review_depth": "publisher abstract",
+    "bibliographic_fields": {
+      "title": "Isolation Forest",
+      "author": "Fei Tony Liu and Kai Ming Ting and Zhi-Hua Zhou",
+      "year": "2008",
+      "url": "https://ieeexplore.ieee.org/document/4781136",
+      "booktitle": "2008 Eighth IEEE International Conference on Data Mining",
+      "doi": "10.1109/ICDM.2008.17"
+    },
+    "versions": [],
+    "audit_failures": [
+      "IEEE JavaScript robot wall (turn0view2).",
+      "LAMDA alternate PDF timeout (turn7view1,turn16view0)."
+    ],
+    "unresolved_metadata": [
+      "Exact proceedings pagination was not independently recovered; do not fill from memory."
+    ]
+  },
+  {
+    "id": "R04",
+    "title": "Bayesian Online Changepoint Detection",
+    "authors": "Ryan Prescott Adams; David J. C. MacKay",
+    "year": 2007,
+    "venue": "arXiv preprint",
+    "url": "https://arxiv.org/abs/0710.3742",
+    "review_depth": "Author abstract and submission history.",
+    "contribution": "Online inference tracks the run length since a possible distribution change.",
+    "limitation": "Hazard and likelihood assumptions matter; not an out-of-box market-abuse detector.",
+    "project_decision": "Later regime-change detector; test detection delay and likelihood misspecification.",
+    "accessed": "2026-10-02",
+    "prior_review_depth": "author abstract",
+    "bibliographic_fields": {
+      "title": "Bayesian Online Changepoint Detection",
+      "author": "Ryan Prescott Adams and David J. C. MacKay",
+      "year": "2007",
+      "url": "https://arxiv.org/abs/0710.3742",
+      "howpublished": "arXiv preprint",
+      "doi": "10.48550/arXiv.0710.3742",
+      "eprint": "0710.3742",
+      "archivePrefix": "arXiv",
+      "version": "v1"
+    },
+    "versions": [
+      {
+        "kind": "author_preprint",
+        "arxiv_id": "0710.3742v1",
+        "url": "https://arxiv.org/abs/0710.3742v1",
+        "doi": "10.48550/arXiv.0710.3742",
+        "year": 2007
+      }
+    ],
+    "audit_failures": [],
+    "unresolved_metadata": []
+  },
+  {
+    "id": "R05",
+    "title": "Selective review of offline change point detection methods",
+    "authors": "Charles Truong; Laurent Oudre; Nicolas Vayatis",
+    "year": 2020,
+    "venue": "Signal Processing",
+    "url": "https://arxiv.org/abs/1801.00718",
+    "review_depth": "Author abstract, journal reference and revision history.",
+    "contribution": "Organizes offline change-point algorithms by cost, search and change-count constraints.",
+    "limitation": "Offline segmentation can see future observations.",
+    "project_decision": "Use ruptures-style offline analysis only for research/labels, not claim-time live detection.",
+    "accessed": "2026-10-02",
+    "prior_review_depth": "author abstract and publication metadata",
+    "bibliographic_fields": {
+      "title": "Selective review of offline change point detection methods",
+      "author": "Charles Truong and Laurent Oudre and Nicolas Vayatis",
+      "year": "2020",
+      "url": "https://arxiv.org/abs/1801.00718",
+      "journal": "Signal Processing",
+      "volume": "167",
+      "eid": "107299",
+      "doi": "10.1016/j.sigpro.2019.107299",
+      "note": "Author manuscript arXiv:1801.00718v3; journal version 2020."
+    },
+    "versions": [
+      {
+        "kind": "author_preprint",
+        "arxiv_id": "1801.00718v3",
+        "url": "https://arxiv.org/abs/1801.00718v3",
+        "doi": "10.48550/arXiv.1801.00718",
+        "year": 2018
+      }
+    ],
+    "audit_failures": [],
+    "unresolved_metadata": []
+  },
+  {
+    "id": "R06",
+    "title": "Current Time Series Anomaly Detection Benchmarks are Flawed and are Creating the Illusion of Progress",
+    "authors": "Renjie Wu; Eamonn J. Keogh",
+    "year": 2023,
+    "venue": "IEEE TKDE 35(3), 2421–2429 (final issue 2023; early access 2021)",
+    "url": "https://arxiv.org/abs/2009.13807",
+    "review_depth": "Author abstract, revision history and journal/ICDE distinction; publisher indexed final issue metadata; no full-text critique replication.",
+    "contribution": "Documents flaws that can distort anomaly benchmark comparisons.",
+    "limitation": "General benchmark critique; it does not label Project 50K events.",
+    "project_decision": "Keep normal controls, point-in-time datasets and explicit event matching; no showcase-only accuracy.",
+    "accessed": "2026-10-02",
+    "prior_review_depth": "author abstract and publication metadata",
+    "bibliographic_fields": {
+      "title": "Current Time Series Anomaly Detection Benchmarks are Flawed and are Creating the Illusion of Progress",
+      "author": "Renjie Wu and Eamonn J. Keogh",
+      "year": "2023",
+      "url": "https://ieeexplore.ieee.org/document/9537291/",
+      "journal": "IEEE Transactions on Knowledge and Data Engineering",
+      "volume": "35",
+      "number": "3",
+      "pages": "2421--2429",
+      "doi": "10.1109/TKDE.2021.3112126",
+      "note": "Journal early access in 2021; final issue March 2023. Author manuscript arXiv:2009.13807v5 revised 2022-09-03. Separate ICDE 2022 extended abstract is not this journal article."
+    },
+    "versions": [
+      {
+        "kind": "journal_early_access",
+        "year": 2021,
+        "doi": "10.1109/TKDE.2021.3112126"
+      },
+      {
+        "kind": "author_preprint",
+        "arxiv_id": "2009.13807v5",
+        "url": "https://arxiv.org/abs/2009.13807v5",
+        "doi": "10.48550/arXiv.2009.13807",
+        "year": 2020
+      },
+      {
+        "kind": "separate_extended_abstract",
+        "venue": "38th IEEE International Conference on Data Engineering (ICDE)",
+        "year": 2022,
+        "pages": "1479--1480",
+        "doi": "10.1109/ICDE53745.2022.00116",
+        "note": "Keep separate; do not use as TKDE pagination."
+      }
+    ],
+    "audit_failures": [
+      "IEEE robot wall (turn20view2); DOI direct inaccessible (turn8view0)."
+    ],
+    "unresolved_metadata": []
+  },
+  {
+    "id": "R07",
+    "title": "On Calibration of Modern Neural Networks",
+    "authors": "Chuan Guo; Geoff Pleiss; Yu Sun; Kilian Q. Weinberger",
+    "year": 2017,
+    "venue": "ICML / PMLR 70",
+    "url": "https://proceedings.mlr.press/v70/guo17a.html",
+    "review_depth": "Proceedings abstract and supplied BibTeX.",
+    "contribution": "Confidence calibration requires predicted probabilities to match observed correctness.",
+    "limitation": "Image/text classification experiments; temperature scaling does not calibrate an arbitrary weighted score automatically.",
+    "project_decision": "Separate evidence strength from probability; assess Brier score and reliability only with labels.",
+    "accessed": "2026-10-02",
+    "prior_review_depth": "proceedings abstract",
+    "bibliographic_fields": {
+      "title": "On Calibration of Modern Neural Networks",
+      "author": "Chuan Guo and Geoff Pleiss and Yu Sun and Kilian Q. Weinberger",
+      "year": "2017",
+      "url": "https://proceedings.mlr.press/v70/guo17a.html",
+      "booktitle": "Proceedings of the 34th International Conference on Machine Learning",
+      "volume": "70",
+      "pages": "1321--1330",
+      "series": "Proceedings of Machine Learning Research",
+      "publisher": "PMLR"
+    },
+    "versions": [],
+    "audit_failures": [],
+    "unresolved_metadata": []
+  },
+  {
+    "id": "R08",
+    "title": "Conformal prediction beyond exchangeability",
+    "authors": "Rina Foygel Barber; Emmanuel J. Candès; Aaditya Ramdas; Ryan J. Tibshirani",
+    "year": 2023,
+    "venue": "Annals of Statistics; author preprint 2022",
+    "url": "https://arxiv.org/abs/2202.13415",
+    "review_depth": "Author abstract/revision history; primary publisher indexed journal metadata.",
+    "contribution": "Studies predictive inference when exchangeability is weakened.",
+    "limitation": "Coverage assumptions and drift still matter; a prediction set is not a fraud probability.",
+    "project_decision": "Research option, not a weekend guarantee of 95% coverage on financial time series.",
+    "accessed": "2026-10-02",
+    "prior_review_depth": "author abstract",
+    "bibliographic_fields": {
+      "title": "Conformal prediction beyond exchangeability",
+      "author": "Rina Foygel Barber and Emmanuel J. Candès and Aaditya Ramdas and Ryan J. Tibshirani",
+      "year": "2023",
+      "url": "https://arxiv.org/abs/2202.13415",
+      "journal": "Annals of Statistics",
+      "volume": "51",
+      "number": "2",
+      "pages": "816--845",
+      "doi": "10.1214/23-AOS2276",
+      "note": "Author preprint first submitted 2022; final journal article April 2023."
+    },
+    "versions": [
+      {
+        "kind": "author_preprint",
+        "arxiv_id": "2202.13415v5",
+        "url": "https://arxiv.org/abs/2202.13415v5",
+        "doi": "10.48550/arXiv.2202.13415",
+        "year": 2022
+      }
+    ],
+    "audit_failures": [
+      "Euclid direct page iframe only (turn20view1)."
+    ],
+    "unresolved_metadata": []
+  },
+  {
+    "id": "R09",
+    "title": "Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing",
+    "authors": "Yoav Benjamini; Yosef Hochberg",
+    "year": 1995,
+    "venue": "JRSS Series B",
+    "url": "https://academic.oup.com/jrsssb/article/57/1/289/7035855",
+    "review_depth": "Publisher title excerpt and author-institution publication metadata. Author-hosted13-page PDF retrieved; text extraction empty; screenshots attempted. Do not claim full text read.",
+    "contribution": "Controls a multiple-testing error criterion under stated assumptions.",
+    "limitation": "Overlapping assets/times are dependent; heuristics are not automatically valid p-values.",
+    "project_decision": "Measure alert burden across the universe; do not promise FDR control without justified tests.",
+    "accessed": "2026-10-02",
+    "prior_review_depth": "publisher abstract",
+    "bibliographic_fields": {
+      "title": "Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing",
+      "author": "Yoav Benjamini and Yosef Hochberg",
+      "year": "1995",
+      "url": "https://academic.oup.com/jrsssb/article/57/1/289/7035855",
+      "journal": "Journal of the Royal Statistical Society Series B",
+      "volume": "57",
+      "number": "1",
+      "pages": "289--300",
+      "doi": "10.1111/j.2517-6161.1995.tb02031.x"
+    },
+    "versions": [],
+    "audit_failures": [
+      "Publisher redirected to inaccessible CDN (turn2view3).",
+      "JSTOR no article text (turn7view3).",
+      "Author PDF returned zero parsed lines (turn20view0)."
+    ],
+    "unresolved_metadata": []
+  },
+  {
+    "id": "R10",
+    "title": "Costly Search and Mutual Fund Flows",
+    "authors": "Erik R. Sirri; Peter Tufano",
+    "year": 1998,
+    "venue": "Journal of Finance",
+    "url": "https://onlinelibrary.wiley.com/doi/10.1111/0022-1082.00066",
+    "review_depth": "Publisher abstract and journal issue citation; not full article.",
+    "contribution": "Fund flows relate asymmetrically to past performance and search costs.",
+    "limitation": "Historical equity mutual funds outside Türkiye; flow changes are not misconduct evidence.",
+    "project_decision": "Contextualize subscriptions/redemptions and category behavior; do not equate outflow with fraud.",
+    "accessed": "2026-10-02",
+    "prior_review_depth": "publisher abstract",
+    "bibliographic_fields": {
+      "title": "Costly Search and Mutual Fund Flows",
+      "author": "Erik R. Sirri and Peter Tufano",
+      "year": "1998",
+      "url": "https://onlinelibrary.wiley.com/doi/10.1111/0022-1082.00066",
+      "journal": "Journal of Finance",
+      "volume": "53",
+      "number": "5",
+      "pages": "1589--1622",
+      "doi": "10.1111/0022-1082.00066",
+      "note": "Journal issue October 1998; later website online-publication date is distinct."
+    },
+    "versions": [],
+    "audit_failures": [],
+    "unresolved_metadata": []
+  },
+  {
+    "id": "R11",
+    "title": "To the moon: defining and detecting cryptocurrency pump-and-dumps",
+    "authors": "Josh Kamps; Bennett Kleinberg",
+    "year": 2018,
+    "venue": "Crime Science 7,18",
+    "url": "https://link.springer.com/article/10.1186/s40163-018-0093-5",
+    "review_depth": "Accessible article metadata; method, selected results/cases and limitations inspected; no exhaustive full-article claim.",
+    "contribution": "Combines pump-and-dump definitions with anomalous trading-pattern screening.",
+    "limitation": "Historical exchanges and selected events; labels and thresholds are not portable to BIST or major coins without testing.",
+    "project_decision": "Use price/volume patterns as research candidates and report suspicious behavior, not legal verdicts.",
+    "accessed": "2026-10-02",
+    "prior_review_depth": "publisher abstract and accessible article",
+    "bibliographic_fields": {
+      "title": "To the moon: defining and detecting cryptocurrency pump-and-dumps",
+      "author": "Josh Kamps and Bennett Kleinberg",
+      "year": "2018",
+      "url": "https://link.springer.com/article/10.1186/s40163-018-0093-5",
+      "journal": "Crime Science",
+      "volume": "7",
+      "eid": "18",
+      "doi": "10.1186/s40163-018-0093-5"
+    },
+    "versions": [],
+    "audit_failures": [],
+    "unresolved_metadata": []
+  },
+  {
+    "id": "R12",
+    "title": "The Anatomy of a Cryptocurrency Pump-and-Dump Scheme",
+    "authors": "Jiahua Xu; Benjamin Livshits",
+    "year": 2019,
+    "venue": "28th USENIX Security Symposium",
+    "url": "https://www.usenix.org/conference/usenixsecurity19/presentation/xu-jiahua",
+    "review_depth": "Conference abstract/BibTeX and PDF introduction, case-study excerpt and data-collection section4.1 selectively inspected.",
+    "contribution": "Examines organized cryptocurrency pump-and-dump activity.",
+    "limitation": "Coordination evidence depends on data excluded from our social-media-free MVP.",
+    "project_decision": "Record the information gap; price plus a transfer cannot prove coordinated control.",
+    "accessed": "2026-10-02",
+    "prior_review_depth": "conference abstract",
+    "bibliographic_fields": {
+      "title": "The Anatomy of a Cryptocurrency Pump-and-Dump Scheme",
+      "author": "Jiahua Xu and Benjamin Livshits",
+      "year": "2019",
+      "url": "https://www.usenix.org/conference/usenixsecurity19/presentation/xu-jiahua",
+      "booktitle": "28th USENIX Security Symposium (USENIX Security 19)",
+      "pages": "1609--1625",
+      "publisher": "USENIX Association",
+      "address": "Santa Clara, CA",
+      "month": "aug",
+      "isbn": "978-1-939133-06-9"
+    },
+    "versions": [],
+    "audit_failures": [],
+    "unresolved_metadata": []
+  },
+  {
+    "id": "R13",
+    "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+    "authors": "Patrick Lewis; Ethan Perez; Aleksandra Piktus; Fabio Petroni; Vladimir Karpukhin; Naman Goyal; Heinrich Küttler; Mike Lewis; Wen-tau Yih; Tim Rocktäschel; Sebastian Riedel; Douwe Kiela",
+    "year": 2020,
+    "venue": "NeurIPS",
+    "url": "https://arxiv.org/abs/2005.11401",
+    "review_depth": "Author abstract, full author list, acceptance note and revisions.",
+    "contribution": "Retrieval adds external knowledge to generation.",
+    "limitation": "Retrieval does not establish source truth or eliminate unsupported synthesis.",
+    "project_decision": "Use dated evidence packets and verify claim-level references.",
+    "accessed": "2026-10-02",
+    "prior_review_depth": "author abstract",
+    "bibliographic_fields": {
+      "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+      "author": "Patrick Lewis and Ethan Perez and Aleksandra Piktus and Fabio Petroni and Vladimir Karpukhin and Naman Goyal and Heinrich Küttler and Mike Lewis and Wen-tau Yih and Tim Rocktäschel and Sebastian Riedel and Douwe Kiela",
+      "year": "2020",
+      "url": "https://arxiv.org/abs/2005.11401",
+      "booktitle": "Advances in Neural Information Processing Systems",
+      "note": "Accepted at NeurIPS 2020; linked author manuscript arXiv:2005.11401v4 revised 2021-04-12. ArXiv DOI belongs to preprint, not a separately verified proceedings DOI."
+    },
+    "versions": [
+      {
+        "kind": "author_preprint",
+        "arxiv_id": "2005.11401v4",
+        "url": "https://arxiv.org/abs/2005.11401v4",
+        "doi": "10.48550/arXiv.2005.11401",
+        "year": 2020
+      }
+    ],
+    "audit_failures": [],
+    "unresolved_metadata": [
+      "Proceedings URL/pagination/volume not independently recovered in this audit; fields omitted."
+    ]
+  },
+  {
+    "id": "R14",
+    "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+    "authors": "Shunyu Yao; Jeffrey Zhao; Dian Yu; Nan Du; Izhak Shafran; Karthik Narasimhan; Yuan Cao",
+    "year": 2023,
+    "venue": "ICLR; author preprint 2022",
+    "url": "https://arxiv.org/abs/2210.03629",
+    "review_depth": "Author abstract, full author list and ICLR-camera-ready revision note.",
+    "contribution": "Interleaves language-model reasoning and tool interaction.",
+    "limitation": "Benchmark results are not financial accuracy evidence; unrestricted tool autonomy adds risk.",
+    "project_decision": "Bounded read-only asset investigation with budgets and logged tool actions, not hidden chain-of-thought storage.",
+    "accessed": "2026-10-02",
+    "prior_review_depth": "author abstract",
+    "bibliographic_fields": {
+      "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+      "author": "Shunyu Yao and Jeffrey Zhao and Dian Yu and Nan Du and Izhak Shafran and Karthik Narasimhan and Yuan Cao",
+      "year": "2023",
+      "url": "https://arxiv.org/abs/2210.03629",
+      "booktitle": "International Conference on Learning Representations",
+      "note": "ICLR camera-ready author manuscript arXiv:2210.03629v3 revised 2023-03-10; initial preprint 2022."
+    },
+    "versions": [
+      {
+        "kind": "author_preprint",
+        "arxiv_id": "2210.03629v3",
+        "url": "https://arxiv.org/abs/2210.03629v3",
+        "doi": "10.48550/arXiv.2210.03629",
+        "year": 2022
+      }
+    ],
+    "audit_failures": [],
+    "unresolved_metadata": [
+      "Proceedings URL/pagination/volume not independently recovered in this audit; fields omitted."
+    ]
+  },
+  {
+    "id": "R15",
+    "title": "Enabling Large Language Models to Generate Text with Citations",
+    "authors": "Tianyu Gao; Howard Yen; Jiatong Yu; Danqi Chen",
+    "year": 2023,
+    "venue": "EMNLP",
+    "url": "https://aclanthology.org/2023.emnlp-main.398/",
+    "review_depth": "Proceedings abstract and BibTeX; PDF§3.3, human-evaluation excerpts, appendixE and metric limitations selectively inspected.",
+    "contribution": "Studies citation generation and evaluation of attributed answers.",
+    "limitation": "A displayed citation may still fail to support the attached claim.",
+    "project_decision": "Test citation completeness and entailment separately from prose fluency.",
+    "accessed": "2026-10-02",
+    "prior_review_depth": "proceedings abstract",
+    "bibliographic_fields": {
+      "title": "Enabling Large Language Models to Generate Text with Citations",
+      "author": "Tianyu Gao and Howard Yen and Jiatong Yu and Danqi Chen",
+      "year": "2023",
+      "url": "https://aclanthology.org/2023.emnlp-main.398/",
+      "booktitle": "Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing",
+      "pages": "6465--6488",
+      "doi": "10.18653/v1/2023.emnlp-main.398",
+      "publisher": "Association for Computational Linguistics",
+      "address": "Singapore",
+      "month": "dec"
+    },
+    "versions": [],
+    "audit_failures": [],
+    "unresolved_metadata": []
+  },
+  {
+    "id": "S34",
+    "title": "KAP publication-service REST integration",
+    "url": "https://kap.org.tr/tr/api/about/content-file/8a019492945fbe080194b26d8bed4873",
+    "kind": "official",
+    "review_depth": "relevant official sections read",
+    "note": "Subscriber route requires distribution contract and MKK IP/key authorization; selected issuer/fund scope; no entitlement obtained.",
+    "accessed": "2026-10-02"
+  },
+  {
+    "id": "S35",
+    "title": "Fintables official product packages",
+    "url": "https://fintables.com/uyelik-paketleri",
+    "kind": "official",
+    "review_depth": "relevant official sections read",
+    "note": "Fund comparison/filtering, fund-stock positions, estimated fund price and Evo AI documented; hands-on quality not tested.",
+    "accessed": "2026-10-02"
+  },
+  {
+    "id": "S36",
+    "title": "ForInvest / ForMind official product context",
+    "url": "https://www.forinvest.com/business?lang=en",
+    "kind": "official",
+    "review_depth": "relevant official sections read",
+    "note": "Official product/terms review documents financial-data and natural-language analysis overlap; consumer task quality not tested.",
+    "accessed": "2026-10-02"
+  },
+  {
+    "id": "S37",
+    "title": "Supabase signout token lifetime",
+    "url": "https://supabase.com/docs/guides/auth/signout",
+    "kind": "official",
+    "review_depth": "relevant official sections read",
+    "note": "Already issued access tokens remain valid to expiry after session revocation; local signature validation does not imply immediate logout enforcement.",
+    "accessed": "2026-10-02"
+  },
+  {
+    "id": "S38",
+    "title": "Supabase session state",
+    "url": "https://supabase.com/docs/guides/auth/sessions",
+    "kind": "official",
+    "review_depth": "relevant official sections read",
+    "note": "Sensitive actions can verify session_id against current trusted session state; no provisioned integration tested.",
+    "accessed": "2026-10-02"
+  },
+  {
+    "id": "S39",
+    "title": "Supabase anonymous authentication roles",
+    "url": "https://supabase.com/docs/guides/auth/auth-anonymous",
+    "kind": "official",
+    "review_depth": "relevant official sections read",
+    "note": "Anonymous Auth sessions use authenticated database role; Google-only product policy needs additional identity/provider checks.",
+    "accessed": "2026-10-02"
+  }
+]

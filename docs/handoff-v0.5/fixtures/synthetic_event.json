@@ -1,0 +1,80 @@
+{
+  "event_id": "00000000-0000-4000-8000-000000000101",
+  "asset_id": "00000000-0000-4000-8000-000000000001",
+  "revision": 1,
+  "event_type": "AN-MKT-001",
+  "title_tr": "İşlem hacminde sıra dışı artış",
+  "summary_tr": "Örnek verilerde işlem hacmi, geçmişteki karşılaştırılabilir zaman dilimlerinin medyanının 6 katına çıktı.",
+  "severity": "MEDIUM",
+  "status": "PUBLISHED",
+  "origin": "SYNTHETIC",
+  "window_start": "2026-10-01T10:00:00Z",
+  "window_end": "2026-10-01T10:15:00Z",
+  "available_at": "2026-10-01T10:15:01Z",
+  "detected_at": "2026-10-01T10:15:03Z",
+  "replay_cutoff": null,
+  "detector_version": "rvol-v1",
+  "config_hash": "4aefaba9af70475a8c5c188dc250004047a04553d3c0b6a84219c6125073085f",
+  "confidence": {
+    "mode": "HEURISTIC_EVIDENCE",
+    "evidence_score": 85,
+    "calibrated_probability": null,
+    "method_version": "evidence-strength-v1",
+    "components": {
+      "completeness": 1,
+      "freshness": 1,
+      "integrity": 1,
+      "corroboration": 0
+    },
+    "reasons": [
+      "Constructed primary inputs are inspectable; no independent corroboration is supplied. This is not real-world accuracy."
+    ]
+  },
+  "coverage": {
+    "market_feed": "SYNTHETIC",
+    "delay_seconds": null,
+    "source_status": "CURRENT",
+    "limitations": [
+      "Örnek verilerle gösterim; gerçek piyasa verisi değildir."
+    ]
+  },
+  "evidence": [
+    {
+      "evidence_id": "00000000-0000-4000-8000-000000000201",
+      "source_id": "synthetic-generator-v1",
+      "kind": "MARKET_OBSERVATION",
+      "title": "Synthetic completed-bar volume and prior-slot median",
+      "locator": "fixture://synthetic-market-001",
+      "origin": "SYNTHETIC",
+      "observed_at": "2026-10-01T10:15:00Z",
+      "published_at": null,
+      "available_at": "2026-10-01T10:15:01Z",
+      "ingested_at": "2026-10-01T10:15:02Z",
+      "availability_provenance": "OBSERVED",
+      "source_version": "synthetic-v1",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "rights_status": "SYNTHETIC",
+      "values": {
+        "current_volume": "600",
+        "prior_slot_median": "100",
+        "relative_volume": "6"
+      },
+      "units": {
+        "current_volume": "shares",
+        "prior_slot_median": "shares",
+        "relative_volume": "ratio"
+      },
+      "limitations": [
+        "Constructed inputs. No actual listed issuer. Not historical performance evidence."
+      ]
+    }
+  ],
+  "limitations": [
+    "Bu örnek, piyasa manipülasyonu veya bir yatırım fırsatı göstermez."
+  ],
+  "global_release_approved": false,
+  "replay_bundle_id": null
+}

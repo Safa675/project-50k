@@ -1,0 +1,47 @@
+[
+  {
+    "check": "All97baselinefilesmatchv0.3ZIP",
+    "count": 97,
+    "changed": [],
+    "extra": []
+  },
+  {
+    "check": "Recoveredv0.1READMEbyteidentity",
+    "passed": true
+  },
+  {
+    "check": "ArchiveCRC",
+    "path": "archives/original_packages/Project_50K_Development_Package_v0.3.zip",
+    "members": 97,
+    "crc_failure": null
+  },
+  {
+    "check": "ArchiveCRC",
+    "path": "archives/original_packages/Project_50K_Documentation_v0.1.zip",
+    "members": 5,
+    "crc_failure": null
+  },
+  {
+    "check": "ArchiveCRC",
+    "path": "archives/original_packages/Project_50K_Documentation_v0.2.zip",
+    "members": 11,
+    "crc_failure": null
+  },
+  {
+    "check": "LooseSnapshotByteIdentity",
+    "group": "Project_50K_v0.3",
+    "count": 6,
+    "mismatches": []
+  },
+  {
+    "check": "LooseSnapshotByteIdentity",
+    "group": "project_50k_docs",
+    "count": 11,
+    "mismatches": []
+  },
+  {
+    "check": "AttachmentHashesMatchAll25RecordedHashes",
+    "passed": true,
+    "count": 25
+  }
+]

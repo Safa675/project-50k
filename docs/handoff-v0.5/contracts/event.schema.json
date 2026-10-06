@@ -1,0 +1,377 @@
+{
+  "type": "object",
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "asset_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "event_type": {
+      "type": "string",
+      "pattern": "^AN-[A-Z]{2,3}-[0-9]{3}$"
+    },
+    "title_tr": {
+      "type": "string",
+      "minLength": 1
+    },
+    "summary_tr": {
+      "type": "string",
+      "minLength": 1
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "MEDIUM",
+        "HIGH",
+        "CRITICAL"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "CANDIDATE",
+        "INVESTIGATING",
+        "REVIEW_REQUIRED",
+        "PUBLISHED",
+        "UPDATED",
+        "EXPIRED",
+        "INVALIDATED"
+      ]
+    },
+    "origin": {
+      "type": "string",
+      "enum": [
+        "LIVE",
+        "DELAYED",
+        "HISTORICAL_REPLAY",
+        "SYNTHETIC"
+      ]
+    },
+    "window_start": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "window_end": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "available_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "detected_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "replay_cutoff": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "date-time"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "detector_version": {
+      "type": "string"
+    },
+    "config_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "confidence": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": [
+            "HEURISTIC_EVIDENCE",
+            "UNAVAILABLE"
+          ]
+        },
+        "evidence_score": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "calibrated_probability": {
+          "type": "null"
+        },
+        "method_version": {
+          "type": "string"
+        },
+        "components": {
+          "type": "object",
+          "properties": {
+            "completeness": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 1
+            },
+            "freshness": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 1
+            },
+            "integrity": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 1
+            },
+            "corroboration": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 1
+            }
+          },
+          "required": [
+            "completeness",
+            "freshness",
+            "integrity",
+            "corroboration"
+          ],
+          "additionalProperties": false
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "mode",
+        "evidence_score",
+        "calibrated_probability",
+        "method_version",
+        "components",
+        "reasons"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "mode": {
+                "const": "UNAVAILABLE"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "evidence_score": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "mode": {
+                "const": "HEURISTIC_EVIDENCE"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "evidence_score": {
+                "type": "integer"
+              },
+              "components": {
+                "properties": {
+                  "completeness": {
+                    "type": "number"
+                  },
+                  "freshness": {
+                    "type": "number"
+                  },
+                  "integrity": {
+                    "type": "number"
+                  },
+                  "corroboration": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "coverage": {
+      "type": "object",
+      "properties": {
+        "market_feed": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "delay_seconds": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "source_status": {
+          "type": "string",
+          "enum": [
+            "CURRENT",
+            "DELAYED",
+            "STALE",
+            "PARTIAL",
+            "UNAVAILABLE"
+          ]
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "market_feed",
+        "delay_seconds",
+        "source_status",
+        "limitations"
+      ],
+      "additionalProperties": false
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "evidence.schema.json"
+      },
+      "minItems": 1
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 0
+    },
+    "global_release_approved": {
+      "type": "boolean"
+    },
+    "replay_bundle_id": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "uuid"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "event_id",
+    "asset_id",
+    "revision",
+    "event_type",
+    "title_tr",
+    "summary_tr",
+    "severity",
+    "status",
+    "origin",
+    "window_start",
+    "window_end",
+    "available_at",
+    "detected_at",
+    "replay_cutoff",
+    "detector_version",
+    "config_hash",
+    "confidence",
+    "coverage",
+    "evidence",
+    "limitations",
+    "global_release_approved",
+    "replay_bundle_id"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://project50k.invalid/contracts/event.schema.json",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "origin": {
+            "const": "HISTORICAL_REPLAY"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "replay_cutoff": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "replay_bundle_id": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "replay_cutoff": {
+            "type": "null"
+          },
+          "replay_bundle_id": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "origin": {
+            "enum": [
+              "HISTORICAL_REPLAY",
+              "SYNTHETIC"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "global_release_approved": {
+            "const": false
+          }
+        }
+      }
+    }
+  ]
+}

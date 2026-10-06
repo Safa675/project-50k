@@ -1,0 +1,131 @@
+{
+  "run_at_utc": "2026-10-03T07:35:45.213216+00:00",
+  "status": "PASS",
+  "checks": [
+    {
+      "case": "Replay input rejects missing cutoff",
+      "passed": true
+    },
+    {
+      "case": "Replay input rejects null cutoff",
+      "passed": true
+    },
+    {
+      "case": "Live input rejects replay cutoff",
+      "passed": true
+    },
+    {
+      "case": "Live input accepts explicit null cutoff",
+      "passed": true
+    },
+    {
+      "case": "Replay input accepts known cutoff",
+      "passed": true
+    },
+    {
+      "case": "Answer fixture schema and ratio provenance",
+      "passed": true
+    },
+    {
+      "case": "Answer rejects absent canonical asset",
+      "passed": true
+    },
+    {
+      "case": "Replay answer rejects null cutoff",
+      "passed": true
+    },
+    {
+      "case": "Derived claim rejects missing calculation ID",
+      "passed": true
+    },
+    {
+      "case": "Orphan calculation reference rejected semantically",
+      "passed": true
+    },
+    {
+      "case": "Incorrect ratio rejected semantically",
+      "passed": true
+    },
+    {
+      "case": "Zero denominator rejected semantically",
+      "passed": true
+    },
+    {
+      "case": "Mixed ratio units rejected semantically",
+      "passed": true
+    },
+    {
+      "case": "Dangling evidence reference rejected semantically",
+      "passed": true
+    },
+    {
+      "case": "Published synthetic projection remains labeled",
+      "passed": true
+    },
+    {
+      "case": "Public projection rejects CANDIDATE",
+      "passed": true
+    },
+    {
+      "case": "Public projection rejects INVESTIGATING",
+      "passed": true
+    },
+    {
+      "case": "Public projection rejects REVIEW_REQUIRED",
+      "passed": true
+    },
+    {
+      "case": "Schema permits rights-labeled real projection (not entitlement proof)",
+      "passed": true
+    },
+    {
+      "case": "Real public projection rejects UNKNOWN evidence",
+      "passed": true
+    },
+    {
+      "case": "Real public projection rejects RESTRICTED evidence",
+      "passed": true
+    },
+    {
+      "case": "Real public projection rejects SYNTHETIC evidence",
+      "passed": true
+    },
+    {
+      "case": "Real public projection rejects synthetic evidence",
+      "passed": true
+    },
+    {
+      "case": "Public locator rejects executable scheme",
+      "passed": true
+    },
+    {
+      "case": "UPDATE response delivery enum is supported",
+      "passed": true
+    },
+    {
+      "case": "Admin path keys match reviewed allowlist",
+      "passed": true
+    },
+    {
+      "case": "Admin value rules match reviewed config",
+      "passed": true
+    },
+    {
+      "case": "String setting value rejected",
+      "passed": true
+    },
+    {
+      "case": "Out-of-range setting rejected for chat_daily_turn_limit",
+      "passed": true
+    },
+    {
+      "case": "Out-of-range setting rejected for rvol_threshold",
+      "passed": true
+    },
+    {
+      "case": "Stored replay thread requires cutoff",
+      "passed": true
+    }
+  ],
+  "scope": "Offline schema counterexamples, shipped ratio provenance and configuration declarations only. No runtime authorization, prose entailment, RLS, network fetch, provider rights or delivery validation."
+}

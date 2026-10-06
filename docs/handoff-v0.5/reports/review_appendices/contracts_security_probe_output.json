@@ -1,0 +1,629 @@
+{
+  "root": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3",
+  "scope": "Static Draft 2020-12 schemas with format checking only. No API/auth/RLS/browser/email/LLM implementation exists or was tested.",
+  "results": [
+    {
+      "id": "CS-P01-replay-request-missing-cutoff",
+      "schema_accepts": true,
+      "expectation": "Reject historical replay unless immutable bundle/version plus non-null cutoff resolves server-side.",
+      "classification": "SCHEMA_CONTRACT_ONLY_NOT_APP_VULNERABILITY",
+      "errors": [],
+      "input": {
+        "question_tr": "Bu hareket neden oldu?",
+        "origin": "HISTORICAL_REPLAY"
+      }
+    },
+    {
+      "id": "CS-P02-live-request-carries-replay-cutoff",
+      "schema_accepts": true,
+      "expectation": "Reject ambiguous live request carrying a replay cutoff.",
+      "classification": "SCHEMA_CONTRACT_ONLY_NOT_APP_VULNERABILITY",
+      "errors": [],
+      "input": {
+        "question_tr": "Bu hareket neden oldu?",
+        "origin": "LIVE",
+        "replay_cutoff": "2025-01-01T00:00:00Z"
+      }
+    },
+    {
+      "id": "CS-P03-replay-answer-no-context-identity",
+      "schema_accepts": true,
+      "expectation": "Replay answer must retain canonical asset plus immutable context/cutoff; existing schema has no such fields.",
+      "classification": "SCHEMA_CONTRACT_ONLY_NOT_APP_VULNERABILITY",
+      "errors": [],
+      "input": {
+        "status": "ANSWERED",
+        "answer_tr": "Bu yalnızca örnek verilerle hazırlanmış bir gösterimdir. İşlem hacmi 600 birim, karşılaştırma medyanı 100 birim olduğu için hacim oranı 6 kattır. Bu ölçüm, tek başına manipülasyon veya alım fırsatı anlamına gelmez.",
+        "as_of": "2026-10-01T10:15:03Z",
+        "origin": "HISTORICAL_REPLAY",
+        "thread_id": "00000000-0000-4000-8000-000000000301",
+        "request_id": "00000000-0000-4000-8000-000000000401",
+        "claims": [
+          {
+            "claim_id": "C1",
+            "text_tr": "İşlem hacmi 600 birim, karşılaştırma medyanı 100 birimdir.",
+            "evidence_ids": [
+              "00000000-0000-4000-8000-000000000201"
+            ],
+            "support": "DIRECT",
+            "calculation_id": null
+          },
+          {
+            "claim_id": "C2",
+            "text_tr": "Hacim oranı 6 kattır.",
+            "evidence_ids": [
+              "00000000-0000-4000-8000-000000000201"
+            ],
+            "support": "DERIVED",
+            "calculation_id": "synthetic-calc-001"
+          }
+        ],
+        "evidence": [
+          {
+            "evidence_id": "00000000-0000-4000-8000-000000000201",
+            "source_id": "synthetic-generator-v1",
+            "kind": "MARKET_OBSERVATION",
+            "title": "Synthetic completed-bar volume and prior-slot median",
+            "locator": "fixture://synthetic-market-001",
+            "origin": "SYNTHETIC",
+            "observed_at": "2026-10-01T10:15:00Z",
+            "published_at": null,
+            "available_at": "2026-10-01T10:15:01Z",
+            "ingested_at": "2026-10-01T10:15:02Z",
+            "availability_provenance": "OBSERVED",
+            "source_version": "synthetic-v1",
+            "claim_ids": [
+              "C1",
+              "C2"
+            ],
+            "rights_status": "SYNTHETIC",
+            "values": {
+              "current_volume": "600",
+              "prior_slot_median": "100",
+              "relative_volume": "6"
+            },
+            "units": {
+              "current_volume": "shares",
+              "prior_slot_median": "shares",
+              "relative_volume": "ratio"
+            },
+            "limitations": [
+              "Constructed inputs. No actual listed issuer. Not historical performance evidence."
+            ]
+          }
+        ],
+        "limitations": [
+          "Gerçek piyasa araştırması yapılmadı; örnek yanıt elle hazırlanmıştır."
+        ],
+        "tool_usage": {
+          "calls": 0,
+          "web_searches": 0,
+          "elapsed_ms": 0
+        }
+      }
+    },
+    {
+      "id": "CS-P04-answered-no-claims-no-evidence",
+      "schema_accepts": true,
+      "expectation": "A factual ANSWERED result cannot silently bypass claim/evidence validation; requires material-claim completeness at semantic boundary.",
+      "classification": "SCHEMA_CONTRACT_ONLY_NOT_APP_VULNERABILITY",
+      "errors": [],
+      "input": {
+        "status": "ANSWERED",
+        "answer_tr": "İşlem hacmi 999 birimdir.",
+        "as_of": "2026-10-01T10:15:03Z",
+        "origin": "SYNTHETIC",
+        "thread_id": "00000000-0000-4000-8000-000000000301",
+        "request_id": "00000000-0000-4000-8000-000000000401",
+        "claims": [],
+        "evidence": [],
+        "limitations": [
+          "Gerçek piyasa araştırması yapılmadı; örnek yanıt elle hazırlanmıştır."
+        ],
+        "tool_usage": {
+          "calls": 0,
+          "web_searches": 0,
+          "elapsed_ms": 0
+        }
+      }
+    },
+    {
+      "id": "CS-P05-dangling-evidence-reference",
+      "schema_accepts": true,
+      "expectation": "Semantic validator must reject nonexistent evidence IDs; schema validation alone is insufficient.",
+      "classification": "SCHEMA_CONTRACT_ONLY_NOT_APP_VULNERABILITY",
+      "errors": [],
+      "input": {
+        "status": "ANSWERED",
+        "answer_tr": "Bu yalnızca örnek verilerle hazırlanmış bir gösterimdir. İşlem hacmi 600 birim, karşılaştırma medyanı 100 birim olduğu için hacim oranı 6 kattır. Bu ölçüm, tek başına manipülasyon veya alım fırsatı anlamına gelmez.",
+        "as_of": "2026-10-01T10:15:03Z",
+        "origin": "SYNTHETIC",
+        "thread_id": "00000000-0000-4000-8000-000000000301",
+        "request_id": "00000000-0000-4000-8000-000000000401",
+        "claims": [
+          {
+            "claim_id": "C1",
+            "text_tr": "İşlem hacmi 600 birim, karşılaştırma medyanı 100 birimdir.",
+            "evidence_ids": [
+              "ffffffff-ffff-4fff-8fff-ffffffffffff"
+            ],
+            "support": "DIRECT",
+            "calculation_id": null
+          },
+          {
+            "claim_id": "C2",
+            "text_tr": "Hacim oranı 6 kattır.",
+            "evidence_ids": [
+              "00000000-0000-4000-8000-000000000201"
+            ],
+            "support": "DERIVED",
+            "calculation_id": "synthetic-calc-001"
+          }
+        ],
+        "evidence": [
+          {
+            "evidence_id": "00000000-0000-4000-8000-000000000201",
+            "source_id": "synthetic-generator-v1",
+            "kind": "MARKET_OBSERVATION",
+            "title": "Synthetic completed-bar volume and prior-slot median",
+            "locator": "fixture://synthetic-market-001",
+            "origin": "SYNTHETIC",
+            "observed_at": "2026-10-01T10:15:00Z",
+            "published_at": null,
+            "available_at": "2026-10-01T10:15:01Z",
+            "ingested_at": "2026-10-01T10:15:02Z",
+            "availability_provenance": "OBSERVED",
+            "source_version": "synthetic-v1",
+            "claim_ids": [
+              "C1",
+              "C2"
+            ],
+            "rights_status": "SYNTHETIC",
+            "values": {
+              "current_volume": "600",
+              "prior_slot_median": "100",
+              "relative_volume": "6"
+            },
+            "units": {
+              "current_volume": "shares",
+              "prior_slot_median": "shares",
+              "relative_volume": "ratio"
+            },
+            "limitations": [
+              "Constructed inputs. No actual listed issuer. Not historical performance evidence."
+            ]
+          }
+        ],
+        "limitations": [
+          "Gerçek piyasa araştırması yapılmadı; örnek yanıt elle hazırlanmıştır."
+        ],
+        "tool_usage": {
+          "calls": 0,
+          "web_searches": 0,
+          "elapsed_ms": 0
+        }
+      }
+    },
+    {
+      "id": "CS-P06-public-event-unreleased-unknown-rights",
+      "schema_accepts": true,
+      "expectation": "Public Event response must reject unreleased event or unapproved public evidence; internal lifecycle schema can remain broader.",
+      "classification": "SCHEMA_CONTRACT_ONLY_NOT_APP_VULNERABILITY",
+      "errors": [],
+      "input": {
+        "event_id": "00000000-0000-4000-8000-000000000101",
+        "asset_id": "00000000-0000-4000-8000-000000000001",
+        "revision": 1,
+        "event_type": "AN-MKT-001",
+        "title_tr": "İşlem hacminde sıra dışı artış",
+        "summary_tr": "Örnek verilerde işlem hacmi, geçmişteki karşılaştırılabilir zaman dilimlerinin medyanının 6 katına çıktı.",
+        "severity": "MEDIUM",
+        "status": "REVIEW_REQUIRED",
+        "origin": "LIVE",
+        "window_start": "2026-10-01T10:00:00Z",
+        "window_end": "2026-10-01T10:15:00Z",
+        "available_at": "2026-10-01T10:15:01Z",
+        "detected_at": "2026-10-01T10:15:03Z",
+        "replay_cutoff": null,
+        "detector_version": "rvol-v1",
+        "config_hash": "4aefaba9af70475a8c5c188dc250004047a04553d3c0b6a84219c6125073085f",
+        "confidence": {
+          "mode": "HEURISTIC_EVIDENCE",
+          "evidence_score": 85,
+          "calibrated_probability": null,
+          "method_version": "evidence-strength-v1",
+          "components": {
+            "completeness": 1,
+            "freshness": 1,
+            "integrity": 1,
+            "corroboration": 0
+          },
+          "reasons": [
+            "Constructed primary inputs are inspectable; no independent corroboration is supplied. This is not real-world accuracy."
+          ]
+        },
+        "coverage": {
+          "market_feed": "SYNTHETIC",
+          "delay_seconds": null,
+          "source_status": "CURRENT",
+          "limitations": [
+            "Örnek verilerle gösterim; gerçek piyasa verisi değildir."
+          ]
+        },
+        "evidence": [
+          {
+            "evidence_id": "00000000-0000-4000-8000-000000000201",
+            "source_id": "synthetic-generator-v1",
+            "kind": "MARKET_OBSERVATION",
+            "title": "Synthetic completed-bar volume and prior-slot median",
+            "locator": "fixture://synthetic-market-001",
+            "origin": "LIVE",
+            "observed_at": "2026-10-01T10:15:00Z",
+            "published_at": null,
+            "available_at": "2026-10-01T10:15:01Z",
+            "ingested_at": "2026-10-01T10:15:02Z",
+            "availability_provenance": "OBSERVED",
+            "source_version": "synthetic-v1",
+            "claim_ids": [
+              "C1",
+              "C2"
+            ],
+            "rights_status": "UNKNOWN",
+            "values": {
+              "current_volume": "600",
+              "prior_slot_median": "100",
+              "relative_volume": "6"
+            },
+            "units": {
+              "current_volume": "shares",
+              "prior_slot_median": "shares",
+              "relative_volume": "ratio"
+            },
+            "limitations": [
+              "Constructed inputs. No actual listed issuer. Not historical performance evidence."
+            ]
+          }
+        ],
+        "limitations": [
+          "Bu örnek, piyasa manipülasyonu veya bir yatırım fırsatı göstermez."
+        ],
+        "global_release_approved": false
+      }
+    },
+    {
+      "id": "CS-P07-unsafe-citation-locator",
+      "schema_accepts": true,
+      "expectation": "Generic locator is not safe hyperlink validation; final rendering must allow only validated http(s) metadata or controlled fixture links.",
+      "classification": "SCHEMA_CONTRACT_ONLY_NOT_APP_VULNERABILITY",
+      "errors": [],
+      "input": {
+        "status": "ANSWERED",
+        "answer_tr": "Bu yalnızca örnek verilerle hazırlanmış bir gösterimdir. İşlem hacmi 600 birim, karşılaştırma medyanı 100 birim olduğu için hacim oranı 6 kattır. Bu ölçüm, tek başına manipülasyon veya alım fırsatı anlamına gelmez.",
+        "as_of": "2026-10-01T10:15:03Z",
+        "origin": "SYNTHETIC",
+        "thread_id": "00000000-0000-4000-8000-000000000301",
+        "request_id": "00000000-0000-4000-8000-000000000401",
+        "claims": [
+          {
+            "claim_id": "C1",
+            "text_tr": "İşlem hacmi 600 birim, karşılaştırma medyanı 100 birimdir.",
+            "evidence_ids": [
+              "00000000-0000-4000-8000-000000000201"
+            ],
+            "support": "DIRECT",
+            "calculation_id": null
+          },
+          {
+            "claim_id": "C2",
+            "text_tr": "Hacim oranı 6 kattır.",
+            "evidence_ids": [
+              "00000000-0000-4000-8000-000000000201"
+            ],
+            "support": "DERIVED",
+            "calculation_id": "synthetic-calc-001"
+          }
+        ],
+        "evidence": [
+          {
+            "evidence_id": "00000000-0000-4000-8000-000000000201",
+            "source_id": "synthetic-generator-v1",
+            "kind": "MARKET_OBSERVATION",
+            "title": "Synthetic completed-bar volume and prior-slot median",
+            "locator": "javascript:alert(1)",
+            "origin": "SYNTHETIC",
+            "observed_at": "2026-10-01T10:15:00Z",
+            "published_at": null,
+            "available_at": "2026-10-01T10:15:01Z",
+            "ingested_at": "2026-10-01T10:15:02Z",
+            "availability_provenance": "OBSERVED",
+            "source_version": "synthetic-v1",
+            "claim_ids": [
+              "C1",
+              "C2"
+            ],
+            "rights_status": "SYNTHETIC",
+            "values": {
+              "current_volume": "600",
+              "prior_slot_median": "100",
+              "relative_volume": "6"
+            },
+            "units": {
+              "current_volume": "shares",
+              "prior_slot_median": "shares",
+              "relative_volume": "ratio"
+            },
+            "limitations": [
+              "Constructed inputs. No actual listed issuer. Not historical performance evidence."
+            ]
+          }
+        ],
+        "limitations": [
+          "Gerçek piyasa araştırması yapılmadı; örnek yanıt elle hazırlanmıştır."
+        ],
+        "tool_usage": {
+          "calls": 0,
+          "web_searches": 0,
+          "elapsed_ms": 0
+        }
+      }
+    },
+    {
+      "id": "CS-P08-incoherent-tool-budget-metadata",
+      "schema_accepts": true,
+      "expectation": "Server budget accounting must enforce web_searches <= calls and actual deadline; output metadata cannot authorize spending.",
+      "classification": "SCHEMA_CONTRACT_ONLY_NOT_APP_VULNERABILITY",
+      "errors": [],
+      "input": {
+        "status": "ANSWERED",
+        "answer_tr": "Bu yalnızca örnek verilerle hazırlanmış bir gösterimdir. İşlem hacmi 600 birim, karşılaştırma medyanı 100 birim olduğu için hacim oranı 6 kattır. Bu ölçüm, tek başına manipülasyon veya alım fırsatı anlamına gelmez.",
+        "as_of": "2026-10-01T10:15:03Z",
+        "origin": "SYNTHETIC",
+        "thread_id": "00000000-0000-4000-8000-000000000301",
+        "request_id": "00000000-0000-4000-8000-000000000401",
+        "claims": [
+          {
+            "claim_id": "C1",
+            "text_tr": "İşlem hacmi 600 birim, karşılaştırma medyanı 100 birimdir.",
+            "evidence_ids": [
+              "00000000-0000-4000-8000-000000000201"
+            ],
+            "support": "DIRECT",
+            "calculation_id": null
+          },
+          {
+            "claim_id": "C2",
+            "text_tr": "Hacim oranı 6 kattır.",
+            "evidence_ids": [
+              "00000000-0000-4000-8000-000000000201"
+            ],
+            "support": "DERIVED",
+            "calculation_id": "synthetic-calc-001"
+          }
+        ],
+        "evidence": [
+          {
+            "evidence_id": "00000000-0000-4000-8000-000000000201",
+            "source_id": "synthetic-generator-v1",
+            "kind": "MARKET_OBSERVATION",
+            "title": "Synthetic completed-bar volume and prior-slot median",
+            "locator": "fixture://synthetic-market-001",
+            "origin": "SYNTHETIC",
+            "observed_at": "2026-10-01T10:15:00Z",
+            "published_at": null,
+            "available_at": "2026-10-01T10:15:01Z",
+            "ingested_at": "2026-10-01T10:15:02Z",
+            "availability_provenance": "OBSERVED",
+            "source_version": "synthetic-v1",
+            "claim_ids": [
+              "C1",
+              "C2"
+            ],
+            "rights_status": "SYNTHETIC",
+            "values": {
+              "current_volume": "600",
+              "prior_slot_median": "100",
+              "relative_volume": "6"
+            },
+            "units": {
+              "current_volume": "shares",
+              "prior_slot_median": "shares",
+              "relative_volume": "ratio"
+            },
+            "limitations": [
+              "Constructed inputs. No actual listed issuer. Not historical performance evidence."
+            ]
+          }
+        ],
+        "limitations": [
+          "Gerçek piyasa araştırması yapılmadı; örnek yanıt elle hazırlanmıştır."
+        ],
+        "tool_usage": {
+          "calls": 0,
+          "web_searches": 2,
+          "elapsed_ms": 60000
+        }
+      }
+    },
+    {
+      "id": "CS-P09-reversed-event-window",
+      "schema_accepts": true,
+      "expectation": "Semantic validation must reject reversed timestamps; JSON Schema cannot compare timestamp values.",
+      "classification": "SCHEMA_CONTRACT_ONLY_NOT_APP_VULNERABILITY",
+      "errors": [],
+      "input": {
+        "event_id": "00000000-0000-4000-8000-000000000101",
+        "asset_id": "00000000-0000-4000-8000-000000000001",
+        "revision": 1,
+        "event_type": "AN-MKT-001",
+        "title_tr": "İşlem hacminde sıra dışı artış",
+        "summary_tr": "Örnek verilerde işlem hacmi, geçmişteki karşılaştırılabilir zaman dilimlerinin medyanının 6 katına çıktı.",
+        "severity": "MEDIUM",
+        "status": "PUBLISHED",
+        "origin": "SYNTHETIC",
+        "window_start": "2026-10-02T00:00:00Z",
+        "window_end": "2026-10-01T00:00:00Z",
+        "available_at": "2026-10-01T10:15:01Z",
+        "detected_at": "2026-10-01T10:15:03Z",
+        "replay_cutoff": null,
+        "detector_version": "rvol-v1",
+        "config_hash": "4aefaba9af70475a8c5c188dc250004047a04553d3c0b6a84219c6125073085f",
+        "confidence": {
+          "mode": "HEURISTIC_EVIDENCE",
+          "evidence_score": 85,
+          "calibrated_probability": null,
+          "method_version": "evidence-strength-v1",
+          "components": {
+            "completeness": 1,
+            "freshness": 1,
+            "integrity": 1,
+            "corroboration": 0
+          },
+          "reasons": [
+            "Constructed primary inputs are inspectable; no independent corroboration is supplied. This is not real-world accuracy."
+          ]
+        },
+        "coverage": {
+          "market_feed": "SYNTHETIC",
+          "delay_seconds": null,
+          "source_status": "CURRENT",
+          "limitations": [
+            "Örnek verilerle gösterim; gerçek piyasa verisi değildir."
+          ]
+        },
+        "evidence": [
+          {
+            "evidence_id": "00000000-0000-4000-8000-000000000201",
+            "source_id": "synthetic-generator-v1",
+            "kind": "MARKET_OBSERVATION",
+            "title": "Synthetic completed-bar volume and prior-slot median",
+            "locator": "fixture://synthetic-market-001",
+            "origin": "SYNTHETIC",
+            "observed_at": "2026-10-01T10:15:00Z",
+            "published_at": null,
+            "available_at": "2026-10-01T10:15:01Z",
+            "ingested_at": "2026-10-01T10:15:02Z",
+            "availability_provenance": "OBSERVED",
+            "source_version": "synthetic-v1",
+            "claim_ids": [
+              "C1",
+              "C2"
+            ],
+            "rights_status": "SYNTHETIC",
+            "values": {
+              "current_volume": "600",
+              "prior_slot_median": "100",
+              "relative_volume": "6"
+            },
+            "units": {
+              "current_volume": "shares",
+              "prior_slot_median": "shares",
+              "relative_volume": "ratio"
+            },
+            "limitations": [
+              "Constructed inputs. No actual listed issuer. Not historical performance evidence."
+            ]
+          }
+        ],
+        "limitations": [
+          "Bu örnek, piyasa manipülasyonu veya bir yatırım fırsatı göstermez."
+        ],
+        "global_release_approved": false
+      }
+    },
+    {
+      "id": "CS-P10-derived-claim-missing-calculation",
+      "schema_accepts": true,
+      "expectation": "DERIVED numeric claim should require a resolvable deterministic calculation reference.",
+      "classification": "SCHEMA_CONTRACT_ONLY_NOT_APP_VULNERABILITY",
+      "errors": [],
+      "input": {
+        "status": "ANSWERED",
+        "answer_tr": "Bu yalnızca örnek verilerle hazırlanmış bir gösterimdir. İşlem hacmi 600 birim, karşılaştırma medyanı 100 birim olduğu için hacim oranı 6 kattır. Bu ölçüm, tek başına manipülasyon veya alım fırsatı anlamına gelmez.",
+        "as_of": "2026-10-01T10:15:03Z",
+        "origin": "SYNTHETIC",
+        "thread_id": "00000000-0000-4000-8000-000000000301",
+        "request_id": "00000000-0000-4000-8000-000000000401",
+        "claims": [
+          {
+            "claim_id": "C1",
+            "text_tr": "İşlem hacmi 600 birim, karşılaştırma medyanı 100 birimdir.",
+            "evidence_ids": [
+              "00000000-0000-4000-8000-000000000201"
+            ],
+            "support": "DIRECT",
+            "calculation_id": null
+          },
+          {
+            "claim_id": "C2",
+            "text_tr": "Hacim oranı 6 kattır.",
+            "evidence_ids": [
+              "00000000-0000-4000-8000-000000000201"
+            ],
+            "support": "DERIVED",
+            "calculation_id": null
+          }
+        ],
+        "evidence": [
+          {
+            "evidence_id": "00000000-0000-4000-8000-000000000201",
+            "source_id": "synthetic-generator-v1",
+            "kind": "MARKET_OBSERVATION",
+            "title": "Synthetic completed-bar volume and prior-slot median",
+            "locator": "fixture://synthetic-market-001",
+            "origin": "SYNTHETIC",
+            "observed_at": "2026-10-01T10:15:00Z",
+            "published_at": null,
+            "available_at": "2026-10-01T10:15:01Z",
+            "ingested_at": "2026-10-01T10:15:02Z",
+            "availability_provenance": "OBSERVED",
+            "source_version": "synthetic-v1",
+            "claim_ids": [
+              "C1",
+              "C2"
+            ],
+            "rights_status": "SYNTHETIC",
+            "values": {
+              "current_volume": "600",
+              "prior_slot_median": "100",
+              "relative_volume": "6"
+            },
+            "units": {
+              "current_volume": "shares",
+              "prior_slot_median": "shares",
+              "relative_volume": "ratio"
+            },
+            "limitations": [
+              "Constructed inputs. No actual listed issuer. Not historical performance evidence."
+            ]
+          }
+        ],
+        "limitations": [
+          "Gerçek piyasa araştırması yapılmadı; örnek yanıt elle hazırlanmıştır."
+        ],
+        "tool_usage": {
+          "calls": 0,
+          "web_searches": 0,
+          "elapsed_ms": 0
+        }
+      }
+    },
+    {
+      "id": "CS-P11-documented-update-class-rejected",
+      "schema_accepts": false,
+      "expectation": "UPDATE class documented by policy and delivery-key helper must be representable in notification response.",
+      "classification": "CONTRACT_CHECK",
+      "errors": [
+        "'UPDATE' is not one of ['PERSONAL', 'GLOBAL_CRITICAL', 'DIGEST', 'CORRECTION']"
+      ],
+      "input": {
+        "notification_id": "00000000-0000-4000-8000-000000000601",
+        "event_id": "00000000-0000-4000-8000-000000000101",
+        "event_revision": 2,
+        "title_tr": "Önemli güncelleme",
+        "read_at": null,
+        "created_at": "2026-10-02T00:00:00Z",
+        "delivery_class": "UPDATE"
+      }
+    }
+  ]
+}

@@ -1,0 +1,2976 @@
+[
+  {
+    "id": "UR-001",
+    "title": "Public asset discovery",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nA visitor shall be able to search supported assets without creating an account.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-002",
+    "title": "Cross-asset search",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nA visitor shall be able to search across supported BIST equities, Turkish investment funds, selected crypto assets, and selected U.S. equities from a single search experience.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-003",
+    "title": "Public asset overview",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nA visitor shall be able to open an asset page and understand the asset's current market state, recent price behavior, and important detected events.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-004",
+    "title": "Public evidence access",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nA visitor shall be able to inspect the evidence and sources supporting a public intelligence event.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-005",
+    "title": "Clear market/asset identity",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nA user shall be able to clearly distinguish between assets with similar symbols or names and understand which market/asset class is being viewed.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-006",
+    "title": "Frictionless authentication",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nA user shall be able to create/access an account through Google sign-in without creating or managing a Project 50K password.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-007",
+    "title": "Anonymous-to-authenticated continuity",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nA visitor who signs in from an asset page should be able to continue the current workflow without losing context.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-008",
+    "title": "Persistent personal state",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nAn authenticated user's watchlist, alert preferences, notifications, and feedback shall persist across sessions.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-009",
+    "title": "Secure sign-out",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nAn authenticated user shall be able to sign out and return to the anonymous public experience.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-010",
+    "title": "Add asset to watchlist",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nAn authenticated user shall be able to follow an asset from search results or its asset page.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-011",
+    "title": "Remove asset from watchlist",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nAn authenticated user shall be able to stop following an asset.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-012",
+    "title": "Unified watchlist concept",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nFor the MVP, the product shall use one simple `Watchlist / My Assets` concept rather than separate portfolio and watchlist workflows.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-013",
+    "title": "No mandatory quantity or cost basis",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nA user shall not be required to provide units, purchase price, or average cost in order to follow an asset.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-014",
+    "title": "Optional exposure data in future",
+    "legacy_priority": "P2",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P2  \nA user may later be able to provide optional position size or portfolio weight for relevance prioritization without turning Project 50K into a portfolio-accounting product.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-015",
+    "title": "Personalized important developments",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nAn authenticated user shall see important events affecting assets on their watchlist.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-016",
+    "title": "Market-wide highlights",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nA user shall see a separate feed of important market events that are not limited to their watchlist.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-017",
+    "title": "Critical off-watchlist awareness",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \n\nAn authenticated user may explicitly opt into genuinely critical off-watchlist notifications. MVP global circulation requires policy eligibility, valid evidence and admin release; opting out suppresses queued external delivery.\n\n**v0.3 amendment:** see document 00; original text retained in archive/v0.2.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": true
+  },
+  {
+    "id": "UR-018",
+    "title": "Attention prioritization",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe feed shall prioritize events by importance and user relevance rather than presenting a raw chronological data stream only.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-019",
+    "title": "Quiet state",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nWhen no meaningful event is detected, the product shall communicate that clearly rather than manufacturing activity or low-value alerts.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-020",
+    "title": "Event type",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nFor each surfaced event, the user shall be able to understand what kind of event was detected, such as unusual market movement, abnormal volume, fund allocation change, regulatory event, or on-chain activity.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-021",
+    "title": "Severity",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nEach intelligence event shall communicate an importance/severity level.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-022",
+    "title": "Confidence",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \n\nEach event shall expose evidence strength separately from severity. In v1 this is an inspectable heuristic score, not a calibrated probability of correctness, manipulation or loss. When support is insufficient the score is unavailable.\n\n**v0.3 amendment:** see document 00; original text retained in archive/v0.2.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": true
+  },
+  {
+    "id": "UR-023",
+    "title": "Severity-confidence separation",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe user shall not be led to interpret event severity and system confidence as the same concept.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-024",
+    "title": "Why detected",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nA user shall be able to understand the quantitative or categorical reasons why an event was detected.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-025",
+    "title": "Evidence inspection",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nA user shall be able to inspect supporting metrics, timestamps, and source evidence.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-026",
+    "title": "Source provenance",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nMaterial factual claims shall show or link to their source whenever the product presents an AI-generated interpretation.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-027",
+    "title": "Data freshness",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe user shall be able to understand when the relevant data or source was last updated when freshness materially affects interpretation.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-028",
+    "title": "No false legal conclusion",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe product shall describe observed risk indicators and anomalies without presenting an unverified legal conclusion that a person, company, security, or token is engaged in market manipulation, fraud, or another offense.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-029",
+    "title": "Intraday BIST intelligence",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nA user shall be able to view intraday BIST behavior for supported securities and inspect intraday anomaly events where data availability permits.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-030",
+    "title": "BIST contextual comparison",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nA user shall be able to understand whether a BIST asset's movement differs materially from relevant market, index, or sector context when such data is available.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-031",
+    "title": "KAP context",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nA user shall be able to see relevant KAP disclosures in the context of the security's market behavior.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-032",
+    "title": "Fundamental context",
+    "legacy_priority": "P1",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P1  \nA user should be able to see significant financial-statement changes or anomalies relevant to a BIST security.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-033",
+    "title": "Regulatory context",
+    "legacy_priority": "P1",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P1  \nA user should be able to see relevant SPK/BIST regulatory events or measures associated with a security or issuer.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-034",
+    "title": "Fund-specific intelligence",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nA user shall receive fund intelligence that goes beyond simple return charts.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-035",
+    "title": "Fund historical metrics",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \n\nA user shall see historical fund metrics only where actual dated values exist. NAV publication cadence, source date and missing AUM/investor history shall be disclosed; no interpolation may create fictional intraday fund prices.\n\n**v0.3 amendment:** see document 00; original text retained in archive/v0.2.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": true
+  },
+  {
+    "id": "UR-036",
+    "title": "Fund allocation intelligence",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nA user shall be able to see meaningful changes in fund asset allocation where source data is available.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-037",
+    "title": "Fund anomaly events",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe system shall surface fund-specific anomalies such as unusual fund-size changes, investor-count changes, allocation shifts, or category divergence when sufficient data exists.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-038",
+    "title": "Fund peer context",
+    "legacy_priority": "P1",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P1  \nA user should be able to compare a fund's behavior with relevant peers or category benchmarks.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-039",
+    "title": "Fund-to-market relationship intelligence",
+    "legacy_priority": "P2",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P2  \nA user may later be able to inspect meaningful relationships between fund behavior/holdings and underlying BIST securities when sufficient reliable data exists.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-040",
+    "title": "Popular crypto coverage",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \n\nA user shall be able to discover a meaningful curated set of popular crypto assets, with active monitoring and on-chain coverage disclosed separately from catalog membership.\n\n**v0.3 amendment:** see document 00; original text retained in archive/v0.2.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": true
+  },
+  {
+    "id": "UR-041",
+    "title": "Crypto market anomalies",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nA user shall be able to see price, volume, and volatility-related crypto anomalies.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-042",
+    "title": "On-chain intelligence",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nFor supported networks/assets, a user shall be able to see at least selected on-chain signals such as whale transfers, concentration, exchange flows, liquidity-related changes, or related wallet activity.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-043",
+    "title": "Multi-signal crypto event",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe user shall be able to see when market and on-chain signals combine into a single higher-context event.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-044",
+    "title": "Network transparency",
+    "legacy_priority": "P1",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0 — safety/coverage requirement when feature is exposed\n\nA user shall see the exact blockchain/network and asset identity of an on-chain signal. Partial token-account coverage shall not be represented as complete beneficial ownership.\n\n**v0.3 amendment:** see document 00; original text retained in archive/v0.2.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": true
+  },
+  {
+    "id": "UR-045",
+    "title": "Selected U.S. equity coverage",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nA user shall be able to search and inspect a restricted but meaningful universe of liquid/popular U.S. equities in the MVP.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-046",
+    "title": "U.S. market anomalies",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nA user shall be able to view market anomaly events for supported U.S. equities.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-047",
+    "title": "U.S. contextual events",
+    "legacy_priority": "P1",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P1  \nA user should be able to view selected earnings, filing, or trustworthy-news context relevant to supported U.S. equities.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-048",
+    "title": "Asset-aware conversation",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nA user shall be able to ask questions from an asset page without repeatedly specifying which asset is being discussed.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-049",
+    "title": "Natural Turkish answers",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe assistant shall respond in natural Turkish using established financial terminology rather than literal or awkward machine-translated expressions.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-050",
+    "title": "Project data usage",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe assistant shall use Project 50K's structured market/event data when answering questions about the current asset.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-051",
+    "title": "Web research capability",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe assistant shall be able to research current public information on the web when needed, subject to source-quality and grounding requirements.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-052",
+    "title": "Source-backed AI claims",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nMaterial factual claims in AI responses shall be accompanied by sources that the user can inspect.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-053",
+    "title": "Source hierarchy awareness",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe assistant shall prefer official/regulatory and issuer sources over lower-authority sources when available.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-054",
+    "title": "Insufficient-evidence answer",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe assistant shall be able to state clearly that the available evidence is insufficient to explain a movement or reach a conclusion.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-055",
+    "title": "No direct investment recommendation",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe assistant shall not provide Project 50K-authored Buy/Hold/Sell recommendations or act as an automated personalized investment adviser.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-056",
+    "title": "Conversational drill-down",
+    "legacy_priority": "P1",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P1  \nA user should be able to move from a detected event to historical comparison, source interpretation, and follow-up explanation through conversation.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-057",
+    "title": "In-app notifications",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nAn authenticated user shall receive in-app notifications for eligible intelligence events.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-058",
+    "title": "Immediate high-importance e-mail",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \n\nAn authenticated user shall be able to opt into immediate email for eligible high/critical personal events and approved critical market-wide events. Real delivery requires verified sender, legal/rights gates, idempotency and send-time consent checks.\n\n**v0.3 amendment:** see document 00; original text retained in archive/v0.2.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": true
+  },
+  {
+    "id": "UR-059",
+    "title": "Market-wide spam protection",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe product shall apply a materially higher threshold to unsolicited off-watchlist alerts than to watchlist alerts.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-060",
+    "title": "Alert sensitivity preference",
+    "legacy_priority": "P1",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P1  \nA user should be able to select a simple alert sensitivity profile such as Critical Only, Important + Critical, or All Eligible Alerts.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-061",
+    "title": "Digest e-mail",
+    "legacy_priority": "P1",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P1  \nA user should be able to receive a periodic digest for lower-urgency developments instead of receiving every event as an immediate e-mail.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-062",
+    "title": "No browser push requirement",
+    "legacy_priority": "P0 constraint",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0 constraint  \nThe MVP shall not require browser push notifications.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-063",
+    "title": "Native push future direction",
+    "legacy_priority": "P2",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P2  \nThe future mobile product should use native push notifications as a core alert channel.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-064",
+    "title": "Event relevance feedback",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nA user shall be able to indicate that an event was useful/relevant or irrelevant/not useful.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-065",
+    "title": "Feedback without friction",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nSubmitting event feedback shall require no more than a simple single-action interaction unless the user voluntarily provides additional detail.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-066",
+    "title": "Feedback history for improvement",
+    "legacy_priority": "P1",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P1  \nThe product should retain event feedback so that product/decision-engine quality can be evaluated over time.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-067",
+    "title": "Protected admin access",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nOnly explicitly authorized Google accounts shall be able to access the admin area.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-068",
+    "title": "Operational health",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nAn admin shall be able to understand whether key data sources and ingestion jobs are current and functioning.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-069",
+    "title": "Event monitoring",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nAn admin shall be able to inspect recent generated events and high/critical events.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-070",
+    "title": "Product metrics",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nAn admin shall be able to view a minimal set of product metrics such as user count, watchlist count, event count, and notification activity.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-071",
+    "title": "Controlled configuration",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nAn admin shall be able to adjust a small approved set of thresholds or feature flags without requiring a code deployment.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-072",
+    "title": "AI configuration visibility",
+    "legacy_priority": "P1",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P1  \nAn admin should be able to identify the active AI model/configuration or prompt version associated with generated intelligence.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-073",
+    "title": "Turkish product language",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe user-facing MVP shall use Turkish as its primary application language.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-074",
+    "title": "Native financial terminology",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nUI copy shall use established Turkish financial-market terminology and avoid awkward literal translations.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-075",
+    "title": "Progressive disclosure",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe product shall present a concise explanation first and allow the user to reveal deeper metrics, methodology, and evidence when desired.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-076",
+    "title": "Deliberate visual design",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe product shall feel intentionally designed and shall avoid generic AI-generated fintech-dashboard patterns that reduce trust or clarity.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-077",
+    "title": "Responsive web usability",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe MVP shall be usable on common desktop and mobile web viewport sizes even though native mobile applications are outside the weekend scope.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-078",
+    "title": "Historical anomaly replay",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nA user/jury member shall be able to inspect at least one historical case showing that the system would have detected a meaningful event using historical data.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-079",
+    "title": "Current/live capability proof",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe MVP shall demonstrate that the architecture can ingest current or near-current data even if historical replay is used as the primary reliable jury demonstration.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "UR-080",
+    "title": "Explainable replay",
+    "legacy_priority": "P0",
+    "file": "docs/06_User_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nHistorical replay shall preserve the same event evidence, severity/confidence concept, and explanation workflow as current events.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-001",
+    "title": "Canonical asset entity",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-002",
+      "UR-005"
+    ],
+    "body": "**Priority:** P0  \nThe system shall represent every supported asset using a canonical internal identifier independent of provider-specific symbols.\n\nMinimum metadata:\n\n- asset ID;\n- display symbol/code;\n- canonical name;\n- asset class;\n- market/exchange/network;\n- currency where relevant;\n- country where relevant;\n- provider identifiers;\n- active/inactive status.\n\n**Supports:** UR-002, UR-005",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-002",
+    "title": "Asset-class enumeration",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-002"
+    ],
+    "body": "**Priority:** P0  \nThe system shall support at least the following canonical asset classes in the MVP:\n\n- `BIST_EQUITY`;\n- `TR_INVESTMENT_FUND`;\n- `CRYPTO`;\n- `US_EQUITY`.\n\n**Supports:** UR-002",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-003",
+    "title": "Universal search endpoint",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-001",
+      "UR-002"
+    ],
+    "body": "**Priority:** P0  \nThe backend shall expose a search function that returns matches across all supported asset classes from one query.\n\n**Supports:** UR-001, UR-002",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-004",
+    "title": "Search disambiguation",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-005"
+    ],
+    "body": "**Priority:** P0  \nSearch results shall include sufficient metadata to disambiguate similarly named assets, including market/asset class and canonical name.\n\n**Supports:** UR-005",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-005",
+    "title": "Anonymous search access",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-001",
+      "UR-003"
+    ],
+    "body": "**Priority:** P0  \nAsset search and supported public asset pages shall be accessible without authentication.\n\n**Supports:** UR-001, UR-003\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-006",
+    "title": "Google OAuth only",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-006"
+    ],
+    "body": "**Priority:** P0  \nThe MVP authentication system shall support Google OAuth as the only end-user authentication method.\n\nThe system shall not expose password registration, password reset, or e-mail verification workflows for Project 50K credentials.\n\n**Supports:** UR-006",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-007",
+    "title": "User account creation/update",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-006",
+      "UR-008"
+    ],
+    "body": "**Priority:** P0  \nOn successful Google sign-in, the system shall create or update a Project 50K user record linked to the external identity.\n\n**Supports:** UR-006, UR-008",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-008",
+    "title": "Session-aware redirect",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-007"
+    ],
+    "body": "**Priority:** P0  \nWhen a user signs in during an asset/watchlist workflow, the application shall return the user to the intended context whenever technically feasible.\n\n**Supports:** UR-007",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-009",
+    "title": "Role model",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-067"
+    ],
+    "body": "**Priority:** P0  \nThe system shall support at least:\n\n- `USER`;\n- `ADMIN`.\n\n**Supports:** UR-067",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-010",
+    "title": "Admin allowlist",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-067"
+    ],
+    "body": "**Priority:** P0  \nAdmin role assignment for the MVP shall be controlled by a server-side allowlist or equivalent protected configuration; a client-side e-mail check alone is insufficient.\n\n**Supports:** UR-067",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-011",
+    "title": "Protected admin routes and APIs",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-067"
+    ],
+    "body": "**Priority:** P0  \nAll admin pages and admin APIs shall verify authenticated admin authorization server-side.\n\n**Supports:** UR-067\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-012",
+    "title": "Add watchlist item",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-010"
+    ],
+    "body": "**Priority:** P0  \nAn authenticated user shall be able to add a supported asset to their watchlist.\n\n**Supports:** UR-010",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-013",
+    "title": "Remove watchlist item",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-011"
+    ],
+    "body": "**Priority:** P0  \nAn authenticated user shall be able to remove a supported asset from their watchlist.\n\n**Supports:** UR-011",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-014",
+    "title": "Watchlist uniqueness",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-010",
+      "UR-012"
+    ],
+    "body": "**Priority:** P0  \nThe system shall prevent duplicate watchlist entries for the same user and asset.\n\n**Supports:** UR-010, UR-012",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-015",
+    "title": "Persistent watchlist",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-008",
+      "UR-012"
+    ],
+    "body": "**Priority:** P0  \nWatchlist membership shall be stored in the database and restored across sessions/devices for the same authenticated user.\n\n**Supports:** UR-008, UR-012",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-016",
+    "title": "No quantity/cost requirement",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-013"
+    ],
+    "body": "**Priority:** P0  \nThe watchlist data model shall not require quantity, purchase price, or average cost fields for MVP functionality.\n\n**Supports:** UR-013\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-017",
+    "title": "Provider abstraction",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nData ingestion shall use provider interfaces/adapters rather than embedding provider-specific calls directly throughout product logic.\n\nAt minimum, separate provider abstractions should exist for:\n\n- equity market data;\n- fund data;\n- disclosure/regulatory data;\n- crypto market data;\n- on-chain data;\n- news data.\n\n**Supports:** maintainability and later licensed-provider migration.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-018",
+    "title": "Timestamp normalization",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-027"
+    ],
+    "body": "**Priority:** P0  \nAll ingested observations shall store source timestamps and a normalized timestamp representation suitable for cross-source correlation.\n\n**Supports:** UR-027",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-019",
+    "title": "Data freshness metadata",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-027",
+      "UR-068"
+    ],
+    "body": "**Priority:** P0  \nIngested datasets used for user-facing events shall expose or retain sufficient metadata to determine freshness and last successful ingestion.\n\n**Supports:** UR-027, UR-068",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-020",
+    "title": "Idempotent ingestion",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nRepeated ingestion of the same source event or market observation shall not create uncontrolled duplicates.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-021",
+    "title": "Ingestion failure recording",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-068"
+    ],
+    "body": "**Priority:** P0  \nThe system shall record ingestion failures with provider, job type, timestamp, and error status for administrative visibility.\n\n**Supports:** UR-068",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-022",
+    "title": "Scheduled and on-demand ingestion",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe architecture shall support scheduled collection and developer/admin-triggered collection for demo/recovery scenarios.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-023",
+    "title": "Data-source status",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-068"
+    ],
+    "body": "**Priority:** P0  \nThe system shall expose a derived health state for each important data source, such as healthy, delayed, stale, or failed.\n\n**Supports:** UR-068\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-024",
+    "title": "BIST OHLCV ingestion",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-029"
+    ],
+    "body": "**Priority:** P0  \nThe system shall ingest sufficient BIST price/volume history to calculate the selected MVP intraday anomaly signals for showcased securities.\n\n**Supports:** UR-029",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-025",
+    "title": "BIST benchmark context",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-030"
+    ],
+    "body": "**Priority:** P0  \nFor supported securities, the system shall ingest or derive relevant index/market context and, where available, sector context.\n\n**Supports:** UR-030",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-026",
+    "title": "KAP event ingestion",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-031"
+    ],
+    "body": "**Priority:** P0  \nThe system shall ingest relevant KAP disclosures for supported BIST issuers or retrieve them on demand.\n\n**Supports:** UR-031",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-027",
+    "title": "KAP event classification",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-031"
+    ],
+    "body": "**Priority:** P0  \nThe system shall classify KAP disclosures into useful event categories using deterministic rules, AI classification, or a hybrid approach.\n\nExamples:\n\n- new contract/order;\n- capital action;\n- financial result;\n- management/governance;\n- material corporate event;\n- other.\n\n**Supports:** UR-031",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-028",
+    "title": "KAP materiality context",
+    "legacy_priority": "P1",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-031",
+      "UR-032"
+    ],
+    "body": "**Priority:** P1  \nWhere sufficient structured data exists, the system should calculate contextual ratios such as disclosed contract size relative to recent revenue or another relevant baseline.\n\n**Supports:** UR-031, UR-032",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-029",
+    "title": "Fundamental dataset support",
+    "legacy_priority": "P1",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-032"
+    ],
+    "body": "**Priority:** P1  \nThe system should ingest selected BIST financial-statement metrics sufficient to calculate the MVP fundamental anomaly rules.\n\n**Supports:** UR-032",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-030",
+    "title": "Regulatory-event ingestion",
+    "legacy_priority": "P1",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-033"
+    ],
+    "body": "**Priority:** P1  \nThe system should ingest relevant SPK/BIST measures or regulatory events for supported securities/issuers.\n\n**Supports:** UR-033\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-031",
+    "title": "Fund master-data ingestion",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-034",
+      "UR-035"
+    ],
+    "body": "**Priority:** P0  \nThe system shall ingest sufficient metadata to identify and search supported Turkish investment funds.\n\n**Supports:** UR-034, UR-035",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-032",
+    "title": "Fund price/NAV history",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-035"
+    ],
+    "body": "**Priority:** P0  \n\nThe system shall ingest actual published NAV values with source as-of and availability dates. Unsupported intraday NAV intervals shall be rejected. Underlying market movements shall not be presented as current fund unit prices.\n\n**Supports:** UR-035\n\n**v0.3 amendment:** see document 00; original text retained in archive/v0.2.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": true
+  },
+  {
+    "id": "FR-033",
+    "title": "Fund AUM/size metric support",
+    "legacy_priority": "P0 where source available",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-037"
+    ],
+    "body": "**Priority:** P0 where source available  \n\nThe system shall ingest AUM only from verified dated observations. In the inspected borsapy price-history path, FundSize is a compatibility placeholder and must normalize to missing. Latest detail may be stored as a snapshot but must not backfill unknown history.\n\n**Supports:** UR-037\n\n**v0.3 amendment:** see document 00; original text retained in archive/v0.2.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": true
+  },
+  {
+    "id": "FR-034",
+    "title": "Investor-count metric support",
+    "legacy_priority": "P0 where source available",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-037"
+    ],
+    "body": "**Priority:** P0 where source available  \n\nThe system shall ingest investor counts only with verified source dates. In the inspected borsapy price-history path, Investors=0 is a compatibility placeholder, not an observed zero. Missing historical counts disable investor-change detectors.\n\n**Supports:** UR-037\n\n**v0.3 amendment:** see document 00; original text retained in archive/v0.2.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": true
+  },
+  {
+    "id": "FR-035",
+    "title": "Fund allocation ingestion",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-036"
+    ],
+    "body": "**Priority:** P0  \n\nThe system shall preserve dated fund allocation values, original category codes and publication/availability metadata. Asset-class allocation is not security-level holdings. Unknown mappings or signed derivative exposures require guarded handling.\n\n**Supports:** UR-036\n\n**v0.3 amendment:** see document 00; original text retained in archive/v0.2.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": true
+  },
+  {
+    "id": "FR-036",
+    "title": "Fund peer/category mapping",
+    "legacy_priority": "P1",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-038"
+    ],
+    "body": "**Priority:** P1  \nThe system should map supported funds to relevant category/peer groups for comparative analysis.\n\n**Supports:** UR-038",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-037",
+    "title": "Fund anomaly calculations",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-037"
+    ],
+    "body": "**Priority:** P0  \n\nFund detectors shall use valid available inputs only. Estimated net flow must adjust AUM changes for NAV return and compatible distributions/dates; it shall be labeled an estimate. Data gaps disable the affected detector rather than imply no risk.\n\n**Supports:** UR-037\n\n**v0.3 amendment:** see document 00; original text retained in archive/v0.2.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": true
+  },
+  {
+    "id": "FR-038",
+    "title": "Fund-to-equity relation model",
+    "legacy_priority": "P2",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-039"
+    ],
+    "body": "**Priority:** P2  \nThe data model shall be extensible to represent fund holdings/exposure relationships with BIST securities if sufficiently granular holding data becomes available.\n\n**Supports:** UR-039\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-039",
+    "title": "Curated crypto universe",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-040"
+    ],
+    "body": "**Priority:** P0  \n\nThe catalog target is approximately 75–100 curated popular/liquid crypto assets, contingent on lawful provider coverage. Active first-slice monitoring may be 10–20 pairs. Catalog, market and on-chain capabilities shall be separate and dated; reductions require explicit scope disclosure.\n\n**Supports:** UR-040\n\n**v0.3 amendment:** see document 00; original text retained in archive/v0.2.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": true
+  },
+  {
+    "id": "FR-040",
+    "title": "Crypto market data ingestion",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-041"
+    ],
+    "body": "**Priority:** P0  \nThe system shall ingest price/volume history for the curated crypto universe.\n\n**Supports:** UR-041",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-041",
+    "title": "EVM on-chain adapter",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-042"
+    ],
+    "body": "**Priority:** P0  \n\nProvide a bounded EVM adapter for supported showcase contracts after provider/right/finality validation. On-chain intelligence is user-required; EVM is the proposed initial network implementation; an untested or absent adapter is NOT_IMPLEMENTED, not a successful MVP feature.\n\n**Supports:** UR-042\n\n**v0.3 amendment:** see document 00; original text retained in archive/v0.2.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": true,
+    "amended_in_v04_audit": true
+  },
+  {
+    "id": "FR-042",
+    "title": "Solana on-chain adapter",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-042"
+    ],
+    "body": "**Priority:** P0  \n\nProvide a bounded Solana adapter for supported showcase assets after provider/right/commitment validation. Token accounts are not independent beneficial owners. Absent or untested integration must be disclosed as incomplete scope.\n\n**Supports:** UR-042\n\n**v0.3 amendment:** see document 00; original text retained in archive/v0.2.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": true
+  },
+  {
+    "id": "FR-043",
+    "title": "On-chain event normalization",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-042",
+      "UR-043"
+    ],
+    "body": "**Priority:** P0  \nOn-chain observations used by the intelligence engine shall be normalized into structured event/signal types independent of the source provider.\n\nExamples:\n\n- large transfer;\n- exchange inflow/outflow only with independently verified, dated address attribution;\n- holder concentration change;\n- liquidity change;\n- wallet-cluster activity only with validated, documented clustering evidence; raw RPC accounts are not beneficial-owner identities.\n\n**Supports:** UR-042, UR-043",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false,
+    "amended_in_v04_audit": true
+  },
+  {
+    "id": "FR-044",
+    "title": "Crypto multi-signal event creation",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-043"
+    ],
+    "body": "**Priority:** P0  \nThe decision engine shall be able to combine market anomaly signals with one or more on-chain signals into a single intelligence event.\n\n**Supports:** UR-043\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-045",
+    "title": "Restricted U.S. universe",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-045"
+    ],
+    "body": "**Priority:** P0  \n\nThe broader catalog target is approximately 100–200 selected US equities. The first active monitoring slice may be 5–10 under provider limits. Catalog membership shall not imply full real-time market, filing or consolidated-volume coverage.\n\n**Supports:** UR-045\n\n**v0.3 amendment:** see document 00; original text retained in archive/v0.2.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": true
+  },
+  {
+    "id": "FR-046",
+    "title": "U.S. OHLCV ingestion",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-046"
+    ],
+    "body": "**Priority:** P0  \n\nUS OHLCV observations shall retain provider, feed/venue coverage and adjustment metadata. IEX-only data shall not be labeled consolidated US-market volume and shall not be mixed with SIP baselines without explicit compatible normalization.\n\n**Supports:** UR-046\n\n**v0.3 amendment:** see document 00; original text retained in archive/v0.2.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": true
+  },
+  {
+    "id": "FR-047",
+    "title": "U.S. contextual source integration",
+    "legacy_priority": "P1",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-047"
+    ],
+    "body": "**Priority:** P1  \nThe system should retrieve selected earnings, filing, issuer, and trusted-news context for supported U.S. assets.\n\n**Supports:** UR-047\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-048",
+    "title": "Signal interface",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nEach anomaly/signal detector shall produce a structured output containing at least:\n\n- signal type;\n- asset ID;\n- observation time/window;\n- numeric/categorical evidence;\n- baseline/reference used;\n- normalized strength where applicable;\n- detector version;\n- data-quality/freshness indicators.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-049",
+    "title": "Relative volume detector",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe MVP shall implement an abnormal/relative volume detector for applicable market assets.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-050",
+    "title": "Price-return anomaly detector",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe MVP shall implement a detector for unusual price return relative to an asset's historical behavior and/or appropriate contextual baseline.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-051",
+    "title": "Volatility anomaly detector",
+    "legacy_priority": "P0 or P1 depending on weekend capacity",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0 or P1 depending on weekend capacity  \n\nUnusual realized/intraday volatility is a NEXT-phase detector until data quality and baseline evaluation are complete. Same-duration windows, session effects and missing observations shall be controlled.\n\n**v0.3 amendment:** see document 00; original text retained in archive/v0.2.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": true
+  },
+  {
+    "id": "FR-052",
+    "title": "Benchmark divergence detector",
+    "legacy_priority": "P0 for showcased BIST case",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0 for showcased BIST case  \nThe engine shall support divergence between an asset and a relevant market/index/sector benchmark when the mapping/data is available.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-053",
+    "title": "Composite signal support",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe system shall support event logic based on multiple independent signals rather than only single-threshold triggers.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-054",
+    "title": "Detector versioning",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nEach generated signal/event shall be traceable to a detector configuration/version so that historical results are reproducible.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-055",
+    "title": "Structured AI tasks",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nAI/LLM calls used in the intelligence pipeline shall operate through defined tasks with structured expected outputs rather than unrestricted free-form generation.\n\nCandidate tasks include:\n\n- disclosure classification;\n- news/event classification;\n- materiality interpretation;\n- cross-source synthesis;\n- evidence-summary generation;\n- asset-chat research.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-056",
+    "title": "AI provider abstraction",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe application shall call AI models through an internal provider/service abstraction so that core product logic is not permanently coupled to one model vendor.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-057",
+    "title": "Evidence packet input",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe AI explanation layer shall receive a structured evidence packet assembled by Project 50K rather than being asked to invent the event from a raw prompt alone.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-058",
+    "title": "Source-aware AI output",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-026",
+      "UR-052"
+    ],
+    "body": "**Priority:** P0  \nAI-generated factual explanations shall retain references to the source evidence used in the answer.\n\n**Supports:** UR-026, UR-052",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-059",
+    "title": "Official-source preference",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-053"
+    ],
+    "body": "**Priority:** P0  \nWhen multiple sources describe the same event, retrieval/ranking logic shall prefer official/regulatory/issuer sources where practical.\n\n**Supports:** UR-053",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-060",
+    "title": "Web research tool for asset assistant",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-051"
+    ],
+    "body": "**Priority:** P0  \nThe contextual asset assistant shall be able to invoke approved web research tooling for current information when project-indexed data is insufficient.\n\n**Supports:** UR-051",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-061",
+    "title": "Insufficient-evidence response path",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-054"
+    ],
+    "body": "**Priority:** P0  \nThe AI layer shall support a structured `insufficient_evidence` or equivalent state and shall generate a clear user-facing response rather than forcing a causal explanation.\n\n**Supports:** UR-054",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-062",
+    "title": "No recommendation mode",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-055"
+    ],
+    "body": "**Priority:** P0  \nProject-owned prompts and response post-processing shall avoid generating Buy/Hold/Sell calls or personalized trading instructions as the product's own recommendation.\n\n**Supports:** UR-055",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-063",
+    "title": "Turkish response localization",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-049",
+      "UR-074"
+    ],
+    "body": "**Priority:** P0  \nUser-facing AI output shall be generated or post-edited in natural `tr-TR` financial language.\n\n**Supports:** UR-049, UR-074\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-064",
+    "title": "Event entity",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe system shall create a normalized `IntelligenceEvent` entity separate from raw signals.\n\nMinimum fields:\n\n- event ID;\n- asset ID;\n- event type;\n- title/summary;\n- start/detection time;\n- severity;\n- confidence;\n- status;\n- supporting signal IDs;\n- evidence/source references;\n- explanation version;\n- detector/decision-engine version;\n- replay/live origin.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-065",
+    "title": "Cross-signal correlation",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe decision engine shall be able to correlate multiple signals occurring within a relevant time/context window.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-066",
+    "title": "Severity calculation",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-021"
+    ],
+    "body": "**Priority:** P0  \nSeverity shall be calculated from configured event logic and evidence magnitude; it shall not be determined solely by an LLM's self-assessment.\n\n**Supports:** UR-021",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-067",
+    "title": "Confidence calculation",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-022",
+      "UR-023"
+    ],
+    "body": "**Priority:** P0  \n\nThe decision engine shall calculate heuristic evidence strength from validated completeness, freshness, source integrity and independent corroboration, with explicit hard validity gates. Magnitude belongs to severity, not probability. calibrated_probability shall remain null until separately validated calibration exists. The LLM shall not assign its own confidence.\n\n**Supports:** UR-022, UR-023\n\n**v0.3 amendment:** see document 00; original text retained in archive/v0.2.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": true
+  },
+  {
+    "id": "FR-068",
+    "title": "Confidence component storage",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \n\nStore evidence-score components, heuristic/calibrated mode, method version and limitations. Feedback usefulness is not a ground-truth correctness label. Preserve independent labels before any calibration study.\n\n**v0.3 amendment:** see document 00; original text retained in archive/v0.2.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": true
+  },
+  {
+    "id": "FR-069",
+    "title": "Event de-duplication/merging",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nRepeated detections of the same underlying event within a configured time window shall be merged or updated rather than producing uncontrolled duplicate alerts.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-070",
+    "title": "Event lifecycle",
+    "legacy_priority": "P1",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P1  \nThe system should support event states such as detected, updated, resolved/expired, and invalidated when new evidence changes the interpretation.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-071",
+    "title": "Legal-language guard",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-028"
+    ],
+    "body": "**Priority:** P0  \nFor manipulation/fraud-related risk patterns, generated event labels and explanations shall use anomaly/risk-indicator language rather than asserting unverified criminal or regulatory conclusions.\n\n**Supports:** UR-028\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-072",
+    "title": "Event card summary",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nAn event card shall display at least:\n\n- asset;\n- event title;\n- event time;\n- severity;\n- confidence;\n- concise evidence summary.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-073",
+    "title": "Event detail view",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe user shall be able to open an event detail view containing:\n\n- explanation;\n- supporting metrics;\n- relevant chart/time context;\n- source links;\n- data freshness;\n- feedback controls.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-074",
+    "title": "Evidence-first rendering",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nIf an AI explanation fails or is unavailable, the event detail shall still be able to display the deterministic/statistical evidence rather than hiding the event completely.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-075",
+    "title": "Event chart markers",
+    "legacy_priority": "P0 for showcased cases",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0 for showcased cases  \nThe asset chart shall support visual markers for intelligence events and selected disclosures/news items.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-076",
+    "title": "Common asset-page shell",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nAll asset classes shall share a coherent page structure while allowing asset-class-specific modules.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-077",
+    "title": "BIST page modules",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe showcased BIST page shall include:\n\n- price chart;\n- volume/context;\n- recent intelligence events;\n- KAP/news evidence;\n- AI assistant.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-078",
+    "title": "Fund page modules",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe showcased fund page shall include:\n\n- NAV/price history;\n- selected fund metrics;\n- allocation information when available;\n- recent fund intelligence events;\n- AI assistant.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-079",
+    "title": "Crypto page modules",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe showcased crypto page shall include:\n\n- market chart;\n- market anomaly evidence;\n- selected on-chain intelligence;\n- combined events;\n- AI assistant.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-080",
+    "title": "U.S. equity page modules",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe showcased U.S. equity page shall include:\n\n- price chart;\n- price/volume anomaly evidence;\n- selected contextual event/news;\n- AI assistant or common assistant shell.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-081",
+    "title": "Personal watchlist feed",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-015"
+    ],
+    "body": "**Priority:** P0  \nThe authenticated dashboard shall query and display eligible recent events for assets in the user's watchlist.\n\n**Supports:** UR-015",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-082",
+    "title": "Market highlights feed",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-016"
+    ],
+    "body": "**Priority:** P0  \nThe application shall display a separate market-wide intelligence feed independent of watchlist membership.\n\n**Supports:** UR-016",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-083",
+    "title": "Feed ranking",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-018"
+    ],
+    "body": "**Priority:** P0  \nFeed ordering shall consider severity, confidence, freshness, and user relevance rather than relying exclusively on reverse chronology.\n\n**Supports:** UR-018",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-084",
+    "title": "Quiet-state handling",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-019"
+    ],
+    "body": "**Priority:** P0  \nThe dashboard shall display an intentional quiet state that does not imply financial safety or asset health when no eligible event is present.\n\n**Supports:** UR-019\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false,
+    "amended_in_v04_audit": true
+  },
+  {
+    "id": "FR-085",
+    "title": "Notification eligibility engine",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe system shall determine notification eligibility separately from event creation.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-086",
+    "title": "Watchlist notification policy",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nEvents for watchlist assets shall be eligible for in-app/e-mail according to severity and user preference.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-087",
+    "title": "Off-watchlist critical policy",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [
+      "UR-017",
+      "UR-059"
+    ],
+    "body": "**Priority:** P0  \n\nOff-watchlist immediate notifications require CRITICAL policy eligibility; external email additionally requires explicit global opt-in and MVP admin release. Market price/volume alone cannot create a global critical broadcast. Recheck evidence, consent, caps and replay exclusion at send time.\n\n**Supports:** UR-017, UR-059\n\n**v0.3 amendment:** see document 00; original text retained in archive/v0.2.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": true
+  },
+  {
+    "id": "FR-088",
+    "title": "In-app notification record",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nEligible alerts shall create an in-app notification record with read/unread state.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-089",
+    "title": "Immediate e-mail delivery",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \n\nSupport immediate eligible email through a durable outbox with application/provider idempotency, sender verification, consent/unsubscribe checks and kill switch. External delivery defaults disabled. Dry-run demonstration is not verified real delivery.\n\n**v0.3 amendment:** see document 00; original text retained in archive/v0.2.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": true
+  },
+  {
+    "id": "FR-090",
+    "title": "Notification idempotency",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe same event/user/channel combination shall not be delivered repeatedly unless the event materially updates and the policy explicitly permits an update alert.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-091",
+    "title": "Alert sensitivity modes",
+    "legacy_priority": "P1",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P1  \nThe system should support simple sensitivity profiles such as:\n\n- Critical Only;\n- Important + Critical;\n- All Eligible.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-092",
+    "title": "Digest generation",
+    "legacy_priority": "P1",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P1  \nThe system should be able to compile lower-urgency events into a scheduled digest.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-093",
+    "title": "Browser push excluded",
+    "legacy_priority": "P0 constraint",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0 constraint  \nThe MVP shall not require browser push implementation.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-094",
+    "title": "Asset-context injection",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nWhen chat is opened from an asset page, the backend shall automatically provide canonical asset identity and relevant recent intelligence context.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-095",
+    "title": "Conversation persistence",
+    "legacy_priority": "P1",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P1  \n\nWhen conversation persistence is enabled, scope every thread/message to verified user, asset and origin/cutoff; disclose retention/deletion. Private history shall never enter shared caches or another user context.\n\n**v0.3 amendment:** see document 00; original text retained in archive/v0.2.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": true
+  },
+  {
+    "id": "FR-096",
+    "title": "Source rendering in chat",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe UI shall render inspectable source references for material factual claims returned by the assistant.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-097",
+    "title": "Tool-result separation",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe assistant architecture shall distinguish retrieved/tool-derived facts from model-generated synthesis so that source grounding can be preserved.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-098",
+    "title": "Chat failure fallback",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nIf web research or one data source fails, the assistant shall either answer from available grounded evidence with a limitation statement or state that it cannot reliably answer.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-099",
+    "title": "Event feedback controls",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nEvent detail/card views shall provide at least two quick feedback actions such as `Useful` and `Not Relevant`.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-100",
+    "title": "Feedback persistence",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nFeedback shall be stored with user ID, event ID, response value, and timestamp.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-101",
+    "title": "Feedback analytics",
+    "legacy_priority": "P1",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P1  \nAdmin/product analytics should aggregate event feedback by event type, severity, and detector version.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-102",
+    "title": "Admin KPI summary",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe admin dashboard shall display at least:\n\n- total users;\n- watchlist count;\n- generated event count;\n- recent high/critical event count;\n- notification/e-mail activity where available.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-103",
+    "title": "Data freshness panel",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe admin dashboard shall display freshness/health information for major data providers/jobs.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-104",
+    "title": "Recent event inspection",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nAn admin shall be able to inspect recent intelligence events and their severity/confidence.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-105",
+    "title": "Controlled threshold configuration",
+    "legacy_priority": "P0 limited",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0 limited  \nThe admin dashboard shall expose only a small explicit set of safe configuration values/feature flags during the MVP.\n\nArbitrary code or unrestricted detector expressions shall not be editable through the admin UI.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-106",
+    "title": "Configuration persistence and audit",
+    "legacy_priority": "P1",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P1  \nAdmin configuration changes should record who changed what and when.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-107",
+    "title": "AI version visibility",
+    "legacy_priority": "P1",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P1  \nThe admin dashboard should display active AI model/prompt/config version metadata.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-108",
+    "title": "Historical replay dataset",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \n\nReplay datasets shall be immutable, provenance-dated, rights-cleared and identified as real historical or synthetic. Synthetic fixtures demonstrate behavior only and shall never support historical prediction/performance claims.\n\n**v0.3 amendment:** see document 00; original text retained in archive/v0.2.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": true
+  },
+  {
+    "id": "FR-109",
+    "title": "Time-bounded replay",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \n\nReplay shall exclude evidence whose publication/available date or version is later than cutoff and any record with unknown historical availability. It shall disable current web research, current holdings/constituent leakage and external notifications.\n\n**v0.3 amendment:** see document 00; original text retained in archive/v0.2.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": true
+  },
+  {
+    "id": "FR-110",
+    "title": "Replay/live event parity",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nHistorical replay shall produce the same normalized event structure used by current/live events.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-111",
+    "title": "Demo mode fallback",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe application may provide an explicit internal demo/replay mode so jury presentation does not depend on a live anomaly happening during the presentation.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-112",
+    "title": "Value proposition above the fold",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe landing page shall communicate the monitoring/anomaly-intelligence value proposition within the first viewport.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-113",
+    "title": "Search from landing",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe landing page shall provide direct access to asset search.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-114",
+    "title": "Example intelligence event",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe landing page shall include at least one convincing example of an intelligence event rather than relying exclusively on marketing copy.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-115",
+    "title": "Product-scope communication",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe landing page shall communicate that the product covers BIST and Turkish funds as primary markets with crypto and U.S. equity expansion/support.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-116",
+    "title": "Sign-in CTA",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe landing page shall provide a clear Google sign-in CTA for users who want watchlist/alerts.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-117",
+    "title": "`tr-TR` default UI",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe user-facing MVP shall default to Turkish (`tr-TR`).",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-118",
+    "title": "English internal identifiers",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nCode identifiers, API fields, database names, internal prompts, and engineering documentation shall use English unless a source field must preserve an original Turkish label.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-119",
+    "title": "Financial terminology glossary",
+    "legacy_priority": "P1",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P1  \nThe project should maintain a small approved terminology glossary for recurring Turkish financial terms to improve UI/AI consistency.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-120",
+    "title": "Event-generation audit record",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nEach event shall retain enough metadata to identify the signals, evidence, detector version, and explanation version used to create it.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-121",
+    "title": "Notification audit record",
+    "legacy_priority": "P0",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nEach attempted notification shall record channel, user, event, status, and timestamp.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "FR-122",
+    "title": "AI request metadata",
+    "legacy_priority": "P1",
+    "file": "docs/07_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P1  \nAI calls used for production intelligence should record non-secret metadata such as task type, model/config version, latency, and success/failure state.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-001",
+    "title": "No fabricated data",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe system shall never invent a market value, fund metric, source event, timestamp, or on-chain fact because a provider failed or returned incomplete data.\n\nIf data is unavailable, the UI/AI shall display an unavailable/stale/insufficient state.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-002",
+    "title": "Partial-source resilience",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nFailure of one non-critical source shall not cause the entire asset page or event system to fail when other evidence can still be displayed safely.\n\nExample: if trusted-news retrieval fails, deterministic market evidence may still render with a limitation notice.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-003",
+    "title": "Source outage visibility",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nCritical source outages or stale ingestion shall be visible in the admin area.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-004",
+    "title": "Duplicate-event resistance",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nRetries, repeated ingestion, or repeated detector runs shall not generate uncontrolled duplicate events/notifications.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-005",
+    "title": "Demo reliability",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe jury demonstration shall not depend on the occurrence of a live anomaly. Historical replay shall provide a deterministic backup demonstration path.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-006",
+    "title": "Public page performance",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nFor the MVP deployment under normal demo load, the landing page and cached/public asset shell should become usable within approximately 2.5 seconds on a typical broadband connection, excluding slow third-party source retrieval performed after initial rendering.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-007",
+    "title": "Search responsiveness",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nAsset search should return local/cached catalog matches within approximately 500 ms at the application/API level under normal MVP load.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-008",
+    "title": "Asset intelligence responsiveness",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nPreviously computed intelligence events shall load from Project 50K storage rather than requiring full anomaly recomputation on every page request.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-009",
+    "title": "AI chat responsiveness",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \n\nThe UI shall acknowledge long-running AI research promptly with progress states. Unvalidated factual output/citations shall be buffered until schema and evidence checks pass; streaming unsupported facts is not required for responsiveness.\n\n**v0.3 amendment:** see document 00; original text retained in archive/v0.2.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": true
+  },
+  {
+    "id": "NFR-010",
+    "title": "Asynchronous long-running work",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nData ingestion, historical detector runs, e-mail delivery, and other potentially slow operations shall not block interactive web requests when they can be executed asynchronously.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-011",
+    "title": "OAuth-only end-user credentials",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nProject 50K shall not store application-specific user passwords in the MVP.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-012",
+    "title": "Server-side authorization",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nAuthorization decisions, especially admin access, shall be enforced server-side and shall not rely on hidden UI elements or client-only checks.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-013",
+    "title": "Secrets management",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nAPI keys, OAuth secrets, e-mail credentials, database secrets, and AI provider secrets shall be stored in environment/secret-management systems and never committed to the repository.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-014",
+    "title": "Principle of least privilege",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nDatabase/service credentials used by web clients, backend services, and workers shall have only the minimum permissions necessary for their responsibilities.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-015",
+    "title": "Input validation",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nAll externally supplied inputs shall be validated at API boundaries, including asset identifiers, search inputs, chat messages, admin configuration values, and provider payloads.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-016",
+    "title": "Rate limiting / abuse controls",
+    "legacy_priority": "P1",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0 — safety/coverage requirement when feature is exposed\n\nBefore any public paid-model/research exposure, enforce persistent per-user and project quotas, concurrency bounds, rate limits and spending caps. Public anonymous chat is disabled initially.\n\n**v0.3 amendment:** see document 00; original text retained in archive/v0.2.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": true
+  },
+  {
+    "id": "NFR-017",
+    "title": "Admin configuration safety",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe admin UI shall not allow arbitrary code execution, raw SQL, or unrestricted prompt/code editing.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-018",
+    "title": "Data minimization",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe MVP shall store only user data necessary for account identity, watchlist, preferences, notifications, feedback, and product operation.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-019",
+    "title": "No unnecessary financial-position collection",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe MVP shall not require quantity, cost basis, transaction history, bank credentials, or brokerage credentials.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-020",
+    "title": "Sensitive logging restriction",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nLogs shall avoid storing OAuth tokens, secret keys, full authentication headers, or other credentials.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-021",
+    "title": "Conversation data awareness",
+    "legacy_priority": "P1",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0 — safety/coverage requirement when feature is exposed\n\nBefore persisted chats/public accounts, disclose actual retention, deletion and processing arrangements. Own-user access controls, minimization and deletion tests are release requirements, not optional later cleanup.\n\n**v0.3 amendment:** see document 00; original text retained in archive/v0.2.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": true
+  },
+  {
+    "id": "NFR-022",
+    "title": "Source provenance",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nEvery material intelligence event shall be traceable to its underlying data/source records.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-023",
+    "title": "Timestamp provenance",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \n\nPreserve observed/effective, source publication, available, ingestion, detector and delivery times separately where relevant. Unknown historical availability cannot be guessed. Revisions shall not overwrite evidence used by earlier decisions.\n\n**v0.3 amendment:** see document 00; original text retained in archive/v0.2.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": true
+  },
+  {
+    "id": "NFR-024",
+    "title": "Data freshness disclosure",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe UI shall not imply real-time data when the underlying source is delayed or stale.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-025",
+    "title": "Provider normalization testing",
+    "legacy_priority": "P1",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P1  \nProvider adapters should have fixture-based tests for symbol mapping, timestamp parsing, numeric units, and missing-value behavior.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-026",
+    "title": "Unit consistency",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nFinancial calculations shall use explicit units/currencies/percentage conventions to prevent silent scale errors.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-027",
+    "title": "Grounded material claims",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nMaterial factual claims in AI-generated user-facing content shall be grounded in retrieved/structured evidence and accompanied by inspectable sources where applicable.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-028",
+    "title": "No invented source citations",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe AI layer shall not display a source reference unless that source was actually retrieved or included in the evidence packet.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-029",
+    "title": "Insufficient-evidence behavior",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe system shall prefer an explicit insufficient-evidence response over an unsupported causal explanation.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-030",
+    "title": "Deterministic confidence ownership",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \n\nNumeric confidence is owned by validated application logic. V1 outputs heuristic evidence strength and null calibrated probability; no LLM self-rating or anomaly-score-to-probability conversion is permitted.\n\n**v0.3 amendment:** see document 00; original text retained in archive/v0.2.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": true
+  },
+  {
+    "id": "NFR-031",
+    "title": "AI output schema validation",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nStructured LLM outputs used by the application shall be schema-validated before being persisted or used for decisions.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-032",
+    "title": "Prompt injection containment",
+    "legacy_priority": "P1",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P1  \nRetrieved web/source content shall be treated as untrusted data and shall not be allowed to override system/developer instructions or trigger arbitrary tools.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-033",
+    "title": "Source quality hierarchy",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nRetrieval/synthesis logic shall rank official/regulatory/issuer sources above lower-authority sources when relevant evidence is available.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-034",
+    "title": "Model/provider replaceability",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nAI integration shall be abstracted so that one provider or model can be replaced without redesigning the core event schema or product API.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-035",
+    "title": "Reproducibility",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nGiven the same historical input dataset and detector/decision configuration, the deterministic/statistical portion of the engine should produce reproducible outputs.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-036",
+    "title": "Versioned detectors",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nDetector versions and decision-rule configurations shall be versioned and recorded with generated events.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-037",
+    "title": "Backtestability",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nDetectors selected for the product shall support historical replay/backtesting on time-ordered data.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-038",
+    "title": "No future leakage",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nHistorical validation/replay shall prevent future information from influencing a detector result at an earlier timestamp.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-039",
+    "title": "Precision-over-noise bias for alerts",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nFor user notifications, the product shall prefer fewer higher-quality events over excessive low-confidence alerts.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-040",
+    "title": "Calibration readiness",
+    "legacy_priority": "P1",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P1  \n\nRetain method/feature versions and independent outcome labels for future calibration. User usefulness feedback is not correctness ground truth. Any probability requires a defined target and separate held-out calibration evaluation.\n\n**v0.3 amendment:** see document 00; original text retained in archive/v0.2.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": true
+  },
+  {
+    "id": "NFR-041",
+    "title": "Structured logging",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nBackend/worker logs shall be structured enough to identify request/job type, asset/provider where appropriate, status, and error category.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-042",
+    "title": "Correlation identifiers",
+    "legacy_priority": "P1",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P1  \nImportant asynchronous flows should use job/event/request identifiers that allow ingestion → signal → event → notification debugging.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-043",
+    "title": "Health checks",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe web/API deployment and critical workers/providers shall expose enough state to support basic health monitoring.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-044",
+    "title": "Failure visibility",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nSilent failures are not acceptable for critical ingestion/notification jobs; failures shall be recorded and surfaced to admin/observability tooling.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-045",
+    "title": "Cost observability",
+    "legacy_priority": "P1",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P1  \nAI/search/e-mail/provider usage should be measurable so the team can identify unexpectedly expensive workflows before production scale.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-046",
+    "title": "Precompute intelligence",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nCore anomaly/event generation shall be performed by scheduled/event-driven workers and stored, rather than recomputed independently for every user viewing the same public asset.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-047",
+    "title": "Shared event model",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nA single detected market event shall be reusable across many users; personalization should primarily affect ranking/notification eligibility rather than duplicating the underlying event computation.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-048",
+    "title": "Horizontal worker evolution",
+    "legacy_priority": "P1",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P1  \n\nThe initial worker uses durable PostgreSQL jobs/outbox with leases and idempotent processing. Horizontal evolution is a future option, not a requirement to add Redis or distributed infrastructure to the weekend.\n\n**v0.3 amendment:** see document 00; original text retained in archive/v0.2.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": true
+  },
+  {
+    "id": "NFR-049",
+    "title": "Provider-rate-limit awareness",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nIngestion logic shall implement caching, batching, backoff, or scheduling appropriate to upstream rate limits, especially TEFAS-like sources.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-050",
+    "title": "Monorepo clarity",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe repository shall use a clear structure separating web UI, API/backend, workers/intelligence, shared contracts, documentation, and research artifacts.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-051",
+    "title": "English engineering language",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nCode, internal API names, database schema, engineering documentation, tests, and LLM development prompts shall use English unless preserving an official source term.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-052",
+    "title": "Typed contracts",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nFrontend/backend boundaries shall use explicit typed/schema-validated contracts.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-053",
+    "title": "Small composable services",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nAgents and developers should implement data providers, detectors, decision logic, and AI tasks as modular components with narrow responsibilities.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-054",
+    "title": "Requirements traceability",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nImportant implementation tasks and tests should reference requirement IDs where practical.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-055",
+    "title": "Documentation-as-context",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe `/docs` and `/research` content shall be treated as authoritative agentic-development context and kept synchronized with locked product decisions.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-056",
+    "title": "No generic AI-slop aesthetic",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe product shall avoid common low-quality generated-dashboard patterns such as excessive glassmorphism, decorative gradient blobs, arbitrary neon effects, nested card-on-card layouts, repetitive status chips, and visual elements with no informational purpose.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-057",
+    "title": "Information hierarchy over card density",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nDense financial information shall be organized using hierarchy, typography, spacing, grouping, and progressive disclosure rather than wrapping every element in an identical card.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-058",
+    "title": "Design system",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe MVP shall define reusable design tokens for at least typography, spacing, radius, borders, surface hierarchy, semantic states, and chart/event styling.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-059",
+    "title": "Impeccable review workflow",
+    "legacy_priority": "P0 process requirement",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0 process requirement  \nAgent-generated frontend work shall be reviewed using the team's Impeccable-based design-quality workflow and then reviewed by the team's UI/UX designer before final acceptance.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false,
+    "amended_in_v04_audit": true
+  },
+  {
+    "id": "NFR-060",
+    "title": "Semantic status design",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nSeverity, confidence, positive/negative financial movement, and data-quality states shall not rely on color alone; text/iconography/labels shall provide meaning.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-061",
+    "title": "Progressive disclosure",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nAdvanced methodology and evidence shall remain accessible without overwhelming the default event summary.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-062",
+    "title": "Keyboard accessibility",
+    "legacy_priority": "P1",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P1  \nCore desktop interactions should be keyboard accessible, especially search, navigation, dialogs, and event expansion.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-063",
+    "title": "Contrast/readability",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nText and critical UI states shall maintain readable contrast; decorative visual choices shall not reduce financial-data legibility.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-064",
+    "title": "Touch usability",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe responsive MVP shall maintain usable touch targets and avoid interactions that only work with mouse hover.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-065",
+    "title": "Reduced-motion respect",
+    "legacy_priority": "P1",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P1  \nNon-essential animation should respect reduced-motion preferences.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-066",
+    "title": "Turkish locale",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe MVP shall use `tr-TR` formatting and natural Turkish UI copy.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-067",
+    "title": "Istanbul timezone default",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nUser-facing timestamps for the MVP shall default to `Europe/Istanbul` unless the UI explicitly communicates another market-local time.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-068",
+    "title": "Market-time correctness",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe system shall distinguish market hours/trading calendars where needed; crypto shall be treated as 24/7.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-069",
+    "title": "Decimal/currency clarity",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nNumbers shall be formatted consistently with clear currency/percentage units and without ambiguous decimal separators.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-070",
+    "title": "Informational positioning",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nProject 50K shall present itself as an investment intelligence/information product rather than an automated personalized investment-advisory service.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-071",
+    "title": "No Project-owned Buy/Hold/Sell verdict",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe product shall not generate its own direct Buy/Hold/Sell verdict as a core output.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-072",
+    "title": "Anomaly vs. legal finding distinction",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nProduct copy shall distinguish statistical/behavioral anomalies from legal findings of manipulation, fraud, or misconduct.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-073",
+    "title": "Data-rights readiness",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nProvider boundaries shall be designed so that hackathon data sources can later be replaced by appropriately licensed commercial feeds without rewriting the product core.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-074",
+    "title": "Attribution/license compliance",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \n\nBefore public or external data use, obtain and honor the applicable data-processing/non-display/display/redistribution and library attribution rights. Delayed, educational or hackathon use is not assumed exempt.\n\n**v0.3 amendment:** see document 00; original text retained in archive/v0.2.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": true
+  },
+  {
+    "id": "NFR-075",
+    "title": "Reproducible deployment",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe web/API deployment shall be reproducible from repository code and documented environment variables.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-076",
+    "title": "Separate development/production secrets",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nLocal development secrets and deployed environment secrets shall be managed separately.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-077",
+    "title": "Database migration discipline",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nDatabase schema changes shall use migrations rather than undocumented manual production edits.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-078",
+    "title": "Demo backup plan",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe team shall maintain a known-good deployed build and a prepared historical replay dataset before the jury session.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-079",
+    "title": "Critical-path automated tests",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nAt minimum, automated tests should cover:\n\n- signal calculation on fixtures;\n- event severity/confidence calculation;\n- watchlist authorization;\n- admin authorization;\n- AI structured-output validation;\n- notification idempotency.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-080",
+    "title": "Historical detector validation",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \n\nBefore claims of historical detector performance, run a reproducible, timestamp-correct evaluation on appropriately licensed real data with independent labels and reported limitations. Synthetic unit tests do not satisfy this empirical evaluation requirement.\n\n**v0.3 amendment:** see document 00; original text retained in archive/v0.2.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": true
+  },
+  {
+    "id": "NFR-081",
+    "title": "Source-grounding checks",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nThe team shall manually test representative AI answers to confirm that displayed citations support the claims made.",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  },
+  {
+    "id": "NFR-082",
+    "title": "Turkish copy review",
+    "legacy_priority": "P0",
+    "file": "docs/08_Non_Functional_Requirements.md",
+    "supports": [],
+    "body": "**Priority:** P0  \nHigh-visibility user-facing Turkish copy shall receive human review before the jury demonstration.\n\n---",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "amended_in_v03": false
+  }
+]

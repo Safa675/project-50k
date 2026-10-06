@@ -1,0 +1,22 @@
+{
+  "version": "detector-defaults-v1",
+  "status": "PROVISIONAL_NOT_CALIBRATED",
+  "minimum_baseline_observations": 20,
+  "rvol_threshold": 3.0,
+  "robust_z_threshold": 4.0,
+  "absolute_return_floor": 0.01,
+  "fund_flow_fraction_threshold": 0.1,
+  "allocation_total_variation_threshold": 0.2,
+  "evidence_weights": {
+    "completeness": 0.35,
+    "freshness": 0.25,
+    "integrity": 0.25,
+    "corroboration": 0.15
+  },
+  "evidence_bands": {
+    "moderate_min": 50,
+    "strong_min": 75
+  },
+  "calibrated_probability_enabled": false,
+  "market_only_critical_enabled": false
+}

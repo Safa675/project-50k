@@ -1,0 +1,63 @@
+{
+  "status": "PROPOSED_NOT_OWNER_OR_DESIGNER_APPROVED",
+  "recommended_palette_id": "mineral_ink",
+  "scope": "Opaque sRGB light-theme candidate tokens and explicitly intended pairings; not rendered UI certification.",
+  "reviewed_on": "2026-10-02",
+  "sources": [
+    {"id": "BR-WCAG22", "url": "https://www.w3.org/TR/WCAG22/", "depth": "Relevant contrast, luminance, use-of-color, focus, reflow and target-size sections only; not whole-standard review", "role": "Normative formula and contrast thresholds"},
+    {"id": "BR-NONTEXT", "url": "https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html", "depth": "Relevant UI-boundary, focus-adjacency and inactive-component guidance", "role": "Informative interpretation, not normative requirements"},
+    {"id": "BR-FOCUS", "url": "https://www.w3.org/WAI/WCAG22/Understanding/focus-appearance.html", "depth": "Criterion and relevant area/contrast explanation", "role": "Informative explanation of AAA focus appearance; no geometry test performed"}
+  ],
+  "palettes": [
+    {
+      "id": "mineral_ink", "name": "Mineral / Ink", "recommendation": "FIRST_CHOICE_PROPOSAL",
+      "character": "Cool paper, dense ink, petrol actions; a legible research instrument rather than a brokerage terminal.",
+      "colors": {"canvas": "#F4F6F7", "surface": "#FFFFFF", "soft_surface": "#EAF0F3", "text": "#172A31", "muted": "#52656C", "accent": "#234B5D", "accent_hover": "#183C4B", "control_border": "#75888F", "decorative_separator": "#C8D2D7", "focus": "#152F42"}
+    },
+    {
+      "id": "aubergine_frost", "name": "Aubergine / Frost", "recommendation": "ALTERNATIVE_PROPOSAL",
+      "character": "A restrained violet action accent and cool paper; more distinctive but needs care beside critical-event and replay labels.",
+      "colors": {"canvas": "#F6F5F8", "surface": "#FFFFFF", "soft_surface": "#EEEAF2", "text": "#292332", "muted": "#625B6B", "accent": "#5A4268", "accent_hover": "#45324F", "control_border": "#837B8B", "decorative_separator": "#D0CBD6", "focus": "#152F42"}
+    },
+    {
+      "id": "graphite_copper", "name": "Graphite / Copper", "recommendation": "ALTERNATIVE_PROPOSAL",
+      "character": "Warm graphite and a restrained copper action accent; avoid turning all surfaces beige or using decorative italic-serif headlines.",
+      "colors": {"canvas": "#F7F6F3", "surface": "#FFFFFF", "soft_surface": "#F0ECE5", "text": "#2D2924", "muted": "#675E53", "accent": "#7A4937", "accent_hover": "#603A2C", "control_border": "#897F72", "decorative_separator": "#D6CFC5", "focus": "#152F42"}
+    }
+  ],
+  "shared_semantic_colors": {
+    "white": "#FFFFFF",
+    "disabled_text": "#58666E", "disabled_surface": "#E6ECEF",
+    "severity_attention": "#805300", "severity_attention_surface": "#FBF4E2",
+    "severity_important": "#9C3F17", "severity_important_surface": "#FFF0E7",
+    "severity_critical": "#80314D", "severity_critical_surface": "#FBEAF1",
+    "price_positive": "#1F684C", "price_positive_surface": "#E8F4EE",
+    "price_negative": "#9D3342", "price_negative_surface": "#FBECEF",
+    "data_current": "#50616A", "data_current_surface": "#EDF2F4",
+    "data_delayed": "#335D76", "data_delayed_surface": "#EAF1F6",
+    "data_stale": "#74580B", "data_stale_surface": "#FFF7DF",
+    "data_unavailable": "#61596A", "data_unavailable_surface": "#F2EEF5",
+    "data_replay": "#6B5571", "data_replay_surface": "#F2EDF4",
+    "data_synthetic": "#534D6B", "data_synthetic_surface": "#F0EEF6",
+    "series_a": "#355F7D", "series_b": "#705378", "series_c": "#79612C",
+    "series_d": "#4F6C64", "series_e": "#8A5063", "series_f": "#59636F"
+  },
+  "semantic_rules": {
+    "brand_action": "Navigation/interaction only, never a risk score or price trend.",
+    "severity": "Text label plus distinct icon/position; importance is not price direction or source health.",
+    "evidence_strength": "Neutral ink typography and disclosed 0-100 heuristic method; unavailable has no fabricated score. No rainbow/gauge/probability styling.",
+    "price_direction": "Signed values and words supply meaning; green/red only supplement price movement, never indicate safe/unsafe assets.",
+    "data_mode_and_health": "Reserved source/date band with explicit mode/coverage label; source freshness is not investment safety. Essential limitation text is active text, never disabled contrast.",
+    "sector_or_series": "Categorical legend/name and line pattern or direct label; color carries no good/bad or severity meaning. Adjacent-series differentiation remains a rendered chart task."
+  },
+  "pairing_policy": {
+    "normal_text_threshold": 4.5,
+    "nontext_threshold": 3.0,
+    "normal_text_is_not_assumed_large": true,
+    "disabled_wcag_applicability": "EXEMPT_ONLY_IF_ACTUALLY_INACTIVE",
+    "disabled_voluntary_readability_target": 4.5,
+    "decorative_separator_applicability": "NO_THRESHOLD_ONLY_IF_NOT_REQUIRED_TO_IDENTIFY_CONTROL_OR_DATA",
+    "focus_construction": "3px external opaque focus outline with 2px surface-colored offset; tested only on listed light surfaces. This contrast calculation does not test actual area, clipping or obscuration.",
+    "unsupported": ["Alpha/transparency", "Gradients", "Image-backed text", "Dark theme", "Actual CSS compositing", "Font rendering", "Color-vision simulation", "Adjacent series color distinction", "Focus geometry/occlusion"]
+  }
+}

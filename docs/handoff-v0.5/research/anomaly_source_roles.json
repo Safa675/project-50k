@@ -1,0 +1,453 @@
+{
+  "audit_date": "2026-10-02",
+  "scope": "Role mapping for all28 catalog entries based on local source definitions and verified research content. S-source roles use their documented local scope; direct source/API verification remains separate. No entry has completed empirical validation.",
+  "role_definitions": {
+    "method": "Research supports the specified methodological component only; see per-entry notes. This does not imply product threshold validation.",
+    "data": "Provider/interface/official factual-source provenance within stated scope; no live coverage/rights/service guarantee.",
+    "background": "Contextual motivation or related domain evidence, not a derivation/validation of this detector.",
+    "project_heuristic": "Project-authored formula, threshold, extraction workflow or deterministic policy/process.",
+    "validation": "Direct empirical Project50K detector evaluation; empty because none was performed."
+  },
+  "project_provenance": {
+    "PROJECT_SPEC": [
+      "docs/12_Anomaly_Catalog.md",
+      "config/anomaly_catalog.json",
+      "config/detection_defaults.json"
+    ]
+  },
+  "source_roles": {
+    "AN-MKT-001": {
+      "method": [],
+      "data": [],
+      "background": [
+        "R02"
+      ],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "AN-MKT-002": {
+      "method": [],
+      "data": [],
+      "background": [
+        "R01",
+        "R02"
+      ],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "AN-MKT-003": {
+      "method": [],
+      "data": [],
+      "background": [
+        "R01"
+      ],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "AN-MKT-004": {
+      "method": [],
+      "data": [],
+      "background": [
+        "R02",
+        "R04"
+      ],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "AN-MKT-005": {
+      "method": [
+        "R11"
+      ],
+      "data": [],
+      "background": [],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "AN-MKT-006": {
+      "method": [],
+      "data": [],
+      "background": [
+        "R01"
+      ],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "AN-MKT-007": {
+      "method": [],
+      "data": [],
+      "background": [
+        "R01"
+      ],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "AN-FND-001": {
+      "method": [],
+      "data": [],
+      "background": [
+        "R10"
+      ],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "AN-FND-002": {
+      "method": [],
+      "data": [],
+      "background": [
+        "R10"
+      ],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "AN-FND-003": {
+      "method": [],
+      "data": [],
+      "background": [
+        "R10"
+      ],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "AN-FND-004": {
+      "method": [],
+      "data": [
+        "S06"
+      ],
+      "background": [],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "AN-FND-005": {
+      "method": [],
+      "data": [
+        "S02",
+        "S03"
+      ],
+      "background": [],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "AN-FND-006": {
+      "method": [],
+      "data": [],
+      "background": [
+        "R10"
+      ],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "AN-FND-007": {
+      "method": [],
+      "data": [],
+      "background": [
+        "S03"
+      ],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "AN-EVT-001": {
+      "method": [],
+      "data": [
+        "S34"
+      ],
+      "background": [
+        "R13"
+      ],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "AN-EVT-002": {
+      "method": [],
+      "data": [
+        "S09"
+      ],
+      "background": [],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "AN-EVT-003": {
+      "method": [],
+      "data": [
+        "S09"
+      ],
+      "background": [],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "AN-EVT-004": {
+      "method": [
+        "R15"
+      ],
+      "data": [],
+      "background": [],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "AN-ONC-001": {
+      "method": [],
+      "data": [
+        "S11"
+      ],
+      "background": [
+        "R12"
+      ],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "AN-ONC-002": {
+      "method": [],
+      "data": [
+        "S12"
+      ],
+      "background": [],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "AN-ONC-003": {
+      "method": [],
+      "data": [
+        "S13"
+      ],
+      "background": [],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "AN-ONC-004": {
+      "method": [],
+      "data": [
+        "S11"
+      ],
+      "background": [
+        "S12"
+      ],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "AN-ONC-005": {
+      "method": [],
+      "data": [],
+      "background": [
+        "R12"
+      ],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "AN-CMP-001": {
+      "method": [
+        "R11",
+        "R14"
+      ],
+      "data": [],
+      "background": [
+        "R12"
+      ],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "AN-CMP-002": {
+      "method": [],
+      "data": [],
+      "background": [
+        "S03"
+      ],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "AN-DQ-001": {
+      "method": [],
+      "data": [
+        "S04"
+      ],
+      "background": [],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "AN-DQ-002": {
+      "method": [],
+      "data": [
+        "S06"
+      ],
+      "background": [],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    },
+    "AN-DQ-003": {
+      "method": [],
+      "data": [],
+      "background": [
+        "R01",
+        "R02"
+      ],
+      "project_heuristic": [
+        "PROJECT_SPEC"
+      ],
+      "validation": []
+    }
+  },
+  "source_role_notes": {
+    "AN-MKT-001": "R02 motivates intraday volatility seasonality; it does not supply the same-slot median-volume formula, RVOL3 threshold or20-observation rule.",
+    "AN-MKT-002": "Financial stylized facts and intraday-volatility context motivate robust baselines; MAD scale, z4,1%floor and20-reference rule are project design.",
+    "AN-MKT-003": "R01 is contextual financial behavior evidence; beta-one benchmark subtraction and robust residual threshold are project rules.",
+    "AN-MKT-004": "R02 concerns intraday dynamics. R04 documents online changepoint inference, but the catalog uses sqrt(sum(r^2)) window comparison rather than implementing that algorithm; neither derives its quantile rule.",
+    "AN-MKT-005": "R11 supports general joint price/volume anomaly screening. The robust-score/RVOL adaptation, one-bar merge and HIGH severity are project rules; R11 does not validate their thresholds.",
+    "AN-MKT-006": "R01 supplies broad financial context, not a validated spread/liquidity detector.",
+    "AN-MKT-007": "Cross-venue FX/fee normalization and robust difference baseline are project design; R01 is background only.",
+    "AN-FND-001": "R10 studies fund-flow/search/performance relationships, not this median-peer divergence or10-peer threshold.",
+    "AN-FND-002": "R10 motivates flow context; its abstract-only inspected depth does not establish this exact NAV-ratio/distribution convention. Return adjustment and10%trigger are project design.",
+    "AN-FND-003": "R10 is fund-flow context; it does not validate investor-count changes as monetary flows or the10%/100-investor rule.",
+    "AN-FND-004": "S06 is maintainer provider implementation evidence about field/interface behavior, not mathematical validation or an independently tested/entitled endpoint. Total variation and0.20threshold are project design.",
+    "AN-FND-005": "Official SPK notices provide factual context/source class; exact per-fund identity/action/status must come from the relevant decision. Extraction/entity validation is project process, not a validated model.",
+    "AN-FND-006": "R10 is not an HHI/holding-concentration method reference. Top-position/HHI definitions and publication freshness rules are project design.",
+    "AN-FND-007": "S03 is regulatory contextual evidence; it does not supply licensed holdings liquidity, redemption terms or validate weighted liquidity mismatch.",
+    "AN-EVT-001": "R13 motivates retrieval-augmented language generation, not the contract/TTM ratio or materiality judgement. Existing S09(SEC EDGAR) is excluded because it does not document KAP. KAP subscriber documentation S34 supplies the relevant Turkish interface; entitlement remains open.",
+    "AN-EVT-002": "SEC submission/XBRL API documentation addresses retrieval and dated filings, not correctness of automatic classification, period comparison or EPS surprises.",
+    "AN-EVT-003": "SEC APIs address retrieval of filed facts; accounting divergence ratios/sector rules are project design, not validated fraud inference.",
+    "AN-EVT-004": "R15 supports citation completeness/entailment evaluation only. Document-version diff, event invalidation and correction lifecycle are project process; no source-accuracy guarantee follows.",
+    "AN-ONC-001": "S11 supplies raw RPC transaction/log data concepts; identity and sale inference do not follow. R12 concerns exchange/channel pump events, not a validated large-transfer detector.",
+    "AN-ONC-002": "S12 documents largest token accounts(top20), not20 beneficial owners. Top-account/supply ratio and account-role caveats are project design.",
+    "AN-ONC-003": "S13 documents pair-level API snapshots, not assumed history or a validated liquidity-withdrawal detector; reserve/price separation is project design.",
+    "AN-ONC-004": "S11 offers base RPC capabilities but not contract/proxy permission semantics. S12(getTokenLargestAccounts) is an ecosystem/account-data entrypoint, not authority/Token2022 documentation.",
+    "AN-ONC-005": "R12 is manipulation background only; it does not document issuer vesting schedules or validate supply unlock alerts.",
+    "AN-CMP-001": "R11 supports market screening only; R14 supports interleaved tool interaction at a conceptual level. Neither validates market/on-chain causal linkage, timing, severity or confidence; R12 explains excluded coordination evidence.",
+    "AN-CMP-002": "S03 supplies regulatory context, not a point-in-time security-level exposure/stock relationship detector.",
+    "AN-DQ-001": "S04 is an official fund-value discovery page; it does not establish a tested publication cadence/heartbeat contract. Schedule-aware staleness rules are project design.",
+    "AN-DQ-002": "S06 provides maintainer code evidence about placeholder/default behavior, not a guarantee for every live field or provider. Quarantine/schema/unit rules are project design.",
+    "AN-DQ-003": "Stylized financial behavior and session dynamics are background; corporate-action calendars, adjustment-state checks and suppression are project process."
+  },
+  "additional_primary_source_needs": {
+    "AN-MKT-001": [
+      "Licensed final-bar volume feed and explicit session/calendar contract."
+    ],
+    "AN-MKT-002": [
+      "Point-in-time corporate-action/adjusted-series convention."
+    ],
+    "AN-MKT-003": [
+      "Asset-benchmark point-in-time mapping and exact residual baseline window."
+    ],
+    "AN-MKT-004": [
+      "Primary realized-variance methodology if scientific provenance is wanted; explicit window and missing-bar policy."
+    ],
+    "AN-MKT-006": [
+      "Licensed synchronized quote/tick-size/quote-age data contract; spread method provenance."
+    ],
+    "AN-MKT-007": [
+      "Asset equivalence/FX/fee/transfer-restriction contracts."
+    ],
+    "AN-FND-001": [
+      "Dated category/mandate/NAV total-return convention; tested fund exclusion."
+    ],
+    "AN-FND-002": [
+      "Aligned AUM/NAV publication and distribution/unit-change contracts; formula derivation or exact primary section."
+    ],
+    "AN-FND-003": [
+      "Actual historical investor counts and stable count-definition contract."
+    ],
+    "AN-FND-004": [
+      "Published allocation history/availability and stable category-map contract."
+    ],
+    "AN-FND-005": [
+      "Exact affected-fund decisions with publication/effective dates and subsequent status."
+    ],
+    "AN-FND-006": [
+      "Security-level dated holdings data; HHI convention and signed/derivative treatment."
+    ],
+    "AN-FND-007": [
+      "Fund redemption terms; current supported holdings and underlying-liquidity data."
+    ],
+    "AN-EVT-001": [
+      "Primary KAP disclosure/interface source; comparable issuer financial-scale source."
+    ],
+    "AN-EVT-002": [
+      "Accession/acceptance timestamps and original/revised fact-vintage handling."
+    ],
+    "AN-EVT-003": [
+      "Comparable income/cash-flow periods, accounting regime and sector-specific denominator rules."
+    ],
+    "AN-ONC-001": [
+      "Chain-specific finality, contract/decimals, historical transfer/supply baseline and dated address labels."
+    ],
+    "AN-ONC-002": [
+      "Supply/account state alignment and role labels with uncertainty."
+    ],
+    "AN-ONC-003": [
+      "Comparable historical pool reserves and specialized concentrated-liquidity semantics."
+    ],
+    "AN-ONC-004": [
+      "Primary supported ABI/proxy implementation semantics; Solana mint/freeze/Token2022 authority documentation."
+    ],
+    "AN-ONC-005": [
+      "Primary issuer vesting schedule with revisions; circulating-supply convention."
+    ],
+    "AN-CMP-001": [
+      "Asset/chain matching and time-window policy; source/derived-input lineage preventing false corroboration."
+    ],
+    "AN-CMP-002": [
+      "Published security holdings and availability timestamps; licensed aligned market observations."
+    ],
+    "AN-DQ-001": [
+      "Provider-specific expected cadence/calendar and observed availability contract."
+    ],
+    "AN-DQ-003": [
+      "Verified action/calendar/adjustment metadata contracts."
+    ]
+  },
+  "excluded_existing_sources": {
+    "AN-EVT-001": [
+      "S09"
+    ]
+  }
+}

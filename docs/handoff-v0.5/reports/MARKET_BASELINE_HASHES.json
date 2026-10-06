@@ -1,0 +1,42 @@
+{
+  "baseline": "pre-market risk-updatedv0.5",
+  "input_files": [
+    {
+      "path": "requirements_registry.json",
+      "sha256": "d42a9b668459a22d79dcb7f7740bcb2a0b8d4bd0b04021dfe2fdedb7f5231a3e"
+    },
+    {
+      "path": "config/anomaly_catalog.json",
+      "sha256": "231c785d32d189b102bedd39327c2ab0a104352570ede27d2ffb00c54626ff27"
+    },
+    {
+      "path": "docs/02_Problem_Analysis_and_Opportunity.md",
+      "sha256": "b51f8b0722d4dd60191887cecd645ef545070774fb646679cda296c228c67ceb"
+    },
+    {
+      "path": "docs/23_Startup_Validation_and_Demo.md",
+      "sha256": "4249d868cf8c51a19d7be8c2b594d61e9d7d1175ca98b05edaff16ef0bf0e651"
+    },
+    {
+      "path": "docs/24_Competitor_Evidence_and_Positioning.md",
+      "sha256": "a2dc60ce2bb235f238e9deb6b61cb00fd85bd5e5766a800f71d2a9da1355f579"
+    },
+    {
+      "path": "reports/RESEARCH_REPORT.md",
+      "sha256": "1fa83fb00a38785262ff4e2b396465d86799af0d872a56f2b290f95b01f75add"
+    },
+    {
+      "path": "START_HERE.md",
+      "sha256": "89bf974798c17b9388755f4efb995a73419e49239e75875f97355d3636823c7f"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "95c59f778f33c8f9aaaf20747a095a17ca558a6427c3749e9d0112c63e52b8ea"
+    },
+    {
+      "path": "docs/12_Anomaly_Catalog.md",
+      "sha256": "35ba9040db5f129a178f20a35cd8732c47cb43afe6ffc2ac0a8493a1fd424792"
+    }
+  ],
+  "source_manifest_project_hash_semantics": "Project-document source hashes bind the pre-update files at reading time; current continuation addenda do not rewrite those observations."
+}

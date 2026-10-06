@@ -1,0 +1,149 @@
+{
+  "type": "object",
+  "properties": {
+    "evidence_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "source_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "MARKET_OBSERVATION",
+        "FUND_OBSERVATION",
+        "OFFICIAL_DOCUMENT",
+        "NEWS",
+        "ONCHAIN",
+        "CALCULATION"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "locator": {
+      "type": "string",
+      "minLength": 1
+    },
+    "origin": {
+      "type": "string",
+      "enum": [
+        "LIVE",
+        "DELAYED",
+        "HISTORICAL_REPLAY",
+        "SYNTHETIC"
+      ]
+    },
+    "observed_at": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "date-time"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "published_at": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "date-time"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "available_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "ingested_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "availability_provenance": {
+      "type": "string",
+      "enum": [
+        "OBSERVED",
+        "ARCHIVE_VERIFIED",
+        "UNKNOWN"
+      ]
+    },
+    "source_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "claim_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "rights_status": {
+      "type": "string",
+      "enum": [
+        "APPROVED",
+        "RESTRICTED",
+        "UNKNOWN",
+        "SYNTHETIC"
+      ]
+    },
+    "values": {
+      "type": "object",
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "string",
+            "pattern": "^-?\\d+(\\.\\d+)?$"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      }
+    },
+    "units": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 0
+    }
+  },
+  "required": [
+    "evidence_id",
+    "source_id",
+    "kind",
+    "title",
+    "locator",
+    "origin",
+    "observed_at",
+    "published_at",
+    "available_at",
+    "ingested_at",
+    "availability_provenance",
+    "source_version",
+    "claim_ids",
+    "rights_status",
+    "values",
+    "units",
+    "limitations"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://project50k.invalid/contracts/evidence.schema.json"
+}

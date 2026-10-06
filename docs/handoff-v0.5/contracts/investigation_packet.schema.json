@@ -1,0 +1,165 @@
+{
+  "type": "object",
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "origin": {
+      "type": "string",
+      "enum": [
+        "LIVE",
+        "DELAYED",
+        "HISTORICAL_REPLAY",
+        "SYNTHETIC"
+      ]
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "candidate_type": {
+      "type": "string"
+    },
+    "numeric_facts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "fact_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string",
+            "pattern": "^-?\\d+(\\.\\d+)?$"
+          },
+          "unit": {
+            "type": "string"
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "minItems": 1
+          }
+        },
+        "required": [
+          "fact_id",
+          "name",
+          "value",
+          "unit",
+          "evidence_ids"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "evidence.schema.json"
+      },
+      "minItems": 0
+    },
+    "coverage_notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 0
+    },
+    "allowed_questions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 0
+    },
+    "asset_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "replay_cutoff": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "date-time"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "replay_bundle_id": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "uuid"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "event_id",
+    "origin",
+    "as_of",
+    "candidate_type",
+    "numeric_facts",
+    "sources",
+    "coverage_notes",
+    "allowed_questions",
+    "asset_id",
+    "replay_cutoff",
+    "replay_bundle_id"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://project50k.invalid/contracts/investigation_packet.schema.json",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "origin": {
+            "const": "HISTORICAL_REPLAY"
+          }
+        },
+        "required": [
+          "origin"
+        ]
+      },
+      "then": {
+        "properties": {
+          "replay_cutoff": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "replay_bundle_id": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "replay_cutoff"
+        ]
+      },
+      "else": {
+        "properties": {
+          "replay_cutoff": {
+            "type": "null"
+          },
+          "replay_bundle_id": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ]
+}

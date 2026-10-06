@@ -1,0 +1,229 @@
+[
+  {
+    "path": "AGENTS.md",
+    "review_scope": "FULL_CONTENT_REVIEW",
+    "reviewer": "reference_engine",
+    "external_verification": "NOT_PERFORMED",
+    "changed_by_reviewer": false
+  },
+  {
+    "path": "START_HERE.md",
+    "review_scope": "FULL_CONTENT_REVIEW",
+    "reviewer": "reference_engine",
+    "external_verification": "NOT_PERFORMED",
+    "changed_by_reviewer": false
+  },
+  {
+    "path": "docs/00_Decisions_and_Corrections.md",
+    "review_scope": "FULL_CONTENT_REVIEW",
+    "reviewer": "reference_engine",
+    "external_verification": "NOT_PERFORMED",
+    "changed_by_reviewer": false
+  },
+  {
+    "path": "docs/25_Release_Gates_and_Open_Decisions.md",
+    "review_scope": "FULL_CONTENT_REVIEW",
+    "reviewer": "reference_engine",
+    "external_verification": "NOT_PERFORMED",
+    "changed_by_reviewer": false
+  },
+  {
+    "path": "PRODUCT.md",
+    "review_scope": "FULL_CONTENT_REVIEW",
+    "reviewer": "reference_engine",
+    "external_verification": "NOT_PERFORMED",
+    "changed_by_reviewer": false
+  },
+  {
+    "path": "DESIGN.md",
+    "review_scope": "FULL_CONTENT_REVIEW",
+    "reviewer": "reference_engine",
+    "external_verification": "NOT_PERFORMED",
+    "changed_by_reviewer": false
+  },
+  {
+    "path": "docs/13_Decision_Confidence_and_Validation.md",
+    "review_scope": "FULL_CONTENT_REVIEW",
+    "reviewer": "reference_engine",
+    "external_verification": "NOT_PERFORMED",
+    "changed_by_reviewer": false
+  },
+  {
+    "path": "docs/20_Test_and_Validation_Strategy.md",
+    "review_scope": "FULL_CONTENT_REVIEW",
+    "reviewer": "reference_engine",
+    "external_verification": "NOT_PERFORMED",
+    "changed_by_reviewer": false
+  },
+  {
+    "path": "config/detection_defaults.json",
+    "review_scope": "FULL_CONTENT_REVIEW",
+    "reviewer": "reference_engine",
+    "external_verification": "NOT_PERFORMED",
+    "changed_by_reviewer": false
+  },
+  {
+    "path": "config/notification_defaults.json",
+    "review_scope": "FULL_CONTENT_REVIEW",
+    "reviewer": "reference_engine",
+    "external_verification": "NOT_PERFORMED",
+    "changed_by_reviewer": false
+  },
+  {
+    "path": "config/admin_settings.json",
+    "review_scope": "FULL_CONTENT_REVIEW",
+    "reviewer": "reference_engine",
+    "external_verification": "NOT_PERFORMED",
+    "changed_by_reviewer": false
+  },
+  {
+    "path": "config/anomaly_catalog.json",
+    "review_scope": "FULL_CONTENT_REVIEW",
+    "reviewer": "reference_engine",
+    "external_verification": "NOT_PERFORMED",
+    "changed_by_reviewer": false
+  },
+  {
+    "path": "reference/engine.py",
+    "review_scope": "FULL_CONTENT_REVIEW",
+    "reviewer": "reference_engine",
+    "external_verification": "NOT_PERFORMED",
+    "changed_by_reviewer": true
+  },
+  {
+    "path": "tests/test_reference.py",
+    "review_scope": "FULL_CONTENT_REVIEW",
+    "reviewer": "reference_engine",
+    "external_verification": "NOT_PERFORMED",
+    "changed_by_reviewer": true
+  },
+  {
+    "path": "fixtures/README.md",
+    "review_scope": "FULL_CONTENT_REVIEW",
+    "reviewer": "reference_engine",
+    "external_verification": "NOT_PERFORMED",
+    "changed_by_reviewer": false
+  },
+  {
+    "path": "fixtures/synthetic_event.json",
+    "review_scope": "FULL_CONTENT_REVIEW",
+    "reviewer": "reference_engine",
+    "external_verification": "NOT_PERFORMED",
+    "changed_by_reviewer": false
+  },
+  {
+    "path": "fixtures/synthetic_ai_answer.json",
+    "review_scope": "FULL_CONTENT_REVIEW",
+    "reviewer": "reference_engine",
+    "external_verification": "NOT_PERFORMED",
+    "changed_by_reviewer": false
+  },
+  {
+    "path": "fixtures/synthetic_fund_cases.json",
+    "review_scope": "FULL_CONTENT_REVIEW",
+    "reviewer": "reference_engine",
+    "external_verification": "NOT_PERFORMED",
+    "changed_by_reviewer": false
+  },
+  {
+    "path": "fixtures/ai_adversarial_cases.json",
+    "review_scope": "FULL_CONTENT_REVIEW",
+    "reviewer": "reference_engine",
+    "external_verification": "NOT_PERFORMED",
+    "changed_by_reviewer": false
+  },
+  {
+    "path": "scripts/validate_package.py",
+    "review_scope": "FULL_CONTENT_REVIEW",
+    "reviewer": "reference_engine",
+    "external_verification": "NOT_PERFORMED",
+    "changed_by_reviewer": false
+  },
+  {
+    "path": "scripts/make_manifest.py",
+    "review_scope": "FULL_CONTENT_REVIEW",
+    "reviewer": "reference_engine",
+    "external_verification": "NOT_PERFORMED",
+    "changed_by_reviewer": false
+  },
+  {
+    "path": "requirements-validation.txt",
+    "review_scope": "FULL_CONTENT_REVIEW",
+    "reviewer": "reference_engine",
+    "external_verification": "NOT_PERFORMED",
+    "changed_by_reviewer": false
+  },
+  {
+    "path": "contracts/evidence.schema.json",
+    "review_scope": "FULL_CONTENT_REVIEW",
+    "reviewer": "reference_engine",
+    "external_verification": "NOT_PERFORMED",
+    "changed_by_reviewer": false
+  },
+  {
+    "path": "contracts/event.schema.json",
+    "review_scope": "FULL_CONTENT_REVIEW",
+    "reviewer": "reference_engine",
+    "external_verification": "NOT_PERFORMED",
+    "changed_by_reviewer": false
+  },
+  {
+    "path": "docs/07_Functional_Requirements.md",
+    "review_scope": "RELEVANT_SECTIONS_ONLY",
+    "reviewer": "reference_engine",
+    "requirement_ids": [
+      "FR-032",
+      "FR-033",
+      "FR-034",
+      "FR-035",
+      "FR-037",
+      "FR-048",
+      "FR-049",
+      "FR-050",
+      "FR-053",
+      "FR-054",
+      "FR-064",
+      "FR-067",
+      "FR-068",
+      "FR-069",
+      "FR-070",
+      "FR-085",
+      "FR-086",
+      "FR-087",
+      "FR-089",
+      "FR-090",
+      "FR-108",
+      "FR-109",
+      "FR-110",
+      "FR-111"
+    ],
+    "changed_by_reviewer": false
+  },
+  {
+    "path": "docs/08_Non_Functional_Requirements.md",
+    "review_scope": "RELEVANT_SECTIONS_ONLY",
+    "reviewer": "reference_engine",
+    "requirement_ids": [
+      "NFR-022",
+      "NFR-023",
+      "NFR-024",
+      "NFR-025",
+      "NFR-026",
+      "NFR-027",
+      "NFR-028",
+      "NFR-029",
+      "NFR-030",
+      "NFR-031",
+      "NFR-032",
+      "NFR-033",
+      "NFR-034",
+      "NFR-035",
+      "NFR-036",
+      "NFR-037",
+      "NFR-038",
+      "NFR-039",
+      "NFR-040"
+    ],
+    "changed_by_reviewer": false
+  }
+]

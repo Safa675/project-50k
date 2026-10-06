@@ -1,0 +1,80 @@
+{
+  "research_local_date": "2026-10-03",
+  "status": "Desk-research dispositions and proposed falsifiers; no customer, detector or payment experiment executed",
+  "owner_scope_unchanged": true,
+  "requirements_completed": 0,
+  "hypotheses": [
+    {
+      "id": "PS01",
+      "proposition": "Some followed-asset developments require interpreting revisions or conflicting information.",
+      "evidence_status": "SUPPORTED_SELECTED_MECHANISM",
+      "evidence": "OFFICIAL_INCIDENT_CASES.md; turkey_market_sources.json/TR-S07",
+      "limitation": "Frequency and unresolved burden in intended users remain unknown.",
+      "disconfirmation_condition": "Recent artifact-backed tasks show no unresolved confusion or the official route solves it easily.",
+      "externally_tested_by_this_task": false
+    },
+    {
+      "id": "PS02",
+      "proposition": "A relevant measured change joined to official evidence improves on notification alone.",
+      "evidence_status": "UNTESTED_INCREMENTAL_VALUE",
+      "evidence": "PROBLEM_AND_SOLUTION_EVIDENCE.md; BIST_FREQUENCY_EVIDENCE.md",
+      "limitation": "KAP already advertises following and instant notifications.",
+      "disconfirmation_condition": "Correct task completion, effort or useful context is no better than the actual next-best route.",
+      "externally_tested_by_this_task": false
+    },
+    {
+      "id": "PS03",
+      "proposition": "Comparable dated fund explanations can improve monitoring.",
+      "evidence_status": "UNTESTED_INCREMENTAL_VALUE",
+      "evidence": "PROBLEM_AND_SOLUTION_EVIDENCE.md; engine_lab/FUND_ENGINE.md",
+      "limitation": "Latest detail is not historical availability; flow residual is not identified cash.",
+      "disconfirmation_condition": "Existing bank/TEFAS/fund-document routine is equally useful, or delayed facts create false urgency.",
+      "externally_tested_by_this_task": false
+    },
+    {
+      "id": "PS04",
+      "proposition": "Cross-market and chain context makes an investigation more useful.",
+      "evidence_status": "UNTESTED_INCREMENTAL_VALUE",
+      "evidence": "PROBLEM_AND_SOLUTION_EVIDENCE.md; CROSS_MARKET_FREQUENCY.md",
+      "limitation": "Ownership, sale and cause cannot be inferred from a transfer; actual multi-market workflow unknown.",
+      "disconfirmation_condition": "Joined evidence is irrelevant, ambiguous, stale or costs more effort than separate tools.",
+      "externally_tested_by_this_task": false
+    },
+    {
+      "id": "PS05",
+      "proposition": "Evidence/time/uncertainty language reduces unsupported conclusions.",
+      "evidence_status": "UNTESTED_HUMAN_OUTCOME",
+      "evidence": "PROBLEM_AND_SOLUTION_EVIDENCE.md; engine_lab/EVIDENCE_INVESTIGATION.md",
+      "limitation": "Constructed policy checks are not Turkish comprehension or truth validation.",
+      "disconfirmation_condition": "Confidence increases without better source/time comprehension or factual accuracy.",
+      "externally_tested_by_this_task": false
+    },
+    {
+      "id": "PS06",
+      "proposition": "The verification job recurs enough for ordinary-use retention.",
+      "evidence_status": "UNKNOWN_RECURRENCE",
+      "evidence": "TURKEY_MARKET_EVIDENCE.md; PROBLEM_AND_SOLUTION_EVIDENCE.md",
+      "limitation": "Platform publications and selected crises do not measure user tasks per week.",
+      "disconfirmation_condition": "Participants rarely have tasks, mute alerts or return only during exceptional episodes.",
+      "externally_tested_by_this_task": false
+    },
+    {
+      "id": "PS07",
+      "proposition": "Enough intended users will pay for measured verification value.",
+      "evidence_status": "UNKNOWN_PAYMENT_AND_ECONOMICS",
+      "evidence": "TURKEY_MARKET_EVIDENCE.md; PROBLEM_AND_SOLUTION_EVIDENCE.md",
+      "limitation": "No market-cohort sum, asset total, affected-investor count or stated interest supplies paid demand.",
+      "disconfirmation_condition": "A subsequently authorized explicit offer loses to actual alternatives or viable cumulative cost cannot be met.",
+      "externally_tested_by_this_task": false
+    },
+    {
+      "id": "PS08",
+      "proposition": "Published anomaly rates can predict this catalog or user alert frequency.",
+      "evidence_status": "REJECTED_TRANSFER_CLAIM",
+      "evidence": "CROSS_MARKET_FREQUENCY.md; BIST_FREQUENCY_EVIDENCE.md; ANOMALY_FREQUENCY_MAP.json",
+      "limitation": "Definitions, populations, clocks and units differ; all28 project rates remain unknown.",
+      "disconfirmation_condition": "Not a product hypothesis to promote: only an admitted complete dataset with frozen rules can establish a project rate.",
+      "externally_tested_by_this_task": false
+    }
+  ]
+}

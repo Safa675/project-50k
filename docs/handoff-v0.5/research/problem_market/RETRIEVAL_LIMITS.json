@@ -1,0 +1,23 @@
+{
+  "retrieved_on": "2026-10-03",
+  "own_empirical_catalog_rates_measured": 0,
+  "complete_market_dataset_obtained": false,
+  "attempts": [
+    {
+      "url": "https://fred.stlouisfed.org/graph/?id=SP500",
+      "source_ref": "turn165view0",
+      "outcome": "Current selected daily values and copyright notice visible; complete authorized historical dataset not obtained. No raw copyrighted S&P series bundled or rate calculated."
+    },
+    {
+      "url": "https://fred.stlouisfed.org/graph/?id=CBBTCUSD",
+      "source_ref": "turn165view1",
+      "outcome": "Retrieval unsuccessful; no data or rate."
+    },
+    {
+      "url": "https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1d&startTime=1735689600000&endTime=1767225599999&limit=1000",
+      "source_ref": "turn165view2",
+      "outcome": "Public endpoint retrieval unsuccessful; no data or rate."
+    }
+  ],
+  "other_limits": "Per-lane manifests retain KAP annual-list retrieval limit, TEFAS failure, VAP methodology gap and selected-paper reading depth. No browser/account/API-key interaction or paid provider trial."
+}

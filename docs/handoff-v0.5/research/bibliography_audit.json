@@ -1,0 +1,601 @@
+{
+  "audit_date": "2026-10-02",
+  "scope": "Bibliographic corrections only; primary metadata confirmation is separate from scientific validation. Omitted metadata must not be invented.",
+  "sync_targets": [
+    "research/references.bib",
+    "research/sources.json",
+    "research/SOURCE_REGISTER.md",
+    "docs/11_Literature_Review.md"
+  ],
+  "records": [
+    {
+      "id": "R01",
+      "bibtex_key": "r01",
+      "bibtex_type": "article",
+      "fields": {
+        "title": "Empirical properties of asset returns: stylized facts and statistical issues",
+        "author": "Rama Cont",
+        "year": "2001",
+        "url": "https://www.tandfonline.com/doi/abs/10.1080/713665670",
+        "journal": "Quantitative Finance",
+        "volume": "1",
+        "number": "2",
+        "pages": "223--236",
+        "doi": "10.1080/713665670"
+      },
+      "authors": [
+        "Rama Cont"
+      ],
+      "versions": [],
+      "verified_primary_urls": [
+        "https://www.tandfonline.com/doi/abs/10.1080/713665670",
+        "https://rama.cont.perso.math.cnrs.fr/",
+        "https://rama.cont.perso.math.cnrs.fr/pdf/empirical.pdf"
+      ],
+      "source_ref_ids": [
+        "turn4search4",
+        "turn22search8",
+        "turn25search0"
+      ],
+      "retrieved_on": "2026-10-02",
+      "verification_depth": "Publisher metadata and author manuscript indexed abstract excerpts only; no body read.",
+      "verification_failures": [
+        "Publisher abstract HTTP403 (turn0view0).",
+        "Author manuscript timeout/502 (turn7view0, turn16view1, turn37view0).",
+        "Publisher full URL inaccessible (turn37view1)."
+      ],
+      "unresolved_fields": []
+    },
+    {
+      "id": "R02",
+      "bibtex_key": "r02",
+      "bibtex_type": "article",
+      "fields": {
+        "title": "Intraday periodicity and volatility persistence in financial markets",
+        "author": "Torben G. Andersen and Tim Bollerslev",
+        "year": "1997",
+        "url": "https://www.sciencedirect.com/science/article/pii/S0927539897000042",
+        "journal": "Journal of Empirical Finance",
+        "volume": "4",
+        "number": "2--3",
+        "pages": "115--158",
+        "doi": "10.1016/S0927-5398(97)00004-2"
+      },
+      "authors": [
+        "Torben G. Andersen",
+        "Tim Bollerslev"
+      ],
+      "versions": [],
+      "verified_primary_urls": [
+        "https://www.sciencedirect.com/science/article/pii/S0927539897000042",
+        "https://www.kellogg.northwestern.edu/academics-research/research/detail/1997/intraday-periodicity-and-volatility-persistence-in-financial-markets/"
+      ],
+      "source_ref_ids": [
+        "turn25search3",
+        "turn7view2"
+      ],
+      "retrieved_on": "2026-10-02",
+      "verification_depth": "Author-institution abstract and metadata; publisher indexed metadata; no full text.",
+      "verification_failures": [
+        "Publisher direct HTTP403 (turn0view1)."
+      ],
+      "unresolved_fields": []
+    },
+    {
+      "id": "R03",
+      "bibtex_key": "r03",
+      "bibtex_type": "inproceedings",
+      "fields": {
+        "title": "Isolation Forest",
+        "author": "Fei Tony Liu and Kai Ming Ting and Zhi-Hua Zhou",
+        "year": "2008",
+        "url": "https://ieeexplore.ieee.org/document/4781136",
+        "booktitle": "2008 Eighth IEEE International Conference on Data Mining",
+        "doi": "10.1109/ICDM.2008.17"
+      },
+      "authors": [
+        "Fei Tony Liu",
+        "Kai Ming Ting",
+        "Zhi-Hua Zhou"
+      ],
+      "versions": [],
+      "verified_primary_urls": [
+        "https://ieeexplore.ieee.org/document/4781136",
+        "https://cs.nju.edu.cn/zhouzh/zhouzh.files/publication/icdm08b.pdf"
+      ],
+      "source_ref_ids": [
+        "turn4search10",
+        "turn36view0",
+        "turn40search0"
+      ],
+      "retrieved_on": "2026-10-02",
+      "verification_depth": "Publisher conference-date excerpt; author PDF abstract/introduction selectively inspected (first two pages), not exhaustive methods/experiments.",
+      "verification_failures": [
+        "IEEE JavaScript robot wall (turn0view2).",
+        "LAMDA alternate PDF timeout (turn7view1,turn16view0)."
+      ],
+      "unresolved_fields": [
+        "Exact proceedings pagination was not independently recovered; do not fill from memory."
+      ]
+    },
+    {
+      "id": "R04",
+      "bibtex_key": "r04",
+      "bibtex_type": "misc",
+      "fields": {
+        "title": "Bayesian Online Changepoint Detection",
+        "author": "Ryan Prescott Adams and David J. C. MacKay",
+        "year": "2007",
+        "url": "https://arxiv.org/abs/0710.3742",
+        "howpublished": "arXiv preprint",
+        "doi": "10.48550/arXiv.0710.3742",
+        "eprint": "0710.3742",
+        "archivePrefix": "arXiv",
+        "version": "v1"
+      },
+      "authors": [
+        "Ryan Prescott Adams",
+        "David J. C. MacKay"
+      ],
+      "versions": [
+        {
+          "kind": "author_preprint",
+          "arxiv_id": "0710.3742v1",
+          "url": "https://arxiv.org/abs/0710.3742v1",
+          "doi": "10.48550/arXiv.0710.3742",
+          "year": 2007
+        }
+      ],
+      "verified_primary_urls": [
+        "https://arxiv.org/abs/0710.3742"
+      ],
+      "source_ref_ids": [
+        "turn0view3"
+      ],
+      "retrieved_on": "2026-10-02",
+      "verification_depth": "Author abstract and submission history.",
+      "verification_failures": [],
+      "unresolved_fields": []
+    },
+    {
+      "id": "R05",
+      "bibtex_key": "r05",
+      "bibtex_type": "article",
+      "fields": {
+        "title": "Selective review of offline change point detection methods",
+        "author": "Charles Truong and Laurent Oudre and Nicolas Vayatis",
+        "year": "2020",
+        "url": "https://arxiv.org/abs/1801.00718",
+        "journal": "Signal Processing",
+        "volume": "167",
+        "eid": "107299",
+        "doi": "10.1016/j.sigpro.2019.107299",
+        "note": "Author manuscript arXiv:1801.00718v3; journal version 2020."
+      },
+      "authors": [
+        "Charles Truong",
+        "Laurent Oudre",
+        "Nicolas Vayatis"
+      ],
+      "versions": [
+        {
+          "kind": "author_preprint",
+          "arxiv_id": "1801.00718v3",
+          "url": "https://arxiv.org/abs/1801.00718v3",
+          "doi": "10.48550/arXiv.1801.00718",
+          "year": 2018
+        }
+      ],
+      "verified_primary_urls": [
+        "https://arxiv.org/abs/1801.00718"
+      ],
+      "source_ref_ids": [
+        "turn0view4"
+      ],
+      "retrieved_on": "2026-10-02",
+      "verification_depth": "Author abstract, journal reference and revision history.",
+      "verification_failures": [],
+      "unresolved_fields": []
+    },
+    {
+      "id": "R06",
+      "bibtex_key": "r06",
+      "bibtex_type": "article",
+      "fields": {
+        "title": "Current Time Series Anomaly Detection Benchmarks are Flawed and are Creating the Illusion of Progress",
+        "author": "Renjie Wu and Eamonn J. Keogh",
+        "year": "2023",
+        "url": "https://ieeexplore.ieee.org/document/9537291/",
+        "journal": "IEEE Transactions on Knowledge and Data Engineering",
+        "volume": "35",
+        "number": "3",
+        "pages": "2421--2429",
+        "doi": "10.1109/TKDE.2021.3112126",
+        "note": "Journal early access in 2021; final issue March 2023. Author manuscript arXiv:2009.13807v5 revised 2022-09-03. Separate ICDE 2022 extended abstract is not this journal article."
+      },
+      "authors": [
+        "Renjie Wu",
+        "Eamonn J. Keogh"
+      ],
+      "versions": [
+        {
+          "kind": "journal_early_access",
+          "year": 2021,
+          "doi": "10.1109/TKDE.2021.3112126"
+        },
+        {
+          "kind": "author_preprint",
+          "arxiv_id": "2009.13807v5",
+          "url": "https://arxiv.org/abs/2009.13807v5",
+          "doi": "10.48550/arXiv.2009.13807",
+          "year": 2020
+        },
+        {
+          "kind": "separate_extended_abstract",
+          "venue": "38th IEEE International Conference on Data Engineering (ICDE)",
+          "year": 2022,
+          "pages": "1479--1480",
+          "doi": "10.1109/ICDE53745.2022.00116",
+          "note": "Keep separate; do not use as TKDE pagination."
+        }
+      ],
+      "verified_primary_urls": [
+        "https://arxiv.org/abs/2009.13807",
+        "https://ieeexplore.ieee.org/document/9537291/"
+      ],
+      "source_ref_ids": [
+        "turn2view0",
+        "turn25search2"
+      ],
+      "retrieved_on": "2026-10-02",
+      "verification_depth": "Author abstract, revision history and journal/ICDE distinction; publisher indexed final issue metadata; no full-text critique replication.",
+      "verification_failures": [
+        "IEEE robot wall (turn20view2); DOI direct inaccessible (turn8view0)."
+      ],
+      "unresolved_fields": []
+    },
+    {
+      "id": "R07",
+      "bibtex_key": "r07",
+      "bibtex_type": "inproceedings",
+      "fields": {
+        "title": "On Calibration of Modern Neural Networks",
+        "author": "Chuan Guo and Geoff Pleiss and Yu Sun and Kilian Q. Weinberger",
+        "year": "2017",
+        "url": "https://proceedings.mlr.press/v70/guo17a.html",
+        "booktitle": "Proceedings of the 34th International Conference on Machine Learning",
+        "volume": "70",
+        "pages": "1321--1330",
+        "series": "Proceedings of Machine Learning Research",
+        "publisher": "PMLR"
+      },
+      "authors": [
+        "Chuan Guo",
+        "Geoff Pleiss",
+        "Yu Sun",
+        "Kilian Q. Weinberger"
+      ],
+      "versions": [],
+      "verified_primary_urls": [
+        "https://proceedings.mlr.press/v70/guo17a.html"
+      ],
+      "source_ref_ids": [
+        "turn2view1"
+      ],
+      "retrieved_on": "2026-10-02",
+      "verification_depth": "Proceedings abstract and supplied BibTeX.",
+      "verification_failures": [],
+      "unresolved_fields": []
+    },
+    {
+      "id": "R08",
+      "bibtex_key": "r08",
+      "bibtex_type": "article",
+      "fields": {
+        "title": "Conformal prediction beyond exchangeability",
+        "author": "Rina Foygel Barber and Emmanuel J. Candès and Aaditya Ramdas and Ryan J. Tibshirani",
+        "year": "2023",
+        "url": "https://arxiv.org/abs/2202.13415",
+        "journal": "Annals of Statistics",
+        "volume": "51",
+        "number": "2",
+        "pages": "816--845",
+        "doi": "10.1214/23-AOS2276",
+        "note": "Author preprint first submitted 2022; final journal article April 2023."
+      },
+      "authors": [
+        "Rina Foygel Barber",
+        "Emmanuel J. Candès",
+        "Aaditya Ramdas",
+        "Ryan J. Tibshirani"
+      ],
+      "versions": [
+        {
+          "kind": "author_preprint",
+          "arxiv_id": "2202.13415v5",
+          "url": "https://arxiv.org/abs/2202.13415v5",
+          "doi": "10.48550/arXiv.2202.13415",
+          "year": 2022
+        }
+      ],
+      "verified_primary_urls": [
+        "https://arxiv.org/abs/2202.13415",
+        "https://projecteuclid.org/journals/annals-of-statistics/volume-51/issue-2/Conformal-prediction-beyond-exchangeability/10.1214/23-AOS2276.short"
+      ],
+      "source_ref_ids": [
+        "turn2view2",
+        "turn15search1"
+      ],
+      "retrieved_on": "2026-10-02",
+      "verification_depth": "Author abstract/revision history; primary publisher indexed journal metadata.",
+      "verification_failures": [
+        "Euclid direct page iframe only (turn20view1)."
+      ],
+      "unresolved_fields": []
+    },
+    {
+      "id": "R09",
+      "bibtex_key": "r09",
+      "bibtex_type": "article",
+      "fields": {
+        "title": "Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing",
+        "author": "Yoav Benjamini and Yosef Hochberg",
+        "year": "1995",
+        "url": "https://academic.oup.com/jrsssb/article/57/1/289/7035855",
+        "journal": "Journal of the Royal Statistical Society Series B",
+        "volume": "57",
+        "number": "1",
+        "pages": "289--300",
+        "doi": "10.1111/j.2517-6161.1995.tb02031.x"
+      },
+      "authors": [
+        "Yoav Benjamini",
+        "Yosef Hochberg"
+      ],
+      "versions": [],
+      "verified_primary_urls": [
+        "https://academic.oup.com/jrsssb/article/57/1/289/7035855",
+        "https://cris.tau.ac.il/en/publications/controlling-the-false-discovery-rate-a-practical-and-powerful-app-2/",
+        "https://www.math.tau.ac.il/~ybenja/MyPapers/benjamini_hochberg1995.pdf"
+      ],
+      "source_ref_ids": [
+        "turn4search3",
+        "turn36view1",
+        "turn20view0"
+      ],
+      "retrieved_on": "2026-10-02",
+      "verification_depth": "Publisher title excerpt and author-institution publication metadata. Author-hosted13-page PDF retrieved; text extraction empty; screenshots attempted. Do not claim full text read.",
+      "verification_failures": [
+        "Publisher redirected to inaccessible CDN (turn2view3).",
+        "JSTOR no article text (turn7view3).",
+        "Author PDF returned zero parsed lines (turn20view0)."
+      ],
+      "unresolved_fields": []
+    },
+    {
+      "id": "R10",
+      "bibtex_key": "r10",
+      "bibtex_type": "article",
+      "fields": {
+        "title": "Costly Search and Mutual Fund Flows",
+        "author": "Erik R. Sirri and Peter Tufano",
+        "year": "1998",
+        "url": "https://onlinelibrary.wiley.com/doi/10.1111/0022-1082.00066",
+        "journal": "Journal of Finance",
+        "volume": "53",
+        "number": "5",
+        "pages": "1589--1622",
+        "doi": "10.1111/0022-1082.00066",
+        "note": "Journal issue October 1998; later website online-publication date is distinct."
+      },
+      "authors": [
+        "Erik R. Sirri",
+        "Peter Tufano"
+      ],
+      "versions": [],
+      "verified_primary_urls": [
+        "https://onlinelibrary.wiley.com/doi/10.1111/0022-1082.00066"
+      ],
+      "source_ref_ids": [
+        "turn16view3"
+      ],
+      "retrieved_on": "2026-10-02",
+      "verification_depth": "Publisher abstract and journal issue citation; not full article.",
+      "verification_failures": [],
+      "unresolved_fields": []
+    },
+    {
+      "id": "R11",
+      "bibtex_key": "r11",
+      "bibtex_type": "article",
+      "fields": {
+        "title": "To the moon: defining and detecting cryptocurrency pump-and-dumps",
+        "author": "Josh Kamps and Bennett Kleinberg",
+        "year": "2018",
+        "url": "https://link.springer.com/article/10.1186/s40163-018-0093-5",
+        "journal": "Crime Science",
+        "volume": "7",
+        "eid": "18",
+        "doi": "10.1186/s40163-018-0093-5"
+      },
+      "authors": [
+        "Josh Kamps",
+        "Bennett Kleinberg"
+      ],
+      "versions": [],
+      "verified_primary_urls": [
+        "https://link.springer.com/article/10.1186/s40163-018-0093-5"
+      ],
+      "source_ref_ids": [
+        "turn1view0",
+        "turn8view2"
+      ],
+      "retrieved_on": "2026-10-02",
+      "verification_depth": "Accessible article metadata; method, selected results/cases and limitations inspected; no exhaustive full-article claim.",
+      "verification_failures": [],
+      "unresolved_fields": []
+    },
+    {
+      "id": "R12",
+      "bibtex_key": "r12",
+      "bibtex_type": "inproceedings",
+      "fields": {
+        "title": "The Anatomy of a Cryptocurrency Pump-and-Dump Scheme",
+        "author": "Jiahua Xu and Benjamin Livshits",
+        "year": "2019",
+        "url": "https://www.usenix.org/conference/usenixsecurity19/presentation/xu-jiahua",
+        "booktitle": "28th USENIX Security Symposium (USENIX Security 19)",
+        "pages": "1609--1625",
+        "publisher": "USENIX Association",
+        "address": "Santa Clara, CA",
+        "month": "aug",
+        "isbn": "978-1-939133-06-9"
+      },
+      "authors": [
+        "Jiahua Xu",
+        "Benjamin Livshits"
+      ],
+      "versions": [],
+      "verified_primary_urls": [
+        "https://www.usenix.org/conference/usenixsecurity19/presentation/xu-jiahua",
+        "https://www.usenix.org/system/files/sec19-xu-jiahua_0.pdf"
+      ],
+      "source_ref_ids": [
+        "turn9view0",
+        "turn21view0",
+        "turn31view1"
+      ],
+      "retrieved_on": "2026-10-02",
+      "verification_depth": "Conference abstract/BibTeX and PDF introduction, case-study excerpt and data-collection section4.1 selectively inspected.",
+      "verification_failures": [],
+      "unresolved_fields": []
+    },
+    {
+      "id": "R13",
+      "bibtex_key": "r13",
+      "bibtex_type": "inproceedings",
+      "fields": {
+        "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+        "author": "Patrick Lewis and Ethan Perez and Aleksandra Piktus and Fabio Petroni and Vladimir Karpukhin and Naman Goyal and Heinrich Küttler and Mike Lewis and Wen-tau Yih and Tim Rocktäschel and Sebastian Riedel and Douwe Kiela",
+        "year": "2020",
+        "url": "https://arxiv.org/abs/2005.11401",
+        "booktitle": "Advances in Neural Information Processing Systems",
+        "note": "Accepted at NeurIPS 2020; linked author manuscript arXiv:2005.11401v4 revised 2021-04-12. ArXiv DOI belongs to preprint, not a separately verified proceedings DOI."
+      },
+      "authors": [
+        "Patrick Lewis",
+        "Ethan Perez",
+        "Aleksandra Piktus",
+        "Fabio Petroni",
+        "Vladimir Karpukhin",
+        "Naman Goyal",
+        "Heinrich Küttler",
+        "Mike Lewis",
+        "Wen-tau Yih",
+        "Tim Rocktäschel",
+        "Sebastian Riedel",
+        "Douwe Kiela"
+      ],
+      "versions": [
+        {
+          "kind": "author_preprint",
+          "arxiv_id": "2005.11401v4",
+          "url": "https://arxiv.org/abs/2005.11401v4",
+          "doi": "10.48550/arXiv.2005.11401",
+          "year": 2020
+        }
+      ],
+      "verified_primary_urls": [
+        "https://arxiv.org/abs/2005.11401"
+      ],
+      "source_ref_ids": [
+        "turn9view1"
+      ],
+      "retrieved_on": "2026-10-02",
+      "verification_depth": "Author abstract, full author list, acceptance note and revisions.",
+      "verification_failures": [],
+      "unresolved_fields": [
+        "Proceedings URL/pagination/volume not independently recovered in this audit; fields omitted."
+      ]
+    },
+    {
+      "id": "R14",
+      "bibtex_key": "r14",
+      "bibtex_type": "inproceedings",
+      "fields": {
+        "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+        "author": "Shunyu Yao and Jeffrey Zhao and Dian Yu and Nan Du and Izhak Shafran and Karthik Narasimhan and Yuan Cao",
+        "year": "2023",
+        "url": "https://arxiv.org/abs/2210.03629",
+        "booktitle": "International Conference on Learning Representations",
+        "note": "ICLR camera-ready author manuscript arXiv:2210.03629v3 revised 2023-03-10; initial preprint 2022."
+      },
+      "authors": [
+        "Shunyu Yao",
+        "Jeffrey Zhao",
+        "Dian Yu",
+        "Nan Du",
+        "Izhak Shafran",
+        "Karthik Narasimhan",
+        "Yuan Cao"
+      ],
+      "versions": [
+        {
+          "kind": "author_preprint",
+          "arxiv_id": "2210.03629v3",
+          "url": "https://arxiv.org/abs/2210.03629v3",
+          "doi": "10.48550/arXiv.2210.03629",
+          "year": 2022
+        }
+      ],
+      "verified_primary_urls": [
+        "https://arxiv.org/abs/2210.03629"
+      ],
+      "source_ref_ids": [
+        "turn9view2"
+      ],
+      "retrieved_on": "2026-10-02",
+      "verification_depth": "Author abstract, full author list and ICLR-camera-ready revision note.",
+      "verification_failures": [],
+      "unresolved_fields": [
+        "Proceedings URL/pagination/volume not independently recovered in this audit; fields omitted."
+      ]
+    },
+    {
+      "id": "R15",
+      "bibtex_key": "r15",
+      "bibtex_type": "inproceedings",
+      "fields": {
+        "title": "Enabling Large Language Models to Generate Text with Citations",
+        "author": "Tianyu Gao and Howard Yen and Jiatong Yu and Danqi Chen",
+        "year": "2023",
+        "url": "https://aclanthology.org/2023.emnlp-main.398/",
+        "booktitle": "Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing",
+        "pages": "6465--6488",
+        "doi": "10.18653/v1/2023.emnlp-main.398",
+        "publisher": "Association for Computational Linguistics",
+        "address": "Singapore",
+        "month": "dec"
+      },
+      "authors": [
+        "Tianyu Gao",
+        "Howard Yen",
+        "Jiatong Yu",
+        "Danqi Chen"
+      ],
+      "versions": [],
+      "verified_primary_urls": [
+        "https://aclanthology.org/2023.emnlp-main.398/",
+        "https://aclanthology.org/2023.emnlp-main.398.pdf"
+      ],
+      "source_ref_ids": [
+        "turn16view2",
+        "turn31view2"
+      ],
+      "retrieved_on": "2026-10-02",
+      "verification_depth": "Proceedings abstract and BibTeX; PDF§3.3, human-evaluation excerpts, appendixE and metric limitations selectively inspected.",
+      "verification_failures": [],
+      "unresolved_fields": []
+    }
+  ]
+}

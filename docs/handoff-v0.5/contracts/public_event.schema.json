@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://project50k.invalid/contracts/public_event.schema.json",
+  "title": "Rights-cleared public event projection",
+  "description": "Candidates and display-restricted evidence are excluded. Runtime checks must verify actual entitlements, identity, time eligibility and support.",
+  "allOf": [
+    {
+      "$ref": "event.schema.json"
+    },
+    {
+      "properties": {
+        "status": {
+          "enum": [
+            "PUBLISHED",
+            "UPDATED",
+            "EXPIRED",
+            "INVALIDATED"
+          ]
+        },
+        "global_release_approved": {
+          "description": "Informational display snapshot only; external sending requires current private revision-scoped approval."
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "origin": {
+                "const": "SYNTHETIC"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "evidence": {
+                "items": {
+                  "properties": {
+                    "origin": {
+                      "const": "SYNTHETIC"
+                    },
+                    "rights_status": {
+                      "const": "SYNTHETIC"
+                    },
+                    "locator": {
+                      "pattern": "^fixture://"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "evidence": {
+                "items": {
+                  "properties": {
+                    "origin": {
+                      "enum": [
+                        "LIVE",
+                        "DELAYED",
+                        "HISTORICAL_REPLAY"
+                      ]
+                    },
+                    "rights_status": {
+                      "const": "APPROVED"
+                    },
+                    "locator": {
+                      "pattern": "^https?://"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

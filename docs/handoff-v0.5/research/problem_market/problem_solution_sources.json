@@ -1,0 +1,216 @@
+{
+  "schema_version": "1.0",
+  "created_utc": "2026-10-03",
+  "research_status": "DESK_RESEARCH_AND_PROPOSED_PROTOCOL_ONLY",
+  "sources": [
+    {
+      "id": "PM-S01",
+      "title": "Financial Attention",
+      "authors": [
+        "Nachum Sicherman",
+        "George Loewenstein",
+        "Duane J. Seppi",
+        "Stephen P. Utkus"
+      ],
+      "url": "https://www.cmu.edu/dietrich/sds/docs/loewenstein/FinancialAttention.pdf",
+      "published": "2016; advance access 2015-11-19",
+      "accessed": "2026-10-03",
+      "source_type": "AUTHOR_HOSTED_PUBLISHED_PRIMARY_RESEARCH",
+      "review_depth": "MAIN_PAPER_TEXT_METHODS_TABLES_CONCLUSIONS_READ",
+      "sections": "35-page PDF main text sections 1–5, tables 1–9; Internet Appendix not reviewed; no data reanalysis",
+      "web_refs": [
+        "turn191view0",
+        "turn197view0",
+        "turn198view0",
+        "turn199view0",
+        "turn201view0"
+      ],
+      "supports": [
+        "Investor attention is observed separately from trading",
+        "Attention depends on market conditions and individual heterogeneity"
+      ],
+      "cannot_establish": [
+        "Turkish target prevalence",
+        "Source fragmentation burden",
+        "Product benefit or payment willingness",
+        "Causal impact of our alerts"
+      ],
+      "quantitative_summary_location": "PROBLEM_AND_SOLUTION_EVIDENCE.md evidence table"
+    },
+    {
+      "id": "PM-S02",
+      "title": "Processing Fluency and Investors’ Reactions to Disclosure Readability — author discussion",
+      "author": "Kristina Rennekamp",
+      "url": "https://corpgov.law.harvard.edu/2012/06/08/processing-fluency-and-investors-reactions-to-disclosure-readability/",
+      "published": "2012-06-08",
+      "accessed": "2026-10-03",
+      "source_type": "PRIMARY_AUTHOR_INTERPRETATION",
+      "review_depth": "FULL_AUTHOR_ARTICLE_READ_NOT_FULL_STUDY",
+      "web_refs": [
+        "turn203view0"
+      ],
+      "supports": [
+        "Readable presentation may alter reliance and reactions beyond information extracted"
+      ],
+      "limitations": [
+        "Journal request redirected to abstract",
+        "Study N, collection dates and numerical effect size unverified",
+        "No quantitative effect-size claim or Turkish extrapolation"
+      ],
+      "full_study_url": "https://onlinelibrary.wiley.com/doi/full/10.1111/j.1475-679X.2012.00460.x",
+      "failed_full_study_ref": "turn191view2"
+    },
+    {
+      "id": "PM-S03",
+      "title": "KAP Genel Bilgi",
+      "url": "https://www.kap.org.tr/tr/about/genel-bilgi",
+      "accessed": "2026-10-03",
+      "source_type": "OFFICIAL_SERVICE_INFORMATION",
+      "review_depth": "FULL_EXTRACTED_PAGE_READ_177_LINES",
+      "web_refs": [
+        "turn207view0"
+      ],
+      "supports": [
+        "Free disclosure/archive access",
+        "Financial item comparisons",
+        "Personalized mobile company/fund following and notifications"
+      ],
+      "limitations": [
+        "Stated services only",
+        "No hands-on or delivery test",
+        "No pain/WTP inference"
+      ]
+    },
+    {
+      "id": "PM-S04",
+      "title": "Takasbank TEFAS fund comparison/history route",
+      "url": "https://www.tefas.gov.tr/FonKarsilastirma.aspx",
+      "accessed": "2026-10-03",
+      "source_type": "OFFICIAL_DOMAIN_INDEXED_NAVIGATION_WITH_DIRECT_RETRIEVAL_FAILED",
+      "review_depth": "SEARCH_SNIPPET_ONLY_DIRECT_PAGE_REJECTED",
+      "web_refs": [
+        "turn195search12",
+        "turn207view1",
+        "turn210view1"
+      ],
+      "supports": [
+        "Official-domain navigation lists fund comparison and historical data"
+      ],
+      "limitations": [
+        "Comparison request rejected",
+        "Alternate official page internal error",
+        "No current full workflow, data precision, commercial rights or quality verified"
+      ]
+    },
+    {
+      "id": "PM-S05",
+      "title": "MKK Merak Ettikleriniz",
+      "url": "https://www.mkk.com.tr/yatirimci-hizmetleri/merak-ettikleriniz",
+      "accessed": "2026-10-03",
+      "source_type": "OFFICIAL_SERVICE_FAQ",
+      "review_depth": "RELEVANT_EYATIRIMCI_MKK_YBS_SECTIONS_READ",
+      "web_refs": [
+        "turn205search0",
+        "turn207view2",
+        "turn210view0"
+      ],
+      "supports": [
+        "Portfolio/account information route",
+        "Free e-YATIRIMCI use and notifications",
+        "Rights announcements and monthly report service"
+      ],
+      "limitations": [
+        "No account access",
+        "No notification delivery test",
+        "Account record job differs from public anomaly investigation"
+      ]
+    },
+    {
+      "id": "PM-S06",
+      "title": "Midas price alarm support",
+      "url": "https://www.getmidas.com/destek/midas-ile-yatirima-baslarken/midas-ile-neler-yapabilirim/hisseler-icin-nasil-fiyat-alarmi-kurabilirsin",
+      "accessed": "2026-10-02",
+      "source_type": "OFFICIAL_SUPPORT_INHERITED_VERIFICATION",
+      "review_depth": "PRIOR_RELEVANT_SECTION_REVIEW_REUSED_NOT_RETESTED",
+      "inherited_manifest": "research/data_sources_verification.json",
+      "inherited_source_id": "ADD-MIDAS",
+      "web_refs": [
+        "turn34view0"
+      ],
+      "supports": [
+        "Price/percentage alarm route documented"
+      ],
+      "limitations": [
+        "No universal broker feature claim",
+        "No signed-in/hands-on test"
+      ]
+    },
+    {
+      "id": "PM-S07",
+      "title": "Fintables Evo nedir",
+      "url": "https://fintables.com/evo/nedir",
+      "accessed": "2026-10-02",
+      "source_type": "OFFICIAL_VENDOR_OFFER",
+      "review_depth": "PRIOR_MAIN_CONTENT_REVIEW_REUSED",
+      "inherited_manifest": "research/risk_review/product_risk_sources.json",
+      "web_refs": [
+        "turn133view0",
+        "turn135view0",
+        "turn135view1",
+        "turn135view2"
+      ],
+      "supports": [
+        "Existing sourced Turkish share/fund/KAP conversational research offer"
+      ],
+      "limitations": [
+        "Marketing proves offer, not quality or unmet pain",
+        "No customer or hands-on validation",
+        "Consumer access not redistribution rights"
+      ]
+    }
+  ],
+  "screened_not_appraised": [
+    {
+      "title": "All That Glitters: The Effect of Attention and News on Buying Behavior of Individual and Institutional Investors",
+      "url": "https://academic.oup.com/rfs/article-abstract/21/2/785/1607197",
+      "accessed": "2026-10-03",
+      "depth": "SEARCH_ABSTRACT_SCREEN_ONLY",
+      "used_for_claims": false,
+      "reason": "Full methods/results not appraised within pass"
+    },
+    {
+      "title": "Individual Investors and Financial Disclosure",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0165410113000359",
+      "accessed": "2026-10-03",
+      "depth": "SEARCH_ABSTRACT_SCREEN_ONLY",
+      "used_for_claims": false,
+      "reason": "Full methods/results not appraised within pass"
+    },
+    {
+      "title": "Attention Utility: Evidence from Individual Investors",
+      "url": "https://academic.oup.com/restud/article/93/1/664/8149267",
+      "accessed": "2026-10-03",
+      "depth": "FULL_HTML_ACCESSIBLE_BUT_NOT_FULLY_READ",
+      "web_refs": [
+        "turn191view3"
+      ],
+      "used_for_claims": false,
+      "reason": "4643 extracted lines; no denominator/effect claims drawn from incomplete read"
+    }
+  ],
+  "study_execution": {
+    "contacted": false,
+    "interviewed": false,
+    "observed_users": false,
+    "charged_users": false,
+    "prototype_benchmark": false
+  },
+  "evidence_gaps": [
+    "No fully appraised Turkish retail behavioral study",
+    "No target segment incident prevalence/time measurements",
+    "No observed next-best-alternative comparison",
+    "No comprehension/retention/payment evidence"
+  ],
+  "source_interpretation_rule": "Primary academic findings are bounded by population, period and method; marketing proves offers, not unmet need or willingness to pay. Incomplete full-study reads do not receive numeric sample/effect claims.",
+  "scope_rule": "Four-market breadth remains accepted; proposed research does not narrow it."
+}

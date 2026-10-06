@@ -1,0 +1,10 @@
+Use case: logo-brand.
+Asset type: exploratory modern logo lockup for a Turkish consumer investment intelligence web/app, proposed name İzvanta.
+Primary request: create one beautifully resolved flat graphic symbol and wordmark lockup. Exact wordmark text, all lowercase ASCII: "izvanta" (i-z-v-a-n-t-a). No other text.
+Concept: an open inspection frame brings a slightly displaced observation into context. A compact asymmetrical framing symbol with two calm short horizontal datum strokes, one deliberately offset. It must feel like evidence being inspected, not a price forecast. Integrate restrained negative space and a distinctive silhouette that could work in a favicon. Avoid a literal eye, magnifying glass, generic radar, brackets-only code logo or clichéd letter monogram.
+Style: contemporary editorial financial intelligence, confident but quiet; crisp flat vector-like construction, optical alignment, medium-weight geometry, polished custom humanist sans wordmark with readable distinct letters. Original design, do not imitate existing finance/AI brands.
+Palette: mark deep petrol #234B5D; wordmark ink #172A31; a tiny optional offset datum accent in muted copper #9A6144. No gradients, shadows, texture, glow, 3D, metallic finish or mockup.
+Composition: a single horizontal lockup, symbol on left and wordmark on right, substantial clear spacing, generous transparent margin. No tile background, no multi-panel presentation, no variants, no taglines, no registration symbol.
+Background: genuinely transparent, preserve alpha.
+Avoid: candlesticks, currency symbols, upward/downward trading arrows, rockets, shields, surveillance eyes, prediction or guaranteed-safety symbolism.
+This is a design exploration, not an approved or legally-cleared final identity.

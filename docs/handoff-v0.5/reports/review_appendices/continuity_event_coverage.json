@@ -1,0 +1,436 @@
+{
+  "agent": "continuity_event",
+  "reviewed_on": "2026-10-02",
+  "received_root": "/workspace/scratch/cda839272ca3/received/Project_50K_Work_Handoff_v1",
+  "immutable_received_modified": false,
+  "local_files": [
+    {
+      "path": "context/04_USER_MESSAGES_TR.md",
+      "bytes": 8957,
+      "sha256": "7b777330c213752d1b2559c281dbc2aa696d3fc8681b30eea68bbb5bef380097",
+      "review_mode": "FULL_TEXT_SEMANTIC_REVIEW"
+    },
+    {
+      "path": "context/05_EVENT_MATERIALS_AND_SCHEDULE.md",
+      "bytes": 3728,
+      "sha256": "e472d529855fac6942957e8c1eb79733b73bf90af86d0e38806ce55c638a9432",
+      "review_mode": "FULL_TEXT_SEMANTIC_REVIEW"
+    },
+    {
+      "path": "context/06_PROVENANCE_AND_LIMITATIONS.md",
+      "bytes": 4254,
+      "sha256": "81a356d9954b7b13e9cec6e62e5228b647d363894d103ef2b0ae306d63d709fb",
+      "review_mode": "FULL_TEXT_SEMANTIC_REVIEW"
+    },
+    {
+      "path": "context/07_PREVIOUS_DELIVERY_STATUS.md",
+      "bytes": 1639,
+      "sha256": "4accea3a763856e516a57a98e296eca2b01c19555d64ac7a900b621a141fa909",
+      "review_mode": "FULL_TEXT_SEMANTIC_REVIEW"
+    },
+    {
+      "path": "context/08_ARTIFACT_MAP.md",
+      "bytes": 6852,
+      "sha256": "4a5eee30169906bcaa624140980786cc060585e70bc4437ef0b377cd527ad9ba",
+      "review_mode": "FULL_TEXT_SEMANTIC_REVIEW"
+    },
+    {
+      "path": "user_materials/application_form_pasted_TR.txt",
+      "bytes": 1952,
+      "sha256": "c12b74d8604cf49e1c545435b3a84eac0617b8f6c927ea2d48c3eddd696e6a85",
+      "review_mode": "FULL_TEXT_SEMANTIC_REVIEW"
+    },
+    {
+      "path": "baseline/Project_50K_v0.3/docs/00_Decisions_and_Corrections.md",
+      "bytes": 6219,
+      "sha256": "934ad05efc97296dad7e57964a19cc56fcb3451c8b214b1ff0aa156b88cdfec8",
+      "review_mode": "FULL_TEXT_SEMANTIC_REVIEW"
+    },
+    {
+      "path": "baseline/Project_50K_v0.3/docs/04_MVP_Techstars_Startup_Weekend_Scope.md",
+      "bytes": 4724,
+      "sha256": "9fc88b48cf97ecbf74547ca0c4443f3380f27264fd6a750ccead6af2bb042c12",
+      "review_mode": "FULL_TEXT_SEMANTIC_REVIEW"
+    },
+    {
+      "path": "baseline/Project_50K_v0.3/docs/14_Architecture_and_ADRs.md",
+      "bytes": 6853,
+      "sha256": "1f30c426d2be632e250ab7fd308e1149d98567c3f5931864b571b2158fcf95cc",
+      "review_mode": "FULL_TEXT_SEMANTIC_REVIEW"
+    },
+    {
+      "path": "baseline/Project_50K_v0.3/docs/18_UX_Design_and_Turkish_Content.md",
+      "bytes": 6551,
+      "sha256": "e3a3721bd7fb99f0223459ad8bc58149d4876d8bdfba85ca64f30d04f5abe047",
+      "review_mode": "FULL_TEXT_SEMANTIC_REVIEW"
+    },
+    {
+      "path": "baseline/Project_50K_v0.3/docs/22_Deployment_Operations_and_Costs.md",
+      "bytes": 5396,
+      "sha256": "a42a407321d74d4da0bddb246bf8860b79450a6bf597735ad149b9f701a2f988",
+      "review_mode": "FULL_TEXT_SEMANTIC_REVIEW"
+    },
+    {
+      "path": "baseline/Project_50K_v0.3/docs/25_Release_Gates_and_Open_Decisions.md",
+      "bytes": 3517,
+      "sha256": "51157188a19ca7bc54fdeb842235a7605776e2d546d592d155cd6038b8dc1bda",
+      "review_mode": "FULL_TEXT_SEMANTIC_REVIEW"
+    },
+    {
+      "path": "baseline/Project_50K_v0.3/PRODUCT.md",
+      "bytes": 1746,
+      "sha256": "287c8fbc4c1c240adbc48103901b9e9001e4f8db208b52da358917d9806f3c2d",
+      "review_mode": "FULL_TEXT_SEMANTIC_REVIEW"
+    },
+    {
+      "path": "baseline/Project_50K_v0.3/DESIGN.md",
+      "bytes": 2618,
+      "sha256": "17bdf4b0766811a89b76f0a394feedbd3206a64f9d5698d81f1c78117f12e418",
+      "review_mode": "FULL_TEXT_SEMANTIC_REVIEW"
+    },
+    {
+      "path": "baseline/Project_50K_v0.3/research/USER_SUPPLIED_EVENT_CONTEXT.md",
+      "bytes": 1617,
+      "sha256": "76b3920cb3ceb0b741baf19d6cd5331d462604a8f918858650453cd27fbcfac1",
+      "review_mode": "FULL_TEXT_SEMANTIC_REVIEW"
+    },
+    {
+      "path": "baseline/Project_50K_v0.3/templates/ORGANIZER_CLARIFICATION.md",
+      "bytes": 844,
+      "sha256": "99dc22ec6b24f40075465da8a1024feffb8c02598cabc02940567fcc4624f17d",
+      "review_mode": "FULL_TEXT_SEMANTIC_REVIEW"
+    },
+    {
+      "path": "archives/recovered_standalone_versions/README_v0.1.md",
+      "bytes": 2208,
+      "sha256": "f3bffdbdf2fdc196ab78216aa51c52cf3f0ec228f0f0141d59bd6007228a2420",
+      "review_mode": "FULL_TEXT_SEMANTIC_REVIEW"
+    },
+    {
+      "path": "verification/PRESERVATION_REPORT.md",
+      "bytes": 3577,
+      "sha256": "6c775875e7b3485fc1a41981e3fc3b5290e94f9a33b23476dad8b1e459fd9769",
+      "review_mode": "FULL_TEXT_SEMANTIC_REVIEW"
+    },
+    {
+      "path": "verification/HANDOFF_INTEGRITY_RESULT.json",
+      "bytes": 2834,
+      "sha256": "b5d23c4d14b12d6a53478b58a5a87b998395413d1612af36e1a67830f05a88a7",
+      "review_mode": "FULL_TEXT_SEMANTIC_REVIEW"
+    },
+    {
+      "path": "verification/ATTACHMENT_RECONCILIATION.json",
+      "bytes": 10005,
+      "sha256": "eefac1a4660196c71040df69c22c0449eaab29813ba4a1f7553ea5a76ecc7f79",
+      "review_mode": "FULL_TEXT_SEMANTIC_REVIEW"
+    },
+    {
+      "path": "baseline/Project_50K_v0.3/research/SOURCE_REGISTER.md",
+      "bytes": 10873,
+      "sha256": "9dd8b0f6625dd6b0c1b8c13e72fca65c6b2a1bee2fa0ffbca3a05d76cf5acb59",
+      "review_mode": "SELECTIVE_SOURCE_ENTRY_REVIEW",
+      "entries": [
+        "S15",
+        "S16",
+        "S17",
+        "S18",
+        "S22",
+        "S23",
+        "S24",
+        "S25",
+        "S26",
+        "S33"
+      ],
+      "other_entries": "not claimed semantically reverified by this sub-audit"
+    },
+    {
+      "path": "baseline/Project_50K_v0.3/research/sources.json",
+      "bytes": 20770,
+      "sha256": "f7d5c1c1126b7cc12dacc3a76d8f41606777254708ead4fa8645dd4044c92947",
+      "review_mode": "SELECTIVE_SOURCE_ENTRY_REVIEW",
+      "entries": [
+        "S15",
+        "S16",
+        "S17",
+        "S18",
+        "S22",
+        "S23",
+        "S24",
+        "S25",
+        "S26",
+        "S33"
+      ],
+      "other_entries": "not claimed semantically reverified by this sub-audit"
+    },
+    {
+      "path": "verification/ORIGINAL_INPUTS.json",
+      "bytes": 8518,
+      "sha256": "7eb8f843b62cfaab596ea68804b1fb76364a4ed0bb5f91ce1848fa5f05dd0ae0",
+      "review_mode": "PROVENANCE_STRUCTURE_READ"
+    },
+    {
+      "path": "user_materials/screenshots/image(20261002-091143).png",
+      "bytes": 967435,
+      "sha256": "24659a0ce27e8062384288a8efa36c5458e7a4eb7ad1e2c5a4df398e12d5c215",
+      "review_mode": "VIEW_IMAGE_VISUAL_REVIEW",
+      "width": 1422,
+      "height": 716,
+      "compared_against": "context/05_EVENT_MATERIALS_AND_SCHEDULE.md"
+    },
+    {
+      "path": "user_materials/screenshots/image(20261002-091154).png",
+      "bytes": 41827,
+      "sha256": "9b2575bb488d11b1881c149dea72e0aa0f97fa809cce72443ce0da17c1418c90",
+      "review_mode": "VIEW_IMAGE_VISUAL_REVIEW",
+      "width": 1116,
+      "height": 463,
+      "compared_against": "context/05_EVENT_MATERIALS_AND_SCHEDULE.md"
+    },
+    {
+      "path": "user_materials/screenshots/image(20261002-091200).png",
+      "bytes": 53533,
+      "sha256": "71135ef561536630482b8f1061ba4903627c5dedae14595eca06a4f4e2d02a11",
+      "review_mode": "VIEW_IMAGE_VISUAL_REVIEW",
+      "width": 925,
+      "height": 638,
+      "compared_against": "context/05_EVENT_MATERIALS_AND_SCHEDULE.md"
+    },
+    {
+      "path": "user_materials/screenshots/image(20261002-091207).png",
+      "bytes": 46100,
+      "sha256": "df98debb467dcff1efdddf83a43fb84a11b73e6f0507bfe8e070caf34c4477b7",
+      "review_mode": "VIEW_IMAGE_VISUAL_REVIEW",
+      "width": 654,
+      "height": 535,
+      "compared_against": "context/05_EVENT_MATERIALS_AND_SCHEDULE.md"
+    },
+    {
+      "path": "archives/original_packages/Project_50K_Development_Package_v0.3.zip",
+      "bytes": 278327,
+      "sha256": "d1c68b791794086d8062afb7315933f537745a92cff97f270ee1dea4f422cfbc",
+      "review_mode": "ARCHIVE_MEMBER_LAYOUT_CRC_AND_BYTE_COMPARISON",
+      "semantic_review": "archive member content not audited by this sub-audit"
+    },
+    {
+      "path": "archives/original_packages/Project_50K_Documentation_v0.1.zip",
+      "bytes": 36848,
+      "sha256": "f1a1758c2eabf0f79878209603423262cb8846a09a5c2a834dbcf5fcd5e06a5c",
+      "review_mode": "ARCHIVE_MEMBER_LAYOUT_CRC_AND_BYTE_COMPARISON",
+      "semantic_review": "archive member content not audited by this sub-audit"
+    },
+    {
+      "path": "archives/original_packages/Project_50K_Documentation_v0.2.zip",
+      "bytes": 66723,
+      "sha256": "d67990a0db4d3eb0318ffd4433192dab8213d6b0a8d747b7ab6de58734f62ebb",
+      "review_mode": "ARCHIVE_MEMBER_LAYOUT_CRC_AND_BYTE_COMPARISON",
+      "semantic_review": "archive member content not audited by this sub-audit"
+    },
+    {
+      "path": "archives/loose_attachment_snapshots/Project_50K_v0.3/README.md",
+      "bytes": 2808,
+      "sha256": "03f061495111f204b2e9a09c24116fc7dc0fcfbf4c90bfb67903def68b60d16b",
+      "review_mode": "BYTE_IDENTITY_PROVENANCE_CHECK",
+      "semantic_review": "not claimed"
+    },
+    {
+      "path": "archives/loose_attachment_snapshots/Project_50K_v0.3/START_HERE.md",
+      "bytes": 3823,
+      "sha256": "8db7f00bd76f5246d0a80486cc1b98952d59f1a32e1289b42c244a71f54e5f8f",
+      "review_mode": "BYTE_IDENTITY_PROVENANCE_CHECK",
+      "semantic_review": "not claimed"
+    },
+    {
+      "path": "archives/loose_attachment_snapshots/Project_50K_v0.3/prompts/CLAUDE_CODE_START.md",
+      "bytes": 2188,
+      "sha256": "d39d4fc406036920d478b6a0ffeb357520151d2a396d82c505d1b6ef4de3f7f3",
+      "review_mode": "BYTE_IDENTITY_PROVENANCE_CHECK",
+      "semantic_review": "not claimed"
+    },
+    {
+      "path": "archives/loose_attachment_snapshots/Project_50K_v0.3/prompts/CODEX_START.md",
+      "bytes": 2182,
+      "sha256": "8d9292ac5ba2e6019790a108007abbb56c20a4ed7cb7eae6e0fcfc9275633766",
+      "review_mode": "BYTE_IDENTITY_PROVENANCE_CHECK",
+      "semantic_review": "not claimed"
+    },
+    {
+      "path": "archives/loose_attachment_snapshots/Project_50K_v0.3/reports/PACKAGE_AUDIT.md",
+      "bytes": 4845,
+      "sha256": "e29a1d75cea21b5e09dae2230d9f38fc8e1ce42124192a4abe69bfe8bf2d93eb",
+      "review_mode": "BYTE_IDENTITY_PROVENANCE_CHECK",
+      "semantic_review": "not claimed"
+    },
+    {
+      "path": "archives/loose_attachment_snapshots/Project_50K_v0.3/reports/VALIDATION_REPORT.md",
+      "bytes": 2219,
+      "sha256": "1547d3b59cce0b290772d9c02955deef1a8a49416e3a3b1db63e29e7d7fbbb61",
+      "review_mode": "BYTE_IDENTITY_PROVENANCE_CHECK",
+      "semantic_review": "not claimed"
+    },
+    {
+      "path": "archives/loose_attachment_snapshots/project_50k_docs/01_Product_Vision_and_Executive_Summary.md",
+      "bytes": 21058,
+      "sha256": "32aaa57d95ae640e3703e354ab5f529fe2b4be883e544bb10f1acdcbf9f4e857",
+      "review_mode": "BYTE_IDENTITY_PROVENANCE_CHECK",
+      "semantic_review": "not claimed"
+    },
+    {
+      "path": "archives/loose_attachment_snapshots/project_50k_docs/02_Problem_Analysis_and_Opportunity.md",
+      "bytes": 19300,
+      "sha256": "daa04cf2614938e1239a2fe06899dada88e15d29c7b8ce5e6761983cb5b4063f",
+      "review_mode": "BYTE_IDENTITY_PROVENANCE_CHECK",
+      "semantic_review": "not claimed"
+    },
+    {
+      "path": "archives/loose_attachment_snapshots/project_50k_docs/03_Product_Scope_and_Core_Principles.md",
+      "bytes": 19558,
+      "sha256": "c1568f5b214319c67c70219de2a918142dd756229a68c053068687fd4e9d3d4b",
+      "review_mode": "BYTE_IDENTITY_PROVENANCE_CHECK",
+      "semantic_review": "not claimed"
+    },
+    {
+      "path": "archives/loose_attachment_snapshots/project_50k_docs/04_MVP_Techstars_Startup_Weekend_Scope.md",
+      "bytes": 24052,
+      "sha256": "d9dff78684842cf5b39ddd48a04377d182c149fe6e2004c6e31b292ab70f083b",
+      "review_mode": "BYTE_IDENTITY_PROVENANCE_CHECK",
+      "semantic_review": "not claimed"
+    },
+    {
+      "path": "archives/loose_attachment_snapshots/project_50k_docs/05_User_Personas.md",
+      "bytes": 13122,
+      "sha256": "8fdf28c6d7cc084297defa4be2e3b1c7faac401768d362e2f0136bed8d2bba82",
+      "review_mode": "BYTE_IDENTITY_PROVENANCE_CHECK",
+      "semantic_review": "not claimed"
+    },
+    {
+      "path": "archives/loose_attachment_snapshots/project_50k_docs/06_User_Requirements.md",
+      "bytes": 16603,
+      "sha256": "a7f9a12f2997c57ade6cc18c85c458cf0147bc0b2bf22818e0b693db733f545a",
+      "review_mode": "BYTE_IDENTITY_PROVENANCE_CHECK",
+      "semantic_review": "not claimed"
+    },
+    {
+      "path": "archives/loose_attachment_snapshots/project_50k_docs/07_Functional_Requirements.md",
+      "bytes": 28176,
+      "sha256": "2e77b1c2a8d96eecdf00c80d4636a64acb4376b33b6711c8f6f391acc41b23f4",
+      "review_mode": "BYTE_IDENTITY_PROVENANCE_CHECK",
+      "semantic_review": "not claimed"
+    },
+    {
+      "path": "archives/loose_attachment_snapshots/project_50k_docs/08_Non_Functional_Requirements.md",
+      "bytes": 18398,
+      "sha256": "36dfacf4ac03d22a20895efc38506d6419c7cd96db6526a2baf23477e75c7f99",
+      "review_mode": "BYTE_IDENTITY_PROVENANCE_CHECK",
+      "semantic_review": "not claimed"
+    },
+    {
+      "path": "archives/loose_attachment_snapshots/project_50k_docs/09_Requirements_Traceability_Matrix.md",
+      "bytes": 4403,
+      "sha256": "5cd9e382558a34edef2101e8a1ed7fb4a450344f186a77a98385d38ee9010e4e",
+      "review_mode": "BYTE_IDENTITY_PROVENANCE_CHECK",
+      "semantic_review": "not claimed"
+    },
+    {
+      "path": "archives/loose_attachment_snapshots/project_50k_docs/README.md",
+      "bytes": 2288,
+      "sha256": "fef09d6a359a4e5e24ba050d3ab94888f3143ef92347d449b5dc3c2997fabd49",
+      "review_mode": "BYTE_IDENTITY_PROVENANCE_CHECK",
+      "semantic_review": "not claimed"
+    },
+    {
+      "path": "archives/loose_attachment_snapshots/project_50k_docs/VERSION_v0.2.md",
+      "bytes": 396,
+      "sha256": "560490e40113596cade7f67aa4854e761c157b18647cb54602a8f8e83da364de",
+      "review_mode": "BYTE_IDENTITY_PROVENANCE_CHECK",
+      "semantic_review": "not claimed"
+    },
+    {
+      "path": "baseline/Project_50K_v0.3/docs/19_Security_Privacy_and_Compliance.md",
+      "bytes": 5113,
+      "sha256": "6d867930374c66e0c93b3df0b0716c6c0ff6fa61085e66fab810e34339e94964",
+      "review_mode": "TARGETED_TEXT_SEARCH",
+      "patterns": [
+        "cache",
+        "getclaims",
+        "getsession",
+        "idempot",
+        "TradingView",
+        "22.18",
+        "20.9"
+      ],
+      "semantic_review": "full document not claimed"
+    },
+    {
+      "path": "baseline/Project_50K_v0.3/docs/20_Test_and_Validation_Strategy.md",
+      "bytes": 7544,
+      "sha256": "40644f3c3358d9cc0db64012fe8058fdfc98dd0fc0f77c02da7bd1fb992977e7",
+      "review_mode": "TARGETED_TEXT_SEARCH",
+      "patterns": [
+        "cache",
+        "getclaims",
+        "getsession",
+        "idempot",
+        "TradingView",
+        "22.18",
+        "20.9"
+      ],
+      "semantic_review": "full document not claimed"
+    },
+    {
+      "path": "baseline/Project_50K_v0.3/.env.example",
+      "bytes": 706,
+      "sha256": "8bd66e04a0c25b6306d0dbda03cea2cc31995dbda458acebc42dc1d84ad1b0fe",
+      "review_mode": "TARGETED_TEXT_SEARCH",
+      "patterns": [
+        "cache",
+        "getclaims",
+        "getsession",
+        "idempot",
+        "TradingView",
+        "22.18",
+        "20.9"
+      ],
+      "semantic_review": "full document not claimed"
+    },
+    {
+      "path": "baseline/Project_50K_v0.3/requirements-validation.txt",
+      "bytes": 198,
+      "sha256": "a3e2e6cb5c04d99671140bb192807d0188090b88e861a831036935a6156deaa2",
+      "review_mode": "TARGETED_TEXT_SEARCH",
+      "patterns": [
+        "cache",
+        "getclaims",
+        "getsession",
+        "idempot",
+        "TradingView",
+        "22.18",
+        "20.9"
+      ],
+      "semantic_review": "full document not claimed"
+    },
+    {
+      "path": "baseline/Project_50K_v0.3/templates/DESIGN_ACCEPTANCE.md",
+      "bytes": 523,
+      "sha256": "0fb10ddcff14ba838cf88f4ee23dc60a8b190cc0aacb10e3e9363be85858240c",
+      "review_mode": "FULL_TEXT_SEMANTIC_REVIEW"
+    },
+    {
+      "path": "baseline/Project_50K_v0.3/prompts/DESIGN_REVIEW.md",
+      "bytes": 978,
+      "sha256": "c298b449a6700a7d9dcaa9257a40a8abdac239a5f0f1d04600a130e5ee4a4a89",
+      "review_mode": "FULL_TEXT_SEMANTIC_REVIEW"
+    }
+  ],
+  "visual_images_reviewed": 4,
+  "other_provenance_scope": "All97v0.3baselinefilebytescompared; all25attachmentrecordhashescompared; archive file counts5/11/97 CRC-clean. Comparisons do not constitute semantic review of every member.",
+  "outputs": [
+    "audit_work/continuity_event.md",
+    "audit_work/continuity_provenance_checks.json"
+  ],
+  "limitations": [
+    "No organizer contact or application submission",
+    "Full live event schedule/form not retrievable; complete supplied originals visually/textually reconciled",
+    "No installation, hosted app, data-provider calls, actual auth/RLS, emails or tests run by this sub-audit",
+    "No historical platform inventory independently recovered"
+  ]
+}

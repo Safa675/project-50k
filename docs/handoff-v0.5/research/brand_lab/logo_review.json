@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-02",
+  "mode": "built-in imagegen",
+  "asset": "assets/izvanta_logo_concept_v1.png",
+  "proposal_not_approved": true,
+  "image_size": [
+    1983,
+    793
+  ],
+  "bands": [
+    "R",
+    "G",
+    "B",
+    "A"
+  ],
+  "alpha_extrema": [
+    0,
+    255
+  ],
+  "visual_review": {
+    "wordmark": "izvanta, correct letters",
+    "concept": "open inspection frame with two displaced datum strokes",
+    "no_financial_direction_arrow": true,
+    "limitation": "Raster concept contains mild tonal variation; exact brand colors, optical geometry and tiny-size favicon rendition need designer vector production. No trademark/image-similarity clearance or full accessibility review performed."
+  }
+}

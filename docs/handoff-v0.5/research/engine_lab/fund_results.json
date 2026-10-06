@@ -1,0 +1,1019 @@
+{
+  "schema_version": "1.0",
+  "lab": "fund_accounting",
+  "evaluation_date": "2026-10-02",
+  "command": "python experiments/fund_accounting.py --output research/engine_lab/fund_results.json",
+  "synthetic_only": true,
+  "live_data_accessed": false,
+  "scientific_status": "counterexamples_and_bounded_formula_checks_no_empirical_accuracy",
+  "accounting_cases": [
+    {
+      "id": "no_flow_market_gain",
+      "synthetic": true,
+      "opening_net_assets": "1000",
+      "closing_net_assets": "1200",
+      "opening_NAV": "10",
+      "closing_NAV": "12",
+      "opening_units": "100",
+      "closing_units": "100",
+      "raw_endpoint_residual": "0",
+      "fraction_of_opening_net_assets": "0",
+      "split_adjusted_residual": "0",
+      "actual_external_subscription_minus_redemption_cash": "0",
+      "cash_distributions_excluded_from_new_subscription_cash": "0",
+      "noncash_transfers": "0",
+      "events": [
+        {
+          "event": "market_gain",
+          "old_NAV": "10",
+          "new_NAV": "12"
+        }
+      ],
+      "conclusion": "Matched net-asset and NAV revaluation cancels; AUM change alone is not flow."
+    },
+    {
+      "id": "no_flow_market_loss",
+      "synthetic": true,
+      "opening_net_assets": "1000",
+      "closing_net_assets": "800",
+      "opening_NAV": "10",
+      "closing_NAV": "8",
+      "opening_units": "100",
+      "closing_units": "100",
+      "raw_endpoint_residual": "0",
+      "fraction_of_opening_net_assets": "0",
+      "split_adjusted_residual": "0",
+      "actual_external_subscription_minus_redemption_cash": "0",
+      "cash_distributions_excluded_from_new_subscription_cash": "0",
+      "noncash_transfers": "0",
+      "events": [
+        {
+          "event": "market_loss",
+          "old_NAV": "10",
+          "new_NAV": "8"
+        }
+      ],
+      "conclusion": "Matched net-asset and NAV revaluation cancels; AUM change alone is not flow."
+    },
+    {
+      "id": "no_flow_fees_or_liability_revaluation",
+      "synthetic": true,
+      "opening_net_assets": "1000",
+      "closing_net_assets": "950",
+      "opening_NAV": "10",
+      "closing_NAV": "19/2",
+      "opening_units": "100",
+      "closing_units": "100",
+      "raw_endpoint_residual": "0.0",
+      "fraction_of_opening_net_assets": "0.0",
+      "split_adjusted_residual": "0.0",
+      "actual_external_subscription_minus_redemption_cash": "0",
+      "cash_distributions_excluded_from_new_subscription_cash": "0",
+      "noncash_transfers": "0",
+      "events": [
+        {
+          "event": "fees_or_liability_revaluation",
+          "old_NAV": "10",
+          "new_NAV": "19/2"
+        }
+      ],
+      "conclusion": "Matched net-asset and NAV revaluation cancels; AUM change alone is not flow."
+    },
+    {
+      "id": "early_100_cash",
+      "synthetic": true,
+      "opening_net_assets": "1000",
+      "closing_net_assets": "1320",
+      "opening_NAV": "10",
+      "closing_NAV": "12",
+      "opening_units": "100",
+      "closing_units": "110",
+      "raw_endpoint_residual": "120",
+      "fraction_of_opening_net_assets": "0.12",
+      "split_adjusted_residual": "120",
+      "actual_external_subscription_minus_redemption_cash": "100",
+      "cash_distributions_excluded_from_new_subscription_cash": "0",
+      "noncash_transfers": "0",
+      "events": [
+        {
+          "event": "external_subscription_or_redemption",
+          "cash": "100",
+          "transaction_NAV": "10",
+          "unit_change": "10"
+        },
+        {
+          "event": "market_revaluation",
+          "old_NAV": "10",
+          "new_NAV": "12"
+        }
+      ],
+      "conclusion": "Same endpoint AUM/NAV and unit count, different actual cash; cash timing is unidentified."
+    },
+    {
+      "id": "late_120_cash_same_endpoints",
+      "synthetic": true,
+      "opening_net_assets": "1000",
+      "closing_net_assets": "1320",
+      "opening_NAV": "10",
+      "closing_NAV": "12",
+      "opening_units": "100",
+      "closing_units": "110",
+      "raw_endpoint_residual": "120",
+      "fraction_of_opening_net_assets": "0.12",
+      "split_adjusted_residual": "120",
+      "actual_external_subscription_minus_redemption_cash": "120",
+      "cash_distributions_excluded_from_new_subscription_cash": "0",
+      "noncash_transfers": "0",
+      "events": [
+        {
+          "event": "market_revaluation",
+          "old_NAV": "10",
+          "new_NAV": "12"
+        },
+        {
+          "event": "external_subscription_or_redemption",
+          "cash": "120",
+          "transaction_NAV": "12",
+          "unit_change": "10"
+        }
+      ],
+      "conclusion": "Same endpoint AUM/NAV and unit count, different actual cash; cash timing is unidentified."
+    },
+    {
+      "id": "late_100_cash",
+      "synthetic": true,
+      "opening_net_assets": "1000",
+      "closing_net_assets": "1300",
+      "opening_NAV": "10",
+      "closing_NAV": "12",
+      "opening_units": "100",
+      "closing_units": "325/3",
+      "raw_endpoint_residual": "100",
+      "fraction_of_opening_net_assets": "0.1",
+      "split_adjusted_residual": "100",
+      "actual_external_subscription_minus_redemption_cash": "100",
+      "cash_distributions_excluded_from_new_subscription_cash": "0",
+      "noncash_transfers": "0",
+      "events": [
+        {
+          "event": "market_revaluation",
+          "old_NAV": "10",
+          "new_NAV": "12"
+        },
+        {
+          "event": "external_subscription_or_redemption",
+          "cash": "100",
+          "transaction_NAV": "12",
+          "unit_change": "25/3"
+        }
+      ],
+      "conclusion": "Exact cash equality holds in the stylized end-period subscription case."
+    },
+    {
+      "id": "offset_units_but_negative_cash",
+      "synthetic": true,
+      "opening_net_assets": "1000",
+      "closing_net_assets": "1200",
+      "opening_NAV": "10",
+      "closing_NAV": "12",
+      "opening_units": "100",
+      "closing_units": "100",
+      "raw_endpoint_residual": "0",
+      "fraction_of_opening_net_assets": "0",
+      "split_adjusted_residual": "0",
+      "actual_external_subscription_minus_redemption_cash": "-20",
+      "cash_distributions_excluded_from_new_subscription_cash": "0",
+      "noncash_transfers": "0",
+      "events": [
+        {
+          "event": "external_subscription_or_redemption",
+          "cash": "100",
+          "transaction_NAV": "10",
+          "unit_change": "10"
+        },
+        {
+          "event": "market_revaluation",
+          "old_NAV": "10",
+          "new_NAV": "12"
+        },
+        {
+          "event": "external_subscription_or_redemption",
+          "cash": "-120",
+          "transaction_NAV": "12",
+          "unit_change": "-10"
+        }
+      ],
+      "conclusion": "Equal endpoint units yield zero residual while cash subscriptions minus redemptions is -20."
+    },
+    {
+      "id": "distribution_reinvestment_0",
+      "synthetic": true,
+      "opening_net_assets": "1000",
+      "closing_net_assets": "900",
+      "opening_NAV": "10",
+      "closing_NAV": "9",
+      "opening_units": "100",
+      "closing_units": "100",
+      "raw_endpoint_residual": "0",
+      "fraction_of_opening_net_assets": "0",
+      "split_adjusted_residual": "0",
+      "actual_external_subscription_minus_redemption_cash": "0",
+      "cash_distributions_excluded_from_new_subscription_cash": "100",
+      "noncash_transfers": "0",
+      "events": [
+        {
+          "event": "distribution",
+          "per_pre_distribution_unit": "1",
+          "reinvestment_fraction": "0",
+          "cash_distribution": "100",
+          "reinvested_distribution": "0",
+          "ex_distribution_NAV": "9"
+        }
+      ],
+      "conclusion": "Raw NAV counts reinvestment as unit growth; total-return residual counts cash distributions as outflow unless corrected.",
+      "known_total_return_factor": "1",
+      "uncorrected_total_return_residual": "-100",
+      "distribution_corrected_total_return_residual": "0"
+    },
+    {
+      "id": "distribution_reinvestment_0.5",
+      "synthetic": true,
+      "opening_net_assets": "1000",
+      "closing_net_assets": "950",
+      "opening_NAV": "10",
+      "closing_NAV": "9",
+      "opening_units": "100",
+      "closing_units": "950/9",
+      "raw_endpoint_residual": "50",
+      "fraction_of_opening_net_assets": "0.05",
+      "split_adjusted_residual": "50",
+      "actual_external_subscription_minus_redemption_cash": "0",
+      "cash_distributions_excluded_from_new_subscription_cash": "50",
+      "noncash_transfers": "0",
+      "events": [
+        {
+          "event": "distribution",
+          "per_pre_distribution_unit": "1",
+          "reinvestment_fraction": "1/2",
+          "cash_distribution": "50",
+          "reinvested_distribution": "50",
+          "ex_distribution_NAV": "9"
+        }
+      ],
+      "conclusion": "Raw NAV counts reinvestment as unit growth; total-return residual counts cash distributions as outflow unless corrected.",
+      "known_total_return_factor": "1",
+      "uncorrected_total_return_residual": "-50",
+      "distribution_corrected_total_return_residual": "0"
+    },
+    {
+      "id": "distribution_reinvestment_1",
+      "synthetic": true,
+      "opening_net_assets": "1000",
+      "closing_net_assets": "1000",
+      "opening_NAV": "10",
+      "closing_NAV": "9",
+      "opening_units": "100",
+      "closing_units": "1000/9",
+      "raw_endpoint_residual": "100",
+      "fraction_of_opening_net_assets": "0.1",
+      "split_adjusted_residual": "100",
+      "actual_external_subscription_minus_redemption_cash": "0",
+      "cash_distributions_excluded_from_new_subscription_cash": "0",
+      "noncash_transfers": "0",
+      "events": [
+        {
+          "event": "distribution",
+          "per_pre_distribution_unit": "1",
+          "reinvestment_fraction": "1",
+          "cash_distribution": "0",
+          "reinvested_distribution": "100",
+          "ex_distribution_NAV": "9"
+        }
+      ],
+      "conclusion": "Raw NAV counts reinvestment as unit growth; total-return residual counts cash distributions as outflow unless corrected.",
+      "known_total_return_factor": "1",
+      "uncorrected_total_return_residual": "0",
+      "distribution_corrected_total_return_residual": "0"
+    },
+    {
+      "id": "two_for_one_split",
+      "synthetic": true,
+      "opening_net_assets": "1000",
+      "closing_net_assets": "1000",
+      "opening_NAV": "10",
+      "closing_NAV": "5",
+      "opening_units": "100",
+      "closing_units": "200",
+      "raw_endpoint_residual": "500",
+      "fraction_of_opening_net_assets": "0.5",
+      "split_adjusted_residual": "0",
+      "actual_external_subscription_minus_redemption_cash": "0",
+      "cash_distributions_excluded_from_new_subscription_cash": "0",
+      "noncash_transfers": "0",
+      "events": [
+        {
+          "event": "unit_split",
+          "new_units_per_old_unit": "2"
+        }
+      ],
+      "conclusion": "Raw residual 500 is mechanical; known split adjustment restores zero."
+    },
+    {
+      "id": "noncash_merger",
+      "synthetic": true,
+      "opening_net_assets": "1000",
+      "closing_net_assets": "1500",
+      "opening_NAV": "10",
+      "closing_NAV": "10",
+      "opening_units": "100",
+      "closing_units": "150",
+      "raw_endpoint_residual": "500",
+      "fraction_of_opening_net_assets": "0.5",
+      "split_adjusted_residual": "500",
+      "actual_external_subscription_minus_redemption_cash": "0",
+      "cash_distributions_excluded_from_new_subscription_cash": "0",
+      "noncash_transfers": "500",
+      "events": [
+        {
+          "event": "noncash_merger_transfer",
+          "net_assets_transferred": "500"
+        }
+      ],
+      "conclusion": "500 residual reflects transferred assets, not 500 new external subscription cash."
+    },
+    {
+      "id": "FX_same_reporting_currency",
+      "synthetic": true,
+      "opening_net_assets": "1000",
+      "closing_net_assets": "1200",
+      "opening_NAV": "10",
+      "closing_NAV": "12",
+      "opening_units": "100",
+      "closing_units": "100",
+      "raw_endpoint_residual": "0",
+      "fraction_of_opening_net_assets": "0",
+      "split_adjusted_residual": "0",
+      "actual_external_subscription_minus_redemption_cash": "0",
+      "cash_distributions_excluded_from_new_subscription_cash": "0",
+      "noncash_transfers": "0",
+      "events": [
+        {
+          "event": "same_currency_FX_translation",
+          "old_NAV": "10",
+          "new_NAV": "12"
+        }
+      ],
+      "conclusion": "FX translation cancels when AUM and NAV use the same currency and valuation."
+    },
+    {
+      "id": "FX_mismatched_currencies",
+      "synthetic": true,
+      "inputs": {
+        "A0_TRY": "1000",
+        "A1_TRY": "1200",
+        "p0_USD": "10",
+        "p1_USD": "10"
+      },
+      "naive_residual": "200",
+      "actual_external_cash": "0",
+      "required_outcome": "ABSTAIN_CURRENCY_MISMATCH",
+      "conclusion": "AUM translated to TRY and unchanged USD NAV create a false 200 residual."
+    },
+    {
+      "id": "whole_fund_AUM_one_class_NAV",
+      "synthetic": true,
+      "class_A_assets": [
+        "500",
+        "600"
+      ],
+      "class_B_assets": [
+        "500",
+        "400"
+      ],
+      "naive_residual": "-200",
+      "actual_external_cash": "0",
+      "required_outcome": "ABSTAIN_SCOPE_OR_CLASS_MISMATCH",
+      "conclusion": "Whole-fund AUM with one class return fabricates -200; oldest-class approximation is not an identity."
+    },
+    {
+      "id": "redemption_liability_settlement_not_new_unit_flow",
+      "synthetic": true,
+      "opening_gross_assets": "1100",
+      "opening_liabilities": "100",
+      "closing_gross_assets": "1000",
+      "closing_liabilities": "0",
+      "net_assets_both": "1000",
+      "units_both": "100",
+      "NAV_both": "10",
+      "raw_endpoint_residual": "0",
+      "bank_cash_settlement": "-100",
+      "new_share_transaction_subscription_minus_redemption_in_window": "0",
+      "conclusion": "Paying a previously recognized redemption payable is bank cash outflow with no current-window net unit flow; target accounting basis must be explicit."
+    }
+  ],
+  "investor_count_cases": [
+    {
+      "id": "investors_2_to_1_cash_-100",
+      "synthetic": true,
+      "opening_net_assets": "1000",
+      "closing_net_assets": "900",
+      "opening_NAV": "10",
+      "closing_NAV": "10",
+      "opening_units": "100",
+      "closing_units": "90",
+      "raw_endpoint_residual": "-100",
+      "fraction_of_opening_net_assets": "-0.1",
+      "split_adjusted_residual": "-100",
+      "actual_external_subscription_minus_redemption_cash": "-100",
+      "cash_distributions_excluded_from_new_subscription_cash": "0",
+      "noncash_transfers": "0",
+      "events": [
+        {
+          "event": "external_subscription_or_redemption",
+          "cash": "-100",
+          "transaction_NAV": "10",
+          "unit_change": "-10"
+        }
+      ],
+      "conclusion": "Identical investor-count decrease has negative, zero, or positive new subscription cash.",
+      "opening_investors": 2,
+      "closing_investors": 1,
+      "opening_holder_units": {
+        "departing": 10,
+        "remaining": 90
+      },
+      "closing_holder_units": {
+        "remaining": 90
+      }
+    },
+    {
+      "id": "investors_2_to_1_cash_0",
+      "synthetic": true,
+      "opening_net_assets": "1000",
+      "closing_net_assets": "1000",
+      "opening_NAV": "10",
+      "closing_NAV": "10",
+      "opening_units": "100",
+      "closing_units": "100",
+      "raw_endpoint_residual": "0",
+      "fraction_of_opening_net_assets": "0",
+      "split_adjusted_residual": "0",
+      "actual_external_subscription_minus_redemption_cash": "0",
+      "cash_distributions_excluded_from_new_subscription_cash": "0",
+      "noncash_transfers": "0",
+      "events": [
+        {
+          "event": "external_subscription_or_redemption",
+          "cash": "-100",
+          "transaction_NAV": "10",
+          "unit_change": "-10"
+        },
+        {
+          "event": "external_subscription_or_redemption",
+          "cash": "100",
+          "transaction_NAV": "10",
+          "unit_change": "10"
+        }
+      ],
+      "conclusion": "Identical investor-count decrease has negative, zero, or positive new subscription cash.",
+      "opening_investors": 2,
+      "closing_investors": 1,
+      "opening_holder_units": {
+        "departing": 10,
+        "remaining": 90
+      },
+      "closing_holder_units": {
+        "remaining": 100
+      }
+    },
+    {
+      "id": "investors_2_to_1_cash_150",
+      "synthetic": true,
+      "opening_net_assets": "1000",
+      "closing_net_assets": "1150",
+      "opening_NAV": "10",
+      "closing_NAV": "10",
+      "opening_units": "100",
+      "closing_units": "115",
+      "raw_endpoint_residual": "150",
+      "fraction_of_opening_net_assets": "0.15",
+      "split_adjusted_residual": "150",
+      "actual_external_subscription_minus_redemption_cash": "150",
+      "cash_distributions_excluded_from_new_subscription_cash": "0",
+      "noncash_transfers": "0",
+      "events": [
+        {
+          "event": "external_subscription_or_redemption",
+          "cash": "-100",
+          "transaction_NAV": "10",
+          "unit_change": "-10"
+        },
+        {
+          "event": "external_subscription_or_redemption",
+          "cash": "250",
+          "transaction_NAV": "10",
+          "unit_change": "25"
+        }
+      ],
+      "conclusion": "Identical investor-count decrease has negative, zero, or positive new subscription cash.",
+      "opening_investors": 2,
+      "closing_investors": 1,
+      "opening_holder_units": {
+        "departing": 10,
+        "remaining": 90
+      },
+      "closing_holder_units": {
+        "remaining": 115
+      }
+    }
+  ],
+  "allocation_and_holdings_cases": [
+    {
+      "id": "allocation_price_drift_no_trade",
+      "synthetic": true,
+      "opening_security_values": [
+        "500",
+        "500"
+      ],
+      "closing_security_values": [
+        "1000",
+        "500"
+      ],
+      "quantities_unchanged": true,
+      "observed_weight_distance": "0.16666666666666666666666666666666666666666666666667",
+      "actual_security_buys": "0",
+      "actual_security_sells": "0",
+      "conclusion": "TV=1/6 from revaluation alone; allocation distance is not trading turnover."
+    },
+    {
+      "id": "allocation_same_endpoints_different_turnover",
+      "synthetic": true,
+      "observed_weight_distance_both_paths": "0.0",
+      "path_A": {
+        "buys": "0",
+        "sells": "0"
+      },
+      "path_B": {
+        "events": [
+          "sell all X for 500",
+          "buy Y for 500",
+          "sell added Y for 500",
+          "buy X for 500"
+        ],
+        "buys": "1000",
+        "sells": "1000",
+        "opening_assets": "1000"
+      },
+      "conclusion": "Unchanged weights hide round-trip trading; both observed TV values are zero."
+    },
+    {
+      "id": "redemption_same_fund_endpoints_different_security_sales",
+      "synthetic": true,
+      "opening_net_assets": "1000",
+      "closing_net_assets": "900",
+      "NAV_both": "10",
+      "external_redemption_both": "100",
+      "path_A": {
+        "opening_cash": "100",
+        "opening_security": "900",
+        "security_sales": "0",
+        "closing_cash": "0"
+      },
+      "path_B": {
+        "opening_cash": "0",
+        "opening_security": "1000",
+        "security_sales": "100",
+        "closing_cash": "0"
+      },
+      "conclusion": "Even known redemption cash does not identify security sales without cash/holdings/trade evidence."
+    },
+    {
+      "id": "stale_holdings_current_exposure_unidentified",
+      "synthetic": true,
+      "report_valuation": "2026-09-01T17:00:00+03:00",
+      "report_publication": "2026-09-03T09:00:00+03:00",
+      "query_cutoff": "2026-10-01T12:00:00+03:00",
+      "reported_X_weight_both": "0.5",
+      "possible_current_X_weights": [
+        "0.5",
+        "0"
+      ],
+      "conclusion": "The same last published report permits different current holdings; only historical disclosed exposure is observable."
+    }
+  ],
+  "publication_cutoff_cases": [
+    {
+      "id": "publication_cutoff_2026-09-02T08:00:00+03:00",
+      "synthetic": true,
+      "cutoff": "2026-09-02T08:00:00+03:00",
+      "included": [],
+      "excluded": [
+        "AUM_v1",
+        "NAV_v1",
+        "NAV_v2"
+      ],
+      "ready_for_same_time_endpoint": false,
+      "conclusion": "Valuation date does not confer availability; later receipt/publication and revisions cannot alter a frozen earlier snapshot."
+    },
+    {
+      "id": "publication_cutoff_2026-09-02T09:30:00+03:00",
+      "synthetic": true,
+      "cutoff": "2026-09-02T09:30:00+03:00",
+      "included": [
+        {
+          "id": "NAV_v1",
+          "field": "NAV",
+          "value": "10",
+          "effective_at": "2026-09-01T17:00:00+03:00",
+          "published_at": "2026-09-02T09:00:00+03:00",
+          "available_at": "2026-09-02T09:05:00+03:00"
+        }
+      ],
+      "excluded": [
+        "AUM_v1",
+        "NAV_v2"
+      ],
+      "ready_for_same_time_endpoint": false,
+      "conclusion": "Valuation date does not confer availability; later receipt/publication and revisions cannot alter a frozen earlier snapshot."
+    },
+    {
+      "id": "publication_cutoff_2026-09-02T10:30:00+03:00",
+      "synthetic": true,
+      "cutoff": "2026-09-02T10:30:00+03:00",
+      "included": [
+        {
+          "id": "AUM_v1",
+          "field": "net_assets",
+          "value": "1000",
+          "effective_at": "2026-09-01T17:00:00+03:00",
+          "published_at": "2026-09-02T10:00:00+03:00",
+          "available_at": "2026-09-02T10:05:00+03:00"
+        },
+        {
+          "id": "NAV_v1",
+          "field": "NAV",
+          "value": "10",
+          "effective_at": "2026-09-01T17:00:00+03:00",
+          "published_at": "2026-09-02T09:00:00+03:00",
+          "available_at": "2026-09-02T09:05:00+03:00"
+        }
+      ],
+      "excluded": [
+        "NAV_v2"
+      ],
+      "ready_for_same_time_endpoint": true,
+      "conclusion": "Valuation date does not confer availability; later receipt/publication and revisions cannot alter a frozen earlier snapshot."
+    },
+    {
+      "id": "publication_cutoff_2026-09-03T10:00:00+03:00",
+      "synthetic": true,
+      "cutoff": "2026-09-03T10:00:00+03:00",
+      "included": [
+        {
+          "id": "AUM_v1",
+          "field": "net_assets",
+          "value": "1000",
+          "effective_at": "2026-09-01T17:00:00+03:00",
+          "published_at": "2026-09-02T10:00:00+03:00",
+          "available_at": "2026-09-02T10:05:00+03:00"
+        },
+        {
+          "id": "NAV_v2",
+          "field": "NAV",
+          "value": "9.8",
+          "effective_at": "2026-09-01T17:00:00+03:00",
+          "published_at": "2026-09-03T09:00:00+03:00",
+          "available_at": "2026-09-03T09:05:00+03:00"
+        }
+      ],
+      "excluded": [],
+      "ready_for_same_time_endpoint": true,
+      "conclusion": "Valuation date does not confer availability; later receipt/publication and revisions cannot alter a frozen earlier snapshot."
+    }
+  ],
+  "endpoint_metadata_cases": [
+    {
+      "id": "matched_endpoint_metadata",
+      "synthetic": true,
+      "outcome": "ELIGIBLE_FOR_RESIDUAL_ONLY",
+      "reasons": [],
+      "conclusion": "Comparable metadata allows arithmetic; it does not identify actual cash or grant data rights."
+    },
+    {
+      "id": "mismatched_effective_times",
+      "synthetic": true,
+      "changed_field": "effective_at",
+      "changed_value": "2026-09-02T17:00:00+03:00",
+      "outcome": "ABSTAIN_INCOMPARABLE_ENDPOINTS",
+      "reasons": [
+        "MISMATCH_OR_UNKNOWN_EFFECTIVE_AT"
+      ]
+    },
+    {
+      "id": "mismatched_currency",
+      "synthetic": true,
+      "changed_field": "currency",
+      "changed_value": "USD",
+      "outcome": "ABSTAIN_INCOMPARABLE_ENDPOINTS",
+      "reasons": [
+        "MISMATCH_OR_UNKNOWN_CURRENCY"
+      ]
+    },
+    {
+      "id": "mismatched_class",
+      "synthetic": true,
+      "changed_field": "share_class_id",
+      "changed_value": "B",
+      "outcome": "ABSTAIN_INCOMPARABLE_ENDPOINTS",
+      "reasons": [
+        "MISMATCH_OR_UNKNOWN_SHARE_CLASS_ID"
+      ]
+    },
+    {
+      "id": "gross_AUM_not_net_assets",
+      "synthetic": true,
+      "changed_field": "asset_basis",
+      "changed_value": "gross_assets",
+      "outcome": "ABSTAIN_INCOMPARABLE_ENDPOINTS",
+      "reasons": [
+        "AUM_NOT_VERIFIED_NET_ASSETS"
+      ]
+    },
+    {
+      "id": "total_return_series_not_raw_NAV",
+      "synthetic": true,
+      "changed_field": "nav_kind",
+      "changed_value": "total_return_index",
+      "outcome": "ABSTAIN_INCOMPARABLE_ENDPOINTS",
+      "reasons": [
+        "UNSUPPORTED_OR_UNKNOWN_NAV_CONVENTION"
+      ]
+    },
+    {
+      "id": "unknown_corporate_actions",
+      "synthetic": true,
+      "changed_field": "corporate_actions_resolved",
+      "changed_value": false,
+      "outcome": "ABSTAIN_INCOMPARABLE_ENDPOINTS",
+      "reasons": [
+        "CORPORATE_ACTIONS_UNRESOLVED"
+      ]
+    },
+    {
+      "id": "historical_AUM_placeholder",
+      "synthetic": true,
+      "changed_field": "missing_reason",
+      "changed_value": "PROVIDER_DEFAULT_PLACEHOLDER",
+      "outcome": "ABSTAIN_INCOMPARABLE_ENDPOINTS",
+      "reasons": [
+        "MISSING_OR_PLACEHOLDER"
+      ]
+    }
+  ],
+  "uncertainty_cases": [
+    {
+      "input_bounds": {
+        "opening_assets": [
+          "995",
+          "1005"
+        ],
+        "closing_assets": [
+          "1095",
+          "1105"
+        ],
+        "opening_NAV": [
+          "9.995",
+          "10.005"
+        ],
+        "closing_NAV": [
+          "9.995",
+          "10.005"
+        ]
+      },
+      "residual_bound": [
+        "88.9944972486243121560780390195097548774387193597",
+        "110.99450274862568715642178910544727636181909045477"
+      ],
+      "fraction_of_opening_assets_bound": [
+        "0.0885517385558450867224657104671738854501877804573",
+        "0.11155226406897053985570029055823846870534581955252"
+      ],
+      "threshold": "0.1",
+      "classification": "THRESHOLD_CLASSIFICATION_UNRESOLVED",
+      "corner_checks": 16,
+      "interval_kind": "deterministic_input_bounds_not_confidence_interval",
+      "id": "rounding_threshold_overlap",
+      "synthetic": true,
+      "bounds_origin": "Illustrative +/-5 asset currency units and +/-0.005 NAV; not measured provider error."
+    },
+    {
+      "input_bounds": {
+        "opening_assets": [
+          "995",
+          "1005"
+        ],
+        "closing_assets": [
+          "1145",
+          "1155"
+        ],
+        "opening_NAV": [
+          "9.995",
+          "10.005"
+        ],
+        "closing_NAV": [
+          "9.995",
+          "10.005"
+        ]
+      },
+      "residual_bound": [
+        "138.9944972486243121560780390195097548774387193597",
+        "160.99450274862568715642178910544727636181909045477"
+      ],
+      "fraction_of_opening_assets_bound": [
+        "0.1383029823369396140856497900691639352014315615519",
+        "0.16180352035037757503157968754316309182092370899982"
+      ],
+      "threshold": "0.1",
+      "classification": "ROBUST_POSITIVE_OVER_ILLUSTRATIVE_THRESHOLD",
+      "corner_checks": 16,
+      "interval_kind": "deterministic_input_bounds_not_confidence_interval",
+      "id": "robust_above_threshold",
+      "synthetic": true,
+      "bounds_origin": "Illustrative +/-5 asset currency units and +/-0.005 NAV; not measured provider error."
+    },
+    {
+      "input_bounds": {
+        "opening_assets": [
+          "995",
+          "1005"
+        ],
+        "closing_assets": [
+          "1035",
+          "1045"
+        ],
+        "opening_NAV": [
+          "9.995",
+          "10.005"
+        ],
+        "closing_NAV": [
+          "9.995",
+          "10.005"
+        ]
+      },
+      "residual_bound": [
+        "28.9944972486243121560780390195097548774387193597",
+        "50.99450274862568715642178910544727636181909045477"
+      ],
+      "fraction_of_opening_assets_bound": [
+        "0.0288502460185316538866448149447858257486952431439",
+        "0.05125075653128209764464501417632892096665235221582"
+      ],
+      "threshold": "0.1",
+      "classification": "ENTIRE_BOUND_BELOW_ILLUSTRATIVE_THRESHOLD",
+      "corner_checks": 16,
+      "interval_kind": "deterministic_input_bounds_not_confidence_interval",
+      "id": "robust_below_threshold",
+      "synthetic": true,
+      "bounds_origin": "Illustrative +/-5 asset currency units and +/-0.005 NAV; not measured provider error."
+    }
+  ],
+  "invalid_and_missing_cases": [
+    {
+      "id": "zero_opening_assets",
+      "synthetic": true,
+      "inputs": [
+        "0",
+        "100",
+        "10",
+        "10"
+      ],
+      "outcome": "ABSTAIN_INVALID_INPUT",
+      "reason": "opening_net_assets must be finite and positive"
+    },
+    {
+      "id": "negative_opening_assets",
+      "synthetic": true,
+      "inputs": [
+        "-1",
+        "100",
+        "10",
+        "10"
+      ],
+      "outcome": "ABSTAIN_INVALID_INPUT",
+      "reason": "opening_net_assets must be finite and positive"
+    },
+    {
+      "id": "zero_opening_NAV",
+      "synthetic": true,
+      "inputs": [
+        "100",
+        "100",
+        "0",
+        "10"
+      ],
+      "outcome": "ABSTAIN_INVALID_INPUT",
+      "reason": "opening_NAV must be finite and positive"
+    },
+    {
+      "id": "zero_closing_NAV",
+      "synthetic": true,
+      "inputs": [
+        "100",
+        "100",
+        "10",
+        "0"
+      ],
+      "outcome": "ABSTAIN_INVALID_INPUT",
+      "reason": "closing_NAV must be finite and positive"
+    },
+    {
+      "id": "negative_closing_assets",
+      "synthetic": true,
+      "inputs": [
+        "100",
+        "-1",
+        "10",
+        "10"
+      ],
+      "outcome": "ABSTAIN_INVALID_INPUT",
+      "reason": "closing_net_assets must be finite and nonnegative"
+    },
+    {
+      "id": "NaN_assets",
+      "synthetic": true,
+      "inputs": [
+        "100",
+        "NaN",
+        "10",
+        "10"
+      ],
+      "outcome": "ABSTAIN_INVALID_INPUT",
+      "reason": "closing_net_assets must be finite and nonnegative"
+    },
+    {
+      "id": "infinite_NAV",
+      "synthetic": true,
+      "inputs": [
+        "100",
+        "100",
+        "10",
+        "Infinity"
+      ],
+      "outcome": "ABSTAIN_INVALID_INPUT",
+      "reason": "closing_NAV must be finite and positive"
+    },
+    {
+      "id": "signed_weights",
+      "synthetic": true,
+      "inputs": [
+        "1.2",
+        "-0.2"
+      ],
+      "outcome": "ABSTAIN_INCOMPARABLE_ALLOCATION",
+      "reason": "Signed/nonfinite exposures require a different model"
+    },
+    {
+      "id": "incomplete_weights",
+      "synthetic": true,
+      "inputs": [
+        "0.4",
+        "0.4"
+      ],
+      "outcome": "ABSTAIN_INCOMPARABLE_ALLOCATION",
+      "reason": "Complete weights must sum to one; no silent normalization"
+    },
+    {
+      "id": "zero_investor_placeholder",
+      "synthetic": true,
+      "opening_count": 10,
+      "closing_count": 0,
+      "missing_reason": "PROVIDER_DEFAULT_PLACEHOLDER",
+      "outcome": "ABSTAIN_MISSING_COUNT",
+      "conclusion": "Provider default zero must not become a -100% investor change."
+    },
+    {
+      "id": "observed_true_zero_investor_denominator",
+      "synthetic": true,
+      "opening_count": 0,
+      "closing_count": 10,
+      "missing_reason": null,
+      "outcome": "ABSOLUTE_CHANGE_ONLY_PERCENT_UNDEFINED",
+      "conclusion": "Observed zero differs from missing but still has no percentage denominator."
+    }
+  ],
+  "bounded_formula_checks": {
+    "checked_synthetic_combinations": 768,
+    "maximum_absolute_decimal_vs_exact_fraction_error": "3.33333E-48",
+    "absolute_numeric_tolerance": "1E-40",
+    "precision": 50,
+    "scope": "Finite authored grid; not exhaustive proof, provider tests, empirical accuracy, or threshold validation."
+  },
+  "limitations": [
+    "No actual fund observations, historical replay, NAV reconstruction, or trade-ledger validation.",
+    "Exact cash cannot generally be recovered from two NAV/AUM endpoints, even with endpoint unit counts.",
+    "Distribution examples use one immediate distribution with no other return; no general corporate-action processor.",
+    "Cadence/rights/adjustment metadata are proposed gates; source-specific adapters are not implemented.",
+    "Synthetic uncertainty bounds are illustrative and assume positive independent input bounds."
+  ],
+  "experiment_sha256": "e5aa45c3d4c3a4a2020267146aea522417590182ce2b6917316efc995f6c6ba1"
+}

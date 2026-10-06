@@ -1,0 +1,439 @@
+{
+  "agent": "contracts_security",
+  "audit_date": "2026-10-02",
+  "immutable_baseline": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3",
+  "actual_application_tests": [],
+  "static_checks": [
+    "Draft 2020-12 schema structural checks with FormatChecker",
+    "Eleven targeted schema cases",
+    "All traceability rows parsed/mappings reviewed",
+    "Read-only official Supabase docs checks"
+  ],
+  "files": [
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/.env.example",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "8bd66e04a0c25b6306d0dbda03cea2cc31995dbda458acebc42dc1d84ad1b0fe",
+      "bytes": 706,
+      "lines": 29,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/AGENTS.md",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "4cbf0829f1bc2f31538335e2d6a33b14a74aadbbecd2df46e79cd31f19e8c1b8",
+      "bytes": 4849,
+      "lines": 37,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/CLAUDE.md",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "700939c905a3839a50611d58e0b12274d84ad812b4253c6a0da05db6d2eaff58",
+      "bytes": 330,
+      "lines": 5,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/README.md",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "03f061495111f204b2e9a09c24116fc7dc0fcfbf4c90bfb67903def68b60d16b",
+      "bytes": 2808,
+      "lines": 32,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/START_HERE.md",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "8db7f00bd76f5246d0a80486cc1b98952d59f1a32e1289b42c244a71f54e5f8f",
+      "bytes": 3823,
+      "lines": 38,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/docs/00_Decisions_and_Corrections.md",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "934ad05efc97296dad7e57964a19cc56fcb3451c8b214b1ff0aa156b88cdfec8",
+      "bytes": 6219,
+      "lines": 45,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/docs/13_Decision_Confidence_and_Validation.md",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "659d8afe1e625a9dfeb75968999f3496d85cd4f9a0f68a688e2cdea9e11ca780",
+      "bytes": 6630,
+      "lines": 62,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/docs/14_Architecture_and_ADRs.md",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "1f30c426d2be632e250ab7fd308e1149d98567c3f5931864b571b2158fcf95cc",
+      "bytes": 6853,
+      "lines": 71,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/docs/15_Domain_Model_and_Persistence.md",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "a638bcf21a70247281808baaf4eba409628b5f8b62767515ce6778d3f0cc5703",
+      "bytes": 7333,
+      "lines": 71,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/docs/16_API_Specification.md",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "80a21ab901fccb1cff8b403d3fabda392504061658a3fbff7e67b9df944e6435",
+      "bytes": 5798,
+      "lines": 48,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/docs/17_AI_Tools_and_Runtime_Prompts.md",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "0dcde85500be5d8fd99d1b4b75c61579bf9880c13ffa727887206b10b731fd9c",
+      "bytes": 5720,
+      "lines": 46,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/docs/19_Security_Privacy_and_Compliance.md",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "6d867930374c66e0c93b3df0b0716c6c0ff6fa61085e66fab810e34339e94964",
+      "bytes": 5113,
+      "lines": 44,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/docs/20_Test_and_Validation_Strategy.md",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "40644f3c3358d9cc0db64012fe8058fdfc98dd0fc0f77c02da7bd1fb992977e7",
+      "bytes": 7544,
+      "lines": 72,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/docs/22_Deployment_Operations_and_Costs.md",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "a42a407321d74d4da0bddb246bf8860b79450a6bf597735ad149b9f701a2f988",
+      "bytes": 5396,
+      "lines": 51,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/docs/25_Release_Gates_and_Open_Decisions.md",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "51157188a19ca7bc54fdeb842235a7605776e2d546d592d155cd6038b8dc1bda",
+      "bytes": 3517,
+      "lines": 33,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/reports/PACKAGE_AUDIT.md",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "e29a1d75cea21b5e09dae2230d9f38fc8e1ce42124192a4abe69bfe8bf2d93eb",
+      "bytes": 4845,
+      "lines": 38,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/fixtures/synthetic_event.json",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "e246b582cf2c2ac93a1a53bbaa621dd414cafe1232fa4e37879bab335c7d38f9",
+      "bytes": 2574,
+      "lines": 79,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/fixtures/synthetic_ai_answer.json",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "f99fde68d2f3b88a4e3732c1a4c3054ae43fbe3b93f416738547d2f80d7a6a3a",
+      "bytes": 2217,
+      "lines": 70,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/config/notification_defaults.json",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "b27ffbd479470c30c413a8e8394b1fc8337b52214896d37d99b62f3b595d8c72",
+      "bytes": 616,
+      "lines": 20,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/config/admin_settings.json",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "3eb64d5e0f1d7f9106344f64bb1737122c74a298ef735f711f17bfe60fcbe163",
+      "bytes": 819,
+      "lines": 44,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/templates/MODEL_CARD.md",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "c2cc5c84dcaee1ed02ea70f53dfbd28a100619d26c9f4b8fcb3208c050ff8710",
+      "bytes": 621,
+      "lines": 16,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/templates/DATA_CARD.md",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "686bcf7ef24e1289e902cdda831641b6b942d74fbd75478759fffc49d32bb2a7",
+      "bytes": 522,
+      "lines": 13,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/templates/COST_WORKSHEET.md",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "c4721adf4187fa5e06cd79acb99ccfcd188b88e0e26fe112fab37b9bed89d664",
+      "bytes": 525,
+      "lines": 15,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/templates/RIGHTS_INVENTORY.md",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "4712a38d5254c346c9131709c25ca246db9718342160525932c470f1fa0f34fe",
+      "bytes": 509,
+      "lines": 16,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/templates/RELEASE_CHECKLIST.md",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "3b00199b747431fd062b48d6d055b7bec4be4ef72763e1a28d15b9603d45cfe6",
+      "bytes": 655,
+      "lines": 18,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/templates/PROVIDER_SPIKE.md",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "7de8631fbe35b4f9806694f1f75da4b2ad192c50651c6446a9367b0fb736468c",
+      "bytes": 690,
+      "lines": 16,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/templates/TASK.md",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "ed3bb4d1182a01a2942bad8777d226fe87afa8b43842de091c523f6ea4e6738d",
+      "bytes": 432,
+      "lines": 18,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/contracts/ai_answer.schema.json",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "067886f533a776cc403cc00b07c67039558e3f629ee90469c7d05bf264698b79",
+      "bytes": 2722,
+      "lines": 137,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/contracts/domain_tables.json",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "808ed216ccd4023bed6f2488aa0644a14d17d52d4c3b2567dc8e4171d424632d",
+      "bytes": 5431,
+      "lines": 223,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/contracts/event.schema.json",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "50e11680ff9de0a48a2e83048dae9971ad55fc10369eb2dc4cb9351136297058",
+      "bytes": 7121,
+      "lines": 351,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/contracts/evidence.schema.json",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "58c662f1ca2d932c4246f05b4dfac7744495d7eedd953052d10224d68a0e2438",
+      "bytes": 2736,
+      "lines": 149,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/contracts/investigation_packet.schema.json",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "45c499e1e27c89ed955e0ac372f5c59c28354b5334f61b36fc7c764b3161b7ca",
+      "bytes": 1954,
+      "lines": 97,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/contracts/openapi.yaml",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "1018384ed0800a8b9c1bbcaf146dba9c4ec1cbcb61cb68e80d02fe850a3b3a62",
+      "bytes": 31729,
+      "lines": 1294,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/prompts/CLAUDE_CODE_START.md",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "d39d4fc406036920d478b6a0ffeb357520151d2a396d82c505d1b6ef4de3f7f3",
+      "bytes": 2188,
+      "lines": 18,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/prompts/CODEX_START.md",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "8d9292ac5ba2e6019790a108007abbb56c20a4ed7cb7eae6e0fcfc9275633766",
+      "bytes": 2182,
+      "lines": 18,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/prompts/DESIGN_REVIEW.md",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "c298b449a6700a7d9dcaa9257a40a8abdac239a5f0f1d04600a130e5ee4a4a89",
+      "bytes": 978,
+      "lines": 7,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/prompts/IMPLEMENT_ONE_SLICE.md",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "9a7ed4c21da720d74659dfbbb464613e6c0ba427d5b5acfa7ae47f950f90e774",
+      "bytes": 1080,
+      "lines": 15,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/prompts/RUNTIME_ASSET_ASSISTANT.md",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "9300b1dc3cabe3af6255299a7a9fffde0bdccdf379ae13d61a18d6dfc6dcc595",
+      "bytes": 1687,
+      "lines": 11,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/prompts/RUNTIME_EVIDENCE_REVIEWER.md",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "9fad948a98b45e33545bc95e46b5d5f9620b45c5c53b384c9aa54af65c4780e0",
+      "bytes": 1080,
+      "lines": 7,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/prompts/RUNTIME_INVESTIGATOR.md",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "1c84e7cd919fd9e93e3133856436d82072f66c4a0a22407ebfa3125888e2e676",
+      "bytes": 1785,
+      "lines": 11,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/prompts/SECURITY_AND_RELEASE_REVIEW.md",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "f5930dab54766a6efcfd669d670a7c252035fa4b88208befcdfb9cd1ec96e848",
+      "bytes": 949,
+      "lines": 7,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/contracts/traceability.json",
+      "review_mode": "FULL_PARSE_AND_MAPPING_REVIEW",
+      "sha256": "04c5ea75581d0b622a4f9d8cfbd5bc7b5e2f85219eabcc90ef526199a7ff2a5a",
+      "bytes": 127255,
+      "lines": 5215,
+      "notes": "All 284 rows parsed and compact mappings reviewed; verification/implementation invariants and empty acceptance rows counted. Atomic acceptance belongs to parent requirements audit."
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/requirements_registry.json",
+      "review_mode": "FULL_PARSE_SELECTED_SEMANTIC_REVIEW",
+      "sha256": "a979c75b5afef630b1c438b1cde7c6211f5def09aa31ee3ec4d3a4e88c6194d9",
+      "bytes": 127299,
+      "lines": 2972,
+      "notes": "All records parsed/titles searched; body reviewed for auth/admin/privacy/claims/evidence/replay/notifications/calculation requirements quoted in report."
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/reference/engine.py",
+      "review_mode": "PARTIAL_CONTENT_REVIEW",
+      "sha256": "5042b7a97bc01cd076aa2a50b684875ca6a5f33e80cbca323e9edecac883b8a6",
+      "bytes": 10317,
+      "lines": 216,
+      "notes": "Lines 1–125 and 190–220 read; all release/global/replay/status matches searched. Other reference implementation belongs to parent agent."
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/scripts/validate_package.py",
+      "review_mode": "PARTIAL_CONTENT_REVIEW",
+      "sha256": "8a71bb662eecde470e2f76f11cdfd430ba17137b9626df156664b8362dfd62ff",
+      "bytes": 10378,
+      "lines": 133,
+      "notes": "Lines 1–130 read. Remaining script execution belongs to parent agent."
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/context/01_CONVERSATION_BRIEF.md",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "5238bad6b7cb4de3f7e7c379dc3472f5e54ead437c25ccc5d5bb374dbb43078e",
+      "bytes": 9597,
+      "lines": 61,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/context/02_DECISION_LEDGER.md",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "51a7dbb02912c6242cdc94dd79c4d5fe1b67e7a32ff35d3285944e8a0dcfe4a7",
+      "bytes": 8534,
+      "lines": 77,
+      "notes": ""
+    },
+    {
+      "path": "received/Project_50K_Work_Handoff_v1/context/03_FIRST_TASK_AUDIT_AND_OPEN_QUESTIONS.md",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "56bd765c30c6206e17bbd9b3c363c752e38c112efd64d6ad3e2899ff6d1ff082",
+      "bytes": 6865,
+      "lines": 50,
+      "notes": ""
+    },
+    {
+      "path": "upload/Pasted text(20261002-111450).txt",
+      "review_mode": "FULL_CONTENT_REVIEW",
+      "sha256": "d9735a1e285d4f246352bd36e01b1727c336d8500e27181d41e01c61f35b6f61",
+      "bytes": 19571,
+      "lines": 141,
+      "notes": ""
+    }
+  ],
+  "external_sources": [
+    {
+      "url": "https://supabase.com/docs/guides/auth/signout",
+      "retrieval_ref": "turn39view1",
+      "review_depth": "Relevant official documentation text"
+    },
+    {
+      "url": "https://supabase.com/docs/guides/auth/sessions",
+      "retrieval_ref": "turn39view0",
+      "review_depth": "Relevant official documentation text"
+    },
+    {
+      "url": "https://supabase.com/docs/guides/auth/auth-anonymous",
+      "retrieval_ref": "turn39view2",
+      "review_depth": "Relevant official documentation text"
+    },
+    {
+      "url": "https://supabase.com/docs/guides/auth/signing-keys",
+      "retrieval_ref": "turn39view3",
+      "review_depth": "Official overview; no provisioned project validation"
+    }
+  ],
+  "not_verified": [
+    "Auth/JWT/RLS deployment",
+    "Two-user isolation",
+    "Admin role/session revocation behavior",
+    "Custom-fetch SSRF defenses",
+    "LLM runtime/material-claim validation",
+    "Real provider/data rights",
+    "Email enqueue/send/reconcile/withdrawal",
+    "Account deletion/retention",
+    "Hosting/secret bundle scanning"
+  ]
+}

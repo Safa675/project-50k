@@ -1,0 +1,5432 @@
+[
+  {
+    "requirement_id": "UR-001",
+    "title": "Public asset discovery",
+    "phase": "CORE",
+    "task_ids": [
+      "T04"
+    ],
+    "related_requirement_ids": [
+      "FR-003",
+      "FR-005"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-001",
+      "TC-DATA-002",
+      "TC-DATA-003",
+      "TC-DATA-004",
+      "TC-DATA-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-002",
+    "title": "Cross-asset search",
+    "phase": "CORE",
+    "task_ids": [
+      "T04"
+    ],
+    "related_requirement_ids": [
+      "FR-001",
+      "FR-002",
+      "FR-003"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-001",
+      "TC-DATA-002",
+      "TC-DATA-003",
+      "TC-DATA-004",
+      "TC-DATA-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-003",
+    "title": "Public asset overview",
+    "phase": "CORE",
+    "task_ids": [
+      "T04"
+    ],
+    "related_requirement_ids": [
+      "FR-005"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-001",
+      "TC-DATA-002",
+      "TC-DATA-003",
+      "TC-DATA-004",
+      "TC-DATA-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-004",
+    "title": "Public evidence access",
+    "phase": "CORE",
+    "task_ids": [
+      "T07"
+    ],
+    "related_requirement_ids": [
+      "FR-073"
+    ],
+    "acceptance_case_ids": [
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false,
+    "required_acceptance_detail": "Anonymous visitor opens a public event and can inspect actual permitted source links, timestamps and metrics; private records are absent."
+  },
+  {
+    "requirement_id": "UR-005",
+    "title": "Clear market/asset identity",
+    "phase": "CORE",
+    "task_ids": [
+      "T04"
+    ],
+    "related_requirement_ids": [
+      "FR-001",
+      "FR-004"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-001",
+      "TC-DATA-002",
+      "TC-DATA-003",
+      "TC-DATA-004",
+      "TC-DATA-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-006",
+    "title": "Frictionless authentication",
+    "phase": "CORE",
+    "task_ids": [
+      "T03"
+    ],
+    "related_requirement_ids": [
+      "FR-006",
+      "FR-007"
+    ],
+    "acceptance_case_ids": [
+      "TC-AUTH-001",
+      "TC-AUTH-002",
+      "TC-AUTH-003",
+      "TC-AUTH-004"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-007",
+    "title": "Anonymous-to-authenticated continuity",
+    "phase": "CORE",
+    "task_ids": [
+      "T03"
+    ],
+    "related_requirement_ids": [
+      "FR-008"
+    ],
+    "acceptance_case_ids": [
+      "TC-AUTH-001",
+      "TC-AUTH-002",
+      "TC-AUTH-003",
+      "TC-AUTH-004"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-008",
+    "title": "Persistent personal state",
+    "phase": "CORE",
+    "task_ids": [
+      "T03",
+      "T09"
+    ],
+    "related_requirement_ids": [
+      "FR-007",
+      "FR-015"
+    ],
+    "acceptance_case_ids": [
+      "TC-AUTH-001",
+      "TC-AUTH-002",
+      "TC-AUTH-003",
+      "TC-AUTH-004",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-009",
+    "title": "Secure sign-out",
+    "phase": "CORE",
+    "task_ids": [
+      "T03"
+    ],
+    "related_requirement_ids": [
+      "FR-006"
+    ],
+    "acceptance_case_ids": [
+      "TC-AUTH-001",
+      "TC-AUTH-002",
+      "TC-AUTH-003",
+      "TC-AUTH-004"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false,
+    "required_acceptance_detail": "Sign out returns to anonymous access; prior private watchlist/chat/notifications are removed from visible client state and private requests fail. FR-006 is contextual, not a dedicated sign-out function."
+  },
+  {
+    "requirement_id": "UR-010",
+    "title": "Add asset to watchlist",
+    "phase": "CORE",
+    "task_ids": [
+      "T09"
+    ],
+    "related_requirement_ids": [
+      "FR-012",
+      "FR-014"
+    ],
+    "acceptance_case_ids": [
+      "TC-AUTH-002",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-011",
+    "title": "Remove asset from watchlist",
+    "phase": "CORE",
+    "task_ids": [
+      "T09"
+    ],
+    "related_requirement_ids": [
+      "FR-013"
+    ],
+    "acceptance_case_ids": [
+      "TC-AUTH-002",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-012",
+    "title": "Unified watchlist concept",
+    "phase": "CORE",
+    "task_ids": [
+      "T09"
+    ],
+    "related_requirement_ids": [
+      "FR-014",
+      "FR-015"
+    ],
+    "acceptance_case_ids": [
+      "TC-AUTH-002",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-013",
+    "title": "No mandatory quantity or cost basis",
+    "phase": "CORE",
+    "task_ids": [
+      "T09"
+    ],
+    "related_requirement_ids": [
+      "FR-016"
+    ],
+    "acceptance_case_ids": [
+      "TC-AUTH-002",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-014",
+    "title": "Optional exposure data in future",
+    "phase": "LATER",
+    "task_ids": [
+      "T18"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-015",
+    "title": "Personalized important developments",
+    "phase": "CORE",
+    "task_ids": [
+      "T09"
+    ],
+    "related_requirement_ids": [
+      "FR-081"
+    ],
+    "acceptance_case_ids": [
+      "TC-AUTH-002",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-016",
+    "title": "Market-wide highlights",
+    "phase": "CORE",
+    "task_ids": [
+      "T09"
+    ],
+    "related_requirement_ids": [
+      "FR-082"
+    ],
+    "acceptance_case_ids": [
+      "TC-AUTH-002",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-017",
+    "title": "Critical off-watchlist awareness",
+    "phase": "CORE",
+    "task_ids": [
+      "T10"
+    ],
+    "related_requirement_ids": [
+      "FR-087"
+    ],
+    "acceptance_case_ids": [
+      "TC-NOT-001",
+      "TC-NOT-002",
+      "TC-NOT-003",
+      "TC-NOT-004",
+      "TC-NOT-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": true
+  },
+  {
+    "requirement_id": "UR-018",
+    "title": "Attention prioritization",
+    "phase": "CORE",
+    "task_ids": [
+      "T09"
+    ],
+    "related_requirement_ids": [
+      "FR-083"
+    ],
+    "acceptance_case_ids": [
+      "TC-AUTH-002",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-019",
+    "title": "Quiet state",
+    "phase": "CORE",
+    "task_ids": [
+      "T09"
+    ],
+    "related_requirement_ids": [
+      "FR-084"
+    ],
+    "acceptance_case_ids": [
+      "TC-AUTH-002",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-020",
+    "title": "Event type",
+    "phase": "CORE",
+    "task_ids": [
+      "T07"
+    ],
+    "related_requirement_ids": [
+      "FR-064",
+      "FR-072"
+    ],
+    "acceptance_case_ids": [
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false,
+    "required_acceptance_detail": "Shown event type matches normalized event type and is understandable in Turkish."
+  },
+  {
+    "requirement_id": "UR-021",
+    "title": "Severity",
+    "phase": "CORE",
+    "task_ids": [
+      "T07"
+    ],
+    "related_requirement_ids": [
+      "FR-066"
+    ],
+    "acceptance_case_ids": [
+      "TC-DET-006",
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-022",
+    "title": "Confidence",
+    "phase": "CORE",
+    "task_ids": [
+      "T07"
+    ],
+    "related_requirement_ids": [
+      "FR-067"
+    ],
+    "acceptance_case_ids": [
+      "TC-DET-006",
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": true
+  },
+  {
+    "requirement_id": "UR-023",
+    "title": "Severity-confidence separation",
+    "phase": "CORE",
+    "task_ids": [
+      "T07"
+    ],
+    "related_requirement_ids": [
+      "FR-067"
+    ],
+    "acceptance_case_ids": [
+      "TC-DET-006",
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-024",
+    "title": "Why detected",
+    "phase": "CORE",
+    "task_ids": [
+      "T07"
+    ],
+    "related_requirement_ids": [
+      "FR-073",
+      "FR-074"
+    ],
+    "acceptance_case_ids": [
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false,
+    "required_acceptance_detail": "Event explains actual trigger value, baseline/window and limitation; inspect numeric evidence if AI unavailable."
+  },
+  {
+    "requirement_id": "UR-025",
+    "title": "Evidence inspection",
+    "phase": "CORE",
+    "task_ids": [
+      "T07"
+    ],
+    "related_requirement_ids": [
+      "FR-073"
+    ],
+    "acceptance_case_ids": [
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false,
+    "required_acceptance_detail": "User can inspect each displayed supporting metric with units, timestamp and source evidence."
+  },
+  {
+    "requirement_id": "UR-026",
+    "title": "Source provenance",
+    "phase": "CORE",
+    "task_ids": [
+      "T08"
+    ],
+    "related_requirement_ids": [
+      "FR-058"
+    ],
+    "acceptance_case_ids": [
+      "TC-AI-001",
+      "TC-AI-002",
+      "TC-AI-003",
+      "TC-AI-004",
+      "TC-AI-005",
+      "TC-AI-006"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-027",
+    "title": "Data freshness",
+    "phase": "CORE",
+    "task_ids": [
+      "T04"
+    ],
+    "related_requirement_ids": [
+      "FR-018",
+      "FR-019"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-001",
+      "TC-DATA-002",
+      "TC-DATA-003",
+      "TC-DATA-004",
+      "TC-DATA-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-028",
+    "title": "No false legal conclusion",
+    "phase": "CORE",
+    "task_ids": [
+      "T07"
+    ],
+    "related_requirement_ids": [
+      "FR-071"
+    ],
+    "acceptance_case_ids": [
+      "TC-DET-006",
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-029",
+    "title": "Intraday BIST intelligence",
+    "phase": "CORE",
+    "task_ids": [
+      "T05"
+    ],
+    "related_requirement_ids": [
+      "FR-024"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-005",
+      "TC-DET-001",
+      "TC-DET-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-030",
+    "title": "BIST contextual comparison",
+    "phase": "CORE",
+    "task_ids": [
+      "T05"
+    ],
+    "related_requirement_ids": [
+      "FR-025"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-005",
+      "TC-DET-001",
+      "TC-DET-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-031",
+    "title": "KAP context",
+    "phase": "CORE",
+    "task_ids": [
+      "T05"
+    ],
+    "related_requirement_ids": [
+      "FR-026",
+      "FR-027",
+      "FR-028"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-005",
+      "TC-DET-001",
+      "TC-DET-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-032",
+    "title": "Fundamental context",
+    "phase": "CORE",
+    "task_ids": [
+      "T05"
+    ],
+    "related_requirement_ids": [
+      "FR-028",
+      "FR-029"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-005",
+      "TC-DET-001",
+      "TC-DET-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-033",
+    "title": "Regulatory context",
+    "phase": "CORE",
+    "task_ids": [
+      "T05"
+    ],
+    "related_requirement_ids": [
+      "FR-030"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-005",
+      "TC-DET-001",
+      "TC-DET-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-034",
+    "title": "Fund-specific intelligence",
+    "phase": "CORE",
+    "task_ids": [
+      "T06"
+    ],
+    "related_requirement_ids": [
+      "FR-031"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-001",
+      "TC-DET-003",
+      "TC-DET-004",
+      "TC-DET-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-035",
+    "title": "Fund historical metrics",
+    "phase": "CORE",
+    "task_ids": [
+      "T06"
+    ],
+    "related_requirement_ids": [
+      "FR-031",
+      "FR-032"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-001",
+      "TC-DET-003",
+      "TC-DET-004",
+      "TC-DET-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": true
+  },
+  {
+    "requirement_id": "UR-036",
+    "title": "Fund allocation intelligence",
+    "phase": "CORE",
+    "task_ids": [
+      "T06"
+    ],
+    "related_requirement_ids": [
+      "FR-035"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-001",
+      "TC-DET-003",
+      "TC-DET-004",
+      "TC-DET-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-037",
+    "title": "Fund anomaly events",
+    "phase": "CORE",
+    "task_ids": [
+      "T06"
+    ],
+    "related_requirement_ids": [
+      "FR-033",
+      "FR-034",
+      "FR-037"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-001",
+      "TC-DET-003",
+      "TC-DET-004",
+      "TC-DET-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-038",
+    "title": "Fund peer context",
+    "phase": "CORE",
+    "task_ids": [
+      "T06"
+    ],
+    "related_requirement_ids": [
+      "FR-036"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-001",
+      "TC-DET-003",
+      "TC-DET-004",
+      "TC-DET-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-039",
+    "title": "Fund-to-market relationship intelligence",
+    "phase": "LATER",
+    "task_ids": [
+      "T18"
+    ],
+    "related_requirement_ids": [
+      "FR-038"
+    ],
+    "acceptance_case_ids": [],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-040",
+    "title": "Popular crypto coverage",
+    "phase": "CONDITIONAL",
+    "task_ids": [
+      "T13"
+    ],
+    "related_requirement_ids": [
+      "FR-039"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-003",
+      "TC-DATA-004"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": true
+  },
+  {
+    "requirement_id": "UR-041",
+    "title": "Crypto market anomalies",
+    "phase": "CONDITIONAL",
+    "task_ids": [
+      "T13"
+    ],
+    "related_requirement_ids": [
+      "FR-040"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-003",
+      "TC-DATA-004"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-042",
+    "title": "On-chain intelligence",
+    "phase": "CONDITIONAL",
+    "task_ids": [
+      "T14"
+    ],
+    "related_requirement_ids": [
+      "FR-041",
+      "FR-042",
+      "FR-043"
+    ],
+    "acceptance_case_ids": [
+      "TC-DET-006"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-043",
+    "title": "Multi-signal crypto event",
+    "phase": "CONDITIONAL",
+    "task_ids": [
+      "T14"
+    ],
+    "related_requirement_ids": [
+      "FR-043",
+      "FR-044"
+    ],
+    "acceptance_case_ids": [
+      "TC-DET-006"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-044",
+    "title": "Network transparency",
+    "phase": "CORE",
+    "task_ids": [
+      "T14"
+    ],
+    "related_requirement_ids": [
+      "FR-001",
+      "FR-043"
+    ],
+    "acceptance_case_ids": [
+      "TC-DET-006",
+      "TC-UX-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": true,
+    "required_acceptance_detail": "On-chain display includes exact chain and contract/mint/native identity, data coverage and token-account/owner uncertainty; no complete ownership claim from partial accounts."
+  },
+  {
+    "requirement_id": "UR-045",
+    "title": "Selected U.S. equity coverage",
+    "phase": "CONDITIONAL",
+    "task_ids": [
+      "T13"
+    ],
+    "related_requirement_ids": [
+      "FR-045"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-003",
+      "TC-DATA-004"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-046",
+    "title": "U.S. market anomalies",
+    "phase": "CONDITIONAL",
+    "task_ids": [
+      "T13"
+    ],
+    "related_requirement_ids": [
+      "FR-046"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-003",
+      "TC-DATA-004"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-047",
+    "title": "U.S. contextual events",
+    "phase": "CONDITIONAL",
+    "task_ids": [
+      "T13"
+    ],
+    "related_requirement_ids": [
+      "FR-047"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-003",
+      "TC-DATA-004"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-048",
+    "title": "Asset-aware conversation",
+    "phase": "CORE",
+    "task_ids": [
+      "T08"
+    ],
+    "related_requirement_ids": [
+      "FR-094"
+    ],
+    "acceptance_case_ids": [
+      "TC-AI-001",
+      "TC-AI-002",
+      "TC-AI-003",
+      "TC-AI-004",
+      "TC-AI-005",
+      "TC-AI-006"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false,
+    "required_acceptance_detail": "Opening chat on asset A and asking an asset-implicit question resolves A; selecting event B supplies that event without cross-asset or cross-user context."
+  },
+  {
+    "requirement_id": "UR-049",
+    "title": "Natural Turkish answers",
+    "phase": "CORE",
+    "task_ids": [
+      "T08"
+    ],
+    "related_requirement_ids": [
+      "FR-063"
+    ],
+    "acceptance_case_ids": [
+      "TC-AI-001",
+      "TC-AI-002",
+      "TC-AI-003",
+      "TC-AI-004",
+      "TC-AI-005",
+      "TC-AI-006"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-050",
+    "title": "Project data usage",
+    "phase": "CORE",
+    "task_ids": [
+      "T08"
+    ],
+    "related_requirement_ids": [
+      "FR-057",
+      "FR-094",
+      "FR-097"
+    ],
+    "acceptance_case_ids": [
+      "TC-AI-001",
+      "TC-AI-002",
+      "TC-AI-003",
+      "TC-AI-004",
+      "TC-AI-005",
+      "TC-AI-006"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false,
+    "required_acceptance_detail": "Answer about current asset uses bounded structured project observations/event evidence; actual tool evidence supports every material numeric claim."
+  },
+  {
+    "requirement_id": "UR-051",
+    "title": "Web research capability",
+    "phase": "CORE",
+    "task_ids": [
+      "T08"
+    ],
+    "related_requirement_ids": [
+      "FR-060"
+    ],
+    "acceptance_case_ids": [
+      "TC-AI-001",
+      "TC-AI-002",
+      "TC-AI-003",
+      "TC-AI-004",
+      "TC-AI-005",
+      "TC-AI-006"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-052",
+    "title": "Source-backed AI claims",
+    "phase": "CORE",
+    "task_ids": [
+      "T08"
+    ],
+    "related_requirement_ids": [
+      "FR-058"
+    ],
+    "acceptance_case_ids": [
+      "TC-AI-001",
+      "TC-AI-002",
+      "TC-AI-003",
+      "TC-AI-004",
+      "TC-AI-005",
+      "TC-AI-006"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-053",
+    "title": "Source hierarchy awareness",
+    "phase": "CORE",
+    "task_ids": [
+      "T08"
+    ],
+    "related_requirement_ids": [
+      "FR-059"
+    ],
+    "acceptance_case_ids": [
+      "TC-AI-001",
+      "TC-AI-002",
+      "TC-AI-003",
+      "TC-AI-004",
+      "TC-AI-005",
+      "TC-AI-006"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-054",
+    "title": "Insufficient-evidence answer",
+    "phase": "CORE",
+    "task_ids": [
+      "T08"
+    ],
+    "related_requirement_ids": [
+      "FR-061"
+    ],
+    "acceptance_case_ids": [
+      "TC-AI-001",
+      "TC-AI-002",
+      "TC-AI-003",
+      "TC-AI-004",
+      "TC-AI-005",
+      "TC-AI-006"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-055",
+    "title": "No direct investment recommendation",
+    "phase": "CORE",
+    "task_ids": [
+      "T08"
+    ],
+    "related_requirement_ids": [
+      "FR-062"
+    ],
+    "acceptance_case_ids": [
+      "TC-AI-001",
+      "TC-AI-002",
+      "TC-AI-003",
+      "TC-AI-004",
+      "TC-AI-005",
+      "TC-AI-006"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-056",
+    "title": "Conversational drill-down",
+    "phase": "CORE",
+    "task_ids": [
+      "T08"
+    ],
+    "related_requirement_ids": [
+      "FR-094",
+      "FR-096",
+      "FR-097"
+    ],
+    "acceptance_case_ids": [
+      "TC-AI-001",
+      "TC-AI-002",
+      "TC-AI-003",
+      "TC-AI-004",
+      "TC-AI-005",
+      "TC-AI-006"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false,
+    "required_acceptance_detail": "Follow-up asks about selected event/history/source and preserves asset/origin/cutoff with inspectable supporting evidence or abstention."
+  },
+  {
+    "requirement_id": "UR-057",
+    "title": "In-app notifications",
+    "phase": "CORE",
+    "task_ids": [
+      "T09"
+    ],
+    "related_requirement_ids": [
+      "FR-088"
+    ],
+    "acceptance_case_ids": [
+      "TC-AUTH-002",
+      "TC-NOT-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false,
+    "required_acceptance_detail": "Eligible event creates only the intended user in-app record; read/unread state persists and another user cannot access it."
+  },
+  {
+    "requirement_id": "UR-058",
+    "title": "Immediate high-importance e-mail",
+    "phase": "CONDITIONAL",
+    "task_ids": [
+      "T10"
+    ],
+    "related_requirement_ids": [
+      "FR-086",
+      "FR-087",
+      "FR-089"
+    ],
+    "acceptance_case_ids": [
+      "TC-NOT-001",
+      "TC-NOT-002",
+      "TC-NOT-003",
+      "TC-NOT-004",
+      "TC-NOT-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": true,
+    "required_acceptance_detail": "With gates cleared and fresh consent, eligible high/critical personal or released critical global event sends via outbox; no opt-in/unsubscribe/replay produces no external send. Dry-run is not delivery acceptance."
+  },
+  {
+    "requirement_id": "UR-059",
+    "title": "Market-wide spam protection",
+    "phase": "CORE",
+    "task_ids": [
+      "T10"
+    ],
+    "related_requirement_ids": [
+      "FR-087"
+    ],
+    "acceptance_case_ids": [
+      "TC-NOT-001",
+      "TC-NOT-002",
+      "TC-NOT-003",
+      "TC-NOT-004",
+      "TC-NOT-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-060",
+    "title": "Alert sensitivity preference",
+    "phase": "CORE",
+    "task_ids": [
+      "T09",
+      "T10"
+    ],
+    "related_requirement_ids": [
+      "FR-086",
+      "FR-091"
+    ],
+    "acceptance_case_ids": [
+      "TC-AUTH-002",
+      "TC-NOT-003"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false,
+    "required_acceptance_detail": "User selects a sensitivity mode, it persists, and only eligible severity levels produce personal in-app/email according to separate channel consent."
+  },
+  {
+    "requirement_id": "UR-061",
+    "title": "Digest e-mail",
+    "phase": "CONDITIONAL",
+    "task_ids": [
+      "T10"
+    ],
+    "related_requirement_ids": [
+      "FR-086",
+      "FR-092"
+    ],
+    "acceptance_case_ids": [
+      "TC-NOT-001",
+      "TC-NOT-002",
+      "TC-NOT-003",
+      "TC-NOT-004",
+      "TC-NOT-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false,
+    "required_acceptance_detail": "Digest includes only eligible lower-urgency events for the consented user in the selected time window; duplicate/retry/unsubscribe/replay guards apply; exact cadence remains owner choice."
+  },
+  {
+    "requirement_id": "UR-062",
+    "title": "No browser push requirement",
+    "phase": "CORE",
+    "task_ids": [
+      "T09",
+      "T10"
+    ],
+    "related_requirement_ids": [
+      "FR-093"
+    ],
+    "acceptance_case_ids": [],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false,
+    "required_acceptance_detail": "Manual feature review confirms no browser-push dependency or mandatory browser permission for MVP functions. No existing named acceptance case directly covers this exclusion."
+  },
+  {
+    "requirement_id": "UR-063",
+    "title": "Native push future direction",
+    "phase": "LATER",
+    "task_ids": [
+      "T18"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-064",
+    "title": "Event relevance feedback",
+    "phase": "CORE",
+    "task_ids": [
+      "T09"
+    ],
+    "related_requirement_ids": [
+      "FR-099"
+    ],
+    "acceptance_case_ids": [
+      "TC-AUTH-002",
+      "TC-UX-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false,
+    "required_acceptance_detail": "Signed-in user records useful/not useful on the selected event; persisted value belongs to that user/event."
+  },
+  {
+    "requirement_id": "UR-065",
+    "title": "Feedback without friction",
+    "phase": "CORE",
+    "task_ids": [
+      "T09"
+    ],
+    "related_requirement_ids": [
+      "FR-099"
+    ],
+    "acceptance_case_ids": [
+      "TC-UX-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false,
+    "required_acceptance_detail": "A single click/tap/keyboard activation submits relevance feedback without mandatory form; optional detail remains optional."
+  },
+  {
+    "requirement_id": "UR-066",
+    "title": "Feedback history for improvement",
+    "phase": "CORE",
+    "task_ids": [
+      "T09",
+      "T11"
+    ],
+    "related_requirement_ids": [
+      "FR-100",
+      "FR-101"
+    ],
+    "acceptance_case_ids": [
+      "TC-AUTH-002",
+      "TC-AUTH-003"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false,
+    "required_acceptance_detail": "Feedback records persist with user/event/value/time; authorized aggregation is usefulness evidence, never detector accuracy ground truth."
+  },
+  {
+    "requirement_id": "UR-067",
+    "title": "Protected admin access",
+    "phase": "CORE",
+    "task_ids": [
+      "T03"
+    ],
+    "related_requirement_ids": [
+      "FR-009",
+      "FR-010",
+      "FR-011"
+    ],
+    "acceptance_case_ids": [
+      "TC-AUTH-001",
+      "TC-AUTH-002",
+      "TC-AUTH-003",
+      "TC-AUTH-004"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-068",
+    "title": "Operational health",
+    "phase": "CORE",
+    "task_ids": [
+      "T04"
+    ],
+    "related_requirement_ids": [
+      "FR-019",
+      "FR-021",
+      "FR-023"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-001",
+      "TC-DATA-002",
+      "TC-DATA-003",
+      "TC-DATA-004",
+      "TC-DATA-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-069",
+    "title": "Event monitoring",
+    "phase": "CORE",
+    "task_ids": [
+      "T11"
+    ],
+    "related_requirement_ids": [
+      "FR-104"
+    ],
+    "acceptance_case_ids": [
+      "TC-AUTH-003",
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false,
+    "required_acceptance_detail": "Authorized admin sees recent and high/critical events with truthful severity/evidence strength; non-admin is denied."
+  },
+  {
+    "requirement_id": "UR-070",
+    "title": "Product metrics",
+    "phase": "CORE",
+    "task_ids": [
+      "T11"
+    ],
+    "related_requirement_ids": [
+      "FR-102"
+    ],
+    "acceptance_case_ids": [
+      "TC-AUTH-003",
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false,
+    "required_acceptance_detail": "Authorized admin sees defined minimal metrics computed from actual records, with periods and data-mode separation; no invented counts."
+  },
+  {
+    "requirement_id": "UR-071",
+    "title": "Controlled configuration",
+    "phase": "CORE",
+    "task_ids": [
+      "T11"
+    ],
+    "related_requirement_ids": [
+      "FR-105",
+      "FR-106"
+    ],
+    "acceptance_case_ids": [
+      "TC-AUTH-003",
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false,
+    "required_acceptance_detail": "Admin changes only bounded typed allowlisted settings; server rejects invalid/unauthorized values and records actor/before/after/version."
+  },
+  {
+    "requirement_id": "UR-072",
+    "title": "AI configuration visibility",
+    "phase": "CORE",
+    "task_ids": [
+      "T11"
+    ],
+    "related_requirement_ids": [
+      "FR-107",
+      "FR-122"
+    ],
+    "acceptance_case_ids": [
+      "TC-AUTH-003",
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false,
+    "required_acceptance_detail": "Admin can inspect active model/config/prompt version and associated event/call versions without secret values."
+  },
+  {
+    "requirement_id": "UR-073",
+    "title": "Turkish product language",
+    "phase": "CORE",
+    "task_ids": [
+      "T02"
+    ],
+    "related_requirement_ids": [
+      "FR-117",
+      "FR-119"
+    ],
+    "acceptance_case_ids": [
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false,
+    "required_acceptance_detail": "Core high-visibility screens render natural Turkish by default, with human-approved terminology; English engineering identifiers do not leak as UI copy."
+  },
+  {
+    "requirement_id": "UR-074",
+    "title": "Native financial terminology",
+    "phase": "CORE",
+    "task_ids": [
+      "T08"
+    ],
+    "related_requirement_ids": [
+      "FR-063"
+    ],
+    "acceptance_case_ids": [
+      "TC-AI-001",
+      "TC-AI-002",
+      "TC-AI-003",
+      "TC-AI-004",
+      "TC-AI-005",
+      "TC-AI-006"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "UR-075",
+    "title": "Progressive disclosure",
+    "phase": "CORE",
+    "task_ids": [
+      "T07"
+    ],
+    "related_requirement_ids": [
+      "FR-072",
+      "FR-073"
+    ],
+    "acceptance_case_ids": [
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false,
+    "required_acceptance_detail": "Concise event summary is understandable first; expanded metrics/method/source remain keyboard/touch accessible."
+  },
+  {
+    "requirement_id": "UR-076",
+    "title": "Deliberate visual design",
+    "phase": "CORE",
+    "task_ids": [
+      "T02"
+    ],
+    "related_requirement_ids": [
+      "FR-112",
+      "FR-114",
+      "NFR-056",
+      "NFR-057",
+      "NFR-059"
+    ],
+    "acceptance_case_ids": [
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false,
+    "required_acceptance_detail": "Designer-approved direction, representative-screen screenshot review and actual available Impeccable findings are recorded; generic patterns fixed and final approval documented."
+  },
+  {
+    "requirement_id": "UR-077",
+    "title": "Responsive web usability",
+    "phase": "CORE",
+    "task_ids": [
+      "T02",
+      "T07"
+    ],
+    "related_requirement_ids": [
+      "FR-076"
+    ],
+    "acceptance_case_ids": [
+      "TC-UX-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false,
+    "required_acceptance_detail": "At 390/768/1440px essential source/time/evidence/limitations remain reachable without overflow, hover dependence or trapped mobile scroll."
+  },
+  {
+    "requirement_id": "UR-078",
+    "title": "Historical anomaly replay",
+    "phase": "CORE",
+    "task_ids": [
+      "T12"
+    ],
+    "related_requirement_ids": [
+      "FR-108",
+      "FR-109"
+    ],
+    "acceptance_case_ids": [
+      "TC-NOT-005",
+      "TC-TIME-001",
+      "TC-TIME-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false,
+    "required_acceptance_detail": "Rights-cleared real historical case replays reproducibly from contemporaneously available evidence and shows the actual detected event. Synthetic mechanics are labeled and do not satisfy this historical-proof requirement."
+  },
+  {
+    "requirement_id": "UR-079",
+    "title": "Current/live capability proof",
+    "phase": "CORE",
+    "task_ids": [
+      "T04",
+      "T12"
+    ],
+    "related_requirement_ids": [
+      "FR-022",
+      "FR-111"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-004",
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false,
+    "required_acceptance_detail": "Entitled current or near-current provider response is actually observed with source/venue/time/delay. Frozen replay or synthetic fixtures alone do not satisfy current-fetch proof."
+  },
+  {
+    "requirement_id": "UR-080",
+    "title": "Explainable replay",
+    "phase": "CORE",
+    "task_ids": [
+      "T12"
+    ],
+    "related_requirement_ids": [
+      "FR-110"
+    ],
+    "acceptance_case_ids": [
+      "TC-NOT-005",
+      "TC-TIME-001",
+      "TC-TIME-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false,
+    "required_acceptance_detail": "Replay and current normalized events use the same evidence/severity/heuristic-score/explanation contract, with visibly distinct origin and replay cutoff."
+  },
+  {
+    "requirement_id": "FR-001",
+    "title": "Canonical asset entity",
+    "phase": "CORE",
+    "task_ids": [
+      "T04"
+    ],
+    "related_requirement_ids": [
+      "UR-002",
+      "UR-005"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-001",
+      "TC-DATA-002",
+      "TC-DATA-003",
+      "TC-DATA-004",
+      "TC-DATA-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-002",
+    "title": "Asset-class enumeration",
+    "phase": "CORE",
+    "task_ids": [
+      "T04"
+    ],
+    "related_requirement_ids": [
+      "UR-002"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-001",
+      "TC-DATA-002",
+      "TC-DATA-003",
+      "TC-DATA-004",
+      "TC-DATA-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-003",
+    "title": "Universal search endpoint",
+    "phase": "CORE",
+    "task_ids": [
+      "T04"
+    ],
+    "related_requirement_ids": [
+      "UR-001",
+      "UR-002"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-001",
+      "TC-DATA-002",
+      "TC-DATA-003",
+      "TC-DATA-004",
+      "TC-DATA-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-004",
+    "title": "Search disambiguation",
+    "phase": "CORE",
+    "task_ids": [
+      "T04"
+    ],
+    "related_requirement_ids": [
+      "UR-005"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-001",
+      "TC-DATA-002",
+      "TC-DATA-003",
+      "TC-DATA-004",
+      "TC-DATA-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-005",
+    "title": "Anonymous search access",
+    "phase": "CORE",
+    "task_ids": [
+      "T04"
+    ],
+    "related_requirement_ids": [
+      "UR-001",
+      "UR-003"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-001",
+      "TC-DATA-002",
+      "TC-DATA-003",
+      "TC-DATA-004",
+      "TC-DATA-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-006",
+    "title": "Google OAuth only",
+    "phase": "CORE",
+    "task_ids": [
+      "T03"
+    ],
+    "related_requirement_ids": [
+      "UR-006"
+    ],
+    "acceptance_case_ids": [
+      "TC-AUTH-001",
+      "TC-AUTH-002",
+      "TC-AUTH-003",
+      "TC-AUTH-004"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-007",
+    "title": "User account creation/update",
+    "phase": "CORE",
+    "task_ids": [
+      "T03"
+    ],
+    "related_requirement_ids": [
+      "UR-006",
+      "UR-008"
+    ],
+    "acceptance_case_ids": [
+      "TC-AUTH-001",
+      "TC-AUTH-002",
+      "TC-AUTH-003",
+      "TC-AUTH-004"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-008",
+    "title": "Session-aware redirect",
+    "phase": "CORE",
+    "task_ids": [
+      "T03"
+    ],
+    "related_requirement_ids": [
+      "UR-007"
+    ],
+    "acceptance_case_ids": [
+      "TC-AUTH-001",
+      "TC-AUTH-002",
+      "TC-AUTH-003",
+      "TC-AUTH-004"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-009",
+    "title": "Role model",
+    "phase": "CORE",
+    "task_ids": [
+      "T03"
+    ],
+    "related_requirement_ids": [
+      "UR-067"
+    ],
+    "acceptance_case_ids": [
+      "TC-AUTH-001",
+      "TC-AUTH-002",
+      "TC-AUTH-003",
+      "TC-AUTH-004"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-010",
+    "title": "Admin allowlist",
+    "phase": "CORE",
+    "task_ids": [
+      "T03"
+    ],
+    "related_requirement_ids": [
+      "UR-067"
+    ],
+    "acceptance_case_ids": [
+      "TC-AUTH-001",
+      "TC-AUTH-002",
+      "TC-AUTH-003",
+      "TC-AUTH-004"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-011",
+    "title": "Protected admin routes and APIs",
+    "phase": "CORE",
+    "task_ids": [
+      "T03"
+    ],
+    "related_requirement_ids": [
+      "UR-067"
+    ],
+    "acceptance_case_ids": [
+      "TC-AUTH-001",
+      "TC-AUTH-002",
+      "TC-AUTH-003",
+      "TC-AUTH-004"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-012",
+    "title": "Add watchlist item",
+    "phase": "CORE",
+    "task_ids": [
+      "T09"
+    ],
+    "related_requirement_ids": [
+      "UR-010"
+    ],
+    "acceptance_case_ids": [
+      "TC-AUTH-002",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-013",
+    "title": "Remove watchlist item",
+    "phase": "CORE",
+    "task_ids": [
+      "T09"
+    ],
+    "related_requirement_ids": [
+      "UR-011"
+    ],
+    "acceptance_case_ids": [
+      "TC-AUTH-002",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-014",
+    "title": "Watchlist uniqueness",
+    "phase": "CORE",
+    "task_ids": [
+      "T09"
+    ],
+    "related_requirement_ids": [
+      "UR-010",
+      "UR-012"
+    ],
+    "acceptance_case_ids": [
+      "TC-AUTH-002",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-015",
+    "title": "Persistent watchlist",
+    "phase": "CORE",
+    "task_ids": [
+      "T09"
+    ],
+    "related_requirement_ids": [
+      "UR-008",
+      "UR-012"
+    ],
+    "acceptance_case_ids": [
+      "TC-AUTH-002",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-016",
+    "title": "No quantity/cost requirement",
+    "phase": "CORE",
+    "task_ids": [
+      "T09"
+    ],
+    "related_requirement_ids": [
+      "UR-013"
+    ],
+    "acceptance_case_ids": [
+      "TC-AUTH-002",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-017",
+    "title": "Provider abstraction",
+    "phase": "CORE",
+    "task_ids": [
+      "T04"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-DATA-001",
+      "TC-DATA-002",
+      "TC-DATA-003",
+      "TC-DATA-004",
+      "TC-DATA-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-018",
+    "title": "Timestamp normalization",
+    "phase": "CORE",
+    "task_ids": [
+      "T04"
+    ],
+    "related_requirement_ids": [
+      "UR-027"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-001",
+      "TC-DATA-002",
+      "TC-DATA-003",
+      "TC-DATA-004",
+      "TC-DATA-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-019",
+    "title": "Data freshness metadata",
+    "phase": "CORE",
+    "task_ids": [
+      "T04"
+    ],
+    "related_requirement_ids": [
+      "UR-027",
+      "UR-068"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-001",
+      "TC-DATA-002",
+      "TC-DATA-003",
+      "TC-DATA-004",
+      "TC-DATA-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-020",
+    "title": "Idempotent ingestion",
+    "phase": "CORE",
+    "task_ids": [
+      "T04"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-DATA-001",
+      "TC-DATA-002",
+      "TC-DATA-003",
+      "TC-DATA-004",
+      "TC-DATA-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-021",
+    "title": "Ingestion failure recording",
+    "phase": "CORE",
+    "task_ids": [
+      "T04"
+    ],
+    "related_requirement_ids": [
+      "UR-068"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-001",
+      "TC-DATA-002",
+      "TC-DATA-003",
+      "TC-DATA-004",
+      "TC-DATA-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-022",
+    "title": "Scheduled and on-demand ingestion",
+    "phase": "CORE",
+    "task_ids": [
+      "T04"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-DATA-001",
+      "TC-DATA-002",
+      "TC-DATA-003",
+      "TC-DATA-004",
+      "TC-DATA-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-023",
+    "title": "Data-source status",
+    "phase": "CORE",
+    "task_ids": [
+      "T04"
+    ],
+    "related_requirement_ids": [
+      "UR-068"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-001",
+      "TC-DATA-002",
+      "TC-DATA-003",
+      "TC-DATA-004",
+      "TC-DATA-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-024",
+    "title": "BIST OHLCV ingestion",
+    "phase": "CORE",
+    "task_ids": [
+      "T05"
+    ],
+    "related_requirement_ids": [
+      "UR-029"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-005",
+      "TC-DET-001",
+      "TC-DET-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-025",
+    "title": "BIST benchmark context",
+    "phase": "CORE",
+    "task_ids": [
+      "T05"
+    ],
+    "related_requirement_ids": [
+      "UR-030"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-005",
+      "TC-DET-001",
+      "TC-DET-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-026",
+    "title": "KAP event ingestion",
+    "phase": "CORE",
+    "task_ids": [
+      "T05"
+    ],
+    "related_requirement_ids": [
+      "UR-031"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-005",
+      "TC-DET-001",
+      "TC-DET-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-027",
+    "title": "KAP event classification",
+    "phase": "CORE",
+    "task_ids": [
+      "T05"
+    ],
+    "related_requirement_ids": [
+      "UR-031"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-005",
+      "TC-DET-001",
+      "TC-DET-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-028",
+    "title": "KAP materiality context",
+    "phase": "CORE",
+    "task_ids": [
+      "T05"
+    ],
+    "related_requirement_ids": [
+      "UR-031",
+      "UR-032"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-005",
+      "TC-DET-001",
+      "TC-DET-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-029",
+    "title": "Fundamental dataset support",
+    "phase": "CORE",
+    "task_ids": [
+      "T05"
+    ],
+    "related_requirement_ids": [
+      "UR-032"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-005",
+      "TC-DET-001",
+      "TC-DET-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-030",
+    "title": "Regulatory-event ingestion",
+    "phase": "CORE",
+    "task_ids": [
+      "T05"
+    ],
+    "related_requirement_ids": [
+      "UR-033"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-005",
+      "TC-DET-001",
+      "TC-DET-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-031",
+    "title": "Fund master-data ingestion",
+    "phase": "CORE",
+    "task_ids": [
+      "T06"
+    ],
+    "related_requirement_ids": [
+      "UR-034",
+      "UR-035"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-001",
+      "TC-DET-003",
+      "TC-DET-004",
+      "TC-DET-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-032",
+    "title": "Fund price/NAV history",
+    "phase": "CORE",
+    "task_ids": [
+      "T06"
+    ],
+    "related_requirement_ids": [
+      "UR-035"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-001",
+      "TC-DET-003",
+      "TC-DET-004",
+      "TC-DET-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": true
+  },
+  {
+    "requirement_id": "FR-033",
+    "title": "Fund AUM/size metric support",
+    "phase": "CORE",
+    "task_ids": [
+      "T06"
+    ],
+    "related_requirement_ids": [
+      "UR-037"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-001",
+      "TC-DET-003",
+      "TC-DET-004",
+      "TC-DET-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": true
+  },
+  {
+    "requirement_id": "FR-034",
+    "title": "Investor-count metric support",
+    "phase": "CORE",
+    "task_ids": [
+      "T06"
+    ],
+    "related_requirement_ids": [
+      "UR-037"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-001",
+      "TC-DET-003",
+      "TC-DET-004",
+      "TC-DET-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": true
+  },
+  {
+    "requirement_id": "FR-035",
+    "title": "Fund allocation ingestion",
+    "phase": "CORE",
+    "task_ids": [
+      "T06"
+    ],
+    "related_requirement_ids": [
+      "UR-036"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-001",
+      "TC-DET-003",
+      "TC-DET-004",
+      "TC-DET-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": true
+  },
+  {
+    "requirement_id": "FR-036",
+    "title": "Fund peer/category mapping",
+    "phase": "CORE",
+    "task_ids": [
+      "T06"
+    ],
+    "related_requirement_ids": [
+      "UR-038"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-001",
+      "TC-DET-003",
+      "TC-DET-004",
+      "TC-DET-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-037",
+    "title": "Fund anomaly calculations",
+    "phase": "CORE",
+    "task_ids": [
+      "T06"
+    ],
+    "related_requirement_ids": [
+      "UR-037"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-001",
+      "TC-DET-003",
+      "TC-DET-004",
+      "TC-DET-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": true
+  },
+  {
+    "requirement_id": "FR-038",
+    "title": "Fund-to-equity relation model",
+    "phase": "LATER",
+    "task_ids": [
+      "T06"
+    ],
+    "related_requirement_ids": [
+      "UR-039"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-001",
+      "TC-DET-003",
+      "TC-DET-004",
+      "TC-DET-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-039",
+    "title": "Curated crypto universe",
+    "phase": "CONDITIONAL",
+    "task_ids": [
+      "T13"
+    ],
+    "related_requirement_ids": [
+      "UR-040"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-003",
+      "TC-DATA-004"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": true
+  },
+  {
+    "requirement_id": "FR-040",
+    "title": "Crypto market data ingestion",
+    "phase": "CONDITIONAL",
+    "task_ids": [
+      "T13"
+    ],
+    "related_requirement_ids": [
+      "UR-041"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-003",
+      "TC-DATA-004"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-041",
+    "title": "EVM on-chain adapter",
+    "phase": "CONDITIONAL",
+    "task_ids": [
+      "T14"
+    ],
+    "related_requirement_ids": [
+      "UR-042"
+    ],
+    "acceptance_case_ids": [
+      "TC-DET-006"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": true,
+    "amended_in_v04_audit": true
+  },
+  {
+    "requirement_id": "FR-042",
+    "title": "Solana on-chain adapter",
+    "phase": "CONDITIONAL",
+    "task_ids": [
+      "T14"
+    ],
+    "related_requirement_ids": [
+      "UR-042"
+    ],
+    "acceptance_case_ids": [
+      "TC-DET-006"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": true
+  },
+  {
+    "requirement_id": "FR-043",
+    "title": "On-chain event normalization",
+    "phase": "CONDITIONAL",
+    "task_ids": [
+      "T14"
+    ],
+    "related_requirement_ids": [
+      "UR-042",
+      "UR-043"
+    ],
+    "acceptance_case_ids": [
+      "TC-DET-006"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false,
+    "amended_in_v04_audit": true
+  },
+  {
+    "requirement_id": "FR-044",
+    "title": "Crypto multi-signal event creation",
+    "phase": "CONDITIONAL",
+    "task_ids": [
+      "T14"
+    ],
+    "related_requirement_ids": [
+      "UR-043"
+    ],
+    "acceptance_case_ids": [
+      "TC-DET-006"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-045",
+    "title": "Restricted U.S. universe",
+    "phase": "CONDITIONAL",
+    "task_ids": [
+      "T13"
+    ],
+    "related_requirement_ids": [
+      "UR-045"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-003",
+      "TC-DATA-004"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": true
+  },
+  {
+    "requirement_id": "FR-046",
+    "title": "U.S. OHLCV ingestion",
+    "phase": "CONDITIONAL",
+    "task_ids": [
+      "T13"
+    ],
+    "related_requirement_ids": [
+      "UR-046"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-003",
+      "TC-DATA-004"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": true
+  },
+  {
+    "requirement_id": "FR-047",
+    "title": "U.S. contextual source integration",
+    "phase": "CONDITIONAL",
+    "task_ids": [
+      "T13"
+    ],
+    "related_requirement_ids": [
+      "UR-047"
+    ],
+    "acceptance_case_ids": [
+      "TC-DATA-003",
+      "TC-DATA-004"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-048",
+    "title": "Signal interface",
+    "phase": "CORE",
+    "task_ids": [
+      "T05"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-DATA-005",
+      "TC-DET-001",
+      "TC-DET-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-049",
+    "title": "Relative volume detector",
+    "phase": "CORE",
+    "task_ids": [
+      "T05"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-DATA-005",
+      "TC-DET-001",
+      "TC-DET-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "REFERENCE_SUBSET_ONLY",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-050",
+    "title": "Price-return anomaly detector",
+    "phase": "CORE",
+    "task_ids": [
+      "T05"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-DATA-005",
+      "TC-DET-001",
+      "TC-DET-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "REFERENCE_SUBSET_ONLY",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-051",
+    "title": "Volatility anomaly detector",
+    "phase": "NEXT",
+    "task_ids": [
+      "T05"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-DATA-005",
+      "TC-DET-001",
+      "TC-DET-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": true
+  },
+  {
+    "requirement_id": "FR-052",
+    "title": "Benchmark divergence detector",
+    "phase": "CORE",
+    "task_ids": [
+      "T05"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-DATA-005",
+      "TC-DET-001",
+      "TC-DET-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-053",
+    "title": "Composite signal support",
+    "phase": "CORE",
+    "task_ids": [
+      "T05"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-DATA-005",
+      "TC-DET-001",
+      "TC-DET-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-054",
+    "title": "Detector versioning",
+    "phase": "CORE",
+    "task_ids": [
+      "T05"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-DATA-005",
+      "TC-DET-001",
+      "TC-DET-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-055",
+    "title": "Structured AI tasks",
+    "phase": "CORE",
+    "task_ids": [
+      "T08"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-AI-001",
+      "TC-AI-002",
+      "TC-AI-003",
+      "TC-AI-004",
+      "TC-AI-005",
+      "TC-AI-006"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-056",
+    "title": "AI provider abstraction",
+    "phase": "CORE",
+    "task_ids": [
+      "T08"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-AI-001",
+      "TC-AI-002",
+      "TC-AI-003",
+      "TC-AI-004",
+      "TC-AI-005",
+      "TC-AI-006"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-057",
+    "title": "Evidence packet input",
+    "phase": "CORE",
+    "task_ids": [
+      "T08"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-AI-001",
+      "TC-AI-002",
+      "TC-AI-003",
+      "TC-AI-004",
+      "TC-AI-005",
+      "TC-AI-006"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-058",
+    "title": "Source-aware AI output",
+    "phase": "CORE",
+    "task_ids": [
+      "T08"
+    ],
+    "related_requirement_ids": [
+      "UR-026",
+      "UR-052"
+    ],
+    "acceptance_case_ids": [
+      "TC-AI-001",
+      "TC-AI-002",
+      "TC-AI-003",
+      "TC-AI-004",
+      "TC-AI-005",
+      "TC-AI-006"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-059",
+    "title": "Official-source preference",
+    "phase": "CORE",
+    "task_ids": [
+      "T08"
+    ],
+    "related_requirement_ids": [
+      "UR-053"
+    ],
+    "acceptance_case_ids": [
+      "TC-AI-001",
+      "TC-AI-002",
+      "TC-AI-003",
+      "TC-AI-004",
+      "TC-AI-005",
+      "TC-AI-006"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-060",
+    "title": "Web research tool for asset assistant",
+    "phase": "CORE",
+    "task_ids": [
+      "T08"
+    ],
+    "related_requirement_ids": [
+      "UR-051"
+    ],
+    "acceptance_case_ids": [
+      "TC-AI-001",
+      "TC-AI-002",
+      "TC-AI-003",
+      "TC-AI-004",
+      "TC-AI-005",
+      "TC-AI-006"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-061",
+    "title": "Insufficient-evidence response path",
+    "phase": "CORE",
+    "task_ids": [
+      "T08"
+    ],
+    "related_requirement_ids": [
+      "UR-054"
+    ],
+    "acceptance_case_ids": [
+      "TC-AI-001",
+      "TC-AI-002",
+      "TC-AI-003",
+      "TC-AI-004",
+      "TC-AI-005",
+      "TC-AI-006"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-062",
+    "title": "No recommendation mode",
+    "phase": "CORE",
+    "task_ids": [
+      "T08"
+    ],
+    "related_requirement_ids": [
+      "UR-055"
+    ],
+    "acceptance_case_ids": [
+      "TC-AI-001",
+      "TC-AI-002",
+      "TC-AI-003",
+      "TC-AI-004",
+      "TC-AI-005",
+      "TC-AI-006"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-063",
+    "title": "Turkish response localization",
+    "phase": "CORE",
+    "task_ids": [
+      "T08"
+    ],
+    "related_requirement_ids": [
+      "UR-049",
+      "UR-074"
+    ],
+    "acceptance_case_ids": [
+      "TC-AI-001",
+      "TC-AI-002",
+      "TC-AI-003",
+      "TC-AI-004",
+      "TC-AI-005",
+      "TC-AI-006"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-064",
+    "title": "Event entity",
+    "phase": "CORE",
+    "task_ids": [
+      "T07"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-DET-006",
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-065",
+    "title": "Cross-signal correlation",
+    "phase": "CORE",
+    "task_ids": [
+      "T07"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-DET-006",
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-066",
+    "title": "Severity calculation",
+    "phase": "CORE",
+    "task_ids": [
+      "T07"
+    ],
+    "related_requirement_ids": [
+      "UR-021"
+    ],
+    "acceptance_case_ids": [
+      "TC-DET-006",
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-067",
+    "title": "Confidence calculation",
+    "phase": "CORE",
+    "task_ids": [
+      "T07"
+    ],
+    "related_requirement_ids": [
+      "UR-022",
+      "UR-023"
+    ],
+    "acceptance_case_ids": [
+      "TC-DET-006",
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "REFERENCE_SUBSET_ONLY",
+    "amended_in_v03": true
+  },
+  {
+    "requirement_id": "FR-068",
+    "title": "Confidence component storage",
+    "phase": "CORE",
+    "task_ids": [
+      "T07"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-DET-006",
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": true
+  },
+  {
+    "requirement_id": "FR-069",
+    "title": "Event de-duplication/merging",
+    "phase": "CORE",
+    "task_ids": [
+      "T07"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-DET-006",
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-070",
+    "title": "Event lifecycle",
+    "phase": "CORE",
+    "task_ids": [
+      "T07"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-DET-006",
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-071",
+    "title": "Legal-language guard",
+    "phase": "CORE",
+    "task_ids": [
+      "T07"
+    ],
+    "related_requirement_ids": [
+      "UR-028"
+    ],
+    "acceptance_case_ids": [
+      "TC-DET-006",
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-072",
+    "title": "Event card summary",
+    "phase": "CORE",
+    "task_ids": [
+      "T07"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-DET-006",
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-073",
+    "title": "Event detail view",
+    "phase": "CORE",
+    "task_ids": [
+      "T07"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-DET-006",
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-074",
+    "title": "Evidence-first rendering",
+    "phase": "CORE",
+    "task_ids": [
+      "T07"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-DET-006",
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-075",
+    "title": "Event chart markers",
+    "phase": "CORE",
+    "task_ids": [
+      "T07"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-DET-006",
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-076",
+    "title": "Common asset-page shell",
+    "phase": "CORE",
+    "task_ids": [
+      "T07"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-DET-006",
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-077",
+    "title": "BIST page modules",
+    "phase": "CORE",
+    "task_ids": [
+      "T07"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-DET-006",
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-078",
+    "title": "Fund page modules",
+    "phase": "CORE",
+    "task_ids": [
+      "T07"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-DET-006",
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-079",
+    "title": "Crypto page modules",
+    "phase": "CONDITIONAL",
+    "task_ids": [
+      "T07"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-DET-006",
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-080",
+    "title": "U.S. equity page modules",
+    "phase": "CONDITIONAL",
+    "task_ids": [
+      "T07"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-DET-006",
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-081",
+    "title": "Personal watchlist feed",
+    "phase": "CORE",
+    "task_ids": [
+      "T09"
+    ],
+    "related_requirement_ids": [
+      "UR-015"
+    ],
+    "acceptance_case_ids": [
+      "TC-AUTH-002",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-082",
+    "title": "Market highlights feed",
+    "phase": "CORE",
+    "task_ids": [
+      "T09"
+    ],
+    "related_requirement_ids": [
+      "UR-016"
+    ],
+    "acceptance_case_ids": [
+      "TC-AUTH-002",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-083",
+    "title": "Feed ranking",
+    "phase": "CORE",
+    "task_ids": [
+      "T09"
+    ],
+    "related_requirement_ids": [
+      "UR-018"
+    ],
+    "acceptance_case_ids": [
+      "TC-AUTH-002",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-084",
+    "title": "Quiet-state handling",
+    "phase": "CORE",
+    "task_ids": [
+      "T09"
+    ],
+    "related_requirement_ids": [
+      "UR-019"
+    ],
+    "acceptance_case_ids": [
+      "TC-AUTH-002",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false,
+    "amended_in_v04_audit": true
+  },
+  {
+    "requirement_id": "FR-085",
+    "title": "Notification eligibility engine",
+    "phase": "CORE",
+    "task_ids": [
+      "T10"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-NOT-001",
+      "TC-NOT-002",
+      "TC-NOT-003",
+      "TC-NOT-004",
+      "TC-NOT-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-086",
+    "title": "Watchlist notification policy",
+    "phase": "CORE",
+    "task_ids": [
+      "T10"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-NOT-001",
+      "TC-NOT-002",
+      "TC-NOT-003",
+      "TC-NOT-004",
+      "TC-NOT-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-087",
+    "title": "Off-watchlist critical policy",
+    "phase": "CORE",
+    "task_ids": [
+      "T10"
+    ],
+    "related_requirement_ids": [
+      "UR-017",
+      "UR-059"
+    ],
+    "acceptance_case_ids": [
+      "TC-NOT-001",
+      "TC-NOT-002",
+      "TC-NOT-003",
+      "TC-NOT-004",
+      "TC-NOT-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": true
+  },
+  {
+    "requirement_id": "FR-088",
+    "title": "In-app notification record",
+    "phase": "CORE",
+    "task_ids": [
+      "T09"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-AUTH-002",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-089",
+    "title": "Immediate e-mail delivery",
+    "phase": "CONDITIONAL",
+    "task_ids": [
+      "T10"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-NOT-001",
+      "TC-NOT-002",
+      "TC-NOT-003",
+      "TC-NOT-004",
+      "TC-NOT-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": true
+  },
+  {
+    "requirement_id": "FR-090",
+    "title": "Notification idempotency",
+    "phase": "CORE",
+    "task_ids": [
+      "T10"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-NOT-001",
+      "TC-NOT-002",
+      "TC-NOT-003",
+      "TC-NOT-004",
+      "TC-NOT-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "REFERENCE_SUBSET_ONLY",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-091",
+    "title": "Alert sensitivity modes",
+    "phase": "CORE",
+    "task_ids": [
+      "T09"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-AUTH-002",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-092",
+    "title": "Digest generation",
+    "phase": "CONDITIONAL",
+    "task_ids": [
+      "T10"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-NOT-001",
+      "TC-NOT-002",
+      "TC-NOT-003",
+      "TC-NOT-004",
+      "TC-NOT-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-093",
+    "title": "Browser push excluded",
+    "phase": "CORE",
+    "task_ids": [
+      "T10"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-NOT-001",
+      "TC-NOT-002",
+      "TC-NOT-003",
+      "TC-NOT-004",
+      "TC-NOT-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-094",
+    "title": "Asset-context injection",
+    "phase": "CORE",
+    "task_ids": [
+      "T08"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-AI-001",
+      "TC-AI-002",
+      "TC-AI-003",
+      "TC-AI-004",
+      "TC-AI-005",
+      "TC-AI-006"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-095",
+    "title": "Conversation persistence",
+    "phase": "NEXT",
+    "task_ids": [
+      "T08"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-AI-001",
+      "TC-AI-002",
+      "TC-AI-003",
+      "TC-AI-004",
+      "TC-AI-005",
+      "TC-AI-006"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": true
+  },
+  {
+    "requirement_id": "FR-096",
+    "title": "Source rendering in chat",
+    "phase": "CORE",
+    "task_ids": [
+      "T08"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-AI-001",
+      "TC-AI-002",
+      "TC-AI-003",
+      "TC-AI-004",
+      "TC-AI-005",
+      "TC-AI-006"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-097",
+    "title": "Tool-result separation",
+    "phase": "CORE",
+    "task_ids": [
+      "T08"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-AI-001",
+      "TC-AI-002",
+      "TC-AI-003",
+      "TC-AI-004",
+      "TC-AI-005",
+      "TC-AI-006"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-098",
+    "title": "Chat failure fallback",
+    "phase": "CORE",
+    "task_ids": [
+      "T08"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-AI-001",
+      "TC-AI-002",
+      "TC-AI-003",
+      "TC-AI-004",
+      "TC-AI-005",
+      "TC-AI-006"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-099",
+    "title": "Event feedback controls",
+    "phase": "CORE",
+    "task_ids": [
+      "T09"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-AUTH-002",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-100",
+    "title": "Feedback persistence",
+    "phase": "CORE",
+    "task_ids": [
+      "T09"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-AUTH-002",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-101",
+    "title": "Feedback analytics",
+    "phase": "NEXT",
+    "task_ids": [
+      "T09"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-AUTH-002",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-102",
+    "title": "Admin KPI summary",
+    "phase": "CORE",
+    "task_ids": [
+      "T11"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-AUTH-003",
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-103",
+    "title": "Data freshness panel",
+    "phase": "CORE",
+    "task_ids": [
+      "T11"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-AUTH-003",
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-104",
+    "title": "Recent event inspection",
+    "phase": "CORE",
+    "task_ids": [
+      "T11"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-AUTH-003",
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-105",
+    "title": "Controlled threshold configuration",
+    "phase": "CORE",
+    "task_ids": [
+      "T11"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-AUTH-003",
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-106",
+    "title": "Configuration persistence and audit",
+    "phase": "CORE",
+    "task_ids": [
+      "T11"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-AUTH-003",
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-107",
+    "title": "AI version visibility",
+    "phase": "CORE",
+    "task_ids": [
+      "T11"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-AUTH-003",
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-108",
+    "title": "Historical replay dataset",
+    "phase": "CORE",
+    "task_ids": [
+      "T12"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-NOT-005",
+      "TC-TIME-001",
+      "TC-TIME-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": true
+  },
+  {
+    "requirement_id": "FR-109",
+    "title": "Time-bounded replay",
+    "phase": "CORE",
+    "task_ids": [
+      "T12"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-NOT-005",
+      "TC-TIME-001",
+      "TC-TIME-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "REFERENCE_SUBSET_ONLY",
+    "amended_in_v03": true
+  },
+  {
+    "requirement_id": "FR-110",
+    "title": "Replay/live event parity",
+    "phase": "CORE",
+    "task_ids": [
+      "T12"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-NOT-005",
+      "TC-TIME-001",
+      "TC-TIME-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-111",
+    "title": "Demo mode fallback",
+    "phase": "CORE",
+    "task_ids": [
+      "T12"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-NOT-005",
+      "TC-TIME-001",
+      "TC-TIME-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-112",
+    "title": "Value proposition above the fold",
+    "phase": "CORE",
+    "task_ids": [
+      "T02"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-113",
+    "title": "Search from landing",
+    "phase": "CORE",
+    "task_ids": [
+      "T02"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-114",
+    "title": "Example intelligence event",
+    "phase": "CORE",
+    "task_ids": [
+      "T02"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-115",
+    "title": "Product-scope communication",
+    "phase": "CORE",
+    "task_ids": [
+      "T02"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-116",
+    "title": "Sign-in CTA",
+    "phase": "CORE",
+    "task_ids": [
+      "T02"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-117",
+    "title": "`tr-TR` default UI",
+    "phase": "CORE",
+    "task_ids": [
+      "T02"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-118",
+    "title": "English internal identifiers",
+    "phase": "CORE",
+    "task_ids": [
+      "T02"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-119",
+    "title": "Financial terminology glossary",
+    "phase": "CORE",
+    "task_ids": [
+      "T02"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-120",
+    "title": "Event-generation audit record",
+    "phase": "CORE",
+    "task_ids": [
+      "T11"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-AUTH-003",
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-121",
+    "title": "Notification audit record",
+    "phase": "CORE",
+    "task_ids": [
+      "T10"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-NOT-001",
+      "TC-NOT-002",
+      "TC-NOT-003",
+      "TC-NOT-004",
+      "TC-NOT-005"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "FR-122",
+    "title": "AI request metadata",
+    "phase": "CORE",
+    "task_ids": [
+      "T11"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-AUTH-003",
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-001",
+    "title": "No fabricated data",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-002",
+    "title": "Partial-source resilience",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-003",
+    "title": "Source outage visibility",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-004",
+    "title": "Duplicate-event resistance",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-005",
+    "title": "Demo reliability",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-006",
+    "title": "Public page performance",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-007",
+    "title": "Search responsiveness",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-008",
+    "title": "Asset intelligence responsiveness",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-009",
+    "title": "AI chat responsiveness",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": true
+  },
+  {
+    "requirement_id": "NFR-010",
+    "title": "Asynchronous long-running work",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-011",
+    "title": "OAuth-only end-user credentials",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-AUTH-001",
+      "TC-AUTH-002",
+      "TC-AUTH-003"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-012",
+    "title": "Server-side authorization",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-AUTH-001",
+      "TC-AUTH-002",
+      "TC-AUTH-003"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-013",
+    "title": "Secrets management",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-AUTH-001",
+      "TC-AUTH-002",
+      "TC-AUTH-003"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-014",
+    "title": "Principle of least privilege",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-AUTH-001",
+      "TC-AUTH-002",
+      "TC-AUTH-003"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-015",
+    "title": "Input validation",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-AUTH-001",
+      "TC-AUTH-002",
+      "TC-AUTH-003"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-016",
+    "title": "Rate limiting / abuse controls",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-AUTH-001",
+      "TC-AUTH-002",
+      "TC-AUTH-003"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": true
+  },
+  {
+    "requirement_id": "NFR-017",
+    "title": "Admin configuration safety",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-AUTH-001",
+      "TC-AUTH-002",
+      "TC-AUTH-003"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-018",
+    "title": "Data minimization",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-019",
+    "title": "No unnecessary financial-position collection",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-020",
+    "title": "Sensitive logging restriction",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-021",
+    "title": "Conversation data awareness",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": true
+  },
+  {
+    "requirement_id": "NFR-022",
+    "title": "Source provenance",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-023",
+    "title": "Timestamp provenance",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": true
+  },
+  {
+    "requirement_id": "NFR-024",
+    "title": "Data freshness disclosure",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-025",
+    "title": "Provider normalization testing",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-026",
+    "title": "Unit consistency",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-027",
+    "title": "Grounded material claims",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-AI-001",
+      "TC-AI-002",
+      "TC-AI-003"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-028",
+    "title": "No invented source citations",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-AI-001",
+      "TC-AI-002",
+      "TC-AI-003"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-029",
+    "title": "Insufficient-evidence behavior",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-AI-001",
+      "TC-AI-002",
+      "TC-AI-003"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-030",
+    "title": "Deterministic confidence ownership",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-AI-001",
+      "TC-AI-002",
+      "TC-AI-003"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": true
+  },
+  {
+    "requirement_id": "NFR-031",
+    "title": "AI output schema validation",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-AI-001",
+      "TC-AI-002",
+      "TC-AI-003"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-032",
+    "title": "Prompt injection containment",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-AI-001",
+      "TC-AI-002",
+      "TC-AI-003"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-033",
+    "title": "Source quality hierarchy",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-AI-001",
+      "TC-AI-002",
+      "TC-AI-003"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-034",
+    "title": "Model/provider replaceability",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-AI-001",
+      "TC-AI-002",
+      "TC-AI-003"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-035",
+    "title": "Reproducibility",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-TIME-001",
+      "TC-TIME-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-036",
+    "title": "Versioned detectors",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-TIME-001",
+      "TC-TIME-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-037",
+    "title": "Backtestability",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-TIME-001",
+      "TC-TIME-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-038",
+    "title": "No future leakage",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-TIME-001",
+      "TC-TIME-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-039",
+    "title": "Precision-over-noise bias for alerts",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-TIME-001",
+      "TC-TIME-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-040",
+    "title": "Calibration readiness",
+    "phase": "NEXT",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-TIME-001",
+      "TC-TIME-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": true
+  },
+  {
+    "requirement_id": "NFR-041",
+    "title": "Structured logging",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-042",
+    "title": "Correlation identifiers",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-043",
+    "title": "Health checks",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-044",
+    "title": "Failure visibility",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-045",
+    "title": "Cost observability",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-046",
+    "title": "Precompute intelligence",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-047",
+    "title": "Shared event model",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-048",
+    "title": "Horizontal worker evolution",
+    "phase": "NEXT",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": true
+  },
+  {
+    "requirement_id": "NFR-049",
+    "title": "Provider-rate-limit awareness",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-050",
+    "title": "Monorepo clarity",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-051",
+    "title": "English engineering language",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-052",
+    "title": "Typed contracts",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-053",
+    "title": "Small composable services",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-054",
+    "title": "Requirements traceability",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-055",
+    "title": "Documentation-as-context",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-056",
+    "title": "No generic AI-slop aesthetic",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-057",
+    "title": "Information hierarchy over card density",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-058",
+    "title": "Design system",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-059",
+    "title": "Impeccable review workflow",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false,
+    "amended_in_v04_audit": true
+  },
+  {
+    "requirement_id": "NFR-060",
+    "title": "Semantic status design",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-061",
+    "title": "Progressive disclosure",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-062",
+    "title": "Keyboard accessibility",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-063",
+    "title": "Contrast/readability",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-064",
+    "title": "Touch usability",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-065",
+    "title": "Reduced-motion respect",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-066",
+    "title": "Turkish locale",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-067",
+    "title": "Istanbul timezone default",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-068",
+    "title": "Market-time correctness",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-069",
+    "title": "Decimal/currency clarity",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-UX-001",
+      "TC-UX-002"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-070",
+    "title": "Informational positioning",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-071",
+    "title": "No Project-owned Buy/Hold/Sell verdict",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-072",
+    "title": "Anomaly vs. legal finding distinction",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-073",
+    "title": "Data-rights readiness",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-074",
+    "title": "Attribution/license compliance",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": true
+  },
+  {
+    "requirement_id": "NFR-075",
+    "title": "Reproducible deployment",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-076",
+    "title": "Separate development/production secrets",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-077",
+    "title": "Database migration discipline",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-078",
+    "title": "Demo backup plan",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-079",
+    "title": "Critical-path automated tests",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-080",
+    "title": "Historical detector validation",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": true
+  },
+  {
+    "requirement_id": "NFR-081",
+    "title": "Source-grounding checks",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  },
+  {
+    "requirement_id": "NFR-082",
+    "title": "Turkish copy review",
+    "phase": "CORE",
+    "task_ids": [
+      "T15"
+    ],
+    "related_requirement_ids": [],
+    "acceptance_case_ids": [
+      "TC-OPS-001"
+    ],
+    "test_mapping_level": "TASK_COVERAGE_NOT_EXHAUSTIVE",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "verification_status": "NOT_VERIFIED",
+    "amended_in_v03": false
+  }
+]

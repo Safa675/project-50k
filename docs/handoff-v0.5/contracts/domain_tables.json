@@ -1,0 +1,243 @@
+{
+  "version": "0.4-audit",
+  "tables": [
+    {
+      "name": "assets",
+      "primary_key": [
+        "id"
+      ],
+      "access": "PUBLIC_PROJECTION",
+      "purpose": "Canonical identities and capability flags",
+      "migration_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "name": "provider_aliases",
+      "primary_key": [
+        "id"
+      ],
+      "access": "WORKER_ONLY",
+      "purpose": "Dated provider identifiers",
+      "migration_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "name": "providers",
+      "primary_key": [
+        "id"
+      ],
+      "access": "ADMIN_SAFE_VIEW",
+      "purpose": "Provider rights/capability configuration",
+      "migration_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "name": "observations",
+      "primary_key": [
+        "id"
+      ],
+      "access": "WORKER_ONLY",
+      "purpose": "Immutable raw/normalized numeric observations",
+      "migration_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "name": "document_versions",
+      "primary_key": [
+        "id"
+      ],
+      "access": "WORKER_ONLY",
+      "purpose": "Timestamped source version with retention rights",
+      "migration_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "name": "signals",
+      "primary_key": [
+        "id"
+      ],
+      "access": "WORKER_ONLY",
+      "purpose": "Detector results and input provenance",
+      "migration_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "name": "signal_inputs",
+      "primary_key": [
+        "signal_id",
+        "observation_id"
+      ],
+      "access": "WORKER_ONLY",
+      "purpose": "Normalized observation references for a signal",
+      "migration_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "name": "events",
+      "primary_key": [
+        "id"
+      ],
+      "access": "PUBLIC_PROJECTION",
+      "purpose": "Origin-scoped logical event and current revision",
+      "migration_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "name": "event_revisions",
+      "primary_key": [
+        "event_id",
+        "revision"
+      ],
+      "access": "PUBLIC_PROJECTION",
+      "purpose": "Immutable published version",
+      "migration_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "name": "event_evidence",
+      "primary_key": [
+        "event_id",
+        "revision",
+        "evidence_id",
+        "claim_id"
+      ],
+      "access": "PUBLIC_PROJECTION",
+      "purpose": "Claim-level citations",
+      "migration_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "name": "profiles",
+      "primary_key": [
+        "user_id"
+      ],
+      "access": "OWN_ROWS",
+      "purpose": "Display preferences only, not roles",
+      "migration_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "name": "watchlist_entries",
+      "primary_key": [
+        "user_id",
+        "asset_id"
+      ],
+      "access": "OWN_ROWS",
+      "purpose": "Follow relationship",
+      "migration_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "name": "notification_preferences",
+      "primary_key": [
+        "user_id"
+      ],
+      "access": "OWN_ROWS",
+      "purpose": "Opt-in sensitivity and email choices",
+      "migration_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "name": "notifications",
+      "primary_key": [
+        "id"
+      ],
+      "access": "OWN_READ_MARK",
+      "purpose": "Notification ledger",
+      "migration_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "name": "outbox",
+      "primary_key": [
+        "id"
+      ],
+      "access": "WORKER_ONLY",
+      "purpose": "External delivery state and provider reconciliation",
+      "migration_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "name": "feedback",
+      "primary_key": [
+        "user_id",
+        "event_id"
+      ],
+      "access": "OWN_ROWS",
+      "purpose": "Usefulness not truth labels",
+      "migration_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "name": "chat_threads",
+      "primary_key": [
+        "id"
+      ],
+      "access": "OWN_ROWS",
+      "purpose": "Asset-specific origin-fixed conversation",
+      "migration_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "name": "chat_messages",
+      "primary_key": [
+        "id"
+      ],
+      "access": "OWN_ROWS",
+      "purpose": "User or validated assistant message",
+      "migration_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "name": "private.admin_memberships",
+      "primary_key": [
+        "user_id"
+      ],
+      "access": "PRIVATE_ADMIN",
+      "purpose": "Protected role membership",
+      "migration_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "name": "private.settings_versions",
+      "primary_key": [
+        "key",
+        "version"
+      ],
+      "access": "PRIVATE_ADMIN",
+      "purpose": "Typed configuration audit",
+      "migration_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "name": "private.audit_log",
+      "primary_key": [
+        "id"
+      ],
+      "access": "PRIVATE_ADMIN",
+      "purpose": "Append-only metadata",
+      "migration_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "name": "private.jobs",
+      "primary_key": [
+        "id"
+      ],
+      "access": "WORKER_ONLY",
+      "purpose": "Durable leased work",
+      "migration_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "name": "private.budget_ledger",
+      "primary_key": [
+        "account",
+        "provider",
+        "day"
+      ],
+      "access": "WORKER_ONLY",
+      "purpose": "Atomic budget reservations",
+      "migration_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "name": "private.event_release_decisions",
+      "primary_key": [
+        "event_id",
+        "revision",
+        "decision_id"
+      ],
+      "access": "PRIVATE_ADMIN",
+      "purpose": "Append-only global release/revocation decisions with payload/config hash, actor, time and reason; sender rechecks current revision, policy and consent",
+      "migration_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "name": "private.replay_bundles",
+      "primary_key": [
+        "bundle_id"
+      ],
+      "access": "WORKER_ADMIN_ONLY",
+      "purpose": "Registered immutable evidence/revision manifest, cutoff, config hash and rights record; server binds chat/thread/answer/event to exact bundle",
+      "migration_status": "NOT_IMPLEMENTED"
+    }
+  ],
+  "warning": "Schema inventory; not an applied migration or verified RLS implementation."
+}

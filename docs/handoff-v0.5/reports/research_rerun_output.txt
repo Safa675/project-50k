@@ -1,0 +1,158 @@
+## color.stdout
+
+mineral_ink: 46 applicable pairs; 0 below threshold; 4 qualified exceptions; minimum text 5.312; minimum nontext 3.217
+aubergine_frost: 46 applicable pairs; 0 below threshold; 4 qualified exceptions; minimum text 5.479; minimum nontext 3.420
+graphite_copper: 46 applicable pairs; 0 below threshold; 4 qualified exceptions; minimum text 5.400; minimum nontext 3.338
+
+## evaluation.stdout
+
+length=20: raw F1=0.001391, adjusted F1=0.024369, any-hit recall=0.023438, early recall=0.007812
+length=200: raw F1=0.004848, adjusted F1=0.549684, any-hit recall=0.421875, early recall=0.007812
+length=1000: raw F1=0.004968, adjusted F1=0.956449, any-hit recall=0.937500, early recall=0.007812
+SYNTHETIC random flags; zero trained models/market observations; no financial performance claim.
+
+## evidence.stdout
+
+{
+  "origin": "SYNTHETIC",
+  "cases": 32,
+  "graph_policy_oracle_matches": 32,
+  "budget_assertions": {
+    "bounded_plan_fits": true,
+    "seventh_call_rejected": true,
+    "third_search_rejected": true,
+    "ninth_source_rejected": true,
+    "timeout_rejected": true
+  },
+  "summary": {
+    "EXISTENCE_ARITHMETIC": {
+      "answer_status_counts": {
+        "ANSWERED": 29,
+        "INSUFFICIENT_EVIDENCE": 3
+      },
+      "emitted_claim_count": 32,
+      "unsupported_fixture_claims_emitted": [
+        "E02:wrong",
+        "E03:cause",
+        "E05:corroborated",
+        "E07:official",
+        "E08:cyc1",
+        "E08:cyc2",
+        "E10:official",
+        "E12:official",
+        "E13:official",
+        "E15:absence",
+        "E18:ratio",
+        "E20:wrong",
+        "E20:child",
+        "E21:official",
+        "E23:price",
+        "E24:official",
+        "E25:laundered",
+        "E26:official",
+        "E27:association",
+        "E28:official",
+        "E29:ratio",
+        "E30:ratio",
+        "E31:official",
+        "E32:ratio"
+      ],
+      "known_world_false_but_source_supported_claims_emitted": [
+        "E06:corroborated"
+      ],
+      "unvalidated_prose_cases_published": [
+        "E14"
+      ]
+    },
+    "TYPED_SCOPE": {
+      "answer_status_counts": {
+        "ANSWERED": 14,
+        "INSUFFICIENT_EVIDENCE": 16,
+        "PARTIAL": 2
+      },
+      "emitted_claim_count": 17,
+      "unsupported_fixture_claims_emitted": [
+        "E05:corroborated",
+        "E07:official",
+        "E08:cyc1",
+        "E08:cyc2",
+        "E20:child",
+        "E21:official",
+        "E26:official",
+        "E28:official",
+        "E31:official"
+      ],
+      "known_world_false_but_source_supported_claims_emitted": [
+        "E06:corroborated"
+      ],
+      "unvalidated_prose_cases_published": [
+        "E14"
+      ]
+    },
+    "GRAPH_RENDER": {
+      "answer_status_counts": {
+        "ANSWERED": 6,
+        "INSUFFICIENT_EVIDENCE": 24,
+        "PARTIAL": 1,
+        "REVIEW_REQUIRED": 1
+      },
+      "emitted_claim_count": 7,
+      "unsupported_fixture_claims_emitted": [],
+      "known_world_false_but_source_supported_claims_emitted": [
+        "E06:corroborated"
+      ],
+      "unvalidated_prose_cases_published": []
+    }
+  },
+  "passed": true
+}
+
+## fund.stdout
+
+PASS: 49 named synthetic cases; 768 bounded accounting combinations; 48 uncertainty corner checks.
+Observed: identical AUM/NAV endpoints give cash 100 or 120; zero residual can coexist with net cash -20.
+Observed: raw split residual 500; distribution reinvestment residual 0/50/100; adjusted stylized controls zero.
+Observed: investor count 2->1 gives net cash -100/0/+150; allocation TV can be positive with zero trades or zero with round trips.
+Saved /workspace/scratch/cda839272ca3/audit_work/v0.5_reproduction/fund.json
+
+## market.stdout
+
+MARKET STATISTICS LAB — SYNTHETIC ONLY
+seeds=12; real_financial_observations=0; tuning=none
+volume crypto_UTC_cycle pooled20: false_flags_per_100_asset_days=211.1111, injected_event_recall=0.5301
+volume crypto_UTC_cycle same_slot20: false_flags_per_100_asset_days=38.3507, injected_event_recall=0.6829
+volume crypto_UTC_cycle same_slot60: false_flags_per_100_asset_days=34.0278, injected_event_recall=0.7014
+volume crypto_flat_control pooled20: false_flags_per_100_asset_days=39.4792, injected_event_recall=0.7106
+volume crypto_flat_control same_slot20: false_flags_per_100_asset_days=39.4618, injected_event_recall=0.7245
+volume crypto_flat_control same_slot60: false_flags_per_100_asset_days=34.9826, injected_event_recall=0.7199
+volume equity_session_U pooled20: false_flags_per_100_asset_days=135.2778, injected_event_recall=0.6088
+volume equity_session_U same_slot20: false_flags_per_100_asset_days=12.4653, injected_event_recall=0.6875
+volume equity_session_U same_slot60: false_flags_per_100_asset_days=11.4410, injected_event_recall=0.6921
+market_context beta_regime_change beta_one_residual: market_only_asset_flag_rate=0.8804, idio_recall=1.0000
+market_context beta_regime_change prior_OLS_residual: market_only_asset_flag_rate=1.0000, idio_recall=0.8333
+market_context beta_regime_change raw: market_only_asset_flag_rate=1.0000, idio_recall=0.9861
+market_context stable_beta beta_one_residual: market_only_asset_flag_rate=0.5882, idio_recall=0.9722
+market_context stable_beta prior_OLS_residual: market_only_asset_flag_rate=0.0556, idio_recall=1.0000
+market_context stable_beta raw: market_only_asset_flag_rate=0.9903, idio_recall=0.9583
+multiple_testing Gaussian_correlated_all_null BH: batch_FDR=0.0412, power=0.0000
+multiple_testing Gaussian_correlated_all_null BY: batch_FDR=0.0075, power=0.0000
+multiple_testing Gaussian_correlated_all_null per_test_q: batch_FDR=0.9965, power=0.0000
+multiple_testing Gaussian_independent_10pct_shift BH: batch_FDR=0.0447, power=0.7271
+multiple_testing Gaussian_independent_10pct_shift BY: batch_FDR=0.0079, power=0.4911
+multiple_testing Gaussian_independent_10pct_shift per_test_q: batch_FDR=0.3180, power=0.9371
+multiple_testing Gaussian_independent_all_null BH: batch_FDR=0.0473, power=0.0000
+multiple_testing Gaussian_independent_all_null BY: batch_FDR=0.0097, power=0.0000
+multiple_testing Gaussian_independent_all_null per_test_q: batch_FDR=1.0000, power=0.0000
+multiple_testing t3_wrong_Gaussian_all_null BH: batch_FDR=0.8113, power=0.0000
+multiple_testing t3_wrong_Gaussian_all_null BY: batch_FDR=0.6988, power=0.0000
+multiple_testing t3_wrong_Gaussian_all_null per_test_q: batch_FDR=0.9998, power=0.0000
+contamination=0.0: robust_detection=1.0000; mean_sd_detection=1.0000
+contamination=0.1: robust_detection=1.0000; mean_sd_detection=0.0000
+contamination=0.3: robust_detection=0.9992; mean_sd_detection=0.0000
+contamination=0.5: robust_detection=0.0000; mean_sd_detection=0.0000
+contamination=0.6: robust_detection=0.0000; mean_sd_detection=0.0000
+All outcomes are conditional synthetic stress tests; no real-market performance/calibration claim.
+
+## temporal.stdout
+
+PASS 29/29 synthetic checks; external sends=0; output=/workspace/scratch/cda839272ca3/audit_work/v0.5_reproduction/temporal.json

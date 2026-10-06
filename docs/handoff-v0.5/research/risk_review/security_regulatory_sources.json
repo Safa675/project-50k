@@ -1,0 +1,272 @@
+{
+  "review": "Project50K security and regulatory risks",
+  "checked_date_utc": "2026-10-02",
+  "risk_count": 8,
+  "scope": "Documentation/contracts and existing offline lab boundaries only. No app security/auth/RLS/cache/race/LLM/delivery test, legal opinion or compliance determination.",
+  "sources": [
+    {
+      "id": "SR-S01",
+      "title": "OWASP LLM Prompt Injection Prevention Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html",
+      "primary": true,
+      "checked_date_utc": "2026-10-02",
+      "retrieval_refs": [
+        "turn120view0",
+        "turn134view2"
+      ],
+      "review_depth": "SELECTED_OFFICIAL_SECTIONS",
+      "sections_reviewed": [
+        "Indirect injection; HTML/Markdown exfiltration; agent tool-parameter validation; least privilege; guardrail caveat"
+      ],
+      "narrow_supported_facts": [
+        "Retrieved material can contain instructions and attacker-selected tool parameters.",
+        "A guardrail model is one fallible layer, not a substitute for capability/argument enforcement."
+      ],
+      "limitations": "Engineering guidance only; no project attack test"
+    },
+    {
+      "id": "SR-S02",
+      "title": "OWASP SSRF Prevention Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html",
+      "primary": true,
+      "checked_date_utc": "2026-10-02",
+      "retrieval_refs": [
+        "turn120view1",
+        "turn127view1",
+        "turn127view2"
+      ],
+      "review_depth": "SELECTED_OFFICIAL_SECTIONS",
+      "sections_reviewed": [
+        "Redirect bypass; IPv4/IPv6 validation; domain allowlist and DNS pinning sections"
+      ],
+      "narrow_supported_facts": [
+        "Redirects can bypass initial validation.",
+        "Domain parsing and DNS/destination handling need attention beyond a URL scheme check."
+      ],
+      "limitations": "No resolver or network control tested"
+    },
+    {
+      "id": "SR-S03",
+      "title": "Supabase Row Level Security",
+      "url": "https://supabase.com/docs/guides/database/postgres/row-level-security",
+      "primary": true,
+      "checked_date_utc": "2026-10-02",
+      "retrieval_refs": [
+        "turn127view0",
+        "turn134view0"
+      ],
+      "review_depth": "SELECTED_OFFICIAL_SECTIONS",
+      "sections_reviewed": [
+        "Grants and policies; auth.jwt authorization claims; Bypassing RLS, lines1853-1869"
+      ],
+      "narrow_supported_facts": [
+        "Effective grants and policies both matter.",
+        "service_role has bypassrls; requests carrying a user access token can instead execute under the user policies even when a client was initialized with a secret key."
+      ],
+      "limitations": "Selected platform documentation; no database migration/policy test"
+    },
+    {
+      "id": "SR-S04",
+      "title": "Supabase SSR advanced guide",
+      "url": "https://supabase.com/docs/guides/auth/server-side/advanced-guide",
+      "primary": true,
+      "checked_date_utc": "2026-10-02",
+      "retrieval_refs": [
+        "turn120view2",
+        "turn127view3"
+      ],
+      "review_depth": "SELECTED_OFFICIAL_SECTIONS",
+      "sections_reviewed": [
+        "CDN/reverse proxy cache and Set-Cookie; shared in-memory clients, lines134-187"
+      ],
+      "narrow_supported_facts": [
+        "Cached refreshed session responses can expose another user session.",
+        "Request-shared user-specific clients can mix session context."
+      ],
+      "limitations": "No deployed SSR/CDN configuration or library version verified"
+    },
+    {
+      "id": "SR-S05",
+      "title": "Supabase user sessions",
+      "url": "https://supabase.com/docs/guides/auth/sessions",
+      "primary": true,
+      "checked_date_utc": "2026-10-02",
+      "retrieval_refs": [
+        "turn120view3",
+        "turn127view4",
+        "turn134view1"
+      ],
+      "review_depth": "SELECTED_OFFICIAL_SECTIONS",
+      "sections_reviewed": [
+        "Session/JWT representation; lifecycle; ensuring JWT cannot be used after sign-out, lines172-176"
+      ],
+      "narrow_supported_facts": [
+        "Session state and access-token validity are distinct.",
+        "Sensitive post-sign-out validation may check the JWT session_id against existing session state."
+      ],
+      "limitations": "No auth/session test; no chosen timeout asserted"
+    },
+    {
+      "id": "SR-S06",
+      "title": "SPK investment services and institutions guide, updated10 March2026",
+      "url": "https://spk.gov.tr/data/61e496a11b41c60d1404d6b2/Yat%C4%B1r%C4%B1m%20Hizmetleri%20ve%20Kurulu%C5%9Flar%C4%B1%20Rehberi%20%28i-SPK.37.8%29%2010%2003%202026.pdf",
+      "primary": true,
+      "checked_date_utc": "2026-10-02",
+      "retrieval_refs": [
+        "turn137view0",
+        "turn138view0"
+      ],
+      "review_depth": "SELECTED_OFFICIAL_SECTIONS",
+      "sections_reviewed": [
+        "PDF pages10-15 printed; financial information, general recommendations, tailored activity; retrieval lines298-445"
+      ],
+      "narrow_supported_facts": [
+        "Distinguishes nondirective financial information from general recommendations and customer-specific activities.",
+        "Calls for impartial information and case-specific assessment; provisions concern defined entities and activities."
+      ],
+      "limitations": "Official current guide, selected provisions only; service-specific classification not established"
+    },
+    {
+      "id": "SR-S07",
+      "title": "KVKK FAQ: processing principles and retention",
+      "url": "https://www.kvkk.gov.tr/SharedFolderServer/CMSFiles/c148901d-cd7f-43ff-ae9a-978fb78fb43c.pdf?v=1.0.24",
+      "primary": true,
+      "checked_date_utc": "2026-10-02",
+      "retrieval_refs": [
+        "turn137view1"
+      ],
+      "review_depth": "SELECTED_OFFICIAL_SECTIONS",
+      "sections_reviewed": [
+        "PDF page40 general principles and selected continuation40-42; retrieval lines637-683"
+      ],
+      "narrow_supported_facts": [
+        "Purposes should be specified; processing limited and proportionate.",
+        "Retention is limited by applicable legal requirements or processing purpose; no project retention duration is supplied."
+      ],
+      "limitations": "Selected principles, not comprehensive current-law/legal-basis analysis; later open at770 errored and was not relied upon"
+    },
+    {
+      "id": "SR-S08",
+      "title": "KVKK overseas transfers",
+      "url": "https://www.kvkk.gov.tr/Icerik/2053/Yurtdisina-Aktarim",
+      "primary": true,
+      "checked_date_utc": "2026-10-02",
+      "retrieval_refs": [
+        "turn137view2",
+        "turn138view1"
+      ],
+      "review_depth": "SELECTED_OFFICIAL_SECTIONS",
+      "sections_reviewed": [
+        "Revised Article9 effective1 June2024; adequacy/safeguards hierarchy; incidental exceptions, lines85-131"
+      ],
+      "narrow_supported_facts": [
+        "Explains adequacy, safeguards and limited incidental-transfer exceptions.",
+        "Incidental exceptions concern irregular, noncontinuous transfers; routine processing cannot be presumed incidental."
+      ],
+      "limitations": "Selected current authority explanation; actual controller/vendor mechanism unverified"
+    },
+    {
+      "id": "SR-S09",
+      "title": "Ticaret Ministry commercial electronic messages general information",
+      "url": "https://ticaret.gov.tr/ic-ticaret/ticari-elektronik-iletiler/genel-bilgiler",
+      "primary": true,
+      "checked_date_utc": "2026-10-02",
+      "retrieval_refs": [
+        "turn137view3"
+      ],
+      "review_depth": "SELECTED_OFFICIAL_SECTIONS",
+      "sections_reviewed": [
+        "Page dated31 December2020; substantive lines139-148"
+      ],
+      "narrow_supported_facts": [
+        "Describes prior approval for commercial messages and merchant/tradesperson exception subject to refusal.",
+        "Commercial messages themselves cannot be used to request approval under the summary."
+      ],
+      "limitations": "Older official explanatory page; consolidated current legislation and exact IYS consequences not independently verified"
+    }
+  ],
+  "local_sources": [
+    {
+      "path": "AGENTS.md",
+      "depth": "FULL_CURRENT_READ"
+    },
+    {
+      "path": "docs/19_Security_Privacy_and_Compliance.md",
+      "depth": "FULL_CURRENT_READ"
+    },
+    {
+      "path": "docs/15_Domain_Model_and_Persistence.md",
+      "depth": "FULL_PRIOR_CURRENT_PACKAGE_READ"
+    },
+    {
+      "path": "docs/13_Decision_Confidence_and_Validation.md",
+      "depth": "FULL_PRIOR_CURRENT_PACKAGE_READ"
+    },
+    {
+      "path": "contracts/ai_answer.schema.json",
+      "depth": "FULL"
+    },
+    {
+      "path": "contracts/evidence.schema.json",
+      "depth": "FULL"
+    },
+    {
+      "path": "contracts/public_event.schema.json",
+      "depth": "FULL"
+    },
+    {
+      "path": "contracts/investigation_packet.schema.json",
+      "depth": "FULL"
+    },
+    {
+      "path": "contracts/calculation.schema.json",
+      "depth": "FULL"
+    },
+    {
+      "path": "contracts/domain_tables.json",
+      "depth": "FULL"
+    },
+    {
+      "path": "contracts/event.schema.json",
+      "depth": "SELECTED_FIELD_AND_LINE_INSPECTION"
+    },
+    {
+      "path": "contracts/openapi.yaml",
+      "depth": "SELECTED_SECURITY_ROUTES_AND_COMPONENT_REFERENCES"
+    },
+    {
+      "path": "contracts/traceability.json",
+      "depth": "SELECTED_SECURITY_PRIVACY_NOTIFICATION_ACCEPTANCE_SEARCH"
+    },
+    {
+      "path": "research/engine_lab/TEMPORAL_CHAIN_ENGINE.md",
+      "depth": "FULL_AUTHOR_AND_LIMITATION_REVIEW"
+    },
+    {
+      "path": "research/engine_lab/EVIDENCE_INVESTIGATION.md",
+      "depth": "FULL_READ"
+    },
+    {
+      "path": "research/engine_lab/ENGINE_SYSTEM_DESIGN.md",
+      "depth": "FULL_READ"
+    },
+    {
+      "path": "docs/07_Functional_Requirements.md",
+      "depth": "SELECTED_SECURITY_NOTIFICATION_CHAT_REPLAY_REQUIREMENTS"
+    },
+    {
+      "path": "docs/08_Non_Functional_Requirements.md",
+      "depth": "SELECTED_SECURITY_PRIVACY_EVIDENCE_REQUIREMENTS"
+    }
+  ],
+  "regulatory_uncertainties": [
+    "Actual service SPK classification, permitted status and licensing implications depend on concrete activities and were not determined.",
+    "Watchlist filtering or disclaimers do not determine classification.",
+    "Actual controller, lawful bases, data categories, retention, vendor regions/subprocessors and transfer mechanism remain unverified.",
+    "Concrete service-alert/global discovery message classification and exact IYS obligations remain unresolved; older Ticaret overview is not treated as current consolidated legislation."
+  ],
+  "tests_performed_this_review": [],
+  "acceptance_tests": "Proposed minimum actual integration checks per SR-01 through SR-08; none executed.",
+  "actions_performed": "Read-only official browsing and local document review; created only SECURITY_AND_REGULATORY_RISKS.md and this JSON.",
+  "external_account_rpc_install_spend_deploy_send_actions": 0
+}

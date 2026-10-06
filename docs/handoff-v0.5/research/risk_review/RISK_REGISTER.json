@@ -1,0 +1,575 @@
+{
+  "review_local_date": "2026-10-03",
+  "timezone": "Europe/Istanbul",
+  "record_count": 24,
+  "interpretation": "Research register: impact is ordinal and conditional on exposure; likelihood/failure frequency is unestimated. Evidence basis is not the product evidence-strength score. No RPN, probability ranking, exhaustive-coverage claim, new scope approval or completed acceptance is implied.",
+  "scope_preserved": {
+    "markets": [
+      "BIST",
+      "Turkish funds",
+      "crypto",
+      "US"
+    ],
+    "meaningful_on_chain": true,
+    "total_ceiling_TRY": 5000,
+    "only_excluded_cost": "development Claude/Codex subscriptions",
+    "product_requirements_completed": 0
+  },
+  "risks": [
+    {
+      "id": "R01",
+      "title": "Data acquisition/use rights",
+      "impact_if_materialized": "CRITICAL_IF_PUBLIC_RELEASE",
+      "likelihood": "NOT_ESTIMATED",
+      "evidence_basis": [
+        "OWNER_FACT",
+        "OFFICIAL_SOURCE"
+      ],
+      "known_boundary_or_unknown": "No actual entitlement for retained history/non-display/derived public use is supplied.",
+      "early_signal": "Accessible wrapper or consumer subscription is used as permission.",
+      "smallest_next_learning_probe": "Record exact source/use/retention/redistribution scope and obtain admitted evidence before live publication.",
+      "probe_execution_status": "PROPOSED_NOT_EXECUTED",
+      "existing_related_gates": [
+        "G02",
+        "G04"
+      ],
+      "details": [
+        "research/risk_review/DATA_AND_COST_RISKS.md"
+      ],
+      "current_status": "UNRESOLVED_OR_KNOWN_LIMITATION",
+      "not_product_scope_change": true
+    },
+    {
+      "id": "R02",
+      "title": "Cumulative budget and unspecified horizon",
+      "impact_if_materialized": "HIGH",
+      "likelihood": "NOT_ESTIMATED",
+      "evidence_basis": [
+        "OWNER_FACT",
+        "OFFICIAL_SOURCE",
+        "AUTHORED_SCENARIO"
+      ],
+      "known_boundary_or_unknown": "TRY5000 is total, while selected configuration, workload, duration and complete prices are unknown.",
+      "early_signal": "Renewals/usage are omitted or ceiling is treated as monthly.",
+      "smallest_next_learning_probe": "Price a chosen horizon and reconcile actual+committed+reserved+contingency; do not spend or reduce scope to force fit.",
+      "probe_execution_status": "PROPOSED_NOT_EXECUTED",
+      "existing_related_gates": [
+        "G05"
+      ],
+      "details": [
+        "research/risk_review/DATA_AND_COST_RISKS.md",
+        "research/risk_review/RISK_SCENARIOS.md"
+      ],
+      "current_status": "UNRESOLVED_OR_KNOWN_LIMITATION",
+      "not_product_scope_change": true
+    },
+    {
+      "id": "R03",
+      "title": "Fund field coverage and cash nonidentifiability",
+      "impact_if_materialized": "HIGH",
+      "likelihood": "NOT_ESTIMATED",
+      "evidence_basis": [
+        "PRIOR_SOURCE_INSPECTION",
+        "OBSERVED_SYNTHETIC_COUNTEREXAMPLE"
+      ],
+      "known_boundary_or_unknown": "Dated AUM/count/allocation are unverified; endpoints alone do not generally identify cash or selling.",
+      "early_signal": "Placeholder/latest field is dated by NAV; residual is titled redemptions or asset sales.",
+      "smallest_next_learning_probe": "Admit raw dated fields/actions and independently reconcile disclosed transactions; otherwise publish only correctly named dated facts/conditional estimate.",
+      "probe_execution_status": "PROPOSED_NOT_EXECUTED",
+      "existing_related_gates": [
+        "G03",
+        "G10"
+      ],
+      "details": [
+        "research/risk_review/DATA_AND_COST_RISKS.md",
+        "research/risk_review/SCIENTIFIC_RISKS.md"
+      ],
+      "current_status": "UNRESOLVED_OR_KNOWN_LIMITATION",
+      "not_product_scope_change": true
+    },
+    {
+      "id": "R04",
+      "title": "Mixed venue/unit/cadence histories",
+      "impact_if_materialized": "HIGH",
+      "likelihood": "NOT_ESTIMATED",
+      "evidence_basis": [
+        "OFFICIAL_SOURCE",
+        "PROJECT_SPECIFICATION"
+      ],
+      "known_boundary_or_unknown": "US feed scope, fund cadence, crypto venue and adjustment comparability differ.",
+      "early_signal": "IEX/SIP histories mix or fund NAV is shown as intraday.",
+      "smallest_next_learning_probe": "Exercise feed/calendar/unit changes and preserve exact comparable source metadata and unavailable states.",
+      "probe_execution_status": "PROPOSED_NOT_EXECUTED",
+      "existing_related_gates": [
+        "G04",
+        "G10",
+        "G11"
+      ],
+      "details": [
+        "research/risk_review/DATA_AND_COST_RISKS.md",
+        "research/risk_review/DELIVERY_AND_OPERATIONS_RISKS.md"
+      ],
+      "current_status": "UNRESOLVED_OR_KNOWN_LIMITATION",
+      "not_product_scope_change": true
+    },
+    {
+      "id": "R05",
+      "title": "Four-market and on-chain prerequisite chain",
+      "impact_if_materialized": "HIGH",
+      "likelihood": "NOT_ESTIMATED",
+      "evidence_basis": [
+        "OWNER_FACT",
+        "KNOWN_NOT_IMPLEMENTED"
+      ],
+      "known_boundary_or_unknown": "Accepted demonstration spans four domains plus meaningful chain evidence; source/account/runtime paths are absent.",
+      "early_signal": "One successful equity chart is called full coverage.",
+      "smallest_next_learning_probe": "Prove a bounded meaningful path in every required domain and track unresolved dependencies without silently dropping one.",
+      "probe_execution_status": "PROPOSED_NOT_EXECUTED",
+      "existing_related_gates": [
+        "G02",
+        "G03",
+        "G04",
+        "G11"
+      ],
+      "details": [
+        "research/risk_review/DELIVERY_AND_OPERATIONS_RISKS.md"
+      ],
+      "current_status": "UNRESOLVED_OR_KNOWN_LIMITATION",
+      "not_product_scope_change": true
+    },
+    {
+      "id": "R06",
+      "title": "Base rates, drift and invalid statistical guarantees",
+      "impact_if_materialized": "HIGH",
+      "likelihood": "NOT_ESTIMATED",
+      "evidence_basis": [
+        "OBSERVED_SYNTHETIC_COUNTEREXAMPLE",
+        "AUTHORED_SCENARIO"
+      ],
+      "known_boundary_or_unknown": "Toy methods fail under deliberately shifted/misspecified processes; actual population rates are unknown.",
+      "early_signal": "One threshold or BH/BY result is advertised as stable financial precision.",
+      "smallest_next_learning_probe": "Freeze natural-prevalence chronological evaluation with ordinary periods, prior-only selection, clustered uncertainty and all eligible denominators.",
+      "probe_execution_status": "PROPOSED_NOT_EXECUTED",
+      "existing_related_gates": [
+        "G10"
+      ],
+      "details": [
+        "research/risk_review/SCIENTIFIC_RISKS.md",
+        "research/risk_review/RISK_SCENARIOS.md"
+      ],
+      "current_status": "UNRESOLVED_OR_KNOWN_LIMITATION",
+      "not_product_scope_change": true
+    },
+    {
+      "id": "R07",
+      "title": "Truth/causality overclaim and unvalidated natural language",
+      "impact_if_materialized": "HIGH",
+      "likelihood": "NOT_ESTIMATED",
+      "evidence_basis": [
+        "OBSERVED_SYNTHETIC_COUNTEREXAMPLE",
+        "KNOWN_NOT_IMPLEMENTED"
+      ],
+      "known_boundary_or_unknown": "Citation support, arithmetic and agreeing origins do not establish world truth/cause; typed atoms are supplied.",
+      "early_signal": "High score or calculation permits extra causal/fraud prose.",
+      "smallest_next_learning_probe": "Use independent unfamiliar Turkish claim labels, exact premise lineage/contradictions and actual rendering evaluation.",
+      "probe_execution_status": "PROPOSED_NOT_EXECUTED",
+      "existing_related_gates": [
+        "G10"
+      ],
+      "details": [
+        "research/risk_review/SCIENTIFIC_RISKS.md",
+        "research/risk_review/SECURITY_AND_REGULATORY_RISKS.md"
+      ],
+      "current_status": "UNRESOLVED_OR_KNOWN_LIMITATION",
+      "not_product_scope_change": true
+    },
+    {
+      "id": "R08",
+      "title": "Hindsight leakage, survivor selection and weak evaluation target",
+      "impact_if_materialized": "HIGH",
+      "likelihood": "NOT_ESTIMATED",
+      "evidence_basis": [
+        "OBSERVED_SYNTHETIC_COUNTEREXAMPLE",
+        "UNTESTED_FAILURE_MECHANISM"
+      ],
+      "known_boundary_or_unknown": "Current revisions, survivors and retrospective interval scoring can change what the test measures.",
+      "early_signal": "Famous incidents/current holdings are used as historical truth or later hits are backdated.",
+      "smallest_next_learning_probe": "Freeze available-at universe/records and targets, retain missing/delisted/excluded cases and untouched later evaluation.",
+      "probe_execution_status": "PROPOSED_NOT_EXECUTED",
+      "existing_related_gates": [
+        "G10"
+      ],
+      "details": [
+        "research/risk_review/SCIENTIFIC_RISKS.md",
+        "research/risk_review/DATA_AND_COST_RISKS.md"
+      ],
+      "current_status": "UNRESOLVED_OR_KNOWN_LIMITATION",
+      "not_product_scope_change": true
+    },
+    {
+      "id": "R09",
+      "title": "Unproven useful recurring job and payment",
+      "impact_if_materialized": "HIGH",
+      "likelihood": "NOT_ESTIMATED",
+      "evidence_basis": [
+        "NO_CUSTOMER_EVIDENCE"
+      ],
+      "known_boundary_or_unknown": "No observed user effort reduction, sustained use or willingness to pay.",
+      "early_signal": "Praise/curiosity is reported as demand; unusual facts remove no actual task burden.",
+      "smallest_next_learning_probe": "Observe recent real jobs against usual workflow, then an ordinary-period pilot and any later separately authorized priced test.",
+      "probe_execution_status": "PROPOSED_NOT_EXECUTED",
+      "existing_related_gates": [],
+      "details": [
+        "research/risk_review/PRODUCT_AND_COMPETITION_RISKS.md"
+      ],
+      "current_status": "UNRESOLVED_OR_KNOWN_LIMITATION",
+      "not_product_scope_change": true,
+      "review_context": "Business learning priority; not a new formal release gate or a condition silently added to G11."
+    },
+    {
+      "id": "R10",
+      "title": "Advertised incumbent overlap and weak switching reason",
+      "impact_if_materialized": "HIGH",
+      "likelihood": "NOT_ESTIMATED",
+      "evidence_basis": [
+        "OFFICIAL_PRODUCT_DESCRIPTION"
+      ],
+      "known_boundary_or_unknown": "Current official competitors describe overlapping AI/fund/source/alert jobs; our task advantage is untested.",
+      "early_signal": "No-competitor claims or absent webpage feature is scored as competitor absence.",
+      "smallest_next_learning_probe": "Compare the same five jobs with tier/date/coverage recorded; observe what users actually replace.",
+      "probe_execution_status": "PROPOSED_NOT_EXECUTED",
+      "existing_related_gates": [],
+      "details": [
+        "research/risk_review/PRODUCT_AND_COMPETITION_RISKS.md"
+      ],
+      "current_status": "UNRESOLVED_OR_KNOWN_LIMITATION",
+      "not_product_scope_change": true,
+      "review_context": "Business learning priority; not a new formal release gate or a condition silently added to G11."
+    },
+    {
+      "id": "R11",
+      "title": "Alert fatigue versus suppressed material events",
+      "impact_if_materialized": "HIGH",
+      "likelihood": "NOT_ESTIMATED",
+      "evidence_basis": [
+        "OBSERVED_SYNTHETIC_COUNTEREXAMPLE",
+        "UNTESTED_USER_HYPOTHESIS"
+      ],
+      "known_boundary_or_unknown": "Duplicate noise and lost distinct events are separate; actual fatigue is unmeasured.",
+      "early_signal": "Notification caps/cooldown improve counts while distinct events vanish.",
+      "smallest_next_learning_probe": "Score logical episodes, update burden, misses/latency and consenting-user comprehension together.",
+      "probe_execution_status": "PROPOSED_NOT_EXECUTED",
+      "existing_related_gates": [
+        "G06",
+        "G10"
+      ],
+      "details": [
+        "research/risk_review/PRODUCT_AND_COMPETITION_RISKS.md",
+        "research/risk_review/SCIENTIFIC_RISKS.md",
+        "research/risk_review/RISK_SCENARIOS.md"
+      ],
+      "current_status": "UNRESOLVED_OR_KNOWN_LIMITATION",
+      "not_product_scope_change": true
+    },
+    {
+      "id": "R12",
+      "title": "Abstention and quiet states reduce visible value",
+      "impact_if_materialized": "MEDIUM",
+      "likelihood": "NOT_ESTIMATED",
+      "evidence_basis": [
+        "UNTESTED_USER_HYPOTHESIS",
+        "KNOWN_NOT_IMPLEMENTED"
+      ],
+      "known_boundary_or_unknown": "Policy-correct fixture abstentions do not estimate coverage; users may confuse silence with broken monitoring.",
+      "early_signal": "Unavailable coverage is shown as no risk, or trivial alerts fill quiet days.",
+      "smallest_next_learning_probe": "Observe ordinary-period comprehension/return and separate unavailable, quiet, partial and review-required states.",
+      "probe_execution_status": "PROPOSED_NOT_EXECUTED",
+      "existing_related_gates": [
+        "G09",
+        "G10"
+      ],
+      "details": [
+        "research/risk_review/PRODUCT_AND_COMPETITION_RISKS.md",
+        "research/risk_review/DELIVERY_AND_OPERATIONS_RISKS.md"
+      ],
+      "current_status": "UNRESOLVED_OR_KNOWN_LIMITATION",
+      "not_product_scope_change": true
+    },
+    {
+      "id": "R13",
+      "title": "Authorization, session and cache isolation",
+      "impact_if_materialized": "CRITICAL_IF_PUBLIC_ACCOUNTS",
+      "likelihood": "NOT_ESTIMATED",
+      "evidence_basis": [
+        "KNOWN_NOT_IMPLEMENTED",
+        "OFFICIAL_PLATFORM_DOCUMENTATION"
+      ],
+      "known_boundary_or_unknown": "RLS/session/admin/private-cache declarations have not run through actual integration.",
+      "early_signal": "Own-user routes bypass row policies or cached cookies/context cross users.",
+      "smallest_next_learning_probe": "Run actual anonymous/A/B grants/RLS/session-revocation and SSR/cache tests with secret-role handling.",
+      "probe_execution_status": "PROPOSED_NOT_EXECUTED",
+      "existing_related_gates": [
+        "G08",
+        "G07"
+      ],
+      "details": [
+        "research/risk_review/SECURITY_AND_REGULATORY_RISKS.md"
+      ],
+      "current_status": "UNRESOLVED_OR_KNOWN_LIMITATION",
+      "not_product_scope_change": true
+    },
+    {
+      "id": "R14",
+      "title": "Untrusted retrieval, SSRF and private-context exfiltration",
+      "impact_if_materialized": "CRITICAL_IF_RUNTIME_CONNECTED",
+      "likelihood": "NOT_ESTIMATED",
+      "evidence_basis": [
+        "KNOWN_NOT_IMPLEMENTED",
+        "OFFICIAL_SECURITY_GUIDANCE"
+      ],
+      "known_boundary_or_unknown": "Read-only fetching can reach unsafe destinations or leak context; regex/schema gates are not runtime defense.",
+      "early_signal": "Retrieved text directs tools; redirects/DNS changes reach private transport.",
+      "smallest_next_learning_probe": "Exercise actual server-controlled router/resolver/renderer against hostile pages, private redirects, DNS changes and secret-bearing queries.",
+      "probe_execution_status": "PROPOSED_NOT_EXECUTED",
+      "existing_related_gates": [
+        "G08"
+      ],
+      "details": [
+        "research/risk_review/SECURITY_AND_REGULATORY_RISKS.md"
+      ],
+      "current_status": "UNRESOLVED_OR_KNOWN_LIMITATION",
+      "not_product_scope_change": true
+    },
+    {
+      "id": "R15",
+      "title": "Revision/outbox races and uncertain sends",
+      "impact_if_materialized": "HIGH",
+      "likelihood": "NOT_ESTIMATED",
+      "evidence_basis": [
+        "KNOWN_NOT_IMPLEMENTED",
+        "OBSERVED_LOCAL_POLICY_COUNTEREXAMPLE"
+      ],
+      "known_boundary_or_unknown": "Reference gates do not implement atomic publication, leases, crash recovery or provider acceptance reconciliation.",
+      "early_signal": "Old approval/consent is used after queueing; retries duplicate or lose logical intent.",
+      "smallest_next_learning_probe": "Inject crashes and concurrent invalidation/withdrawal in real PostgreSQL with provider stub and recorded acceptance ledger.",
+      "probe_execution_status": "PROPOSED_NOT_EXECUTED",
+      "existing_related_gates": [
+        "G06",
+        "G08"
+      ],
+      "details": [
+        "research/risk_review/SECURITY_AND_REGULATORY_RISKS.md",
+        "research/risk_review/DELIVERY_AND_OPERATIONS_RISKS.md"
+      ],
+      "current_status": "UNRESOLVED_OR_KNOWN_LIMITATION",
+      "not_product_scope_change": true
+    },
+    {
+      "id": "R16",
+      "title": "On-chain quota/finality/attribution coverage",
+      "impact_if_materialized": "HIGH",
+      "likelihood": "NOT_ESTIMATED",
+      "evidence_basis": [
+        "OFFICIAL_SOURCE",
+        "OBSERVED_LOCAL_POLICY_COUNTEREXAMPLE"
+      ],
+      "known_boundary_or_unknown": "Public RPC reliability and exact coverage are unmeasured; confirmed/account/transfer are not finalized/owner/sale.",
+      "early_signal": "Empty partial RPC results become safe, finality is generic across EVM, or account clusters become people.",
+      "smallest_next_learning_probe": "Pin network/event/finality/coverage and test throttles/reorgs/checkpoints; keep exact raw observation and attribution limits.",
+      "probe_execution_status": "PROPOSED_NOT_EXECUTED",
+      "existing_related_gates": [
+        "G04",
+        "G10",
+        "G11"
+      ],
+      "details": [
+        "research/risk_review/DATA_AND_COST_RISKS.md",
+        "research/risk_review/SECURITY_AND_REGULATORY_RISKS.md"
+      ],
+      "current_status": "UNRESOLVED_OR_KNOWN_LIMITATION",
+      "not_product_scope_change": true
+    },
+    {
+      "id": "R17",
+      "title": "Personal-data lifecycle and transfer",
+      "impact_if_materialized": "HIGH_IF_PERSONAL_DATA_PROCESSING",
+      "likelihood": "NOT_ESTIMATED",
+      "evidence_basis": [
+        "KNOWN_NOT_IMPLEMENTED",
+        "OFFICIAL_REGULATORY_SOURCE"
+      ],
+      "known_boundary_or_unknown": "Actual controller/vendor/region/dataflow/purpose/deletion/retention arrangements are unreviewed.",
+      "early_signal": "Private watchlist/chat enters search/shared cache/logs or retention defaults are called statutory.",
+      "smallest_next_learning_probe": "Trace one user through actual/stub dataflow and deletion, then review actual purpose/processors/transfer mechanism at existing gate.",
+      "probe_execution_status": "PROPOSED_NOT_EXECUTED",
+      "existing_related_gates": [
+        "G07",
+        "G08"
+      ],
+      "details": [
+        "research/risk_review/SECURITY_AND_REGULATORY_RISKS.md"
+      ],
+      "current_status": "UNRESOLVED_OR_KNOWN_LIMITATION",
+      "not_product_scope_change": true
+    },
+    {
+      "id": "R18",
+      "title": "Advice-like or reputational output classification",
+      "impact_if_materialized": "HIGH_IF_PUBLIC_OUTPUT",
+      "likelihood": "NOT_ESTIMATED",
+      "evidence_basis": [
+        "PROJECT_POLICY",
+        "OFFICIAL_REGULATORY_SOURCE"
+      ],
+      "known_boundary_or_unknown": "Actual personalization/output/service classification is fact-specific and not settled by disclaimer.",
+      "early_signal": "User circumstances drive buy/exit/sizing calls; unsupported crime/safety labels appear.",
+      "smallest_next_learning_probe": "Evaluate actual Turkish adversarial prompts/templates and retain factual context; review actual service before release/monetization.",
+      "probe_execution_status": "PROPOSED_NOT_EXECUTED",
+      "existing_related_gates": [],
+      "details": [
+        "research/risk_review/SECURITY_AND_REGULATORY_RISKS.md",
+        "research/risk_review/SCIENTIFIC_RISKS.md"
+      ],
+      "current_status": "UNRESOLVED_OR_KNOWN_LIMITATION",
+      "not_product_scope_change": true,
+      "review_context": "Actual financial-language/service review in docs/19 sections1/6; not a privacy classification or an inferred new gate."
+    },
+    {
+      "id": "R19",
+      "title": "Email categories, consent and message classification",
+      "impact_if_materialized": "HIGH_IF_EXTERNAL_EMAIL_ENABLED",
+      "likelihood": "NOT_ESTIMATED",
+      "evidence_basis": [
+        "PROJECT_POLICY",
+        "OFFICIAL_REGULATORY_SOURCE"
+      ],
+      "known_boundary_or_unknown": "Following, privacy consent, global opt-in and sending authority differ; actual template/IYS classification unresolved.",
+      "early_signal": "Watchlist automatically enables global mail or consent is checked only at enqueue.",
+      "smallest_next_learning_probe": "Exercise category withdrawal, current revision, kill switch and origin before stub-send; review actual message templates under G06.",
+      "probe_execution_status": "PROPOSED_NOT_EXECUTED",
+      "existing_related_gates": [
+        "G06"
+      ],
+      "details": [
+        "research/risk_review/SECURITY_AND_REGULATORY_RISKS.md"
+      ],
+      "current_status": "UNRESOLVED_OR_KNOWN_LIMITATION",
+      "not_product_scope_change": true
+    },
+    {
+      "id": "R20",
+      "title": "Scores, cadences and mobile semantics misunderstood",
+      "impact_if_materialized": "MEDIUM",
+      "likelihood": "NOT_ESTIMATED",
+      "evidence_basis": [
+        "UNTESTED_USER_HYPOTHESIS",
+        "ARITHMETIC_COLOR_TEST_ONLY"
+      ],
+      "known_boundary_or_unknown": "Opaque contrast passes are not comprehension or rendered accessibility; personas need different depth.",
+      "early_signal": "78/100 is read as probability/safety; fund publication date is hidden; partial chain coverage looks complete.",
+      "smallest_next_learning_probe": "Observe realistic Turkish mobile/desktop/source tasks and contradictory states; test keyboard/glyph/focus and revise specific misunderstanding.",
+      "probe_execution_status": "PROPOSED_NOT_EXECUTED",
+      "existing_related_gates": [
+        "G09"
+      ],
+      "details": [
+        "research/risk_review/PRODUCT_AND_COMPETITION_RISKS.md",
+        "research/risk_review/SECURITY_AND_REGULATORY_RISKS.md"
+      ],
+      "current_status": "UNRESOLVED_OR_KNOWN_LIMITATION",
+      "not_product_scope_change": true
+    },
+    {
+      "id": "R21",
+      "title": "Unproven acquisition/channel and economic proposition",
+      "impact_if_materialized": "HIGH",
+      "likelihood": "NOT_ESTIMATED",
+      "evidence_basis": [
+        "NO_CUSTOMER_EVIDENCE"
+      ],
+      "known_boundary_or_unknown": "No conversion, channel cost, distribution agreement or renewal economics measured.",
+      "early_signal": "Clicks/testimonials are treated as retained users or fear-based loss prevention drives interest.",
+      "smallest_next_learning_probe": "Use later authorized transparent audience/channel tests with engaged-job outcomes and actual costs; do not assume a partnership.",
+      "probe_execution_status": "PROPOSED_NOT_EXECUTED",
+      "existing_related_gates": [
+        "G05"
+      ],
+      "details": [
+        "research/risk_review/PRODUCT_AND_COMPETITION_RISKS.md"
+      ],
+      "current_status": "UNRESOLVED_OR_KNOWN_LIMITATION",
+      "not_product_scope_change": true,
+      "review_context": "Acquisition/retention remain business hypotheses; G05 relates only to costs of any future authorized activity."
+    },
+    {
+      "id": "R22",
+      "title": "Worker starvation, cold start and silent stale state",
+      "impact_if_materialized": "HIGH",
+      "likelihood": "NOT_ESTIMATED",
+      "evidence_basis": [
+        "KNOWN_NOT_IMPLEMENTED",
+        "UNTESTED_FAILURE_MECHANISM"
+      ],
+      "known_boundary_or_unknown": "A shared worker and current-data endpoints need not provide fair jobs, baseline coverage or progress.",
+      "early_signal": "Process green despite old watermarks, stalled corrections or denied history.",
+      "smallest_next_learning_probe": "Stall/poison/kill jobs, revoke leases, deny history and repeat stale bars through actual integration; inspect queue type age and visible coverage.",
+      "probe_execution_status": "PROPOSED_NOT_EXECUTED",
+      "existing_related_gates": [
+        "G08",
+        "G10",
+        "G11"
+      ],
+      "details": [
+        "research/risk_review/DELIVERY_AND_OPERATIONS_RISKS.md"
+      ],
+      "current_status": "UNRESOLVED_OR_KNOWN_LIMITATION",
+      "not_product_scope_change": true
+    },
+    {
+      "id": "R23",
+      "title": "Competition use of prepared material",
+      "impact_if_materialized": "HIGH_IF_COMPETITION_USE",
+      "likelihood": "NOT_ESTIMATED",
+      "evidence_basis": [
+        "OWNER_FACT",
+        "SUPPLIED_EVENT_RULE"
+      ],
+      "known_boundary_or_unknown": "No organizer ruling exists; preparation authorization does not settle external eligibility.",
+      "early_signal": "Completed preparation is represented as approved or only event-time work.",
+      "smallest_next_learning_probe": "Retain contribution history and existing G01 ruling requirement before competition use; continue authorized preparation.",
+      "probe_execution_status": "PROPOSED_NOT_EXECUTED",
+      "existing_related_gates": [
+        "G01"
+      ],
+      "details": [
+        "research/risk_review/DELIVERY_AND_OPERATIONS_RISKS.md"
+      ],
+      "current_status": "UNRESOLVED_OR_KNOWN_LIMITATION",
+      "not_product_scope_change": true
+    },
+    {
+      "id": "R24",
+      "title": "Brand/name adoption and attention tradeoff",
+      "impact_if_materialized": "MEDIUM_IF_ADOPTED",
+      "likelihood": "NOT_ESTIMATED",
+      "evidence_basis": [
+        "BOUNDED_PUBLIC_SEARCH",
+        "UNTESTED_DESIGN_PROPOSAL"
+      ],
+      "known_boundary_or_unknown": "Izvanta/domain/mark/similarity and designer approval remain unresolved; logo is raster concept.",
+      "early_signal": "Public adoption claims worldwide uniqueness or branding substitutes for customer/capability evidence.",
+      "smallest_next_learning_probe": "Before adoption, resolve dated authoritative availability/similarity and actual design/comprehension; prioritize proven task value.",
+      "probe_execution_status": "PROPOSED_NOT_EXECUTED",
+      "existing_related_gates": [
+        "G09"
+      ],
+      "details": [
+        "research/risk_review/PRODUCT_AND_COMPETITION_RISKS.md",
+        "research/brand_lab/NAMING_AND_LOGO.md"
+      ],
+      "current_status": "UNRESOLVED_OR_KNOWN_LIMITATION",
+      "not_product_scope_change": true,
+      "review_context": "G09 covers designer approval, not official domain/mark/name-rights clearance; the latter remains unresolved separately in NAMING_AND_LOGO."
+    }
+  ]
+}

@@ -1,0 +1,569 @@
+{
+  "review_local_date": "2026-10-03",
+  "scope": "Anomaly-frequency evidence gap map; all28 existing IDs preserved. This file does not change the catalog or introduce empirical forecasts.",
+  "entries": [
+    {
+      "anomaly_id": "AN-MKT-001",
+      "name": "Relative volume",
+      "phase_unchanged": "CORE",
+      "existing_requirement": "FR-049",
+      "existing_threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+      "catalog_sha256": "231c785d32d189b102bedd39327c2ab0a104352570ede27d2ffb00c54626ff27",
+      "empirical_frequency": "NOT_ESTIMATED",
+      "frequency_value": null,
+      "required_denominator": "Eligible comparable completed asset/venue/session intervals; also unique episodes and affected asset-days, separately.",
+      "need_before_rate_claim": [
+        "Frozen asset/source universe, interval and target definition",
+        "Actual admitted fields, history, adjustments and point-in-time revisions",
+        "All eligible ordinary and unusual opportunities; missing/unavailable/excluded records counted separately from detector exposure",
+        "Prior-only method/threshold where a numerical trigger applies; fixed event eligibility otherwise; untouched evaluation period",
+        "Raw candidates, deduplicated episodes, useful reviewer-labelled events and actual delivery measured separately"
+      ],
+      "external_evidence_transfer": "Published research uses other populations and methods; selected official cases prove presence; KAP aggregates measure publications. None supplies this catalog entry rate.",
+      "product_implementation_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "anomaly_id": "AN-MKT-002",
+      "name": "Robust return deviation",
+      "phase_unchanged": "CORE",
+      "existing_requirement": "FR-050",
+      "existing_threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+      "catalog_sha256": "231c785d32d189b102bedd39327c2ab0a104352570ede27d2ffb00c54626ff27",
+      "empirical_frequency": "NOT_ESTIMATED",
+      "frequency_value": null,
+      "required_denominator": "Eligible comparable completed asset/venue/session intervals; also unique episodes and affected asset-days, separately.",
+      "need_before_rate_claim": [
+        "Frozen asset/source universe, interval and target definition",
+        "Actual admitted fields, history, adjustments and point-in-time revisions",
+        "All eligible ordinary and unusual opportunities; missing/unavailable/excluded records counted separately from detector exposure",
+        "Prior-only method/threshold where a numerical trigger applies; fixed event eligibility otherwise; untouched evaluation period",
+        "Raw candidates, deduplicated episodes, useful reviewer-labelled events and actual delivery measured separately"
+      ],
+      "external_evidence_transfer": "Published research uses other populations and methods; selected official cases prove presence; KAP aggregates measure publications. None supplies this catalog entry rate.",
+      "product_implementation_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "anomaly_id": "AN-MKT-003",
+      "name": "Benchmark divergence",
+      "phase_unchanged": "CORE",
+      "existing_requirement": "FR-052",
+      "existing_threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+      "catalog_sha256": "231c785d32d189b102bedd39327c2ab0a104352570ede27d2ffb00c54626ff27",
+      "empirical_frequency": "NOT_ESTIMATED",
+      "frequency_value": null,
+      "required_denominator": "Eligible comparable completed asset/venue/session intervals; also unique episodes and affected asset-days, separately.",
+      "need_before_rate_claim": [
+        "Frozen asset/source universe, interval and target definition",
+        "Actual admitted fields, history, adjustments and point-in-time revisions",
+        "All eligible ordinary and unusual opportunities; missing/unavailable/excluded records counted separately from detector exposure",
+        "Prior-only method/threshold where a numerical trigger applies; fixed event eligibility otherwise; untouched evaluation period",
+        "Raw candidates, deduplicated episodes, useful reviewer-labelled events and actual delivery measured separately"
+      ],
+      "external_evidence_transfer": "Published research uses other populations and methods; selected official cases prove presence; KAP aggregates measure publications. None supplies this catalog entry rate.",
+      "product_implementation_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "anomaly_id": "AN-MKT-004",
+      "name": "Realized volatility shift",
+      "phase_unchanged": "NEXT",
+      "existing_requirement": "FR-051",
+      "existing_threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+      "catalog_sha256": "231c785d32d189b102bedd39327c2ab0a104352570ede27d2ffb00c54626ff27",
+      "empirical_frequency": "NOT_ESTIMATED",
+      "frequency_value": null,
+      "required_denominator": "Eligible comparable completed asset/venue/session intervals; also unique episodes and affected asset-days, separately.",
+      "need_before_rate_claim": [
+        "Frozen asset/source universe, interval and target definition",
+        "Actual admitted fields, history, adjustments and point-in-time revisions",
+        "All eligible ordinary and unusual opportunities; missing/unavailable/excluded records counted separately from detector exposure",
+        "Prior-only method/threshold where a numerical trigger applies; fixed event eligibility otherwise; untouched evaluation period",
+        "Raw candidates, deduplicated episodes, useful reviewer-labelled events and actual delivery measured separately"
+      ],
+      "external_evidence_transfer": "Published research uses other populations and methods; selected official cases prove presence; KAP aggregates measure publications. None supplies this catalog entry rate.",
+      "product_implementation_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "anomaly_id": "AN-MKT-005",
+      "name": "Joint price and volume event",
+      "phase_unchanged": "CORE",
+      "existing_requirement": "FR-053",
+      "existing_threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+      "catalog_sha256": "231c785d32d189b102bedd39327c2ab0a104352570ede27d2ffb00c54626ff27",
+      "empirical_frequency": "NOT_ESTIMATED",
+      "frequency_value": null,
+      "required_denominator": "Eligible comparable completed asset/venue/session intervals; also unique episodes and affected asset-days, separately.",
+      "need_before_rate_claim": [
+        "Frozen asset/source universe, interval and target definition",
+        "Actual admitted fields, history, adjustments and point-in-time revisions",
+        "All eligible ordinary and unusual opportunities; missing/unavailable/excluded records counted separately from detector exposure",
+        "Prior-only method/threshold where a numerical trigger applies; fixed event eligibility otherwise; untouched evaluation period",
+        "Raw candidates, deduplicated episodes, useful reviewer-labelled events and actual delivery measured separately"
+      ],
+      "external_evidence_transfer": "Published research uses other populations and methods; selected official cases prove presence; KAP aggregates measure publications. None supplies this catalog entry rate.",
+      "product_implementation_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "anomaly_id": "AN-MKT-006",
+      "name": "Spread/liquidity deterioration",
+      "phase_unchanged": "LATER",
+      "existing_requirement": "FR-048",
+      "existing_threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+      "catalog_sha256": "231c785d32d189b102bedd39327c2ab0a104352570ede27d2ffb00c54626ff27",
+      "empirical_frequency": "NOT_ESTIMATED",
+      "frequency_value": null,
+      "required_denominator": "Eligible comparable completed asset/venue/session intervals; also unique episodes and affected asset-days, separately.",
+      "need_before_rate_claim": [
+        "Frozen asset/source universe, interval and target definition",
+        "Actual admitted fields, history, adjustments and point-in-time revisions",
+        "All eligible ordinary and unusual opportunities; missing/unavailable/excluded records counted separately from detector exposure",
+        "Prior-only method/threshold where a numerical trigger applies; fixed event eligibility otherwise; untouched evaluation period",
+        "Raw candidates, deduplicated episodes, useful reviewer-labelled events and actual delivery measured separately"
+      ],
+      "external_evidence_transfer": "Published research uses other populations and methods; selected official cases prove presence; KAP aggregates measure publications. None supplies this catalog entry rate.",
+      "product_implementation_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "anomaly_id": "AN-MKT-007",
+      "name": "Cross-venue price divergence",
+      "phase_unchanged": "LATER",
+      "existing_requirement": "FR-048",
+      "existing_threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+      "catalog_sha256": "231c785d32d189b102bedd39327c2ab0a104352570ede27d2ffb00c54626ff27",
+      "empirical_frequency": "NOT_ESTIMATED",
+      "frequency_value": null,
+      "required_denominator": "Eligible comparable completed asset/venue/session intervals; also unique episodes and affected asset-days, separately.",
+      "need_before_rate_claim": [
+        "Frozen asset/source universe, interval and target definition",
+        "Actual admitted fields, history, adjustments and point-in-time revisions",
+        "All eligible ordinary and unusual opportunities; missing/unavailable/excluded records counted separately from detector exposure",
+        "Prior-only method/threshold where a numerical trigger applies; fixed event eligibility otherwise; untouched evaluation period",
+        "Raw candidates, deduplicated episodes, useful reviewer-labelled events and actual delivery measured separately"
+      ],
+      "external_evidence_transfer": "Published research uses other populations and methods; selected official cases prove presence; KAP aggregates measure publications. None supplies this catalog entry rate.",
+      "product_implementation_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "anomaly_id": "AN-FND-001",
+      "name": "Fund NAV/category divergence",
+      "phase_unchanged": "NEXT",
+      "existing_requirement": "FR-036",
+      "existing_threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+      "catalog_sha256": "231c785d32d189b102bedd39327c2ab0a104352570ede27d2ffb00c54626ff27",
+      "empirical_frequency": "NOT_ESTIMATED",
+      "frequency_value": null,
+      "required_denominator": "Eligible dated fund/share-class valuation or disclosure opportunities with required comparable fields; distinct fund episodes separately.",
+      "need_before_rate_claim": [
+        "Frozen asset/source universe, interval and target definition",
+        "Actual admitted fields, history, adjustments and point-in-time revisions",
+        "All eligible ordinary and unusual opportunities; missing/unavailable/excluded records counted separately from detector exposure",
+        "Prior-only method/threshold where a numerical trigger applies; fixed event eligibility otherwise; untouched evaluation period",
+        "Raw candidates, deduplicated episodes, useful reviewer-labelled events and actual delivery measured separately"
+      ],
+      "external_evidence_transfer": "Published research uses other populations and methods; selected official cases prove presence; KAP aggregates measure publications. None supplies this catalog entry rate.",
+      "product_implementation_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "anomaly_id": "AN-FND-002",
+      "name": "Return-adjusted net-flow estimate",
+      "phase_unchanged": "CONDITIONAL",
+      "existing_requirement": "FR-037",
+      "existing_threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+      "catalog_sha256": "231c785d32d189b102bedd39327c2ab0a104352570ede27d2ffb00c54626ff27",
+      "empirical_frequency": "NOT_ESTIMATED",
+      "frequency_value": null,
+      "required_denominator": "Eligible dated fund/share-class valuation or disclosure opportunities with required comparable fields; distinct fund episodes separately.",
+      "need_before_rate_claim": [
+        "Frozen asset/source universe, interval and target definition",
+        "Actual admitted fields, history, adjustments and point-in-time revisions",
+        "All eligible ordinary and unusual opportunities; missing/unavailable/excluded records counted separately from detector exposure",
+        "Prior-only method/threshold where a numerical trigger applies; fixed event eligibility otherwise; untouched evaluation period",
+        "Raw candidates, deduplicated episodes, useful reviewer-labelled events and actual delivery measured separately"
+      ],
+      "external_evidence_transfer": "Published research uses other populations and methods; selected official cases prove presence; KAP aggregates measure publications. None supplies this catalog entry rate.",
+      "product_implementation_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "anomaly_id": "AN-FND-003",
+      "name": "Investor count change",
+      "phase_unchanged": "CONDITIONAL",
+      "existing_requirement": "FR-034",
+      "existing_threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+      "catalog_sha256": "231c785d32d189b102bedd39327c2ab0a104352570ede27d2ffb00c54626ff27",
+      "empirical_frequency": "NOT_ESTIMATED",
+      "frequency_value": null,
+      "required_denominator": "Eligible dated fund/share-class valuation or disclosure opportunities with required comparable fields; distinct fund episodes separately.",
+      "need_before_rate_claim": [
+        "Frozen asset/source universe, interval and target definition",
+        "Actual admitted fields, history, adjustments and point-in-time revisions",
+        "All eligible ordinary and unusual opportunities; missing/unavailable/excluded records counted separately from detector exposure",
+        "Prior-only method/threshold where a numerical trigger applies; fixed event eligibility otherwise; untouched evaluation period",
+        "Raw candidates, deduplicated episodes, useful reviewer-labelled events and actual delivery measured separately"
+      ],
+      "external_evidence_transfer": "Published research uses other populations and methods; selected official cases prove presence; KAP aggregates measure publications. None supplies this catalog entry rate.",
+      "product_implementation_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "anomaly_id": "AN-FND-004",
+      "name": "Asset-type allocation shift",
+      "phase_unchanged": "CORE",
+      "existing_requirement": "FR-035",
+      "existing_threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+      "catalog_sha256": "231c785d32d189b102bedd39327c2ab0a104352570ede27d2ffb00c54626ff27",
+      "empirical_frequency": "NOT_ESTIMATED",
+      "frequency_value": null,
+      "required_denominator": "Eligible dated fund/share-class valuation or disclosure opportunities with required comparable fields; distinct fund episodes separately.",
+      "need_before_rate_claim": [
+        "Frozen asset/source universe, interval and target definition",
+        "Actual admitted fields, history, adjustments and point-in-time revisions",
+        "All eligible ordinary and unusual opportunities; missing/unavailable/excluded records counted separately from detector exposure",
+        "Prior-only method/threshold where a numerical trigger applies; fixed event eligibility otherwise; untouched evaluation period",
+        "Raw candidates, deduplicated episodes, useful reviewer-labelled events and actual delivery measured separately"
+      ],
+      "external_evidence_transfer": "Published research uses other populations and methods; selected official cases prove presence; KAP aggregates measure publications. None supplies this catalog entry rate.",
+      "product_implementation_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "anomaly_id": "AN-FND-005",
+      "name": "Fund access/regulatory event",
+      "phase_unchanged": "CORE",
+      "existing_requirement": "FR-055",
+      "existing_threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+      "catalog_sha256": "231c785d32d189b102bedd39327c2ab0a104352570ede27d2ffb00c54626ff27",
+      "empirical_frequency": "NOT_ESTIMATED",
+      "frequency_value": null,
+      "required_denominator": "Eligible dated fund/share-class valuation or disclosure opportunities with required comparable fields; distinct fund episodes separately.",
+      "need_before_rate_claim": [
+        "Frozen asset/source universe, interval and target definition",
+        "Actual admitted fields, history, adjustments and point-in-time revisions",
+        "All eligible ordinary and unusual opportunities; missing/unavailable/excluded records counted separately from detector exposure",
+        "Prior-only method/threshold where a numerical trigger applies; fixed event eligibility otherwise; untouched evaluation period",
+        "Raw candidates, deduplicated episodes, useful reviewer-labelled events and actual delivery measured separately"
+      ],
+      "external_evidence_transfer": "Published research uses other populations and methods; selected official cases prove presence; KAP aggregates measure publications. None supplies this catalog entry rate.",
+      "product_implementation_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "anomaly_id": "AN-FND-006",
+      "name": "Reported holding concentration",
+      "phase_unchanged": "LATER",
+      "existing_requirement": "FR-038",
+      "existing_threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+      "catalog_sha256": "231c785d32d189b102bedd39327c2ab0a104352570ede27d2ffb00c54626ff27",
+      "empirical_frequency": "NOT_ESTIMATED",
+      "frequency_value": null,
+      "required_denominator": "Eligible dated fund/share-class valuation or disclosure opportunities with required comparable fields; distinct fund episodes separately.",
+      "need_before_rate_claim": [
+        "Frozen asset/source universe, interval and target definition",
+        "Actual admitted fields, history, adjustments and point-in-time revisions",
+        "All eligible ordinary and unusual opportunities; missing/unavailable/excluded records counted separately from detector exposure",
+        "Prior-only method/threshold where a numerical trigger applies; fixed event eligibility otherwise; untouched evaluation period",
+        "Raw candidates, deduplicated episodes, useful reviewer-labelled events and actual delivery measured separately"
+      ],
+      "external_evidence_transfer": "Published research uses other populations and methods; selected official cases prove presence; KAP aggregates measure publications. None supplies this catalog entry rate.",
+      "product_implementation_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "anomaly_id": "AN-FND-007",
+      "name": "Potential liquidity mismatch",
+      "phase_unchanged": "LATER",
+      "existing_requirement": "FR-038",
+      "existing_threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+      "catalog_sha256": "231c785d32d189b102bedd39327c2ab0a104352570ede27d2ffb00c54626ff27",
+      "empirical_frequency": "NOT_ESTIMATED",
+      "frequency_value": null,
+      "required_denominator": "Eligible dated fund/share-class valuation or disclosure opportunities with required comparable fields; distinct fund episodes separately.",
+      "need_before_rate_claim": [
+        "Frozen asset/source universe, interval and target definition",
+        "Actual admitted fields, history, adjustments and point-in-time revisions",
+        "All eligible ordinary and unusual opportunities; missing/unavailable/excluded records counted separately from detector exposure",
+        "Prior-only method/threshold where a numerical trigger applies; fixed event eligibility otherwise; untouched evaluation period",
+        "Raw candidates, deduplicated episodes, useful reviewer-labelled events and actual delivery measured separately"
+      ],
+      "external_evidence_transfer": "Published research uses other populations and methods; selected official cases prove presence; KAP aggregates measure publications. None supplies this catalog entry rate.",
+      "product_implementation_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "anomaly_id": "AN-EVT-001",
+      "name": "Material issuer disclosure",
+      "phase_unchanged": "CORE",
+      "existing_requirement": "FR-055",
+      "existing_threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+      "catalog_sha256": "231c785d32d189b102bedd39327c2ab0a104352570ede27d2ffb00c54626ff27",
+      "empirical_frequency": "NOT_ESTIMATED",
+      "frequency_value": null,
+      "required_denominator": "Complete admitted issuer/filing/disclosure universe in a fixed period; count distinct material events and revisions separately from publications.",
+      "need_before_rate_claim": [
+        "Frozen asset/source universe, interval and target definition",
+        "Actual admitted fields, history, adjustments and point-in-time revisions",
+        "All eligible ordinary and unusual opportunities; missing/unavailable/excluded records counted separately from detector exposure",
+        "Prior-only method/threshold where a numerical trigger applies; fixed event eligibility otherwise; untouched evaluation period",
+        "Raw candidates, deduplicated episodes, useful reviewer-labelled events and actual delivery measured separately"
+      ],
+      "external_evidence_transfer": "Published research uses other populations and methods; selected official cases prove presence; KAP aggregates measure publications. None supplies this catalog entry rate.",
+      "product_implementation_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "anomaly_id": "AN-EVT-002",
+      "name": "US filing/earnings context",
+      "phase_unchanged": "NEXT",
+      "existing_requirement": "FR-047",
+      "existing_threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+      "catalog_sha256": "231c785d32d189b102bedd39327c2ab0a104352570ede27d2ffb00c54626ff27",
+      "empirical_frequency": "NOT_ESTIMATED",
+      "frequency_value": null,
+      "required_denominator": "Complete admitted issuer/filing/disclosure universe in a fixed period; count distinct material events and revisions separately from publications.",
+      "need_before_rate_claim": [
+        "Frozen asset/source universe, interval and target definition",
+        "Actual admitted fields, history, adjustments and point-in-time revisions",
+        "All eligible ordinary and unusual opportunities; missing/unavailable/excluded records counted separately from detector exposure",
+        "Prior-only method/threshold where a numerical trigger applies; fixed event eligibility otherwise; untouched evaluation period",
+        "Raw candidates, deduplicated episodes, useful reviewer-labelled events and actual delivery measured separately"
+      ],
+      "external_evidence_transfer": "Published research uses other populations and methods; selected official cases prove presence; KAP aggregates measure publications. None supplies this catalog entry rate.",
+      "product_implementation_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "anomaly_id": "AN-EVT-003",
+      "name": "Profit/cash-flow divergence",
+      "phase_unchanged": "LATER",
+      "existing_requirement": "FR-048",
+      "existing_threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+      "catalog_sha256": "231c785d32d189b102bedd39327c2ab0a104352570ede27d2ffb00c54626ff27",
+      "empirical_frequency": "NOT_ESTIMATED",
+      "frequency_value": null,
+      "required_denominator": "Complete admitted issuer/filing/disclosure universe in a fixed period; count distinct material events and revisions separately from publications.",
+      "need_before_rate_claim": [
+        "Frozen asset/source universe, interval and target definition",
+        "Actual admitted fields, history, adjustments and point-in-time revisions",
+        "All eligible ordinary and unusual opportunities; missing/unavailable/excluded records counted separately from detector exposure",
+        "Prior-only method/threshold where a numerical trigger applies; fixed event eligibility otherwise; untouched evaluation period",
+        "Raw candidates, deduplicated episodes, useful reviewer-labelled events and actual delivery measured separately"
+      ],
+      "external_evidence_transfer": "Published research uses other populations and methods; selected official cases prove presence; KAP aggregates measure publications. None supplies this catalog entry rate.",
+      "product_implementation_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "anomaly_id": "AN-EVT-004",
+      "name": "Source correction/material update",
+      "phase_unchanged": "CORE",
+      "existing_requirement": "FR-070",
+      "existing_threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+      "catalog_sha256": "231c785d32d189b102bedd39327c2ab0a104352570ede27d2ffb00c54626ff27",
+      "empirical_frequency": "NOT_ESTIMATED",
+      "frequency_value": null,
+      "required_denominator": "Complete admitted issuer/filing/disclosure universe in a fixed period; count distinct material events and revisions separately from publications.",
+      "need_before_rate_claim": [
+        "Frozen asset/source universe, interval and target definition",
+        "Actual admitted fields, history, adjustments and point-in-time revisions",
+        "All eligible ordinary and unusual opportunities; missing/unavailable/excluded records counted separately from detector exposure",
+        "Prior-only method/threshold where a numerical trigger applies; fixed event eligibility otherwise; untouched evaluation period",
+        "Raw candidates, deduplicated episodes, useful reviewer-labelled events and actual delivery measured separately"
+      ],
+      "external_evidence_transfer": "Published research uses other populations and methods; selected official cases prove presence; KAP aggregates measure publications. None supplies this catalog entry rate.",
+      "product_implementation_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "anomaly_id": "AN-ONC-001",
+      "name": "Large finalized transfer",
+      "phase_unchanged": "CONDITIONAL",
+      "existing_requirement": "FR-043",
+      "existing_threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+      "catalog_sha256": "231c785d32d189b102bedd39327c2ab0a104352570ede27d2ffb00c54626ff27",
+      "empirical_frequency": "NOT_ESTIMATED",
+      "frequency_value": null,
+      "required_denominator": "Admitted network/contract-or-mint finalized observations in a fixed interval and known covered universe; unique events separately from addresses/transactions.",
+      "need_before_rate_claim": [
+        "Frozen asset/source universe, interval and target definition",
+        "Actual admitted fields, history, adjustments and point-in-time revisions",
+        "All eligible ordinary and unusual opportunities; missing/unavailable/excluded records counted separately from detector exposure",
+        "Prior-only method/threshold where a numerical trigger applies; fixed event eligibility otherwise; untouched evaluation period",
+        "Raw candidates, deduplicated episodes, useful reviewer-labelled events and actual delivery measured separately"
+      ],
+      "external_evidence_transfer": "Published research uses other populations and methods; selected official cases prove presence; KAP aggregates measure publications. None supplies this catalog entry rate.",
+      "product_implementation_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "anomaly_id": "AN-ONC-002",
+      "name": "Token-account concentration",
+      "phase_unchanged": "CONDITIONAL",
+      "existing_requirement": "FR-043",
+      "existing_threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+      "catalog_sha256": "231c785d32d189b102bedd39327c2ab0a104352570ede27d2ffb00c54626ff27",
+      "empirical_frequency": "NOT_ESTIMATED",
+      "frequency_value": null,
+      "required_denominator": "Admitted network/contract-or-mint finalized observations in a fixed interval and known covered universe; unique events separately from addresses/transactions.",
+      "need_before_rate_claim": [
+        "Frozen asset/source universe, interval and target definition",
+        "Actual admitted fields, history, adjustments and point-in-time revisions",
+        "All eligible ordinary and unusual opportunities; missing/unavailable/excluded records counted separately from detector exposure",
+        "Prior-only method/threshold where a numerical trigger applies; fixed event eligibility otherwise; untouched evaluation period",
+        "Raw candidates, deduplicated episodes, useful reviewer-labelled events and actual delivery measured separately"
+      ],
+      "external_evidence_transfer": "Published research uses other populations and methods; selected official cases prove presence; KAP aggregates measure publications. None supplies this catalog entry rate.",
+      "product_implementation_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "anomaly_id": "AN-ONC-003",
+      "name": "Pool-liquidity change",
+      "phase_unchanged": "LATER",
+      "existing_requirement": "FR-043",
+      "existing_threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+      "catalog_sha256": "231c785d32d189b102bedd39327c2ab0a104352570ede27d2ffb00c54626ff27",
+      "empirical_frequency": "NOT_ESTIMATED",
+      "frequency_value": null,
+      "required_denominator": "Admitted network/contract-or-mint finalized observations in a fixed interval and known covered universe; unique events separately from addresses/transactions.",
+      "need_before_rate_claim": [
+        "Frozen asset/source universe, interval and target definition",
+        "Actual admitted fields, history, adjustments and point-in-time revisions",
+        "All eligible ordinary and unusual opportunities; missing/unavailable/excluded records counted separately from detector exposure",
+        "Prior-only method/threshold where a numerical trigger applies; fixed event eligibility otherwise; untouched evaluation period",
+        "Raw candidates, deduplicated episodes, useful reviewer-labelled events and actual delivery measured separately"
+      ],
+      "external_evidence_transfer": "Published research uses other populations and methods; selected official cases prove presence; KAP aggregates measure publications. None supplies this catalog entry rate.",
+      "product_implementation_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "anomaly_id": "AN-ONC-004",
+      "name": "Token authority/contract change",
+      "phase_unchanged": "LATER",
+      "existing_requirement": "FR-043",
+      "existing_threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+      "catalog_sha256": "231c785d32d189b102bedd39327c2ab0a104352570ede27d2ffb00c54626ff27",
+      "empirical_frequency": "NOT_ESTIMATED",
+      "frequency_value": null,
+      "required_denominator": "Admitted network/contract-or-mint finalized observations in a fixed interval and known covered universe; unique events separately from addresses/transactions.",
+      "need_before_rate_claim": [
+        "Frozen asset/source universe, interval and target definition",
+        "Actual admitted fields, history, adjustments and point-in-time revisions",
+        "All eligible ordinary and unusual opportunities; missing/unavailable/excluded records counted separately from detector exposure",
+        "Prior-only method/threshold where a numerical trigger applies; fixed event eligibility otherwise; untouched evaluation period",
+        "Raw candidates, deduplicated episodes, useful reviewer-labelled events and actual delivery measured separately"
+      ],
+      "external_evidence_transfer": "Published research uses other populations and methods; selected official cases prove presence; KAP aggregates measure publications. None supplies this catalog entry rate.",
+      "product_implementation_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "anomaly_id": "AN-ONC-005",
+      "name": "Scheduled supply unlock",
+      "phase_unchanged": "LATER",
+      "existing_requirement": "FR-043",
+      "existing_threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+      "catalog_sha256": "231c785d32d189b102bedd39327c2ab0a104352570ede27d2ffb00c54626ff27",
+      "empirical_frequency": "NOT_ESTIMATED",
+      "frequency_value": null,
+      "required_denominator": "Verified dated issuer unlock schedules, schedule revisions and eligible scheduled unlock opportunities; separately count observed finalized transfers and measured supply changes.",
+      "need_before_rate_claim": [
+        "Frozen asset/source universe, interval and target definition",
+        "Actual admitted fields, history, adjustments and point-in-time revisions",
+        "All eligible ordinary and unusual opportunities; missing/unavailable/excluded records counted separately from detector exposure",
+        "Prior-only method/threshold where a numerical trigger applies; fixed event eligibility otherwise; untouched evaluation period",
+        "Raw candidates, deduplicated episodes, useful reviewer-labelled events and actual delivery measured separately"
+      ],
+      "external_evidence_transfer": "Published research uses other populations and methods; selected official cases prove presence; KAP aggregates measure publications. None supplies this catalog entry rate.",
+      "product_implementation_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "anomaly_id": "AN-CMP-001",
+      "name": "Market/on-chain contextual event",
+      "phase_unchanged": "CONDITIONAL",
+      "existing_requirement": "FR-044",
+      "existing_threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+      "catalog_sha256": "231c785d32d189b102bedd39327c2ab0a104352570ede27d2ffb00c54626ff27",
+      "empirical_frequency": "NOT_ESTIMATED",
+      "frequency_value": null,
+      "required_denominator": "Eligible joined asset/fund/chain context opportunities with point-in-time mappings; deduplicated cross-signal episodes.",
+      "need_before_rate_claim": [
+        "Frozen asset/source universe, interval and target definition",
+        "Actual admitted fields, history, adjustments and point-in-time revisions",
+        "All eligible ordinary and unusual opportunities; missing/unavailable/excluded records counted separately from detector exposure",
+        "Prior-only method/threshold where a numerical trigger applies; fixed event eligibility otherwise; untouched evaluation period",
+        "Raw candidates, deduplicated episodes, useful reviewer-labelled events and actual delivery measured separately"
+      ],
+      "external_evidence_transfer": "Published research uses other populations and methods; selected official cases prove presence; KAP aggregates measure publications. None supplies this catalog entry rate.",
+      "product_implementation_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "anomaly_id": "AN-CMP-002",
+      "name": "Fund/share relationship event",
+      "phase_unchanged": "LATER",
+      "existing_requirement": "FR-038",
+      "existing_threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+      "catalog_sha256": "231c785d32d189b102bedd39327c2ab0a104352570ede27d2ffb00c54626ff27",
+      "empirical_frequency": "NOT_ESTIMATED",
+      "frequency_value": null,
+      "required_denominator": "Eligible joined asset/fund/chain context opportunities with point-in-time mappings; deduplicated cross-signal episodes.",
+      "need_before_rate_claim": [
+        "Frozen asset/source universe, interval and target definition",
+        "Actual admitted fields, history, adjustments and point-in-time revisions",
+        "All eligible ordinary and unusual opportunities; missing/unavailable/excluded records counted separately from detector exposure",
+        "Prior-only method/threshold where a numerical trigger applies; fixed event eligibility otherwise; untouched evaluation period",
+        "Raw candidates, deduplicated episodes, useful reviewer-labelled events and actual delivery measured separately"
+      ],
+      "external_evidence_transfer": "Published research uses other populations and methods; selected official cases prove presence; KAP aggregates measure publications. None supplies this catalog entry rate.",
+      "product_implementation_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "anomaly_id": "AN-DQ-001",
+      "name": "Stale or failed source",
+      "phase_unchanged": "CORE",
+      "existing_requirement": "FR-103",
+      "existing_threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+      "catalog_sha256": "231c785d32d189b102bedd39327c2ab0a104352570ede27d2ffb00c54626ff27",
+      "empirical_frequency": "NOT_ESTIMATED",
+      "frequency_value": null,
+      "required_denominator": "Scheduled eligible collection/validation opportunities by source and expected cadence; separate missing responses, stale payloads and adjustment/calendar exclusions.",
+      "need_before_rate_claim": [
+        "Frozen asset/source universe, interval and target definition",
+        "Actual admitted fields, history, adjustments and point-in-time revisions",
+        "All eligible ordinary and unusual opportunities; missing/unavailable/excluded records counted separately from detector exposure",
+        "Prior-only method/threshold where a numerical trigger applies; fixed event eligibility otherwise; untouched evaluation period",
+        "Raw candidates, deduplicated episodes, useful reviewer-labelled events and actual delivery measured separately"
+      ],
+      "external_evidence_transfer": "Published research uses other populations and methods; selected official cases prove presence; KAP aggregates measure publications. None supplies this catalog entry rate.",
+      "product_implementation_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "anomaly_id": "AN-DQ-002",
+      "name": "Missing/placeholder/invalid observation",
+      "phase_unchanged": "CORE",
+      "existing_requirement": "FR-048",
+      "existing_threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+      "catalog_sha256": "231c785d32d189b102bedd39327c2ab0a104352570ede27d2ffb00c54626ff27",
+      "empirical_frequency": "NOT_ESTIMATED",
+      "frequency_value": null,
+      "required_denominator": "Scheduled eligible collection/validation opportunities by source and expected cadence; separate missing responses, stale payloads and adjustment/calendar exclusions.",
+      "need_before_rate_claim": [
+        "Frozen asset/source universe, interval and target definition",
+        "Actual admitted fields, history, adjustments and point-in-time revisions",
+        "All eligible ordinary and unusual opportunities; missing/unavailable/excluded records counted separately from detector exposure",
+        "Prior-only method/threshold where a numerical trigger applies; fixed event eligibility otherwise; untouched evaluation period",
+        "Raw candidates, deduplicated episodes, useful reviewer-labelled events and actual delivery measured separately"
+      ],
+      "external_evidence_transfer": "Published research uses other populations and methods; selected official cases prove presence; KAP aggregates measure publications. None supplies this catalog entry rate.",
+      "product_implementation_status": "NOT_IMPLEMENTED"
+    },
+    {
+      "anomaly_id": "AN-DQ-003",
+      "name": "Corporate-action/session break",
+      "phase_unchanged": "CORE",
+      "existing_requirement": "FR-050",
+      "existing_threshold_status": "PROVISIONAL_NOT_EMPIRICALLY_VALIDATED",
+      "catalog_sha256": "231c785d32d189b102bedd39327c2ab0a104352570ede27d2ffb00c54626ff27",
+      "empirical_frequency": "NOT_ESTIMATED",
+      "frequency_value": null,
+      "required_denominator": "Scheduled eligible collection/validation opportunities by source and expected cadence; separate missing responses, stale payloads and adjustment/calendar exclusions.",
+      "need_before_rate_claim": [
+        "Frozen asset/source universe, interval and target definition",
+        "Actual admitted fields, history, adjustments and point-in-time revisions",
+        "All eligible ordinary and unusual opportunities; missing/unavailable/excluded records counted separately from detector exposure",
+        "Prior-only method/threshold where a numerical trigger applies; fixed event eligibility otherwise; untouched evaluation period",
+        "Raw candidates, deduplicated episodes, useful reviewer-labelled events and actual delivery measured separately"
+      ],
+      "external_evidence_transfer": "Published research uses other populations and methods; selected official cases prove presence; KAP aggregates measure publications. None supplies this catalog entry rate.",
+      "product_implementation_status": "NOT_IMPLEMENTED"
+    }
+  ],
+  "count": 28,
+  "rates_measured_by_this_task": 0,
+  "not_a_scope_reduction": true
+}

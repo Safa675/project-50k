@@ -1,0 +1,267 @@
+test_nonfinite_threshold_configuration_rejected (test_regression_baseline.MarketIntegrityTests.test_nonfinite_threshold_configuration_rejected) ... 
+  test_nonfinite_threshold_configuration_rejected (test_regression_baseline.MarketIntegrityTests.test_nonfinite_threshold_configuration_rejected) (threshold=nan) ... FAIL
+  test_nonfinite_threshold_configuration_rejected (test_regression_baseline.MarketIntegrityTests.test_nonfinite_threshold_configuration_rejected) (threshold=inf) ... FAIL
+  test_nonfinite_threshold_configuration_rejected (test_regression_baseline.MarketIntegrityTests.test_nonfinite_threshold_configuration_rejected) (threshold=True) ... FAIL
+  test_nonfinite_threshold_configuration_rejected (test_regression_baseline.MarketIntegrityTests.test_nonfinite_threshold_configuration_rejected) (threshold='3') ... ERROR
+test_rvol_overflow_abstains (test_regression_baseline.MarketIntegrityTests.test_rvol_overflow_abstains) ... FAIL
+test_provenance_flags_must_be_boolean_true (test_regression_baseline.MarketIntegrityTests.test_provenance_flags_must_be_boolean_true) ... 
+  test_provenance_flags_must_be_boolean_true (test_regression_baseline.MarketIntegrityTests.test_provenance_flags_must_be_boolean_true) (flag=1) ... FAIL
+  test_provenance_flags_must_be_boolean_true (test_regression_baseline.MarketIntegrityTests.test_provenance_flags_must_be_boolean_true) (flag='false') ... FAIL
+test_flow_independent_of_ambient_decimal_context (test_regression_baseline.FundIntegrityTests.test_flow_independent_of_ambient_decimal_context) ... 
+  test_flow_independent_of_ambient_decimal_context (test_regression_baseline.FundIntegrityTests.test_flow_independent_of_ambient_decimal_context) (precision=6) ... ERROR
+  test_flow_independent_of_ambient_decimal_context (test_regression_baseline.FundIntegrityTests.test_flow_independent_of_ambient_decimal_context) (precision=28) ... ERROR
+test_flow_avoids_repeating_ratio_residual (test_regression_baseline.FundIntegrityTests.test_flow_avoids_repeating_ratio_residual) ... FAIL
+test_allocation_outside_fraction_range_rejected (test_regression_baseline.FundIntegrityTests.test_allocation_outside_fraction_range_rejected) ... FAIL
+test_invalid_row_does_not_abort_other_eligible_evidence (test_regression_baseline.TemporalIntegrityTests.test_invalid_row_does_not_abort_other_eligible_evidence) ... 
+  test_invalid_row_does_not_abort_other_eligible_evidence (test_regression_baseline.TemporalIntegrityTests.test_invalid_row_does_not_abort_other_eligible_evidence) (invalid='bad') ... ERROR
+  test_invalid_row_does_not_abort_other_eligible_evidence (test_regression_baseline.TemporalIntegrityTests.test_invalid_row_does_not_abort_other_eligible_evidence) (invalid='2026-10-01T11:00:00') ... ERROR
+test_future_observation_and_effective_instants_excluded (test_regression_baseline.TemporalIntegrityTests.test_future_observation_and_effective_instants_excluded) ... 
+  test_future_observation_and_effective_instants_excluded (test_regression_baseline.TemporalIntegrityTests.test_future_observation_and_effective_instants_excluded) (key='observed_at') ... FAIL
+  test_future_observation_and_effective_instants_excluded (test_regression_baseline.TemporalIntegrityTests.test_future_observation_and_effective_instants_excluded) (key='effective_at') ... FAIL
+test_half_up_rounding_at_display_boundary (test_regression_baseline.ConfidenceIntegrityTests.test_half_up_rounding_at_display_boundary) ... 
+  test_half_up_rounding_at_display_boundary (test_regression_baseline.ConfidenceIntegrityTests.test_half_up_rounding_at_display_boundary) (component=0.145) ... FAIL
+  test_half_up_rounding_at_display_boundary (test_regression_baseline.ConfidenceIntegrityTests.test_half_up_rounding_at_display_boundary) (component=0.285) ... FAIL
+test_hard_gate_must_be_boolean (test_regression_baseline.ConfidenceIntegrityTests.test_hard_gate_must_be_boolean) ... 
+  test_hard_gate_must_be_boolean (test_regression_baseline.ConfidenceIntegrityTests.test_hard_gate_must_be_boolean) (gate=1) ... FAIL
+  test_hard_gate_must_be_boolean (test_regression_baseline.ConfidenceIntegrityTests.test_hard_gate_must_be_boolean) (gate='false') ... FAIL
+  test_hard_gate_must_be_boolean (test_regression_baseline.ConfidenceIntegrityTests.test_hard_gate_must_be_boolean) (gate=None) ... FAIL
+test_initial_key_rejects_explanation_rewrite_id (test_regression_baseline.NotificationIntegrityTests.test_initial_key_rejects_explanation_rewrite_id) ... FAIL
+
+======================================================================
+ERROR: test_nonfinite_threshold_configuration_rejected (test_regression_baseline.MarketIntegrityTests.test_nonfinite_threshold_configuration_rejected) (threshold='3')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/cda839272ca3/working/Project_50K_v0.4_audit/tests/test_reference.py", line 118, in test_nonfinite_threshold_configuration_rejected
+    relative_volume(600, [100]*20, final_bar=True, same_feed=True, threshold=threshold)
+  File "/workspace/scratch/cda839272ca3/audit_work/reference_baseline_probe/reference/engine.py", line 101, in relative_volume
+    if min_observations < 2 or threshold <= 0:
+                               ^^^^^^^^^^^^^^
+TypeError: '<=' not supported between instances of 'str' and 'int'
+
+======================================================================
+ERROR: test_flow_independent_of_ambient_decimal_context (test_regression_baseline.FundIntegrityTests.test_flow_independent_of_ambient_decimal_context) (precision=6)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/cda839272ca3/working/Project_50K_v0.4_audit/tests/test_reference.py", line 162, in test_flow_independent_of_ambient_decimal_context
+    flow = estimated_fund_flow('123456789', '900', '3', '10', dates_aligned=True, distribution_adjustment_verified=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/cda839272ca3/audit_work/reference_baseline_probe/reference/engine.py", line 156, in estimated_fund_flow
+    return a1 - a0 * (p1 / p0)
+                      ~~~^~~~
+decimal.Inexact: [<class 'decimal.Inexact'>]
+
+======================================================================
+ERROR: test_flow_independent_of_ambient_decimal_context (test_regression_baseline.FundIntegrityTests.test_flow_independent_of_ambient_decimal_context) (precision=28)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/cda839272ca3/working/Project_50K_v0.4_audit/tests/test_reference.py", line 162, in test_flow_independent_of_ambient_decimal_context
+    flow = estimated_fund_flow('123456789', '900', '3', '10', dates_aligned=True, distribution_adjustment_verified=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/cda839272ca3/audit_work/reference_baseline_probe/reference/engine.py", line 156, in estimated_fund_flow
+    return a1 - a0 * (p1 / p0)
+                      ~~~^~~~
+decimal.Inexact: [<class 'decimal.Inexact'>]
+
+======================================================================
+ERROR: test_invalid_row_does_not_abort_other_eligible_evidence (test_regression_baseline.TemporalIntegrityTests.test_invalid_row_does_not_abort_other_eligible_evidence) (invalid='bad')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/cda839272ca3/audit_work/reference_baseline_probe/reference/engine.py", line 57, in parse_timestamp
+    dt = datetime.fromisoformat(value.replace("Z", "+00:00"))
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Invalid isoformat string: 'bad'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspace/scratch/cda839272ca3/working/Project_50K_v0.4_audit/tests/test_reference.py", line 210, in test_invalid_row_does_not_abort_other_eligible_evidence
+    self.assertEqual(eligible_evidence([{**self.row, 'available_at': invalid}, self.row], self.cutoff), [self.row])
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/cda839272ca3/audit_work/reference_baseline_probe/reference/engine.py", line 77, in eligible_evidence
+    if not isinstance(available, str) or parse_timestamp(available) > limit:
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/cda839272ca3/audit_work/reference_baseline_probe/reference/engine.py", line 59, in parse_timestamp
+    raise InvalidEvidence("Invalid timestamp") from exc
+reference.engine.InvalidEvidence: Invalid timestamp
+
+======================================================================
+ERROR: test_invalid_row_does_not_abort_other_eligible_evidence (test_regression_baseline.TemporalIntegrityTests.test_invalid_row_does_not_abort_other_eligible_evidence) (invalid='2026-10-01T11:00:00')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/cda839272ca3/working/Project_50K_v0.4_audit/tests/test_reference.py", line 210, in test_invalid_row_does_not_abort_other_eligible_evidence
+    self.assertEqual(eligible_evidence([{**self.row, 'available_at': invalid}, self.row], self.cutoff), [self.row])
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/cda839272ca3/audit_work/reference_baseline_probe/reference/engine.py", line 77, in eligible_evidence
+    if not isinstance(available, str) or parse_timestamp(available) > limit:
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/cda839272ca3/audit_work/reference_baseline_probe/reference/engine.py", line 61, in parse_timestamp
+    raise InvalidEvidence("Timestamp must include UTC offset")
+reference.engine.InvalidEvidence: Timestamp must include UTC offset
+
+======================================================================
+FAIL: test_nonfinite_threshold_configuration_rejected (test_regression_baseline.MarketIntegrityTests.test_nonfinite_threshold_configuration_rejected) (threshold=nan)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/cda839272ca3/working/Project_50K_v0.4_audit/tests/test_reference.py", line 117, in test_nonfinite_threshold_configuration_rejected
+    with self.assertRaises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_nonfinite_threshold_configuration_rejected (test_regression_baseline.MarketIntegrityTests.test_nonfinite_threshold_configuration_rejected) (threshold=inf)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/cda839272ca3/working/Project_50K_v0.4_audit/tests/test_reference.py", line 117, in test_nonfinite_threshold_configuration_rejected
+    with self.assertRaises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_nonfinite_threshold_configuration_rejected (test_regression_baseline.MarketIntegrityTests.test_nonfinite_threshold_configuration_rejected) (threshold=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/cda839272ca3/working/Project_50K_v0.4_audit/tests/test_reference.py", line 117, in test_nonfinite_threshold_configuration_rejected
+    with self.assertRaises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rvol_overflow_abstains (test_regression_baseline.MarketIntegrityTests.test_rvol_overflow_abstains)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/cda839272ca3/working/Project_50K_v0.4_audit/tests/test_reference.py", line 141, in test_rvol_overflow_abstains
+    self.assertEqual(result.outcome, 'ABSTAINED')
+AssertionError: 'CANDIDATE' != 'ABSTAINED'
+- CANDIDATE
++ ABSTAINED
+
+
+======================================================================
+FAIL: test_provenance_flags_must_be_boolean_true (test_regression_baseline.MarketIntegrityTests.test_provenance_flags_must_be_boolean_true) (flag=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/cda839272ca3/working/Project_50K_v0.4_audit/tests/test_reference.py", line 135, in test_provenance_flags_must_be_boolean_true
+    self.assertEqual(relative_volume(600, [100]*20, final_bar=flag, same_feed=True).outcome, 'ABSTAINED')
+AssertionError: 'CANDIDATE' != 'ABSTAINED'
+- CANDIDATE
++ ABSTAINED
+
+
+======================================================================
+FAIL: test_provenance_flags_must_be_boolean_true (test_regression_baseline.MarketIntegrityTests.test_provenance_flags_must_be_boolean_true) (flag='false')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/cda839272ca3/working/Project_50K_v0.4_audit/tests/test_reference.py", line 135, in test_provenance_flags_must_be_boolean_true
+    self.assertEqual(relative_volume(600, [100]*20, final_bar=flag, same_feed=True).outcome, 'ABSTAINED')
+AssertionError: 'CANDIDATE' != 'ABSTAINED'
+- CANDIDATE
++ ABSTAINED
+
+
+======================================================================
+FAIL: test_flow_avoids_repeating_ratio_residual (test_regression_baseline.FundIntegrityTests.test_flow_avoids_repeating_ratio_residual)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/cda839272ca3/working/Project_50K_v0.4_audit/tests/test_reference.py", line 166, in test_flow_avoids_repeating_ratio_residual
+    self.assertEqual(estimated_fund_flow('3', '1', '3', '1', dates_aligned=True, distribution_adjustment_verified=True), Decimal('0'))
+AssertionError: Decimal('1E-28') != Decimal('0')
+
+======================================================================
+FAIL: test_allocation_outside_fraction_range_rejected (test_regression_baseline.FundIntegrityTests.test_allocation_outside_fraction_range_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/cda839272ca3/working/Project_50K_v0.4_audit/tests/test_reference.py", line 179, in test_allocation_outside_fraction_range_rejected
+    with self.assertRaises(InvalidEvidence):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: InvalidEvidence not raised
+
+======================================================================
+FAIL: test_future_observation_and_effective_instants_excluded (test_regression_baseline.TemporalIntegrityTests.test_future_observation_and_effective_instants_excluded) (key='observed_at')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/cda839272ca3/working/Project_50K_v0.4_audit/tests/test_reference.py", line 220, in test_future_observation_and_effective_instants_excluded
+    self.assertEqual(eligible_evidence([{**self.row, key: '2026-10-01T12:00:01Z'}], self.cutoff), [])
+AssertionError: Lists differ: [{'available_at': '2026-10-01T11:00:00Z', [73 chars]1Z'}] != []
+
+First list contains 1 additional elements.
+First extra element 0:
+{'available_at': '2026-10-01T11:00:00Z', 'availability_provenance': 'OBSERVED', 'observed_at': '2026-10-01T12:00:01Z'}
+
++ []
+- [{'availability_provenance': 'OBSERVED',
+-   'available_at': '2026-10-01T11:00:00Z',
+-   'observed_at': '2026-10-01T12:00:01Z'}]
+
+======================================================================
+FAIL: test_future_observation_and_effective_instants_excluded (test_regression_baseline.TemporalIntegrityTests.test_future_observation_and_effective_instants_excluded) (key='effective_at')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/cda839272ca3/working/Project_50K_v0.4_audit/tests/test_reference.py", line 220, in test_future_observation_and_effective_instants_excluded
+    self.assertEqual(eligible_evidence([{**self.row, key: '2026-10-01T12:00:01Z'}], self.cutoff), [])
+AssertionError: Lists differ: [{'available_at': '2026-10-01T11:00:00Z', [74 chars]1Z'}] != []
+
+First list contains 1 additional elements.
+First extra element 0:
+{'available_at': '2026-10-01T11:00:00Z', 'availability_provenance': 'OBSERVED', 'effective_at': '2026-10-01T12:00:01Z'}
+
++ []
+- [{'availability_provenance': 'OBSERVED',
+-   'available_at': '2026-10-01T11:00:00Z',
+-   'effective_at': '2026-10-01T12:00:01Z'}]
+
+======================================================================
+FAIL: test_half_up_rounding_at_display_boundary (test_regression_baseline.ConfidenceIntegrityTests.test_half_up_rounding_at_display_boundary) (component=0.145)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/cda839272ca3/working/Project_50K_v0.4_audit/tests/test_reference.py", line 254, in test_half_up_rounding_at_display_boundary
+    self.assertEqual(result['evidence_score'], expected)
+AssertionError: 14 != 15
+
+======================================================================
+FAIL: test_half_up_rounding_at_display_boundary (test_regression_baseline.ConfidenceIntegrityTests.test_half_up_rounding_at_display_boundary) (component=0.285)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/cda839272ca3/working/Project_50K_v0.4_audit/tests/test_reference.py", line 254, in test_half_up_rounding_at_display_boundary
+    self.assertEqual(result['evidence_score'], expected)
+AssertionError: 28 != 29
+
+======================================================================
+FAIL: test_hard_gate_must_be_boolean (test_regression_baseline.ConfidenceIntegrityTests.test_hard_gate_must_be_boolean) (gate=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/cda839272ca3/working/Project_50K_v0.4_audit/tests/test_reference.py", line 263, in test_hard_gate_must_be_boolean
+    with self.subTest(gate=gate), self.assertRaises(InvalidEvidence):
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: InvalidEvidence not raised
+
+======================================================================
+FAIL: test_hard_gate_must_be_boolean (test_regression_baseline.ConfidenceIntegrityTests.test_hard_gate_must_be_boolean) (gate='false')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/cda839272ca3/working/Project_50K_v0.4_audit/tests/test_reference.py", line 263, in test_hard_gate_must_be_boolean
+    with self.subTest(gate=gate), self.assertRaises(InvalidEvidence):
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: InvalidEvidence not raised
+
+======================================================================
+FAIL: test_hard_gate_must_be_boolean (test_regression_baseline.ConfidenceIntegrityTests.test_hard_gate_must_be_boolean) (gate=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/cda839272ca3/working/Project_50K_v0.4_audit/tests/test_reference.py", line 263, in test_hard_gate_must_be_boolean
+    with self.subTest(gate=gate), self.assertRaises(InvalidEvidence):
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: InvalidEvidence not raised
+
+======================================================================
+FAIL: test_initial_key_rejects_explanation_rewrite_id (test_regression_baseline.NotificationIntegrityTests.test_initial_key_rejects_explanation_rewrite_id)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/cda839272ca3/working/Project_50K_v0.4_audit/tests/test_reference.py", line 306, in test_initial_key_rejects_explanation_rewrite_id
+    with self.assertRaises(InvalidEvidence):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: InvalidEvidence not raised
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.004s
+
+FAILED (failures=16, errors=5)

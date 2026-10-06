@@ -1,0 +1,372 @@
+{
+  "review": "Official Turkish incident mechanisms and knowledge timing",
+  "checked_date_utc": "2026-10-03",
+  "case_selection": "Purposeful mechanism examples; neither random, exhaustive nor representative",
+  "episode_count": 3,
+  "episodes": [
+    {
+      "id": "IC01",
+      "name": "September2026 fund access/liquidation process",
+      "sources": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "S06",
+        "S07",
+        "S08",
+        "S09",
+        "S10",
+        "S11"
+      ],
+      "cohort_attribution": {
+        "authority": "SPK statement citing MKK",
+        "statement_date": "2026-09-23",
+        "funds": 131,
+        "portfolio_management_companies": 7,
+        "unique_investors": 455758,
+        "not_a_loss_fraud_victim_or_paying_tam_estimate": true
+      },
+      "retrospective_context": "2025Q4 and December2025 observations/discussions described in18September2026 explanation; earlier public availability not demonstrated"
+    },
+    {
+      "id": "IC02",
+      "name": "AGROT financial line item amendment",
+      "sources": [
+        "S12"
+      ],
+      "prior_report_date_attributed_by_issuer": "2026-08-11",
+      "original_report_retrieved": false,
+      "subsequent_corrected_report_verified": false,
+      "issuer_impact_statement_independently_verified": false
+    },
+    {
+      "id": "IC03",
+      "name": "ISKPL unusual movement and attributed no-undisclosed-development response",
+      "sources": [
+        "S13"
+      ],
+      "underlying_exchange_letter_verified": false,
+      "market_series_retrieved": false,
+      "anomaly_statistic_computed": false,
+      "causal_or_manipulation_finding": false
+    }
+  ],
+  "sources": [
+    {
+      "id": "S01",
+      "title": "SPK investor count statement",
+      "url": "https://spk.gov.tr/duyurular/basin-duyurulari/2026/tasfiye-konusu-fonlardaki-yatirimci-sayisina-iliskin-aciklama",
+      "primary": true,
+      "checked_date_utc": "2026-10-03",
+      "retrieval_refs": [
+        "turn161view0"
+      ],
+      "document_or_page_date": "2026-09-23",
+      "source_reported_submission_timestamp_raw": null,
+      "timestamp_timezone_verified": false,
+      "historical_available_at": null,
+      "availability_provenance": "UNKNOWN",
+      "app_ingested_at": null,
+      "review_depth": "Complete substantive notice, lines62-75",
+      "legal_guidance": false,
+      "original_historic_snapshot_verified": false
+    },
+    {
+      "id": "S02",
+      "title": "SPK fund guide process explanation",
+      "url": "https://spk.gov.tr/duyurular/basin-duyurulari/2026/yatirim-fonlarina-iliskin-rehber-duzenleme-surecine-iliskin-aciklama",
+      "primary": true,
+      "checked_date_utc": "2026-10-03",
+      "retrieval_refs": [
+        "turn161view1"
+      ],
+      "document_or_page_date": "2026-09-18",
+      "source_reported_submission_timestamp_raw": null,
+      "timestamp_timezone_verified": false,
+      "historical_available_at": null,
+      "availability_provenance": "UNKNOWN",
+      "app_ingested_at": null,
+      "review_depth": "Complete substantive explanation, lines62-94; retrospective chronology is attributed context",
+      "legal_guidance": false,
+      "original_historic_snapshot_verified": false
+    },
+    {
+      "id": "S03",
+      "title": "SPK bulletin2026/54",
+      "url": "https://spk.gov.tr/data/6a91fe798f95db1fb01ff364/2026-54.pdf",
+      "primary": true,
+      "checked_date_utc": "2026-10-03",
+      "retrieval_refs": [
+        "turn172view4",
+        "turn177view0",
+        "turn183view3",
+        "turn185view3"
+      ],
+      "document_or_page_date": "2026-08-28",
+      "source_reported_submission_timestamp_raw": null,
+      "timestamp_timezone_verified": false,
+      "historical_available_at": null,
+      "availability_provenance": "UNKNOWN",
+      "app_ingested_at": null,
+      "review_depth": "Both PDF pages text, lines6-43; page1 image requested/retrieved",
+      "legal_guidance": false,
+      "original_historic_snapshot_verified": false
+    },
+    {
+      "id": "S04",
+      "title": "SPK2026 bulletin index",
+      "url": "https://spk.gov.tr/spk-bultenleri/2026-yili-spk-bultenleri",
+      "primary": true,
+      "checked_date_utc": "2026-10-03",
+      "retrieval_refs": [
+        "turn166view2",
+        "turn168view0"
+      ],
+      "document_or_page_date": null,
+      "source_reported_submission_timestamp_raw": null,
+      "timestamp_timezone_verified": false,
+      "historical_available_at": null,
+      "availability_provenance": "UNKNOWN",
+      "app_ingested_at": null,
+      "review_depth": "Selected listed publication dates, line49; index is current, not an original timestamped archive",
+      "legal_guidance": false,
+      "original_historic_snapshot_verified": false
+    },
+    {
+      "id": "S05",
+      "title": "SPK bulletin2026/60",
+      "url": "https://spk.gov.tr/data/6aab8e7b8f95db07100fd7b4/2026-60.pdf",
+      "primary": true,
+      "checked_date_utc": "2026-10-03",
+      "retrieval_refs": [
+        "turn172view2",
+        "turn185view2"
+      ],
+      "document_or_page_date": "2026-09-17",
+      "source_reported_submission_timestamp_raw": null,
+      "timestamp_timezone_verified": false,
+      "historical_available_at": null,
+      "availability_provenance": "UNKNOWN",
+      "app_ingested_at": null,
+      "review_depth": "Decision text lines6-21 and page1 image; fund list not exhaustively mapped",
+      "legal_guidance": false,
+      "original_historic_snapshot_verified": false
+    },
+    {
+      "id": "S06",
+      "title": "KAP SPK bulletin1664479",
+      "url": "https://www.kap.org.tr/tr/Bildirim/1664479",
+      "primary": true,
+      "checked_date_utc": "2026-10-03",
+      "retrieval_refs": [
+        "turn172view0"
+      ],
+      "document_or_page_date": "2026-09-17",
+      "source_reported_submission_timestamp_raw": "17.09.2026 11:10:11",
+      "timestamp_timezone_verified": false,
+      "historical_available_at": null,
+      "availability_provenance": "UNKNOWN",
+      "app_ingested_at": null,
+      "review_depth": "Metadata and substantive bulletin reference, lines73-130",
+      "legal_guidance": false,
+      "original_historic_snapshot_verified": false
+    },
+    {
+      "id": "S07",
+      "title": "SPK bulletin2026/61",
+      "url": "https://spk.gov.tr/data/6aac56ff8f95db07100fd82d/2026-61.pdf",
+      "primary": true,
+      "checked_date_utc": "2026-10-03",
+      "retrieval_refs": [
+        "turn172view3",
+        "turn177view1",
+        "turn183view2",
+        "turn185view4",
+        "turn185view5"
+      ],
+      "document_or_page_date": "2026-09-17",
+      "source_reported_submission_timestamp_raw": null,
+      "timestamp_timezone_verified": false,
+      "historical_available_at": null,
+      "availability_provenance": "UNKNOWN",
+      "app_ingested_at": null,
+      "review_depth": "Procedure text lines6-65 and pages1-2 images; complete fund list not audited",
+      "legal_guidance": false,
+      "original_historic_snapshot_verified": false
+    },
+    {
+      "id": "S08",
+      "title": "KAP A1CAP correction1665519",
+      "url": "https://www.kap.org.tr/tr/Bildirim/1665519",
+      "primary": true,
+      "checked_date_utc": "2026-10-03",
+      "retrieval_refs": [
+        "turn172view1"
+      ],
+      "document_or_page_date": "2026-09-18",
+      "source_reported_submission_timestamp_raw": "18.09.2026 18:13:26",
+      "timestamp_timezone_verified": false,
+      "historical_available_at": null,
+      "availability_provenance": "UNKNOWN",
+      "app_ingested_at": null,
+      "review_depth": "Metadata, correction flags and substantive Turkish disclosure, lines73-138; previous disclosure text not retrieved",
+      "legal_guidance": false,
+      "original_historic_snapshot_verified": false
+    },
+    {
+      "id": "S09",
+      "title": "SPK order/process clarification",
+      "url": "https://spk.gov.tr/duyurular/basin-duyurulari/2026/tasfiye-suresine-iliskin-basin-duyurusu",
+      "primary": true,
+      "checked_date_utc": "2026-10-03",
+      "retrieval_refs": [
+        "turn161view2",
+        "turn166view0"
+      ],
+      "document_or_page_date": "2026-09-28",
+      "source_reported_submission_timestamp_raw": null,
+      "timestamp_timezone_verified": false,
+      "historical_available_at": null,
+      "availability_provenance": "UNKNOWN",
+      "app_ingested_at": null,
+      "review_depth": "Complete substantive notice, lines62-71",
+      "legal_guidance": false,
+      "original_historic_snapshot_verified": false
+    },
+    {
+      "id": "S10",
+      "title": "SPK interim payment notice",
+      "url": "https://spk.gov.tr/duyurular/basin-duyurulari/2026/tasfiyedeki-fonlara-iliskin-ara-odeme-duyurusu",
+      "primary": true,
+      "checked_date_utc": "2026-10-03",
+      "retrieval_refs": [
+        "turn161view3",
+        "turn166view1"
+      ],
+      "document_or_page_date": "2026-10-01",
+      "source_reported_submission_timestamp_raw": null,
+      "timestamp_timezone_verified": false,
+      "historical_available_at": null,
+      "availability_provenance": "UNKNOWN",
+      "app_ingested_at": null,
+      "review_depth": "Complete substantive notice, lines62-71",
+      "legal_guidance": false,
+      "original_historic_snapshot_verified": false
+    },
+    {
+      "id": "S11",
+      "title": "SPK A1Capital Bulls Pardus process notice",
+      "url": "https://spk.gov.tr/duyurular/basin-duyurulari/2026/a1-capital-portfoy-yonetimi-a-s-bulls-portfoy-yonetimi-a-s-ve-pardus-portfoy-yonetimi-a-s-nin-kurucusu-oldugu-fonlara-iliskin-tasfiye-sureci-hakkinda-duyuru",
+      "primary": true,
+      "checked_date_utc": "2026-10-03",
+      "retrieval_refs": [
+        "turn172view5",
+        "turn177view2"
+      ],
+      "document_or_page_date": "2026-10-01",
+      "source_reported_submission_timestamp_raw": null,
+      "timestamp_timezone_verified": false,
+      "historical_available_at": null,
+      "availability_provenance": "UNKNOWN",
+      "app_ingested_at": null,
+      "review_depth": "Complete substantive notice, lines62-71",
+      "legal_guidance": false,
+      "original_historic_snapshot_verified": false
+    },
+    {
+      "id": "S12",
+      "title": "KAP AGROT financial amendment1648456",
+      "url": "https://www.kap.org.tr/tr/Bildirim/1648456",
+      "primary": true,
+      "checked_date_utc": "2026-10-03",
+      "retrieval_refs": [
+        "turn183view0",
+        "turn185view0"
+      ],
+      "document_or_page_date": "2026-08-12",
+      "source_reported_submission_timestamp_raw": "12.08.2026 15:40:23",
+      "timestamp_timezone_verified": false,
+      "historical_available_at": null,
+      "availability_provenance": "UNKNOWN",
+      "app_ingested_at": null,
+      "review_depth": "Metadata/flags and substantive amendment notice, lines73-147; original and later revised reports not retrieved",
+      "legal_guidance": false,
+      "original_historic_snapshot_verified": false
+    },
+    {
+      "id": "S13",
+      "title": "KAP ISKPL unusual price volume disclosure1634635",
+      "url": "https://www.kap.org.tr/tr/Bildirim/1634635",
+      "primary": true,
+      "checked_date_utc": "2026-10-03",
+      "retrieval_refs": [
+        "turn183view1",
+        "turn185view1"
+      ],
+      "document_or_page_date": "2026-07-17",
+      "source_reported_submission_timestamp_raw": "17.07.2026 18:42:25",
+      "timestamp_timezone_verified": false,
+      "historical_available_at": null,
+      "availability_provenance": "UNKNOWN",
+      "app_ingested_at": null,
+      "review_depth": "Metadata/flags and substantive notice, lines73-131; underlying BIST letter and price series not retrieved",
+      "legal_guidance": false,
+      "original_historic_snapshot_verified": false
+    }
+  ],
+  "date_conflicts": [
+    {
+      "source_id": "S03",
+      "pdf_and_decision_date": "2026-08-28",
+      "official_index_source_id": "S04",
+      "official_index_publication_label": "2026-08-29",
+      "resolution": "Preserved distinct date roles; no exact historical availability inferred"
+    }
+  ],
+  "limits": [
+    "KAP timestamps are raw displayed submission metadata without a timezone in reviewed content, not invented UTC availability instants.",
+    "Current retrieval does not prove historical first public access or original text/revision.",
+    "No source admitted as a validated production replay bundle.",
+    "A1CAP prior notice was not compared; correction flag establishes a link, not the exact corrected words.",
+    "Payment/process announcements do not prove completed payment or final recovery/loss.",
+    "Three selected episodes and multiple same-episode notices do not establish anomaly frequency, detection precision, alert burden, investor harm or paying demand.",
+    "No financial outcome counterfactual, avoided-loss calculation, live integration, legal/security review or app test performed."
+  ],
+  "frequency_study_required": [
+    "Declared universe/time window",
+    "Eligible asset or fund day denominator and coverage gaps",
+    "Distinct event definitions and immutable source/revision time",
+    "Episode deduplication and ordinary/noevent periods",
+    "Independent labels separating official action, statistical signal, correction and harm"
+  ],
+  "local_context": [
+    {
+      "file": "AGENTS.md",
+      "depth": "FULL_CURRENT_READ"
+    },
+    {
+      "file": "docs/02_Problem_Analysis_and_Opportunity.md",
+      "depth": "SELECTED_RELEVANT_SECTIONS"
+    },
+    {
+      "file": "research/data_sources_verification.json",
+      "depth": "SELECTED_EXISTING_SPK_SOURCE_ROUTING"
+    }
+  ],
+  "scope_preserved": {
+    "markets": [
+      "BIST",
+      "TURKISH_FUNDS",
+      "CRYPTO",
+      "US"
+    ],
+    "meaningful_onchain_required": true,
+    "budget_ceiling_try": 5000,
+    "G01": "UNRESOLVED",
+    "shared_docs_contracts_edited": false,
+    "external_actions": 0
+  },
+  "validation": "Structural artifact checks only; no runtime or historical-performance test"
+}

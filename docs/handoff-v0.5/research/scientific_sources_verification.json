@@ -1,0 +1,466 @@
+{
+  "audit_date": "2026-10-02",
+  "scope": "Research references R01–R15; primary source metadata and targeted content inspection; no empirical product validation.",
+  "root_citation_instruction": "Root must reopen/search each cited primary source before using source refs in final user response.",
+  "rows": [
+    {
+      "id": "R01",
+      "metadata_status": "verified_from_primary_excerpts",
+      "authors": [
+        "Rama Cont"
+      ],
+      "year": 2001,
+      "venue": "Quantitative Finance",
+      "volume": "1",
+      "issue": "2",
+      "pages": "223–236",
+      "doi": "10.1080/713665670",
+      "requested_url": "https://www.tandfonline.com/doi/abs/10.1080/713665670",
+      "primary_urls": [
+        "https://www.tandfonline.com/doi/abs/10.1080/713665670",
+        "https://rama.cont.perso.math.cnrs.fr/",
+        "https://rama.cont.perso.math.cnrs.fr/pdf/empirical.pdf"
+      ],
+      "refs": [
+        "turn4search4",
+        "turn22search8",
+        "turn25search0"
+      ],
+      "depth": "Publisher metadata and author manuscript indexed abstract excerpts only; no body read.",
+      "support": "Financial stylized facts and heavy tails support contextual motivation, not the exact MAD detector.",
+      "failures": [
+        "Publisher abstract HTTP403 (turn0view0).",
+        "Author manuscript timeout/502 (turn7view0, turn16view1, turn37view0).",
+        "Publisher full URL inaccessible (turn37view1)."
+      ],
+      "retrieved_on": "2026-10-02",
+      "primary_sources_only": true,
+      "scientific_validation_claimed": false
+    },
+    {
+      "id": "R02",
+      "metadata_status": "verified",
+      "authors": [
+        "Torben G. Andersen",
+        "Tim Bollerslev"
+      ],
+      "year": 1997,
+      "venue": "Journal of Empirical Finance",
+      "volume": "4",
+      "issue": "2–3",
+      "pages": "115–158",
+      "doi": "10.1016/S0927-5398(97)00004-2",
+      "requested_url": "https://www.sciencedirect.com/science/article/pii/S0927539897000042",
+      "primary_urls": [
+        "https://www.sciencedirect.com/science/article/pii/S0927539897000042",
+        "https://www.kellogg.northwestern.edu/academics-research/research/detail/1997/intraday-periodicity-and-volatility-persistence-in-financial-markets/"
+      ],
+      "refs": [
+        "turn25search3",
+        "turn7view2"
+      ],
+      "depth": "Author-institution abstract and metadata; publisher indexed metadata; no full text.",
+      "support": "Intraday volatility periodicity motivates matching session slots, not RVOL3 or 20 observations.",
+      "failures": [
+        "Publisher direct HTTP403 (turn0view1)."
+      ],
+      "retrieved_on": "2026-10-02",
+      "primary_sources_only": true,
+      "scientific_validation_claimed": false
+    },
+    {
+      "id": "R03",
+      "metadata_status": "verified",
+      "authors": [
+        "Fei Tony Liu",
+        "Kai Ming Ting",
+        "Zhi-Hua Zhou"
+      ],
+      "year": 2008,
+      "venue": "2008 Eighth IEEE International Conference on Data Mining",
+      "doi": "10.1109/ICDM.2008.17",
+      "requested_url": "https://ieeexplore.ieee.org/document/4781136",
+      "primary_urls": [
+        "https://ieeexplore.ieee.org/document/4781136",
+        "https://cs.nju.edu.cn/zhouzh/zhouzh.files/publication/icdm08b.pdf"
+      ],
+      "refs": [
+        "turn4search10",
+        "turn36view0",
+        "turn40search0"
+      ],
+      "depth": "Publisher conference-date excerpt; author PDF abstract/introduction selectively inspected (first two pages), not exhaustive methods/experiments.",
+      "support": "Isolation trees and shorter paths motivate unsupervised anomaly challenger; no market-abuse probability.",
+      "failures": [
+        "IEEE JavaScript robot wall (turn0view2).",
+        "LAMDA alternate PDF timeout (turn7view1,turn16view0)."
+      ],
+      "metadata_note": "DOI confirmed by primary IEEE indexed record. Precise proceedings pagination was not independently recovered in this audit; obtain publisher export before populating it.",
+      "retrieved_on": "2026-10-02",
+      "primary_sources_only": true,
+      "scientific_validation_claimed": false
+    },
+    {
+      "id": "R04",
+      "metadata_status": "verified",
+      "authors": [
+        "Ryan Prescott Adams",
+        "David J. C. MacKay"
+      ],
+      "year": 2007,
+      "venue": "arXiv preprint",
+      "identifier": "0710.3742v1",
+      "doi": "10.48550/arXiv.0710.3742",
+      "requested_url": "https://arxiv.org/abs/0710.3742",
+      "primary_urls": [
+        "https://arxiv.org/abs/0710.3742"
+      ],
+      "refs": [
+        "turn0view3"
+      ],
+      "depth": "Author abstract and submission history.",
+      "support": "Run-length posterior via online message passing; assumptions require separate likelihood/hazard implementation review.",
+      "failures": [],
+      "retrieved_on": "2026-10-02",
+      "primary_sources_only": true,
+      "scientific_validation_claimed": false
+    },
+    {
+      "id": "R05",
+      "metadata_status": "verified",
+      "authors": [
+        "Charles Truong",
+        "Laurent Oudre",
+        "Nicolas Vayatis"
+      ],
+      "year": 2020,
+      "venue": "Signal Processing",
+      "volume": "167",
+      "article_number": "107299",
+      "doi": "10.1016/j.sigpro.2019.107299",
+      "identifier": "1801.00718v3",
+      "requested_url": "https://arxiv.org/abs/1801.00718",
+      "primary_urls": [
+        "https://arxiv.org/abs/1801.00718"
+      ],
+      "refs": [
+        "turn0view4"
+      ],
+      "depth": "Author abstract, journal reference and revision history.",
+      "support": "Offline survey organized by cost/search/change-count constraints; does not validate live causal detection.",
+      "failures": [],
+      "retrieved_on": "2026-10-02",
+      "primary_sources_only": true,
+      "scientific_validation_claimed": false
+    },
+    {
+      "id": "R06",
+      "metadata_status": "verified_version_correction_required",
+      "authors": [
+        "Renjie Wu",
+        "Eamonn J. Keogh"
+      ],
+      "year": 2023,
+      "early_access_year": 2021,
+      "venue": "IEEE Transactions on Knowledge and Data Engineering",
+      "volume": "35",
+      "issue": "3",
+      "pages": "2421–2429",
+      "doi": "10.1109/TKDE.2021.3112126",
+      "identifier": "2009.13807v5",
+      "requested_url": "https://arxiv.org/abs/2009.13807",
+      "primary_urls": [
+        "https://arxiv.org/abs/2009.13807",
+        "https://ieeexplore.ieee.org/document/9537291/"
+      ],
+      "refs": [
+        "turn2view0",
+        "turn25search2"
+      ],
+      "depth": "Author abstract, revision history and journal/ICDE distinction; publisher indexed final issue metadata; no full-text critique replication.",
+      "support": "Benchmark flaws motivate negative controls and careful matching, not labels for Project50K.",
+      "failures": [
+        "IEEE robot wall (turn20view2); DOI direct inaccessible (turn8view0)."
+      ],
+      "correction": "Distinguish 2021 early access, final March2023 TKDE35(3),2022 arXiv revision, and separate ICDE2022 extended abstract.",
+      "retrieved_on": "2026-10-02",
+      "primary_sources_only": true,
+      "scientific_validation_claimed": false
+    },
+    {
+      "id": "R07",
+      "metadata_status": "verified",
+      "authors": [
+        "Chuan Guo",
+        "Geoff Pleiss",
+        "Yu Sun",
+        "Kilian Q. Weinberger"
+      ],
+      "year": 2017,
+      "venue": "Proceedings of the 34th International Conference on Machine Learning",
+      "series": "PMLR",
+      "volume": "70",
+      "pages": "1321–1330",
+      "requested_url": "https://proceedings.mlr.press/v70/guo17a.html",
+      "primary_urls": [
+        "https://proceedings.mlr.press/v70/guo17a.html"
+      ],
+      "refs": [
+        "turn2view1"
+      ],
+      "depth": "Proceedings abstract and supplied BibTeX.",
+      "support": "Calibration studied in image/document classifiers; temperature scaling does not calibrate a hand-designed evidence rubric.",
+      "failures": [],
+      "retrieved_on": "2026-10-02",
+      "primary_sources_only": true,
+      "scientific_validation_claimed": false
+    },
+    {
+      "id": "R08",
+      "metadata_status": "verified",
+      "authors": [
+        "Rina Foygel Barber",
+        "Emmanuel J. Candès",
+        "Aaditya Ramdas",
+        "Ryan J. Tibshirani"
+      ],
+      "year": 2023,
+      "preprint_year": 2022,
+      "venue": "Annals of Statistics",
+      "volume": "51",
+      "issue": "2",
+      "pages": "816–845",
+      "doi": "10.1214/23-AOS2276",
+      "identifier": "2202.13415v5",
+      "requested_url": "https://arxiv.org/abs/2202.13415",
+      "primary_urls": [
+        "https://arxiv.org/abs/2202.13415",
+        "https://projecteuclid.org/journals/annals-of-statistics/volume-51/issue-2/Conformal-prediction-beyond-exchangeability/10.1214/23-AOS2276.short"
+      ],
+      "refs": [
+        "turn2view2",
+        "turn15search1"
+      ],
+      "depth": "Author abstract/revision history; primary publisher indexed journal metadata.",
+      "support": "Drift-aware predictive coverage remains assumption-bound; no financial95% guarantee.",
+      "failures": [
+        "Euclid direct page iframe only (turn20view1)."
+      ],
+      "retrieved_on": "2026-10-02",
+      "primary_sources_only": true,
+      "scientific_validation_claimed": false
+    },
+    {
+      "id": "R09",
+      "metadata_status": "verified_metadata_content_depth_limited",
+      "authors": [
+        "Yoav Benjamini",
+        "Yosef Hochberg"
+      ],
+      "year": 1995,
+      "venue": "Journal of the Royal Statistical Society Series B",
+      "volume": "57",
+      "issue": "1",
+      "pages": "289–300",
+      "doi": "10.1111/j.2517-6161.1995.tb02031.x",
+      "requested_url": "https://academic.oup.com/jrsssb/article/57/1/289/7035855",
+      "primary_urls": [
+        "https://academic.oup.com/jrsssb/article/57/1/289/7035855",
+        "https://cris.tau.ac.il/en/publications/controlling-the-false-discovery-rate-a-practical-and-powerful-app-2/",
+        "https://www.math.tau.ac.il/~ybenja/MyPapers/benjamini_hochberg1995.pdf"
+      ],
+      "refs": [
+        "turn4search3",
+        "turn36view1",
+        "turn20view0"
+      ],
+      "depth": "Publisher title excerpt and author-institution publication metadata. Author-hosted13-page PDF retrieved; text extraction empty; screenshots attempted. Do not claim full text read.",
+      "support": "Multiple-testing background; no asserted validity of project p-values/FDR control.",
+      "failures": [
+        "Publisher redirected to inaccessible CDN (turn2view3).",
+        "JSTOR no article text (turn7view3).",
+        "Author PDF returned zero parsed lines (turn20view0)."
+      ],
+      "retrieved_on": "2026-10-02",
+      "primary_sources_only": true,
+      "scientific_validation_claimed": false
+    },
+    {
+      "id": "R10",
+      "metadata_status": "verified",
+      "authors": [
+        "Erik R. Sirri",
+        "Peter Tufano"
+      ],
+      "year": 1998,
+      "venue": "Journal of Finance",
+      "volume": "53",
+      "issue": "5",
+      "pages": "1589–1622",
+      "doi": "10.1111/0022-1082.00066",
+      "requested_url": "https://onlinelibrary.wiley.com/doi/10.1111/0022-1082.00066",
+      "primary_urls": [
+        "https://onlinelibrary.wiley.com/doi/10.1111/0022-1082.00066"
+      ],
+      "refs": [
+        "turn16view3"
+      ],
+      "depth": "Publisher abstract and journal issue citation; not full article.",
+      "support": "Asymmetric flows/performance/search costs, not holdings-concentration thresholds or exact project NAV/distribution convention.",
+      "failures": [],
+      "metadata_note": "Web page's2002 online-first field is distinct from journal issue October1998.",
+      "retrieved_on": "2026-10-02",
+      "primary_sources_only": true,
+      "scientific_validation_claimed": false
+    },
+    {
+      "id": "R11",
+      "metadata_status": "verified",
+      "authors": [
+        "Josh Kamps",
+        "Bennett Kleinberg"
+      ],
+      "year": 2018,
+      "venue": "Crime Science",
+      "volume": "7",
+      "article_number": "18",
+      "doi": "10.1186/s40163-018-0093-5",
+      "requested_url": "https://link.springer.com/article/10.1186/s40163-018-0093-5",
+      "primary_urls": [
+        "https://link.springer.com/article/10.1186/s40163-018-0093-5"
+      ],
+      "refs": [
+        "turn1view0",
+        "turn8view2"
+      ],
+      "depth": "Accessible article metadata; method, selected results/cases and limitations inspected; no exhaustive full-article claim.",
+      "support": "Price/volume screening is parameter-sensitive; retrospective dips and selected confirmed cases are not contemporaneous predictive accuracy.",
+      "failures": [],
+      "retrieved_on": "2026-10-02",
+      "primary_sources_only": true,
+      "scientific_validation_claimed": false
+    },
+    {
+      "id": "R12",
+      "metadata_status": "verified",
+      "authors": [
+        "Jiahua Xu",
+        "Benjamin Livshits"
+      ],
+      "year": 2019,
+      "venue": "28th USENIX Security Symposium",
+      "pages": "1609–1625",
+      "requested_url": "https://www.usenix.org/conference/usenixsecurity19/presentation/xu-jiahua",
+      "primary_urls": [
+        "https://www.usenix.org/conference/usenixsecurity19/presentation/xu-jiahua",
+        "https://www.usenix.org/system/files/sec19-xu-jiahua_0.pdf"
+      ],
+      "refs": [
+        "turn9view0",
+        "turn21view0",
+        "turn31view1"
+      ],
+      "depth": "Conference abstract/BibTeX and PDF introduction, case-study excerpt and data-collection section4.1 selectively inspected.",
+      "support": "Telegram-coordinated exchange pump events support the information-gap caveat; not validation for on-chain transfer/unlock signals.",
+      "failures": [],
+      "retrieved_on": "2026-10-02",
+      "primary_sources_only": true,
+      "scientific_validation_claimed": false
+    },
+    {
+      "id": "R13",
+      "metadata_status": "verified",
+      "authors": [
+        "Patrick Lewis",
+        "Ethan Perez",
+        "Aleksandra Piktus",
+        "Fabio Petroni",
+        "Vladimir Karpukhin",
+        "Naman Goyal",
+        "Heinrich Küttler",
+        "Mike Lewis",
+        "Wen-tau Yih",
+        "Tim Rocktäschel",
+        "Sebastian Riedel",
+        "Douwe Kiela"
+      ],
+      "year": 2020,
+      "venue": "NeurIPS",
+      "identifier": "2005.11401v4",
+      "doi": "10.48550/arXiv.2005.11401",
+      "requested_url": "https://arxiv.org/abs/2005.11401",
+      "primary_urls": [
+        "https://arxiv.org/abs/2005.11401"
+      ],
+      "refs": [
+        "turn9view1"
+      ],
+      "depth": "Author abstract, full author list, acceptance note and revisions.",
+      "support": "Retrieval-augmented generation and task comparisons support architecture concept, not guaranteed truth.",
+      "failures": [],
+      "retrieved_on": "2026-10-02",
+      "primary_sources_only": true,
+      "scientific_validation_claimed": false
+    },
+    {
+      "id": "R14",
+      "metadata_status": "verified",
+      "authors": [
+        "Shunyu Yao",
+        "Jeffrey Zhao",
+        "Dian Yu",
+        "Nan Du",
+        "Izhak Shafran",
+        "Karthik Narasimhan",
+        "Yuan Cao"
+      ],
+      "year": 2023,
+      "preprint_year": 2022,
+      "venue": "ICLR",
+      "identifier": "2210.03629v3",
+      "doi": "10.48550/arXiv.2210.03629",
+      "requested_url": "https://arxiv.org/abs/2210.03629",
+      "primary_urls": [
+        "https://arxiv.org/abs/2210.03629"
+      ],
+      "refs": [
+        "turn9view2"
+      ],
+      "depth": "Author abstract, full author list and ICLR-camera-ready revision note.",
+      "support": "Interleaved reasoning/actions in generic tasks motivate bounded tools; not financial accuracy or safety evidence.",
+      "failures": [],
+      "retrieved_on": "2026-10-02",
+      "primary_sources_only": true,
+      "scientific_validation_claimed": false
+    },
+    {
+      "id": "R15",
+      "metadata_status": "verified",
+      "authors": [
+        "Tianyu Gao",
+        "Howard Yen",
+        "Jiatong Yu",
+        "Danqi Chen"
+      ],
+      "year": 2023,
+      "venue": "EMNLP",
+      "pages": "6465–6488",
+      "doi": "10.18653/v1/2023.emnlp-main.398",
+      "requested_url": "https://aclanthology.org/2023.emnlp-main.398/",
+      "primary_urls": [
+        "https://aclanthology.org/2023.emnlp-main.398/",
+        "https://aclanthology.org/2023.emnlp-main.398.pdf"
+      ],
+      "refs": [
+        "turn16view2",
+        "turn31view2"
+      ],
+      "depth": "Proceedings abstract and BibTeX; PDF§3.3, human-evaluation excerpts, appendixE and metric limitations selectively inspected.",
+      "support": "Citation recall and precision should be measured separately; automated partial-support errors remain and Turkish performance needs local adjudication.",
+      "failures": [],
+      "retrieved_on": "2026-10-02",
+      "primary_sources_only": true,
+      "scientific_validation_claimed": false
+    }
+  ]
+}

@@ -1,0 +1,411 @@
+{
+  "schema_version": "1.0",
+  "retrieved_on": "2026-10-03",
+  "scope": "Limited primary empirical US/crypto literature and original incident evidence; no new market backtest.",
+  "sources": [
+    {
+      "id": "CF-S01",
+      "title": "Stock price jumps: news and volume play a minor role",
+      "authors": [
+        "Armand Joulin",
+        "Augustin Lefevre",
+        "Daniel Grunberg",
+        "Jean-Philippe Bouchaud"
+      ],
+      "type": "original empirical preprint",
+      "publication_date": "2008-03-12",
+      "identifier": "arXiv:0803.1769v1",
+      "urls": [
+        "https://arxiv.org/abs/0803.1769",
+        "https://arxiv.org/pdf/0803.1769"
+      ],
+      "source_ref_ids": [
+        "turn160view0",
+        "turn175view1",
+        "turn181view6",
+        "turn208view2"
+      ],
+      "retrieval_date": "2026-10-03",
+      "verification_status": "selected original text inspected; no raw-data replication",
+      "content_depth": {
+        "pages_read_selected": [
+          "2-3",
+          "8-10"
+        ],
+        "pdf_page_count": 14,
+        "lines": [
+          "45-104",
+          "339-395"
+        ],
+        "full_text_review": false
+      },
+      "empirical_period": {
+        "start": "2005-11-28",
+        "end": "2006-06-30",
+        "reported_trading_days": 149
+      },
+      "unit": "one-minute return threshold crossings",
+      "denominator": {
+        "complete_subset_stocks": 163,
+        "count_paragraph_stocks": 166,
+        "internal_inconsistency": true
+      },
+      "definition": "Absolute one-minute return exceeds s times 120-minute mean absolute return; s=4 reported count. Not four standard deviations.",
+      "observed": {
+        "threshold_s": 4,
+        "crossings": 177674,
+        "author_approximate_crossings_per_stock_day": "7-8",
+        "s8_count_reduction_approximate_factor": 10
+      },
+      "limitations": [
+        "Stock denominator is internally inconsistent; exact independent normalized rate not established.",
+        "Repeated minute flags are not distinct harmful or actionable episodes.",
+        "Historical restricted sample; no Project 50K threshold validation.",
+        "PDF prints November 26, 2024 although arXiv v1 metadata is March 12, 2008; discrepancy preserved.",
+        "Inspected text specifies a 120-minute flat moving average but does not establish one-sided/trailing orientation."
+      ],
+      "verification_failures": [],
+      "causal_status": "Liquidity micro-crisis interpretation is conjectural; no incidence of verified causes measured."
+    },
+    {
+      "id": "CF-S02",
+      "title": "Understanding temporal dynamics of jumps in cryptocurrency markets: evidence from tick-by-tick data",
+      "authors": [
+        "Danial Saef",
+        "Odett Nagy",
+        "Sergej Sizov",
+        "Wolfgang Karl Härdle"
+      ],
+      "type": "original empirical journal article",
+      "publication_date": "2024-08-08",
+      "journal": "Digital Finance",
+      "volume": 6,
+      "pages": "605-638",
+      "doi": "10.1007/s42521-024-00116-1",
+      "urls": [
+        "https://link.springer.com/article/10.1007/s42521-024-00116-1",
+        "https://link.springer.com/content/pdf/10.1007/s42521-024-00116-1.pdf"
+      ],
+      "source_ref_ids": [
+        "turn175view0",
+        "turn184view0",
+        "turn189view0",
+        "turn190view1",
+        "turn190view2",
+        "turn208view0",
+        "turn209view0",
+        "turn209view1",
+        "turn209view2"
+      ],
+      "retrieval_date": "2026-10-03",
+      "verification_status": "publisher selected text and exact Table 4 inspected; no tick-data replication",
+      "content_depth": {
+        "sections_read_selected": [
+          "introduction",
+          "jump-testing description",
+          "4 Data",
+          "5.1 Overview",
+          "5.2 Crypto market microstructure and jump testing",
+          "Table 4"
+        ],
+        "table_4_pdf_page_one_based": 23,
+        "table_4_text_lines": "882-889",
+        "pdf_page_count": 37,
+        "full_text_review": false
+      },
+      "empirical_period": {
+        "start": "2019-04-12",
+        "end": "2021-09-27"
+      },
+      "unit": "detected econometric jumps; eligible test days",
+      "definition": "Lee-Mykland noise-adjusted moment detections accepted only on days also passing Ait-Sahalia-Jacod-Li jump test, with multiple-testing adjustment and eligibility filters.",
+      "denominator": "Per-currency eligible test days after sampling/completeness filters, not all calendar days or all cryptocurrencies.",
+      "venues": [
+        "Binance",
+        "Bitfinex",
+        "Bitstamp",
+        "Coinbase Pro",
+        "HitBTC",
+        "OKex",
+        "Poloniex"
+      ],
+      "trade_quote": "Tether",
+      "observed": {
+        "total_detected_jumps": 1392,
+        "table_4_rows": [
+          {
+            "symbol": "BTC",
+            "n_jumps": 499,
+            "n_test_days": 865,
+            "table_percent_label": 57.69
+          },
+          {
+            "symbol": "ETH",
+            "n_jumps": 277,
+            "n_test_days": 865,
+            "table_percent_label": 32.02
+          },
+          {
+            "symbol": "BCH",
+            "n_jumps": 194,
+            "n_test_days": 858,
+            "table_percent_label": 22.61
+          },
+          {
+            "symbol": "XRP",
+            "n_jumps": 169,
+            "n_test_days": 865,
+            "table_percent_label": 19.54
+          },
+          {
+            "symbol": "ETC",
+            "n_jumps": 145,
+            "n_test_days": 793,
+            "table_percent_label": 18.28
+          },
+          {
+            "symbol": "LTC",
+            "n_jumps": 108,
+            "n_test_days": 861,
+            "table_percent_label": 12.54
+          }
+        ],
+        "safe_ratio_unit": "detected jumps per 100 eligible test days",
+        "verified_probability_of_at_least_one_jump_per_day": null
+      },
+      "limitations": [
+        "Introduction describes 58%/32% of days; Table 4 numerator is N jumps. Distinct jump-date counts not reconciled here; do not convert event/day ratio to probability.",
+        "Eligibility excludes incomplete/illiquid asset-days; aggregation and microstructure affect detection.",
+        "Historical econometric events do not measure usefulness, causes, fraud or local detector incidence."
+      ],
+      "correction": {
+        "url": "https://link.springer.com/article/10.1007/s42521-025-00131-w",
+        "doi": "10.1007/s42521-025-00131-w",
+        "date": "2025-05-06",
+        "source_ref_ids": [
+          "turn184view2",
+          "turn186view0"
+        ],
+        "content_read": "Correction text: missing IDA Institute Digital Assets, Bucharest affiliation. No numerical correction stated."
+      },
+      "verification_failures": [
+        {
+          "url": "https://link.springer.com/article/10.1007/s42521-024-00116-1/tables/4",
+          "source_ref_id": "turn188view0",
+          "failure": "Direct HTML table retrieval returned internal error; article anchor did not expose cells. Exact table recovered from publisher PDF."
+        }
+      ]
+    },
+    {
+      "id": "CF-S03",
+      "title": "Crypto Wash Trading",
+      "authors": [
+        "Lin William Cong",
+        "Xi Li",
+        "Ke Tang",
+        "Yang Yang"
+      ],
+      "type": "original empirical working-paper draft",
+      "version_reviewed": "July 2021 draft; first draft December 2019",
+      "identifier": "arXiv:2108.10984",
+      "urls": [
+        "https://arxiv.org/pdf/2108.10984"
+      ],
+      "source_ref_ids": [
+        "turn160view1",
+        "turn175view2",
+        "turn184view1",
+        "turn181view3"
+      ],
+      "retrieval_date": "2026-10-03",
+      "verification_status": "selected original draft data and exact Table 7 inspected; no re-estimation",
+      "content_depth": {
+        "pages_read_selected": [
+          "4 sample-selection paragraph",
+          "9-10 data",
+          "46 Table 7 and notes"
+        ],
+        "pdf_page_count": 62,
+        "full_text_review": false
+      },
+      "empirical_period": {
+        "start": "2019-07-09",
+        "end": "2019-11-03"
+      },
+      "unit": "estimated wash share of reported trade value",
+      "denominator": {
+        "selected_exchanges": 29,
+        "historically_classified_unregulated_exchanges": 26,
+        "coins": [
+          "BTC",
+          "ETH",
+          "LTC",
+          "XRP"
+        ],
+        "quote": "USD or USDT",
+        "final_sample_transactions": 448475535
+      },
+      "observed": {
+        "table_7_unregulated_volume_weighted_wash_percent_without_controls": 77.5,
+        "table_7_unregulated_volume_weighted_wash_percent_with_controls": 71.43
+      },
+      "limitations": [
+        "Selected historical API-compatible/publicized exchanges, not a representative present-day crypto census.",
+        "Model-estimated value share, not episode count, transaction-fraud probability or individual legal finding.",
+        "Reported volume reliability does not establish the project RVOL trigger frequency."
+      ],
+      "verification_failures": []
+    },
+    {
+      "id": "CF-S04",
+      "title": "$2.2 Billion Stolen from Crypto Platforms in 2024, but Hacked Volumes Stagnate Toward Year-End as DPRK Slows Activity Post-July",
+      "authors": [
+        "Chainalysis Team"
+      ],
+      "type": "original commercial incident analysis",
+      "publication_date": "2024-12-19",
+      "urls": [
+        "https://www.chainalysis.com/blog/crypto-hacking-stolen-funds-2025/"
+      ],
+      "source_ref_ids": [
+        "turn160view2",
+        "turn170view2",
+        "turn170view3",
+        "turn181view4"
+      ],
+      "retrieval_date": "2026-10-03",
+      "verification_status": "original public report selected count/timing text inspected",
+      "content_depth": {
+        "selected_text_lines": "109-144",
+        "full_text_review": false,
+        "gated_annual_report_read": false
+      },
+      "empirical_period": {
+        "label": "2024 year-to-report snapshot",
+        "report_as_of": "2024-12-19",
+        "completed_calendar_year": false
+      },
+      "unit": "identified hacking incidents",
+      "denominator": "Vendor identified incident records; exposed-platform/wallet/transaction denominator not supplied.",
+      "observed": {
+        "reported_2024_incidents": 303,
+        "reported_2023_incidents": 282
+      },
+      "limitations": [
+        "Pre-year-end count; completeness, revisions and detection/reporting selection unresolved.",
+        "Original vendor research, not an independently audited census.",
+        "No per-token risk or large-transfer/contract-change anomaly frequency follows."
+      ],
+      "verification_failures": []
+    },
+    {
+      "id": "CF-S05",
+      "title": "Findings Regarding the Market Events of May 6, 2010: Report of the Staffs of the CFTC and SEC to the Joint Advisory Committee on Emerging Regulatory Issues",
+      "authors": [
+        "Staffs of the CFTC and SEC"
+      ],
+      "type": "official original staff investigation",
+      "publication_date": "2010-09-30",
+      "urls": [
+        "https://www.sec.gov/files/marketevents-report.pdf"
+      ],
+      "source_ref_ids": [
+        "turn160view3",
+        "turn175view3",
+        "turn181view5",
+        "turn190view3"
+      ],
+      "retrieval_date": "2026-10-03",
+      "verification_status": "official staff report selected executive summary/timing inspected",
+      "content_depth": {
+        "pages_read_selected": [
+          "cover",
+          "executive summary page 1 (PDF page 4)",
+          "selected episode timing"
+        ],
+        "selected_text_lines": [
+          "77-90",
+          "282-285"
+        ],
+        "pdf_page_count": 104,
+        "full_text_review": false
+      },
+      "empirical_period": {
+        "date": "2010-05-06",
+        "time_start": "14:40",
+        "time_end": "15:00",
+        "timezone": "America/New_York"
+      },
+      "unit": "executions inside one investigated market episode",
+      "denominator": "One selected 20-minute episode, not a recurrence population.",
+      "observed": {
+        "executions_lower_bound_exclusive": 20000,
+        "securities_lower_bound_exclusive": 300,
+        "distance_from_1440_price_percent_at_least": 60,
+        "trades_later_cancelled": true
+      },
+      "limitations": [
+        "Executions are dependent observations within one episode.",
+        "No recurring incident rate or realized loss rate.",
+        "Staff analysis; not a full causal audit here."
+      ],
+      "verification_failures": []
+    }
+  ],
+  "catalog_coverage": {
+    "catalog_file": "docs/12_Anomaly_Catalog.md",
+    "catalog_ids": [
+      "AN-MKT-001",
+      "AN-MKT-002",
+      "AN-MKT-003",
+      "AN-MKT-004",
+      "AN-MKT-005",
+      "AN-MKT-006",
+      "AN-MKT-007",
+      "AN-FND-001",
+      "AN-FND-002",
+      "AN-FND-003",
+      "AN-FND-004",
+      "AN-FND-005",
+      "AN-FND-006",
+      "AN-FND-007",
+      "AN-EVT-001",
+      "AN-EVT-002",
+      "AN-EVT-003",
+      "AN-EVT-004",
+      "AN-ONC-001",
+      "AN-ONC-002",
+      "AN-ONC-003",
+      "AN-ONC-004",
+      "AN-ONC-005",
+      "AN-CMP-001",
+      "AN-CMP-002",
+      "AN-DQ-001",
+      "AN-DQ-002",
+      "AN-DQ-003"
+    ],
+    "validation_frequency_established": false,
+    "point_in_time_raw_market_universe_obtained": false,
+    "current_2026_rate_established": false
+  },
+  "unmeasured_outcomes": [
+    "Project threshold-crossing rates",
+    "clustered actionable-event rate",
+    "causally explained-event rate",
+    "harm sensitivity",
+    "false-alert burden",
+    "abstention and omission coverage",
+    "user attention saved",
+    "paid demand"
+  ],
+  "prohibited_transfers": [
+    "Gaussian four-sigma probability to financial event frequency",
+    "synthetic pass rates to observed market rates",
+    "jump counts divided by eligible days to verified jump-day probability without unique-date reconciliation",
+    "volume-value share to episode or fraud probability",
+    "preliminary hack count to per-token annual risk",
+    "one severe episode to recurring market rate"
+  ],
+  "paid_data_access": false,
+  "llm_provider_calls": false
+}

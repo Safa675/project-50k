@@ -1,0 +1,236 @@
+{
+  "date": "2026-10-02",
+  "status": "Research recommendations, not new user approvals or real-market validation",
+  "hypotheses": [
+    {
+      "id": "H01",
+      "research_disposition": "KEEP_CONDITIONAL",
+      "hypothesis": "Match market baselines by session/slot/feed",
+      "evidence_result": "market_results.json",
+      "basis": "Seasonal and flat-control matched simulations",
+      "conditions_or_boundary": "No real calendar, regime or threshold validation; field admission first",
+      "product_implementation_status": "NOT_IMPLEMENTED",
+      "not_owner_scope_change": true
+    },
+    {
+      "id": "H02",
+      "research_disposition": "KEEP_CONDITIONAL",
+      "hypothesis": "Median/MAD as inspectable initial unusualness context",
+      "evidence_result": "market_results.json",
+      "basis": "Contamination counterexamples and fixed prior baselines",
+      "conditions_or_boundary": "Not a probability; degenerate MAD/high contamination and drift still require abstention",
+      "product_implementation_status": "NOT_IMPLEMENTED",
+      "not_owner_scope_change": true
+    },
+    {
+      "id": "H03",
+      "research_disposition": "KEEP_CONDITIONAL",
+      "hypothesis": "Separate raw market movement from prior market-adjusted context",
+      "evidence_result": "market_results.json",
+      "basis": "Stable-beta and beta-drift comparisons",
+      "conditions_or_boundary": "Do not suppress market-wide events; prior fit/stability conditions and real evaluation pending",
+      "product_implementation_status": "NOT_IMPLEMENTED",
+      "not_owner_scope_change": true
+    },
+    {
+      "id": "H04",
+      "research_disposition": "DEFER",
+      "hypothesis": "Apply financial BH/BY or conformal tail guarantees",
+      "evidence_result": "market_results.json",
+      "basis": "Valid Gaussian versus invalid heavy-tail probability comparisons; calibration resolution",
+      "conditions_or_boundary": "Financial null validity/dependence/drift and time horizon must be established",
+      "product_implementation_status": "NOT_IMPLEMENTED",
+      "not_owner_scope_change": true
+    },
+    {
+      "id": "H05",
+      "research_disposition": "REJECT",
+      "hypothesis": "Correction or robust-score magnitude alone guarantees financial false-discovery control",
+      "evidence_result": "market_results.json",
+      "basis": "Heavy-tail misspecification defeats BH/BY",
+      "conditions_or_boundary": "Valid probabilities are a prerequisite, not supplied by a robust score",
+      "product_implementation_status": "NOT_IMPLEMENTED",
+      "not_owner_scope_change": true
+    },
+    {
+      "id": "H06",
+      "research_disposition": "KEEP_HYPOTHESIS",
+      "hypothesis": "Episode-aware candidate aggregation and material revisions",
+      "evidence_result": "market_results.json",
+      "basis": "Constructed repeated-feature and cooldown counterexamples",
+      "conditions_or_boundary": "Oracle grouping is not implemented causal episode discovery",
+      "product_implementation_status": "NOT_IMPLEMENTED",
+      "not_owner_scope_change": true
+    },
+    {
+      "id": "H07",
+      "research_disposition": "REJECT",
+      "hypothesis": "A blind fixed cooldown can safely replace event identity",
+      "evidence_result": "market_results.json",
+      "basis": "Separate material event is suppressed",
+      "conditions_or_boundary": "Use verified episode/revision/material-change policy, evaluated prospectively",
+      "product_implementation_status": "NOT_IMPLEMENTED",
+      "not_owner_scope_change": true
+    },
+    {
+      "id": "H08",
+      "research_disposition": "KEEP_CONDITIONAL",
+      "hypothesis": "Matched fund endpoint residual as end-period unit-value estimate",
+      "evidence_result": "fund_results.json",
+      "basis": "Independent exact ledger and Decimal identity combinations",
+      "conditions_or_boundary": "Specify scope/raw NAV/actions/timing; estimate is not generally cash",
+      "product_implementation_status": "NOT_IMPLEMENTED",
+      "not_owner_scope_change": true
+    },
+    {
+      "id": "H09",
+      "research_disposition": "REJECT",
+      "hypothesis": "Sparse AUM/NAV/units endpoints identify exact cash or security selling",
+      "evidence_result": "fund_results.json",
+      "basis": "Identical endpoints with different cash and redemption funding paths",
+      "conditions_or_boundary": "Need transaction/flow/trade evidence for those targets",
+      "product_implementation_status": "NOT_IMPLEMENTED",
+      "not_owner_scope_change": true
+    },
+    {
+      "id": "H10",
+      "research_disposition": "REJECT",
+      "hypothesis": "Investor-count decline establishes monetary outflow direction",
+      "evidence_result": "fund_results.json",
+      "basis": "Same count decrease permits negative/zero/positive cash",
+      "conditions_or_boundary": "Retain comparable count change as its own observation",
+      "product_implementation_status": "NOT_IMPLEMENTED",
+      "not_owner_scope_change": true
+    },
+    {
+      "id": "H11",
+      "research_disposition": "REJECT",
+      "hypothesis": "Allocation distance measures realized turnover or current holdings",
+      "evidence_result": "fund_results.json",
+      "basis": "Revaluation, round-trip and stale snapshot alternatives",
+      "conditions_or_boundary": "Retain dated composition changes; trade/position evidence separate",
+      "product_implementation_status": "NOT_IMPLEMENTED",
+      "not_owner_scope_change": true
+    },
+    {
+      "id": "H12",
+      "research_disposition": "KEEP_CONDITIONAL",
+      "hypothesis": "Propagate justified numeric bounds and unresolved threshold crossing",
+      "evidence_result": "fund_results.json",
+      "basis": "48 input-corner checks",
+      "conditions_or_boundary": "Bounds must come from data/precision evidence; not a confidence interval or cure for scope/time errors",
+      "product_implementation_status": "NOT_IMPLEMENTED",
+      "not_owner_scope_change": true
+    },
+    {
+      "id": "H13",
+      "research_disposition": "KEEP",
+      "hypothesis": "Bind eligible immutable revisions, config and explicit replay knowledge basis",
+      "evidence_result": "temporal_chain_results.json",
+      "basis": "Frozen bundle/config/late-archive counterexamples",
+      "conditions_or_boundary": "Toy model only; real code/dependency/rights/universe manifests and source authentication needed",
+      "product_implementation_status": "NOT_IMPLEMENTED",
+      "not_owner_scope_change": true
+    },
+    {
+      "id": "H14",
+      "research_disposition": "REJECT",
+      "hypothesis": "Latest rows or last arrivals recreate what the actual engine knew",
+      "evidence_result": "temporal_chain_results.json",
+      "basis": "Cutoff and permutation/revision rollback examples",
+      "conditions_or_boundary": "Actually ingested and source-available reconstruction answer different questions",
+      "product_implementation_status": "NOT_IMPLEMENTED",
+      "not_owner_scope_change": true
+    },
+    {
+      "id": "H15",
+      "research_disposition": "KEEP_CONDITIONAL",
+      "hypothesis": "Use dated canonicality/finality and exact dependency state gates",
+      "evidence_result": "temporal_chain_results.json",
+      "basis": "Reorg/future-finalization/binding/invalid-state cases",
+      "conditions_or_boundary": "No RPC/consensus/database/outbox/concurrency proof; exact networks after spikes",
+      "product_implementation_status": "NOT_IMPLEMENTED",
+      "not_owner_scope_change": true
+    },
+    {
+      "id": "H16",
+      "research_disposition": "REJECT",
+      "hypothesis": "Confirmed equals finalized; transfer equals sale; token account equals beneficial owner",
+      "evidence_result": "temporal_chain_results.json",
+      "basis": "Protocol semantics and authored transfer/authority fixtures",
+      "conditions_or_boundary": "Retain raw observation with units, coverage and interpretation limits",
+      "product_implementation_status": "NOT_IMPLEMENTED",
+      "not_owner_scope_change": true
+    },
+    {
+      "id": "H17",
+      "research_disposition": "REJECT",
+      "hypothesis": "Citation existence, correct arithmetic or repeated text establishes claim support",
+      "evidence_result": "evidence_results.json",
+      "basis": "Weaker policy ablations emit fixture-unsupported claims",
+      "conditions_or_boundary": "Typed scope, lineage, metric allowlist, dependency and render coverage needed",
+      "product_implementation_status": "NOT_IMPLEMENTED",
+      "not_owner_scope_change": true
+    },
+    {
+      "id": "H18",
+      "research_disposition": "KEEP_HYPOTHESIS",
+      "hypothesis": "Claim-level typed dependencies, contradiction checks and closed rendering",
+      "evidence_result": "evidence_results.json",
+      "basis": "Hand-authored adversarial policy cases",
+      "conditions_or_boundary": "Does not extract/validate arbitrary Turkish prose or authenticate real sources",
+      "product_implementation_status": "NOT_IMPLEMENTED",
+      "not_owner_scope_change": true
+    },
+    {
+      "id": "H19",
+      "research_disposition": "REJECT",
+      "hypothesis": "Distinct sources or a high metadata score establish world truth probability",
+      "evidence_result": "evidence_results.json",
+      "basis": "Deliberate source-supported but world-false fact; heuristic-score counterexample",
+      "conditions_or_boundary": "Original roots are not guaranteed causal/statistical independence or truth",
+      "product_implementation_status": "NOT_IMPLEMENTED",
+      "not_owner_scope_change": true
+    },
+    {
+      "id": "H20",
+      "research_disposition": "DEFER",
+      "hypothesis": "Production investigator/reviewer semantic correctness and calibrated confidence",
+      "evidence_result": "evidence_results.json",
+      "basis": "No real LLM or independently parsed corpus",
+      "conditions_or_boundary": "Strict output schemas, actual runtime/source evaluations and independently defined truth target required",
+      "product_implementation_status": "NOT_IMPLEMENTED",
+      "not_owner_scope_change": true
+    },
+    {
+      "id": "H21",
+      "research_disposition": "KEEP_HYPOTHESIS",
+      "hypothesis": "Bounded staged investigation with shared eligible event context and reservations",
+      "evidence_result": "evidence_results.json",
+      "basis": "Authored tool/time/source budget-policy cases",
+      "conditions_or_boundary": "No measured model costs/latency/affordability; private context/rights/config separate",
+      "product_implementation_status": "NOT_IMPLEMENTED",
+      "not_owner_scope_change": true
+    },
+    {
+      "id": "H22",
+      "research_disposition": "REJECT",
+      "hypothesis": "Retrospective point-adjusted F1 proves timely detection",
+      "evidence_result": "evaluation_results.json",
+      "basis": "Random flags can score highly after future-label-aware segment expansion",
+      "conditions_or_boundary": "Report actual first alert/misses/burden and target-specific point/event metrics",
+      "product_implementation_status": "NOT_IMPLEMENTED",
+      "not_owner_scope_change": true
+    },
+    {
+      "id": "H23",
+      "research_disposition": "DEFER",
+      "hypothesis": "Learned market models, accuracy/calibration or loss-prevention claims",
+      "evidence_result": "evaluation_results.json",
+      "basis": "No licensed empirical observations or labels in these labs",
+      "conditions_or_boundary": "Freeze point-in-time datasets, protocol and untouched evaluation periods first",
+      "product_implementation_status": "NOT_IMPLEMENTED",
+      "not_owner_scope_change": true
+    }
+  ]
+}

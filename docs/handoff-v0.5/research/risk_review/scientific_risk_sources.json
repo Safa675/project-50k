@@ -1,0 +1,121 @@
+{
+  "schema_version": "scientific-risk-review-v1",
+  "review_date_utc": "2026-10-02",
+  "scope": "Seven scientific interpretation risks; no new experiments, lab modifications, real-data validation or performance estimates.",
+  "confidence_semantics": "HIGH denotes confidence in an observed counterexample, non-identification or evaluation boundary. It is not a calibrated deployment failure probability. Deployment frequency and magnitude remain UNKNOWN.",
+  "root_citation_instruction": "Reopen the relevant primary source before citing a web reference ID in a final answer.",
+  "reviewed_lab_files": [
+    {"file": "research/engine_lab/MARKET_STATISTICS.md", "depth": "Complete narrative", "sha256": "56f9157bf5846b35a89dbc31423eeec7a38d99edfcbb250ea534e8a80ed76142"},
+    {"file": "research/engine_lab/FUND_ENGINE.md", "depth": "Complete narrative", "sha256": "3fd33da345d3f27e21f5259d627c28ff6f4d57901ca944c7eec3bda0fb9d01ba"},
+    {"file": "research/engine_lab/EVIDENCE_INVESTIGATION.md", "depth": "Complete narrative", "sha256": "7e2de1f06fbee3ee961601c08ce0d4aba92b5649d9f73980a0e73485da982855"},
+    {"file": "research/engine_lab/EVALUATION_METRICS.md", "depth": "Complete narrative", "sha256": "356f06db7c18694a4a7e1f76af06e7c15b87333ecb635947e3a91e81e2efef0a"},
+    {"file": "research/engine_lab/market_results.json", "depth": "Parsed keys and selected outputs interpreted through narrative; not every numerical row reviewed", "sha256": "ddf3df54d1563f1da7307406a8d5987ee8dec2c1aafd011b94e261127e3f3f4a"},
+    {"file": "research/engine_lab/fund_results.json", "depth": "Parsed keys and selected accounting/cash/invalidity outputs", "sha256": "39fa46b9a858f964c4939fd36b7c7071679893f0b9ef5b30c1afe913c723d86a"},
+    {"file": "research/engine_lab/evidence_results.json", "depth": "Previously reviewed full cases; current summary/case boundaries used for risk review", "sha256": "ab6417496a119cfe7d0968589d5a651c49a6acbc77083f2b6cf5781fb57391f4"},
+    {"file": "research/engine_lab/evaluation_results.json", "depth": "Parsed keys and selected prevalence/recall/seed output records", "sha256": "85bd14f444c25fb2446218fc42dd6d85844715d8d8598d1b93d2be782760ec7f"}
+  ],
+  "sources": [
+    {
+      "id": "SR-S01",
+      "title": "The Precision-Recall Plot Is More Informative than the ROC Plot When Evaluating Binary Classifiers on Imbalanced Datasets",
+      "authors": ["Takaya Saito", "Marc Rehmsmeier"],
+      "year": 2015,
+      "metadata": {"venue": "PLOS ONE", "volume_issue": "10(3)", "article": "e0118432", "doi": "10.1371/journal.pone.0118432"},
+      "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0118432",
+      "retrieved_at_utc_date": "2026-10-02",
+      "refs": ["turn123view0", "turn132view3"],
+      "depth": "Publisher metadata/abstract, introduction on train/final-evaluation distinction, selected theoretical precision and prevalence discussion, text lines 134-159 and 211-229. Not a full-paper review or replication.",
+      "support": "Precision and PR behavior depend on class distribution; accuracy/ROC interpretation can conceal rare-positive burden.",
+      "transfer_limit": "Biological classifier examples do not estimate financial prevalence, Project 50K alert precision or its deployment rates.",
+      "risk_ids": ["SR-02"],
+      "failures": []
+    },
+    {
+      "id": "SR-S02",
+      "title": "On the Foundations of Noise-free Selective Classification",
+      "authors": ["Ran El-Yaniv", "Yair Wiener"],
+      "year": 2010,
+      "metadata": {"venue": "JMLR", "volume_issue": "11(53)", "pages": "1605-1641"},
+      "url": "https://jmlr.org/papers/v11/el-yaniv10a.html",
+      "retrieved_at_utc_date": "2026-10-02",
+      "refs": ["turn128view3", "turn132view2"],
+      "depth": "Publisher metadata and abstract only, lines 30-35. No theorem reviewed or applied.",
+      "support": "Reject-option classification treats risk and coverage as a tradeoff.",
+      "transfer_limit": "The stated theory assumes noise-free models and provides no project guarantee for abstention or noisy evidence.",
+      "risk_ids": ["SR-04"],
+      "failures": []
+    },
+    {
+      "id": "SR-S03",
+      "title": "Towards a Rigorous Evaluation of Time-Series Anomaly Detection",
+      "authors": ["Siwon Kim", "Kukjin Choi", "Hyun-Soo Choi", "Byunghan Lee", "Sungroh Yoon"],
+      "year": 2022,
+      "metadata": {"venue": "AAAI", "volume_issue": "36(7)", "pages": "7194-7201", "doi": "10.1609/aaai.v36i7.20680"},
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/view/20680",
+      "retrieved_at_utc_date": "2026-10-02",
+      "refs": ["turn128view1", "turn132view0"],
+      "depth": "Publisher metadata and abstract only in this risk task, lines 18-44. The project's evaluation lab documents its separate selected-PDF review. No benchmark replication here.",
+      "support": "Point adjustment can overestimate time-series anomaly performance and alter method rankings, including random/untrained baselines.",
+      "transfer_limit": "The paper does not establish financial detection, event usefulness or loss prevention for this product.",
+      "risk_ids": ["SR-05", "SR-07"],
+      "failures": []
+    },
+    {
+      "id": "SR-S04",
+      "title": "Estimated Net Cash Flow Methodology",
+      "authors": ["Morningstar Research"],
+      "year": 2018,
+      "metadata": {"methodology_version": "2.0", "version_date": "2018-08-31", "page_footer_date": "2018-09-18", "pages": 3},
+      "url": "https://www.morningstar.com/content/dam/marketing/shared/research/methodology/765555_Estimated_Net_Cash_Flow_Methodology.pdf",
+      "retrieved_at_utc_date": "2026-10-02",
+      "refs": ["turn128view2", "turn132view1", "turn136view0"],
+      "depth": "All three extracted pages read across two selected opens; distributions/reinvestment, fund/class approximation, inception/merger and US ETF context inspected. No current implementation verification.",
+      "support": "Published flow methodology is an estimate with explicit distribution, reinvestment, share-class and merger conventions.",
+      "transfer_limit": "Historical foreign conventions do not establish Turkish defaults, exact sparse-endpoint transaction cash or provider entitlement. The fund lab's counterexamples establish its narrower non-identification claim independently.",
+      "risk_ids": ["SR-06"],
+      "failures": []
+    },
+    {
+      "id": "SR-S05",
+      "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+      "authors_short": "Lewis et al.",
+      "year": 2020,
+      "metadata": {"arxiv": "2005.11401", "reviewed_version": "v4, 2021-04-12", "metadata_already_verified_in": "research/engine_lab/evidence_sources.json EV-S01"},
+      "url": "https://arxiv.org/pdf/2005.11401",
+      "retrieved_at_utc_date": "2026-10-02",
+      "refs": ["turn132view4"],
+      "depth": "Selected discussion/Broader Impact reopened in this risk task, PDF pp. 9-10 / lines 528-553. Metadata previously verified in the same session. Not a full-paper review.",
+      "support": "External knowledge can itself be wrong or biased; retrieval is not a world-truth guarantee.",
+      "transfer_limit": "No project hallucination, citation entailment or causal accuracy is inferred from its NLP comparisons.",
+      "risk_ids": ["SR-03"],
+      "failures": []
+    },
+    {
+      "id": "SR-S06",
+      "title": "Causal inference in statistics: An overview",
+      "authors": ["Judea Pearl"],
+      "year": 2009,
+      "metadata": {"venue": "Statistics Surveys", "volume": "3", "pages": "96-146", "doi": "10.1214/09-SS057"},
+      "url": "https://ftp.cs.ucla.edu/pub/stat_ser/r350.pdf",
+      "retrieved_at_utc_date": "2026-10-02",
+      "refs": ["turn106view1", "turn128view4"],
+      "depth": "Author-hosted metadata/header previously verified; selected association/causation discussion reopened, PDF pp. 4-5 / lines 120-161. Not a full-paper review.",
+      "support": "Causal claims require assumptions beyond observed associations.",
+      "transfer_limit": "No project causal model, identifying assumptions or causal financial effect estimate is validated.",
+      "risk_ids": ["SR-03"],
+      "failures": []
+    }
+  ],
+  "unusable_retrievals": [
+    {"url": "https://academic.oup.com/rfs/article-abstract/5/4/553/1575665", "ref_id": "turn128view0", "result": "Internal Error; no metadata or content verified, no claim or bibliography entry supported. Survivorship is labelled an inferred unmeasured project risk based on absent historical-universe validation."}
+  ],
+  "risk_register": [
+    {"id": "SR-01", "severity": "HIGH", "evidence_confidence": "HIGH_BOUNDARY", "future_frequency": "UNKNOWN", "observed": "Synthetic authored conformance/arithmetic/generator results", "inferred": "Unseen-document and deployment transfer failure"},
+    {"id": "SR-02", "severity": "HIGH", "evidence_confidence": "HIGH_CONSTRUCTED_COUNTEREXAMPLES", "future_frequency": "UNKNOWN", "observed": "Constructed burden, drift, wrong tails and dependent signals", "inferred": "Base-rate/serial/source-dependence burden in deployment"},
+    {"id": "SR-03", "severity": "HIGH", "evidence_confidence": "HIGH_NON_IMPLICATION", "future_frequency": "UNKNOWN", "observed": "E06 source-supported world-false claim; unsupported causal promotions", "inferred": "False concordance and semantic reviewer errors"},
+    {"id": "SR-04", "severity": "HIGH", "evidence_confidence": "HIGH_OMISSION_MECHANISMS", "future_frequency": "UNKNOWN", "observed": "Abstention/partial/review and cooldown loss", "inferred": "Hidden misses and uneven coverage"},
+    {"id": "SR-05", "severity": "HIGH", "evidence_confidence": "HIGH_LEAKAGE_COUNTEREXAMPLE_SURVIVOR_MAGNITUDE_UNKNOWN", "future_frequency": "UNKNOWN", "observed": "Deliberately leaky windows and retrospective interval adjustment", "inferred": "Survivor selection, revision leakage and holdout reuse"},
+    {"id": "SR-06", "severity": "HIGH", "evidence_confidence": "HIGH_ALGEBRAIC_NON_IDENTIFICATION", "future_frequency": "UNKNOWN", "observed": "Identical endpoints permit different cash; counts/allocation do not identify transactions", "inferred": "Mislabelled cash, capital-flight or sale claims"},
+    {"id": "SR-07", "severity": "HIGH_FOR_EFFECTIVENESS_CLAIMS_MEDIUM_FOR_EXPLORATORY_TIMELINE", "evidence_confidence": "HIGH_TARGET_MISMATCH", "future_frequency": "UNKNOWN", "observed": "Random adjusted F1 0.956449 with first-ten recall 0.007812", "inferred": "Rarity/retrospective hits mistaken for usefulness or timely warning"}
+  ]
+}

@@ -1,0 +1,284 @@
+{
+  "from": "pre-risk v0.5 research release",
+  "to": "v0.5 risk-review update 2026-10-03 local",
+  "changes": [
+    {
+      "path": "AGENTS.md",
+      "change": "MODIFIED",
+      "before_sha256": "057ebd4c88ffe8bac2a22af691880804a65d1d62f49212da75c1d3d44764b7bf",
+      "after_sha256": "95c59f778f33c8f9aaaf20747a095a17ca558a6427c3749e9d0112c63e52b8ea"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "change": "MODIFIED",
+      "before_sha256": "b74dda100489a343c43741302f67adfaae8eaeac82f58870de2e0822069f59b4",
+      "after_sha256": "18f51024477ba906629f4068c40b75572998bd53bc64e33ba65624b7595834c0"
+    },
+    {
+      "path": "CLAUDE.md",
+      "change": "MODIFIED",
+      "before_sha256": "9e6aa62597e4b54597055e4c1f5b6a3ac66e6883c16de1ac2bdd32b063a98925",
+      "after_sha256": "5de7cc491e48ad4b723293a899b3c7e150f43acd8419356ee856d1c5d912649e"
+    },
+    {
+      "path": "README.md",
+      "change": "MODIFIED",
+      "before_sha256": "916b8d5e4c0302113e1551cb9457919d936f550dd22dab3a27b6d60fb9b03f88",
+      "after_sha256": "b73e7b70dd7ad5fe5941dd3e3cd9b59daacc44acd9786d779e7c367c00dae3dd"
+    },
+    {
+      "path": "START_HERE.md",
+      "change": "MODIFIED",
+      "before_sha256": "dfa0ff25df973ee411c5d709856aa72be06d1c1eebfd7e4b5ae7a5bce52a087d",
+      "after_sha256": "89bf974798c17b9388755f4efb995a73419e49239e75875f97355d3636823c7f"
+    },
+    {
+      "path": "docs/00_Decisions_and_Corrections.md",
+      "change": "MODIFIED",
+      "before_sha256": "109febd73755afa50ad44e7f4ef9de5a043ff4dd7684f7736fcd67148aed421f",
+      "after_sha256": "0ba7fcd72f1ea400d57925ff7cd28d61c831ac34334d52dbca3538d5f8eee44d"
+    },
+    {
+      "path": "docs/10_Data_Requirements_and_Provider_Matrix.md",
+      "change": "MODIFIED",
+      "before_sha256": "017a9020df2e20931aba3426319879446faffa04023758b0b82acb5257013478",
+      "after_sha256": "ac3d3eabfd5c36a0d7c6f0e94af2a40aa41da70f16033347426ae5b692655f71"
+    },
+    {
+      "path": "docs/13_Decision_Confidence_and_Validation.md",
+      "change": "MODIFIED",
+      "before_sha256": "daa5b626aed418ee230079663c73d0e525d21f1816fe2c028540740276d95d9c",
+      "after_sha256": "5010380aa8542761b5c62691d9bd6067a832a0b66fd10c1803a6a1816b7b0b1b"
+    },
+    {
+      "path": "docs/14_Architecture_and_ADRs.md",
+      "change": "MODIFIED",
+      "before_sha256": "b20b152cb39eed6cc8066a1d516abf5a3dee407925bb1ba0236ed009a18ba296",
+      "after_sha256": "eaa77a04bfc9293b8b2cf32b07b556d25a0d2505cf5bd7daa9c121276a703c89"
+    },
+    {
+      "path": "docs/17_AI_Tools_and_Runtime_Prompts.md",
+      "change": "MODIFIED",
+      "before_sha256": "0b5934066ccfd2bdfdf904bab0fb5667891e6ae261e86b1fe874115a4bcc4279",
+      "after_sha256": "99c6af690e2ccce3e8c6b81986a03e105d3e7145a3a89d851fee45922f4c0bb2"
+    },
+    {
+      "path": "docs/18_UX_Design_and_Turkish_Content.md",
+      "change": "MODIFIED",
+      "before_sha256": "ee10fea6b005bc6b022323d514afc90f38eacae0c8928a92c2acf6a7a20609d7",
+      "after_sha256": "e09812aca398c116289be9f8cd002c340662c1979b0c6552aad26ecafe03d5ba"
+    },
+    {
+      "path": "docs/19_Security_Privacy_and_Compliance.md",
+      "change": "MODIFIED",
+      "before_sha256": "6d867930374c66e0c93b3df0b0716c6c0ff6fa61085e66fab810e34339e94964",
+      "after_sha256": "66093cc811c5386ee1920772034439c6823af3a866d7c4c4a49d973433326926"
+    },
+    {
+      "path": "docs/20_Test_and_Validation_Strategy.md",
+      "change": "MODIFIED",
+      "before_sha256": "5a95f7853da5ca7eb8e854703933dc7920917b4811946c32e1b6c44b0663db43",
+      "after_sha256": "9c9e0bd54922008ee6aa82a4779c1a29d31e8b6344a8514ce73ddf1b08683698"
+    },
+    {
+      "path": "docs/21_Implementation_Backlog_and_Traceability.md",
+      "change": "MODIFIED",
+      "before_sha256": "450920c9cf04ded9969fbc60aeb76f8ed72d60226f074411ebb2992701491943",
+      "after_sha256": "b917195a919e278e460bbe3eedca8d2e1f436a187a45993cdb1dea777195b208"
+    },
+    {
+      "path": "docs/22_Deployment_Operations_and_Costs.md",
+      "change": "MODIFIED",
+      "before_sha256": "a5577c40793811605c54210fc0162401cce7e740641404e1a95d997af3e8ce98",
+      "after_sha256": "dd64507b04be3004274ab623391fa5e138a5d4e288f5873e2f7cb2095244b5cd"
+    },
+    {
+      "path": "docs/23_Startup_Validation_and_Demo.md",
+      "change": "MODIFIED",
+      "before_sha256": "ae43859eca6231ff27775c3c8682b16bfb14b64ee9ecac5d12c7eb1d1c8d62f7",
+      "after_sha256": "4249d868cf8c51a19d7be8c2b594d61e9d7d1175ca98b05edaff16ef0bf0e651"
+    },
+    {
+      "path": "docs/24_Competitor_Evidence_and_Positioning.md",
+      "change": "MODIFIED",
+      "before_sha256": "3e4a51c6d773056077ab76e86b45262bd6b9a443c64107e11ec93ba35b654a99",
+      "after_sha256": "a2dc60ce2bb235f238e9deb6b61cb00fd85bd5e5766a800f71d2a9da1355f579"
+    },
+    {
+      "path": "docs/25_Release_Gates_and_Open_Decisions.md",
+      "change": "MODIFIED",
+      "before_sha256": "77ebbc40c30a2d19c96fa7eac6078c9146ea91abc46ccebfbc232a2b75e02776",
+      "after_sha256": "c6b4861fbac5ace3c920b59f55fcbbd56667044f281afaacf662667761dd61ef"
+    },
+    {
+      "path": "experiments/risk_scenarios.py",
+      "change": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "51941da11e451f89d928c53cda3c7786bfea192b8b4e4893da120b5088aafbab"
+    },
+    {
+      "path": "prompts/CLAUDE_CODE_START.md",
+      "change": "MODIFIED",
+      "before_sha256": "249278240aeda94bcd80e24124e0ddf5489dda79befea46d5d9dd96aaeeeffbe",
+      "after_sha256": "6ba7be9e31c4a9c0c9c9537689a087ae113372635cd1cb534683299b5f8bb55f"
+    },
+    {
+      "path": "prompts/CODEX_START.md",
+      "change": "MODIFIED",
+      "before_sha256": "f8e2293cfa1f1c9f8f363224a07e817804fd0735f189030574c2e8fc5632731b",
+      "after_sha256": "671d5a8d21cc1241ca5658b663740ed26909423e3740ebd05acbeeb106714c06"
+    },
+    {
+      "path": "reports/OPEN_DECISIONS.md",
+      "change": "MODIFIED",
+      "before_sha256": "59c36f9c2fd16aaba327c79b723d2e36f547a62b07c100866e66866e80d16401",
+      "after_sha256": "79c38929727a00add0188f669ef498e64a0320620e505acaf63bc934480fddd5"
+    },
+    {
+      "path": "reports/RESEARCH_REPORT.md",
+      "change": "MODIFIED",
+      "before_sha256": "30e3cd5b113946f6370b8a90f107e84aee3ccfe2031b38ad607151170d4c22ab",
+      "after_sha256": "1fa83fb00a38785262ff4e2b396465d86799af0d872a56f2b290f95b01f75add"
+    },
+    {
+      "path": "reports/RISK_BASELINE_HASHES.json",
+      "change": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "ac9c85c9fe810c39e3d0aa7658102d94e6dc54955c29ddd97853c3fd8e53abf2"
+    },
+    {
+      "path": "reports/RISK_EXECUTION.json",
+      "change": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "b6c768f949439c464fa21b1e154c9963e9612a8798aee0623b14126f27dbbca4"
+    },
+    {
+      "path": "reports/RISK_REVIEW.md",
+      "change": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "deed4879025ff4cffd60fbbee6ed07f31ff1f726f725d44f055fbdfc8eccd973"
+    },
+    {
+      "path": "reports/VALIDATION_EXECUTION.md",
+      "change": "MODIFIED",
+      "before_sha256": "587f00aa04b151b61df0c53cf76a0fe9a8466a9947d519f4804e46dcf677f375",
+      "after_sha256": "e68cfbed7b42bf68f0f7e74eee77d534feaa35c95324a8a8a9c10f32789f9248"
+    },
+    {
+      "path": "reports/VALIDATION_REPORT.md",
+      "change": "MODIFIED",
+      "before_sha256": "04aaf9b723c1714f56e87aaf3856a500b2eae5c4c6f50cb7919cb0d2e36147d8",
+      "after_sha256": "2e799d0f2fd147f7b34546d3ced2bd7574a5bd95fa5e7ef3382c6a70bbe751d9"
+    },
+    {
+      "path": "reports/contract_regression_results.json",
+      "change": "MODIFIED",
+      "before_sha256": "39c244684e56d01e778e801e619a7ed6f4a0e60ae2b8c3388a579a9d2a8c216f",
+      "after_sha256": "66329e5f2a9049e148e96be62c8d4ad12fe53c024801cc9e6b6cbb248348c131"
+    },
+    {
+      "path": "reports/validation_results.json",
+      "change": "MODIFIED",
+      "before_sha256": "dfa266cf464ee51040ccf25786b6ec7bb48df43a71b2e41efe7e641507f96a68",
+      "after_sha256": "01f970c838a2dec115649bec1eff96c8fcfce9e412eb792fec1cce43287a7635"
+    },
+    {
+      "path": "research/SOURCE_REGISTER.md",
+      "change": "MODIFIED",
+      "before_sha256": "1bd70a097abaebb8471eb508da9760f570efd865830d3fcc884fdb8a4409a1c7",
+      "after_sha256": "3f48a3b5cc5601b9e7140840a83008908063de0bf2fffe3b1463a07f94de493d"
+    },
+    {
+      "path": "research/risk_review/DATA_AND_COST_RISKS.md",
+      "change": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "ba1990bf171553cad0a2cf0ef8b7b1ff47c3ff89bff82da79a2c5473cd68a5bf"
+    },
+    {
+      "path": "research/risk_review/DELIVERY_AND_OPERATIONS_RISKS.md",
+      "change": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "a4631ba9ca1a0674b2de8bce9e06187608c469749ab3ff7108dc32a383a1ec4d"
+    },
+    {
+      "path": "research/risk_review/PRODUCT_AND_COMPETITION_RISKS.md",
+      "change": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "ba8534d7003ad93ce6e6ca8b69f78e8d926081d3d29f75db2fd1b1a0cb9717fb"
+    },
+    {
+      "path": "research/risk_review/RISK_PEER_REVIEW.md",
+      "change": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "44376d228e8bbf3eb97e037f92f9248b68fe6581f79af8788a6aaa3be388ec65"
+    },
+    {
+      "path": "research/risk_review/RISK_REGISTER.json",
+      "change": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "b1fa5abde0f5c1b78674d54288038417bee8e2a5fae06856f2b5e9794dc5e926"
+    },
+    {
+      "path": "research/risk_review/RISK_SCENARIOS.md",
+      "change": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "4aee4dc5ad77ae7f277d5c5705f2fa8d2f8556fc42b37c46f74b76ace11744ea"
+    },
+    {
+      "path": "research/risk_review/SCIENTIFIC_RISKS.md",
+      "change": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "1171b6b9a3c89889e02bce7ada2c35b8d7031a01c36cfa979db77ce936f49452"
+    },
+    {
+      "path": "research/risk_review/SECURITY_AND_REGULATORY_RISKS.md",
+      "change": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "583d9af49d8b6250f7f2822c86f54803450456aa705b39ddc09fe06456689702"
+    },
+    {
+      "path": "research/risk_review/data_cost_sources.json",
+      "change": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "566d177d617238a27994b19841d4d04b82cd2950757e2ede618b10051465581b"
+    },
+    {
+      "path": "research/risk_review/delivery_risk_sources.json",
+      "change": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "f7069a8e7ad288c1c99261bb44371d82cf0ad92a092ac6a35467abc4655602e2"
+    },
+    {
+      "path": "research/risk_review/product_risk_sources.json",
+      "change": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "3a65bec8cdffb824d16906d6cda67f30be4b2c0c3114b4ee97405dd20026349b"
+    },
+    {
+      "path": "research/risk_review/risk_scenario_results.json",
+      "change": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "c9924297f3d8612f056327efb9645c2719a9c15401a8c958200071227cd06153"
+    },
+    {
+      "path": "research/risk_review/scientific_risk_sources.json",
+      "change": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "638f9c249a15fa976a960df7fb160401358060ed7e065d15d205c9de198f8601"
+    },
+    {
+      "path": "research/risk_review/security_regulatory_sources.json",
+      "change": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "39872f36517ae66cb5640e5aac3ec5d7a4ec0e848bd6cc30c7464408e8e8a58c"
+    }
+  ],
+  "deleted_files": [],
+  "excluded": [
+    "MANIFEST.json",
+    "reports/RISK_DIFF.json",
+    "__pycache__"
+  ],
+  "prior_V0_5_DIFF_scope": "v0.4 to initial research v0.5; historical baseline",
+  "prior_labs_and_production_contracts_config_reference_tests_registry_unchanged": true
+}

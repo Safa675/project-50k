@@ -1,0 +1,123 @@
+{
+  "status": "PASS",
+  "checks": 21,
+  "results": [
+    {
+      "check": "No symlinks in the handoff",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Manifest entries unique",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Manifest covers every payload file",
+      "passed": true,
+      "detail": {
+        "missing": [],
+        "unexpected": []
+      }
+    },
+    {
+      "check": "Payload SHA-256 and sizes match",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "check": "24 mounted original inputs recorded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Mounted original input copies unchanged",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "check": "All 25 logical attachments represented",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Attachment paths and digests reconcile",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "check": "Project_50K_Documentation_v0.1.zip: member count, unique paths and CRC",
+      "passed": true,
+      "detail": 5
+    },
+    {
+      "check": "Project_50K_Documentation_v0.2.zip: member count, unique paths and CRC",
+      "passed": true,
+      "detail": 11
+    },
+    {
+      "check": "Project_50K_Development_Package_v0.3.zip: member count, unique paths and CRC",
+      "passed": true,
+      "detail": 97
+    },
+    {
+      "check": "Entire 97-file baseline identical to original ZIP",
+      "passed": true,
+      "detail": {
+        "changed": [],
+        "extra": [],
+        "missing": []
+      }
+    },
+    {
+      "check": "Original 96-entry inner manifest valid",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "check": "Recovered v0.1 README matches original release",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "All 17 standalone snapshots match correct current/archive counterparts",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "check": "Four original screenshots present",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Pasted form and 12 user messages retained",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "26 active baseline documents",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "284 stable baseline requirements retained",
+      "passed": true,
+      "detail": {
+        "UR": 80,
+        "FR": 122,
+        "NFR": 82
+      }
+    },
+    {
+      "check": "Actual rerun report records 37 checks and 51 unit tests passing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "No font binaries or actual .env file added",
+      "passed": true,
+      "detail": ""
+    }
+  ],
+  "scope": "File preservation and recorded local-rerun evidence only; not factual/legal/model/application certification."
+}

@@ -1,0 +1,82 @@
+{
+  "checked_at_utc_date": "2026-10-02",
+  "scope": "Primary academic works and official provider documentation. Selected sections/indexed excerpts only; no systematic review, independent proof verification or financial validation.",
+  "sources": [
+    {
+      "id": "MS-01",
+      "title": "Intraday periodicity and volatility persistence in financial markets",
+      "authors": ["Torben G. Andersen", "Tim Bollerslev"],
+      "publication_year": 1997,
+      "primary_url": "https://public.econ.duke.edu/~boller/Published_Papers/joef_97.pdf",
+      "institutional_url": "https://www.kellogg.northwestern.edu/academics-research/research/detail/1997/intraday-periodicity-and-volatility-persistence-in-financial-markets/",
+      "doi": "10.1016/S0927-5398(97)00004-2",
+      "source_type": "PRIMARY_AUTHOR_PAPER_AND_AUTHOR_INSTITUTION",
+      "review_depth": "Indexed author-PDF abstract/introduction and selected periodicity excerpt; institutional abstract opened. Direct PDF text extraction returned zero lines; screenshot tool returned only text placeholders, so no visual/full-body reading claimed.",
+      "retrieval_ref_ids": ["turn91search36", "turn45search49", "turn53view0", "turn94view2"],
+      "supports": "Intraday periodicity matters for high-frequency return dynamics; motivates session/slot controls.",
+      "does_not_support": "Project RVOL threshold3, robust z4, 20-session sample sufficiency, contemporary BIST or crypto performance. Volume profile in experiment is constructed."
+    },
+    {
+      "id": "MS-02",
+      "title": "Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing",
+      "authors": ["Yoav Benjamini", "Yosef Hochberg"],
+      "publication_year": 1995,
+      "primary_url": "https://rss.onlinelibrary.wiley.com/doi/10.1111/j.2517-6161.1995.tb02031.x",
+      "doi": "10.1111/j.2517-6161.1995.tb02031.x",
+      "source_type": "PRIMARY_PUBLISHER_ABSTRACT",
+      "review_depth": "Publisher metadata and summary read. Independence/FDR interpretation checked; original full proof not read. Algorithm statement also inspected in original MS-03 section1.2.",
+      "retrieval_ref_ids": ["turn53view2", "turn93view0"],
+      "supports": "FDR is an expected false fraction; independent-test BH method.",
+      "does_not_support": "Financial robust scores are valid p-values; repeated per-window filtering controls a user's full-day alert probability."
+    },
+    {
+      "id": "MS-03",
+      "title": "The control of the false discovery rate in multiple testing under dependency",
+      "authors": ["Yoav Benjamini", "Daniel Yekutieli"],
+      "publication_year": 2001,
+      "primary_url": "https://projecteuclid.org/journals/annals-of-statistics/volume-29/issue-4/The-control-of-the-false-discovery-rate-in-multiple-testing/10.1214/aos/1013699998.full",
+      "author_uploaded_full_text_url": "https://www.researchgate.net/publication/38348313_The_control_of_the_false_discovery_rate_in_multiple_testing_under_dependency",
+      "author_draft_url": "https://www.math.tau.ac.il/~ybenja/depApr27.pdf",
+      "doi": "10.1214/aos/1013699998",
+      "source_type": "PRIMARY_ORIGINAL_PAPER_UPLOADED_BY_YOAV_BENJAMINI",
+      "review_depth": "Author-upload attribution checked; original paper sections1.2–1.4, FDR definition, Theorems1.2/1.3 and selected one-sided/two-sided dependence cautions read. Full proof not independently verified. Euclid direct page produced iframe-only content; author draft text extraction garbled; readable original author-upload used as fallback.",
+      "retrieval_ref_ids": ["turn53view1", "turn62view0", "turn93view0", "turn94view0", "turn94view3"],
+      "supports": "BH requires appropriate dependence conditions; harmonic BY modification gives conservative control with valid null p-values under arbitrary dependence; two-sided dependence requires care.",
+      "does_not_support": "Repairing invalid tail probabilities, uncertainty in provenance, finance-market calibration or online/time-uniform control."
+    },
+    {
+      "id": "MS-04",
+      "title": "Conformal prediction beyond exchangeability",
+      "authors": ["Rina Foygel Barber", "Emmanuel J. Candes", "Aaditya Ramdas", "Ryan J. Tibshirani"],
+      "primary_url": "https://arxiv.org/html/2202.13415v5",
+      "arxiv_identifier": "2202.13415v5",
+      "source_type": "PRIMARY_AUTHOR_MANUSCRIPT",
+      "review_depth": "Abstract, introduction, split-conformal section2 and selected section4.3 remarks on weights/drift checked. No proof replication or finance experiment performed.",
+      "retrieval_ref_ids": ["turn70view0", "turn90view2", "turn94view1"],
+      "supports": "Ordinary conformal inference requires exchangeability/symmetry; drift changes guarantees; training and calibration separation matters.",
+      "does_not_support": "Automatic valid financial anomaly p-values using20 observations, or that proposed weighted methods are deployed here."
+    },
+    {
+      "id": "MS-05",
+      "title": "Event Studies in Economics and Finance",
+      "authors": ["A. Craig MacKinlay"],
+      "publication_year": 1997,
+      "primary_url": "https://www.bu.edu/econ/files/2011/01/MacKinlay-1996-Event-Studies-in-Economics-and-Finance.pdf",
+      "source_type": "PRIMARY_PAPER_COPY_ON_ACADEMIC_HOST",
+      "review_depth": "Indexed original-paper excerpt on page15 read: market model stable linear relation; estimation normally prior to event and excluding event. PDF extraction largely linked references, so no full-body reading claimed. Filename says1996 and upload path2011; neither used as publication year.",
+      "retrieval_ref_ids": ["turn62view1", "turn91search37"],
+      "supports": "Separating normal market relation from asset abnormal return and fitting before the event.",
+      "does_not_support": "Beta-one is universally valid, OLS is robust to beta drift, residual removes causality or z4 is empirically validated."
+    },
+    {
+      "id": "MS-06",
+      "title": "Alpaca Historical bars API reference",
+      "primary_url": "https://docs.alpaca.markets/us/reference/stockbars",
+      "source_type": "OFFICIAL_PROVIDER_DOCUMENTATION",
+      "review_depth": "Endpoint parameters read: feed IEX/SIP/BOATS/OTC, raw/split/dividend/spin-off adjustments, asof symbol mapping and pagination. No authenticated request or account/entitlement check.",
+      "retrieval_ref_ids": ["turn53view3"],
+      "supports": "Feed coverage and price/volume adjustment are explicit dimensions; default symbol asof is current date.",
+      "does_not_support": "Specific rights, available real feed subscription, a5x IEX/SIP volume ratio or point-in-time revision-free corporate action archive."
+    }
+  ]
+}

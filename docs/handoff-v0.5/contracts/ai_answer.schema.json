@@ -1,0 +1,231 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": [
+        "ANSWERED",
+        "PARTIAL",
+        "INSUFFICIENT_EVIDENCE"
+      ]
+    },
+    "answer_tr": {
+      "type": "string",
+      "minLength": 1
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "origin": {
+      "type": "string",
+      "enum": [
+        "LIVE",
+        "DELAYED",
+        "HISTORICAL_REPLAY",
+        "SYNTHETIC"
+      ]
+    },
+    "thread_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "request_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "claim_id": {
+            "type": "string"
+          },
+          "text_tr": {
+            "type": "string"
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "minItems": 1
+          },
+          "support": {
+            "type": "string",
+            "enum": [
+              "DIRECT",
+              "DERIVED",
+              "INTERPRETATION"
+            ]
+          },
+          "calculation_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "claim_id",
+          "text_tr",
+          "evidence_ids",
+          "support",
+          "calculation_id"
+        ],
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "support": {
+                  "const": "DERIVED"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "calculation_id": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          }
+        ]
+      },
+      "minItems": 0
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "evidence.schema.json"
+      },
+      "minItems": 0
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 0
+    },
+    "tool_usage": {
+      "type": "object",
+      "properties": {
+        "calls": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 6
+        },
+        "web_searches": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "elapsed_ms": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "calls",
+        "web_searches",
+        "elapsed_ms"
+      ],
+      "additionalProperties": false
+    },
+    "asset_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "replay_cutoff": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "date-time"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "calculations": {
+      "type": "array",
+      "items": {
+        "$ref": "calculation.schema.json"
+      }
+    },
+    "replay_bundle_id": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "uuid"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "status",
+    "answer_tr",
+    "as_of",
+    "origin",
+    "thread_id",
+    "request_id",
+    "claims",
+    "evidence",
+    "limitations",
+    "tool_usage",
+    "asset_id",
+    "replay_cutoff",
+    "calculations",
+    "replay_bundle_id"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://project50k.invalid/contracts/ai_answer.schema.json",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "origin": {
+            "const": "HISTORICAL_REPLAY"
+          }
+        },
+        "required": [
+          "origin"
+        ]
+      },
+      "then": {
+        "properties": {
+          "replay_cutoff": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "replay_bundle_id": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "replay_cutoff"
+        ]
+      },
+      "else": {
+        "properties": {
+          "replay_cutoff": {
+            "type": "null"
+          },
+          "replay_bundle_id": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ]
+}

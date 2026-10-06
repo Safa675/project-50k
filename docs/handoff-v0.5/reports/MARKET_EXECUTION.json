@@ -1,0 +1,28 @@
+{
+  "run_at_utc": "2026-10-03T07:38:30.178339+00:00",
+  "scope": "Public-source desk research, selected-passage/source-unit review and local package/arithmetic integrity; no market-data detector backtest or customer experiment.",
+  "five_specialist_evidence_lanes": true,
+  "independent_peer_review_file": "research/problem_market/MARKET_PEER_REVIEW.md",
+  "peer_review_sha256": "419f3dc8f007e167e5bd0f57cea43d67ab27029b9a14899248a661562a6ccc15",
+  "root_selected_source_passages_and_two_pdf_tables_checked": true,
+  "kap_published_category_sums_2025_2024": "PASS",
+  "kap_calendar_day_derivations": "PASS",
+  "crypto_six_row_ratios_and_sum": "PASS",
+  "catalog_coverage_unchanged": 28,
+  "catalog_empirical_rates_measured": 0,
+  "problem_solution_hypotheses": 8,
+  "package_checks_passed": 43,
+  "reference_methods_passed": 88,
+  "contract_scenarios_passed": 31,
+  "production_contracts_config_reference_tests_fixtures_registry_unchanged": true,
+  "all_prior_experiment_scripts_and_engine_brand_risk_results_unchanged": true,
+  "requirement_implementation_statuses_unchanged": 284,
+  "not_executed": [
+    "Complete historical admitted market dataset or detector backtest",
+    "Customer outreach, interviews, observational/task/pilot/payment studies",
+    "Provider-account or live RPC/API-key integration tests",
+    "Spending, pricing quotes, deployment or messaging",
+    "Competition clearance or legal/brand classification"
+  ],
+  "initial_package_link_check": "Failed only because peer review file was pending; final rerun passed after completed peer review."
+}

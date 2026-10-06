@@ -1,0 +1,49 @@
+{
+  "editable": {
+    "rvol_threshold": {
+      "type": "number",
+      "minimum": 2,
+      "maximum": 20
+    },
+    "robust_z_threshold": {
+      "type": "number",
+      "minimum": 3,
+      "maximum": 10
+    },
+    "chat_daily_turn_limit": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 50
+    },
+    "ingestion_paused": {
+      "type": "boolean"
+    },
+    "generation_paused": {
+      "type": "boolean"
+    },
+    "sending_paused": {
+      "type": "boolean"
+    }
+  },
+  "not_editable": [
+    "auth_required",
+    "rights_checks",
+    "replay_email_prohibition",
+    "source_validation",
+    "global_opt_in_requirement",
+    "service_keys",
+    "arbitrary_prompts",
+    "arbitrary_urls"
+  ],
+  "required_audit_fields": [
+    "actor_id",
+    "expected_version",
+    "reason",
+    "new_version"
+  ],
+  "runtime_bindings": {
+    "chat_daily_turn_limit": "notification_defaults.chat_turns_per_user_daily",
+    "rvol_threshold": "detection_defaults.rvol_threshold",
+    "robust_z_threshold": "detection_defaults.robust_z_threshold"
+  }
+}

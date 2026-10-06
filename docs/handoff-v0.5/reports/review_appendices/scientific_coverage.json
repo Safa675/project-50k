@@ -1,0 +1,91 @@
+{
+  "audit_date": "2026-10-02",
+  "agent": "scientific_review",
+  "baseline_immutable": true,
+  "coverage": [
+    {
+      "file": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/docs/11_Literature_Review.md",
+      "relative_file": "docs/11_Literature_Review.md",
+      "sha256": "bd9b7e136e3a23c422dac40348f0170c63b99138ef7de483f57dba9d2b6a10cd",
+      "lines": 229,
+      "inspection": "Full local file read; config additionally parsed against all28 catalog entries. Bibliography R01\u2013R15 checked against primary sources with explicit depth/failure limits.",
+      "status": "reviewed",
+      "modified": false
+    },
+    {
+      "file": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/docs/12_Anomaly_Catalog.md",
+      "relative_file": "docs/12_Anomaly_Catalog.md",
+      "sha256": "0e11537262b74020de8a0783441c6d8c983a4a9c0fb36c44697aede4b750ceea",
+      "lines": 388,
+      "inspection": "Full local file read; config additionally parsed against all28 catalog entries. Bibliography R01\u2013R15 checked against primary sources with explicit depth/failure limits.",
+      "status": "reviewed",
+      "modified": false
+    },
+    {
+      "file": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/research/references.bib",
+      "relative_file": "research/references.bib",
+      "sha256": "7de7e07de8435e26dc9b123bedd0b0eacdf5079677dfa1d77adaf739b3c2965f",
+      "lines": 134,
+      "inspection": "Full local file read; config additionally parsed against all28 catalog entries. Bibliography R01\u2013R15 checked against primary sources with explicit depth/failure limits.",
+      "status": "reviewed",
+      "modified": false
+    },
+    {
+      "file": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/research/sources.json",
+      "relative_file": "research/sources.json",
+      "sha256": "f7d5c1c1126b7cc12dacc3a76d8f41606777254708ead4fa8645dd4044c92947",
+      "lines": 494,
+      "inspection": "Full local file read; config additionally parsed against all28 catalog entries. Bibliography R01\u2013R15 checked against primary sources with explicit depth/failure limits.",
+      "status": "reviewed",
+      "modified": false
+    },
+    {
+      "file": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/research/SOURCE_REGISTER.md",
+      "relative_file": "research/SOURCE_REGISTER.md",
+      "sha256": "9dd8b0f6625dd6b0c1b8c13e72fca65c6b2a1bee2fa0ffbca3a05d76cf5acb59",
+      "lines": 291,
+      "inspection": "Full local file read; config additionally parsed against all28 catalog entries. Bibliography R01\u2013R15 checked against primary sources with explicit depth/failure limits.",
+      "status": "reviewed",
+      "modified": false
+    },
+    {
+      "file": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/config/anomaly_catalog.json",
+      "relative_file": "config/anomaly_catalog.json",
+      "sha256": "f1fc124e866443f66e4e1a4a5336dad4aa8338ea4528ebaa4be2bee175236a5d",
+      "lines": 403,
+      "inspection": "Full local file read; config additionally parsed against all28 catalog entries. Bibliography R01\u2013R15 checked against primary sources with explicit depth/failure limits.",
+      "status": "reviewed",
+      "modified": false
+    },
+    {
+      "file": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/config/detection_defaults.json",
+      "relative_file": "config/detection_defaults.json",
+      "sha256": "4aefaba9af70475a8c5c188dc250004047a04553d3c0b6a84219c6125073085f",
+      "lines": 22,
+      "inspection": "Full local file read; config additionally parsed against all28 catalog entries. Bibliography R01\u2013R15 checked against primary sources with explicit depth/failure limits.",
+      "status": "reviewed",
+      "modified": false
+    },
+    {
+      "file": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/docs/13_Decision_Confidence_and_Validation.md",
+      "relative_file": "docs/13_Decision_Confidence_and_Validation.md",
+      "sha256": "659d8afe1e625a9dfeb75968999f3496d85cd4f9a0f68a688e2cdea9e11ca780",
+      "lines": 62,
+      "inspection": "Full local file read; config additionally parsed against all28 catalog entries. Bibliography R01\u2013R15 checked against primary sources with explicit depth/failure limits.",
+      "status": "reviewed",
+      "modified": false
+    },
+    {
+      "file": "received/Project_50K_Work_Handoff_v1/baseline/Project_50K_v0.3/docs/20_Test_and_Validation_Strategy.md",
+      "relative_file": "docs/20_Test_and_Validation_Strategy.md",
+      "sha256": "40644f3c3358d9cc0db64012fe8058fdfc98dd0fc0f77c02da7bd1fb992977e7",
+      "lines": 72,
+      "inspection": "Full local file read; config additionally parsed against all28 catalog entries. Bibliography R01\u2013R15 checked against primary sources with explicit depth/failure limits.",
+      "status": "reviewed",
+      "modified": false
+    }
+  ],
+  "external_research_refs_checked": 15,
+  "anomaly_entries_checked": 28,
+  "excluded_scope": "S01\u2013S33 live source verification assigned elsewhere; source register reviewed locally only for these non-research entries."
+}
