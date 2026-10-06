@@ -1,0 +1,92 @@
+{
+  "checked_at_utc": "2026-10-06T17:37:59.020914+00:00",
+  "fund": "TTE",
+  "report": {
+    "disclosure_index": 1671887,
+    "year": 2026,
+    "month": 9,
+    "publish_date_raw": "05.10.2026 13:00:53",
+    "month_end": "2026-09-30"
+  },
+  "requests": "none: used the PDF already in raw/",
+  "pdf": {
+    "file": "raw/kap_portfoy_dagilim_TTE_2026-09.pdf",
+    "bytes": 4351043,
+    "sha256": "47b88c975ba30f956c1cb33b6b881902b8a8b067d13f624f682641af0955f296",
+    "pages": 9,
+    "text_chars": 26760,
+    "images": 0,
+    "creator": "Microsoft® Excel® LTSC"
+  },
+  "sections_found": {
+    "I fund identity": true,
+    "II performance": true,
+    "III holdings": true,
+    "IV fund total value": true,
+    "V expenses": true,
+    "VI-A corporate actions": true,
+    "VII sales from portfolio": true
+  },
+  "fields_found": {
+    "total_value": true,
+    "units_outstanding": true,
+    "month_end_price": true,
+    "previous_month_price": true,
+    "monthly_change_pct": true,
+    "ytd_change_pct": true,
+    "annual_change_pct": true,
+    "cash_in_from_unit_issuance": true,
+    "cash_out_from_unit_redemption": true
+  },
+  "number_shapes": {
+    "total_value": "9,999,999,999.99",
+    "units_outstanding": "9,999,999,999.999",
+    "month_end_price": "9.999999",
+    "previous_month_price": "9.999999",
+    "monthly_change_pct": "-99.99",
+    "ytd_change_pct": "99.99",
+    "annual_change_pct": "9.99",
+    "cash_in_from_unit_issuance": "9.99",
+    "cash_out_from_unit_redemption": "9.99"
+  },
+  "asset_mix_labels": [
+    "Hisse Senedi",
+    "Hazine Bonosu",
+    "Devlet Tahvili",
+    "Özel Sektör Tahvili",
+    "Kira Sertifikaları",
+    "Finansman Bonusu",
+    "TPP-TPP Borçlanma",
+    "BPP-BPP Borçlanma",
+    "Opsiyon",
+    "Varant",
+    "Değerli Maden",
+    "Mevduat",
+    "Katilim Hesabı",
+    "Diğer",
+    "Teminat",
+    "Yatırım Fonu",
+    "Borsa Yatırım Fonu",
+    "Repo-Trepo",
+    "Taahhütlü Alış-Satış İşlemleri",
+    "Vaad Sözleşmesi İşlemleri"
+  ],
+  "checks": {
+    "units_x_month_end_price_vs_total_rel_diff": 9.012784479905831e-08,
+    "month_end_price_tefas_dates": [
+      "2026-10-01"
+    ],
+    "previous_month_price_tefas_dates": [
+      "2026-09-01"
+    ],
+    "month_end_price_is_first_tefas_row_after_month_end": true,
+    "previous_price_is_first_tefas_row_after_previous_month_end": true,
+    "section_iv_total_equals_section_i_total": true,
+    "asset_mix_items": 20,
+    "asset_mix_sum_pct": 100.0,
+    "cash_flow_fields_both_zero": true,
+    "investor_count_present": false,
+    "negative_amounts_in_holdings_table": 10,
+    "decimal_comma_in_section_iv_percent": true
+  }
+}
