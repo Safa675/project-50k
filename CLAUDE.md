@@ -11,6 +11,8 @@ The handoff instructions imported below, and the handoff's own `CLAUDE.md`, `STA
 - `docs/handoff-v0.5/` is the frozen v0.5 handoff. Do not edit it; its `MANIFEST.json` hashes verify it. Paths in the imported instructions below are relative to that folder.
 - Record new owner decisions in `docs/decisions/` and working notes in `docs/notes/`.
 - Before copying code from Safa675/bist-quant, read `docs/notes/bist-quant-reuse.md`.
+- Before building any TEFAS adapter or fund detector, read `research/spikes/2026-10-06-tefas/REPORT.md`: it records which TEFAS fields are dated and which are placeholders.
+- Backend code lives in `services/p50k/`; tests in `tests/unit/`. Run them from the repo root with `PYTHONPATH=services python -m unittest discover -s tests -t . -v`.
 
 ## Handoff instructions
 
