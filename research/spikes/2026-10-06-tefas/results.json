@@ -1,0 +1,1463 @@
+{
+  "run_at_utc": "2026-10-06T16:09:40.840950+00:00",
+  "run_at_istanbul": "2026-10-06T19:09:40.840950+03:00",
+  "funds": [
+    "TTE",
+    "AAL"
+  ],
+  "environment": {
+    "python": "3.13.13",
+    "borsapy": "0.10.1",
+    "borsapy_tefas_py_sha256": "1f03fe2a21e09ddffdc6345d34d208fe73d0ce5e17918ee07c8a2c4a377fe503",
+    "borsapy_fund_py_sha256": "161bf7c7f9850f2c29feb74a7e13f40bf65aadde20c95701f092590ea5d5bda5",
+    "httpx": "0.28.1",
+    "certifi": "2026.06.17",
+    "openssl": "OpenSSL 3.6.3 9 Jun 2026"
+  },
+  "tls": {
+    "www.tefas.gov.tr": {
+      "verified_handshake": {
+        "ok": true,
+        "tls_version": "TLSv1.2",
+        "subject_cn": "www.takasbank.com.tr",
+        "issuer": {
+          "countryName": "BE",
+          "organizationName": "GlobalSign nv-sa",
+          "commonName": "GlobalSign GCC R3 EV TLS CA 2025"
+        },
+        "not_after": "Apr 13 13:42:38 2027 GMT"
+      },
+      "negative_control_no_trusted_ca": {
+        "ok": false,
+        "error": "SSLCertVerificationError",
+        "verify_message": "self-signed certificate in certificate chain"
+      }
+    },
+    "kap.org.tr": {
+      "verified_handshake": {
+        "ok": true,
+        "tls_version": "TLSv1.3",
+        "subject_cn": "www.kap.org.tr",
+        "issuer": {
+          "countryName": "BE",
+          "organizationName": "GlobalSign nv-sa",
+          "commonName": "GlobalSign GCC R46 EV TLS CA 2025"
+        },
+        "not_after": "Mar  8 09:19:09 2027 GMT"
+      },
+      "negative_control_no_trusted_ca": {
+        "ok": false,
+        "error": "SSLCertVerificationError",
+        "verify_message": "self-signed certificate in certificate chain"
+      }
+    }
+  },
+  "request_headers": {
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+  },
+  "tefas": {
+    "TTE": {
+      "fonBilgiGetir": {
+        "status": 200,
+        "error": null,
+        "parsed": true,
+        "envelope_keys": [
+          "errorCode",
+          "errorMessage",
+          "resultList"
+        ],
+        "error_code": null,
+        "error_message": null,
+        "result_count": 1,
+        "field_inventory": {
+          "fonKodu": {
+            "type": "str",
+            "null": false,
+            "date_like": false
+          },
+          "fonUnvan": {
+            "type": "str",
+            "null": false,
+            "date_like": false
+          },
+          "sonFiyat": {
+            "type": "float",
+            "null": false,
+            "date_like": false
+          },
+          "gunlukGetiri": {
+            "type": "float",
+            "null": false,
+            "date_like": false
+          },
+          "payAdet": {
+            "type": "int",
+            "null": false,
+            "date_like": false
+          },
+          "portBuyukluk": {
+            "type": "float",
+            "null": false,
+            "date_like": false
+          },
+          "fonKategori": {
+            "type": "str",
+            "null": false,
+            "date_like": false
+          },
+          "kategoriDerece": {
+            "type": "int",
+            "null": false,
+            "date_like": false
+          },
+          "kategoriFonSay": {
+            "type": "int",
+            "null": false,
+            "date_like": false
+          },
+          "yatirimciSayi": {
+            "type": "int",
+            "null": false,
+            "date_like": false
+          },
+          "pazarPayi": {
+            "type": "float",
+            "null": false,
+            "date_like": false
+          }
+        }
+      },
+      "fonProfilBilgiGetir": {
+        "status": 200,
+        "error": null,
+        "parsed": true,
+        "envelope_keys": [
+          "errorCode",
+          "errorMessage",
+          "resultList"
+        ],
+        "error_code": null,
+        "error_message": null,
+        "result_count": 1,
+        "field_inventory": {
+          "fonKodu": {
+            "type": "str",
+            "null": false,
+            "date_like": false
+          },
+          "fonUnvan": {
+            "type": "str",
+            "null": false,
+            "date_like": false
+          },
+          "isinKodu": {
+            "type": "str",
+            "null": false,
+            "date_like": false
+          },
+          "sonIsSaat": {
+            "type": "str",
+            "null": false,
+            "date_like": true
+          },
+          "minAlis": {
+            "type": "int",
+            "null": false,
+            "date_like": false
+          },
+          "minSatis": {
+            "type": "int",
+            "null": false,
+            "date_like": false
+          },
+          "maxAlis": {
+            "type": "NoneType",
+            "null": true,
+            "date_like": false
+          },
+          "maxSatis": {
+            "type": "NoneType",
+            "null": true,
+            "date_like": false
+          },
+          "kapLink": {
+            "type": "str",
+            "null": false,
+            "date_like": false
+          },
+          "tefasDurum": {
+            "type": "str",
+            "null": false,
+            "date_like": false
+          },
+          "cikisKomisyonu": {
+            "type": "NoneType",
+            "null": true,
+            "date_like": false
+          },
+          "girisKomisyonu": {
+            "type": "NoneType",
+            "null": true,
+            "date_like": false
+          },
+          "basIsSaat": {
+            "type": "str",
+            "null": false,
+            "date_like": true
+          },
+          "fonSatisValor": {
+            "type": "int",
+            "null": false,
+            "date_like": false
+          },
+          "fonGeriAlisValor": {
+            "type": "int",
+            "null": false,
+            "date_like": false
+          },
+          "faizIcerigi": {
+            "type": "NoneType",
+            "null": true,
+            "date_like": false
+          },
+          "riskDegeri": {
+            "type": "str",
+            "null": false,
+            "date_like": false
+          }
+        }
+      },
+      "fonFiyatBilgiGetir": {
+        "status": 200,
+        "error": null,
+        "parsed": true,
+        "envelope_keys": [
+          "errorCode",
+          "errorMessage",
+          "resultList"
+        ],
+        "error_code": null,
+        "error_message": null,
+        "result_count": 1258,
+        "history": {
+          "row_count": 1258,
+          "row_keys": [
+            "fiyat",
+            "fonKodu",
+            "fonUnvan",
+            "kategoriDerece",
+            "kategoriFonSay",
+            "tarih"
+          ],
+          "row_field_inventory": {
+            "fonKodu": {
+              "type": "str",
+              "null": false,
+              "date_like": false
+            },
+            "fonUnvan": {
+              "type": "str",
+              "null": false,
+              "date_like": false
+            },
+            "kategoriDerece": {
+              "type": "int",
+              "null": false,
+              "date_like": false
+            },
+            "kategoriFonSay": {
+              "type": "int",
+              "null": false,
+              "date_like": false
+            },
+            "tarih": {
+              "type": "str",
+              "null": false,
+              "date_like": true
+            },
+            "fiyat": {
+              "type": "float",
+              "null": false,
+              "date_like": false
+            }
+          },
+          "date_string_shapes": [
+            "9999-99-99"
+          ],
+          "unparsed_dates": 0,
+          "first_date": "2021-10-06",
+          "last_date": "2026-10-06",
+          "order": "ascending",
+          "duplicate_dates": 0,
+          "weekend_dates": [],
+          "gaps_over_4_days": [
+            {
+              "days": 5,
+              "from": "2022-07-08",
+              "to": "2022-07-13"
+            },
+            {
+              "days": 5,
+              "from": "2025-03-28",
+              "to": "2025-04-02"
+            },
+            {
+              "days": 5,
+              "from": "2025-06-05",
+              "to": "2025-06-10"
+            },
+            {
+              "days": 6,
+              "from": "2022-04-29",
+              "to": "2022-05-05"
+            },
+            {
+              "days": 6,
+              "from": "2023-06-27",
+              "to": "2023-07-03"
+            },
+            {
+              "days": 6,
+              "from": "2024-04-09",
+              "to": "2024-04-15"
+            },
+            {
+              "days": 6,
+              "from": "2024-06-14",
+              "to": "2024-06-20"
+            },
+            {
+              "days": 6,
+              "from": "2026-05-26",
+              "to": "2026-06-01"
+            }
+          ],
+          "price_types": [
+            "float"
+          ],
+          "missing_prices": 0,
+          "nonpositive_prices": 0,
+          "max_price_decimals": 6
+        }
+      }
+    },
+    "AAL": {
+      "fonBilgiGetir": {
+        "status": 200,
+        "error": null,
+        "parsed": true,
+        "envelope_keys": [
+          "errorCode",
+          "errorMessage",
+          "resultList"
+        ],
+        "error_code": null,
+        "error_message": null,
+        "result_count": 1,
+        "field_inventory": {
+          "fonKodu": {
+            "type": "str",
+            "null": false,
+            "date_like": false
+          },
+          "fonUnvan": {
+            "type": "str",
+            "null": false,
+            "date_like": false
+          },
+          "sonFiyat": {
+            "type": "float",
+            "null": false,
+            "date_like": false
+          },
+          "gunlukGetiri": {
+            "type": "float",
+            "null": false,
+            "date_like": false
+          },
+          "payAdet": {
+            "type": "int",
+            "null": false,
+            "date_like": false
+          },
+          "portBuyukluk": {
+            "type": "float",
+            "null": false,
+            "date_like": false
+          },
+          "fonKategori": {
+            "type": "str",
+            "null": false,
+            "date_like": false
+          },
+          "kategoriDerece": {
+            "type": "int",
+            "null": false,
+            "date_like": false
+          },
+          "kategoriFonSay": {
+            "type": "int",
+            "null": false,
+            "date_like": false
+          },
+          "yatirimciSayi": {
+            "type": "int",
+            "null": false,
+            "date_like": false
+          },
+          "pazarPayi": {
+            "type": "float",
+            "null": false,
+            "date_like": false
+          }
+        }
+      },
+      "fonProfilBilgiGetir": {
+        "status": 200,
+        "error": null,
+        "parsed": true,
+        "envelope_keys": [
+          "errorCode",
+          "errorMessage",
+          "resultList"
+        ],
+        "error_code": null,
+        "error_message": null,
+        "result_count": 1,
+        "field_inventory": {
+          "fonKodu": {
+            "type": "str",
+            "null": false,
+            "date_like": false
+          },
+          "fonUnvan": {
+            "type": "str",
+            "null": false,
+            "date_like": false
+          },
+          "isinKodu": {
+            "type": "str",
+            "null": false,
+            "date_like": false
+          },
+          "sonIsSaat": {
+            "type": "str",
+            "null": false,
+            "date_like": true
+          },
+          "minAlis": {
+            "type": "int",
+            "null": false,
+            "date_like": false
+          },
+          "minSatis": {
+            "type": "int",
+            "null": false,
+            "date_like": false
+          },
+          "maxAlis": {
+            "type": "NoneType",
+            "null": true,
+            "date_like": false
+          },
+          "maxSatis": {
+            "type": "NoneType",
+            "null": true,
+            "date_like": false
+          },
+          "kapLink": {
+            "type": "str",
+            "null": false,
+            "date_like": false
+          },
+          "tefasDurum": {
+            "type": "str",
+            "null": false,
+            "date_like": false
+          },
+          "cikisKomisyonu": {
+            "type": "NoneType",
+            "null": true,
+            "date_like": false
+          },
+          "girisKomisyonu": {
+            "type": "NoneType",
+            "null": true,
+            "date_like": false
+          },
+          "basIsSaat": {
+            "type": "str",
+            "null": false,
+            "date_like": true
+          },
+          "fonSatisValor": {
+            "type": "int",
+            "null": false,
+            "date_like": false
+          },
+          "fonGeriAlisValor": {
+            "type": "int",
+            "null": false,
+            "date_like": false
+          },
+          "faizIcerigi": {
+            "type": "NoneType",
+            "null": true,
+            "date_like": false
+          },
+          "riskDegeri": {
+            "type": "str",
+            "null": false,
+            "date_like": false
+          }
+        }
+      },
+      "fonFiyatBilgiGetir": {
+        "status": 200,
+        "error": null,
+        "parsed": true,
+        "envelope_keys": [
+          "errorCode",
+          "errorMessage",
+          "resultList"
+        ],
+        "error_code": null,
+        "error_message": null,
+        "result_count": 1258,
+        "history": {
+          "row_count": 1258,
+          "row_keys": [
+            "fiyat",
+            "fonKodu",
+            "fonUnvan",
+            "kategoriDerece",
+            "kategoriFonSay",
+            "tarih"
+          ],
+          "row_field_inventory": {
+            "fonKodu": {
+              "type": "str",
+              "null": false,
+              "date_like": false
+            },
+            "fonUnvan": {
+              "type": "str",
+              "null": false,
+              "date_like": false
+            },
+            "kategoriDerece": {
+              "type": "int",
+              "null": false,
+              "date_like": false
+            },
+            "kategoriFonSay": {
+              "type": "int",
+              "null": false,
+              "date_like": false
+            },
+            "tarih": {
+              "type": "str",
+              "null": false,
+              "date_like": true
+            },
+            "fiyat": {
+              "type": "float",
+              "null": false,
+              "date_like": false
+            }
+          },
+          "date_string_shapes": [
+            "9999-99-99"
+          ],
+          "unparsed_dates": 0,
+          "first_date": "2021-10-06",
+          "last_date": "2026-10-06",
+          "order": "ascending",
+          "duplicate_dates": 0,
+          "weekend_dates": [],
+          "gaps_over_4_days": [
+            {
+              "days": 5,
+              "from": "2022-07-08",
+              "to": "2022-07-13"
+            },
+            {
+              "days": 5,
+              "from": "2025-03-28",
+              "to": "2025-04-02"
+            },
+            {
+              "days": 5,
+              "from": "2025-06-05",
+              "to": "2025-06-10"
+            },
+            {
+              "days": 6,
+              "from": "2022-04-29",
+              "to": "2022-05-05"
+            },
+            {
+              "days": 6,
+              "from": "2023-06-27",
+              "to": "2023-07-03"
+            },
+            {
+              "days": 6,
+              "from": "2024-04-09",
+              "to": "2024-04-15"
+            },
+            {
+              "days": 6,
+              "from": "2024-06-14",
+              "to": "2024-06-20"
+            },
+            {
+              "days": 6,
+              "from": "2026-05-26",
+              "to": "2026-06-01"
+            }
+          ],
+          "price_types": [
+            "float"
+          ],
+          "missing_prices": 0,
+          "nonpositive_prices": 0,
+          "max_price_decimals": 6
+        }
+      }
+    },
+    "fonGetiriBazliBilgiGetir_YAT": {
+      "status": 200,
+      "result_count": 2133,
+      "field_inventory_per_fund": {
+        "AAL": {
+          "fonKodu": {
+            "type": "str",
+            "null": false,
+            "date_like": false
+          },
+          "fonUnvan": {
+            "type": "str",
+            "null": false,
+            "date_like": false
+          },
+          "fonTurAciklama": {
+            "type": "str",
+            "null": false,
+            "date_like": false
+          },
+          "tefasDurum": {
+            "type": "bool",
+            "null": false,
+            "date_like": false
+          },
+          "getiri1a": {
+            "type": "float",
+            "null": false,
+            "date_like": false
+          },
+          "getiri3a": {
+            "type": "float",
+            "null": false,
+            "date_like": false
+          },
+          "getiri6a": {
+            "type": "float",
+            "null": false,
+            "date_like": false
+          },
+          "getiri1y": {
+            "type": "float",
+            "null": false,
+            "date_like": false
+          },
+          "getiriyb": {
+            "type": "float",
+            "null": false,
+            "date_like": false
+          },
+          "getiri3y": {
+            "type": "float",
+            "null": false,
+            "date_like": false
+          },
+          "getiri5y": {
+            "type": "float",
+            "null": false,
+            "date_like": false
+          },
+          "getiriOrani": {
+            "type": "NoneType",
+            "null": true,
+            "date_like": false
+          },
+          "riskDegeri": {
+            "type": "str",
+            "null": false,
+            "date_like": false
+          }
+        },
+        "TTE": {
+          "fonKodu": {
+            "type": "str",
+            "null": false,
+            "date_like": false
+          },
+          "fonUnvan": {
+            "type": "str",
+            "null": false,
+            "date_like": false
+          },
+          "fonTurAciklama": {
+            "type": "str",
+            "null": false,
+            "date_like": false
+          },
+          "tefasDurum": {
+            "type": "bool",
+            "null": false,
+            "date_like": false
+          },
+          "getiri1a": {
+            "type": "float",
+            "null": false,
+            "date_like": false
+          },
+          "getiri3a": {
+            "type": "float",
+            "null": false,
+            "date_like": false
+          },
+          "getiri6a": {
+            "type": "float",
+            "null": false,
+            "date_like": false
+          },
+          "getiri1y": {
+            "type": "float",
+            "null": false,
+            "date_like": false
+          },
+          "getiriyb": {
+            "type": "float",
+            "null": false,
+            "date_like": false
+          },
+          "getiri3y": {
+            "type": "float",
+            "null": false,
+            "date_like": false
+          },
+          "getiri5y": {
+            "type": "float",
+            "null": false,
+            "date_like": false
+          },
+          "getiriOrani": {
+            "type": "NoneType",
+            "null": true,
+            "date_like": false
+          },
+          "riskDegeri": {
+            "type": "str",
+            "null": false,
+            "date_like": false
+          }
+        }
+      }
+    },
+    "not_found_codes": {
+      "AAK": {
+        "in_yat_fund_list": false,
+        "status": 200,
+        "content_type": "application/json;charset=UTF-8",
+        "envelope": {
+          "errorCode": null,
+          "errorMessage": null,
+          "resultList": []
+        }
+      },
+      "ZZZZZ": {
+        "in_yat_fund_list": false,
+        "status": 200,
+        "content_type": "application/json;charset=UTF-8",
+        "envelope": {
+          "errorCode": null,
+          "errorMessage": null,
+          "resultList": []
+        }
+      }
+    }
+  },
+  "snapshot_vs_history": {
+    "TTE": {
+      "latest_history_date": "2026-10-06",
+      "sonFiyat_equals_latest_history_price": true,
+      "units_x_price_vs_size_rel_diff": 1.1653482983761512e-07,
+      "gunlukGetiri_abs_diff_if_percent": 9.84474140984428e-06,
+      "gunlukGetiri_abs_diff_if_fraction": 0.0038610984474140983,
+      "latest_two_history_dates": [
+        "2026-10-05",
+        "2026-10-06"
+      ]
+    },
+    "AAL": {
+      "latest_history_date": "2026-10-06",
+      "sonFiyat_equals_latest_history_price": true,
+      "units_x_price_vs_size_rel_diff": 6.699409917523032e-08,
+      "gunlukGetiri_abs_diff_if_percent": 3.3743323634441436e-05,
+      "gunlukGetiri_abs_diff_if_fraction": 0.10246533743323634,
+      "latest_two_history_dates": [
+        "2026-10-05",
+        "2026-10-06"
+      ]
+    }
+  },
+  "borsapy": {
+    "calls": [
+      [
+        "fonBilgiGetir",
+        "TTE",
+        null
+      ],
+      [
+        "fonGetiriBazliBilgiGetir",
+        "YAT",
+        null
+      ],
+      [
+        "fonProfilBilgiGetir",
+        "TTE",
+        null
+      ],
+      [
+        "fonFiyatBilgiGetir",
+        "TTE",
+        60
+      ],
+      [
+        "fonBilgiGetir",
+        "AAL",
+        null
+      ],
+      [
+        "fonProfilBilgiGetir",
+        "AAL",
+        null
+      ],
+      [
+        "fonFiyatBilgiGetir",
+        "AAL",
+        60
+      ]
+    ],
+    "funds": {
+      "TTE": {
+        "detail_keys": [
+          "allocation",
+          "buy_valor",
+          "category",
+          "category_fund_count",
+          "category_rank",
+          "daily_return",
+          "date",
+          "entry_fee",
+          "exit_fee",
+          "first_trading_time",
+          "founder",
+          "fund_class",
+          "fund_code",
+          "fund_size",
+          "fund_type",
+          "investor_count",
+          "isin",
+          "kap_link",
+          "last_trading_time",
+          "manager",
+          "market_share",
+          "max_purchase",
+          "max_redemption",
+          "min_purchase",
+          "min_redemption",
+          "name",
+          "price",
+          "return_1m",
+          "return_1y",
+          "return_3m",
+          "return_3y",
+          "return_5y",
+          "return_6m",
+          "return_ytd",
+          "risk_value",
+          "sell_valor",
+          "tefas_status",
+          "weekly_return"
+        ],
+        "detail_empty_or_zero": [
+          "allocation",
+          "date",
+          "entry_fee",
+          "exit_fee",
+          "founder",
+          "manager",
+          "max_purchase",
+          "max_redemption",
+          "weekly_return"
+        ],
+        "detail_date_value": "",
+        "history_columns": [
+          "Price",
+          "FundSize",
+          "Investors"
+        ],
+        "history_rows": 1258,
+        "history_index_tz": "None",
+        "history_fundsize_all_nan": true,
+        "history_investors_all_zero": true,
+        "history_last_date": "2026-10-06",
+        "coerced_vs_raw": {
+          "price": {
+            "raw_present": true,
+            "borsapy_value_is_placeholder": false
+          },
+          "fund_size": {
+            "raw_present": true,
+            "borsapy_value_is_placeholder": false
+          },
+          "investor_count": {
+            "raw_present": true,
+            "borsapy_value_is_placeholder": false
+          },
+          "category": {
+            "raw_present": true,
+            "borsapy_value_is_placeholder": false
+          }
+        }
+      },
+      "AAL": {
+        "detail_keys": [
+          "allocation",
+          "buy_valor",
+          "category",
+          "category_fund_count",
+          "category_rank",
+          "daily_return",
+          "date",
+          "entry_fee",
+          "exit_fee",
+          "first_trading_time",
+          "founder",
+          "fund_class",
+          "fund_code",
+          "fund_size",
+          "fund_type",
+          "investor_count",
+          "isin",
+          "kap_link",
+          "last_trading_time",
+          "manager",
+          "market_share",
+          "max_purchase",
+          "max_redemption",
+          "min_purchase",
+          "min_redemption",
+          "name",
+          "price",
+          "return_1m",
+          "return_1y",
+          "return_3m",
+          "return_3y",
+          "return_5y",
+          "return_6m",
+          "return_ytd",
+          "risk_value",
+          "sell_valor",
+          "tefas_status",
+          "weekly_return"
+        ],
+        "detail_empty_or_zero": [
+          "allocation",
+          "buy_valor",
+          "date",
+          "entry_fee",
+          "exit_fee",
+          "founder",
+          "manager",
+          "max_purchase",
+          "max_redemption",
+          "sell_valor",
+          "weekly_return"
+        ],
+        "detail_date_value": "",
+        "history_columns": [
+          "Price",
+          "FundSize",
+          "Investors"
+        ],
+        "history_rows": 1258,
+        "history_index_tz": "None",
+        "history_fundsize_all_nan": true,
+        "history_investors_all_zero": true,
+        "history_last_date": "2026-10-06",
+        "coerced_vs_raw": {
+          "price": {
+            "raw_present": true,
+            "borsapy_value_is_placeholder": false
+          },
+          "fund_size": {
+            "raw_present": true,
+            "borsapy_value_is_placeholder": false
+          },
+          "investor_count": {
+            "raw_present": true,
+            "borsapy_value_is_placeholder": false
+          },
+          "category": {
+            "raw_present": true,
+            "borsapy_value_is_placeholder": false
+          }
+        }
+      }
+    }
+  },
+  "kap": {
+    "TTE": {
+      "kap_link_present": true,
+      "page_status": 200,
+      "list_status": 200,
+      "report_count": 13,
+      "disclosure_basic_keys": [
+        "attachmentCount",
+        "companyTitle",
+        "disclosureCategory",
+        "disclosureClass",
+        "disclosureId",
+        "disclosureIndex",
+        "disclosureType",
+        "donem",
+        "fundType",
+        "hasMultiLanguageSupport",
+        "isBlocked",
+        "isChanged",
+        "isLate",
+        "mkkMemberOid",
+        "period",
+        "publishDate",
+        "relatedDisclosureOid",
+        "relatedStocks",
+        "senderType",
+        "stockCode",
+        "summary",
+        "title",
+        "year"
+      ],
+      "publish_date_shapes": [
+        "99.99.9999 99:99:99"
+      ],
+      "flags_set": {
+        "isLate": 0,
+        "isChanged": 0,
+        "isBlocked": 0
+      },
+      "reports": [
+        {
+          "publish_date": "05.10.2026 13:00:53",
+          "year": 2026,
+          "period_month": 9,
+          "attachment_count": 1
+        },
+        {
+          "publish_date": "03.09.2026 12:55:08",
+          "year": 2026,
+          "period_month": 8,
+          "attachment_count": 1
+        },
+        {
+          "publish_date": "04.08.2026 16:11:22",
+          "year": 2026,
+          "period_month": 7,
+          "attachment_count": 1
+        },
+        {
+          "publish_date": "03.07.2026 17:00:29",
+          "year": 2026,
+          "period_month": 6,
+          "attachment_count": 1
+        },
+        {
+          "publish_date": "04.06.2026 14:05:17",
+          "year": 2026,
+          "period_month": 5,
+          "attachment_count": 1
+        },
+        {
+          "publish_date": "10.05.2026 23:22:19",
+          "year": 2026,
+          "period_month": 4,
+          "attachment_count": 1
+        },
+        {
+          "publish_date": "06.04.2026 09:19:17",
+          "year": 2026,
+          "period_month": 3,
+          "attachment_count": 1
+        },
+        {
+          "publish_date": "06.03.2026 15:31:36",
+          "year": 2026,
+          "period_month": 2,
+          "attachment_count": 1
+        },
+        {
+          "publish_date": "06.02.2026 17:57:54",
+          "year": 2026,
+          "period_month": 1,
+          "attachment_count": 1
+        },
+        {
+          "publish_date": "07.01.2026 17:27:30",
+          "year": 2025,
+          "period_month": 12,
+          "attachment_count": 1
+        },
+        {
+          "publish_date": "04.12.2025 16:44:58",
+          "year": 2025,
+          "period_month": 11,
+          "attachment_count": 1
+        },
+        {
+          "publish_date": "05.11.2025 16:29:20",
+          "year": 2025,
+          "period_month": 10,
+          "attachment_count": 1
+        },
+        {
+          "publish_date": "06.10.2025 08:58:53",
+          "year": 2025,
+          "period_month": 9,
+          "attachment_count": 1
+        }
+      ]
+    },
+    "AAL": {
+      "kap_link_present": true,
+      "page_status": 200,
+      "list_status": 200,
+      "report_count": 12,
+      "disclosure_basic_keys": [
+        "attachmentCount",
+        "companyTitle",
+        "disclosureCategory",
+        "disclosureClass",
+        "disclosureId",
+        "disclosureIndex",
+        "disclosureType",
+        "donem",
+        "fundType",
+        "hasMultiLanguageSupport",
+        "isBlocked",
+        "isChanged",
+        "isLate",
+        "mkkMemberOid",
+        "period",
+        "publishDate",
+        "relatedDisclosureOid",
+        "relatedStocks",
+        "senderType",
+        "stockCode",
+        "summary",
+        "title",
+        "year"
+      ],
+      "publish_date_shapes": [
+        "99.99.9999 99:99:99"
+      ],
+      "flags_set": {
+        "isLate": 0,
+        "isChanged": 0,
+        "isBlocked": 0
+      },
+      "reports": [
+        {
+          "publish_date": "07.09.2026 17:09:47",
+          "year": 2026,
+          "period_month": 8,
+          "attachment_count": 1
+        },
+        {
+          "publish_date": "05.08.2026 17:05:30",
+          "year": 2026,
+          "period_month": 7,
+          "attachment_count": 1
+        },
+        {
+          "publish_date": "07.07.2026 18:08:28",
+          "year": 2026,
+          "period_month": 6,
+          "attachment_count": 1
+        },
+        {
+          "publish_date": "05.06.2026 17:30:51",
+          "year": 2026,
+          "period_month": 5,
+          "attachment_count": 1
+        },
+        {
+          "publish_date": "08.05.2026 16:43:38",
+          "year": 2026,
+          "period_month": 4,
+          "attachment_count": 1
+        },
+        {
+          "publish_date": "07.04.2026 12:01:59",
+          "year": 2026,
+          "period_month": 3,
+          "attachment_count": 1
+        },
+        {
+          "publish_date": "09.03.2026 13:32:08",
+          "year": 2026,
+          "period_month": 2,
+          "attachment_count": 1
+        },
+        {
+          "publish_date": "05.02.2026 10:11:19",
+          "year": 2026,
+          "period_month": 1,
+          "attachment_count": 1
+        },
+        {
+          "publish_date": "08.01.2026 16:42:57",
+          "year": 2025,
+          "period_month": 12,
+          "attachment_count": 1
+        },
+        {
+          "publish_date": "08.12.2025 11:07:11",
+          "year": 2025,
+          "period_month": 11,
+          "attachment_count": 1
+        },
+        {
+          "publish_date": "06.11.2025 18:15:56",
+          "year": 2025,
+          "period_month": 10,
+          "attachment_count": 1
+        },
+        {
+          "publish_date": "06.10.2025 16:21:45",
+          "year": 2025,
+          "period_month": 9,
+          "attachment_count": 1
+        }
+      ]
+    }
+  },
+  "requests": [
+    {
+      "label": "fonBilgiGetir_TTE",
+      "method": "POST",
+      "url": "https://www.tefas.gov.tr/api/funds/fonBilgiGetir",
+      "payload": {
+        "fonKodu": "TTE"
+      },
+      "requested_at_utc": "2026-10-06T16:09:41.680787+00:00",
+      "status": 200,
+      "content_type": "application/json;charset=UTF-8",
+      "server_date_header": "Tue, 06 Oct 2026 16:09:42 GMT",
+      "bytes": 404,
+      "sha256": "fe2e512255c95ee892c9c966555fd59b427ec24021029ef1de37fe5cd770cbd6",
+      "raw_file": "raw/fonBilgiGetir_TTE.body"
+    },
+    {
+      "label": "fonProfilBilgiGetir_TTE",
+      "method": "POST",
+      "url": "https://www.tefas.gov.tr/api/funds/fonProfilBilgiGetir",
+      "payload": {
+        "fonKodu": "TTE",
+        "dil": "TR"
+      },
+      "requested_at_utc": "2026-10-06T16:09:43.377192+00:00",
+      "status": 200,
+      "content_type": "application/json;charset=UTF-8",
+      "server_date_header": "Tue, 06 Oct 2026 16:09:44 GMT",
+      "bytes": 639,
+      "sha256": "6984b5a4763fbbcab321d6646b35e158321712200189d196c60c98b1c0343476",
+      "raw_file": "raw/fonProfilBilgiGetir_TTE.body"
+    },
+    {
+      "label": "fonFiyatBilgiGetir_TTE",
+      "method": "POST",
+      "url": "https://www.tefas.gov.tr/api/funds/fonFiyatBilgiGetir",
+      "payload": {
+        "fonKodu": "TTE",
+        "dil": "TR",
+        "periyod": 60
+      },
+      "requested_at_utc": "2026-10-06T16:09:44.944397+00:00",
+      "status": 200,
+      "content_type": "application/json;charset=UTF-8",
+      "server_date_header": "Tue, 06 Oct 2026 16:09:46 GMT",
+      "bytes": 281710,
+      "sha256": "7f497f224e0014fa71acad0a4c742a7b21968badb2b24e871280f6f5966be635",
+      "raw_file": "raw/fonFiyatBilgiGetir_TTE.body"
+    },
+    {
+      "label": "fonBilgiGetir_AAL",
+      "method": "POST",
+      "url": "https://www.tefas.gov.tr/api/funds/fonBilgiGetir",
+      "payload": {
+        "fonKodu": "AAL"
+      },
+      "requested_at_utc": "2026-10-06T16:09:46.827484+00:00",
+      "status": 200,
+      "content_type": "application/json;charset=UTF-8",
+      "server_date_header": "Tue, 06 Oct 2026 16:09:48 GMT",
+      "bytes": 326,
+      "sha256": "cfb18bdb883db932dbfd17cbc52e49b20566a37d789cdc2c0d08dcfc940e0073",
+      "raw_file": "raw/fonBilgiGetir_AAL.body"
+    },
+    {
+      "label": "fonProfilBilgiGetir_AAL",
+      "method": "POST",
+      "url": "https://www.tefas.gov.tr/api/funds/fonProfilBilgiGetir",
+      "payload": {
+        "fonKodu": "AAL",
+        "dil": "TR"
+      },
+      "requested_at_utc": "2026-10-06T16:09:48.382363+00:00",
+      "status": 200,
+      "content_type": "application/json;charset=UTF-8",
+      "server_date_header": "Tue, 06 Oct 2026 16:09:49 GMT",
+      "bytes": 500,
+      "sha256": "e45530720ea093ce68783ae73658a79b5b34d7a2d0a3e5499e1a8ddb296e8d10",
+      "raw_file": "raw/fonProfilBilgiGetir_AAL.body"
+    },
+    {
+      "label": "fonFiyatBilgiGetir_AAL",
+      "method": "POST",
+      "url": "https://www.tefas.gov.tr/api/funds/fonFiyatBilgiGetir",
+      "payload": {
+        "fonKodu": "AAL",
+        "dil": "TR",
+        "periyod": 60
+      },
+      "requested_at_utc": "2026-10-06T16:09:49.939896+00:00",
+      "status": 200,
+      "content_type": "application/json;charset=UTF-8",
+      "server_date_header": "Tue, 06 Oct 2026 16:09:51 GMT",
+      "bytes": 184836,
+      "sha256": "6a9092b07e02554969ff1b571d97a9b6822129277469eec32bb43a4745fcbd97",
+      "raw_file": "raw/fonFiyatBilgiGetir_AAL.body"
+    },
+    {
+      "label": "fonGetiriBazliBilgiGetir_YAT",
+      "method": "POST",
+      "url": "https://www.tefas.gov.tr/api/funds/fonGetiriBazliBilgiGetir",
+      "payload": {
+        "fonTipi": "YAT",
+        "dil": "TR",
+        "calismaTipi": 2,
+        "donemGetiri1a": "1",
+        "donemGetiri3a": "1",
+        "donemGetiri6a": "1",
+        "donemGetiriyb": "1",
+        "donemGetiri1y": "1",
+        "donemGetiri3y": "1",
+        "donemGetiri5y": "1"
+      },
+      "requested_at_utc": "2026-10-06T16:09:51.648355+00:00",
+      "status": 200,
+      "content_type": "application/json;charset=UTF-8",
+      "server_date_header": "Tue, 06 Oct 2026 16:09:53 GMT",
+      "bytes": 667608,
+      "sha256": "730c12ec039dbc9deb74e7e8d277c2ac0159452721abeb23eef9e72eca52482d",
+      "raw_file": "raw/fonGetiriBazliBilgiGetir_YAT.body"
+    },
+    {
+      "label": "fonBilgiGetir_AAK",
+      "method": "POST",
+      "url": "https://www.tefas.gov.tr/api/funds/fonBilgiGetir",
+      "payload": {
+        "fonKodu": "AAK"
+      },
+      "requested_at_utc": "2026-10-06T16:09:53.818922+00:00",
+      "status": 200,
+      "content_type": "application/json;charset=UTF-8",
+      "server_date_header": "Tue, 06 Oct 2026 16:09:54 GMT",
+      "bytes": 54,
+      "sha256": "3fb4be5d2e26a6ebe6e4e1ffab761b46ecf692a4028bcbd60622de4cb0dc249b",
+      "raw_file": "raw/fonBilgiGetir_AAK.body"
+    },
+    {
+      "label": "fonBilgiGetir_ZZZZZ",
+      "method": "POST",
+      "url": "https://www.tefas.gov.tr/api/funds/fonBilgiGetir",
+      "payload": {
+        "fonKodu": "ZZZZZ"
+      },
+      "requested_at_utc": "2026-10-06T16:09:55.372785+00:00",
+      "status": 200,
+      "content_type": "application/json;charset=UTF-8",
+      "server_date_header": "Tue, 06 Oct 2026 16:09:56 GMT",
+      "bytes": 54,
+      "sha256": "3fb4be5d2e26a6ebe6e4e1ffab761b46ecf692a4028bcbd60622de4cb0dc249b",
+      "raw_file": "raw/fonBilgiGetir_ZZZZZ.body"
+    },
+    {
+      "label": "kap_page_TTE",
+      "method": "GET",
+      "url": "https://www.kap.org.tr/tr/fon-bilgileri/genel/tte-is-portfoy-bist-teknoloji-agirlik-sinirlamali-endeksi-hisse-senedi-tl-fonu-hisse-senedi-yogun-fon",
+      "payload": null,
+      "requested_at_utc": "2026-10-06T16:09:56.930484+00:00",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "server_date_header": "Tue, 06 Oct 2026 16:08:15 GMT",
+      "bytes": 502664,
+      "sha256": "3315a2b163b8477eeb8731960233a2e702a904661dfeb3d767f180b1dc4bc439",
+      "raw_file": "raw/kap_page_TTE.body"
+    },
+    {
+      "label": "kap_portfolio_reports_TTE",
+      "method": "GET",
+      "url": "https://kap.org.tr/tr/api/disclosure/filter/FILTERYFBF/33E5FED7E83B00EAE0530A4A622B2AEA/8aca490d502e34b801502e380044002b/365",
+      "payload": null,
+      "requested_at_utc": "2026-10-06T16:09:58.721790+00:00",
+      "status": 200,
+      "content_type": "application/json",
+      "server_date_header": "Tue, 06 Oct 2026 16:09:59 GMT",
+      "bytes": 13758,
+      "sha256": "c9237142a32651410a44e5b8125be77253d06a42d65f520f7c96ed6e662767be",
+      "raw_file": "raw/kap_portfolio_reports_TTE.body"
+    },
+    {
+      "label": "kap_page_AAL",
+      "method": "GET",
+      "url": "https://www.kap.org.tr/tr/fon-bilgileri/genel/aal-ata-portfoy-para-piyasasi-tl-fonu",
+      "payload": null,
+      "requested_at_utc": "2026-10-06T16:10:00.356853+00:00",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "server_date_header": "Tue, 06 Oct 2026 16:10:01 GMT",
+      "bytes": 310298,
+      "sha256": "2db19e6ea22393ce27365c0674ea5d8900ebef9e3f5058e31533042b65b951af",
+      "raw_file": "raw/kap_page_AAL.body"
+    },
+    {
+      "label": "kap_portfolio_reports_AAL",
+      "method": "GET",
+      "url": "https://kap.org.tr/tr/api/disclosure/filter/FILTERYFBF/33E5FED7E36300EAE0530A4A622B2AEA/8aca490d502e34b801502e380044002b/365",
+      "payload": null,
+      "requested_at_utc": "2026-10-06T16:10:02.002286+00:00",
+      "status": 200,
+      "content_type": "application/json",
+      "server_date_header": "Tue, 06 Oct 2026 16:10:03 GMT",
+      "bytes": 11965,
+      "sha256": "ee2fd2cbec126a9cf2530fdef841abf02314b04b144abf2c46adda42990c3676",
+      "raw_file": "raw/kap_portfolio_reports_AAL.body"
+    }
+  ]
+}

@@ -17,6 +17,9 @@ Planning and research only. There is no application yet, and all 284 requirement
 | `docs/decisions/` | Owner decisions made after the handoff, starting with DEC-024 |
 | `docs/notes/` | Working notes, such as what to reuse from bist-quant |
 | `docs/handoff-v0.5/` | The v0.5 research handoff, unchanged: requirements, anomaly catalog, contracts, research, reports and an offline reference harness |
+| `research/spikes/` | Provider spikes with live samples, starting with [TEFAS / borsapy](research/spikes/2026-10-06-tefas/REPORT.md) |
+| `services/p50k/` | Backend package. So far: provider retry and circuit breaker, a JSON disk cache and series math, ported from bist-quant |
+| `tests/unit/` | Unit tests for `services/p50k/` |
 
 The handoff is kept as a frozen snapshot so its `MANIFEST.json` hashes keep verifying. Record changes as new files in `docs/decisions/` or `docs/notes/` instead of editing it.
 
@@ -30,7 +33,13 @@ The handoff is kept as a frozen snapshot so its `MANIFEST.json` hashes keep veri
 
 ## Local checks
 
-The handoff's offline reference tests need only the Python standard library:
+Both test suites need only the Python standard library. From the repo root:
+
+```sh
+PYTHONPATH=services python -m unittest discover -s tests -t . -v
+```
+
+The handoff's offline reference tests:
 
 ```sh
 cd docs/handoff-v0.5

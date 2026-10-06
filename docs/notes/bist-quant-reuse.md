@@ -12,17 +12,17 @@
 - History is date and NAV only; no AUM or investor-count history.
 - No tests in the repo cover it.
 
-Write a new TEFAS adapter instead, following the spike in `docs/handoff-v0.5/docs/10_Data_Requirements_and_Provider_Matrix.md` section 3.
+Write a new TEFAS adapter instead, following the spike plan in `docs/handoff-v0.5/docs/10_Data_Requirements_and_Provider_Matrix.md` section 3 and the findings in `research/spikes/2026-10-06-tefas/REPORT.md`.
 
-## Candidates to copy
+## Ported (2026-10-06)
 
-Copy the file with an attribution header and add tests in this repo. Review each one against the handoff's integrity rules before use.
+Each ported file starts with its source and a list of what changed. Tests are in `tests/unit/`.
 
-| File | Size | Use |
+| bist-quant source | Ported to | Main changes |
 |---|---|---|
-| `common/resilience.py` | 154 lines | `CircuitBreaker`, `retry_with_backoff` for provider calls |
-| `common/disk_cache.py` | 292 lines | Local response cache |
-| `analytics/core_metrics.py` (selected functions) | 1,036 lines total | `curve_to_returns`, `compute_max_drawdown`, `align_series_by_date`, `quantile`, `sample_std_dev`. `PerformanceMetrics` fields default to `0.0`; check how empty or missing input is reported before reuse, since unknown must not read as normal. |
+| `common/resilience.py` | `services/p50k/providers/resilience.py` | Retries only the exception types the caller names; never retries an open circuit; the circuit breaker can ignore errors that aren't about provider health; one trial call at a time when half-open; logs the error class, not its message. |
+| `common/disk_cache.py` | `services/p50k/providers/disk_cache.py` | JSON only (no pandas); reads return when the value was cached; NaN and non-JSON values rejected; key names validated so they can't escape the cache directory; atomic single-file writes. |
+| `analytics/core_metrics.py` (selected functions) | `services/p50k/series.py` | Undefined results are `None`, not `0.0`; NaN, non-positive prices and duplicate dates raise; real `date` objects; drawdown as a fraction; log returns added; alignment reports dropped observations. `normal_cdf` and the performance suite were not ported. |
 
 When BIST returns (postponed by DEC-024): `clients/borsapy_client.py`, `clients/borsapy_prices.py`, `clients/borsapy_indices.py`, `common/loaders/price_loader.py`.
 
@@ -36,4 +36,4 @@ Prefer copying the few files above over depending on the whole library. bist-qua
 
 ## Not verified
 
-bist-quant's own test suite was not run. borsapy's current fund API was not checked. Whether `bist-quant` is published on PyPI was not checked.
+bist-quant's own test suite was not run. Whether `bist-quant` is published on PyPI was not checked. borsapy's fund API was checked later, in the 2026-10-06 TEFAS spike.

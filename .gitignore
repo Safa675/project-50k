@@ -9,3 +9,6 @@ node_modules/
 coverage/
 .playwright/
 .DS_Store
+
+# Raw provider responses from spikes: data rights not reviewed.
+research/spikes/*/raw/
