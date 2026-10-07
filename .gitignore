@@ -12,3 +12,4 @@ coverage/
 
 # Raw provider responses from spikes: data rights not reviewed.
 research/spikes/*/raw/
+research/events/*/raw/

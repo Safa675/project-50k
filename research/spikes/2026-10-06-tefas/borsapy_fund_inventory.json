@@ -1,0 +1,1101 @@
+{
+  "reviewed": "borsapy 0.10.1, installed source, read-only inspection on 2026-10-06; no borsapy calls and no network requests",
+  "method": "Two readers (fund.py with _providers/tefas.py; the rest of the package) and one reviewer asked to refute: 'only unit price is dated fund history'. Paths are relative to site-packages.",
+  "fund_api": {
+    "history_beyond_price": "No. Within fund.py, the classes it inherits from and every provider they call, unit price is the only dated time series. Fund.history() reads just tarih and fiyat from each fonFiyatBilgiGetir row (tefas.py:525-551). Everything else is undated or a placeholder:\n\n- **Fund size / AUM:** history() sets FundSize=float('nan') on every row (tefas.py:553). The only real value is info['fund_size'] (portBuyukluk, tefas.py:355), and info['date'] is hardcoded '' (tefas.py:353).\n- **Investor count:** history() sets Investors=0 on every row (tefas.py:554). info['investor_count'] (yatirimciSayi, tefas.py:356) is a snapshot.\n- **Units outstanding:** not exposed anywhere. A grep finds no payAdet in tefas.py.\n- **Allocation:** only the current page snapshot, loaded through a stealth browser and stamped Date=datetime.now() (tefas.py:658, 673). allocation_history() deletes period, start and end and returns that same snapshot (fund.py:327-330), and get_allocation() discards start, end and fund_type (tefas.py:640-641). The old allocation-history path is dead code: ASSET_TYPE_MAPPING, commented 'Used by BindHistoryAllocation API' (tefas.py:21-74), and the legacy /api/DB helper _post_json (tefas.py:195-225) are never referenced in the package.\n- **Holdings:** get_holdings() returns one KAP report per call: the latest, or a YYYY-MM within a hard-coded 365-day lookback, otherwise silently the latest (kap_holdings.py:438, 446-458). The DataFrame has no date column (kap_holdings.py:523-533). report_date is computed (kap_holdings.py:482-491) but only kept in a private cache (kap_holdings.py:494). Parsing needs a paid OpenRouter LLM (kap_holdings.py:263-293).\n- **Category membership:** info category, category_rank and category_fund_count are current only (tefas.py:363, 381-382). screen_funds and search_funds list only today's funds, with no dates (tefas.py:776-834, 981-996).\n- **Fees:** management_fee and management_fees (fonYonetimBazliBilgiGetir, tefas.py:1023-1044) and info entry_fee/exit_fee (tefas.py:394-395) carry no effective date.\n- **Returns and risk:** return_1m to return_5y (tefas.py:370-376) and risk_value (tefas.py:364-368) are undated snapshots.\n\nThe only dated non-price items in scope:\n- The KAP disclosure list behind get_holdings: publish_date, year and month per monthly portfolio report (kap_holdings.py:143-154). It is a private provider method and returns report metadata, not holdings values.\n- The static withholding-tax schedule's legal period boundaries (tax.py:27-46). This is reference data, not fund history.\n\nTechnical-indicator series are dated only because they are computed from the price series.",
+    "capabilities": [
+      {
+        "api": "Fund.history(period='1mo', start=None, end=None)",
+        "source_file": "borsapy/fund.py",
+        "line": 332,
+        "upstream": "TEFAS POST https://www.tefas.gov.tr/api/funds/fonFiyatBilgiGetir {fonKodu, dil:'TR', periyod} via TEFASProvider.get_history (tefas.py:484-579, request at 525-529). If fund_type was not passed to Fund(), evaluating self.fund_type (fund.py:372) first calls Fund.info: fonBilgiGetir, fonGetiriBazliBilgiGetir and fonProfilBilgiGetir (fund.py:72-103). That result is then ignored.",
+        "returns": "DataFrame indexed by a timezone-naive Date (datetime.fromisoformat(tarih[:10]), tefas.py:545), sorted ascending (tefas.py:560-561), with columns Price=float(fiyat), FundSize, Investors (tefas.py:548-556). Raises DataNotAvailableError if empty (tefas.py:535-536, 574-577).",
+        "classification": "DATED_HISTORY",
+        "dated_fields": [
+          "Date (TEFAS tarih, per row)",
+          "Price (TEFAS fiyat, per row)"
+        ],
+        "undated_fields": [],
+        "placeholder_fields": [
+          "FundSize = float('nan') on every row (tefas.py:553)",
+          "Investors = 0 on every row (tefas.py:554)"
+        ],
+        "ignored_parameters": [
+          "TEFASProvider.get_history fund_type: documented as ignored (tefas.py:506-507) and never used in the body (tefas.py:514-579)",
+          "period is ignored whenever start or end is given (tefas.py:463-481)",
+          "period is approximated: '1d','5d','1w','1wk' map to the weekly bucket 13 and '2y' maps to the 3y bucket 36 (tefas.py:114-123). Without start/end there is no client-side trim (tefas.py:569-572).",
+          "an unrecognized period (e.g. '10y') silently maps to 1 month (tefas.py:482)",
+          "a start older than about 5 years is silently cut to the 5-year maximum (tefas.py:474-478, 570)"
+        ],
+        "requires": "none (public TEFAS JSON API, no key). borsapy turns TLS verification off (tefas.py:18, 134).",
+        "notes": "Only tarih and fiyat are read from each row (tefas.py:540-541); every other row field is dropped. The period map is in tefas.py:113-131, capped at 5 years (periyod 60). Results are cached per (fund, periyod) for 3600 s (tefas.py:520, 563; cache.py:70). The Fund class docstring example (fund.py:24-28) still shows real FundSize/Investors values, which is stale; the method docstring admits NaN/0 (fund.py:352-356)."
+      },
+      {
+        "api": "Fund.info / Fund.detail (alias)",
+        "source_file": "borsapy/fund.py",
+        "line": 106,
+        "upstream": "TEFASProvider.get_fund_detail (tefas.py:289-411) makes three calls: (1) fonBilgiGetir {fonKodu} (tefas.py:310-314); (2) fonGetiriBazliBilgiGetir for ALL funds of a type, YAT then EMK, with calismaTipi 2 and every donemGetiri* flag '1', via _lookup_fund_returns (tefas.py:413-448, request 426-441); (3) fonProfilBilgiGetir {fonKodu, dil:'TR'} (tefas.py:340-344). Failures in (2) and (3) are swallowed (tefas.py:331-332, 347-348).",
+        "returns": "dict built at tefas.py:350-401. Fields and upstream sources: fund_code; name (fonUnvan); date; price (sonFiyat); fund_size (portBuyukluk); investor_count (yatirimciSayi); founder; manager; fund_type (fonTurAciklama); fund_class (YAT/EMK); category (fonKategori); risk_value (riskDegeri); return_1m/3m/6m/ytd/1y/3y/5y (getiri1a/3a/6a/yb/1y/3y/5y); daily_return (gunlukGetiri); weekly_return; category_rank (kategoriDerece); category_fund_count (kategoriFonSay); market_share (pazarPayi); isin (isinKodu); last_trading_time (sonIsSaat); first_trading_time (basIsSaat); min/max purchase and redemption (minAlis/minSatis/maxAlis/maxSatis); buy_valor and sell_valor (fonGeriAlisValor, fonSatisValor); entry_fee and exit_fee (girisKomisyonu, cikisKomisyonu); kap_link (kapLink); tefas_status (tefasDurum); allocation.",
+        "classification": "LATEST_SNAPSHOT_UNDATED",
+        "dated_fields": [],
+        "undated_fields": [
+          "name",
+          "price",
+          "fund_size",
+          "investor_count",
+          "fund_type",
+          "fund_class",
+          "category",
+          "risk_value",
+          "return_1m",
+          "return_3m",
+          "return_6m",
+          "return_ytd",
+          "return_1y",
+          "return_3y",
+          "return_5y",
+          "daily_return",
+          "category_rank",
+          "category_fund_count",
+          "market_share",
+          "isin",
+          "last_trading_time",
+          "first_trading_time",
+          "min_purchase",
+          "min_redemption",
+          "max_purchase",
+          "max_redemption",
+          "buy_valor",
+          "sell_valor",
+          "entry_fee",
+          "exit_fee",
+          "kap_link",
+          "tefas_status"
+        ],
+        "placeholder_fields": [
+          "date = '' always (tefas.py:353)",
+          "founder = '' always (tefas.py:357)",
+          "manager = '' always (tefas.py:358)",
+          "weekly_return = None always (tefas.py:379)",
+          "allocation = None always (tefas.py:400)",
+          "price, fund_size, investor_count become 0 when missing (tefas.py:354-356)",
+          "risk_value becomes 0 when missing in both profile and returns (tefas.py:364-368)",
+          "fund_class falls back to the requested type 'YAT' when the code is in neither returns list (tefas.py:362)",
+          "name, category, fund_type become '' when missing (tefas.py:352, 359, 363)",
+          "return_* and profile fields become None when those calls fail, which happens silently"
+        ],
+        "ignored_parameters": [
+          "An explicit Fund(code, fund_type=...) is not passed to get_fund_detail (fund.py:130); info always uses the default lookup, YAT first then EMK (tefas.py:422)"
+        ],
+        "requires": "none (public TEFAS JSON API)",
+        "notes": "No field carries an as-of date, although the docstring promises 'date: Last update date' and founder/manager (fund.py:113-119). Units outstanding (payAdet) is never read; a grep finds no reference in tefas.py. The founder code kurucuKod exists upstream (used at tefas.py:797, 1039) but is not mapped into founder. The provider cache lasts 300 s (TTL.FX_RATES, tefas.py:403; cache.py:73; TTL.FUND_DATA in cache.py:75 is unused). The Fund instance caches info with no expiry (fund.py:128-137), so a long-lived Fund object never refreshes. Real zeros cannot be told apart from coerced zeros. An unknown code raises DataNotAvailableError (tefas.py:316-317)."
+      },
+      {
+        "api": "Fund.performance",
+        "source_file": "borsapy/fund.py",
+        "line": 145,
+        "upstream": "No call of its own; reads Fund.info (fund.py:156), so it uses the same three TEFAS calls.",
+        "returns": "dict: daily_return (gunlukGetiri from fonBilgiGetir) and return_1m/3m/6m/ytd/1y/3y/5y (getiri* from fonGetiriBazliBilgiGetir) (fund.py:157-166)",
+        "classification": "LATEST_SNAPSHOT_UNDATED",
+        "dated_fields": [],
+        "undated_fields": [
+          "daily_return",
+          "return_1m",
+          "return_3m",
+          "return_6m",
+          "return_ytd",
+          "return_1y",
+          "return_3y",
+          "return_5y"
+        ],
+        "placeholder_fields": [
+          "return_* are None when the returns lookup fails or the code is not found (tefas.py:325, 331-332, 370-376)"
+        ],
+        "ignored_parameters": [],
+        "requires": "none",
+        "notes": "A subset of info. weekly_return is omitted. The as-of date of the returns is never given, so they cannot be placed on the price timeline."
+      },
+      {
+        "api": "Fund.fund_type (property)",
+        "source_file": "borsapy/fund.py",
+        "line": 73,
+        "upstream": "If not set in the constructor, _detect_fund_type reads Fund.info['fund_class'] (fund.py:88-103). fund_class depends on which fonGetiriBazliBilgiGetir list (YAT or EMK) contains the code (tefas.py:422-446, 362).",
+        "returns": "'YAT' or 'EMK' string",
+        "classification": "DERIVED_FROM_OTHER_OUTPUTS",
+        "dated_fields": [],
+        "undated_fields": [
+          "fund_type"
+        ],
+        "placeholder_fields": [
+          "'YAT' when detection raises or finds nothing (fund.py:86, 98-103; tefas.py:362)"
+        ],
+        "ignored_parameters": [],
+        "requires": "none",
+        "notes": "Derived from membership in today's returns list, so undated. Name clash: Fund.fund_type is the YAT/EMK class code, while info['fund_type'] is the fonTurAciklama description. A constructor value is returned as given, without validation (fund.py:49, 79-80). Reading this property is what triggers the hidden info calls inside history(), allocation and management_fee."
+      },
+      {
+        "api": "Fund.fund_code / Fund.symbol / Fund.__repr__",
+        "source_file": "borsapy/fund.py",
+        "line": 63,
+        "upstream": "none (local)",
+        "returns": "Constructor input, upper-cased (fund.py:48, 62-70, 576-577)",
+        "classification": "OTHER",
+        "dated_fields": [],
+        "undated_fields": [],
+        "placeholder_fields": [],
+        "ignored_parameters": [],
+        "requires": "none",
+        "notes": "No validation; an unknown or retired code only shows up as DataNotAvailableError on the first network call."
+      },
+      {
+        "api": "Fund.management_fee (property)",
+        "source_file": "borsapy/fund.py",
+        "line": 169,
+        "upstream": "TEFASProvider.get_management_fees (tefas.py:1006-1049) calls fonYonetimBazliBilgiGetir {fonTipi, dil:'TR'} for all funds of the type (tefas.py:1023-1027), then filters by code client-side (fund.py:197-198). Reading self.fund_type may trigger the info calls first (fund.py:193).",
+        "returns": "dict: applied_fee (uygulananYu1Y), prospectus_fee (fonIcTuzukYu1G), max_expense_ratio (fonTopGiderKesoran), each parsed from Turkish decimals (tefas.py:1040-1042, 136-154), and annual_return (yillikGetiri, passed through raw, tefas.py:1043)",
+        "classification": "LATEST_SNAPSHOT_UNDATED",
+        "dated_fields": [],
+        "undated_fields": [
+          "applied_fee",
+          "prospectus_fee",
+          "max_expense_ratio",
+          "annual_return"
+        ],
+        "placeholder_fields": [
+          "all four None on any exception or when the code is not found (fund.py:185-195, 206)",
+          "a fee is None when the upstream string is empty or invalid (tefas.py:146-154)"
+        ],
+        "ignored_parameters": [],
+        "requires": "none",
+        "notes": "Fee changes carry no effective date. The window and as-of date of annual_return are undocumented. Not cached, so every call re-downloads the whole list. Errors are swallowed, unlike the module-level management_fees()."
+      },
+      {
+        "api": "Fund.tax_category (property)",
+        "source_file": "borsapy/fund.py",
+        "line": 209,
+        "upstream": "Fund.info category (fonKategori) and name (fonUnvan) (fund.py:224-227), passed to the static map borsapy.tax.classify_fund_tax_category (tax.py:171-205; TEFAS_CATEGORY_MAP tax.py:76-145)",
+        "returns": "Tax-category id string such as 'degisken_karma_doviz', or None",
+        "classification": "DERIVED_FROM_OTHER_OUTPUTS",
+        "dated_fields": [],
+        "undated_fields": [
+          "tax_category"
+        ],
+        "placeholder_fields": [
+          "None when the category is '' or unmapped (tax.py:183-184, 205)"
+        ],
+        "ignored_parameters": [],
+        "requires": "none (static map plus the info network call)",
+        "notes": "Inputs are today's undated category and name, so the result reflects the current category only; there is no historical category. 'Hisse Senedi' categories are split by a 'yabanci' keyword in the name (tax.py:189-195). The map is maintained by hand."
+      },
+      {
+        "api": "Fund.withholding_tax_rate(purchase_date=None, holding_days=None)",
+        "source_file": "borsapy/fund.py",
+        "line": 229,
+        "upstream": "Fund.tax_category (and through it Fund.info), plus the static table borsapy.tax.get_withholding_tax_rate (tax.py:208-244; TAX_PERIODS/TAX_RATES at tax.py:27-46)",
+        "returns": "float rate as a decimal (e.g. 0.175), or None",
+        "classification": "DERIVED_FROM_OTHER_OUTPUTS",
+        "dated_fields": [
+          "purchase_date selects the legal period (tax.py:242-243)"
+        ],
+        "undated_fields": [
+          "the tax category input (today's category)"
+        ],
+        "placeholder_fields": [
+          "purchase_date defaults to date.today() (fund.py:261-262)"
+        ],
+        "ignored_parameters": [],
+        "requires": "none",
+        "notes": "The rate lookup depends on the purchase date, but the category comes from today's data, not the purchase date, so it is not point-in-time. The last legal period is open-ended from 2025-07-09 (tax.py:33); any later legal change is missing. holding_days only matters for GSYF/GYF funds held over 730 days (tax.py:234-240)."
+      },
+      {
+        "api": "Fund.allocation (property)",
+        "source_file": "borsapy/fund.py",
+        "line": 268,
+        "upstream": "TEFASProvider.get_allocation (tefas.py:597-692) calls _fetch_fund_page_html (tefas.py:694-737). That uses Scrapling StealthyFetcher, a stealth patchright/Chromium browser, to render https://www.tefas.gov.tr/tr/fon-detayli-analiz/{code} headless (tefas.py:714-723) and get past the Akamai TSPD bot challenge (tefas.py:606-614, 697-700). A regex then pulls kiymetTip/portfoyOrani from the escaped Next.js JSON (tefas.py:585-595).",
+        "returns": "DataFrame: Date, asset_type (Turkish), asset_name (English via ASSET_NAME_STANDARDIZATION, tefas.py:78-95), weight (%); one row per asset class, sorted by weight descending (tefas.py:687-689)",
+        "classification": "INADMISSIBLE_OR_PAID_PATH",
+        "dated_fields": [],
+        "undated_fields": [
+          "asset_type",
+          "asset_name",
+          "weight"
+        ],
+        "placeholder_fields": [
+          "Date = datetime.now() on every row (tefas.py:658, 673)"
+        ],
+        "ignored_parameters": [
+          "TEFASProvider.get_allocation start, end, fund_type (tefas.py:625-627, 640-641)"
+        ],
+        "requires": "pip install borsapy[allocation], which installs scrapling[fetchers]>=0.4.0 (dist-info METADATA:37-38), plus 'playwright install chromium' (fund.py:275-276; tefas.py:704-712). This is browser automation built to evade bot detection.",
+        "notes": "No source date is parsed from the page. Rows with weight <= 0 are dropped (tefas.py:669-670) and only the first match per asset type is kept (tefas.py:662-664). Cached for 300 s (tefas.py:691). Reading self.fund_type (fund.py:293) still triggers the info calls, even though fund_type is then discarded."
+      },
+      {
+        "api": "Fund.allocation_history(period='1mo', start=None, end=None) [deprecated]",
+        "source_file": "borsapy/fund.py",
+        "line": 295,
+        "upstream": "Same as Fund.allocation (fund.py:330)",
+        "returns": "The current snapshot DataFrame, same as allocation",
+        "classification": "INADMISSIBLE_OR_PAID_PATH",
+        "dated_fields": [],
+        "undated_fields": [
+          "asset_type",
+          "asset_name",
+          "weight"
+        ],
+        "placeholder_fields": [
+          "Date = datetime.now() (tefas.py:658, 673)"
+        ],
+        "ignored_parameters": [
+          "period",
+          "start",
+          "end (all deleted, fund.py:310-313, 327-329)"
+        ],
+        "requires": "Same as allocation (scrapling[fetchers] plus a Chromium binary)",
+        "notes": "Emits a DeprecationWarning (fund.py:320-326). The name suggests history, but it returns today's snapshot. No historical allocation path remains: ASSET_TYPE_MAPPING ('Used by BindHistoryAllocation API', tefas.py:21-74) and the legacy /api/DB helper _post_json (tefas.py:195-225) are never referenced in the package."
+      },
+      {
+        "api": "Fund.risk_metrics(period='1y', risk_free_rate=None)",
+        "source_file": "borsapy/fund.py",
+        "line": 418,
+        "upstream": "Computed locally from Fund.history(period) (fund.py:448), which calls fonFiyatBilgiGetir. When risk_free_rate is None it also calls borsapy.bond.risk_free_rate() (fund.py:481-482; bond.py:147-162), i.e. DovizcomTahvilProvider.get_10y_yield, an HTML scrape of https://www.doviz.com/tahvil (dovizcom_tahvil.py:19, 43-123, 147-160).",
+        "returns": "dict: annualized_return, annualized_volatility, sharpe_ratio, sortino_ratio, max_drawdown (all %), risk_free_rate (%), trading_days (fund.py:511-519)",
+        "classification": "DERIVED_FROM_OTHER_OUTPUTS",
+        "dated_fields": [],
+        "undated_fields": [
+          "all output keys (no as-of date or window dates are returned)"
+        ],
+        "placeholder_fields": [
+          "rf = 30.0 constant on any exception, including get_10y_yield returning None (None*100 raises TypeError) (fund.py:483-484; dovizcom_tahvil.py:159-160)",
+          "all values NaN and trading_days 0 when fewer than 20 rows (fund.py:450-459)",
+          "sortino_ratio = np.inf when there are no negative returns (fund.py:503)"
+        ],
+        "ignored_parameters": [
+          "period inherits history() quirks: '2y' yields 3 years of data, an unknown period yields 1 month (tefas.py:122, 482)"
+        ],
+        "requires": "none extra (bs4 is a base dependency for the doviz.com scrape)",
+        "notes": "Inputs are the dated price series plus the current, undated 10Y yield from a third-party scrape (cached 300 s, dovizcom_tahvil.py:117), a caller-supplied rate, or 30.0. The output carries no date. Today's rate is applied to the whole historical window, so the result is not point-in-time unless risk_free_rate is passed. Uses 252-day annualization (fund.py:467, 471). Fully recomputable from the dated history."
+      },
+      {
+        "api": "Fund.sharpe_ratio(period='1y', risk_free_rate=None)",
+        "source_file": "borsapy/fund.py",
+        "line": 386,
+        "upstream": "Fund.risk_metrics (fund.py:415-416)",
+        "returns": "float sharpe_ratio",
+        "classification": "DERIVED_FROM_OTHER_OUTPUTS",
+        "dated_fields": [],
+        "undated_fields": [
+          "sharpe_ratio"
+        ],
+        "placeholder_fields": [
+          "np.nan default (fund.py:416); inherits the rf=30.0 fallback (fund.py:484)"
+        ],
+        "ignored_parameters": [
+          "same period quirks as history()"
+        ],
+        "requires": "none",
+        "notes": "Same inputs and caveats as risk_metrics: dated prices plus an undated current risk-free rate, and the result is undated."
+      },
+      {
+        "api": "Fund.get_holdings(api_key, period=None)",
+        "source_file": "borsapy/fund.py",
+        "line": 521,
+        "upstream": "KAPHoldingsProvider.get_holdings_df and get_holdings (kap_holdings.py:396-537). Steps: TEFAS get_fund_detail for kap_link (kap_holdings.py:90-95); GET the kap_link page and regex out objId (kap_holdings.py:100-109); GET https://kap.org.tr/tr/api/disclosure/filter/FILTERYFBF/{fund_id}/8aca490d502e34b801502e380044002b/365 (kap_holdings.py:135, 438); GET https://kap.org.tr/tr/Bildirim/{index} for the file id (kap_holdings.py:178-187); GET https://kap.org.tr/tr/api/file/download/{file_id} (kap_holdings.py:207-218); convert with pymupdf4llm (kap_holdings.py:254-255); then an OpenRouter chat completion with model google/gemini-3-flash-preview (kap_holdings.py:28, 263-293).",
+        "returns": "DataFrame: symbol, isin, name, weight, type, country, value, sorted by weight (kap_holdings.py:523-536)",
+        "classification": "INADMISSIBLE_OR_PAID_PATH",
+        "dated_fields": [],
+        "undated_fields": [
+          "symbol",
+          "isin",
+          "name",
+          "weight",
+          "type",
+          "country",
+          "value"
+        ],
+        "placeholder_fields": [
+          "weight None becomes 0.0 (kap_holdings.py:350-351)",
+          "type defaults to 'stock' (kap_holdings.py:370)",
+          "isin and country are filled only if the LLM volunteers them. The prompt asks only for symbol, name, weight, type and market_value (kap_holdings.py:271-276); the actual fill rate cannot be determined from source."
+        ],
+        "ignored_parameters": [
+          "period ('YYYY-MM') is silently replaced by the latest report when it does not match, is malformed, or is older than the fixed 365-day lookback (kap_holdings.py:438, 446-458)"
+        ],
+        "requires": "OpenRouter API key (paid third-party LLM). pymupdf4llm and openai are base dependencies (dist-info METADATA:27, 31).",
+        "notes": "Dated at the source (disclosure year/month), but the date is dropped: report_date is computed (kap_holdings.py:482-491) and kept only in a private cache tuple (kap_holdings.py:494). The markdown is truncated at 80,000 characters (kap_holdings.py:258-260). The prompt covers stocks only, although the docstring lists etf/fund/viop types (fund.py:547). LLM output is nondeterministic, so results are not reproducible. One report per call; there is no holdings-history API."
+      },
+      {
+        "api": "borsapy._providers.kap_holdings.get_kap_holdings_provider().get_disclosures(fund_code, days=365) [private, called by get_holdings]",
+        "source_file": "borsapy/_providers/kap_holdings.py",
+        "line": 116,
+        "upstream": "get_fund_id (TEFAS kapLink, then the KAP fund page objId regex, kap_holdings.py:70-114), then GET https://kap.org.tr/tr/api/disclosure/filter/FILTERYFBF/{fund_id}/8aca490d502e34b801502e380044002b/{days} (kap_holdings.py:135-140)",
+        "returns": "list of dicts: disclosure_id, disclosure_index, publish_date, title, summary, year, period (month), attachment_count (kap_holdings.py:143-154)",
+        "classification": "DATED_HISTORY",
+        "dated_fields": [
+          "publish_date",
+          "year",
+          "period (month number)"
+        ],
+        "undated_fields": [
+          "title",
+          "summary",
+          "attachment_count"
+        ],
+        "placeholder_fields": [
+          "attachment_count defaults to 0 (kap_holdings.py:153)"
+        ],
+        "ignored_parameters": [],
+        "requires": "none (no API key), but reachable only through a private module path",
+        "notes": "The only dated non-price fund history in scope. It is metadata about the monthly 'Portfoy Dagilim Raporu' PDFs, not parsed holdings or allocation values. Not exposed on Fund or at the package root. days is a URL path segment; whether KAP honors values above 365 cannot be determined from source. get_fund_id swallows all errors and returns None, which surfaces as DataNotAvailableError 'Fund not found in KAP' (kap_holdings.py:113-114, 132-133)."
+      },
+      {
+        "api": "borsapy.search_funds(query, limit=20)",
+        "source_file": "borsapy/fund.py",
+        "line": 580,
+        "upstream": "TEFASProvider.search: fonUnvanAra {aranan: query} (tefas.py:969-1004, request 981-985)",
+        "returns": "list of dicts: fund_code (fonKodu), name (fonUnvan), fund_type, return_1y",
+        "classification": "LATEST_SNAPSHOT_UNDATED",
+        "dated_fields": [],
+        "undated_fields": [
+          "fund_code",
+          "name"
+        ],
+        "placeholder_fields": [
+          "fund_type = '' always (tefas.py:993)",
+          "return_1y = None always (tefas.py:994)"
+        ],
+        "ignored_parameters": [],
+        "requires": "none",
+        "notes": "Covers today's fund universe only, with no listing or closing dates. Not cached. Errors are wrapped in APIError (tefas.py:1003-1004)."
+      },
+      {
+        "api": "borsapy.screen_funds(fund_type='YAT', founder=None, min_return_1m/3m/6m/ytd/1y/3y=None, limit=50)",
+        "source_file": "borsapy/fund.py",
+        "line": 602,
+        "upstream": "TEFASProvider.screen_funds: fonGetiriBazliBilgiGetir {fonTipi, dil:'TR', calismaTipi:2, donemGetiri1a/3a/6a/yb/1y/3y/5y:'1'} (tefas.py:739-851, request 776-791)",
+        "returns": "DataFrame: fund_code, name, fund_type (fonTurAciklama), return_1m, return_3m, return_6m, return_ytd, return_1y, return_3y, return_5y (tefas.py:823-834), sorted by 1y then YTD, descending (tefas.py:836-846), cut to limit (tefas.py:848)",
+        "classification": "LATEST_SNAPSHOT_UNDATED",
+        "dated_fields": [],
+        "undated_fields": [
+          "fund_code",
+          "name",
+          "fund_type",
+          "return_1m",
+          "return_3m",
+          "return_6m",
+          "return_ytd",
+          "return_1y",
+          "return_3y",
+          "return_5y"
+        ],
+        "placeholder_fields": [
+          "empty result gives a DataFrame with only fund_code, name, fund_type, return_1y columns (fund.py:656-657)"
+        ],
+        "ignored_parameters": [],
+        "requires": "none",
+        "notes": "This is the only all-funds universe endpoint, and it lists current funds only. The returns have no as-of date. The founder filter checks kurucuKod client-side (tefas.py:797), but kurucuKod is not returned. There is no min_return_5y filter. Not cached here, unlike the tefas:all_returns cache in the info path (tefas.py:423-442)."
+      },
+      {
+        "api": "borsapy.compare_funds(fund_codes)",
+        "source_file": "borsapy/fund.py",
+        "line": 662,
+        "upstream": "TEFASProvider.compare_funds (tefas.py:853-967), which calls get_fund_detail for each code (tefas.py:880). That is three TEFAS endpoints per fund.",
+        "returns": "dict with: funds (a subset of info fields per fund, tefas.py:881-903); rankings by_return_1y, by_return_ytd, by_size, by_risk_asc (tefas.py:911-942); summary with fund_count, total_size, avg_return_1y, avg_return_ytd, best_return_1y, worst_return_1y (tefas.py:949-956); and errors",
+        "classification": "DERIVED_FROM_OTHER_OUTPUTS",
+        "dated_fields": [],
+        "undated_fields": [
+          "all fields"
+        ],
+        "placeholder_fields": [
+          "founder '', weekly_return None, allocation None carried over from info (tefas.py:886, 893, 902)",
+          "fund_size and risk_value coerced to 0 pass the 'is not None' filters (tefas.py:930-942). A fund with missing risk data therefore ranks as least risky, and coerced zeros enter total_size (tefas.py:947-951)."
+        ],
+        "ignored_parameters": [
+          "codes beyond the first 10 are silently dropped (tefas.py:873)"
+        ],
+        "requires": "none",
+        "notes": "Built entirely from undated get_fund_detail snapshots, so the result is undated."
+      },
+      {
+        "api": "borsapy.management_fees(fund_type='YAT', founder=None)",
+        "source_file": "borsapy/fund.py",
+        "line": 694,
+        "upstream": "TEFASProvider.get_management_fees: fonYonetimBazliBilgiGetir {fonTipi, dil:'TR'} (tefas.py:1006-1049, request 1023-1027)",
+        "returns": "DataFrame: fund_code, name, fund_category (fonTurAciklama), founder_code (kurucuKod), applied_fee, prospectus_fee, max_expense_ratio, annual_return (tefas.py:1035-1044)",
+        "classification": "LATEST_SNAPSHOT_UNDATED",
+        "dated_fields": [],
+        "undated_fields": [
+          "fund_code",
+          "name",
+          "fund_category",
+          "founder_code",
+          "applied_fee",
+          "prospectus_fee",
+          "max_expense_ratio",
+          "annual_return"
+        ],
+        "placeholder_fields": [
+          "fee fields are None when blank or invalid (tefas.py:146-154)",
+          "empty result gives a typed empty DataFrame (fund.py:720-724)"
+        ],
+        "ignored_parameters": [],
+        "requires": "none",
+        "notes": "Fee changes have no effective date. Raises APIError on failure (tefas.py:1048-1049), unlike the Fund.management_fee property. Not cached."
+      },
+      {
+        "api": "borsapy.withholding_tax_rate(fund_code, purchase_date=None, holding_days=None) [tax.py, exported at package root]",
+        "source_file": "borsapy/tax.py",
+        "line": 247,
+        "upstream": "Fund(fund_code).info (tax.py:278-281), then classify_fund_tax_category and the static get_withholding_tax_rate",
+        "returns": "float rate (decimal) or None",
+        "classification": "DERIVED_FROM_OTHER_OUTPUTS",
+        "dated_fields": [
+          "purchase_date selects the legal period (tax.py:242-243)"
+        ],
+        "undated_fields": [
+          "category input (today's)"
+        ],
+        "placeholder_fields": [
+          "purchase_date defaults to date.today() (tax.py:275-276)"
+        ],
+        "ignored_parameters": [],
+        "requires": "none",
+        "notes": "Same logic and caveat as Fund.withholding_tax_rate: the category is today's, not as of the purchase date. Exported at __init__.py:182."
+      },
+      {
+        "api": "borsapy.withholding_tax_table()",
+        "source_file": "borsapy/tax.py",
+        "line": 290,
+        "upstream": "none (static constants, tax.py:27-58)",
+        "returns": "DataFrame: tax_category, description, plus one rate column per legal period (tax.py:305-330)",
+        "classification": "STATIC_REFERENCE_DATA",
+        "dated_fields": [
+          "period boundaries 2020-12-23, 2024-05-01, 2024-11-01, 2025-02-01, 2025-07-09 (tax.py:27-34)"
+        ],
+        "undated_fields": [],
+        "placeholder_fields": [],
+        "ignored_parameters": [],
+        "requires": "none",
+        "notes": "A hand-maintained schedule taken from a Ziraat Bank table (tax.py:1-7). No network call."
+      },
+      {
+        "api": "Fund.technicals(period='1y', **kwargs) [TechnicalMixin]",
+        "source_file": "borsapy/technical.py",
+        "line": 1065,
+        "upstream": "Computed locally from Fund.history(period, **kwargs) (technical.py:1075)",
+        "returns": "TechnicalAnalyzer over the history DataFrame (technical.py:854-1039)",
+        "classification": "DERIVED_FROM_OTHER_OUTPUTS",
+        "dated_fields": [
+          "the indicator Series and DataFrames are indexed by history Date"
+        ],
+        "undated_fields": [
+          "the .latest dict (no date key, technical.py:978-1039)"
+        ],
+        "placeholder_fields": [
+          "atr, stochastic, obv, vwap, adx and supertrend give all-NaN output for funds (technical.py:289-291, 329-334, 364-366, 390-392, 421-423, 477-487)",
+          "hhv and llv with the default High/Low columns give NaN (technical.py:581-583, 602-604)",
+          "heikin_ashi raises ValueError (charts.py:72-75)"
+        ],
+        "ignored_parameters": [],
+        "requires": "none",
+        "notes": "Price-based indicators work through _get_price_column, which falls back from Close to Price (technical.py:51-58). .latest includes only price-based keys for funds (technical.py:988-1013). kwargs are forwarded to Fund.history, so start/end work here."
+      },
+      {
+        "api": "Fund.history_with_indicators(period='1mo', indicators=None, **kwargs) [TechnicalMixin]",
+        "source_file": "borsapy/technical.py",
+        "line": 1078,
+        "upstream": "add_indicators over Fund.history(period) (technical.py:1094-1095)",
+        "returns": "History DataFrame plus SMA_20, EMA_12, RSI_14, MACD, MACD_Signal, MACD_Hist, BB_Upper, BB_Middle, BB_Lower by default (technical.py:768, 797-812). Indicators that need high/low or volume are skipped (technical.py:769-774, 813-825).",
+        "classification": "DERIVED_FROM_OTHER_OUTPUTS",
+        "dated_fields": [
+          "Date index with Price and indicator columns"
+        ],
+        "undated_fields": [],
+        "placeholder_fields": [
+          "keeps the FundSize NaN and Investors 0 placeholder columns (technical.py:761)",
+          "RSI is filled with 50.0 when the price does not move (technical.py:191)"
+        ],
+        "ignored_parameters": [
+          "kwargs go to the indicators only; start/end cannot reach history (technical.py:1094)"
+        ],
+        "requires": "none",
+        "notes": "Dated, because it is the price series plus indicators. Requesting 'hhv' or 'llv' explicitly uses Close, which maps to Price (technical.py:829-834)."
+      },
+      {
+        "api": "Fund.rsi / Fund.sma / Fund.ema / Fund.macd / Fund.bollinger_bands (interval='1d', ...) [TechnicalMixin]",
+        "source_file": "borsapy/technical.py",
+        "line": 1097,
+        "upstream": "ta_signals() raises NotImplementedError for Fund, because Fund does not define _get_ta_symbol_info. The base version raises at technical.py:1418-1421; only index.py:208, ticker.py:1440, fx.py:470 and crypto.py:136 override it. The except branch then computes locally from Fund.history(period='3mo') (technical.py:1113, 1136, 1159, 1218, 1253). No TradingView request is made, because technical.py:1483 raises before get_scanner_provider() is called at technical.py:1484.",
+        "returns": "Last value only: a float for rsi, sma and ema; a dict {macd, signal, histogram} for macd; a dict {upper, middle, lower} for bollinger_bands. Method lines: rsi 1097, sma 1119, ema 1142, macd 1194, bollinger_bands 1228.",
+        "classification": "DERIVED_FROM_OTHER_OUTPUTS",
+        "dated_fields": [],
+        "undated_fields": [
+          "returned scalars (the date of the last history row is not returned)"
+        ],
+        "placeholder_fields": [
+          "RSI is 50.0 when there is no price movement (technical.py:191); NaN when fewer than 14 rows (technical.py:174-175)"
+        ],
+        "ignored_parameters": [
+          "interval and **kwargs are ignored for Fund; the fallback uses fixed settings: 3mo history, RSI 14, MACD 12/26/9, BB 20/2.0 (technical.py:1116, 1221, 1256)"
+        ],
+        "requires": "none",
+        "notes": "Computed from the dated Price series, but only the last value is returned, with no date. Each call also triggers the hidden info calls through Fund.fund_type."
+      },
+      {
+        "api": "Fund.tilson_t3 / mom / roc / wma / dema / tema (period='3mo', ...) [TechnicalMixin]",
+        "source_file": "borsapy/technical.py",
+        "line": 1165,
+        "upstream": "Computed locally from Fund.history(period) (technical.py:1188, 1622, 1640, 1656, 1674, 1692)",
+        "returns": "float: the last value of the indicator. Method lines: tilson_t3 1165, mom 1610, roc 1628, wma 1646, dema 1662, tema 1680.",
+        "classification": "DERIVED_FROM_OTHER_OUTPUTS",
+        "dated_fields": [],
+        "undated_fields": [
+          "returned scalar"
+        ],
+        "placeholder_fields": [
+          "WMA is NaN with fewer than 20 rows (min_periods=period, technical.py:671)"
+        ],
+        "ignored_parameters": [
+          "the history() period quirks apply"
+        ],
+        "requires": "none",
+        "notes": "Works for funds because Close falls back to Price (technical.py:51-58). Only the last value is returned, without its date."
+      },
+      {
+        "api": "Fund.atr / stochastic / obv / vwap / adx [TechnicalMixin]",
+        "source_file": "borsapy/technical.py",
+        "line": 1263,
+        "upstream": "For atr, stochastic, vwap and adx, ta_signals raises NotImplementedError and the local fallback runs over Fund.history(period='3mo') (technical.py:1279, 1308, 1348, 1370). obv uses Fund.history(period) directly (technical.py:1326).",
+        "returns": "NaN, or {k: NaN, d: NaN} for stochastic. Method lines: atr 1263, stochastic 1285, obv 1317, vwap 1332, adx 1354.",
+        "classification": "PLACEHOLDER_OR_CONSTANT",
+        "dated_fields": [],
+        "undated_fields": [],
+        "placeholder_fields": [
+          "always NaN for funds, because the High/Low/Close/Volume columns they need are missing (technical.py:289-291, 329-334, 364-366, 390-392, 421-423)"
+        ],
+        "ignored_parameters": [
+          "interval and **kwargs"
+        ],
+        "requires": "none",
+        "notes": "Still makes the TEFAS history and info calls just to return NaN."
+      },
+      {
+        "api": "Fund.hhv(period='3mo', hhv_period=14, column='High') / Fund.llv(..., column='Low') [TechnicalMixin]",
+        "source_file": "borsapy/technical.py",
+        "line": 1576,
+        "upstream": "Computed locally from Fund.history(period) (technical.py:1587, 1604)",
+        "returns": "float: last rolling max or min",
+        "classification": "PLACEHOLDER_OR_CONSTANT",
+        "dated_fields": [],
+        "undated_fields": [],
+        "placeholder_fields": [
+          "NaN with the default column, because the fallback only maps Close to Price (technical.py:51-58, 581-583, 602-604)"
+        ],
+        "ignored_parameters": [],
+        "requires": "none",
+        "notes": "With column='Price' it returns a real rolling max or min of the dated price series, which would be DERIVED_FROM_OTHER_OUTPUTS."
+      },
+      {
+        "api": "Fund.supertrend(period='3mo', atr_period=10, multiplier=3.0) [TechnicalMixin]",
+        "source_file": "borsapy/technical.py",
+        "line": 1528,
+        "upstream": "Computed locally from Fund.history(period) (technical.py:1560)",
+        "returns": "Raises ValueError for funds",
+        "classification": "OTHER",
+        "dated_fields": [],
+        "undated_fields": [],
+        "placeholder_fields": [],
+        "ignored_parameters": [],
+        "requires": "none",
+        "notes": "calculate_supertrend returns an all-NaN frame when High/Low/Close are missing (technical.py:477-487). Then int(NaN) at technical.py:1571 raises ValueError, so the method cannot be used for funds."
+      },
+      {
+        "api": "Fund.heikin_ashi(period='1mo') [TechnicalMixin]",
+        "source_file": "borsapy/technical.py",
+        "line": 1376,
+        "upstream": "charts.calculate_heikin_ashi over Fund.history(period) (technical.py:1398-1403)",
+        "returns": "Raises ValueError for funds",
+        "classification": "OTHER",
+        "dated_fields": [],
+        "undated_fields": [],
+        "placeholder_fields": [],
+        "ignored_parameters": [],
+        "requires": "none",
+        "notes": "Requires Open/High/Low/Close columns and raises ValueError when they are missing (charts.py:72-75). Fund history has only Price, FundSize and Investors."
+      },
+      {
+        "api": "Fund.ta_signals(interval='1d') [TechnicalMixin]",
+        "source_file": "borsapy/technical.py",
+        "line": 1423,
+        "upstream": "None. It would call the TradingView scanner, but _get_ta_symbol_info raises first (technical.py:1483, 1418-1421).",
+        "returns": "Raises NotImplementedError for funds",
+        "classification": "OTHER",
+        "dated_fields": [],
+        "undated_fields": [],
+        "placeholder_fields": [],
+        "ignored_parameters": [
+          "interval"
+        ],
+        "requires": "none",
+        "notes": "Fund never overrides _get_ta_symbol_info; grep finds definitions only in index.py, ticker.py, fx.py, crypto.py and technical.py."
+      },
+      {
+        "api": "Fund.ta_signals_all_timeframes() [TechnicalMixin]",
+        "source_file": "borsapy/technical.py",
+        "line": 1486,
+        "upstream": "none (each ta_signals call raises before any request)",
+        "returns": "dict of 9 intervals, each {'error': 'TA signals not supported for Fund...'} (technical.py:1518-1525)",
+        "classification": "PLACEHOLDER_OR_CONSTANT",
+        "dated_fields": [],
+        "undated_fields": [],
+        "placeholder_fields": [
+          "{'error': ...} for every interval"
+        ],
+        "ignored_parameters": [],
+        "requires": "none",
+        "notes": "Contains no data for funds."
+      },
+      {
+        "api": "Fund.tweets(period='7d', since=None, until=None, lang=None, limit=100, query=None) [TwitterMixin]",
+        "source_file": "borsapy/twitter.py",
+        "line": 208,
+        "upstream": "Fund._get_tweet_query (fund.py:54-60) reads the Fund.info name, a TEFAS call. _build_fund_query (twitter.py:81-100) builds the query, then search_tweets (twitter.py:149-190) calls TwitterProvider.search_tweets (_providers/twitter.py:163-244), which uses Scweet with X session cookies (_providers/twitter.py:120-152).",
+        "returns": "DataFrame: tweet_id, created_at, text, author_handle, author_name, likes, retweets, replies, views, quotes, bookmarks, author_followers, author_verified, lang, url (_providers/twitter.py:87-103)",
+        "classification": "INADMISSIBLE_OR_PAID_PATH",
+        "dated_fields": [
+          "created_at per tweet (None when unparseable, _providers/twitter.py:361-368)"
+        ],
+        "undated_fields": [
+          "engagement counts (as of fetch time)"
+        ],
+        "placeholder_fields": [
+          "on the TweetRecord path: views, quotes, bookmarks, author_followers = 0; author_verified = False; lang = '' (_providers/twitter.py:350-355)",
+          "missing counts become 0 (_safe_int, _providers/twitter.py:371-378)"
+        ],
+        "ignored_parameters": [
+          "since alone or until alone is ignored; only both together override period (_providers/twitter.py:187-195)",
+          "an unknown period silently becomes 7 days (_providers/twitter.py:191)"
+        ],
+        "requires": "pip install borsapy[twitter], which installs scweet>=4.0.0 (dist-info METADATA:43-44), plus logged-in X/Twitter cookies (auth_token, ct0) set with bp.set_twitter_auth (_providers/twitter.py:19-60, 128-133)",
+        "notes": "Not fund data. The window is computed from datetime.now() (_providers/twitter.py:192). Cached for 300 s (_providers/twitter.py:242). This is cookie-based scraping, not an official API."
+      },
+      {
+        "api": "TEFASProvider._post_json and module constant ASSET_TYPE_MAPPING (legacy, dead code)",
+        "source_file": "borsapy/_providers/tefas.py",
+        "line": 195,
+        "upstream": "none (never called)",
+        "returns": "n/a",
+        "classification": "OTHER",
+        "dated_fields": [],
+        "undated_fields": [],
+        "placeholder_fields": [],
+        "ignored_parameters": [],
+        "requires": "none",
+        "notes": "_post_json is the helper for the 'legacy /api/DB endpoints' (tefas.py:195-225), and ASSET_TYPE_MAPPING is commented 'Used by BindHistoryAllocation API' (tefas.py:21-74). A grep shows neither is referenced anywhere in the package (evds.py:683 has its own unrelated _post_json). The legacy historical-allocation and form-POST paths are gone, so 0.10.1 has no code path for allocation history."
+      }
+    ]
+  },
+  "other_modules": {
+    "history_beyond_price": "No. Nothing in scope returns dated history for fund size/AUM, investor count, units outstanding, allocation, holdings, category membership or fees. All paths below are relative to borsapy/.\n\n(1) Holdings and allocation: the only dated source is metadata. KAPHoldingsProvider.get_disclosures (_providers/kap_holdings.py:116-159) returns, for the \"Portföy Dağılım Raporu\" type only (L22, L135):\n- publish_date: raw \"DD.MM.YYYY HH:MM:SS\" string, unparsed (L148)\n- year (L151)\n- period = donem month (L152)\nIt covers a rolling `days` window (default 365, L119). The module is private and unexported (__init__.py:214-338; _providers/__init__.py exports only BaseProvider), and Fund never calls it.\n\nThe contents path, get_holdings/get_holdings_df (L396-537), is what Fund.get_holdings uses (fund.py:571-574). It needs a paid OpenRouter LLM and extra packages (L225-293, L236-251), and it drops the date: report_date is computed at L481-491 but kept only in the private cache (L494). Neither Holding (L31-42) nor the DataFrame columns (L514-533) have a date. A requested period missing from the 365-day list silently returns the latest report (L438, L446-458).\n\nAllocation is only displayed by the CLI from fund.py (cli/commands/fund.py:207-231). portfolio.py's \"allocation\" and \"holdings\" are the user's own positions and target weights (portfolio.py:61-69, 301-336, 526-585), not fund holdings.\n\n(2) AUM and investors: only Fund.info's undated latest values are displayed, defaulting to 0 (cli/commands/fund.py:112, 338-339). Their source sets info[\"date\"] = \"\" (tefas.py:353-356). The aum_usd in tradingview_etf.py:265 belongs to foreign ETFs holding a BIST stock, has no date field, and is not TEFAS data.\n\n(3) Units outstanding: no reference in any in-scope file. A grep for payAdet, units, tedavül and shares_outstanding found nothing.\n\n(4) Category membership: tax.withholding_tax_rate uses today's info[\"category\"] for any historical purchase date (tax.py:278-283). The rest of tax.py is a static table (L27-46, L76-145). There is no dated membership anywhere.\n\n(5) Fees: none in scope. management_fees lives in fund.py (exported at __init__.py:160). expense_ratio in tradingview_etf.py:264 is a foreign-ETF snapshot with no date.\n\n(6) KAP stock paths cannot fill these gaps. KAPProvider resolves only BIST stock codes (kap.py:193-215), its calendar asks only for memberTypes IGS (kap.py:311), and the portfolio report is the only disclosure-type ID in the package.\n\n(7) EVDS (_providers/evds.py:1-43) is a generic, dated TCMB series client with no fund-specific code. Whether its catalog carries fund-sector aggregates cannot be determined from source.",
+    "capabilities": [
+      {
+        "api": "borsapy._providers.kap_holdings.get_kap_holdings_provider().get_disclosures(fund_code, days=365) (also get_latest_disclosure(fund_code), L161-166)",
+        "source_file": "borsapy/_providers/kap_holdings.py",
+        "line": 116,
+        "upstream": "KAP GET https://kap.org.tr/tr/api/disclosure/filter/FILTERYFBF/{fundId}/8aca490d502e34b801502e380044002b/{days} (L59, L135). fundId comes from get_fund_id (L70-114): TEFAS get_fund_detail()['kap_link'] (L90-95; tefas.py:396 maps it from fonProfilBilgiGetir kapLink), then a GET of that KAP fund page and the regex objId (L100-109).",
+        "returns": "list[dict] with disclosure_id, disclosure_index, publish_date, title, summary, year, period (= KAP donem, the month number), attachment_count (L145-154). get_latest_disclosure returns disclosures[0].",
+        "classification": "DATED_HISTORY",
+        "dated_fields": [
+          "publish_date (raw KAP publishDate string 'DD.MM.YYYY HH:MM:SS', unparsed, no UTC offset; L148)",
+          "year (L151)",
+          "period = donem month number (L152)"
+        ],
+        "undated_fields": [
+          "title",
+          "summary",
+          "attachment_count",
+          "disclosure_id",
+          "disclosure_index"
+        ],
+        "ignored_parameters": [],
+        "placeholder_fields": [
+          "attachment_count defaults to 0 if absent (L153)"
+        ],
+        "requires": "None: public KAP and TEFAS endpoints. Private module: not exported (__init__.py:214-338) and never called by Fund (fund.py:571-574 calls only get_holdings_df).",
+        "notes": "The only dated, fund-specific KAP capability in the package, and it returns metadata only (the report itself is a PDF attachment).\n\nCoverage limits:\n- Only one disclosure type is wired. The 32-hex ID at L22 is the sole disclosure-type ID in the whole package, so there are no material events, prospectus (izahname) changes or other fund filings.\n- The window is a rolling `days` value.\n- Order is assumed newest-first and never sorted (L164-165).\n- KAP fields isChanged, isLate, relatedDisclosureIndex and disclosureClass are dropped, so amendments can't be detected. They were null or false in the spike's 25 raw records.\n\nError handling:\n- get_fund_id turns every exception into None (L113-114), and get_disclosures then raises 'Fund not found in KAP' (L132-133). Network, redirect and parse failures therefore look the same as a missing fund.\n- The shared httpx client sets no follow_redirects (base.py:33-35) but does verify TLS (base.py:23, 34), unlike the TEFAS provider.\n\nLocal evidence (spike raw files, not re-run): year and donem are JSON integers; publishDate looks like '05.10.2026 13:00:53'; TTE had 13 records, newest-first. spike.py:323 uses the identical objId regex, and each of the TTE and AAL pages had exactly one objId."
+      },
+      {
+        "api": "Fund.get_holdings(api_key, period=None) -> KAPHoldingsProvider.get_holdings_df / get_holdings; CLI `borsapy fund CODE --holdings --api-key ...`",
+        "source_file": "borsapy/_providers/kap_holdings.py",
+        "line": 396,
+        "upstream": "Steps:\n1. KAP FILTERYFBF portfolio-report list.\n2. GET https://kap.org.tr/tr/Bildirim/{disclosureIndex} HTML and take the first file/download id (L168-192).\n3. GET https://kap.org.tr/tr/api/file/download/{fileId} and slice the bytes from '%PDF-' (L194-223).\n4. Convert to markdown with pymupdf4llm and truncate to 80,000 chars (L253-260).\n5. Send to an OpenRouter chat completion, model google/gemini-3-flash-preview (L28, L262-293).",
+        "returns": "list[Holding(symbol, isin, name, weight, holding_type, country, nominal_value, market_value)] (L31-42). get_holdings_df returns a DataFrame with symbol, isin, name, weight, type, country, value, sorted by weight (L499-537). There is no date or period column.",
+        "classification": "INADMISSIBLE_OR_PAID_PATH",
+        "dated_fields": [],
+        "undated_fields": [
+          "symbol",
+          "isin",
+          "name",
+          "weight",
+          "type",
+          "country",
+          "value"
+        ],
+        "placeholder_fields": [
+          "weight becomes 0.0 when the LLM omits it (L349-351)",
+          "isin and country are usually None because the prompt never asks for them (L269-285, L367, L371)",
+          "holding_type defaults to 'stock' (L370)",
+          "nominal_value is never populated"
+        ],
+        "ignored_parameters": [
+          "period ('YYYY-MM'): silently replaced by the latest report when it is not in the 365-day disclosure list or is malformed (default days at L438; fallback at L446-458)"
+        ],
+        "requires": "OpenRouter API key (a paid LLM; the PDF text is sent to openrouter.ai) plus the extra packages pymupdf, pymupdf4llm and openai (L236-251)",
+        "notes": "The report month is known (year and donem) but thrown away: report_date is computed at L481-491 and kept only in the private cache tuple (L494).\n\nOther behavior:\n- The prompt asks only for stock rows (L269-276), so bonds, repo, deposits, funds and VIOP are never requested, even though L39 lists those types.\n- Rows with weight above 100 are dropped (L357-358).\n- Rows are deduplicated by ISIN, else by symbol (L382-394).\n- Only the first attachment is used (L185).\n- LLM output is nondeterministic.\n- Results are cached in-process for 1 hour (L25, L428-435).\n\nThe CLI exposes no period option and prints no date (cli/commands/fund.py:244-296)."
+      },
+      {
+        "api": "KAPProvider.get_disclosures(symbol, limit=20), via Ticker(symbol).news and CLI `borsapy news`",
+        "source_file": "borsapy/_providers/kap.py",
+        "line": 223,
+        "upstream": "GET https://www.kap.org.tr/tr/bildirim-sorgu-sonuc?member={mkkMemberOid} (L30, L242), parsed with a regex over the Next.js payload (L250-255). The member OID is scraped from https://www.kap.org.tr/tr/bist-sirketler stockCode pairs (L193-215).",
+        "returns": "DataFrame with Date, Title, URL; at most `limit` rows (L257-266)",
+        "classification": "OTHER",
+        "dated_fields": [
+          "Date (raw publishDate string, unparsed; L261)"
+        ],
+        "undated_fields": [
+          "Title",
+          "URL"
+        ],
+        "placeholder_fields": [],
+        "ignored_parameters": [],
+        "requires": "none",
+        "notes": "Stock-only. OIDs are mapped only for stock codes on the BIST companies page (L193-215). An unmatched code returns an empty DataFrame without any error (L238-239), and OID lookup errors become None (L220-221). Whether any TEFAS fund code appears on that page cannot be determined from source. There is no disclosure-type filter, and nothing connects this to Fund (ticker.py:1219-1240; cli/commands/news.py:40-41), so it offers no path to fund material events or prospectus changes."
+      },
+      {
+        "api": "KAPProvider.get_disclosure_content(disclosure_id), via Ticker.get_news_content",
+        "source_file": "borsapy/_providers/kap.py",
+        "line": 505,
+        "upstream": "GET https://www.kap.org.tr/tr/Bildirim/{disclosure_id} (L515)",
+        "returns": "raw HTML string, or None (L518-522)",
+        "classification": "OTHER",
+        "dated_fields": [],
+        "undated_fields": [
+          "entire output (unparsed HTML)"
+        ],
+        "placeholder_fields": [],
+        "ignored_parameters": [],
+        "requires": "none",
+        "notes": "Works for any disclosure ID, so it could fetch a fund disclosure page given an index from get_disclosures. borsapy extracts nothing from it (no date, type or fields) and returns None on any error (L521-522)."
+      },
+      {
+        "api": "KAPProvider stock endpoints: get_calendar (Ticker.calendar, Ticker.earnings_dates), get_companies and search (bp.companies, bp.search_companies), get_company_details (Ticker.info sector/website)",
+        "source_file": "borsapy/_providers/kap.py",
+        "line": 271,
+        "upstream": "POST https://kap.org.tr/tr/api/expected-disclosure-inquiry/company (L31, L326-331); GET the Excel file https://www.kap.org.tr/tr/api/company/generic/excel/IGS/A (L28, L69); company summary and general pages (L32-33)",
+        "returns": "calendar: StartDate, EndDate, Subject, Period, Year (L337-343). companies: ticker, name, city (L89-103). details: sector, market, website, businessSummary.",
+        "classification": "OTHER",
+        "dated_fields": [
+          "StartDate and EndDate (raw strings) on the calendar"
+        ],
+        "undated_fields": [
+          "company list",
+          "company details"
+        ],
+        "placeholder_fields": [
+          "calendar fields default to '' (L338-342)"
+        ],
+        "ignored_parameters": [],
+        "requires": "none",
+        "notes": "No fund coverage. The calendar payload hard-codes memberTypes ['IGS'] (listed companies, L311) and a window from now() to +180 days (L297-299), and the company list is the IGS Excel file. Included only as evidence that the KAP stock paths can't be pointed at funds."
+      },
+      {
+        "api": "Portfolio.add(symbol, asset_type='fund'), then value / holdings / weights / pnl / drift / rebalance_plan / rebalance",
+        "source_file": "borsapy/portfolio.py",
+        "line": 984,
+        "upstream": "Fund(symbol).info['price'] (TEFAS fonBilgiGetir sonFiyat, tefas.py:354), via _get_current_price (L994-996)",
+        "returns": "Position table: symbol, shares, cost, current_price, value, weight, pnl, pnl_pct, asset_type, purchase_date, holding_days (L526-585); weights dict; drift and rebalance DataFrames",
+        "classification": "DERIVED_FROM_OTHER_OUTPUTS",
+        "dated_fields": [
+          "purchase_date (supplied by the user)"
+        ],
+        "undated_fields": [
+          "current_price, value, weight, pnl: computed from Fund.info['price'], whose as-of date is never given (tefas.py:353 sets info['date'] = '')"
+        ],
+        "placeholder_fields": [
+          "current_price becomes 0 on any exception or missing price (L994-999)",
+          "cost defaults to the current price and purchase_date to date.today() when omitted (L197-199, L210-211)"
+        ],
+        "ignored_parameters": [],
+        "requires": "none",
+        "notes": "These are the user's own positions, not fund holdings. 'allocation' here means the user's target weights (L301-336). _detect_asset_type never returns 'fund' (L72-97), so a fund code added without asset_type='fund', or present only in the target weights, is built as a stock Ticker (L114-116, L419-421, L510). If that lookup fails, the position silently reads as price 0."
+      },
+      {
+        "api": "Portfolio.history(period) / risk_metrics / sharpe_ratio / sortino_ratio / beta / correlation_matrix with fund holdings",
+        "source_file": "borsapy/portfolio.py",
+        "line": 641,
+        "upstream": "Fund(symbol).history(period)['Price'] (L663, L678-680; TEFAS fonFiyatBilgiGetir); benchmark Index history; borsapy.bond.risk_free_rate()",
+        "returns": "history: DataFrame with Value and Daily_Return. risk_metrics: dict with annualized_return, annualized_volatility, sharpe, sortino, max_drawdown, beta, alpha, risk_free_rate, trading_days (L716-841). correlation_matrix: DataFrame.",
+        "classification": "DERIVED_FROM_OTHER_OUTPUTS",
+        "dated_fields": [
+          "index dates inherited from Fund.history (the dated unit price)"
+        ],
+        "undated_fields": [],
+        "placeholder_fields": [
+          "risk_free_rate falls back to a constant 30.0% if the bond fetch fails (L770-775)",
+          "performance['annualized_return'] is always NaN (L708)"
+        ],
+        "ignored_parameters": [],
+        "requires": "none",
+        "notes": "Built only from the dated price series. Current share counts are applied to the whole window (L645), annualization uses 252 days (L758), and any holding whose history fails is silently skipped (L681-682, L908-909). Stock and index history is tz-aware Europe/Istanbul (_providers/tradingview.py:520-526), while the spike found fund history tz-naive. L687 combines the two, and how pandas aligns that mix cannot be determined from source (not run)."
+      },
+      {
+        "api": "bp.withholding_tax_rate(fund_code, purchase_date=None, holding_days=None)",
+        "source_file": "borsapy/tax.py",
+        "line": 247,
+        "upstream": "Fund(fund_code).info['category'] and ['name'] (TEFAS fonBilgiGetir, latest values) plus the local static table",
+        "returns": "a float rate (for example 0.175), or None when the category is not recognized (L283-285)",
+        "classification": "DERIVED_FROM_OTHER_OUTPUTS",
+        "dated_fields": [],
+        "undated_fields": [
+          "category (current snapshot; L280)"
+        ],
+        "placeholder_fields": [
+          "purchase_date defaults to date.today() (L275-276)"
+        ],
+        "ignored_parameters": [
+          "holding_days: used only for GSYF/GYF short-term funds (L235-240)"
+        ],
+        "requires": "none",
+        "notes": "Applies today's category to any historical purchase_date (L278-283), because no dated category membership exists. 'Hisse Senedi' funds are split by whether the name contains 'yabancı'/'yabanci' (L148-156, L190-195). GSYF/GYF funds default to the short-term rate (L140-144)."
+      },
+      {
+        "api": "bp.withholding_tax_table(); tax.TAX_PERIODS / TAX_RATES / TEFAS_CATEGORY_MAP; classify_fund_tax_category; get_withholding_tax_rate",
+        "source_file": "borsapy/tax.py",
+        "line": 290,
+        "upstream": "local computation; the source is cited as 'Ziraat Bank withholding tax table + TEFAS category mapping' (L6)",
+        "returns": "DataFrame with tax_category, description and one column per purchase-date period (L290-330)",
+        "classification": "STATIC_REFERENCE_DATA",
+        "dated_fields": [
+          "TAX_PERIODS purchase-date boundaries, hard-coded (L27-34)"
+        ],
+        "undated_fields": [
+          "TAX_RATES (L40-46)",
+          "TEFAS_CATEGORY_MAP (L76-145)"
+        ],
+        "placeholder_fields": [],
+        "ignored_parameters": [],
+        "requires": "none",
+        "notes": "A static table with six periods, the last open-ended from 2025-07-09 (L33). No source date or version is recorded, so any rule change after this release is not reflected. The rows describe tax rules, not fund data."
+      },
+      {
+        "api": "Fund TechnicalMixin methods (rsi, sma, ema, macd, bollinger_bands, atr, stochastic, adx, obv, vwap, supertrend, technicals, history_with_indicators); CLI `borsapy technical CODE --type fund` and `borsapy signals CODE --type fund`",
+        "source_file": "borsapy/technical.py",
+        "line": 1047,
+        "upstream": "local computation on Fund.history(period='3mo' or the given period); Fund inherits the mixin (fund.py:15)",
+        "returns": "latest indicator values (float or dict), a TechnicalAnalyzer, or a history DataFrame with indicator columns",
+        "classification": "DERIVED_FROM_OTHER_OUTPUTS",
+        "dated_fields": [
+          "history_with_indicators and technicals keep Fund.history's dated index"
+        ],
+        "undated_fields": [
+          "single latest-value methods (rsi(), sma(), ...) return no date"
+        ],
+        "placeholder_fields": [
+          "ATR, stochastic, ADX, supertrend, OBV and VWAP are NaN for funds because there are no High/Low/Volume columns (calculate_atr L289-291; add_indicators L764-774; TechnicalAnalyzer L1015-1036)"
+        ],
+        "ignored_parameters": [
+          "interval: ignored for Fund. ta_signals raises NotImplementedError (L1405-1421, L1483), so every method falls back to a local calculation on history(period='3mo') (for example L1111-1117, L1277-1283).",
+          "period passed by the CLI to rsi/sma/ema/... lands in **kwargs and is ignored (L1102; cli/commands/technical.py:71-96)"
+        ],
+        "requires": "none",
+        "notes": "Close-only indicators work on the fund's 'Price' column via _get_price_column (L51-58). TradingView TA signals are not supported for Fund: `signals --all` returns a per-interval error dict (L1520-1526; cli/commands/signals.py:65), and the single-interval path calls ta_signals (signals.py:119), which raises."
+      },
+      {
+        "api": "Fund.tweets(period='7d', since, until, lang, limit, query) via TwitterMixin; twitter._build_fund_query; bp.search_tweets",
+        "source_file": "borsapy/twitter.py",
+        "line": 81,
+        "upstream": "X/Twitter GraphQL through the Scweet library, using the user's session cookies (_providers/twitter.py:113-152, 220-227)",
+        "returns": "DataFrame with tweet_id, created_at, text, author_handle, author_name, likes, retweets, replies, views, quotes, bookmarks, author_followers, author_verified, lang, url (_providers/twitter.py:87-103)",
+        "classification": "INADMISSIBLE_OR_PAID_PATH",
+        "dated_fields": [
+          "created_at (parsed; _providers/twitter.py:288)"
+        ],
+        "undated_fields": [
+          "engagement counts are as of fetch time"
+        ],
+        "placeholder_fields": [
+          "counts default to 0 via _safe_int (_providers/twitter.py:318-324)"
+        ],
+        "ignored_parameters": [
+          "since and until are ignored unless BOTH are given; otherwise the window is now() minus period (_providers/twitter.py:187-195)"
+        ],
+        "requires": "Logged-in X session cookies (auth_token, ct0) copied from browser DevTools and set with bp.set_twitter_auth (_providers/twitter.py:19-59, 128-133), plus the Scweet package via borsapy[twitter] (L120-126)",
+        "notes": "Social-media text, not fund data. The query is '#CODE OR CODE OR \"<first 60 chars of name>\"' (twitter.py:92-100), so 3-letter fund codes will match unrelated tweets. Fund wires it at fund.py:54-60. Classed as inadmissible because it scrapes using a personal account's session cookies."
+      },
+      {
+        "api": "CLI `borsapy fund` (default info, --compare, --screen, --allocation, --holdings, --risk)",
+        "source_file": "borsapy/cli/commands/fund.py",
+        "line": 15,
+        "upstream": "bp.Fund(...).info, bp.compare_funds, bp.screen_funds, Fund.allocation, Fund.get_holdings, Fund.risk_metrics (all in fund.py, backed by TEFAS or KAP)",
+        "returns": "rich tables, or JSON/CSV of the underlying objects",
+        "classification": "LATEST_SNAPSHOT_UNDATED",
+        "dated_fields": [],
+        "undated_fields": [
+          "price, fund_size, investor_count, risk_value, and daily/1m/3m/6m/YTD/1y/3y/5y returns (L336-361)",
+          "compare: return_1y, return_ytd, fund_size, risk_value (L109-124)",
+          "screen: return_1y, return_ytd, fund_type (L174-187)"
+        ],
+        "placeholder_fields": [
+          "fund_size and investors default to 0 (L112, L338-339)",
+          "falsy (0) returns and weights print as '-' (L120-122, L238, L284)"
+        ],
+        "ignored_parameters": [],
+        "requires": "None for info, compare, screen and risk. --holdings needs an OpenRouter key (L244-253). --allocation goes through fund.py's stealth-browser path (per the spike; fund.py not re-inspected here).",
+        "notes": "No dated output beyond what the JSON mode passes through from Fund.\n- The allocation view filters to max(Date) (L228-231). That helps only if Date is a real as-of date, and the spike found fund.py stamps now().\n- --holdings exposes no period option, and its table has no date column (L253, L270-274).\n- Supported fund types are YAT and EMK (L12)."
+      },
+      {
+        "api": "CLI `borsapy history CODE --type fund`",
+        "source_file": "borsapy/cli/commands/history.py",
+        "line": 75,
+        "upstream": "cli/utils.get_asset -> bp.Fund(symbol) (cli/utils.py:154-155)",
+        "returns": "nothing: the command exits with an error",
+        "classification": "OTHER",
+        "dated_fields": [],
+        "undated_fields": [],
+        "placeholder_fields": [],
+        "ignored_parameters": [],
+        "requires": "none",
+        "notes": "Broken by code inspection (not executed). history() always passes interval= (default '1d', L32-35; calls at L75, L78, L80), but Fund.history(self, period, start, end) has no interval parameter or **kwargs (fund.py:332-337). The resulting TypeError is caught and the command exits 1 (L91-93). The --type fund flag is required anyway, because detect_asset_type never returns 'fund' (cli/utils.py:101-129)."
+      },
+      {
+        "api": "CLI `borsapy quote|price|compare CODE --type fund`",
+        "source_file": "borsapy/cli/commands/price.py",
+        "line": 60,
+        "upstream": "bp.Fund(symbol).info via cli/utils.get_asset",
+        "returns": "the symbol, with price fields None or missing",
+        "classification": "PLACEHOLDER_OR_CONSTANT",
+        "dated_fields": [],
+        "undated_fields": [
+          "name (quote only)"
+        ],
+        "placeholder_fields": [
+          "last, change, change_percent and volume are always None for funds (price.py:60-67; compare.py:76-88)",
+          "quote shows only the symbol and name (quote.py:46-56)"
+        ],
+        "ignored_parameters": [],
+        "requires": "none",
+        "notes": "Key mismatch. Fund.info exposes name, date, price, fund_size, investor_count, category, daily_return and kap_link (tefas.py:352-396), but these commands read last, close, change and regularMarketPrice. As a result the fund's price is never shown."
+      },
+      {
+        "api": "bp.search(query, type='fund' or 'etf')",
+        "source_file": "borsapy/search.py",
+        "line": 25,
+        "upstream": "TradingView symbol search at https://symbol-search.tradingview.com/symbol_search/v3/ with type=fund, falling back to the legacy endpoint (_providers/tradingview_search.py:25-39, 141-158)",
+        "returns": "a list of symbols, or dicts with symbol, full_name, description, exchange, type, currency, country, provider_id (tradingview_search.py:186-198)",
+        "classification": "OTHER",
+        "dated_fields": [],
+        "undated_fields": [
+          "all fields"
+        ],
+        "placeholder_fields": [
+          "type defaults to 'stock' when missing (tradingview_search.py:194)"
+        ],
+        "ignored_parameters": [],
+        "requires": "none",
+        "notes": "This is TradingView's symbol directory, not TEFAS. Whether TEFAS fund codes appear under TradingView's 'fund' type cannot be determined from source. The KAP merge runs only when type is None or 'stock' (search.py:116-118), and errors return [] (tradingview_search.py:156-158)."
+      },
+      {
+        "api": "Ticker(symbol).etf_holders",
+        "source_file": "borsapy/_providers/tradingview_etf.py",
+        "line": 255,
+        "upstream": "HTML scrape of the embedded JSON at https://tr.tradingview.com/symbols/BIST-{symbol}/etfs/ (L21)",
+        "returns": "DataFrame with symbol, exchange, name, market_cap_usd, holding_weight_pct, issuer, management, focus, expense_ratio, aum_usd, price, change_pct (L255-268)",
+        "classification": "LATEST_SNAPSHOT_UNDATED",
+        "dated_fields": [],
+        "undated_fields": [
+          "all fields; the module has no date or as-of field at all"
+        ],
+        "placeholder_fields": [],
+        "ignored_parameters": [],
+        "requires": "none",
+        "notes": "Lists the international ETFs that hold a given BIST stock (ticker.py:1326-1360). These are not TEFAS funds, and aum_usd and expense_ratio are foreign-ETF snapshots. Malformed rows are skipped (L271-273), and any other error returns an empty DataFrame (L287-288)."
+      },
+      {
+        "api": "bp.EVDS / evds_series / evds_download / evds_search",
+        "source_file": "borsapy/_providers/evds.py",
+        "line": 1,
+        "upstream": "TCMB EVDS3 at https://evds3.tcmb.gov.tr (L3, L106)",
+        "returns": "dated macro time series",
+        "classification": "OTHER",
+        "dated_fields": [
+          "series observation dates"
+        ],
+        "undated_fields": [],
+        "placeholder_fields": [],
+        "ignored_parameters": [],
+        "requires": "A free EVDS API key for data (L11-14, L26). Catalogue metadata is anonymous (L16-18, L27-31).",
+        "notes": "A generic client: there is no fund keyword or fund series code anywhere in evds.py or _providers/evds.py. Whether the EVDS catalogue carries fund-sector aggregates (as opposed to per-fund data) cannot be determined from borsapy's source. Listed because it is the only other dated time-series source in scope."
+      }
+    ]
+  },
+  "refutation_check": {
+    "refuted": true,
+    "counter_evidence": [
+      {
+        "file": "borsapy/_providers/kap_holdings.py",
+        "line": 116,
+        "finding": "KAPHoldingsProvider.get_disclosures(fund_code, days=365) returns a dated list, for one fund, of its KAP 'Portföy Dağılım Raporu' filings: publish_date, year, period (the report month), title, summary, disclosure_index and attachment_count (L143-154). The days lookback goes into the KAP request URL (L135). I checked the spike's saved responses offline: year and donem are ints, and the 365-day window held 13 monthly reports for TTE (2025-09 to 2026-09) and 12 for AAL.",
+        "dated": true,
+        "admissible": "Needs no API key, LLM or browser. It is in a private module: borsapy._providers.kap_holdings is not exported by borsapy/__init__.py or _providers/__init__.py (which exports only BaseProvider), and Fund only calls it internally through get_holdings (kap_holdings.py:438). It gives filing metadata (filing time and report month), not fund values. publish_date is an unparsed 'DD.MM.YYYY HH:MM:SS' string with no offset. It needs TEFAS's kapLink plus a regex scrape of the KAP page for objId (L93-109), and any failure there turns into None and then DataNotAvailableError (L113-114, L131-133). Whether KAP honors days>365 can't be determined from source. KAP terms not reviewed."
+      },
+      {
+        "file": "borsapy/fund.py",
+        "line": 521,
+        "finding": "The public Fund.get_holdings(api_key, period='YYYY-MM') picks a past month's portfolio report by year and month (kap_holdings.py:446-456) from the last-365-day disclosure list (kap_holdings.py:438), downloads its PDF and returns that month's holdings (symbol, name, weight, market value). So KAP holdings can be fetched for past months, not only the latest one.",
+        "dated": false,
+        "admissible": "The output carries no date. report_date is computed (kap_holdings.py:481-491) but only kept in a private cache tuple (L494), and the DataFrame has no date column (L523-533). If the requested month is missing, it silently returns the latest report instead (L457-458), so the output can't confirm which month you got. It requires an OpenRouter key plus pymupdf4llm and openai (L236-251), and sends up to 80,000 characters of PDF text to a third-party LLM, by default google/gemini-3-flash-preview (L28, L258-266, L290-293). Cost can't be determined from source; the docstring says 'free API key' (fund.py:537). The prompt asks only for stock rows and never asks for ISIN (L269-284), so isin and country are usually None and non-equity holdings are dropped. LLM output can vary between runs."
+      },
+      {
+        "file": "borsapy/_providers/kap_holdings.py",
+        "line": 168,
+        "finding": "_get_file_id(disclosure_index) (L168-192) and _download_pdf(file_id) (L194-223) fetch the raw monthly portfolio-report PDF for any disclosure returned by get_disclosures, with no LLM and no key. Each PDF is dated by its disclosure's year, month and publish_date.",
+        "dated": true,
+        "admissible": "Private underscore methods. The content is a PDF, so you need your own parser. Errors are swallowed and returned as None (L191-192, L222-223). KAP terms not reviewed."
+      },
+      {
+        "file": "borsapy/_providers/tradingview.py",
+        "line": 399,
+        "finding": "Ticker(symbol).history() (ticker.py:676-746) asks TradingView for f'BIST:{symbol}' without checking that the symbol is a stock (tradingview.py:397-399). It returns dated OHLCV plus Volume and honors start/end (L519-536). bp.search(type='fund' or 'etf') maps to TradingView's 'fund' type (tradingview_search.py:37-38; search.py:45). For exchange-traded funds listed on BIST, this gives dated history beyond a single price: open, high, low, close and volume.",
+        "dated": true,
+        "admissible": "This is a different universe: exchange-traded fund shares on BIST, not TEFAS mutual funds, and it gives market price and volume, not NAV, size or investor count. It uses an unofficial TradingView websocket with 'unauthorized_user_token' when not logged in (tradingview.py:304-309). Which codes resolve can't be determined from source, and a TEFAS code that matches a BIST symbol would silently return that other instrument. TradingView terms not reviewed."
+      },
+      {
+        "file": "borsapy/_providers/twitter.py",
+        "line": 163,
+        "finding": "Fund inherits TwitterMixin (fund.py:15). Its query is built at fund.py:54-60 and twitter.py:81-100. Fund.tweets(since, until) passes the date window to Scweet (L187-189, L209-215) and returns a created_at timestamp for each tweet (L288, L314), giving dated historical posts that mention the fund.",
+        "dated": true,
+        "admissible": "Not admissible. It requires logged-in X session cookies (auth_token and ct0) (L19-60, L128-133) and the optional Scweet package, and it scrapes. The result is social chatter, not fund data, and a bare short fund code in the query (twitter.py:92) makes it noisy."
+      }
+    ],
+    "nuances": [
+      "The practical core of the claim holds: for TEFAS numeric fields, borsapy has no dated history besides price. get_history keeps only tarih and fiyat and hard-codes FundSize=NaN and Investors=0 (_providers/tefas.py:538-556). get_fund_detail hard-codes date='' (tefas.py:353), even though Fund.info documents it as 'Last update date' (fund.py:114). Fund size, investor count, category, rank, market share, 1m-5y returns, entry and exit fees and profile come back as latest values only (tefas.py:350-401). screen_funds, compare_funds, search and management_fees are undated too (tefas.py:739-1049). I checked the spike's saved raw responses offline: fonBilgiGetir, fonProfilBilgiGetir and fonGetiriBazliBilgiGetir contain no date field, so borsapy isn't dropping a source date.",
+      "Units outstanding aren't a 'latest-only' field in borsapy. They aren't exposed at all: payAdet is never read (it's absent from tefas.py:350-401), even though TEFAS's fonBilgiGetir returns it (spike raw/fonBilgiGetir_TTE.body).",
+      "KAP disclosure metadata is dated and needs no key or LLM (kap_holdings.py:116-159). It's reachable only by importing the private borsapy._providers.kap_holdings module, and it gives filing dates and report months, not values.",
+      "'KAP holdings need a paid LLM' is imprecise. Only borsapy's built-in parser uses the LLM; the raw PDFs can be fetched without it (kap_holdings.py:168-223). The source doesn't establish any cost: fund.py:537 says 'free API key', and the model is set at kap_holdings.py:28. The real constraints are sending PDF text to a third-party model, output that can vary between runs, and a prompt that asks only for stocks (L269-284).",
+      "KAP holdings aren't latest-only. Fund.get_holdings(period='YYYY-MM') can reach about the last 12 monthly reports, because the disclosure list covers 365 days (kap_holdings.py:438). The output has no date, though, and silently falls back to the latest report when the month isn't found (L457-458).",
+      "KAP gives monthly data with a lag. The spike saw reports published about 3-10 days after month end. The month a report covers comes from year/donem, not from a holdings as-of date.",
+      "Allocation 'stamped with today' means the fetch time, datetime.now() (tefas.py:658, 673), not TEFAS's as-of date. start and end are deleted (tefas.py:641), and allocation_history ignores period, start and end (fund.py:295-330). Rows are deduplicated by asset type, keeping the first match (tefas.py:659-664). Whether the SSR page carries its own date can't be determined from source.",
+      "No historical allocation path remains. BindHistoryAllocation appears only in a comment (tefas.py:21). The legacy /api/DB helper _post_json is defined (tefas.py:195-225) but nothing calls it, and the docstring says allocation is no longer in any JSON endpoint (tefas.py:606-608). Whether the legacy endpoints still respond can't be determined from source. The private _post_json_v2 can call any TEFAS v2 endpoint (tefas.py:227-287), but that's code you'd write yourself, not a borsapy feature.",
+      "Every fonFiyatBilgiGetir row also contains kategoriDerece and kategoriFonSay (spike raw row keys: fiyat, fonKodu, fonUnvan, kategoriDerece, kategoriFonSay, tarih). borsapy drops them (tefas.py:540-541), which is correct: the spike found them constant across all rows.",
+      "Derived outputs are dated but add nothing beyond price. technicals() and history_with_indicators() use the price history (technical.py:1065-1095). risk_metrics() and sharpe_ratio() are computed from it (fund.py:386-519), and Portfolio.history uses the Price column (portfolio.py:678-680). Scalar helpers such as rsi() drop the date (technical.py:1097-1117). Fund doesn't implement _get_ta_symbol_info, so TradingView TA signals aren't available for funds (technical.py:1405-1421).",
+      "Snapshot values can be dated by inference, not from the API. The spike found that sonFiyat equals the newest history price and that gunlukGetiri matches the last two prices. That is the as-of rule in REPORT.md.",
+      "You can build your own history by saving snapshots every day, but borsapy stores nothing. Its cache is in-memory with a time limit only (cache.py:19-62). TTL.FUND_DATA is defined but never used (cache.py:75). There is no sqlite, pickle or file writer; the CLI formatter only writes CSV to stdout. replay, backtest and multi accept only Ticker (replay.py:450-454; backtest.py:564; multi.py:42).",
+      "history() window quirks: a start date older than about 5 years is silently cut to 5 years (tefas.py:467-478). An unknown period returns 1 month (tefas.py:482). '2y' fetches 3 years (tefas.py:123). '1d' and '5d' fetch the weekly bucket (tefas.py:114-115).",
+      "EVDS provides generic dated series that honor start and end (evds.py:64-85, 285-329, 647-723) and needs a free registered key (_providers/evds.py:907-913). The borsapy source names no fund-related series: neither evds.py nor _providers/evds.py contains fon, fund, menkul, portföy or yatırım. Whether TCMB publishes fund statistics there can't be determined from source, and they would be aggregates at best, not per fund.",
+      "tax.py ships a dated withholding-tax rate schedule (TAX_PERIODS and TAX_RATES, tax.py:27-46), used by Fund.withholding_tax_rate(purchase_date) (fund.py:229-265). It's static regulatory data applied using today's category, not fund observations.",
+      "The stock KAPProvider can't list fund disclosures. Its codes come only from the BIST companies page (kap.py:191-218), and an unknown code returns an empty frame (kap.py:237-239). Its get_disclosure_content(disclosure_id) works for any code (kap.py:505-522). There's no path to fund material events or prospectus changes: the only disclosure-type ID in the package is the portfolio report (kap_holdings.py:22).",
+      "Ticker.etf_holders returns an undated snapshot of international ETFs that hold a stock, including their AUM (tradingview_etf.py:46-67, 256-267). It isn't TEFAS data and carries no date."
+    ],
+    "summary": "The claim is refuted, but only narrowly. The practical core holds.\n\n**What holds.** For TEFAS fund fields, borsapy 0.10.1 gives dated history only for the unit price.\n- `get_history` keeps only `tarih` and `fiyat`, and fills FundSize and Investors with NaN and 0 (_providers/tefas.py:538-556).\n- `get_fund_detail` hard-codes `date=''` (tefas.py:353). Fund size, investors, category, rank, market share, returns, fees and profile come back as undated latest values (tefas.py:350-401).\n- Units outstanding (`payAdet`) are not exposed at all, so they aren't even a latest value.\n- Allocation is stamped with `datetime.now()`, and its start/end arguments are thrown away (tefas.py:641, 658).\n- The old dated endpoints (BindHistoryAllocation, /api/DB) survive only as a comment and a helper nothing calls (tefas.py:21, 195-225).\n- Nothing is stored: the cache is in memory only (cache.py:19-62).\n\n**Why the headline is still false.** \"The only dated historical fund data is the unit price\" fails because of KAP:\n1. `KAPHoldingsProvider.get_disclosures` (_providers/kap_holdings.py:116-159) returns a dated list of one fund's monthly portfolio-report filings: publishDate, year and report month. The lookback is passed to KAP, and it needs no key or LLM. It lives in a private module that borsapy doesn't export, and it gives filing metadata, not fund values.\n2. The public `Fund.get_holdings(api_key, period='YYYY-MM')` (fund.py:521; kap_holdings.py:438-458) returns holdings for past months within a 365-day window, so KAP holdings are not latest-only. But:\n   - the output has no date column;\n   - it silently falls back to the latest report when the month isn't found;\n   - it depends on a third-party LLM whose cost the source doesn't establish (the docstring says \"free API key\").\n   - The raw dated PDFs can be fetched without the LLM through `_get_file_id` and `_download_pdf` (kap_holdings.py:168-223).\n\n**Other dated paths, outside TEFAS mutual funds:**\n- `Ticker()` on exchange-traded funds listed on BIST gives dated OHLCV and volume through TradingView (tradingview.py:397-536).\n- `Fund.tweets(since, until)` gives dated tweets, but needs logged-in X session cookies.\n- Neither is admissible fund data here.\n- EVDS offers generic dated series, but the source names no fund series.\n\n**Answer to the user.** No, borsapy isn't limited to the fund's price. It can read many fund fields, but as dated history it gives only:\n- the unit price from TEFAS (5-year maximum);\n- monthly KAP portfolio-report filings, as dates, raw PDFs or LLM-parsed holdings.\n\nSize, investors, units, category, rank, returns, fees, profile and allocation have no history unless you save the snapshot yourself every day.\n\n**Method.** This was read-only. I read the installed source and the spike's saved raw files (to confirm year and month are integers, so `get_holdings` can match a requested month). No network calls or borsapy calls. The tefas.py and fund.py hashes match REPORT.md.\n\n**Not done.** I did not commit, push or open the PR on spike/tefas-and-helpers that the user approved. That was outside this read-only task and still needs to be run."
+  }
+}

@@ -1,0 +1,925 @@
+{
+  "source": "https://spk.gov.tr/data/6aac56ff8f95db07100fd82d/2026-61.pdf",
+  "source_sha256": "420650196a94ad4bb3343d65ebc57076a256f6263049138713276f3ce0dff96c",
+  "decision": "SPK Kurul Karar Organı 17/09/2026, 57/1707 and 57/1708; list updated in Bulletin 2026/61, section C",
+  "matched_against": "TEFAS fund list retrieved 2026-10-06",
+  "funds": [
+    {
+      "n": 1,
+      "name": "A1 CAPİTAL PORTFÖY BANKACILIK SEKTÖRÜ DIŞI ŞİRKETLER HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "A1 CAPİTAL",
+      "code": "BHN",
+      "match": "exact name"
+    },
+    {
+      "n": 2,
+      "name": "A1 CAPİTAL PORTFÖY BIST 100 DIŞI ŞİRKETLER HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "A1 CAPİTAL",
+      "code": "BYZ",
+      "match": "exact name"
+    },
+    {
+      "n": 3,
+      "name": "A1 CAPİTAL PORTFÖY BIST 30 DIŞI ŞİRKETLER HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "A1 CAPİTAL",
+      "code": "CBD",
+      "match": "exact name"
+    },
+    {
+      "n": 4,
+      "name": "A1 CAPİTAL PORTFÖY HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "A1 CAPİTAL",
+      "code": "CAH",
+      "match": "exact name"
+    },
+    {
+      "n": 5,
+      "name": "A1 CAPİTAL PORTFÖY İKİNCİ HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "A1 CAPİTAL",
+      "code": "CHY",
+      "match": "exact name"
+    },
+    {
+      "n": 6,
+      "name": "A1 CAPİTAL PORTFÖY İSTATİSTİKSEL ARBİTRAJ HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "A1 CAPİTAL",
+      "code": "AJ1",
+      "match": "exact name"
+    },
+    {
+      "n": 7,
+      "name": "A1 CAPİTAL PORTFÖY PARA PİYASASI (TL) FONU",
+      "company": "A1 CAPİTAL",
+      "code": "PAB",
+      "match": "exact name"
+    },
+    {
+      "n": 8,
+      "name": "A1 CAPİTAL PORTFÖY PARA PİYASASI (TL) SERBEST FON",
+      "company": "A1 CAPİTAL",
+      "code": "P1A",
+      "match": "exact name"
+    },
+    {
+      "n": 9,
+      "name": "A1 CAPİTAL PORTFÖY SANAYİ SEKTÖRÜ HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "A1 CAPİTAL",
+      "code": "SEH",
+      "match": "exact name"
+    },
+    {
+      "n": 10,
+      "name": "ATLAS PORTFÖY ALGO TOROS HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "ATLAS",
+      "code": "LGO",
+      "match": "exact name"
+    },
+    {
+      "n": 11,
+      "name": "ATLAS PORTFÖY BANKACILIK SEKTÖRÜ HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "ATLAS",
+      "code": "BSH",
+      "match": "exact name"
+    },
+    {
+      "n": 12,
+      "name": "ATLAS PORTFÖY BEŞİNCİ HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "ATLAS",
+      "code": "AP5",
+      "match": "exact name"
+    },
+    {
+      "n": 13,
+      "name": "ATLAS PORTFÖY BİRİNCİ HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "ATLAS",
+      "code": "BAC",
+      "match": "exact name"
+    },
+    {
+      "n": 14,
+      "name": "ATLAS PORTFÖY DÖRDÜNCÜ HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "ATLAS",
+      "code": "AP4",
+      "match": "exact name"
+    },
+    {
+      "n": 15,
+      "name": "ATLAS PORTFÖY DÖRDÜNCÜ SERBEST (TL) FON",
+      "company": "ATLAS",
+      "code": "ABG",
+      "match": "exact name"
+    },
+    {
+      "n": 16,
+      "name": "ATLAS PORTFÖY İKİNCİ HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "ATLAS",
+      "code": "LAI",
+      "match": "exact name"
+    },
+    {
+      "n": 17,
+      "name": "ATLAS PORTFÖY İKİNCİ KATILIM HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "ATLAS",
+      "code": "KHD",
+      "match": "exact name"
+    },
+    {
+      "n": 18,
+      "name": "ATLAS PORTFÖY İSTATİSTİKSEL ARBİTRAJ HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "ATLAS",
+      "code": "BTJ",
+      "match": "exact name"
+    },
+    {
+      "n": 19,
+      "name": "ATLAS PORTFÖY KATILIM HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "ATLAS",
+      "code": "KLH",
+      "match": "exact name"
+    },
+    {
+      "n": 20,
+      "name": "ATLAS PORTFÖY PARA PİYASASI (TL) FONU",
+      "company": "ATLAS",
+      "code": "PPT",
+      "match": "exact name"
+    },
+    {
+      "n": 21,
+      "name": "ATLAS PORTFÖY PARA PİYASASI SERBEST FON",
+      "company": "ATLAS",
+      "code": "PSE",
+      "match": "exact name"
+    },
+    {
+      "n": 22,
+      "name": "ATLAS PORTFÖY SANAYİ SEKTÖRÜ HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "ATLAS",
+      "code": "SNY",
+      "match": "exact name"
+    },
+    {
+      "n": 23,
+      "name": "ATLAS PORTFÖY SERBEST FON",
+      "company": "ATLAS",
+      "code": "DFI",
+      "match": "exact name"
+    },
+    {
+      "n": 24,
+      "name": "ATLAS PORTFÖY UFUK HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "ATLAS",
+      "code": "GCD",
+      "match": "exact name"
+    },
+    {
+      "n": 25,
+      "name": "ATLAS PORTFÖY ÜÇÜNCÜ HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "ATLAS",
+      "code": "UHS",
+      "match": "exact name"
+    },
+    {
+      "n": 26,
+      "name": "BULLS PORTFÖY ALGORİTMİK HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "BULLS",
+      "code": "BLA",
+      "match": "exact name"
+    },
+    {
+      "n": 27,
+      "name": "BULLS PORTFÖY ALTINCI HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "BULLS",
+      "code": "BOS",
+      "match": "exact name"
+    },
+    {
+      "n": 28,
+      "name": "BULLS PORTFÖY BANKACILIK SEKTÖRÜ DIŞI ŞİRKETLER HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "BULLS",
+      "code": "BBO",
+      "match": "exact name"
+    },
+    {
+      "n": 29,
+      "name": "BULLS PORTFÖY BEŞİNCİ HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "BULLS",
+      "code": "BP5",
+      "match": "exact name"
+    },
+    {
+      "n": 30,
+      "name": "BULLS PORTFÖY BIST 30 DIŞI ŞİRKETLER HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "BULLS",
+      "code": "BOH",
+      "match": "exact name"
+    },
+    {
+      "n": 31,
+      "name": "BULLS PORTFÖY BIST 50 DIŞI ŞİRKETLER HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "BULLS",
+      "code": "BI5",
+      "match": "exact name"
+    },
+    {
+      "n": 32,
+      "name": "BULLS PORTFÖY BİRİNCİ HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "BULLS",
+      "code": "BBN",
+      "match": "exact name"
+    },
+    {
+      "n": 33,
+      "name": "BULLS PORTFÖY DÖRDÜNCÜ HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "BULLS",
+      "code": "BDO",
+      "match": "exact name"
+    },
+    {
+      "n": 34,
+      "name": "BULLS PORTFÖY GMS HİSSE SENEDİ SERBEST ÖZEL FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "BULLS",
+      "code": "IHY",
+      "match": "exact name"
+    },
+    {
+      "n": 35,
+      "name": "BULLS PORTFÖY İKİNCİ HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "BULLS",
+      "code": "BIK",
+      "match": "exact name"
+    },
+    {
+      "n": 36,
+      "name": "BULLS PORTFÖY MUTLAK GETİRİ HEDEFLİ HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "BULLS",
+      "code": "BMU",
+      "match": "exact name"
+    },
+    {
+      "n": 37,
+      "name": "BULLS PORTFÖY PARA PİYASASI (TL) FONU",
+      "company": "BULLS",
+      "code": "BPZ",
+      "match": "exact name"
+    },
+    {
+      "n": 38,
+      "name": "BULLS PORTFÖY SANAYİ ŞİRKETLERİ HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "BULLS",
+      "code": "BSN",
+      "match": "exact name"
+    },
+    {
+      "n": 39,
+      "name": "BULLS PORTFÖY ÜÇÜNCÜ HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "BULLS",
+      "code": "BUC",
+      "match": "exact name"
+    },
+    {
+      "n": 40,
+      "name": "BULLS PORTFÖY YILDIZ PAZAR ŞİRKETLERİ HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "BULLS",
+      "code": "YLZ",
+      "match": "exact name"
+    },
+    {
+      "n": 41,
+      "name": "HEDEF PORTFÖY ADA HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "HEDEF",
+      "code": "HLR",
+      "match": "exact name"
+    },
+    {
+      "n": 42,
+      "name": "HEDEF PORTFÖY ALGO EVEREST İSTATİSTİKSEL ARBİTRAJ HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "HEDEF",
+      "code": "HEH",
+      "match": "exact name"
+    },
+    {
+      "n": 43,
+      "name": "HEDEF PORTFÖY ATLAS İSTATİSTİKSEL ARBİTRAJ HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "HEDEF",
+      "code": "HAT",
+      "match": "exact name"
+    },
+    {
+      "n": 44,
+      "name": "HEDEF PORTFÖY BAŞAK HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "HEDEF",
+      "code": "HKM",
+      "match": "exact name"
+    },
+    {
+      "n": 45,
+      "name": "HEDEF PORTFÖY BİRİNCİ İSTATİSTİKSEL ARBİTRAJ HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "HEDEF",
+      "code": "HIM",
+      "match": "exact name"
+    },
+    {
+      "n": 46,
+      "name": "HEDEF PORTFÖY ÇINAR HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "HEDEF",
+      "code": "HPL",
+      "match": "exact name"
+    },
+    {
+      "n": 47,
+      "name": "HEDEF PORTFÖY DOĞU HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "HEDEF",
+      "code": "HDH",
+      "match": "exact name"
+    },
+    {
+      "n": 48,
+      "name": "HEDEF PORTFÖY DORUK HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "HEDEF",
+      "code": "HBV",
+      "match": "exact name"
+    },
+    {
+      "n": 49,
+      "name": "HEDEF PORTFÖY DÖRDÜNCÜ İSTATİSTİKSEL ARBİTRAJ HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "HEDEF",
+      "code": "HDA",
+      "match": "exact name"
+    },
+    {
+      "n": 50,
+      "name": "HEDEF PORTFÖY ECE HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "HEDEF",
+      "code": "HVA",
+      "match": "exact name"
+    },
+    {
+      "n": 51,
+      "name": "HEDEF PORTFÖY EGE HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "HEDEF",
+      "code": "HMK",
+      "match": "exact name"
+    },
+    {
+      "n": 52,
+      "name": "HEDEF PORTFÖY GÜNEŞ HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "HEDEF",
+      "code": "HGH",
+      "match": "exact name"
+    },
+    {
+      "n": 53,
+      "name": "HEDEF PORTFÖY GÜNEY HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "HEDEF",
+      "code": "HGJ",
+      "match": "exact name"
+    },
+    {
+      "n": 54,
+      "name": "HEDEF PORTFÖY İDEAL HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "HEDEF",
+      "code": "HPI",
+      "match": "exact name"
+    },
+    {
+      "n": 55,
+      "name": "HEDEF PORTFÖY İKİNCİ KATILIM HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "HEDEF",
+      "code": "HFI",
+      "match": "exact name"
+    },
+    {
+      "n": 56,
+      "name": "HEDEF PORTFÖY İKİNCİ PARA PİYASASI (TL) FON",
+      "company": "HEDEF",
+      "code": "HPP",
+      "match": "exact name"
+    },
+    {
+      "n": 57,
+      "name": "HEDEF PORTFÖY İNCİ HİSSE SENEDİ SERBEST ÖZEL FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "HEDEF",
+      "code": "HIN",
+      "match": "exact name"
+    },
+    {
+      "n": 58,
+      "name": "HEDEF PORTFÖY KATILIM HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "HEDEF",
+      "code": "HKP",
+      "match": "exact name"
+    },
+    {
+      "n": 59,
+      "name": "HEDEF PORTFÖY KISA VADELİ SERBEST FON",
+      "company": "HEDEF",
+      "code": "KSA",
+      "match": "closest name (0.97)"
+    },
+    {
+      "n": 60,
+      "name": "HEDEF PORTFÖY KUZEY HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "HEDEF",
+      "code": "HPF",
+      "match": "exact name"
+    },
+    {
+      "n": 61,
+      "name": "HEDEF PORTFÖY MAVİ HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "HEDEF",
+      "code": "HMV",
+      "match": "exact name"
+    },
+    {
+      "n": 62,
+      "name": "HEDEF PORTFÖY MODEL HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "HEDEF",
+      "code": "FNT",
+      "match": "exact name"
+    },
+    {
+      "n": 63,
+      "name": "HEDEF PORTFÖY NEHİR HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "HEDEF",
+      "code": "NFK",
+      "match": "exact name"
+    },
+    {
+      "n": 64,
+      "name": "HEDEF PORTFÖY PARA PİYASASI (TL) FONU",
+      "company": "HEDEF",
+      "code": "HYV",
+      "match": "exact name"
+    },
+    {
+      "n": 65,
+      "name": "HEDEF PORTFÖY PARA PİYASASI KATILIM FONU",
+      "company": "HEDEF",
+      "code": "HPH",
+      "match": "exact name"
+    },
+    {
+      "n": 66,
+      "name": "HEDEF PORTFÖY PARA PİYASASI SERBEST FON",
+      "company": "HEDEF",
+      "code": "HKJ",
+      "match": "exact name"
+    },
+    {
+      "n": 67,
+      "name": "HEDEF PORTFÖY PUSULA HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "HEDEF",
+      "code": "HVB",
+      "match": "exact name"
+    },
+    {
+      "n": 68,
+      "name": "HEDEF PORTFÖY ROTA HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "HEDEF",
+      "code": "HVC",
+      "match": "exact name"
+    },
+    {
+      "n": 69,
+      "name": "HEDEF PORTFÖY UFUK HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "HEDEF",
+      "code": "DUH",
+      "match": "exact name"
+    },
+    {
+      "n": 70,
+      "name": "HEDEF PORTFÖY VEGA İSTATİSTİKSEL ARBİTRAJ HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "HEDEF",
+      "code": "HDK",
+      "match": "exact name"
+    },
+    {
+      "n": 71,
+      "name": "HEDEF PORTFÖY ZEN HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN)",
+      "company": "HEDEF",
+      "code": "HPZ",
+      "match": "exact name"
+    },
+    {
+      "n": 72,
+      "name": "PARDUS PORTFÖY ALTINCI HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "AP6",
+      "match": "exact name"
+    },
+    {
+      "n": 73,
+      "name": "PARDUS PORTFÖY ANADOLU HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "PAO",
+      "match": "exact name"
+    },
+    {
+      "n": 74,
+      "name": "PARDUS PORTFÖY BANKACILIK SEKTÖRÜ DIŞI ŞİRKETLER HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "BST",
+      "match": "exact name"
+    },
+    {
+      "n": 75,
+      "name": "PARDUS PORTFÖY BATI HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "PHY",
+      "match": "exact name"
+    },
+    {
+      "n": 76,
+      "name": "PARDUS PORTFÖY BEREKET HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "BRT",
+      "match": "exact name"
+    },
+    {
+      "n": 77,
+      "name": "PARDUS PORTFÖY BEŞİNCİ HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "BHH",
+      "match": "exact name"
+    },
+    {
+      "n": 78,
+      "name": "PARDUS PORTFÖY BIST 100 DIŞI ŞİRKETLER HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "PBY",
+      "match": "exact name"
+    },
+    {
+      "n": 79,
+      "name": "PARDUS PORTFÖY BIST 30 DIŞI ŞİRKETLER HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "BSE",
+      "match": "exact name"
+    },
+    {
+      "n": 80,
+      "name": "PARDUS PORTFÖY BIST 50 DIŞI ŞİRKETLER HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "BDI",
+      "match": "exact name"
+    },
+    {
+      "n": 81,
+      "name": "PARDUS PORTFÖY BİRİNCİ HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "AC7",
+      "match": "exact name"
+    },
+    {
+      "n": 82,
+      "name": "PARDUS PORTFÖY CAPİTAL HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "PCH",
+      "match": "exact name"
+    },
+    {
+      "n": 83,
+      "name": "PARDUS PORTFÖY DOĞU HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "PDH",
+      "match": "exact name"
+    },
+    {
+      "n": 84,
+      "name": "PARDUS PORTFÖY DOKUZUNCU HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "DHI",
+      "match": "exact name"
+    },
+    {
+      "n": 85,
+      "name": "PARDUS PORTFÖY DÖRDÜNCÜ HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "DRH",
+      "match": "exact name"
+    },
+    {
+      "n": 86,
+      "name": "PARDUS PORTFÖY GÜNEY HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "PGE",
+      "match": "exact name"
+    },
+    {
+      "n": 87,
+      "name": "PARDUS PORTFÖY İKİNCİ HİSSE SENEDİ (TL) FONU (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "KHA",
+      "match": "exact name"
+    },
+    {
+      "n": 88,
+      "name": "PARDUS PORTFÖY İKİNCİ HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "AC8",
+      "match": "exact name"
+    },
+    {
+      "n": 89,
+      "name": "PARDUS PORTFÖY İKİNCİ İSTATİSTİKSEL ARBİTRAJ HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "IAU",
+      "match": "exact name"
+    },
+    {
+      "n": 90,
+      "name": "PARDUS PORTFÖY İSTATİSTİKSEL ARBİTRAJ HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "AC5",
+      "match": "exact name"
+    },
+    {
+      "n": 91,
+      "name": "PARDUS PORTFÖY KARTAL HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "KRH",
+      "match": "exact name"
+    },
+    {
+      "n": 92,
+      "name": "PARDUS PORTFÖY KUZEY HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "PKU",
+      "match": "exact name"
+    },
+    {
+      "n": 93,
+      "name": "PARDUS PORTFÖY MARMARA HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "PMH",
+      "match": "exact name"
+    },
+    {
+      "n": 94,
+      "name": "PARDUS PORTFÖY MODEL PORTFÖY HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "PMP",
+      "match": "exact name"
+    },
+    {
+      "n": 95,
+      "name": "PARDUS PORTFÖY MUTLAK GETİRİ HEDEFLİ HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "MGE",
+      "match": "exact name"
+    },
+    {
+      "n": 96,
+      "name": "PARDUS PORTFÖY ONALTINCI HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "POF",
+      "match": "exact name"
+    },
+    {
+      "n": 97,
+      "name": "PARDUS PORTFÖY ONBEŞİNCİ HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "POS",
+      "match": "exact name"
+    },
+    {
+      "n": 98,
+      "name": "PARDUS PORTFÖY ONBİRİNCİ HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "POB",
+      "match": "exact name"
+    },
+    {
+      "n": 99,
+      "name": "PARDUS PORTFÖY ONDOKUZUNCU HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "PO9",
+      "match": "exact name"
+    },
+    {
+      "n": 100,
+      "name": "PARDUS PORTFÖY ONDÖRDÜNCÜ HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "PPO",
+      "match": "exact name"
+    },
+    {
+      "n": 101,
+      "name": "PARDUS PORTFÖY ONİKİNCİ HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "POI",
+      "match": "exact name"
+    },
+    {
+      "n": 102,
+      "name": "PARDUS PORTFÖY ONSEKİZİNCİ HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "PO8",
+      "match": "exact name"
+    },
+    {
+      "n": 103,
+      "name": "PARDUS PORTFÖY ONUNCU HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "OHI",
+      "match": "exact name"
+    },
+    {
+      "n": 104,
+      "name": "PARDUS PORTFÖY ONÜÇÜNCÜ HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "POU",
+      "match": "exact name"
+    },
+    {
+      "n": 105,
+      "name": "PARDUS PORTFÖY ONYEDİNCİ HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "PO7",
+      "match": "exact name"
+    },
+    {
+      "n": 106,
+      "name": "PARDUS PORTFÖY PARA PİYASASI (TL) FON",
+      "company": "PARDUS",
+      "code": "AC4",
+      "match": "exact name"
+    },
+    {
+      "n": 107,
+      "name": "PARDUS PORTFÖY SANAYİ SEKTÖRÜ DIŞI ŞİRKETLER HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "PST",
+      "match": "exact name"
+    },
+    {
+      "n": 108,
+      "name": "PARDUS PORTFÖY SANAYİ ŞİRKETLERİ HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "PSR",
+      "match": "exact name"
+    },
+    {
+      "n": 109,
+      "name": "PARDUS PORTFÖY SEKİZİNCİ HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "SHI",
+      "match": "exact name"
+    },
+    {
+      "n": 110,
+      "name": "PARDUS PORTFÖY ÜÇÜNCÜ HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "CSH",
+      "match": "exact name"
+    },
+    {
+      "n": 111,
+      "name": "PARDUS PORTFÖY YİRMİBİRİNCİ HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "PYD",
+      "match": "exact name"
+    },
+    {
+      "n": 112,
+      "name": "PARDUS PORTFÖY YİRMİİKİNCİ HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "PYI",
+      "match": "exact name"
+    },
+    {
+      "n": 113,
+      "name": "PARDUS PORTFÖY YİRMİNCİ HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PARDUS",
+      "code": "PYR",
+      "match": "exact name"
+    },
+    {
+      "n": 114,
+      "name": "PUSULA PORTFÖY BEŞİNCİ HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PUSULA",
+      "code": "PHB",
+      "match": "exact name"
+    },
+    {
+      "n": 115,
+      "name": "PUSULA PORTFÖY BİRİNCİ HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PUSULA",
+      "code": "PBH",
+      "match": "exact name"
+    },
+    {
+      "n": 116,
+      "name": "PUSULA PORTFÖY DOĞU HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PUSULA",
+      "code": "PDG",
+      "match": "exact name"
+    },
+    {
+      "n": 117,
+      "name": "PUSULA PORTFÖY DÖRDÜNCÜ HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PUSULA",
+      "code": "PDC",
+      "match": "exact name"
+    },
+    {
+      "n": 118,
+      "name": "PUSULA PORTFÖY GÜNEY HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PUSULA",
+      "code": "PGH",
+      "match": "exact name"
+    },
+    {
+      "n": 119,
+      "name": "PUSULA PORTFÖY İKİNCİ HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PUSULA",
+      "code": "PHN",
+      "match": "exact name"
+    },
+    {
+      "n": 120,
+      "name": "PUSULA PORTFÖY İKİNCİ KATILIM HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PUSULA",
+      "code": "PKD",
+      "match": "exact name"
+    },
+    {
+      "n": 121,
+      "name": "PUSULA PORTFÖY İKİNCİ PARA PİYASASI (TL) FONU",
+      "company": "PUSULA",
+      "code": "PNU",
+      "match": "exact name"
+    },
+    {
+      "n": 122,
+      "name": "PUSULA PORTFÖY KUZEY HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PUSULA",
+      "code": "PKZ",
+      "match": "exact name"
+    },
+    {
+      "n": 123,
+      "name": "PUSULA PORTFÖY PARA PİYASASI (TL) FONU",
+      "company": "PUSULA",
+      "code": "PRY",
+      "match": "exact name"
+    },
+    {
+      "n": 124,
+      "name": "PUSULA PORTFÖY PARA PİYASASI KATILIM (TL) FONU",
+      "company": "PUSULA",
+      "code": "PKM",
+      "match": "exact name"
+    },
+    {
+      "n": 125,
+      "name": "PUSULA PORTFÖY ÜÇÜNCÜ HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "PUSULA",
+      "code": "PCS",
+      "match": "exact name"
+    },
+    {
+      "n": 126,
+      "name": "TERA PORTFÖY BİRİNCİ SERBEST FON",
+      "company": "TERA",
+      "code": "TLY",
+      "match": "exact name"
+    },
+    {
+      "n": 127,
+      "name": "TERA PORTFÖY DÖRDÜNCÜ HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+      "company": "TERA",
+      "code": "DOH",
+      "match": "exact name"
+    },
+    {
+      "n": 128,
+      "name": "TERA PORTFÖY HİSSE SENEDİ (TL) FONU (HİSSE SENEDİ YOĞUN FON)",
+      "company": "TERA",
+      "code": "THF",
+      "match": "exact name"
+    },
+    {
+      "n": 129,
+      "name": "TERA PORTFÖY PARA PİYASASI (TL) FONU",
+      "company": "TERA",
+      "code": "TP2",
+      "match": "exact name"
+    },
+    {
+      "n": 130,
+      "name": "TERA PORTFÖY PARA PİYASASI KATILIM (TL) FONU",
+      "company": "TERA",
+      "code": "TLV",
+      "match": "exact name"
+    },
+    {
+      "n": 131,
+      "name": "TERA PORTFÖY ÜÇÜNCÜ HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN)",
+      "company": "TERA",
+      "code": "T3B",
+      "match": "exact name"
+    }
+  ]
+}

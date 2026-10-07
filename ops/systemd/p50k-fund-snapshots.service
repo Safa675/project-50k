@@ -1,0 +1,11 @@
+[Unit]
+Description=Project 50K: save today's TEFAS fund snapshots
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/Documents/project-50k
+Environment=PYTHONPATH=%h/Documents/project-50k/services
+ExecStart=%h/miniforge3/bin/python3 -m p50k.jobs.fund_snapshots --tefas-only
+Nice=10
