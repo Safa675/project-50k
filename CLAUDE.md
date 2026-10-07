@@ -13,6 +13,7 @@ The handoff instructions imported below, and the handoff's own `CLAUDE.md`, `STA
 - Before copying code from Safa675/bist-quant, read `docs/notes/bist-quant-reuse.md`.
 - Before building any TEFAS adapter or fund detector, read `research/spikes/2026-10-06-tefas/REPORT.md`: it records which TEFAS fields are dated and which are placeholders.
 - The daily TEFAS snapshot job is `services/p50k/jobs/fund_snapshots.py`. Its data lives in `~/.local/share/project-50k/`, outside git; never commit real TEFAS or KAP values (data rights not reviewed). Timer files are in `ops/systemd/`.
+- Where the project stands, what is decided and open, and what to do next: `docs/notes/codex-context-2026-10-07.md` (written for Codex, useful to any agent). Codex reads the root `AGENTS.md`; keep it consistent with this file.
 - Backend code lives in `services/p50k/`; tests in `tests/unit/`. Run them from the repo root with `PYTHONPATH=services python -m unittest discover -s tests -t . -v`.
 
 ## Handoff instructions
