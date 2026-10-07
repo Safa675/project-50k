@@ -51,6 +51,23 @@ Notes for a parser:
 - Download: the KAP disclosure page links one file; `GET https://kap.org.tr/tr/api/file/download/{fileId}` returns the PDF wrapped in a Java-serialized byte array, starting at byte 27.
 - Only one management company's report was checked. Others may lay out the file differently.
 
+## KAP batch: ten funds from ten companies
+
+Owner-approved batch, `kap_batch.py`: a year of reports for ten funds covering nine fund types and ten management companies (TTE, AAL, ACC, ADE, AHU, BCO, AHV, DBA, YAK, AC1). Checks are in `kap_batch_results.json`; files stay in `raw/kap/`.
+
+- **KAP stopped answering partway through.** After 180 successful KAP requests in about 9 minutes, 1.5 s apart, KAP started closing connections without a response (`RemoteProtocolError`), first on file downloads, then on disclosure pages. This is consistent with rate limiting, though the cause isn't confirmed. The script stopped itself after three consecutive failures. 78 of about 123 reports were downloaded (90 files, 122 MB); BCO, AHV and AC1 are missing and AHU is partial. Resume later at a much slower pace.
+- **borsapy can't find half of these funds on KAP.** Its fund-id pattern matches only upper-case ids. ACC, AHU, BCO, AHV and AC1 have lower-case ids, so `Fund.get_holdings` would report them as not found. Our scripts now match both.
+- **Layouts differ by company.** Three families so far:
+  - İş, Ak, Deniz and İstanbul: `I-FONU TANITICI BİLGİLER` and `D-)Toplam Değer/Net Varlık Değeri`. All nine fields parsed for 38 reports (TTE, ADE, DBA). İstanbul uses the same labels, but some values sit on separate lines, so the current line matcher misses them.
+  - Ata and Atlas: `1- FONU TANITICI BİLGİLER` and `E. TOPLAM DEĞER/NET VARLIK DEĞERİ`, with an extra `D. FON TUTAR` line and percentages written as `1.80%` or `%2,98`.
+  - Yapı Kredi: labels wrapped over two lines, and list letters that include `Ç.`.
+
+  Numbers appear both as `1,234.56` (İş, Ata) and `1.234,56` (Ak, Deniz, Atlas, İstanbul). A parser needs keyword-based labels for each family, both number formats and tolerance for wrapped lines; the current one handles only the first family.
+- **Deniz splits each report into two attachments:** the main report and a separate "sales from portfolio" section.
+- **Price dating held in 49 of 50 checked months** across TTE, ADE, DBA and ACC. The exception is TTE's year end: its December 2025 month-end price, repeated as January's previous-month price, matches no TEFAS row. ADE's and DBA's year-end prices match. Cause unknown.
+- **The cash-flow fields are filled in some months:** non-zero in 3 of 13 TTE reports, 6 of 13 ADE reports and all 12 DBA reports. A zero can't be read as either "not filled in" or "no flow" without more evidence.
+- **No report had an investor count.**
+
 Availability: the September report was published five days after month end, so a replay must not use a report before its publish time. KAP's list for the last 365 days had 13 reports for TTE and 12 for AAL. A single request for a 1,825-day window returned HTTP 200 with an empty list, so reaching back more than a year is not established.
 
 ## What borsapy 0.10.1 does with this
@@ -76,6 +93,7 @@ Checked by reading all of borsapy's fund-related code (two readers and one revie
 | Allocation | Scrapling `StealthyFetcher` past Akamai; `Date = datetime.now()`; rows with weight ≤ 0 dropped | Code; deliberately not run |
 | KAP holdings (`Fund.get_holdings`) | Reaches reports from the last 365 days through `period='YYYY-MM'`, but the output has no date column and silently falls back to the latest report when the month isn't found. Its parser sends the PDF text to an LLM through OpenRouter; the source does not establish the cost. | Code; not run |
 | KAP report list and PDFs | A private helper lists the last 365 days of reports with publish date, year and month. The PDFs download without any key or LLM. | Code; the PDF was fetched directly in this spike |
+| KAP fund id lookup | Matches only upper-case ids, so it fails for funds whose KAP id is lower-case: 5 of the 10 batch funds | Code and live |
 | Fund material events, prospectus changes | No path: borsapy's KAP provider covers listed stocks only | Code |
 | `Fund.tweets` | Needs logged-in X session cookies | Code; not admissible |
 
@@ -136,14 +154,15 @@ Checked by reading all of borsapy's fund-related code (two readers and one revie
 ## Open issues
 
 1. Data rights for TEFAS and KAP (owner).
-2. Whether to start a daily snapshot collector for size, units and investors (owner and developer). A safe as-of rule: accept a snapshot's date only when `sonFiyat` equals the newest history price, otherwise record as-of unknown.
-3. KAP PDF parsing: plain parsing of sections I, II and IV works on the sample (`kap_pdf_check.py`). Check other management companies' layouts before relying on it.
-4. Price dating is confirmed on one fund. Confirm it on more funds, including funds holding foreign assets, and check when prices publish.
-5. How to build peer sets for AN-FND-001 without dated category membership.
-6. Whether any management company fills the KAP cash-flow fields.
-7. What the negative rows in KAP holdings tables mean, before computing allocation from section III.
-8. Whether KAP reports older than 365 days can be listed.
-9. Pension funds (EMK), WAF behavior and rate limits are untested.
+2. Daily snapshot collector: built as `p50k.jobs.fund_snapshots` and first run on 2026-10-06 for the 1,071 funds traded on TEFAS. It dates a snapshot only when `sonFiyat` equals the newest dated price. Installing the daily timer (`ops/systemd/`) needs the owner's go-ahead.
+3. KAP PDF parsing: plain parsing works for one layout family (İş, Ak, Deniz). Ata/Atlas, Yapı Kredi and İstanbul need their own label rules. Layouts from 7 of about 66 management companies have been seen.
+4. KAP throttling: find a pace KAP tolerates before downloading more. The batch was cut off after 180 requests in about 9 minutes.
+5. Price dating held in 49 of 50 months across four funds. Explain TTE's year-end exception, check funds holding foreign assets, and check when prices publish.
+6. How to build peer sets for AN-FND-001 without dated category membership.
+7. When and by whom the KAP cash-flow fields are filled.
+8. What the negative rows in KAP holdings tables mean, before computing allocation from section III.
+9. Whether KAP reports older than 365 days can be listed.
+10. Pension funds (EMK) are untested. TEFAS's tolerance for a full-universe daily run is untested beyond the first run.
 
 ## Reproduce
 
@@ -162,3 +181,12 @@ python research/spikes/2026-10-06-tefas/kap_pdf_check.py
 ```
 
 It checks the newest KAP report in `spike.py`'s saved list. It reads the PDF from `raw/` if present, otherwise downloads it (2 requests). It needs pymupdf, which borsapy installs, and writes `kap_pdf_results.json`.
+
+The ten-fund batch:
+
+```sh
+python research/spikes/2026-10-06-tefas/kap_batch.py download
+python research/spikes/2026-10-06-tefas/kap_batch.py check
+```
+
+`download` reuses files already in `raw/kap/` and stops after three consecutive failures; mind KAP's throttling. `check` is offline and writes `kap_batch_results.json`.

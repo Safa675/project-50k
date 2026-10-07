@@ -320,7 +320,7 @@ def kap_probe(fetcher: Fetcher, code: str, kap_link: Any) -> dict[str, Any]:
     if body is None or record.get("status") != 200:
         out["stopped"] = "KAP fund page not retrieved; no further KAP requests"
         return out
-    match = re.search(r'objId[\\"\':]+([A-F0-9]{32})', body.decode("utf-8", errors="replace"))
+    match = re.search(r'objId[\\"\':]+([A-Fa-f0-9]{32})', body.decode("utf-8", errors="replace"))
     if not match:
         out["stopped"] = "objId not found in KAP page (possible challenge page); not bypassed"
         return out
