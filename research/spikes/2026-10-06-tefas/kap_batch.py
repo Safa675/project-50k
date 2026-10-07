@@ -7,8 +7,8 @@ each remaining type from a company not yet used). The goal is to see how much
 the report layout varies between companies.
 
 Run from the repo root, after spike.py:
-    python research/spikes/2026-10-06-tefas/kap_batch.py download
-    python research/spikes/2026-10-06-tefas/kap_batch.py check
+    python research/spikes/2026-10-06-tefas/kap_batch.py download [--funds A B ...] [--pause 6] [--log name.json]
+    python research/spikes/2026-10-06-tefas/kap_batch.py check [--funds A B ...] [--out results.json]
 
 download: per fund, TEFAS profile -> KAP fund page -> KAP report list (365
 days) -> each report's disclosure page -> attachment, plus three years of TEFAS
@@ -21,6 +21,7 @@ structure and checks only; values stay in the gitignored raw/ folder.
 """
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 import re
@@ -52,9 +53,10 @@ RESULTS = HERE / "kap_batch_results.json"
 class Session:
     """Sequential, paced requests with a log and a consecutive-failure stop."""
 
-    def __init__(self) -> None:
+    def __init__(self, pause: float = PAUSE_SECONDS) -> None:
         from borsapy._providers.base import BaseProvider
 
+        self.pause = pause
         self.client = httpx.Client(verify=True, timeout=90,
                                    headers={"User-Agent": BaseProvider.DEFAULT_HEADERS["User-Agent"]})
         self.log: list[dict] = []
@@ -71,7 +73,7 @@ class Session:
         except httpx.HTTPError as exc:
             entry["error"] = type(exc).__name__
         self.log.append(entry)
-        time.sleep(PAUSE_SECONDS)
+        time.sleep(self.pause)
         ok = response is not None and response.status_code == 200 and bool(response.content.strip())
         self.failures = 0 if ok else self.failures + 1
         if self.failures >= MAX_CONSECUTIVE_FAILURES:
@@ -159,18 +161,18 @@ def download_fund(session: Session, code: str) -> dict:
     return result
 
 
-def download() -> None:
-    session = Session()
+def download(funds: list[str], pause: float, log_name: str) -> None:
+    session = Session(pause)
     summary = []
     try:
-        for code in FUNDS:
+        for code in funds:
             fund = download_fund(session, code)
             summary.append(fund)
             print(f"{code}: {fund['reports']} reports, {fund['files']} downloaded, {fund['reused']} reused, "
                   f"problems: {fund['problems'] or 'none'}", flush=True)
     finally:
         KAP_DIR.mkdir(parents=True, exist_ok=True)
-        (KAP_DIR / "download_log.json").write_text(
+        (KAP_DIR / log_name).write_text(
             json.dumps({"funds": summary, "requests": session.log}, indent=2, ensure_ascii=False) + "\n",
             encoding="utf-8")
         print(f"{len(session.log)} requests", flush=True)
@@ -247,11 +249,11 @@ def check_pdf(pdf: Path, period: str, history: dict[str, Decimal]) -> dict:
     return record
 
 
-def check() -> None:
+def check(funds_to_check: list[str], out: Path) -> None:
     returns = json.loads((RAW / "fonGetiriBazliBilgiGetir_YAT.body").read_text(encoding="utf-8"))["resultList"]
     meta = {row["fonKodu"]: row for row in returns}
     funds = []
-    for code in FUNDS:
+    for code in funds_to_check:
         fund_dir = KAP_DIR / code
         history = tefas_history(code)
         reports = []
@@ -272,9 +274,24 @@ def check() -> None:
                       "reports": reports})
         ok = sum(1 for r in reports if not r.get("fields_missing") and "error" not in r and not r.get("not_pdf"))
         print(f"{code}: {len(reports)} files, {ok} with all {len(LABELS)} fields", flush=True)
-    RESULTS.write_text(json.dumps({"checked_at_utc": datetime.now(timezone.utc).isoformat(), "funds": funds},
+    out.write_text(json.dumps({"checked_at_utc": datetime.now(timezone.utc).isoformat(), "funds": funds},
                                   indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("command", choices=("download", "check"))
+    parser.add_argument("--funds", nargs="+", default=FUNDS, help="fund codes (default: the original ten)")
+    parser.add_argument("--pause", type=float, default=PAUSE_SECONDS, help="seconds between requests")
+    parser.add_argument("--log", default="download_log.json", help="download: request log file name in raw/kap/")
+    parser.add_argument("--out", type=Path, default=RESULTS, help="check: results file")
+    args = parser.parse_args()
+    funds = [code.upper() for code in args.funds]
+    if args.command == "download":
+        download(funds, args.pause, args.log)
+    else:
+        check(funds, args.out)
+
+
 if __name__ == "__main__":
-    {"download": download, "check": check}[sys.argv[1] if len(sys.argv) > 1 else "check"]()
+    main()
