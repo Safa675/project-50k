@@ -40,6 +40,8 @@ from kap_pdf_check import LABELS, SECTIONS, page_lines, parse_number, shape
 FUNDS = ["TTE", "AAL", "ACC", "ADE", "AHU", "BCO", "AHV", "DBA", "YAK", "AC1"]
 PAUSE_SECONDS = 1.5
 MAX_CONSECUTIVE_FAILURES = 3
+NETWORK_WAIT_SECONDS = 30
+NETWORK_WAIT_ATTEMPTS = 40  # up to 20 minutes without a connection
 TEFAS_API = "https://www.tefas.gov.tr/api/funds"
 KAP = "https://kap.org.tr"
 REPORT_TYPE = "8aca490d502e34b801502e380044002b"  # Portföy Dağılım Raporu
@@ -51,7 +53,7 @@ RESULTS = HERE / "kap_batch_results.json"
 
 
 class Session:
-    """Sequential, paced requests with a log and a consecutive-failure stop."""
+    """Sequential, paced requests with a log, a consecutive-failure stop, and a wait for lost connections."""
 
     def __init__(self, pause: float = PAUSE_SECONDS) -> None:
         from borsapy._providers.base import BaseProvider
@@ -63,15 +65,26 @@ class Session:
         self.failures = 0
 
     def request(self, method: str, url: str, **kwargs) -> httpx.Response | None:
-        entry = {"method": method, "url": url, "at_utc": datetime.now(timezone.utc).isoformat()}
-        response = None
-        try:
-            response = self.client.request(method, url, **kwargs)
-            entry.update(status=response.status_code, bytes=len(response.content),
-                         content_type=response.headers.get("content-type"),
-                         sha256=hashlib.sha256(response.content).hexdigest())
-        except httpx.HTTPError as exc:
-            entry["error"] = type(exc).__name__
+        for attempt in range(NETWORK_WAIT_ATTEMPTS + 1):
+            entry = {"method": method, "url": url, "at_utc": datetime.now(timezone.utc).isoformat()}
+            response = None
+            try:
+                response = self.client.request(method, url, **kwargs)
+                entry.update(status=response.status_code, bytes=len(response.content),
+                             content_type=response.headers.get("content-type"),
+                             sha256=hashlib.sha256(response.content).hexdigest())
+            except (httpx.ConnectError, httpx.ConnectTimeout) as exc:
+                # No connection at all: the local network dropped. Wait for it to come back instead of
+                # counting a server failure; nothing reaches KAP while we wait.
+                entry["error"] = type(exc).__name__
+                if attempt < NETWORK_WAIT_ATTEMPTS:
+                    entry["waiting_for_network"] = True
+                    self.log.append(entry)
+                    time.sleep(NETWORK_WAIT_SECONDS)
+                    continue
+            except httpx.HTTPError as exc:
+                entry["error"] = type(exc).__name__
+            break
         self.log.append(entry)
         time.sleep(self.pause)
         ok = response is not None and response.status_code == 200 and bool(response.content.strip())
