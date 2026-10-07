@@ -85,13 +85,13 @@ Same script at a slower pace (`--pause 6`), for THF, TP2, HLL, TKM, GTL, YLB, HP
 
 ## KAP reports: reading the headline fields (2026-10-07)
 
-`p50k.providers.kap_report.read_headline` finds total value, units outstanding, period-end price, previous price and the period change by keyword in a report's first section. `kap_series.py` runs it over every downloaded PDF and writes monthly series to the gitignored `raw/kap_series/`; `kap_series_coverage.json` holds structure and checks only. Result on the 54 funds read so far (14 companies, 634 reports):
+`p50k.providers.kap_report.read_headline` finds total value, units outstanding, period-end price, previous price and the period change by keyword in a report's first section. `kap_series.py` runs it over every downloaded PDF and writes monthly series to the gitignored `raw/kap_series/`; `kap_series_coverage.json` holds structure and checks only. Result on the 101 funds read (19 companies, 1,255 reports):
 
-- **633 of 634 reports parse completely.** The exception is one image-only PDF with no text layer (Deniz, January 2026), which would need OCR.
-- **units × price equals total value** within 0.01% in 553 of 628 reports and within 1% in all of them. The gap is systematic only for Ziraat (0.1% to 0.4%), so for Ziraat the total value and price are safer than the unit count.
-- **Dating differs by company.** The report's month-end price equals the TEFAS row dated the next business day in 526 of 542 reports from the other companies. In Ziraat's 84 reports it matches only 4 times; on three Ziraat funds it equals the row one business day earlier.
+- **1,246 of 1,255 reports parse completely.** Five are image-only PDFs with no text layer (they would need OCR). Four are KAP disclosures that carry only trade-section attachments and no headline section.
+- **units × price equals total value** within 0.01% in 1,123 of 1,246 reports and within 1% in 1,241. Of the 123 reports above 0.01%, 120 are Ziraat's (a systematic 0.1% to 0.4%), so for Ziraat the total value and price are safer than the unit count.
+- **Dating differs by company.** The report's month-end price equals the TEFAS row dated the next business day in 1,014 of 1,053 monthly reports from the other companies (96%). In Ziraat's 120 reports it matches only 4 times; on three Ziraat funds it equals the row one business day earlier.
 - **Wording varies:** "Ay Sonu" (monthly), "Dönem Sonu" (Yapı Kredi's September 2026 reports) and "Haftalık" (weekly reports). Number formats mix 1.234,56 and 1,234.56, and a lone separator followed by three digits (1,234) is rejected as ambiguous.
-- **KAP's list carries a period code: `AB` for the monthly reports and `HB` for weekly ones** (the PDFs say "Haftalık Pay Fiyatı"). The report list therefore shows a change of reporting cadence without opening a PDF.
+- **KAP's list carries a period code: `AB` for the monthly reports and `HB` for weekly ones** (the PDFs say "Haftalık Pay Fiyatı"). The report list therefore shows a change of reporting cadence without opening a PDF. In the 101 funds read, all 15 Serbest Fon switched to weekly reports in early September 2026 and no other category did, so the switch says nothing about liquidation.
 
 ## What borsapy 0.10.1 does with this
 

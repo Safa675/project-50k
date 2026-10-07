@@ -54,13 +54,15 @@ What the prices show for the two liquidating funds in this stage, described with
 4. Count false alarms: the same detectors on the funds that were not liquidated.
 5. These are four companies and eight funds that move together: a case study, not statistical evidence. A fund with no visible warning in public data is a finding too.
 
-## KAP report cadence
+## KAP report cadence: a hypothesis that did not hold
 
-Seen so far in the KAP report lists of 54 funds, including 6 of the 8 top-100 targets (KHA and PNU are not downloaded yet):
+With the first 54 funds read, three liquidated funds (TLY and DOH of Tera, DFI of Atlas) looked like the only funds to switch from monthly to weekly KAP reports (KAP's period code `AB` to `HB`), with the first weekly report on 2 September. With all 101 funds read the picture is different:
 
-- **Three liquidated funds (TLY and DOH of Tera, DFI of Atlas) switched from monthly to weekly reports.** Their last monthly report is for July (published 3 August for TLY and DOH, 10 August for DFI). Weekly reports followed on 2 and 9 September (DFI also on 16 September), with no August monthly report. KAP's period code changes from `AB` to `HB`.
-- THF, TP2 and PRY, the other liquidated funds read so far, stayed monthly. None of the 48 other funds read so far has a weekly report.
-- Why they switched is not known. It is a pattern found in funds already examined, so it is a hypothesis to test on funds never looked at, not a validated signal. The KAP report list alone is enough to test it, at about 3 requests per fund, without downloading any PDF.
+- All 15 Serbest Fon (hedge-type) funds in the set file weekly reports, and none of the other 86 funds do. Three of the 15 were liquidated; 12 were not.
+- All 15 stopped monthly reporting after July and published their first weekly report between 2 and 4 September.
+- The switch therefore applies to Serbest Funds in general (the cause is not known; it may be a rule), and says nothing about liquidation. The idea is dropped and will not be part of any test.
+
+The first impression came from a partial sample that held few Serbest Funds. Catching this on development data, before it reached a sealed test, is what the development/test split is for.
 
 ## Top 100: price-only detectors
 
