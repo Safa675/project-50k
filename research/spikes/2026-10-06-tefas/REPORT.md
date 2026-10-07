@@ -71,6 +71,18 @@ Owner-approved batch, `kap_batch.py`: a year of reports for ten funds covering n
 
 Availability: the September report was published five days after month end, so a replay must not use a report before its publish time. KAP's list for the last 365 days had 13 reports for TTE and 12 for AAL. A single request for a 1,825-day window returned HTTP 200 with an empty list, so reaching back more than a year is not established.
 
+## KAP stage 1: the top ten funds plus TP2 (2026-10-07)
+
+Same script at a slower pace (`--pause 6`), for THF, TP2, HLL, TKM, GTL, YLB, HPV, DLY, TI1, TTA and TZL: 316 requests and 142 files, with no failures and no sign of throttling at one request every six seconds. The checks are in `kap_stage1_results.json`.
+
+- **All nine fields parsed** for TP2 (Tera), TKM (TEB), TI1 and TTA (İş), and for DLY's main reports (Deniz). TP2 lacks only the yearly change in its first year.
+- **THF (Tera) puts its size and units outstanding on the line after the label,** as İstanbul does. The values are in the PDF, but the line matcher misses them.
+- **Nothing parsed for three more layouts:**
+  - Ziraat (HLL, HPV, TZL), made with pdf-lib.
+  - Garanti (GTL).
+  - Yapı Kredi (YLB), as before.
+- **Both cash-flow fields were zero in 34 of the 59 reports that have them,** including 8 of TP2's 11, while TP2's units outstanding rose more than fourfold. Month-to-month units outstanding is the usable flow measure; the cash-flow fields are not.
+
 ## What borsapy 0.10.1 does with this
 
 Checked by reading all of borsapy's fund-related code (two readers and one reviewer trying to refute the findings; file and line references in `borsapy_fund_inventory.json`), plus the live comparison above.
@@ -160,8 +172,8 @@ The first version of the snapshot collector (`p50k.jobs.fund_snapshots`) treated
 
 1. Data rights for TEFAS and KAP (owner).
 2. Daily snapshot collector: built as `p50k.jobs.fund_snapshots` and first run on 2026-10-06 for the 1,071 funds traded on TEFAS. It dates a snapshot only when `sonFiyat` equals the newest dated price. Installing the daily timer (`ops/systemd/`) needs the owner's go-ahead.
-3. KAP PDF parsing: plain parsing works for one layout family (İş, Ak, Deniz). Ata/Atlas, Yapı Kredi and İstanbul need their own label rules. Layouts from 7 of about 66 management companies have been seen.
-4. KAP throttling: find a pace KAP tolerates before downloading more. The batch was cut off after 180 requests in about 9 minutes.
+3. KAP PDF parsing: plain parsing works for one layout family (İş, Ak, Deniz, TEB, and Tera's money-market reports). Values on the next line (İstanbul, Tera's equity fund), Ziraat, Garanti and Yapı Kredi are not parsed yet. Ata/Atlas, Yapı Kredi and İstanbul need their own label rules. Layouts from 7 of about 66 management companies have been seen.
+4. KAP throttling: one request every six seconds ran 316 requests without a failure (2026-10-07); 1.5 seconds was cut off after 180 requests in about 9 minutes.
 5. Price dating held in 49 of 50 months across four funds. Explain TTE's year-end exception, check funds holding foreign assets, and check when prices publish.
 6. How to build peer sets for AN-FND-001 without dated category membership.
 7. When and by whom the KAP cash-flow fields are filled.

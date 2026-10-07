@@ -1,0 +1,5626 @@
+{
+  "checked_at_utc": "2026-10-07T08:44:10.776772+00:00",
+  "funds": [
+    {
+      "fund": "THF",
+      "type": "Hisse Senedi Şemsiye Fonu",
+      "company": "TERA",
+      "reports": [
+        {
+          "period": "2025-10",
+          "file": "2025-10_1511338.pdf",
+          "bytes": 70558,
+          "pages": 3,
+          "text_chars": 8421,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "cash_in_from_unit_issuance",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_out_from_unit_redemption",
+            "total_value",
+            "units_outstanding"
+          ],
+          "number_shapes": {
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "999.999.999,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "asset_mix_items": 19,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2025-11",
+          "file": "2025-11_1523362.pdf",
+          "bytes": 70849,
+          "pages": 3,
+          "text_chars": 8135,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "cash_in_from_unit_issuance",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_out_from_unit_redemption",
+            "total_value",
+            "units_outstanding"
+          ],
+          "number_shapes": {
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "999.999.999,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "asset_mix_items": 19,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2025-12",
+          "file": "2025-12_1533976.pdf",
+          "bytes": 72101,
+          "pages": 3,
+          "text_chars": 9097,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "cash_in_from_unit_issuance",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_out_from_unit_redemption",
+            "total_value",
+            "units_outstanding"
+          ],
+          "number_shapes": {
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "999.999.999,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "month_end_price_equals_next_business_day_row": false,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-01",
+          "file": "2026-01_1553379.pdf",
+          "bytes": 72120,
+          "pages": 3,
+          "text_chars": 8677,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "cash_in_from_unit_issuance",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_out_from_unit_redemption",
+            "total_value",
+            "units_outstanding"
+          ],
+          "number_shapes": {
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "99,99",
+            "ytd_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": false,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-02",
+          "file": "2026-02_1565536.pdf",
+          "bytes": 71949,
+          "pages": 3,
+          "text_chars": 8596,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "cash_in_from_unit_issuance",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_out_from_unit_redemption",
+            "total_value",
+            "units_outstanding"
+          ],
+          "number_shapes": {
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-03",
+          "file": "2026-03_1583107.pdf",
+          "bytes": 74648,
+          "pages": 4,
+          "text_chars": 10366,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [
+            "cash_out_from_unit_redemption",
+            "total_value",
+            "units_outstanding"
+          ],
+          "number_shapes": {
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "-9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "999.999.999,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-04",
+          "file": "2026-04_1601571.pdf",
+          "bytes": 72979,
+          "pages": 3,
+          "text_chars": 9352,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [
+            "cash_out_from_unit_redemption",
+            "total_value",
+            "units_outstanding"
+          ],
+          "number_shapes": {
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "99,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "999.999.999,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-05",
+          "file": "2026-05_1614816.pdf",
+          "bytes": 74235,
+          "pages": 4,
+          "text_chars": 9958,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [
+            "cash_out_from_unit_redemption",
+            "total_value",
+            "units_outstanding"
+          ],
+          "number_shapes": {
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "-9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "999,99",
+            "cash_in_from_unit_issuance": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-06",
+          "file": "2026-06_1622286.pdf",
+          "bytes": 73358,
+          "pages": 3,
+          "text_chars": 9316,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [
+            "cash_out_from_unit_redemption",
+            "total_value",
+            "units_outstanding"
+          ],
+          "number_shapes": {
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-07",
+          "file": "2026-07_1642299.pdf",
+          "bytes": 73119,
+          "pages": 3,
+          "text_chars": 8856,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [
+            "cash_out_from_unit_redemption",
+            "total_value",
+            "units_outstanding"
+          ],
+          "number_shapes": {
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "-9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-08",
+          "file": "2026-08_1657113.pdf",
+          "bytes": 98398,
+          "pages": 7,
+          "text_chars": 27673,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [
+            "cash_out_from_unit_redemption",
+            "total_value",
+            "units_outstanding"
+          ],
+          "number_shapes": {
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "99,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "999,99",
+            "cash_in_from_unit_issuance": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        }
+      ]
+    },
+    {
+      "fund": "TP2",
+      "type": "Para Piyasası Şemsiye Fonu",
+      "company": "TERA",
+      "reports": [
+        {
+          "period": "2025-10",
+          "file": "2025-10_1511342.pdf",
+          "bytes": 101698,
+          "pages": 7,
+          "text_chars": 44964,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [
+            "annual_change_pct"
+          ],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "99.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "99.999.999.999,99",
+            "cash_out_from_unit_redemption": "99.999.999.999,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 1.0293855008254957e-07,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": false,
+            "asset_mix_items": 19,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2025-11",
+          "file": "2025-11_1523367.pdf",
+          "bytes": 106025,
+          "pages": 9,
+          "text_chars": 50697,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [
+            "annual_change_pct"
+          ],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "99.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "99.999.999.999,99",
+            "cash_out_from_unit_redemption": "99.999.999.999,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 2.510527348430683e-07,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": false,
+            "asset_mix_items": 19,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2025-12",
+          "file": "2025-12_1533971.pdf",
+          "bytes": 101201,
+          "pages": 8,
+          "text_chars": 46344,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [
+            "annual_change_pct"
+          ],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "99.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "99.999.999.999,99",
+            "cash_out_from_unit_redemption": "99.999.999.999,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 2.1259408171984153e-08,
+            "month_end_price_equals_next_business_day_row": false,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": false,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-01",
+          "file": "2026-01_1553374.pdf",
+          "bytes": 111622,
+          "pages": 9,
+          "text_chars": 60419,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "99.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "9,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9,99",
+            "cash_out_from_unit_redemption": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 2.809735106357933e-07,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": false,
+            "cash_flow_fields_both_zero": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-02",
+          "file": "2026-02_1565531.pdf",
+          "bytes": 131221,
+          "pages": 12,
+          "text_chars": 84970,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "999.999.999.999,99",
+            "units_outstanding": "99.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "9,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9,99",
+            "cash_out_from_unit_redemption": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 1.3494352484320495e-07,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-03",
+          "file": "2026-03_1583102.pdf",
+          "bytes": 134927,
+          "pages": 12,
+          "text_chars": 88991,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "999.999.999.999,99",
+            "units_outstanding": "99.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9,99",
+            "cash_out_from_unit_redemption": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 2.402957829539905e-07,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-04",
+          "file": "2026-04_1601576.pdf",
+          "bytes": 148903,
+          "pages": 15,
+          "text_chars": 108141,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "999.999.999.999,99",
+            "units_outstanding": "99.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9,99",
+            "cash_out_from_unit_redemption": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 1.469060344370376e-11,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-05",
+          "file": "2026-05_1614821.pdf",
+          "bytes": 170908,
+          "pages": 18,
+          "text_chars": 139337,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "999.999.999.999,99",
+            "units_outstanding": "99.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9,99",
+            "cash_out_from_unit_redemption": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 2.87516150983434e-08,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-06",
+          "file": "2026-06_1622752.pdf",
+          "bytes": 167324,
+          "pages": 18,
+          "text_chars": 127985,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "999.999.999.999,99",
+            "units_outstanding": "99.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9,99",
+            "cash_out_from_unit_redemption": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 7.711391925539835e-08,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-07",
+          "file": "2026-07_1642296.pdf",
+          "bytes": 198997,
+          "pages": 25,
+          "text_chars": 166500,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "999.999.999.999,99",
+            "units_outstanding": "99.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9,99",
+            "cash_out_from_unit_redemption": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 8.799149308639498e-08,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-08",
+          "file": "2026-08_1657110.pdf",
+          "bytes": 203964,
+          "pages": 25,
+          "text_chars": 177822,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "999.999.999.999,99",
+            "units_outstanding": "99.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9,99",
+            "cash_out_from_unit_redemption": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 2.9419119082725445e-08,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        }
+      ]
+    },
+    {
+      "fund": "HLL",
+      "type": "Para Piyasası Şemsiye Fonu",
+      "company": "ZİRAAT",
+      "reports": [
+        {
+          "period": "2025-09",
+          "file": "2025-09_1499816.pdf",
+          "bytes": 181516,
+          "pages": 27,
+          "text_chars": 132656,
+          "images": 0,
+          "creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+          "sections_found": [],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2025-10",
+          "file": "2025-10_1514017.pdf",
+          "bytes": 175754,
+          "pages": 25,
+          "text_chars": 125175,
+          "images": 0,
+          "creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+          "sections_found": [],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2025-11",
+          "file": "2025-11_1524423.pdf",
+          "bytes": 158780,
+          "pages": 22,
+          "text_chars": 107229,
+          "images": 0,
+          "creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+          "sections_found": [],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2025-12",
+          "file": "2025-12_1538324.pdf",
+          "bytes": 171882,
+          "pages": 25,
+          "text_chars": 116762,
+          "images": 0,
+          "creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+          "sections_found": [],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-01",
+          "file": "2026-01_1554491.pdf",
+          "bytes": 160063,
+          "pages": 22,
+          "text_chars": 106613,
+          "images": 0,
+          "creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+          "sections_found": [],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-02",
+          "file": "2026-02_1568222.pdf",
+          "bytes": 144284,
+          "pages": 19,
+          "text_chars": 90779,
+          "images": 0,
+          "creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+          "sections_found": [],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-03",
+          "file": "2026-03_1587493.pdf",
+          "bytes": 122599,
+          "pages": 15,
+          "text_chars": 67502,
+          "images": 0,
+          "creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+          "sections_found": [],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-04",
+          "file": "2026-04_1604016.pdf",
+          "bytes": 102775,
+          "pages": 11,
+          "text_chars": 49345,
+          "images": 0,
+          "creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+          "sections_found": [],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-05",
+          "file": "2026-05_1614175.pdf",
+          "bytes": 95021,
+          "pages": 10,
+          "text_chars": 40378,
+          "images": 0,
+          "creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+          "sections_found": [],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-06",
+          "file": "2026-06_1628211.pdf",
+          "bytes": 111206,
+          "pages": 13,
+          "text_chars": 53567,
+          "images": 0,
+          "creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+          "sections_found": [],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-07",
+          "file": "2026-07_1645979.pdf",
+          "bytes": 106833,
+          "pages": 12,
+          "text_chars": 49738,
+          "images": 0,
+          "creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+          "sections_found": [],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-08",
+          "file": "2026-08_1660099.pdf",
+          "bytes": 101028,
+          "pages": 11,
+          "text_chars": 46825,
+          "images": 0,
+          "creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+          "sections_found": [],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        }
+      ]
+    },
+    {
+      "fund": "TKM",
+      "type": "Para Piyasası Şemsiye Fonu",
+      "company": "TEB",
+      "reports": [
+        {
+          "period": "2025-10",
+          "file": "2025-10_1511132.pdf",
+          "bytes": 316036,
+          "pages": 87,
+          "text_chars": 355752,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions",
+            "VII sales from portfolio"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "999.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "99.999.999.999,99",
+            "cash_out_from_unit_redemption": "99.999.999.999,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 9.167921923683043e-07,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": false,
+            "asset_mix_items": 19,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2025-11",
+          "file": "2025-11_1522644.pdf",
+          "bytes": 311272,
+          "pages": 84,
+          "text_chars": 346529,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions",
+            "VII sales from portfolio"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "999.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "99.999.999.999,99",
+            "cash_out_from_unit_redemption": "99.999.999.999,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 2.60217308370477e-06,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": false,
+            "asset_mix_items": 19,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2025-12",
+          "file": "2025-12_1532937.pdf",
+          "bytes": 322242,
+          "pages": 90,
+          "text_chars": 361335,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions",
+            "VII sales from portfolio"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "999.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "99.999.999.999,99",
+            "cash_out_from_unit_redemption": "99.999.999.999,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 2.7294258988097887e-06,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": false,
+            "asset_mix_items": 19,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-01",
+          "file": "2026-01_1551946.pdf",
+          "bytes": 99031,
+          "pages": 5,
+          "text_chars": 46228,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "999.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "9,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "99.999.999.999,99",
+            "cash_out_from_unit_redemption": "99.999.999.999,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 1.585829191746957e-06,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": false,
+            "asset_mix_items": 19,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-02",
+          "file": "2026-02_1565433.pdf",
+          "bytes": 324122,
+          "pages": 88,
+          "text_chars": 365945,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions",
+            "VII sales from portfolio"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "999.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "9,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "99.999.999.999,99",
+            "cash_out_from_unit_redemption": "99.999.999.999,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 7.64479581166366e-07,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": false,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-03",
+          "file": "2026-03_1582919.pdf",
+          "bytes": 320154,
+          "pages": 91,
+          "text_chars": 369352,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions",
+            "VII sales from portfolio"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "999.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "9,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9,99",
+            "cash_out_from_unit_redemption": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 1.1924069548543526e-06,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-04",
+          "file": "2026-04_1601279.pdf",
+          "bytes": 320151,
+          "pages": 90,
+          "text_chars": 367707,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "999.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9,99",
+            "cash_out_from_unit_redemption": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 1.1664110059600913e-06,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-05",
+          "file": "2026-05_1613416.pdf",
+          "bytes": 306507,
+          "pages": 75,
+          "text_chars": 357118,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions",
+            "VII sales from portfolio"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "999.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9,99",
+            "cash_out_from_unit_redemption": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 7.74686371964383e-07,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-06",
+          "file": "2026-06_1622604.pdf",
+          "bytes": 297420,
+          "pages": 82,
+          "text_chars": 334945,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "999.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9,99",
+            "cash_out_from_unit_redemption": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 1.162348191829854e-06,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-07",
+          "file": "2026-07_1645268.pdf",
+          "bytes": 309743,
+          "pages": 87,
+          "text_chars": 352203,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "999.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9,99",
+            "cash_out_from_unit_redemption": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 1.4678349890416689e-06,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-08",
+          "file": "2026-08_1658764.pdf",
+          "bytes": 328358,
+          "pages": 92,
+          "text_chars": 375113,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions",
+            "VII sales from portfolio"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "999.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9,99",
+            "cash_out_from_unit_redemption": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 4.868359803465378e-07,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        }
+      ]
+    },
+    {
+      "fund": "GTL",
+      "type": "Para Piyasası Şemsiye Fonu",
+      "company": "GARANTİ",
+      "reports": [
+        {
+          "period": "2025-09",
+          "file": "2025-09_1500743.pdf",
+          "bytes": 52154,
+          "pages": 7,
+          "text_chars": 135128,
+          "images": 0,
+          "creator": "PScript5.dll Version 5.2.2",
+          "sections_found": [
+            "III holdings"
+          ],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2025-10",
+          "file": "2025-10_1514092.pdf",
+          "bytes": 55671,
+          "pages": 8,
+          "text_chars": 144554,
+          "images": 0,
+          "creator": "PScript5.dll Version 5.2.2",
+          "sections_found": [
+            "III holdings"
+          ],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2025-11",
+          "file": "2025-11_1524753.pdf",
+          "bytes": 56343,
+          "pages": 8,
+          "text_chars": 151526,
+          "images": 0,
+          "creator": "PScript5.dll Version 5.2.2",
+          "sections_found": [
+            "III holdings"
+          ],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2025-12",
+          "file": "2025-12_1538518.pdf",
+          "bytes": 45454,
+          "pages": 9,
+          "text_chars": 156846,
+          "images": 0,
+          "creator": "PScript5.dll Version 5.2.2",
+          "sections_found": [
+            "III holdings"
+          ],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-01",
+          "file": "2026-01_1554194.pdf",
+          "bytes": 48731,
+          "pages": 10,
+          "text_chars": 168806,
+          "images": 0,
+          "creator": "PScript5.dll Version 5.2.2",
+          "sections_found": [
+            "III holdings"
+          ],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-02",
+          "file": "2026-02_1568642.pdf",
+          "bytes": 46052,
+          "pages": 9,
+          "text_chars": 172282,
+          "images": 0,
+          "creator": "PScript5.dll Version 5.2.2",
+          "sections_found": [
+            "III holdings"
+          ],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-03",
+          "file": "2026-03_1589266.pdf",
+          "bytes": 39428,
+          "pages": 7,
+          "text_chars": 119010,
+          "images": 0,
+          "creator": "PScript5.dll Version 5.2.2",
+          "sections_found": [
+            "III holdings"
+          ],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-04",
+          "file": "2026-04_1605374.pdf",
+          "bytes": 38471,
+          "pages": 6,
+          "text_chars": 105770,
+          "images": 0,
+          "creator": "PScript5.dll Version 5.2.2",
+          "sections_found": [
+            "III holdings"
+          ],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-05",
+          "file": "2026-05_1614909.pdf",
+          "bytes": 39909,
+          "pages": 7,
+          "text_chars": 113883,
+          "images": 0,
+          "creator": "PScript5.dll Version 5.2.2",
+          "sections_found": [
+            "III holdings"
+          ],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-06",
+          "file": "2026-06_1629994.pdf",
+          "bytes": 38747,
+          "pages": 7,
+          "text_chars": 115527,
+          "images": 0,
+          "creator": "PScript5.dll Version 5.2.2",
+          "sections_found": [
+            "III holdings"
+          ],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-07",
+          "file": "2026-07_1646592.pdf",
+          "bytes": 45708,
+          "pages": 10,
+          "text_chars": 166939,
+          "images": 0,
+          "creator": "PScript5.dll Version 5.2.2",
+          "sections_found": [
+            "III holdings"
+          ],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-08",
+          "file": "2026-08_1659660.pdf",
+          "bytes": 43309,
+          "pages": 9,
+          "text_chars": 154553,
+          "images": 0,
+          "creator": "PScript5.dll Version 5.2.2",
+          "sections_found": [
+            "III holdings"
+          ],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        }
+      ]
+    },
+    {
+      "fund": "YLB",
+      "type": "Para Piyasası Şemsiye Fonu",
+      "company": "YAPI KREDİ",
+      "reports": [
+        {
+          "period": "2025-09",
+          "file": "2025-09_1499269.pdf",
+          "bytes": 314703,
+          "pages": 44,
+          "text_chars": 164186,
+          "images": 0,
+          "creator": "",
+          "sections_found": [
+            "VI-A corporate actions"
+          ],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2025-10",
+          "file": "2025-10_1512915.pdf",
+          "bytes": 325349,
+          "pages": 38,
+          "text_chars": 142015,
+          "images": 0,
+          "creator": "",
+          "sections_found": [
+            "VI-A corporate actions"
+          ],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2025-11",
+          "file": "2025-11_1524635.pdf",
+          "bytes": 259902,
+          "pages": 32,
+          "text_chars": 116637,
+          "images": 0,
+          "creator": "",
+          "sections_found": [
+            "VI-A corporate actions"
+          ],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2025-12",
+          "file": "2025-12_1537365.pdf",
+          "bytes": 289967,
+          "pages": 39,
+          "text_chars": 141490,
+          "images": 0,
+          "creator": "",
+          "sections_found": [
+            "VI-A corporate actions"
+          ],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-01",
+          "file": "2026-01_1554614.pdf",
+          "bytes": 284305,
+          "pages": 38,
+          "text_chars": 136484,
+          "images": 0,
+          "creator": "",
+          "sections_found": [
+            "VI-A corporate actions"
+          ],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-02",
+          "file": "2026-02_1568556.pdf",
+          "bytes": 271303,
+          "pages": 34,
+          "text_chars": 125443,
+          "images": 0,
+          "creator": "",
+          "sections_found": [
+            "VI-A corporate actions"
+          ],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-03",
+          "file": "2026-03_1588045.pdf",
+          "bytes": 236952,
+          "pages": 27,
+          "text_chars": 95724,
+          "images": 0,
+          "creator": "",
+          "sections_found": [
+            "VI-A corporate actions"
+          ],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-04",
+          "file": "2026-04_1604305.pdf",
+          "bytes": 242688,
+          "pages": 28,
+          "text_chars": 100216,
+          "images": 0,
+          "creator": "",
+          "sections_found": [
+            "VI-A corporate actions"
+          ],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-05",
+          "file": "2026-05_1614007.pdf",
+          "bytes": 221428,
+          "pages": 24,
+          "text_chars": 83624,
+          "images": 0,
+          "creator": "",
+          "sections_found": [
+            "VI-A corporate actions"
+          ],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-06",
+          "file": "2026-06_1626063.pdf",
+          "bytes": 264320,
+          "pages": 33,
+          "text_chars": 118115,
+          "images": 0,
+          "creator": "",
+          "sections_found": [
+            "VI-A corporate actions"
+          ],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-07",
+          "file": "2026-07_1646339.pdf",
+          "bytes": 291858,
+          "pages": 38,
+          "text_chars": 138766,
+          "images": 0,
+          "creator": "",
+          "sections_found": [
+            "VI-A corporate actions"
+          ],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-08",
+          "file": "2026-08_1658164.pdf",
+          "bytes": 300568,
+          "pages": 41,
+          "text_chars": 149576,
+          "images": 0,
+          "creator": "",
+          "sections_found": [
+            "VI-A corporate actions"
+          ],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        }
+      ]
+    },
+    {
+      "fund": "HPV",
+      "type": "Katılım Şemsiye Fonu",
+      "company": "ZİRAAT",
+      "reports": [
+        {
+          "period": "2025-09",
+          "file": "2025-09_1499817.pdf",
+          "bytes": 68307,
+          "pages": 5,
+          "text_chars": 17208,
+          "images": 0,
+          "creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+          "sections_found": [],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2025-10",
+          "file": "2025-10_1514018.pdf",
+          "bytes": 69422,
+          "pages": 5,
+          "text_chars": 18076,
+          "images": 0,
+          "creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+          "sections_found": [],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2025-11",
+          "file": "2025-11_1524424.pdf",
+          "bytes": 70934,
+          "pages": 5,
+          "text_chars": 19897,
+          "images": 0,
+          "creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+          "sections_found": [],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2025-12",
+          "file": "2025-12_1538325.pdf",
+          "bytes": 71913,
+          "pages": 6,
+          "text_chars": 20984,
+          "images": 0,
+          "creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+          "sections_found": [],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-01",
+          "file": "2026-01_1554492.pdf",
+          "bytes": 70627,
+          "pages": 5,
+          "text_chars": 19411,
+          "images": 0,
+          "creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+          "sections_found": [],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-02",
+          "file": "2026-02_1568223.pdf",
+          "bytes": 73216,
+          "pages": 6,
+          "text_chars": 21512,
+          "images": 0,
+          "creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+          "sections_found": [],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-03",
+          "file": "2026-03_1587494.pdf",
+          "bytes": 71216,
+          "pages": 5,
+          "text_chars": 20194,
+          "images": 0,
+          "creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+          "sections_found": [],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-04",
+          "file": "2026-04_1604017.pdf",
+          "bytes": 74987,
+          "pages": 6,
+          "text_chars": 23109,
+          "images": 0,
+          "creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+          "sections_found": [],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-05",
+          "file": "2026-05_1614176.pdf",
+          "bytes": 70024,
+          "pages": 5,
+          "text_chars": 18581,
+          "images": 0,
+          "creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+          "sections_found": [],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-06",
+          "file": "2026-06_1628210.pdf",
+          "bytes": 73307,
+          "pages": 6,
+          "text_chars": 21477,
+          "images": 0,
+          "creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+          "sections_found": [],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-07",
+          "file": "2026-07_1645980.pdf",
+          "bytes": 74187,
+          "pages": 6,
+          "text_chars": 22467,
+          "images": 0,
+          "creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+          "sections_found": [],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-08",
+          "file": "2026-08_1660100.pdf",
+          "bytes": 74595,
+          "pages": 6,
+          "text_chars": 22559,
+          "images": 0,
+          "creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+          "sections_found": [],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        }
+      ]
+    },
+    {
+      "fund": "DLY",
+      "type": "Para Piyasası Şemsiye Fonu",
+      "company": "DENİZ",
+      "reports": [
+        {
+          "period": "2025-10",
+          "file": "2025-10_1513973_0.pdf",
+          "bytes": 291941,
+          "pages": 142,
+          "text_chars": 298379,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "VII sales from portfolio"
+          ],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2025-10",
+          "file": "2025-10_1513973_1.pdf",
+          "bytes": 123989,
+          "pages": 8,
+          "text_chars": 71945,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "99.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "99.999.999.999,99",
+            "cash_out_from_unit_redemption": "99.999.999.999,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 1.7727029283996446e-08,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": false,
+            "asset_mix_items": 19,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2025-11",
+          "file": "2025-11_1523181_0.pdf",
+          "bytes": 127250,
+          "pages": 8,
+          "text_chars": 74361,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "99.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "99.999.999.999,99",
+            "cash_out_from_unit_redemption": "99.999.999.999,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 7.64348778590067e-08,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": false,
+            "asset_mix_items": 19,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2025-11",
+          "file": "2025-11_1523181_1.pdf",
+          "bytes": 310109,
+          "pages": 150,
+          "text_chars": 318705,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "VII sales from portfolio"
+          ],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2025-12",
+          "file": "2025-12_1532837_0.pdf",
+          "bytes": 122485,
+          "pages": 8,
+          "text_chars": 68270,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "99.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "99.999.999.999,99",
+            "cash_out_from_unit_redemption": "99.999.999.999,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 8.668459818294048e-08,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": false,
+            "asset_mix_items": 19,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2025-12",
+          "file": "2025-12_1532837_1.pdf",
+          "bytes": 349607,
+          "pages": 172,
+          "text_chars": 363541,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "VII sales from portfolio"
+          ],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-01",
+          "file": "2026-01_1551939_0.pdf",
+          "bytes": 128880,
+          "pages": 8,
+          "text_chars": 76238,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "99.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "9,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "99.999.999.999,99",
+            "cash_out_from_unit_redemption": "99.999.999.999,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 1.021602816962957e-08,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": false,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-01",
+          "file": "2026-01_1551939_1.pdf",
+          "bytes": 320536,
+          "pages": 156,
+          "text_chars": 330473,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "VII sales from portfolio"
+          ],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-02",
+          "file": "2026-02_1565613_0.pdf",
+          "bytes": 121339,
+          "pages": 8,
+          "text_chars": 68579,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "99.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "9,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "999.999.999.999,99",
+            "cash_out_from_unit_redemption": "99.999.999.999,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 9.694474594953135e-08,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": false,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-02",
+          "file": "2026-02_1565613_1.pdf",
+          "bytes": 257041,
+          "pages": 124,
+          "text_chars": 259812,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "VII sales from portfolio"
+          ],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-03",
+          "file": "2026-03_1583441_0.pdf",
+          "bytes": 95020,
+          "pages": 5,
+          "text_chars": 31740,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "99.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "9,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "99.999.999.999,99",
+            "cash_out_from_unit_redemption": "999.999.999.999,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 8.13720707306321e-08,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": false,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-03",
+          "file": "2026-03_1583441_1.pdf",
+          "bytes": 191700,
+          "pages": 93,
+          "text_chars": 195282,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "VII sales from portfolio"
+          ],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-04",
+          "file": "2026-04_1601692_0.pdf",
+          "bytes": 99430,
+          "pages": 5,
+          "text_chars": 40410,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "99.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "999.999.999.999,99",
+            "cash_out_from_unit_redemption": "999.999.999.999,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 2.846899434020263e-09,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": false,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-04",
+          "file": "2026-04_1601692_1.pdf",
+          "bytes": 173047,
+          "pages": 82,
+          "text_chars": 168914,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "VII sales from portfolio"
+          ],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-05",
+          "file": "2026-05_1612889_0.pdf",
+          "bytes": 94943,
+          "pages": 5,
+          "text_chars": 33335,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "99.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "99.999.999.999,99",
+            "cash_out_from_unit_redemption": "99.999.999.999,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 6.280796467977538e-08,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": false,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-05",
+          "file": "2026-05_1612889_1.pdf",
+          "bytes": 120208,
+          "pages": 53,
+          "text_chars": 108710,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "VII sales from portfolio"
+          ],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-06",
+          "file": "2026-06_1623975_0.pdf",
+          "bytes": 98310,
+          "pages": 5,
+          "text_chars": 38575,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "99.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "999.999.999.999,99",
+            "cash_out_from_unit_redemption": "999.999.999.999,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 3.7279303786760925e-09,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": false,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-06",
+          "file": "2026-06_1623975_1.pdf",
+          "bytes": 146862,
+          "pages": 66,
+          "text_chars": 136391,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "VII sales from portfolio"
+          ],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-07",
+          "file": "2026-07_1643297_0.pdf",
+          "bytes": 107917,
+          "pages": 6,
+          "text_chars": 51143,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "99.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "99.999.999.999,99",
+            "cash_out_from_unit_redemption": "99.999.999.999,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 2.143104481279919e-08,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": false,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-07",
+          "file": "2026-07_1643297_1.pdf",
+          "bytes": 174430,
+          "pages": 81,
+          "text_chars": 169867,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "VII sales from portfolio"
+          ],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-08",
+          "file": "2026-08_1658079_0.pdf",
+          "bytes": 100698,
+          "pages": 5,
+          "text_chars": 43049,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "99.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "999.999.999.999,99",
+            "cash_out_from_unit_redemption": "999.999.999.999,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 5.4312611543982184e-08,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": false,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-08",
+          "file": "2026-08_1658079_1.pdf",
+          "bytes": 214322,
+          "pages": 101,
+          "text_chars": 213714,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "VII sales from portfolio"
+          ],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-09",
+          "file": "2026-09_1672021_0.pdf",
+          "bytes": 92998,
+          "pages": 5,
+          "text_chars": 31686,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "9.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "99.999.999.999,99",
+            "cash_out_from_unit_redemption": "99.999.999.999,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 2.6165614547805476e-08,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": false,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-09",
+          "file": "2026-09_1672021_1.pdf",
+          "bytes": 149577,
+          "pages": 67,
+          "text_chars": 140184,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "VII sales from portfolio"
+          ],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        }
+      ]
+    },
+    {
+      "fund": "TI1",
+      "type": "Para Piyasası Şemsiye Fonu",
+      "company": "İŞ",
+      "reports": [
+        {
+          "period": "2025-09",
+          "file": "2025-09_1497626.pdf",
+          "bytes": 137254,
+          "pages": 9,
+          "text_chars": 92272,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "999.999.999.999,99",
+            "units_outstanding": "999.999.999,999",
+            "month_end_price": "9.999,999999",
+            "previous_month_price": "9.999,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "999.999.999.999,99",
+            "cash_out_from_unit_redemption": "999.999.999.999,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 4.99680472962387e-11,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": false,
+            "asset_mix_items": 19,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2025-10",
+          "file": "2025-10_1512066.pdf",
+          "bytes": 138440,
+          "pages": 9,
+          "text_chars": 93946,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "999.999.999.999,99",
+            "units_outstanding": "999.999.999,999",
+            "month_end_price": "9.999,999999",
+            "previous_month_price": "9.999,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "999.999.999.999,99",
+            "cash_out_from_unit_redemption": "999.999.999.999,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 2.475475353188649e-10,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": false,
+            "asset_mix_items": 19,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2025-11",
+          "file": "2025-11_1523230.pdf",
+          "bytes": 142593,
+          "pages": 9,
+          "text_chars": 99283,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "999.999.999.999,99",
+            "units_outstanding": "999.999.999,999",
+            "month_end_price": "9.999,999999",
+            "previous_month_price": "9.999,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "999.999.999.999,99",
+            "cash_out_from_unit_redemption": "999.999.999.999,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 1.6896898826240624e-10,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": false,
+            "asset_mix_items": 19,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2025-12",
+          "file": "2025-12_1534835.pdf",
+          "bytes": 141634,
+          "pages": 9,
+          "text_chars": 95895,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "999.999.999.999,99",
+            "units_outstanding": "999.999.999,999",
+            "month_end_price": "9.999,999999",
+            "previous_month_price": "9.999,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9,99",
+            "cash_out_from_unit_redemption": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 8.224388435308848e-11,
+            "month_end_price_equals_next_business_day_row": false,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-01",
+          "file": "2026-01_1553672.pdf",
+          "bytes": 149983,
+          "pages": 10,
+          "text_chars": 107280,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "999.999.999.999,99",
+            "units_outstanding": "999.999.999,999",
+            "month_end_price": "9.999,999999",
+            "previous_month_price": "9.999,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "9,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9,99",
+            "cash_out_from_unit_redemption": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 3.5768942012130726e-11,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": false,
+            "cash_flow_fields_both_zero": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-02",
+          "file": "2026-02_1567464.pdf",
+          "bytes": 150391,
+          "pages": 10,
+          "text_chars": 107834,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "999.999.999.999,99",
+            "units_outstanding": "999.999.999,999",
+            "month_end_price": "9.999,999999",
+            "previous_month_price": "9.999,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "9,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9,99",
+            "cash_out_from_unit_redemption": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 1.2173400626368236e-10,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-03",
+          "file": "2026-03_1584651.pdf",
+          "bytes": 115315,
+          "pages": 7,
+          "text_chars": 58412,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "999.999.999.999,99",
+            "units_outstanding": "999.999.999,999",
+            "month_end_price": "9.999,999999",
+            "previous_month_price": "9.999,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "9,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9,99",
+            "cash_out_from_unit_redemption": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 2.0004046683240582e-10,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-04",
+          "file": "2026-04_1603927.pdf",
+          "bytes": 121167,
+          "pages": 7,
+          "text_chars": 68333,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "999.999.999.999,99",
+            "units_outstanding": "999.999.999,999",
+            "month_end_price": "9.999,999999",
+            "previous_month_price": "9.999,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9,99",
+            "cash_out_from_unit_redemption": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 3.297458250503611e-10,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-05",
+          "file": "2026-05_1613600.pdf",
+          "bytes": 115885,
+          "pages": 7,
+          "text_chars": 60659,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "999.999.999.999,99",
+            "units_outstanding": "999.999.999,999",
+            "month_end_price": "9.999,999999",
+            "previous_month_price": "9.999,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9,99",
+            "cash_out_from_unit_redemption": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 1.7220064867486166e-10,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-06",
+          "file": "2026-06_1623774.pdf",
+          "bytes": 116351,
+          "pages": 7,
+          "text_chars": 61250,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "999.999.999.999,99",
+            "units_outstanding": "999.999.999,999",
+            "month_end_price": "9.999,999999",
+            "previous_month_price": "9.999,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9,99",
+            "cash_out_from_unit_redemption": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 2.260719210661324e-10,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-07",
+          "file": "2026-07_1643448.pdf",
+          "bytes": 124166,
+          "pages": 7,
+          "text_chars": 74002,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "999.999.999.999,99",
+            "units_outstanding": "999.999.999,999",
+            "month_end_price": "9.999,999999",
+            "previous_month_price": "9.999,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9,99",
+            "cash_out_from_unit_redemption": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 1.136315641205394e-10,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-08",
+          "file": "2026-08_1657932.pdf",
+          "bytes": 130281,
+          "pages": 8,
+          "text_chars": 80350,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "999.999.999.999,99",
+            "units_outstanding": "999.999.999,999",
+            "month_end_price": "9.999,999999",
+            "previous_month_price": "9.999,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9,99",
+            "cash_out_from_unit_redemption": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 3.336741395407628e-11,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-09",
+          "file": "2026-09_1671875.pdf",
+          "bytes": 121583,
+          "pages": 7,
+          "text_chars": 70734,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "999.999.999.999,99",
+            "units_outstanding": "999.999.999,999",
+            "month_end_price": "9.999,999999",
+            "previous_month_price": "9.999,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9,99",
+            "cash_out_from_unit_redemption": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 6.5333218867073996e-12,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        }
+      ]
+    },
+    {
+      "fund": "TTA",
+      "type": "Kıymetli Madenler Şemsiye Fonu",
+      "company": "İŞ",
+      "reports": [
+        {
+          "period": "2025-10",
+          "file": "2025-10_1511666.pdf",
+          "bytes": 87035,
+          "pages": 8,
+          "text_chars": 24790,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "99.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9.999.999.999,99",
+            "cash_out_from_unit_redemption": "9.999.999.999,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 8.633219210771398e-07,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": false,
+            "asset_mix_items": 19,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2025-11",
+          "file": "2025-11_1523132.pdf",
+          "bytes": 77648,
+          "pages": 4,
+          "text_chars": 13453,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "99.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9.999.999.999,99",
+            "cash_out_from_unit_redemption": "9.999.999.999,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 4.987632217495845e-07,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": false,
+            "asset_mix_items": 19,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2025-12",
+          "file": "2025-12_1534903.pdf",
+          "bytes": 76013,
+          "pages": 4,
+          "text_chars": 12701,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "99.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9,99",
+            "cash_out_from_unit_redemption": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 2.1081351223311985e-07,
+            "month_end_price_equals_next_business_day_row": false,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-01",
+          "file": "2026-01_1553905.pdf",
+          "bytes": 85777,
+          "pages": 6,
+          "text_chars": 23181,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "99.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "99,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "999,99",
+            "cash_in_from_unit_issuance": "9,99",
+            "cash_out_from_unit_redemption": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 5.092947279000911e-07,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": false,
+            "cash_flow_fields_both_zero": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-02",
+          "file": "2026-02_1567257.pdf",
+          "bytes": 90549,
+          "pages": 9,
+          "text_chars": 28036,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "99.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "99,99",
+            "annual_change_pct": "999,99",
+            "cash_in_from_unit_issuance": "9,99",
+            "cash_out_from_unit_redemption": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 6.414028691324078e-07,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-03",
+          "file": "2026-03_1584231.pdf",
+          "bytes": 86797,
+          "pages": 8,
+          "text_chars": 24092,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "99.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "-99,99",
+            "ytd_change_pct": "9,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9,99",
+            "cash_out_from_unit_redemption": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 4.5507962307097896e-07,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-04",
+          "file": "2026-04_1603956.pdf",
+          "bytes": 75829,
+          "pages": 4,
+          "text_chars": 11338,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "99.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "-9,99",
+            "ytd_change_pct": "9,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9,99",
+            "cash_out_from_unit_redemption": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 4.119654187754423e-07,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-05",
+          "file": "2026-05_1613175.pdf",
+          "bytes": 71588,
+          "pages": 3,
+          "text_chars": 7011,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "99.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "9,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9,99",
+            "cash_out_from_unit_redemption": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 7.285679297183346e-07,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-06",
+          "file": "2026-06_1623916.pdf",
+          "bytes": 78701,
+          "pages": 5,
+          "text_chars": 14786,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "99.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "-9,99",
+            "ytd_change_pct": "-9,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9,99",
+            "cash_out_from_unit_redemption": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 5.444318097427566e-08,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-07",
+          "file": "2026-07_1642759.pdf",
+          "bytes": 71178,
+          "pages": 3,
+          "text_chars": 8204,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "99.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "-9,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9,99",
+            "cash_out_from_unit_redemption": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 5.25108193096641e-07,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-08",
+          "file": "2026-08_1657953.pdf",
+          "bytes": 70232,
+          "pages": 3,
+          "text_chars": 7615,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "99.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "9,99",
+            "ytd_change_pct": "9,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9,99",
+            "cash_out_from_unit_redemption": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 5.412850659281258e-07,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-09",
+          "file": "2026-09_1671811.pdf",
+          "bytes": 73505,
+          "pages": 3,
+          "text_chars": 9130,
+          "images": 0,
+          "creator": "Infleks Rep Infrastructure",
+          "sections_found": [
+            "I fund identity",
+            "II performance",
+            "III holdings",
+            "IV fund total value",
+            "V expenses",
+            "VI-A corporate actions"
+          ],
+          "fields_found": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "fields_missing": [],
+          "number_shapes": {
+            "total_value": "99.999.999.999,99",
+            "units_outstanding": "99.999.999.999,999",
+            "month_end_price": "9,999999",
+            "previous_month_price": "9,999999",
+            "monthly_change_pct": "-9,99",
+            "ytd_change_pct": "-9,99",
+            "annual_change_pct": "99,99",
+            "cash_in_from_unit_issuance": "9,99",
+            "cash_out_from_unit_redemption": "9,99"
+          },
+          "unparsed": [],
+          "checks": {
+            "units_x_price_vs_total_rel_diff": 4.697780130154338e-07,
+            "month_end_price_equals_next_business_day_row": true,
+            "month_end_price_equals_month_end_row": false,
+            "previous_price_equals_next_business_day_row": true,
+            "cash_flow_fields_both_zero": true,
+            "asset_mix_items": 20,
+            "asset_mix_sum_pct": 100.0,
+            "investor_count_present": false
+          }
+        }
+      ]
+    },
+    {
+      "fund": "TZL",
+      "type": "Para Piyasası Şemsiye Fonu",
+      "company": "ZİRAAT",
+      "reports": [
+        {
+          "period": "2025-09",
+          "file": "2025-09_1499821.pdf",
+          "bytes": 272921,
+          "pages": 46,
+          "text_chars": 237496,
+          "images": 0,
+          "creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+          "sections_found": [],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2025-10",
+          "file": "2025-10_1514022.pdf",
+          "bytes": 246091,
+          "pages": 41,
+          "text_chars": 207740,
+          "images": 0,
+          "creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+          "sections_found": [],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2025-11",
+          "file": "2025-11_1524428.pdf",
+          "bytes": 236373,
+          "pages": 39,
+          "text_chars": 196076,
+          "images": 0,
+          "creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+          "sections_found": [],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2025-12",
+          "file": "2025-12_1538329.pdf",
+          "bytes": 267412,
+          "pages": 46,
+          "text_chars": 228130,
+          "images": 0,
+          "creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+          "sections_found": [],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-01",
+          "file": "2026-01_1554496.pdf",
+          "bytes": 242536,
+          "pages": 41,
+          "text_chars": 205008,
+          "images": 0,
+          "creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+          "sections_found": [],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-02",
+          "file": "2026-02_1568227.pdf",
+          "bytes": 238625,
+          "pages": 40,
+          "text_chars": 198042,
+          "images": 0,
+          "creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+          "sections_found": [],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-03",
+          "file": "2026-03_1587498.pdf",
+          "bytes": 166063,
+          "pages": 24,
+          "text_chars": 112944,
+          "images": 0,
+          "creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+          "sections_found": [],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-04",
+          "file": "2026-04_1604021.pdf",
+          "bytes": 158692,
+          "pages": 23,
+          "text_chars": 108814,
+          "images": 0,
+          "creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+          "sections_found": [],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-05",
+          "file": "2026-05_1614180.pdf",
+          "bytes": 127998,
+          "pages": 16,
+          "text_chars": 72333,
+          "images": 0,
+          "creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+          "sections_found": [],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-06",
+          "file": "2026-06_1628215.pdf",
+          "bytes": 167326,
+          "pages": 24,
+          "text_chars": 109246,
+          "images": 0,
+          "creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+          "sections_found": [],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-07",
+          "file": "2026-07_1645984.pdf",
+          "bytes": 162713,
+          "pages": 23,
+          "text_chars": 107811,
+          "images": 0,
+          "creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+          "sections_found": [],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        },
+        {
+          "period": "2026-08",
+          "file": "2026-08_1660104.pdf",
+          "bytes": 169130,
+          "pages": 24,
+          "text_chars": 114870,
+          "images": 0,
+          "creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+          "sections_found": [],
+          "fields_found": [],
+          "fields_missing": [
+            "annual_change_pct",
+            "cash_in_from_unit_issuance",
+            "cash_out_from_unit_redemption",
+            "month_end_price",
+            "monthly_change_pct",
+            "previous_month_price",
+            "total_value",
+            "units_outstanding",
+            "ytd_change_pct"
+          ],
+          "number_shapes": {},
+          "unparsed": [],
+          "checks": {
+            "investor_count_present": false
+          }
+        }
+      ]
+    }
+  ]
+}

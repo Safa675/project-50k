@@ -1,0 +1,746 @@
+{
+  "run_at_utc": "2026-10-07T08:52:12.470547+00:00",
+  "git_head": "b01da3591469365a59d5cc93f785a20554a9f069",
+  "preregistration_sha256": "259b2b25a47f55a95385a2137f8d85501e1537ed32896b797d68cf6425e71e8b",
+  "detectors_sha256": "b292948c19341c9e9ea76f7e97a3a8613ca8f80a4016330550861ee199a51568",
+  "window": [
+    "2025-10-06",
+    "2026-09-16"
+  ],
+  "order_date": "2026-09-17",
+  "universe": 100,
+  "targets": [
+    "THF",
+    "TP2",
+    "TLY",
+    "DFI",
+    "DOH",
+    "PRY",
+    "KHA",
+    "PNU"
+  ],
+  "calendar": [
+    "2021-10-07",
+    "2026-10-07",
+    1258
+  ],
+  "detectors": {
+    "D1": "persistent excess return",
+    "D2": "change in excess return",
+    "D3": "return autocorrelation",
+    "D4": "correlation with peers",
+    "D5": "young fund (< 730 days)"
+  },
+  "thresholds": {
+    "D1": {
+      "Altın Fonu": null,
+      "Borçlanma Araçları Fonu": 0.00011732378954282637,
+      "Değişken Fon": null,
+      "Fon Sepeti Fonu": null,
+      "Hisse Senedi Fonu": 0.00528641724603849,
+      "Hisse Senedi Yoğun": null,
+      "Karma Fon": null,
+      "Katılım Fonu": null,
+      "Kisa Vadeli Kira Sertifikalari Katilim Fonu": null,
+      "Para Piyasası Fonu": 8.97876223050527e-05,
+      "Serbest Fon": 0.015992423726384607,
+      "Yabancı Fon Sepeti Fonu": null
+    },
+    "D2": {
+      "Altın Fonu": null,
+      "Borçlanma Araçları Fonu": 0.00012734179267589812,
+      "Değişken Fon": null,
+      "Fon Sepeti Fonu": null,
+      "Hisse Senedi Fonu": 0.00727192445319652,
+      "Hisse Senedi Yoğun": null,
+      "Karma Fon": null,
+      "Katılım Fonu": null,
+      "Kisa Vadeli Kira Sertifikalari Katilim Fonu": null,
+      "Para Piyasası Fonu": 0.00012637957560875408,
+      "Serbest Fon": 0.013421472053813806,
+      "Yabancı Fon Sepeti Fonu": null
+    },
+    "D3": {
+      "Altın Fonu": 0.2508088495271278,
+      "Borçlanma Araçları Fonu": 0.2780650975527601,
+      "Değişken Fon": null,
+      "Fon Sepeti Fonu": 0.3537020206532656,
+      "Hisse Senedi Fonu": 0.29648152689405716,
+      "Hisse Senedi Yoğun": null,
+      "Karma Fon": null,
+      "Katılım Fonu": 0.2242125197715593,
+      "Kisa Vadeli Kira Sertifikalari Katilim Fonu": null,
+      "Para Piyasası Fonu": -0.01343543600268118,
+      "Serbest Fon": 0.67265423198429,
+      "Yabancı Fon Sepeti Fonu": null
+    },
+    "D4": {
+      "Altın Fonu": null,
+      "Borçlanma Araçları Fonu": 0.6215264758815846,
+      "Değişken Fon": null,
+      "Fon Sepeti Fonu": null,
+      "Hisse Senedi Fonu": 0.030149591936035697,
+      "Hisse Senedi Yoğun": null,
+      "Karma Fon": null,
+      "Katılım Fonu": null,
+      "Kisa Vadeli Kira Sertifikalari Katilim Fonu": null,
+      "Para Piyasası Fonu": 0.9454479709029076,
+      "Serbest Fon": -0.21373495320599936,
+      "Yabancı Fon Sepeti Fonu": null
+    }
+  },
+  "results": {
+    "D1": {
+      "targets_flagged": 5,
+      "targets_evaluable": 8,
+      "nontargets_flagged": 5,
+      "nontargets_evaluable": 63,
+      "expected_targets_flagged_at_random": 1.13,
+      "nontarget_alarm_day_rate": 0.0075,
+      "nontargets_by_category": {
+        "Borçlanma Araçları Fonu": {
+          "flagged": 2,
+          "evaluable": 13
+        },
+        "Hisse Senedi Fonu": {
+          "flagged": 3,
+          "evaluable": 21
+        },
+        "Para Piyasası Fonu": {
+          "flagged": 0,
+          "evaluable": 16
+        },
+        "Serbest Fon": {
+          "flagged": 0,
+          "evaluable": 13
+        }
+      },
+      "targets": {
+        "THF": {
+          "category": "Hisse Senedi Fonu",
+          "evaluable": true,
+          "flagged": false,
+          "first_alarm": null,
+          "days_before_order": null
+        },
+        "TP2": {
+          "category": "Para Piyasası Fonu",
+          "evaluable": true,
+          "flagged": true,
+          "first_alarm": "2025-10-06",
+          "days_before_order": 346
+        },
+        "TLY": {
+          "category": "Serbest Fon",
+          "evaluable": true,
+          "flagged": false,
+          "first_alarm": null,
+          "days_before_order": null
+        },
+        "DFI": {
+          "category": "Serbest Fon",
+          "evaluable": true,
+          "flagged": true,
+          "first_alarm": "2025-11-20",
+          "days_before_order": 301
+        },
+        "DOH": {
+          "category": "Serbest Fon",
+          "evaluable": true,
+          "flagged": false,
+          "first_alarm": null,
+          "days_before_order": null
+        },
+        "PRY": {
+          "category": "Para Piyasası Fonu",
+          "evaluable": true,
+          "flagged": true,
+          "first_alarm": "2025-10-06",
+          "days_before_order": 346
+        },
+        "KHA": {
+          "category": "Hisse Senedi Fonu",
+          "evaluable": true,
+          "flagged": true,
+          "first_alarm": "2026-08-10",
+          "days_before_order": 38
+        },
+        "PNU": {
+          "category": "Para Piyasası Fonu",
+          "evaluable": true,
+          "flagged": true,
+          "first_alarm": "2026-06-01",
+          "days_before_order": 108
+        }
+      },
+      "reference_year_nontargets_flagged": 6,
+      "reference_year_nontargets_evaluable": 63
+    },
+    "D2": {
+      "targets_flagged": 3,
+      "targets_evaluable": 7,
+      "nontargets_flagged": 5,
+      "nontargets_evaluable": 63,
+      "expected_targets_flagged_at_random": 0.8,
+      "nontarget_alarm_day_rate": 0.0019,
+      "nontargets_by_category": {
+        "Borçlanma Araçları Fonu": {
+          "flagged": 2,
+          "evaluable": 13
+        },
+        "Hisse Senedi Fonu": {
+          "flagged": 3,
+          "evaluable": 21
+        },
+        "Para Piyasası Fonu": {
+          "flagged": 0,
+          "evaluable": 16
+        },
+        "Serbest Fon": {
+          "flagged": 0,
+          "evaluable": 13
+        }
+      },
+      "targets": {
+        "THF": {
+          "category": "Hisse Senedi Fonu",
+          "evaluable": true,
+          "flagged": false,
+          "first_alarm": null,
+          "days_before_order": null
+        },
+        "TP2": {
+          "category": "Para Piyasası Fonu",
+          "evaluable": true,
+          "flagged": true,
+          "first_alarm": "2025-11-10",
+          "days_before_order": 311
+        },
+        "TLY": {
+          "category": "Serbest Fon",
+          "evaluable": true,
+          "flagged": false,
+          "first_alarm": null,
+          "days_before_order": null
+        },
+        "DFI": {
+          "category": "Serbest Fon",
+          "evaluable": true,
+          "flagged": true,
+          "first_alarm": "2025-11-10",
+          "days_before_order": 311
+        },
+        "DOH": {
+          "category": "Serbest Fon",
+          "evaluable": true,
+          "flagged": false,
+          "first_alarm": null,
+          "days_before_order": null
+        },
+        "PRY": {
+          "category": "Para Piyasası Fonu",
+          "evaluable": true,
+          "flagged": true,
+          "first_alarm": "2025-11-03",
+          "days_before_order": 318
+        },
+        "KHA": {
+          "category": "Hisse Senedi Fonu",
+          "evaluable": true,
+          "flagged": false,
+          "first_alarm": null,
+          "days_before_order": null
+        },
+        "PNU": {
+          "category": "Para Piyasası Fonu",
+          "evaluable": false,
+          "reason": "statistic undefined in the period"
+        }
+      },
+      "reference_year_nontargets_flagged": 4,
+      "reference_year_nontargets_evaluable": 63
+    },
+    "D3": {
+      "targets_flagged": 0,
+      "targets_evaluable": 8,
+      "nontargets_flagged": 4,
+      "nontargets_evaluable": 83,
+      "expected_targets_flagged_at_random": 0.35,
+      "nontarget_alarm_day_rate": 0.0012,
+      "nontargets_by_category": {
+        "Altın Fonu": {
+          "flagged": 0,
+          "evaluable": 7
+        },
+        "Borçlanma Araçları Fonu": {
+          "flagged": 0,
+          "evaluable": 13
+        },
+        "Fon Sepeti Fonu": {
+          "flagged": 2,
+          "evaluable": 6
+        },
+        "Hisse Senedi Fonu": {
+          "flagged": 2,
+          "evaluable": 21
+        },
+        "Katılım Fonu": {
+          "flagged": 0,
+          "evaluable": 7
+        },
+        "Para Piyasası Fonu": {
+          "flagged": 0,
+          "evaluable": 16
+        },
+        "Serbest Fon": {
+          "flagged": 0,
+          "evaluable": 13
+        }
+      },
+      "targets": {
+        "THF": {
+          "category": "Hisse Senedi Fonu",
+          "evaluable": true,
+          "flagged": false,
+          "first_alarm": null,
+          "days_before_order": null
+        },
+        "TP2": {
+          "category": "Para Piyasası Fonu",
+          "evaluable": true,
+          "flagged": false,
+          "first_alarm": null,
+          "days_before_order": null
+        },
+        "TLY": {
+          "category": "Serbest Fon",
+          "evaluable": true,
+          "flagged": false,
+          "first_alarm": null,
+          "days_before_order": null
+        },
+        "DFI": {
+          "category": "Serbest Fon",
+          "evaluable": true,
+          "flagged": false,
+          "first_alarm": null,
+          "days_before_order": null
+        },
+        "DOH": {
+          "category": "Serbest Fon",
+          "evaluable": true,
+          "flagged": false,
+          "first_alarm": null,
+          "days_before_order": null
+        },
+        "PRY": {
+          "category": "Para Piyasası Fonu",
+          "evaluable": true,
+          "flagged": false,
+          "first_alarm": null,
+          "days_before_order": null
+        },
+        "KHA": {
+          "category": "Hisse Senedi Fonu",
+          "evaluable": true,
+          "flagged": false,
+          "first_alarm": null,
+          "days_before_order": null
+        },
+        "PNU": {
+          "category": "Para Piyasası Fonu",
+          "evaluable": true,
+          "flagged": false,
+          "first_alarm": null,
+          "days_before_order": null
+        }
+      },
+      "reference_year_nontargets_flagged": 7,
+      "reference_year_nontargets_evaluable": 83
+    },
+    "D4": {
+      "targets_flagged": 0,
+      "targets_evaluable": 8,
+      "nontargets_flagged": 4,
+      "nontargets_evaluable": 63,
+      "expected_targets_flagged_at_random": 0.45,
+      "nontarget_alarm_day_rate": 0.0306,
+      "nontargets_by_category": {
+        "Borçlanma Araçları Fonu": {
+          "flagged": 0,
+          "evaluable": 13
+        },
+        "Hisse Senedi Fonu": {
+          "flagged": 1,
+          "evaluable": 21
+        },
+        "Para Piyasası Fonu": {
+          "flagged": 0,
+          "evaluable": 16
+        },
+        "Serbest Fon": {
+          "flagged": 3,
+          "evaluable": 13
+        }
+      },
+      "targets": {
+        "THF": {
+          "category": "Hisse Senedi Fonu",
+          "evaluable": true,
+          "flagged": false,
+          "first_alarm": null,
+          "days_before_order": null
+        },
+        "TP2": {
+          "category": "Para Piyasası Fonu",
+          "evaluable": true,
+          "flagged": false,
+          "first_alarm": null,
+          "days_before_order": null
+        },
+        "TLY": {
+          "category": "Serbest Fon",
+          "evaluable": true,
+          "flagged": false,
+          "first_alarm": null,
+          "days_before_order": null
+        },
+        "DFI": {
+          "category": "Serbest Fon",
+          "evaluable": true,
+          "flagged": false,
+          "first_alarm": null,
+          "days_before_order": null
+        },
+        "DOH": {
+          "category": "Serbest Fon",
+          "evaluable": true,
+          "flagged": false,
+          "first_alarm": null,
+          "days_before_order": null
+        },
+        "PRY": {
+          "category": "Para Piyasası Fonu",
+          "evaluable": true,
+          "flagged": false,
+          "first_alarm": null,
+          "days_before_order": null
+        },
+        "KHA": {
+          "category": "Hisse Senedi Fonu",
+          "evaluable": true,
+          "flagged": false,
+          "first_alarm": null,
+          "days_before_order": null
+        },
+        "PNU": {
+          "category": "Para Piyasası Fonu",
+          "evaluable": true,
+          "flagged": false,
+          "first_alarm": null,
+          "days_before_order": null
+        }
+      },
+      "reference_year_nontargets_flagged": 5,
+      "reference_year_nontargets_evaluable": 63
+    },
+    "D5": {
+      "targets_flagged": 6,
+      "targets_evaluable": 8,
+      "nontargets_flagged": 5,
+      "nontargets_evaluable": 92,
+      "expected_targets_flagged_at_random": 0.88,
+      "nontarget_alarm_day_rate": 0.0319,
+      "nontargets_by_category": {
+        "Altın Fonu": {
+          "flagged": 0,
+          "evaluable": 7
+        },
+        "Borçlanma Araçları Fonu": {
+          "flagged": 0,
+          "evaluable": 13
+        },
+        "Değişken Fon": {
+          "flagged": 0,
+          "evaluable": 3
+        },
+        "Fon Sepeti Fonu": {
+          "flagged": 1,
+          "evaluable": 6
+        },
+        "Hisse Senedi Fonu": {
+          "flagged": 2,
+          "evaluable": 21
+        },
+        "Hisse Senedi Yoğun": {
+          "flagged": 0,
+          "evaluable": 1
+        },
+        "Karma Fon": {
+          "flagged": 0,
+          "evaluable": 1
+        },
+        "Katılım Fonu": {
+          "flagged": 1,
+          "evaluable": 7
+        },
+        "Kisa Vadeli Kira Sertifikalari Katilim Fonu": {
+          "flagged": 0,
+          "evaluable": 2
+        },
+        "Para Piyasası Fonu": {
+          "flagged": 0,
+          "evaluable": 16
+        },
+        "Serbest Fon": {
+          "flagged": 1,
+          "evaluable": 13
+        },
+        "Yabancı Fon Sepeti Fonu": {
+          "flagged": 0,
+          "evaluable": 2
+        }
+      },
+      "targets": {
+        "THF": {
+          "category": "Hisse Senedi Fonu",
+          "evaluable": true,
+          "flagged": true,
+          "first_alarm": "2025-10-06",
+          "days_before_order": 346
+        },
+        "TP2": {
+          "category": "Para Piyasası Fonu",
+          "evaluable": true,
+          "flagged": true,
+          "first_alarm": "2025-10-06",
+          "days_before_order": 346
+        },
+        "TLY": {
+          "category": "Serbest Fon",
+          "evaluable": true,
+          "flagged": false,
+          "first_alarm": null,
+          "days_before_order": null
+        },
+        "DFI": {
+          "category": "Serbest Fon",
+          "evaluable": true,
+          "flagged": false,
+          "first_alarm": null,
+          "days_before_order": null
+        },
+        "DOH": {
+          "category": "Serbest Fon",
+          "evaluable": true,
+          "flagged": true,
+          "first_alarm": "2025-10-06",
+          "days_before_order": 346
+        },
+        "PRY": {
+          "category": "Para Piyasası Fonu",
+          "evaluable": true,
+          "flagged": true,
+          "first_alarm": "2025-10-06",
+          "days_before_order": 346
+        },
+        "KHA": {
+          "category": "Hisse Senedi Fonu",
+          "evaluable": true,
+          "flagged": true,
+          "first_alarm": "2025-10-06",
+          "days_before_order": 346
+        },
+        "PNU": {
+          "category": "Para Piyasası Fonu",
+          "evaluable": true,
+          "flagged": true,
+          "first_alarm": "2026-03-12",
+          "days_before_order": 189
+        }
+      },
+      "reference_year_nontargets_flagged": 11,
+      "reference_year_nontargets_evaluable": 92
+    }
+  },
+  "composite": {
+    "targets": {
+      "THF": 1,
+      "TP2": 3,
+      "TLY": 0,
+      "DFI": 2,
+      "DOH": 1,
+      "PRY": 3,
+      "KHA": 2,
+      "PNU": 2
+    },
+    "nontargets_histogram": {
+      "0": 77,
+      "1": 10,
+      "2": 3,
+      "3": 1,
+      "4": 1
+    }
+  },
+  "sensitivity": {
+    "thresholds_from_last_250_dates_only": {
+      "thresholds": {
+        "D1": {
+          "Altın Fonu": null,
+          "Borçlanma Araçları Fonu": 0.00018556815304202057,
+          "Değişken Fon": null,
+          "Fon Sepeti Fonu": null,
+          "Hisse Senedi Fonu": 0.005197642984579646,
+          "Hisse Senedi Yoğun": null,
+          "Karma Fon": null,
+          "Katılım Fonu": null,
+          "Kisa Vadeli Kira Sertifikalari Katilim Fonu": null,
+          "Para Piyasası Fonu": 0.00011907104177153782,
+          "Serbest Fon": 0.02696579189801411,
+          "Yabancı Fon Sepeti Fonu": null
+        },
+        "D2": {
+          "Altın Fonu": null,
+          "Borçlanma Araçları Fonu": 0.00013670662967058006,
+          "Değişken Fon": null,
+          "Fon Sepeti Fonu": null,
+          "Hisse Senedi Fonu": 0.0066306275396948965,
+          "Hisse Senedi Yoğun": null,
+          "Karma Fon": null,
+          "Katılım Fonu": null,
+          "Kisa Vadeli Kira Sertifikalari Katilim Fonu": null,
+          "Para Piyasası Fonu": 8.110882228753666e-05,
+          "Serbest Fon": 0.02079553441348709,
+          "Yabancı Fon Sepeti Fonu": null
+        },
+        "D3": {
+          "Altın Fonu": 0.21188150628918828,
+          "Borçlanma Araçları Fonu": 0.3417928548697846,
+          "Değişken Fon": null,
+          "Fon Sepeti Fonu": 0.266712542244825,
+          "Hisse Senedi Fonu": 0.29182513823618234,
+          "Hisse Senedi Yoğun": null,
+          "Karma Fon": null,
+          "Katılım Fonu": 0.2103957898747634,
+          "Kisa Vadeli Kira Sertifikalari Katilim Fonu": null,
+          "Para Piyasası Fonu": -0.007728892043089283,
+          "Serbest Fon": 0.26730966062803496,
+          "Yabancı Fon Sepeti Fonu": null
+        },
+        "D4": {
+          "Altın Fonu": null,
+          "Borçlanma Araçları Fonu": 0.8180348103304631,
+          "Değişken Fon": null,
+          "Fon Sepeti Fonu": null,
+          "Hisse Senedi Fonu": 0.02750653673926925,
+          "Hisse Senedi Yoğun": null,
+          "Karma Fon": null,
+          "Katılım Fonu": null,
+          "Kisa Vadeli Kira Sertifikalari Katilim Fonu": null,
+          "Para Piyasası Fonu": 0.9463943507149445,
+          "Serbest Fon": -0.2329905561551586,
+          "Yabancı Fon Sepeti Fonu": null
+        }
+      },
+      "results": {
+        "D1": {
+          "targets_flagged": 4,
+          "targets_evaluable": 8,
+          "nontargets_flagged": 4,
+          "nontargets_evaluable": 63,
+          "expected_targets_flagged_at_random": 0.9,
+          "targets_flagged_codes": [
+            "TP2",
+            "PRY",
+            "KHA",
+            "PNU"
+          ]
+        },
+        "D2": {
+          "targets_flagged": 2,
+          "targets_evaluable": 7,
+          "nontargets_flagged": 5,
+          "nontargets_evaluable": 63,
+          "expected_targets_flagged_at_random": 0.7,
+          "targets_flagged_codes": [
+            "TP2",
+            "PRY"
+          ]
+        },
+        "D3": {
+          "targets_flagged": 1,
+          "targets_evaluable": 8,
+          "nontargets_flagged": 9,
+          "nontargets_evaluable": 83,
+          "expected_targets_flagged_at_random": 0.88,
+          "targets_flagged_codes": [
+            "DFI"
+          ]
+        },
+        "D4": {
+          "targets_flagged": 0,
+          "targets_evaluable": 8,
+          "nontargets_flagged": 6,
+          "nontargets_evaluable": 63,
+          "expected_targets_flagged_at_random": 0.68,
+          "targets_flagged_codes": []
+        }
+      }
+    },
+    "young_days": {
+      "365": {
+        "targets_flagged": 4,
+        "targets_evaluable": 8,
+        "nontargets_flagged": 0,
+        "nontargets_evaluable": 92,
+        "expected_targets_flagged_at_random": 0.32,
+        "targets_flagged_codes": [
+          "THF",
+          "TP2",
+          "DOH",
+          "PNU"
+        ]
+      },
+      "1095": {
+        "targets_flagged": 6,
+        "targets_evaluable": 8,
+        "nontargets_flagged": 11,
+        "nontargets_evaluable": 92,
+        "expected_targets_flagged_at_random": 1.36,
+        "targets_flagged_codes": [
+          "THF",
+          "TP2",
+          "DOH",
+          "PRY",
+          "KHA",
+          "PNU"
+        ]
+      }
+    },
+    "window_only_history": {
+      "warmup": {
+        "D1": {
+          "funds": 71,
+          "median_window_dates_lost": 50,
+          "funds_never_defined": 0
+        },
+        "D2": {
+          "funds": 70,
+          "median_window_dates_lost": 160,
+          "funds_never_defined": 0
+        },
+        "D3": {
+          "funds": 100,
+          "median_window_dates_lost": 101,
+          "funds_never_defined": 0
+        },
+        "D4": {
+          "funds": 71,
+          "median_window_dates_lost": 100,
+          "funds_never_defined": 0
+        }
+      },
+      "note": "with no earlier prices there is no data before the window to set thresholds, and every fund's first visible price is the window start"
+    }
+  }
+}
