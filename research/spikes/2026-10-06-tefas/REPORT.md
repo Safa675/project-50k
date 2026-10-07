@@ -8,6 +8,7 @@ Updated later the same day with a full read of borsapy's fund-related code and a
 
 - **Only the unit price (NAV) is dated day by day.** TEFAS returns one row per business day for a rolling 5-year window. In the sample, TEFAS dates each price one business day after its valuation date: the KAP report's September month-end price equals TEFAS's 1 October row, and its August month-end price equals the 1 September row.
 - **Everything else from TEFAS is an undated "latest" snapshot.** That covers fund size, units outstanding, investor count, market share, category, category rank, period returns and the profile fields.
+- **TEFAS writes 0 where it has no price.** A price of 0 appears in history rows before a fund starts and after its price stops, and as the latest price. On 2026-10-06 133 of 2,133 funds had a price of 0; only 21 of them are in SPK's list of 131 funds ordered liquidated on 17 September, the rest are mostly special-purpose funds not traded on TEFAS. Read as a price, 0 would give a return of -100% and a false match between two zeros.
 - **Category rank and category size inside the history rows look dated but aren't.** Both funds show the same value on all 1,258 rows, equal to today's snapshot.
 - **KAP's monthly portfolio reports give a dated monthly history for the last 12 months.** Each report has the month-end fund total value, units outstanding, month-end price and the monthly average asset mix. They are plain text in a PDF, so a simple parser reads them without an LLM. Investor count is not in them.
 - **borsapy adds nothing dated beyond price.** It fills history `FundSize` and `Investors` with placeholders (`NaN` and `0`), its `info["date"]` is always empty, it doesn't expose units outstanding, and it stores nothing.
@@ -20,9 +21,9 @@ Units: prices in TRY per unit (both funds are TL funds), fund size in TRY, retur
 
 | Field (TEFAS name) | Endpoint | Dated? | Verdict |
 |---|---|---|---|
-| Unit price (`fiyat`) | `fonFiyatBilgiGetir` history rows | **Yes**, `tarih` per row as `YYYY-MM-DD`, no time or zone | Usable. 5-year window, up to 6 decimals. Dated one business day after valuation (see above). |
+| Unit price (`fiyat`) | `fonFiyatBilgiGetir` history rows | **Yes**, `tarih` per row as `YYYY-MM-DD`, no time or zone | Usable. 5-year window, up to 6 decimals. Dated one business day after valuation (see above). `0` means no price: it starts the series of funds younger than the window (THF: 24 rows, TP2: 28 rows) and follows a price that has stopped (TP2 from 2026-09-17, THF from 2026-09-25). A fund's row for date D was already present at 11:05 on D (one observation). |
 | Latest price (`sonFiyat`), daily return % (`gunlukGetiri`) | `fonBilgiGetir` | No | Price equals the newest history row exactly; daily return matches the last two history prices (diff < 0.0001 pp). Both recomputable from dated history. |
-| Fund size (`portBuyukluk`), units outstanding (`payAdet`), investors (`yatirimciSayi`), market share (`pazarPayi`) | `fonBilgiGetir` | No | Latest value only. Units × price equals size (relative diff ≤ 1.2e-7), so they're consistent with the price's date, but the API never states it. |
+| Fund size (`portBuyukluk`), units outstanding (`payAdet`), investors (`yatirimciSayi`), market share (`pazarPayi`) | `fonBilgiGetir` | No | Latest value only. Units × price equals size (relative diff ≤ 1.2e-7), so they're consistent with the price's date, but the API never states it. For funds with a price of 0, size and units are also 0 (or inconsistent, e.g. a size of 0.01 with positive units) while the investor count remains; those values are placeholders or stale and must not date anything. |
 | Category (`fonKategori`), rank (`kategoriDerece`), category size (`kategoriFonSay`) | `fonBilgiGetir` | No | Current only. No dated category membership. |
 | Rank and category size inside history rows | `fonFiyatBilgiGetir` | **Looks dated, isn't** | One distinct value across 1,258 rows per fund, equal to today's snapshot. Must not be used as history. |
 | Period returns 1m, 3m, 6m, YTD, 1y, 3y, 5y (`getiri*`) | `fonGetiriBazliBilgiGetir` (all 2,133 funds) | No | As-of date unknown. Recompute from price history instead. |
@@ -97,6 +98,10 @@ Checked by reading all of borsapy's fund-related code (two readers and one revie
 | Fund material events, prospectus changes | No path: borsapy's KAP provider covers listed stocks only | Code |
 | `Fund.tweets` | Needs logged-in X session cookies | Code; not admissible |
 
+## Correction: zero prices dated 133 snapshots
+
+The first version of the snapshot collector (`p50k.jobs.fund_snapshots`) treated a price of 0 as a real price. For the 133 funds whose price is 0, the snapshot price (0) equalled the newest history price (0), so the collector dated all 133 snapshots as of 2026-10-06. That was wrong: a placeholder cannot date anything. Fixed on 2026-10-07: a price of 0 is now `None` in the client, a snapshot is dated only when its price is positive and equals the newest positive dated price, and the saved price files hold `null` instead of 0. The 133 stored rows were corrected to "unknown" (raw TEFAS rows kept; a backup of the database was taken first).
+
 ## What this means for the funds-phase anomalies
 
 | Entry | Data status after this spike |
@@ -106,7 +111,7 @@ Checked by reading all of borsapy's fund-related code (two readers and one revie
 | AN-FND-003 investor count change | Disabled. Investor counts are in neither TEFAS history nor the KAP reports; only daily collection from now on can build them. |
 | AN-FND-004 allocation shift | Monthly for the last 12 months from KAP: section II F (monthly average) or the section III totals (month-end). Each report is usable from its publish time, about a week after month end. TEFAS path not admissible. |
 | AN-FND-005 access/regulatory event | No borsapy path. Needs our own KAP adapter for fund disclosures. |
-| AN-DQ-001 / AN-DQ-002 | An unknown or retired code returns HTTP 200 with an empty list and no error, and so does an unsupported KAP window. Empty must not be read as "nothing happened"; codes have to be checked against the fund list. |
+| AN-DQ-001 / AN-DQ-002 | An unknown or retired code returns HTTP 200 with an empty list and no error, and so does an unsupported KAP window. Empty must not be read as "nothing happened"; codes have to be checked against the fund list. A price of 0 is a placeholder: it must be treated as missing, and a price that stops (a series that turns to 0) is itself an event to surface. |
 
 ## Provider spike template
 
@@ -128,7 +133,7 @@ Checked by reading all of borsapy's fund-related code (two readers and one revie
 
 **Venue/chain coverage:** TEFAS investment funds (YAT): 2,133 listed on 2026-10-06. Pension funds (EMK) not tested. Funds sampled: TTE (İş Portföy BIST technology equity fund) and AAL (Ata Portföy TL money-market fund).
 
-**Corporate-action / NAV / finality behavior:** In this sample, TEFAS dates each price one business day after its valuation date: the KAP report's month-end prices for August and September equal TEFAS's 1 September and 1 October rows exactly. Fund closures leave no trace: AAK returns the same response as a code that never existed. No splits or renames were observed in the sample.
+**Corporate-action / NAV / finality behavior:** A price can stop: TP2's TEFAS price stops on 2026-09-17 and THF's on 2026-09-25, after the liquidation order, and 110 of the 131 funds in the order still show a price today. In this sample, TEFAS dates each price one business day after its valuation date: the KAP report's month-end prices for August and September equal TEFAS's 1 September and 1 October rows exactly. Fund closures leave no trace: AAK returns the same response as a code that never existed. No splits or renames were observed in the sample.
 
 **Failure, stale-response and retry tests:**
 - Unknown code (AAK, retired; ZZZZZ, never existed): HTTP 200, `{"errorCode":null,"errorMessage":null,"resultList":[]}`.

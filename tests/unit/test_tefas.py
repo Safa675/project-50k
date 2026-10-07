@@ -88,12 +88,11 @@ class TefasClientTest(unittest.TestCase):
                 with self.assertRaises(TefasUnavailable):
                     self.client.snapshot("TST")
 
-    def test_price_history_is_sorted_and_skips_bad_rows(self):
+    def test_price_history_is_sorted_and_skips_rows_without_a_date(self):
         rows = [
             {"tarih": "2026-10-06", "fiyat": 1.234567, "kategoriDerece": 3, "kategoriFonSay": 10},
             {"tarih": "2026-10-02", "fiyat": 1.2},
             {"tarih": "not a date", "fiyat": 1.0},
-            {"tarih": "2026-10-05", "fiyat": None},
         ]
         self.tefas.respond("fonFiyatBilgiGetir", "TST", ok(rows))
         self.assertEqual(self.client.price_history("TST"), [
@@ -101,6 +100,30 @@ class TefasClientTest(unittest.TestCase):
             PricePoint(date(2026, 10, 6), Decimal("1.234567")),
         ])
         self.assertEqual(self.tefas.calls[0][2], {"fonKodu": "TST", "dil": "TR", "periyod": 13})
+
+    def test_a_zero_or_missing_price_is_kept_as_a_dated_row_without_a_price(self):
+        # TEFAS writes 0 where it has no price: before a fund starts and after its price stops.
+        rows = [
+            {"tarih": "2026-09-16", "fiyat": 2.5},
+            {"tarih": "2026-09-17", "fiyat": 0},
+            {"tarih": "2026-09-18", "fiyat": 0.0},
+            {"tarih": "2026-09-21", "fiyat": None},
+            {"tarih": "2026-09-22", "fiyat": -1},
+        ]
+        self.tefas.respond("fonFiyatBilgiGetir", "TST", ok(rows))
+        points = self.client.price_history("TST")
+        self.assertEqual([p.date.isoformat() for p in points],
+                         ["2026-09-16", "2026-09-17", "2026-09-18", "2026-09-21", "2026-09-22"])
+        self.assertEqual([p.price for p in points], [Decimal("2.5"), None, None, None, None])
+
+    def test_a_zero_snapshot_price_is_none_while_other_zero_fields_are_kept(self):
+        row = {**SNAPSHOT_ROW, "sonFiyat": 0, "payAdet": 0, "portBuyukluk": 0, "yatirimciSayi": 12345}
+        self.tefas.respond("fonBilgiGetir", "TST", ok([row]))
+        snapshot = self.client.snapshot("TST")
+        self.assertIsNone(snapshot.price)
+        self.assertEqual((snapshot.units_outstanding, snapshot.total_value, snapshot.investors),
+                         (Decimal(0), Decimal(0), 12345))
+        self.assertEqual(snapshot.raw["sonFiyat"], 0)  # the raw row keeps TEFAS's own zero
 
     def test_fund_list_requests_the_given_type(self):
         self.tefas.respond("fonGetiriBazliBilgiGetir", "YAT", ok([{"fonKodu": "TST"}]))

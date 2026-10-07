@@ -4,7 +4,9 @@ Built from the 2026-10-06 spike (research/spikes/2026-10-06-tefas/REPORT.md):
 - certificate verification stays on;
 - an empty result list for one fund raises FundNotFound, so a retired or
   unknown code is never read as "nothing changed";
-- missing values stay None, never 0 or NaN;
+- missing values stay None, never 0 or NaN. TEFAS writes 0 for "no price" (before a
+  fund starts, and after its price stops), so a price of 0 becomes None while the
+  date is kept;
 - units outstanding (payAdet) are kept;
 - category rank and size inside history rows are dropped, because they repeat
   today's value on every row.
@@ -53,7 +55,7 @@ class FundSnapshot:
 
     code: str
     name: str | None
-    price: Decimal | None
+    price: Decimal | None  # None when TEFAS reports 0, its placeholder for "no price"
     daily_return_pct: Decimal | None
     units_outstanding: Decimal | None
     total_value: Decimal | None
@@ -68,7 +70,7 @@ class FundSnapshot:
 @dataclass(frozen=True)
 class PricePoint:
     date: date
-    price: Decimal
+    price: Decimal | None  # None: TEFAS has this date but reports no price (it writes 0)
 
 
 def urllib_transport(timeout: float = 30.0) -> Transport:
@@ -97,7 +99,7 @@ class TefasClient:
         return FundSnapshot(
             code=str(row.get("fonKodu") or code.upper()),
             name=_text(row.get("fonUnvan")),
-            price=_decimal(row.get("sonFiyat")),
+            price=_price(row.get("sonFiyat")),
             daily_return_pct=_decimal(row.get("gunlukGetiri")),
             units_outstanding=_decimal(row.get("payAdet")),
             total_value=_decimal(row.get("portBuyukluk")),
@@ -110,19 +112,18 @@ class TefasClient:
         )
 
     def price_history(self, code: str, periyod: int = PERIOD_WEEK) -> list[PricePoint]:
-        """Dated unit prices, oldest first. Rows without a valid date or price are skipped."""
+        """Dated unit prices, oldest first. A row without a valid date is skipped. A row whose
+        price is 0 or missing is kept with price None, so a stopped price stays visible."""
         rows = self._post("fonFiyatBilgiGetir", {"fonKodu": code.upper(), "dil": "TR", "periyod": periyod})
         if not rows:
             raise FundNotFound(code)
         points = {}
         for row in rows:
-            price = _decimal(row.get("fiyat"))
             try:
                 day = date.fromisoformat(str(row.get("tarih"))[:10])
             except ValueError:
                 continue
-            if price is not None:
-                points[day] = price
+            points[day] = _price(row.get("fiyat"))
         return [PricePoint(day, points[day]) for day in sorted(points)]
 
     def fund_list(self, fund_type: str = "YAT") -> list[dict[str, Any]]:
@@ -163,6 +164,12 @@ def _decimal(value: Any) -> Decimal | None:
         return None
     out = Decimal(value)
     return out if out.is_finite() else None
+
+
+def _price(value: Any) -> Decimal | None:
+    """A unit price: positive, or None. TEFAS reports 0 where it has no price."""
+    out = _decimal(value)
+    return out if out is not None and out > 0 else None
 
 
 def _integer(value: Any) -> int | None:

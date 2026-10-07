@@ -99,11 +99,13 @@ def connect(path: Path | str) -> sqlite3.Connection:
 
 def date_snapshot(snapshot: FundSnapshot, prices: Sequence[PricePoint]) -> tuple[str | None, str]:
     """Return (as-of date or None, rule or reason)."""
-    if snapshot.price is None:
-        return None, "unknown:no_snapshot_price"
+    if snapshot.price is None:  # also when TEFAS reports 0: a placeholder dates nothing
+        return None, "unknown:snapshot_has_no_price"
     if not prices:
         return None, "unknown:no_dated_prices"
     newest = prices[-1]
+    if newest.price is None:
+        return None, "unknown:newest_dated_price_is_placeholder"
     if snapshot.price == newest.price:
         return newest.date.isoformat(), DATED_RULE
     # Usually a run that straddled the day's price publication.
@@ -123,7 +125,7 @@ def store(db: sqlite3.Connection, snapshot: FundSnapshot, prices: Sequence[Price
          _text(snapshot.units_outstanding), snapshot.investors, _text(snapshot.daily_return_pct),
          snapshot.category, snapshot.category_rank, snapshot.category_size, _text(snapshot.market_share_pct),
          size_check, json.dumps(snapshot.raw, default=str, ensure_ascii=False),
-         json.dumps([[p.date.isoformat(), str(p.price)] for p in prices])),
+         json.dumps([[p.date.isoformat(), None if p.price is None else str(p.price)] for p in prices])),
     )
     return cursor.rowcount == 1
 

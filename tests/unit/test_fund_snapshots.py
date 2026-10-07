@@ -59,6 +59,30 @@ class FundSnapshotCollectorTest(unittest.TestCase):
         self.assertIsNone(as_of)
         self.assertEqual(rule, "unknown:price_differs_from_newest_dated_price")
 
+    def test_a_zero_price_never_dates_a_snapshot(self):
+        # TEFAS writes 0 for "no price". Zero equal to zero must not count as a match.
+        zero_rows = [{"tarih": "2026-09-16", "fiyat": 2.5}, {"tarih": "2026-10-06", "fiyat": 0}]
+        cases = {
+            "zero in both": ({**SNAPSHOT_ROW, "sonFiyat": 0}, zero_rows,
+                             "unknown:snapshot_has_no_price", None),
+            "zero only in the snapshot": ({**SNAPSHOT_ROW, "sonFiyat": 0}, TODAY_PRICES,
+                                          "unknown:snapshot_has_no_price", None),
+            "zero only in the newest dated price": (SNAPSHOT_ROW, zero_rows,
+                                                    "unknown:newest_dated_price_is_placeholder", "1.234567"),
+        }
+        for name, (snapshot_row, price_rows, reason, stored_price) in cases.items():
+            with self.subTest(case=name):
+                db = connect(":memory:")
+                self.addCleanup(db.close)
+                self.tefas.respond("fonBilgiGetir", "TST", ok([snapshot_row]))
+                self.tefas.respond("fonFiyatBilgiGetir", "TST", ok(price_rows))
+                run(TefasClient(transport=self.tefas), db, ["TST"], sleep=lambda s: None, now=self.clock)
+                [(as_of, rule, price)] = db.execute("SELECT as_of, as_of_rule, price FROM fund_snapshots").fetchall()
+                self.assertEqual((as_of, rule), (None, reason))
+                self.assertEqual(price, stored_price)  # a zero price is never stored as a price
+                [(raw,)] = db.execute("SELECT raw_snapshot FROM fund_snapshots").fetchall()
+                self.assertIn("sonFiyat", raw)  # the raw TEFAS row is kept as evidence
+
     def test_a_second_run_on_the_same_day_does_not_duplicate(self):
         self.tefas.respond("fonBilgiGetir", "TST", ok([SNAPSHOT_ROW]))
         self.tefas.respond("fonFiyatBilgiGetir", "TST", ok(TODAY_PRICES))
