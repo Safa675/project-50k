@@ -1,0 +1,1227 @@
+{
+ "checked_at_utc": "2026-10-07T15:55:57.651447+00:00",
+ "summary": {
+  "funds": 54,
+  "reports": 636,
+  "complete": 635,
+  "funds_with_no_complete_report": [],
+  "funds_with_weekly_reports": {
+   "targets": [
+    "DFI",
+    "DOH",
+    "TLY"
+   ],
+   "non_targets": 0
+  }
+ },
+ "funds": {
+  "AAL": {
+   "reports": 12,
+   "complete": 12,
+   "creators": {
+    "": 12
+   },
+   "company_title": "ATA PORTFÖY PARA PİYASASI (TL) FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 12,
+    "units_x_price_within_one_percent": 12,
+    "period_end_price_checked": 12,
+    "period_end_price_matches_next_tefas_row": 12,
+    "previous_period_price_checked": 12,
+    "previous_period_price_matches_next_tefas_row": 12,
+    "consecutive_reports_checked": 11,
+    "previous_price_equals_last_months_price": 11
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 12,
+   "weekly_reports": 0
+  },
+  "ACC": {
+   "reports": 12,
+   "complete": 12,
+   "creators": {
+    "Infleks Rep Infrastructure": 12
+   },
+   "company_title": "İSTANBUL PORTFÖY DÖRDÜNCÜ HİSSE SENEDİ FONU (HİSSE SENEDİ YOĞUN FON)",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 12,
+    "units_x_price_within_one_percent": 12,
+    "period_end_price_checked": 12,
+    "period_end_price_matches_next_tefas_row": 12,
+    "previous_period_price_checked": 12,
+    "previous_period_price_matches_next_tefas_row": 12,
+    "consecutive_reports_checked": 11,
+    "previous_price_equals_last_months_price": 11
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 12,
+   "weekly_reports": 0
+  },
+  "ADE": {
+   "reports": 13,
+   "complete": 13,
+   "creators": {
+    "Infleks Rep Infrastructure": 13
+   },
+   "company_title": "AK PORTFÖY MUTLAK GETİRİ HEDEFLİ DEĞİŞKEN FON",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 13,
+    "units_x_price_within_one_percent": 13,
+    "period_end_price_checked": 13,
+    "period_end_price_matches_next_tefas_row": 13,
+    "previous_period_price_checked": 13,
+    "previous_period_price_matches_next_tefas_row": 13,
+    "consecutive_reports_checked": 12,
+    "previous_price_equals_last_months_price": 12
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 13,
+   "weekly_reports": 0
+  },
+  "AFA": {
+   "reports": 12,
+   "complete": 12,
+   "creators": {
+    "Infleks Rep Infrastructure": 12
+   },
+   "company_title": "AK PORTFÖY AMERİKA YABANCI HİSSE SENEDİ FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 12,
+    "units_x_price_within_one_percent": 12,
+    "period_end_price_checked": 12,
+    "period_end_price_matches_next_tefas_row": 12,
+    "previous_period_price_checked": 12,
+    "previous_period_price_matches_next_tefas_row": 12,
+    "consecutive_reports_checked": 11,
+    "previous_price_equals_last_months_price": 11
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 12,
+   "weekly_reports": 0
+  },
+  "AFO": {
+   "reports": 12,
+   "complete": 12,
+   "creators": {
+    "Infleks Rep Infrastructure": 12
+   },
+   "company_title": "AK PORTFÖY ALTIN FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 12,
+    "units_x_price_within_one_percent": 12,
+    "period_end_price_checked": 12,
+    "period_end_price_matches_next_tefas_row": 12,
+    "previous_period_price_checked": 12,
+    "previous_period_price_matches_next_tefas_row": 12,
+    "consecutive_reports_checked": 11,
+    "previous_price_equals_last_months_price": 11
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 12,
+   "weekly_reports": 0
+  },
+  "AFT": {
+   "reports": 12,
+   "complete": 12,
+   "creators": {
+    "Infleks Rep Infrastructure": 12
+   },
+   "company_title": "AK PORTFÖY YENİ TEKNOLOJİLER YABANCI HİSSE SENEDİ FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 12,
+    "units_x_price_within_one_percent": 12,
+    "period_end_price_checked": 12,
+    "period_end_price_matches_next_tefas_row": 12,
+    "previous_period_price_checked": 12,
+    "previous_period_price_matches_next_tefas_row": 12,
+    "consecutive_reports_checked": 11,
+    "previous_price_equals_last_months_price": 11
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 12,
+   "weekly_reports": 0
+  },
+  "AHU": {
+   "reports": 4,
+   "complete": 4,
+   "creators": {
+    "Calc": 2,
+    "": 1,
+    "Microsoft® Excel® 2019": 1
+   },
+   "company_title": "ATLAS PORTFÖY BİRİNCİ ÖZEL SEKTÖR BORÇLANMA ARAÇLARI FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 4,
+    "units_x_price_within_one_percent": 4,
+    "period_end_price_checked": 4,
+    "period_end_price_matches_next_tefas_row": 4,
+    "previous_period_price_checked": 4,
+    "previous_period_price_matches_next_tefas_row": 4,
+    "consecutive_reports_checked": 3,
+    "previous_price_equals_last_months_price": 3
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 4,
+   "weekly_reports": 0
+  },
+  "ALE": {
+   "reports": 13,
+   "complete": 13,
+   "creators": {
+    "Infleks Rep Infrastructure": 13
+   },
+   "company_title": "AK PORTFÖY PARA PİYASASI (TL) FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 13,
+    "units_x_price_within_one_percent": 13,
+    "period_end_price_checked": 13,
+    "period_end_price_matches_next_tefas_row": 13,
+    "previous_period_price_checked": 13,
+    "previous_period_price_matches_next_tefas_row": 13,
+    "consecutive_reports_checked": 12,
+    "previous_price_equals_last_months_price": 12
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 13,
+   "weekly_reports": 0
+  },
+  "DBA": {
+   "reports": 12,
+   "complete": 12,
+   "creators": {
+    "Infleks Rep Infrastructure": 24
+   },
+   "company_title": "DENİZ PORTFÖY ALTIN FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 12,
+    "units_x_price_within_one_percent": 12,
+    "period_end_price_checked": 12,
+    "period_end_price_matches_next_tefas_row": 12,
+    "previous_period_price_checked": 12,
+    "previous_period_price_matches_next_tefas_row": 12,
+    "consecutive_reports_checked": 11,
+    "previous_price_equals_last_months_price": 11
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 12,
+   "weekly_reports": 0
+  },
+  "DBK": {
+   "reports": 12,
+   "complete": 11,
+   "creators": {
+    "Infleks Rep Infrastructure": 23,
+    "": 1
+   },
+   "company_title": "DENİZ PORTFÖY KISA VADELİ BORÇLANMA ARAÇLARI (TL) FONU",
+   "missing_fields": {
+    "total_value: not found": 1,
+    "units_outstanding: not found": 1,
+    "period_end_price: not found": 1,
+    "previous_period_price: not found": 1
+   },
+   "checks": {
+    "units_x_price_matches_total": 11,
+    "units_x_price_within_one_percent": 11,
+    "period_end_price_checked": 11,
+    "period_end_price_matches_next_tefas_row": 11,
+    "previous_period_price_checked": 11,
+    "previous_period_price_matches_next_tefas_row": 11,
+    "consecutive_reports_checked": 9,
+    "previous_price_equals_last_months_price": 9
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 12,
+   "weekly_reports": 0
+  },
+  "DFI": {
+   "reports": 13,
+   "complete": 13,
+   "creators": {
+    "": 5,
+    "Microsoft® Excel® 2019": 4,
+    "Calc": 2,
+    "EXCEL.EXE": 2
+   },
+   "company_title": "ATLAS PORTFÖY SERBEST FON",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 13,
+    "units_x_price_within_one_percent": 13,
+    "period_end_price_checked": 10,
+    "period_end_price_matches_next_tefas_row": 10,
+    "previous_period_price_checked": 10,
+    "previous_period_price_matches_next_tefas_row": 10,
+    "consecutive_reports_checked": 9,
+    "previous_price_equals_last_months_price": 8
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 13,
+   "weekly_reports": 3,
+   "first_weekly_report_published": "2026-09-02T18:42:58+03:00"
+  },
+  "DLY": {
+   "reports": 12,
+   "complete": 12,
+   "creators": {
+    "Infleks Rep Infrastructure": 24
+   },
+   "company_title": "DENİZ PORTFÖY PARA PİYASASI (TL) FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 12,
+    "units_x_price_within_one_percent": 12,
+    "period_end_price_checked": 12,
+    "period_end_price_matches_next_tefas_row": 12,
+    "previous_period_price_checked": 12,
+    "previous_period_price_matches_next_tefas_row": 12,
+    "consecutive_reports_checked": 11,
+    "previous_price_equals_last_months_price": 11
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 12,
+   "weekly_reports": 0
+  },
+  "DOH": {
+   "reports": 12,
+   "complete": 12,
+   "creators": {
+    "Infleks Rep Infrastructure": 12
+   },
+   "company_title": "TERA PORTFÖY DÖRDÜNCÜ HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 12,
+    "units_x_price_within_one_percent": 12,
+    "period_end_price_checked": 10,
+    "period_end_price_matches_next_tefas_row": 9,
+    "previous_period_price_checked": 10,
+    "previous_period_price_matches_next_tefas_row": 9,
+    "consecutive_reports_checked": 9,
+    "previous_price_equals_last_months_price": 9
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 12,
+   "weekly_reports": 2,
+   "first_weekly_report_published": "2026-09-02T11:02:16+03:00"
+  },
+  "FI5": {
+   "reports": 11,
+   "complete": 11,
+   "creators": {
+    "Infleks Rep Infrastructure": 11
+   },
+   "company_title": "QNB PORTFÖY PARA PİYASASI (TL) FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 11,
+    "units_x_price_within_one_percent": 11,
+    "period_end_price_checked": 11,
+    "period_end_price_matches_next_tefas_row": 11,
+    "previous_period_price_checked": 11,
+    "previous_period_price_matches_next_tefas_row": 11,
+    "consecutive_reports_checked": 10,
+    "previous_price_equals_last_months_price": 9
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 11,
+   "weekly_reports": 0
+  },
+  "FYT": {
+   "reports": 12,
+   "complete": 12,
+   "creators": {
+    "Infleks Rep Infrastructure": 12
+   },
+   "company_title": "QNB PORTFÖY KISA VADELİ BORÇLANMA ARAÇLARI (TL) FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 12,
+    "units_x_price_within_one_percent": 12,
+    "period_end_price_checked": 12,
+    "period_end_price_matches_next_tefas_row": 12,
+    "previous_period_price_checked": 12,
+    "previous_period_price_matches_next_tefas_row": 12,
+    "consecutive_reports_checked": 11,
+    "previous_price_equals_last_months_price": 11
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 12,
+   "weekly_reports": 0
+  },
+  "GAL": {
+   "reports": 10,
+   "complete": 10,
+   "creators": {
+    "PScript5.dll Version 5.2.2": 10
+   },
+   "company_title": "GARANTİ PORTFÖY İKİNCİ PARA PİYASASI (TL) FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 10,
+    "units_x_price_within_one_percent": 10,
+    "period_end_price_checked": 10,
+    "period_end_price_matches_next_tefas_row": 9,
+    "previous_period_price_checked": 10,
+    "previous_period_price_matches_next_tefas_row": 10,
+    "consecutive_reports_checked": 9,
+    "previous_price_equals_last_months_price": 7
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 10,
+   "weekly_reports": 0
+  },
+  "GTA": {
+   "reports": 12,
+   "complete": 12,
+   "creators": {
+    "PScript5.dll Version 5.2.2": 12
+   },
+   "company_title": "GARANTİ PORTFÖY ALTIN FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 12,
+    "units_x_price_within_one_percent": 12,
+    "period_end_price_checked": 12,
+    "period_end_price_matches_next_tefas_row": 11,
+    "previous_period_price_checked": 12,
+    "previous_period_price_matches_next_tefas_row": 11,
+    "consecutive_reports_checked": 11,
+    "previous_price_equals_last_months_price": 11
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 12,
+   "weekly_reports": 0
+  },
+  "GTL": {
+   "reports": 12,
+   "complete": 12,
+   "creators": {
+    "PScript5.dll Version 5.2.2": 12
+   },
+   "company_title": "GARANTİ PORTFÖY BİRİNCİ PARA PİYASASI (TL) FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 12,
+    "units_x_price_within_one_percent": 12,
+    "period_end_price_checked": 12,
+    "period_end_price_matches_next_tefas_row": 11,
+    "previous_period_price_checked": 12,
+    "previous_period_price_matches_next_tefas_row": 11,
+    "consecutive_reports_checked": 11,
+    "previous_price_equals_last_months_price": 11
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 12,
+   "weekly_reports": 0
+  },
+  "GTZ": {
+   "reports": 12,
+   "complete": 12,
+   "creators": {
+    "PScript5.dll Version 5.2.2": 12
+   },
+   "company_title": "GARANTİ PORTFÖY GÜMÜŞ FON SEPETİ FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 12,
+    "units_x_price_within_one_percent": 12,
+    "period_end_price_checked": 12,
+    "period_end_price_matches_next_tefas_row": 11,
+    "previous_period_price_checked": 12,
+    "previous_period_price_matches_next_tefas_row": 11,
+    "consecutive_reports_checked": 11,
+    "previous_price_equals_last_months_price": 11
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 12,
+   "weekly_reports": 0
+  },
+  "GUM": {
+   "reports": 12,
+   "complete": 12,
+   "creators": {
+    "Infleks Rep Infrastructure": 12
+   },
+   "company_title": "AK PORTFÖY GÜMÜŞ FON SEPETİ FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 12,
+    "units_x_price_within_one_percent": 12,
+    "period_end_price_checked": 12,
+    "period_end_price_matches_next_tefas_row": 12,
+    "previous_period_price_checked": 12,
+    "previous_period_price_matches_next_tefas_row": 12,
+    "consecutive_reports_checked": 11,
+    "previous_price_equals_last_months_price": 11
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 12,
+   "weekly_reports": 0
+  },
+  "HLL": {
+   "reports": 12,
+   "complete": 12,
+   "creators": {
+    "pdf-lib (https://github.com/Hopding/pdf-lib)": 12
+   },
+   "company_title": "ZİRAAT PORTFÖY HALKBANK PARA PİYASASI (TL) FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 0,
+    "units_x_price_within_one_percent": 12,
+    "period_end_price_checked": 12,
+    "period_end_price_matches_next_tefas_row": 0,
+    "previous_period_price_checked": 12,
+    "previous_period_price_matches_next_tefas_row": 0,
+    "consecutive_reports_checked": 11,
+    "previous_price_equals_last_months_price": 11
+   },
+   "units_x_price_worst_relative_gap": 0.0038,
+   "has_publish_time": 12,
+   "weekly_reports": 0
+  },
+  "HPV": {
+   "reports": 12,
+   "complete": 12,
+   "creators": {
+    "pdf-lib (https://github.com/Hopding/pdf-lib)": 12
+   },
+   "company_title": "ZİRAAT PORTFÖY HALKBANK KISA VADELİ KİRA SERTİFİKALARI KATILIM (TL) FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 0,
+    "units_x_price_within_one_percent": 12,
+    "period_end_price_checked": 12,
+    "period_end_price_matches_next_tefas_row": 0,
+    "previous_period_price_checked": 12,
+    "previous_period_price_matches_next_tefas_row": 0,
+    "consecutive_reports_checked": 11,
+    "previous_price_equals_last_months_price": 11
+   },
+   "units_x_price_worst_relative_gap": 0.0036,
+   "has_publish_time": 12,
+   "weekly_reports": 0
+  },
+  "IBK": {
+   "reports": 12,
+   "complete": 12,
+   "creators": {
+    "Infleks Rep Infrastructure": 12
+   },
+   "company_title": "İŞ PORTFÖY MAXİMUM KART KISA VADELİ BORÇLANMA ARAÇLARI (TL) FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 12,
+    "units_x_price_within_one_percent": 12,
+    "period_end_price_checked": 12,
+    "period_end_price_matches_next_tefas_row": 11,
+    "previous_period_price_checked": 12,
+    "previous_period_price_matches_next_tefas_row": 11,
+    "consecutive_reports_checked": 11,
+    "previous_price_equals_last_months_price": 11
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 12,
+   "weekly_reports": 0
+  },
+  "KLU": {
+   "reports": 11,
+   "complete": 11,
+   "creators": {
+    "Infleks Rep Infrastructure": 11
+   },
+   "company_title": "KUVEYT TÜRK PORTFÖY PARA PİYASASI KATILIM (TL) FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 11,
+    "units_x_price_within_one_percent": 11,
+    "period_end_price_checked": 11,
+    "period_end_price_matches_next_tefas_row": 11,
+    "previous_period_price_checked": 11,
+    "previous_period_price_matches_next_tefas_row": 11,
+    "consecutive_reports_checked": 10,
+    "previous_price_equals_last_months_price": 10
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 11,
+   "weekly_reports": 0
+  },
+  "KTV": {
+   "reports": 11,
+   "complete": 11,
+   "creators": {
+    "Infleks Rep Infrastructure": 11
+   },
+   "company_title": "KUVEYT TÜRK PORTFÖY KISA VADELİ KİRA SERTİFİKALARI KATILIM (TL) FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 11,
+    "units_x_price_within_one_percent": 11,
+    "period_end_price_checked": 11,
+    "period_end_price_matches_next_tefas_row": 11,
+    "previous_period_price_checked": 11,
+    "previous_period_price_matches_next_tefas_row": 11,
+    "consecutive_reports_checked": 10,
+    "previous_price_equals_last_months_price": 10
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 11,
+   "weekly_reports": 0
+  },
+  "KZL": {
+   "reports": 11,
+   "complete": 11,
+   "creators": {
+    "Infleks Rep Infrastructure": 11
+   },
+   "company_title": "KUVEYT TÜRK PORTFÖY ALTIN KATILIM FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 11,
+    "units_x_price_within_one_percent": 11,
+    "period_end_price_checked": 11,
+    "period_end_price_matches_next_tefas_row": 11,
+    "previous_period_price_checked": 11,
+    "previous_period_price_matches_next_tefas_row": 11,
+    "consecutive_reports_checked": 10,
+    "previous_price_equals_last_months_price": 10
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 11,
+   "weekly_reports": 0
+  },
+  "PHE": {
+   "reports": 12,
+   "complete": 12,
+   "creators": {
+    "Infleks Rep Infrastructure": 11,
+    "": 1
+   },
+   "company_title": "PUSULA PORTFÖY HİSSE SENEDİ FONU (HİSSE SENEDİ YOĞUN FON)",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 12,
+    "units_x_price_within_one_percent": 12,
+    "period_end_price_checked": 12,
+    "period_end_price_matches_next_tefas_row": 12,
+    "previous_period_price_checked": 12,
+    "previous_period_price_matches_next_tefas_row": 12,
+    "consecutive_reports_checked": 11,
+    "previous_price_equals_last_months_price": 11
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 12,
+   "weekly_reports": 0
+  },
+  "PRY": {
+   "reports": 12,
+   "complete": 12,
+   "creators": {
+    "Infleks Rep Infrastructure": 11,
+    "": 1
+   },
+   "company_title": "PUSULA PORTFÖY PARA PİYASASI (TL) FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 12,
+    "units_x_price_within_one_percent": 12,
+    "period_end_price_checked": 12,
+    "period_end_price_matches_next_tefas_row": 12,
+    "previous_period_price_checked": 12,
+    "previous_period_price_matches_next_tefas_row": 12,
+    "consecutive_reports_checked": 11,
+    "previous_price_equals_last_months_price": 11
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 12,
+   "weekly_reports": 0
+  },
+  "SAS": {
+   "reports": 12,
+   "complete": 12,
+   "creators": {
+    "Infleks Rep Infrastructure": 13
+   },
+   "company_title": "AK PORTFÖY SABANCI TOPLULUĞU ŞİRKETLERİ ENDEKSİ HİSSE SENEDİ (TL) FONU (HİSSE SENEDİ YOĞUN FON)",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 12,
+    "units_x_price_within_one_percent": 12,
+    "period_end_price_checked": 12,
+    "period_end_price_matches_next_tefas_row": 12,
+    "previous_period_price_checked": 12,
+    "previous_period_price_matches_next_tefas_row": 12,
+    "consecutive_reports_checked": 11,
+    "previous_price_equals_last_months_price": 11
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 12,
+   "weekly_reports": 0
+  },
+  "TCA": {
+   "reports": 12,
+   "complete": 12,
+   "creators": {
+    "pdf-lib (https://github.com/Hopding/pdf-lib)": 12
+   },
+   "company_title": "ZİRAAT PORTFÖY ALTIN KATILIM FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 0,
+    "units_x_price_within_one_percent": 7,
+    "period_end_price_checked": 12,
+    "period_end_price_matches_next_tefas_row": 0,
+    "previous_period_price_checked": 12,
+    "previous_period_price_matches_next_tefas_row": 0,
+    "consecutive_reports_checked": 11,
+    "previous_price_equals_last_months_price": 11
+   },
+   "units_x_price_worst_relative_gap": 0.0634,
+   "has_publish_time": 12,
+   "weekly_reports": 0
+  },
+  "TGT": {
+   "reports": 12,
+   "complete": 12,
+   "creators": {
+    "PScript5.dll Version 5.2.2": 12
+   },
+   "company_title": "GARANTİ PORTFÖY KISA VADELİ BORÇLANMA ARAÇLARI FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 12,
+    "units_x_price_within_one_percent": 12,
+    "period_end_price_checked": 12,
+    "period_end_price_matches_next_tefas_row": 11,
+    "previous_period_price_checked": 12,
+    "previous_period_price_matches_next_tefas_row": 11,
+    "consecutive_reports_checked": 11,
+    "previous_price_equals_last_months_price": 11
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 12,
+   "weekly_reports": 0
+  },
+  "THF": {
+   "reports": 11,
+   "complete": 11,
+   "creators": {
+    "Infleks Rep Infrastructure": 11
+   },
+   "company_title": "TERA PORTFÖY HİSSE SENEDİ (TL) FONU (HİSSE SENEDİ YOĞUN FON)",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 11,
+    "units_x_price_within_one_percent": 11,
+    "period_end_price_checked": 11,
+    "period_end_price_matches_next_tefas_row": 10,
+    "previous_period_price_checked": 11,
+    "previous_period_price_matches_next_tefas_row": 10,
+    "consecutive_reports_checked": 10,
+    "previous_price_equals_last_months_price": 10
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 11,
+   "weekly_reports": 0
+  },
+  "TI1": {
+   "reports": 13,
+   "complete": 13,
+   "creators": {
+    "Infleks Rep Infrastructure": 13
+   },
+   "company_title": "İŞ PORTFÖY PARA PİYASASI (TL) FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 13,
+    "units_x_price_within_one_percent": 13,
+    "period_end_price_checked": 13,
+    "period_end_price_matches_next_tefas_row": 12,
+    "previous_period_price_checked": 13,
+    "previous_period_price_matches_next_tefas_row": 12,
+    "consecutive_reports_checked": 12,
+    "previous_price_equals_last_months_price": 12
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 13,
+   "weekly_reports": 0
+  },
+  "TIV": {
+   "reports": 13,
+   "complete": 13,
+   "creators": {
+    "Infleks Rep Infrastructure": 13
+   },
+   "company_title": "İŞ PORTFÖY KISA VADELİ BORÇLANMA ARAÇLARI (TL) FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 13,
+    "units_x_price_within_one_percent": 13,
+    "period_end_price_checked": 13,
+    "period_end_price_matches_next_tefas_row": 12,
+    "previous_period_price_checked": 13,
+    "previous_period_price_matches_next_tefas_row": 12,
+    "consecutive_reports_checked": 12,
+    "previous_price_equals_last_months_price": 12
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 13,
+   "weekly_reports": 0
+  },
+  "TKK": {
+   "reports": 13,
+   "complete": 13,
+   "creators": {
+    "Infleks Rep Infrastructure": 13
+   },
+   "company_title": "İŞ PORTFÖY KUMBARA HESABI FON SEPETİ ÖZEL FON",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 13,
+    "units_x_price_within_one_percent": 13,
+    "period_end_price_checked": 13,
+    "period_end_price_matches_next_tefas_row": 12,
+    "previous_period_price_checked": 13,
+    "previous_period_price_matches_next_tefas_row": 12,
+    "consecutive_reports_checked": 12,
+    "previous_price_equals_last_months_price": 12
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 13,
+   "weekly_reports": 0
+  },
+  "TKM": {
+   "reports": 11,
+   "complete": 11,
+   "creators": {
+    "Infleks Rep Infrastructure": 11
+   },
+   "company_title": "TEB PORTFÖY PARA PİYASASI (TL) FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 11,
+    "units_x_price_within_one_percent": 11,
+    "period_end_price_checked": 11,
+    "period_end_price_matches_next_tefas_row": 11,
+    "previous_period_price_checked": 11,
+    "previous_period_price_matches_next_tefas_row": 11,
+    "consecutive_reports_checked": 10,
+    "previous_price_equals_last_months_price": 10
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 11,
+   "weekly_reports": 0
+  },
+  "TLY": {
+   "reports": 12,
+   "complete": 12,
+   "creators": {
+    "Infleks Rep Infrastructure": 12
+   },
+   "company_title": "TERA PORTFÖY BİRİNCİ SERBEST FON",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 12,
+    "units_x_price_within_one_percent": 12,
+    "period_end_price_checked": 10,
+    "period_end_price_matches_next_tefas_row": 9,
+    "previous_period_price_checked": 10,
+    "previous_period_price_matches_next_tefas_row": 9,
+    "consecutive_reports_checked": 9,
+    "previous_price_equals_last_months_price": 9
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 12,
+   "weekly_reports": 2,
+   "first_weekly_report_published": "2026-09-02T11:02:16+03:00"
+  },
+  "TNK": {
+   "reports": 11,
+   "complete": 11,
+   "creators": {
+    "Infleks Rep Infrastructure": 11
+   },
+   "company_title": "TEB PORTFÖY KISA VADELİ BORÇLANMA ARAÇLARI (TL) FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 11,
+    "units_x_price_within_one_percent": 11,
+    "period_end_price_checked": 11,
+    "period_end_price_matches_next_tefas_row": 11,
+    "previous_period_price_checked": 11,
+    "previous_period_price_matches_next_tefas_row": 11,
+    "consecutive_reports_checked": 10,
+    "previous_price_equals_last_months_price": 10
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 11,
+   "weekly_reports": 0
+  },
+  "TP2": {
+   "reports": 11,
+   "complete": 11,
+   "creators": {
+    "Infleks Rep Infrastructure": 11
+   },
+   "company_title": "TERA PORTFÖY PARA PİYASASI (TL) FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 11,
+    "units_x_price_within_one_percent": 11,
+    "period_end_price_checked": 11,
+    "period_end_price_matches_next_tefas_row": 10,
+    "previous_period_price_checked": 11,
+    "previous_period_price_matches_next_tefas_row": 10,
+    "consecutive_reports_checked": 10,
+    "previous_price_equals_last_months_price": 10
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 11,
+   "weekly_reports": 0
+  },
+  "TSI": {
+   "reports": 13,
+   "complete": 13,
+   "creators": {
+    "Infleks Rep Infrastructure": 13
+   },
+   "company_title": "İŞ PORTFÖY MAKSİMUM HESAP KISA VADELİ BORÇLANMA ARAÇLARI (TL) FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 13,
+    "units_x_price_within_one_percent": 13,
+    "period_end_price_checked": 13,
+    "period_end_price_matches_next_tefas_row": 12,
+    "previous_period_price_checked": 13,
+    "previous_period_price_matches_next_tefas_row": 12,
+    "consecutive_reports_checked": 12,
+    "previous_price_equals_last_months_price": 12
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 13,
+   "weekly_reports": 0
+  },
+  "TTA": {
+   "reports": 12,
+   "complete": 12,
+   "creators": {
+    "Infleks Rep Infrastructure": 12
+   },
+   "company_title": "İŞ PORTFÖY ALTIN FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 12,
+    "units_x_price_within_one_percent": 12,
+    "period_end_price_checked": 12,
+    "period_end_price_matches_next_tefas_row": 11,
+    "previous_period_price_checked": 12,
+    "previous_period_price_matches_next_tefas_row": 11,
+    "consecutive_reports_checked": 11,
+    "previous_price_equals_last_months_price": 11
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 12,
+   "weekly_reports": 0
+  },
+  "TTE": {
+   "reports": 13,
+   "complete": 13,
+   "creators": {
+    "Microsoft® Excel® LTSC": 13
+   },
+   "company_title": "İŞ PORTFÖY BIST TEKNOLOJİ AĞIRLIK SINIRLAMALI ENDEKSİ HİSSE SENEDİ (TL) FONU (HİSSE SENEDİ YOĞUN FON)",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 13,
+    "units_x_price_within_one_percent": 13,
+    "period_end_price_checked": 13,
+    "period_end_price_matches_next_tefas_row": 12,
+    "previous_period_price_checked": 13,
+    "previous_period_price_matches_next_tefas_row": 12,
+    "consecutive_reports_checked": 12,
+    "previous_price_equals_last_months_price": 12
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 13,
+   "weekly_reports": 0
+  },
+  "TZL": {
+   "reports": 12,
+   "complete": 12,
+   "creators": {
+    "pdf-lib (https://github.com/Hopding/pdf-lib)": 12
+   },
+   "company_title": "ZİRAAT PORTFÖY PARA PİYASASI (TL) FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 0,
+    "units_x_price_within_one_percent": 12,
+    "period_end_price_checked": 12,
+    "period_end_price_matches_next_tefas_row": 0,
+    "previous_period_price_checked": 12,
+    "previous_period_price_matches_next_tefas_row": 0,
+    "consecutive_reports_checked": 11,
+    "previous_price_equals_last_months_price": 11
+   },
+   "units_x_price_worst_relative_gap": 0.0038,
+   "has_publish_time": 12,
+   "weekly_reports": 0
+  },
+  "TZV": {
+   "reports": 12,
+   "complete": 12,
+   "creators": {
+    "pdf-lib (https://github.com/Hopding/pdf-lib)": 12
+   },
+   "company_title": "ZİRAAT PORTFÖY KISA VADELİ BORÇLANMA ARAÇLARI (TL) FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 0,
+    "units_x_price_within_one_percent": 12,
+    "period_end_price_checked": 12,
+    "period_end_price_matches_next_tefas_row": 0,
+    "previous_period_price_checked": 12,
+    "previous_period_price_matches_next_tefas_row": 0,
+    "consecutive_reports_checked": 11,
+    "previous_price_equals_last_months_price": 11
+   },
+   "units_x_price_worst_relative_gap": 0.0031,
+   "has_publish_time": 12,
+   "weekly_reports": 0
+  },
+  "VK6": {
+   "reports": 12,
+   "complete": 12,
+   "creators": {
+    "pdf-lib (https://github.com/Hopding/pdf-lib)": 9,
+    "Microsoft® Word LTSC": 1,
+    "Infleks Rep Infrastructure": 2
+   },
+   "company_title": "ZİRAAT PORTFÖY VAKIFBANK PARA PİYASASI (TL) FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 2,
+    "units_x_price_within_one_percent": 12,
+    "period_end_price_checked": 12,
+    "period_end_price_matches_next_tefas_row": 2,
+    "previous_period_price_checked": 12,
+    "previous_period_price_matches_next_tefas_row": 2,
+    "consecutive_reports_checked": 11,
+    "previous_price_equals_last_months_price": 9
+   },
+   "units_x_price_worst_relative_gap": 0.0038,
+   "has_publish_time": 12,
+   "weekly_reports": 0
+  },
+  "VKT": {
+   "reports": 12,
+   "complete": 12,
+   "creators": {
+    "pdf-lib (https://github.com/Hopding/pdf-lib)": 9,
+    "Microsoft® Word LTSC": 1,
+    "Infleks Rep Infrastructure": 2
+   },
+   "company_title": "ZİRAAT PORTFÖY VAKIFBANK KISA VADELİ BORÇLANMA ARAÇLARI (TL) FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 2,
+    "units_x_price_within_one_percent": 12,
+    "period_end_price_checked": 12,
+    "period_end_price_matches_next_tefas_row": 2,
+    "previous_period_price_checked": 12,
+    "previous_period_price_matches_next_tefas_row": 2,
+    "consecutive_reports_checked": 11,
+    "previous_price_equals_last_months_price": 9
+   },
+   "units_x_price_worst_relative_gap": 0.0032,
+   "has_publish_time": 12,
+   "weekly_reports": 0
+  },
+  "YAK": {
+   "reports": 12,
+   "complete": 12,
+   "creators": {
+    "": 12
+   },
+   "company_title": "YAPI KREDİ PORTFÖY KARMA FON",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 12,
+    "units_x_price_within_one_percent": 12,
+    "period_end_price_checked": 12,
+    "period_end_price_matches_next_tefas_row": 12,
+    "previous_period_price_checked": 12,
+    "previous_period_price_matches_next_tefas_row": 12,
+    "consecutive_reports_checked": 11,
+    "previous_price_equals_last_months_price": 11
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 12,
+   "weekly_reports": 0
+  },
+  "YAS": {
+   "reports": 13,
+   "complete": 13,
+   "creators": {
+    "": 13
+   },
+   "company_title": "YAPI KREDİ PORTFÖY KOÇ HOLDİNG  İŞTİRAK VE HİSSE SENEDİ FONU (HİSSE SENEDİ YOĞUN FON)",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 13,
+    "units_x_price_within_one_percent": 13,
+    "period_end_price_checked": 13,
+    "period_end_price_matches_next_tefas_row": 13,
+    "previous_period_price_checked": 13,
+    "previous_period_price_matches_next_tefas_row": 13,
+    "consecutive_reports_checked": 12,
+    "previous_price_equals_last_months_price": 12
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 13,
+   "weekly_reports": 0
+  },
+  "YAY": {
+   "reports": 12,
+   "complete": 12,
+   "creators": {
+    "": 12
+   },
+   "company_title": "YAPI KREDİ PORTFÖY YABANCI TEKNOLOJİ SEKTÖRÜ HİSSE SENEDİ FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 12,
+    "units_x_price_within_one_percent": 12,
+    "period_end_price_checked": 12,
+    "period_end_price_matches_next_tefas_row": 12,
+    "previous_period_price_checked": 12,
+    "previous_period_price_matches_next_tefas_row": 12,
+    "consecutive_reports_checked": 11,
+    "previous_price_equals_last_months_price": 11
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 12,
+   "weekly_reports": 0
+  },
+  "YDK": {
+   "reports": 12,
+   "complete": 12,
+   "creators": {
+    "": 12
+   },
+   "company_title": "YAPI KREDİ PORTFÖY ÇALIŞAN HESAP KISA VADELİ BORÇLANMA ARAÇLARI FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 12,
+    "units_x_price_within_one_percent": 12,
+    "period_end_price_checked": 12,
+    "period_end_price_matches_next_tefas_row": 12,
+    "previous_period_price_checked": 12,
+    "previous_period_price_matches_next_tefas_row": 12,
+    "consecutive_reports_checked": 11,
+    "previous_price_equals_last_months_price": 11
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 12,
+   "weekly_reports": 0
+  },
+  "YHT": {
+   "reports": 10,
+   "complete": 10,
+   "creators": {
+    "": 10
+   },
+   "company_title": "YAPI KREDİ PORTFÖY KISA VADELİ BORÇLANMA ARAÇLARI (TL) FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 10,
+    "units_x_price_within_one_percent": 10,
+    "period_end_price_checked": 10,
+    "period_end_price_matches_next_tefas_row": 10,
+    "previous_period_price_checked": 10,
+    "previous_period_price_matches_next_tefas_row": 10,
+    "consecutive_reports_checked": 9,
+    "previous_price_equals_last_months_price": 8
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 10,
+   "weekly_reports": 0
+  },
+  "YKT": {
+   "reports": 11,
+   "complete": 11,
+   "creators": {
+    "": 11
+   },
+   "company_title": "YAPI KREDİ PORTFÖY ALTIN FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 11,
+    "units_x_price_within_one_percent": 11,
+    "period_end_price_checked": 11,
+    "period_end_price_matches_next_tefas_row": 11,
+    "previous_period_price_checked": 11,
+    "previous_period_price_matches_next_tefas_row": 11,
+    "consecutive_reports_checked": 10,
+    "previous_price_equals_last_months_price": 10
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 11,
+   "weekly_reports": 0
+  },
+  "YLB": {
+   "reports": 12,
+   "complete": 12,
+   "creators": {
+    "": 12
+   },
+   "company_title": "YAPI KREDİ PORTFÖY PARA PİYASASI FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 12,
+    "units_x_price_within_one_percent": 12,
+    "period_end_price_checked": 12,
+    "period_end_price_matches_next_tefas_row": 12,
+    "previous_period_price_checked": 12,
+    "previous_period_price_matches_next_tefas_row": 12,
+    "consecutive_reports_checked": 11,
+    "previous_price_equals_last_months_price": 11
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 12,
+   "weekly_reports": 0
+  },
+  "YVD": {
+   "reports": 12,
+   "complete": 12,
+   "creators": {
+    "": 12
+   },
+   "company_title": "YAPI KREDİ PORTFÖY İKİNCİ PARA PİYASASI (TL) FONU",
+   "missing_fields": {},
+   "checks": {
+    "units_x_price_matches_total": 12,
+    "units_x_price_within_one_percent": 12,
+    "period_end_price_checked": 12,
+    "period_end_price_matches_next_tefas_row": 12,
+    "previous_period_price_checked": 12,
+    "previous_period_price_matches_next_tefas_row": 12,
+    "consecutive_reports_checked": 11,
+    "previous_price_equals_last_months_price": 11
+   },
+   "units_x_price_worst_relative_gap": 0.0,
+   "has_publish_time": 12,
+   "weekly_reports": 0
+  }
+ }
+}
