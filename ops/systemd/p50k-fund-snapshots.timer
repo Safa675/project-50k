@@ -1,0 +1,13 @@
+[Unit]
+Description=Run the TEFAS fund snapshot collector on weekday evenings
+
+[Timer]
+# TEFAS had the day's prices by 19:07 on 2026-10-06; 21:00 leaves a margin.
+OnCalendar=Mon..Fri 21:00 Europe/Istanbul
+# Catch up after the machine was off or asleep. A morning catch-up still dates
+# the snapshot correctly, because the as-of date comes from the matching price.
+Persistent=true
+RandomizedDelaySec=10min
+
+[Install]
+WantedBy=timers.target
