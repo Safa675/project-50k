@@ -54,6 +54,14 @@ What the prices show for the two liquidating funds in this stage, described with
 4. Count false alarms: the same detectors on the funds that were not liquidated.
 5. These are four companies and eight funds that move together: a case study, not statistical evidence. A fund with no visible warning in public data is a finding too.
 
+## KAP report cadence
+
+Seen so far in the KAP report lists of 54 funds, including 6 of the 8 top-100 targets (KHA and PNU are not downloaded yet):
+
+- **Three liquidated funds (TLY and DOH of Tera, DFI of Atlas) switched from monthly to weekly reports.** Their last monthly report is for July (published 3 August for TLY and DOH, 10 August for DFI). Weekly reports followed on 2 and 9 September (DFI also on 16 September), with no August monthly report. KAP's period code changes from `AB` to `HB`.
+- THF, TP2 and PRY, the other liquidated funds read so far, stayed monthly. None of the 48 other funds read so far has a weekly report.
+- Why they switched is not known. It is a pattern found in funds already examined, so it is a hypothesis to test on funds never looked at, not a validated signal. The KAP report list alone is enough to test it, at about 3 requests per fund, without downloading any PDF.
+
 ## Top 100: price-only detectors
 
 Five years of prices for all 100 funds were downloaded on 2026-10-07. Five price-only detectors were pre-registered and run once; see `price_detectors/RESULTS.md`.
