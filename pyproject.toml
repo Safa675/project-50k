@@ -1,0 +1,18 @@
+[project]
+name = "project-50k"
+version = "0.1.0"
+description = "Private archived research for selected Turkish investment funds"
+requires-python = ">=3.13"
+dependencies = []
+
+[project.optional-dependencies]
+api = [
+  "fastapi>=0.115,<1",
+  "pydantic>=2.12,<3",
+  "uvicorn>=0.30,<1",
+]
+api-test = ["httpx2"]
+research = ["numpy==2.4.6"]
+
+[tool.uv]
+package = false
