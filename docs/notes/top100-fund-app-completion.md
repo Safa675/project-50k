@@ -1,113 +1,102 @@
-# Local top-100 fund app: implementation checkpoint
+# Local top-100 fund research app: completion and verification
 
-Date: 2026-10-08. Host: owner's laptop.
-Status: protocol, immutable bundle and read-only API implemented and verified;
-synthetic UI scaffold reviewed technically. Owner screen review is pending.
-The real-data fund list/detail, interactive chart and PDF dialog are unfinished.
-This is a checkpoint, not acceptance of the full app plan.
+Recorded: 2026-10-09. Final regression runs: 2026-10-08. Host: owner's laptop.
+Status: the approved private prototype is implemented locally. The owner approved
+the concrete list/detail design with “design is okay go on”. This approval covers
+the local layout; formal G09, rights and competition gates remain separate.
+No push, merge, public/LAN deployment or systemd installation was performed.
 
-## Authorization and remaining screen review
+## Delivered scope and requirement coverage
 
-The owner requested implementation on the laptop because the VPS was unavailable.
-That authorizes local work on the [app plan](../../plans/2026-10-08-top100-fund-research-app.md).
-No push, merge, public/LAN deployment or systemd installation is included.
-The plan's P0 requires concrete design review before full UI implementation.
-The running `/preview` presents six explicitly synthetic records and a detail
-wireframe. Screenshots were shown to the owner and the screen-review choice was
-requested. No response has been recorded. See [screen review](top100-fund-app-design.md).
-G09 is still open; no designer or Impeccable approval is claimed.
+The actual `/` route keeps all 100 selected funds. Search, category/finding
+filters, denominator-labelled coverage, Turkish deterministic comments and
+missing/stale states are present. Filters and immutable bundle identity persist
+through detail and browser back/forward navigation. Rapid edits use supported
+native history updates rather than delayed server query replacements.
 
-## Partial requirement coverage
+`/funds/[code]` shows separate D1 and conditional estimated-flow calculations,
+exact inputs, metric periods, recorded publication times and source versions.
+A Lightweight Charts graph consumes sealed common-baseline indices; separate
+segments preserve missing observations. An accessible table retains null gaps.
+The chart's peer-price median is explicitly distinct from D1's daily excess-log-
+return median. The fund is excluded from its own peer group.
 
-- FR-036 / FR-037: frozen D1 peer-return calculation and signed July-to-August
-  endpoint-change research arithmetic. Historical category membership, actual
-  investor cash and a validated production flow baseline remain unresolved.
-- FR-073 / FR-074 / FR-078: source-linked deterministic Turkish comments and
-  chart/evidence payloads; synthetic list/detail hierarchy and validated client
-  contracts. Actual-data UI navigation, chart and PDF interaction are pending.
-- FR-018 / FR-019 / FR-108 / FR-109 / NFR-038: immutable hashes, selected-source
-  references, fixed cutoff and future-invariance tests. Recorded publication
-  filtering does not establish verified historical availability or replay
-  admission.
-- FR-111: separate private archived-research contract and conspicuous synthetic
-  preview mode. Competition and external-release gates remain open.
+Own-fund prices, monthly data, notification lists and PDFs are primary evidence;
+peer prices and calculation versions remain in collapsed groups. Detail requires
+exact source-reference membership and own-fund attribution for KAP records.
+Missing monthly PDFs remain visible separately. Official disclosure URLs are
+validated. PDF bytes must match the manifest hash, bundle, cutoff and provenance
+headers before rendering. A native modal contains local PDF.js page rendering,
+page controls, zoom, extracted-text fallback and verified original download.
+Closing aborts requests, destroys rendering work, revokes blobs and restores focus.
+Reopening requires fresh verification. Worker/fonts/decoders come from pinned
+installed packages, with no CDN request. `/preview` remains explicitly synthetic.
 
-The frozen 284-status requirement registry is unchanged.
+Partial requirement coverage:
 
-## Implemented files
+- FR-036 / FR-037: frozen D1 and signed July/August endpoint-change research.
+  Historical categories, actual investor cash and production flow admission
+  remain unresolved.
+- FR-073 / FR-074 / FR-078: source-linked comments, actual list/detail navigation,
+  chart context and evidence/PDF inspection.
+- FR-018 / FR-019 / FR-108 / FR-109 / NFR-038: fixed cutoff, immutable identity,
+  source hashes, strict client/API validation and future-invariance checks.
+- FR-111: private archived-research contract and labelled synthetic preview.
 
-- `research/events/2026-09-17-spk-liquidations/fund_review_app/PROTOCOL.md` and
-  `run.py`: protocol committed before real joined calculations; explicit sealed
-  bundle generation, no downloads or recalibration.
-- `services/p50k/research_reviews/`: contracts, immutable source registry,
-  selected-source bundle validation, frozen D1 adapter, conditional Decimal flow
-  arithmetic and tested Turkish comments.
-- `services/p50k/api/`: strict FastAPI/Pydantic research health, summary, list,
-  detail and opaque manifest-backed source routes. JSON/PDF/error responses are
-  `no-store`; source paths are private.
-- `pyproject.toml`, `uv.lock`, `ops/local/`: locked optional API/test/research
-  dependencies and a loopback launcher with explicit bundle selection.
-- `frontend/`: locked Next.js/TypeScript/next-intl scaffold, Bilun generic
-  primitives and notice, strict runtime response client, synthetic preview and
-  tests. Real-data routes currently redirect to the labelled preview.
-- Synthetic Python tests for bundle/comment/API contracts; design note,
-  repository README and app-plan status.
+The frozen 284-status requirement registry is unchanged. No production acceptance
+or fraud accuracy/false-positive measurement is claimed.
 
-## Actual archive verification
+## Calculation and source evidence
 
-Final private bundle:
+The protocol was committed before new real joined calculations:
+`research/events/2026-09-17-spk-liquidations/fund_review_app/PROTOCOL.md`.
+Private bundle:
 `raw/research/fund-review-app/a13b74d09993616a7c7da6b8b396b6570502cf7f3752683599071b14341cde88/`.
-Its financial contents and source copies are ignored and absent from Git.
-Registration binds implementation commit `3b8e74e38cf78fbe99dbcd9d9a537d014faa0ee3`
-and protocol commit `11f38a4`. Subsequent launcher/documentation changes do not
-alter its registered calculation-source bytes.
+Registration binds calculation implementation commit
+`3b8e74e38cf78fbe99dbcd9d9a537d014faa0ee3` and protocol commit `11f38a4`.
+The final UI/launcher implementation is local commit `f244572` (2026-10-09).
+Subsequent UI/launcher/documentation changes preserve registered calculation bytes.
+The bundle was not regenerated during UI integration.
 
-Exactly 100 selected records remain present. Independent computation reproduced
-71 finite D1 statistics, including one stale result, and 83 exact-fraction flow
-checks. All 166 retained flow endpoints matched the original selected KAP series.
-All 4,260 chart points matched independently calculated common-baseline values
-or explicit gaps. No frozen threshold was changed or recalibrated.
+Independent computation reproduced 71 finite D1 statistics, including one stale
+result, 83 exact-fraction flow checks, all 166 retained original KAP endpoints and
+all 4,260 normalized chart points/gaps. No threshold was changed or recalibrated.
+Of 100 records, 54 have both eligible calculations, 45 have partial assessment
+and one has neither. Descriptive groups contain 2 with two crossings, 19 with one,
+42 without eligible crossings and incomplete evidence, and 37 with both eligible
+calculations without crossings. These aggregates are not fraud labels.
 
-Of 100 records, 54 have both eligible calculations, 45 have a partial assessment
-and one has neither. Descriptive groups are two findings: 2; one finding: 19;
-no eligible finding with incomplete evidence: 42; both calculations eligible
-without crossings: 37. These are archive observations, not fraud labels,
-accuracy, false-positive rates or a validated crisis-beforehand result.
+The actual production API was validated by the frontend's TypeScript loaders:
+all 100 detail objects equal their list records; summary counts, cutoff, bundle,
+exact source sets and monthly source attribution agree. All 102 JSON responses
+were no-store. This in-memory audit passed in 29.23s; temporary tests/configuration
+were removed and no actual response payload was saved. The earlier independent
+HTTP probe also matched an original PDF byte hash through the same-origin proxy.
 
-All 1,907 audited original private files, including the existing SQLite database,
-retain their original hashes. The 216 frozen-handoff manifest entries verify;
-the frozen price detector/preregistration/calibration files are unchanged.
-No unopened price files were consumed. No real values or private screenshots
-were staged. The Bilun source checkout was unchanged.
+All 1,907 audited original private files, including SQLite, retain their hashes;
+216 frozen-handoff manifest entries verify. Frozen detectors, preregistration and
+calibration remain unchanged. No unopened price files were consumed. Real values,
+PDFs and private screenshots are absent from Git. Generic Bilun primitives and
+notices retain their authorized provenance; Bilun health data is not a dependency.
 
-## Executed tests and probes
+## Executed regression commands
 
-Python 3.13.13, locked NumPy 2.4.6 and PyMuPDF 1.27.2.3; optional API/test
-dependencies installed in the ignored `.venv`.
+Locked Python 3.13.13, NumPy 2.4.6 and PyMuPDF 1.27.2.3, with API/test extras:
 
 ```sh
 # Repository root
 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=services .venv/bin/python -m unittest discover -s tests -t . -v
-# Frozen price detector directory
+# research/events/2026-09-17-spk-liquidations/price_detectors/
 PYTHONDONTWRITEBYTECODE=1 /home/safa/Documents/project-50k/.venv/bin/python -m unittest test_detectors -v
-# Frozen handoff directory
+# docs/handoff-v0.5/
 PYTHONDONTWRITEBYTECODE=1 /home/safa/Documents/project-50k/.venv/bin/python -m unittest discover -s tests -v
 ```
 
-After parsing/dependency fixes: root **501 tests, 22.127s, OK**;
-price detector **9 tests, 0.457s, OK**; frozen handoff **88 tests, 0.006s, OK**.
-No skips. Exact logs are local `/tmp/p50k-app-regression-{root,price,frozen}-fixed.log`.
-
-The final root regression, including two launcher socket integration tests:
-**503 tests, 24.724s, OK, no skips**. Exact log:
-`/tmp/p50k-app-regression-root-final.log`. The other frozen suites were unchanged
-after the launcher-only correction.
-
-The first locked full run failed: 497 tests, one failure and two errors. The
-errors were a missing locked PyMuPDF dependency. The failure was invalid Decimal
-input parsing altering the caller's context flags. Both new domain/API parsers
-now isolate conversion flags; synthetic regressions test precision, traps and
-pre-existing flags. Original preregistered futures math/runners were unchanged.
+Final P5 run: root **503 tests, 18.222s, OK**; frozen price **9 tests, 0.283s, OK**;
+frozen handoff **88 tests, 0.003s, OK**. No skips. Exact local logs:
+`/tmp/p50k-app-regression-{root,price,frozen}-p5.log`.
+The earlier dependency/Decimal-context failures were fixed and tested; original
+preregistered futures math/runners were not patched.
 
 From `frontend/`, actually executed:
 
@@ -118,62 +107,60 @@ NEXT_TELEMETRY_DISABLED=1 npm run build
 npm run test:browser
 ```
 
-Typecheck and build exited 0; 28 synthetic unit tests and five Chrome browser
-tests passed (browser run: 11.3s). Checks include search/filter/detail/back,
-no matches, loading/error/missing states, mobile category/metric labels,
-keyboard focus and no horizontal overflow. These do not verify a real-data UI.
-The 201 build assets contained no private fund names, bundle ID or source hashes.
-Seven adapted Bilun primitives and the exact copyright/license notice were
-checked against `cafa27bc9d7f6fe4c6a75f1eaea431fed90e2f52`.
-The frontend evidence record `/tmp/p50k-frontend-scaffold-verification.txt`
-summarizes captured tool outcomes; it is not a full raw command log.
+Typecheck and optimized webpack build exited 0. **47 unit tests passed, 591ms**.
+Raw logs: `/tmp/p50k-frontend-final-{unit,typecheck,build}.log`.
+**26 production-build browser tests passed in 12.2s**, exit 0. The final
+desktop-mounted chart → 390-pixel viewport → rendered PDF → close check passed
+in 724ms. It preserves all six authored chart rows, their null gap and exact D1
+value without body overflow. The suite also covers rapid filters/history,
+100-record coverage, missing/stale data, errors/retry, bundle/code/source
+validation, verified PDF pages, corrupt bytes/headers and modal keyboard focus.
+Raw log: `/tmp/project-50k-browser-production-resize-20261008.log`.
+Fixtures/PDFs are independently authored; no real screenshots, traces or video
+are produced by committed browser tests.
 
-Root manual CUA checks inspected desktop and 390x844 mobile list/detail states;
-mobile viewport override was reset. Eight major text/background pairs had
-calculated contrast ratios of at least 5.17:1. This is a limited check, not a
-complete accessibility or Impeccable audit.
+## Runtime and visual verification
 
-Independent read-only calculation probe:
-`/tmp/p50k-review-independent-audit.py`, output
-`/tmp/p50k-app-independent-audit-final.json`. Actual HTTP probe:
-`/tmp/p50k-app-real-api-probe.py`, output
-`/tmp/p50k-app-real-api-probe-final.json`. These local scripts read the selected
-private archive only and were not committed.
+The combined launcher runs the explicit sealed bundle in production mode, on
+`127.0.0.1:3060` and `127.0.0.1:8767` only. Both HTTP probes returned 200 with the
+same bundle. `--mode production --check` returned 0. Startup creates no data,
+performs no calibration/download/migration and installs no dependencies.
 
-The final actual HTTP run verified all 100 list/detail records and source
-references against the sealed bundle, summary/health identity, `no-store`, an
-original PDF byte hash and the frontend's same-origin API proxy. It completed in
-22.996s. These are live local API probes, not browser coverage of a real-data UI.
-The documented `--check` returned exit 0 and the combined launcher started both
-services; `ss` confirmed only `127.0.0.1:3060` and `127.0.0.1:8767` listeners.
+The direct launcher also checks generated PDF.js assets. The locked npm install
+prepares them via postinstall; explicit `prepare:pdfjs` is available if scripts
+were disabled. An actual missing-assets probe was refused with exit 1; postinstall
+recreated all 202 asset files byte-identically, then the same check returned 0.
+Probe record: `/tmp/p50k-pdfjs-prerequisite-probe.json`.
+A scan of 277 production/PDF asset files found no actual fund names, private
+bundle ID or source hashes: `/tmp/p50k-frontend-final-asset-audit.json`.
 
-A launcher restart check initially mistook a closed connection's `TIME_WAIT`
-for an occupied port. Its probe now uses `SO_REUSEADDR`; integration tests
-reproduce the original false positive and verify that an active listener is
-still rejected without interruption. Generated Next.js `next-env.d.ts` is
-ignored because dev/build commands rewrite its type paths; its local generated
-file is retained.
+Manual CUA verification used actual private list/detail data, including full,
+missing and stale cases. The actual three-page KAP PDF rendered visibly in the
+in-app browser; page change, zoom, Escape and focus restoration worked. Native
+PDF iframe support was blank in that browser, so local PDF.js rendering replaced
+it. After mounting the actual chart on desktop, the 390x844 view had a 375-pixel
+body and 339-pixel chart; its rendered PDF dialog was 358 pixels wide. Escape
+closed the dialog and restored focus to the source button. The grid's child
+minimum width now permits the chart to shrink during viewport changes.
+The earlier scaffold's eight
+major text/background pairs measured at least 5.17:1; this is a limited check,
+not a complete accessibility/Impeccable audit. Private screenshots stay in `/tmp`.
 
-## Data mode, limits and next work
+## Research limits and handoff
 
-Every research response uses `HISTORICAL_REPLAY`, `EXPLORATORY_ARCHIVE`, cutoff
+Responses retain `HISTORICAL_REPLAY`, `EXPLORATORY_ARCHIVE`, cutoff
 `2026-09-16T23:59:59+03:00`, `RECORDED_SOURCE_DATE_FILTER`, false point-in-time
 verification, unknown historical availability/rights, October 2026 universe
-selection and current-snapshot categories. Production decisions remain
-`ABSTAINED`; strict `ReplayCursor` is unchanged.
+selection and current-snapshot categories. Production decisions stay `ABSTAINED`;
+strict `ReplayCursor` is unchanged.
 
-Flow uses monthly July/August reports only. Missing/ambiguous publication,
-duplicate eligible reports and incompatible known units/actions disable it.
-Unknown scope/currency/action history remains explicitly conditional. Quantities
-retain report-currency units rather than an invented TRY label. No success rate,
-novel detector claim, safety verdict or buy/sell advice is established.
+Flow uses eligible monthly July/August reports only. Known incompatible units,
+actions or ambiguous reports disable it. Unknown currency/scope/action history
+stays conditional; displayed amounts retain report-currency units. No buy/sell
+advice or verified crisis-beforehand detection is established. Arbitrary-date
+selection still needs a separate selection/freshness protocol.
 
-No schema migration, original-data relocation, fresh data collection, public
-listener, authentication bypass, credential creation or outbound delivery was
-performed. The API/scaffold can run locally after explicit locked setup; a fresh
-Git clone lacks the private archive and cannot recreate real results unaided.
-
-Next required step: owner review of the concrete screen. Once approved, complete
-P3/P4 real-data list/detail, gapped Lightweight Charts and native manifest-backed
-PDF dialog; verify the actual 100-fund browser flow and finish P5. A date selector
-still requires a separate selection/freshness protocol.
+See [local startup](../../ops/local/README.md), [approved design](top100-fund-app-design.md)
+and [app plan](../../plans/2026-10-08-top100-fund-research-app.md).
+A fresh Git clone contains code and synthetic tests, but requires the owner's
+private archive or sealed bundle for actual results.

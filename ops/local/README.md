@@ -10,6 +10,11 @@ cd frontend
 npm ci
 ```
 
+The locked install prepares the local PDF.js worker, fonts and decoders.
+The direct launcher verifies these assets before starting either app process.
+If install scripts were disabled, explicitly run `npm run prepare:pdfjs` from
+`frontend/`. Asset preparation copies installed package files without downloads.
+
 Select the **exact** existing sealed bundle directory. Raw data is private and
 absent from Git. The launcher refuses missing or corrupt bundles, changed
 originals, changed PDF copies, occupied ports and uninstalled dependencies.

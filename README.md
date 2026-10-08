@@ -9,8 +9,8 @@ Investment intelligence for Turkish retail investors. When something notable hap
 ## Status
 
 The repository includes immutable top-100 archive bundles, a private read-only
-research API and a synthetic Turkish UI scaffold. Concrete owner design review
-is pending before real-data UI integration. The API requires the owner's local
+research API and a Turkish app for the selected 100 funds. The owner approved
+the list/detail design on 2026-10-08. The app requires the owner's local
 raw archive. The frozen registry's
 284 requirement statuses remain `NOT_IMPLEMENTED`; this prototype provides
 partial research coverage rather than production acceptance. No fraud accuracy,
@@ -19,7 +19,7 @@ historical alert validity or customer validation has been established.
 ## Local fund-research app
 
 The first view is fixed at `2026-09-16T23:59:59+03:00` (Europe/Istanbul).
-The bundle and API keep all 100 selected funds, separate D1 peer-return context from the
+The app keeps all 100 selected funds, separates D1 peer-return context from the
 July-to-August estimated-flow screen, and displays missing/stale evidence.
 This is `HISTORICAL_REPLAY` / `EXPLORATORY_ARCHIVE` research with unknown rights
 and historical source-version availability. Production decisions stay
@@ -31,6 +31,9 @@ Install the locked dependencies explicitly, from the repository root:
 uv sync --locked --extra api --extra api-test --extra research --python /home/safa/miniforge3/bin/python3
 npm ci --prefix frontend
 ```
+
+The frontend install prepares locally served PDF.js assets from the pinned
+package. The launcher checks their presence; the viewer needs no CDN connection.
 
 A fresh Git clone has no private data. The inputs are the selected codes in
 `research/events/2026-09-17-spk-liquidations/top100_funds.txt`, their
@@ -59,13 +62,16 @@ Open `http://127.0.0.1:3060`. The separate API listens on
 `http://127.0.0.1:8767/research/v1/health`. Both processes bind to loopback;
 Ctrl+C stops the processes started by the launcher. Startup performs no data
 collection, detector calibration, dependency installation or database migration.
-The current UI routes lead to the explicitly labelled `/preview` scaffold,
-which uses authored synthetic design data. Real fund-list/detail screens,
-interactive charts and PDF-viewer integration await concrete design approval.
+The main route shows the actual sealed bundle. Search and category/finding
+filters persist when opening a fund and returning to the list. Fund detail
+shows separate calculations, a common-baseline chart with explicit gaps,
+recorded publication dates and original manifest-backed PDFs.
+The separate `/preview` route uses explicitly labelled synthetic design data.
 
 See [local launcher options](ops/local/README.md), the
-[bounded protocol](research/events/2026-09-17-spk-liquidations/fund_review_app/PROTOCOL.md)
-and the [app plan](plans/2026-10-08-top100-fund-research-app.md).
+[bounded protocol](research/events/2026-09-17-spk-liquidations/fund_review_app/PROTOCOL.md),
+the [app plan](plans/2026-10-08-top100-fund-research-app.md) and
+[executed verification](docs/notes/top100-fund-app-completion.md).
 
 ## Layout
 
