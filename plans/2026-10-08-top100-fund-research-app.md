@@ -1,6 +1,8 @@
 # Top-100 fund research app: first prototype plan
 
-Status: **DRAFT — owner review; planning only, implementation not authorized.**
+Status: **Local implementation authorized by the owner on 2026-10-08.**
+P0 protocol and P1/P2 backend are implemented; the concrete synthetic screen
+review is pending before the full real-data UI. See the [screen review](../docs/notes/top100-fund-app-design.md).
 Prepared: 2026-10-08. Target repository: `/home/safa/Documents/project-50k`.
 
 ## Goal and first delivery
@@ -28,7 +30,9 @@ do not establish what was historically knowable before the liquidation order.
 - `services/p50k/detectors/fund_flow.py`: existing Decimal endpoint-change
   arithmetic; its production admission/baseline checks remain unchanged.
 - `raw/tefas/prices/`, `raw/kap/reports/`, `raw/kap/series/`: local inputs only.
-- No Project-50K API or frontend currently exists.
+- At planning time no Project-50K API or frontend existed. The local research
+  adapter and synthetic review scaffold now exist; integration status is recorded
+  in the completion note.
 
 Related requirements, with partial coverage only:
 
