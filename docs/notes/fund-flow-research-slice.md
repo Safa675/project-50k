@@ -96,7 +96,52 @@ PYTHONDONTWRITEBYTECODE=1 /home/safa/miniforge3/bin/python3 -m unittest test_det
 PYTHONDONTWRITEBYTECODE=1 /home/safa/miniforge3/bin/python3 -m unittest discover -s tests -v
 ```
 
-Final executed test, review and real-run results are recorded after verification.
+Executed on 2026-10-08 with exit status 0 for each command:
+
+- Repository suite: `Ran 196 tests in 1.616s`, `OK`.
+- Existing price-detector suite: `Ran 9 tests in 0.436s`, `OK`.
+- Frozen handoff reference suite: `Ran 88 tests in 0.004s`, `OK`.
+- Total: 293 passing tests, including 67 new detector and runner tests.
+
+The real runner command above was executed twice after code commit
+`ef2e9f8a23a6acf257040dc80c12e8cfbe30d393`. Both runs exited 0, returned
+fingerprint `82ba645c95d67010cee517e96f8c2071dbd13269129754f277353181e80753dd`,
+and reused the same byte-identical private result with its original metadata.
+
+Of 100 selected funds, 98 had source files and calculable monthly pairs. There
+were 1,099 pair attempts: 1,046 valid calculations and 53 noncomputable attempts
+(51 missing previous months and two missing-value pairs). The latest reported
+monthly pair crossed the fixed absolute 10% screen in 30 of 98 funds: six of
+eight known liquidation-list targets and 24 of 90 other selected funds. Across
+any month in the fixed window, 75 of 98 crossed: eight of eight targets and
+67 of 90 others. The broad crossing frequency does not establish selectivity,
+accuracy or a false-positive rate. All real production decisions remain
+`ABSTAINED`; these are private exploratory screen findings.
+
+Independent exact-fraction recalculation confirmed every valid ratio and
+threshold decision. A separate review verified all 98 source-file hashes,
+2,147 endpoint report references, summary counts and both rankings without a
+discrepancy. The 98 consumed KAP JSON files and two external database files
+matched their before-run hashes and sizes. All 3,906 original archive files
+also matched the migration audit; unopened price files were hashed only.
+All 216 frozen manifest entries matched, and the frozen price detector files
+matched `origin/main`. New Python modules compiled and `git diff --check` passed.
+
+The original six PDF reports for three selected high-crossing pairs were checked
+read-only. All 12 endpoint asset/NAV values matched the extracted inputs exactly;
+disclosure IDs matched the PDF filenames. Independent Decimal calculation
+reproduced all three residuals and rates exactly. This rules out a parser label
+or decimal-separator mismatch in these inputs, but does not establish accounting
+validity or misconduct. Dividend tables for securities held by a fund are not
+proof of distributions to fund holders; merger/unit-action status remains unknown.
+
+A private Turkish review canvas lives outside Git. Its strict TypeScript check
+and in-memory JSX smoke check exited 0; all 100 funds and 1,099 pair values and
+classifications matched the result. App rendering and visual layout were not
+verified. No runtime trading, external alerts, live feed or validated historical
+baseline policy was tested or enabled.
+The canvas smoke command was `/home/safa/.local/bin/node
+/tmp/p50k-fund-flow-canvas-smoke.cjs`; it used SDK stubs rather than a host render.
 
 ## Limits and next task
 
