@@ -4,8 +4,9 @@ Source: SPK Bulletin 2026/61 (17/09/2026), section C, which lists the funds by
 full name, numbered 1 to 131:
 https://spk.gov.tr/data/6aac56ff8f95db07100fd82d/2026-61.pdf
 
-The bulletin PDF sits in raw/ (gitignored). Names are matched to codes using
-the TEFAS fund list saved by the 2026-10-06 spike. Run from the repo root:
+The bulletin PDF sits in raw/spk/ at the repo root (gitignored). Names are
+matched to codes using the TEFAS fund list saved in raw/tefas/responses/ by
+the 2026-10-06 spike. Run from the repo root:
     python research/events/2026-09-17-spk-liquidations/extract.py
 Writes liquidated_funds.json next to this file.
 """
@@ -20,8 +21,10 @@ from pathlib import Path
 import pymupdf
 
 HERE = Path(__file__).resolve().parent
-PDF = HERE / "raw" / "spk-bulten-2026-61.pdf"
-FUND_LIST = HERE.parents[1] / "spikes" / "2026-10-06-tefas" / "raw" / "fonGetiriBazliBilgiGetir_YAT.body"
+REPO = HERE.parents[2]
+RAW = REPO / "raw"
+PDF = RAW / "spk" / "spk-bulten-2026-61.pdf"
+FUND_LIST = RAW / "tefas" / "responses" / "fonGetiriBazliBilgiGetir_YAT.body"
 OUT = HERE / "liquidated_funds.json"
 SOURCE_URL = "https://spk.gov.tr/data/6aac56ff8f95db07100fd82d/2026-61.pdf"
 EXPECTED = 131

@@ -10,6 +10,7 @@ coverage/
 .playwright/
 .DS_Store
 
-# Raw provider responses from spikes: data rights not reviewed.
+# Local provider data and legacy raw paths: data rights not reviewed.
+/raw/
 research/spikes/*/raw/
 research/events/*/raw/

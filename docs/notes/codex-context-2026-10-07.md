@@ -2,6 +2,12 @@
 
 Written by Claude Code at the owner's request so that Codex can continue the implementation. It describes the project as of 2026-10-07 22:59 (Europe/Istanbul). For the current phase, DEC-024 and this file win over the handoff where they conflict; where they are silent, `docs/handoff-v0.5/` applies.
 
+**Path maintenance on 2026-10-08:** local file locations and rebuild paths below now
+refer to the repository-root `raw/` layout. The original dated findings, pending
+decisions and test counts are preserved as a historical snapshot, not a new run.
+See [local raw data layout](local-raw-data-layout.md) for the relocation boundary,
+legacy aliases and verification record.
+
 ## 1. In one minute
 
 - **Product:** investment intelligence for Turkish retail investors. When something notable happens to a fund they follow, they see why it might matter, with its sources. No buy/sell advice, no claim to predict markets. Codename "Project 50K".
@@ -42,15 +48,20 @@ Not in the repo yet: `pyproject.toml` or any lockfile, CI, an API, a UI, a datab
 
 ## 4. Local data that is not in git
 
-Gitignored (`research/spikes/*/raw/`, `research/events/*/raw/`) or outside the repo. They exist only on the owner's laptop. **If you run in a fresh clone or a cloud sandbox, none of this is there**; section 10 says how to rebuild it.
+Gitignored under the repository-root `raw/`, or outside the repo. The old research
+paths remain ignored compatibility symlinks on the owner's laptop. **If you run in
+a fresh clone or a cloud sandbox, none of the local data or aliases is there**;
+section 10 says how to rebuild data. Relocation is not a backup.
 
 | Location | Content |
 |---|---|
 | `~/.local/share/project-50k/fund_snapshots.sqlite3` | One snapshot per listed fund (2,133 funds), taken 2026-10-06: size, units outstanding, investor count, category, raw TEFAS row. 2,000 are dated; 133 are "unknown" after the zero-price fix. A backup, `.before-zero-price-fix`, sits beside it. TEFAS keeps no history of these fields, so a day not collected is lost. |
-| `research/events/2026-09-17-spk-liquidations/raw/prices/{CODE}.json` | Five-year dated prices, `[date, price or null]`, 2,022 funds, retrieved 2026-10-07. One shared calendar of 1,258 business days, 2021-10-07 to 2026-10-07. |
-| `research/events/2026-09-17-spk-liquidations/raw/spk-bulten-2026-61.pdf` | The SPK bulletin with the liquidation list. |
-| `research/spikes/2026-10-06-tefas/raw/kap/{CODE}/*.pdf` | KAP monthly (and weekly) portfolio reports, last 365 days, 101 funds, about 1,340 PDFs, plus each fund's report list. |
-| `research/spikes/2026-10-06-tefas/raw/kap_series/{CODE}.json` | The parsed series (values) for those 101 funds. |
+| `raw/tefas/prices/{CODE}.json` | Five-year dated prices, `[date, price or null]`, 2,022 funds, retrieved 2026-10-07. One shared calendar of 1,258 business days, 2021-10-07 to 2026-10-07. |
+| `raw/spk/spk-bulten-2026-61.pdf` | The SPK bulletin with the liquidation list. |
+| `raw/kap/reports/{CODE}/*.pdf` | KAP monthly (and weekly) portfolio reports, last 365 days, 101 funds, about 1,340 PDFs, plus each fund's report list and acquisition context. |
+| `raw/kap/series/{CODE}.json` | The parsed series (values) for those 101 funds. |
+| `raw/tefas/responses/`, `raw/kap/reports/` | Original provider-spike responses. The former also retains the unchanged mixed-provider `requests.json`; KAP list/page responses and the standalone spike PDF are in the latter. |
+| `raw/tefas/logs/`, `raw/tefas/price-detectors/` | Existing download logs and detailed research outputs. Moving them does not run detectors or change prior results. |
 
 **Opened vs unopened.** The 100 funds in `top100_funds.txt` are *opened*: detectors have run on them and TP2/THF were studied in detail. The other 1,922 price files were downloaded and format-checked only (row counts, sorted dates). They are **unopened**. Computing anything on them is governed by section 7.
 
@@ -185,7 +196,7 @@ PYTHONPATH=services python -m unittest discover -s tests -t . -v
 
 ```sh
 PYTHONPATH=services python -m p50k.jobs.fund_snapshots          # about 2 hours for all 2,133 funds
-PYTHONPATH=services python -m p50k.jobs.price_history --codes THF TP2 --out research/events/2026-09-17-spk-liquidations/raw/prices --periyod 60 --pause 1.5
+PYTHONPATH=services python -m p50k.jobs.price_history --codes THF TP2 --out raw/tefas/prices --periyod 60 --pause 1.5
 python research/spikes/2026-10-06-tefas/kap_batch.py download --funds THF TP2 --pause 6 --log my_log.json   # about 4 minutes per fund
 PYTHONPATH=services:research/spikes/2026-10-06-tefas python research/spikes/2026-10-06-tefas/kap_series.py
 PYTHONPATH=services python research/events/2026-09-17-spk-liquidations/price_detectors/run.py   # about 10 seconds

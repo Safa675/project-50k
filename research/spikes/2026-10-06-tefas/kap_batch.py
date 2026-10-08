@@ -13,11 +13,12 @@ Run from the repo root, after spike.py:
 download: per fund, TEFAS profile -> KAP fund page -> KAP report list (365
 days) -> each report's disclosure page -> attachment, plus three years of TEFAS
 prices for the cross-check. Sequential, 1.5 s apart, certificate verification
-on. Files already in raw/ are reused. Stops after 3 consecutive failures.
+on. Files already in raw/kap/reports/ and raw/tefas/responses/ at the repo root
+are reused. Stops after 3 consecutive failures.
 
 check: parses every PDF with kap_pdf_check's line rebuilding and labels, and
 cross-checks month-end prices against TEFAS. Writes kap_batch_results.json with
-structure and checks only; values stay in the gitignored raw/ folder.
+structure and checks only; values stay under the repo's gitignored raw/ folder.
 """
 from __future__ import annotations
 
@@ -47,8 +48,10 @@ KAP = "https://kap.org.tr"
 REPORT_TYPE = "8aca490d502e34b801502e380044002b"  # Portföy Dağılım Raporu
 
 HERE = Path(__file__).resolve().parent
-RAW = HERE / "raw"
-KAP_DIR = RAW / "kap"
+REPO = HERE.parents[2]
+RAW = REPO / "raw"
+TEFAS_RESPONSES = RAW / "tefas" / "responses"
+KAP_DIR = RAW / "kap" / "reports"
 RESULTS = HERE / "kap_batch_results.json"
 
 
@@ -109,7 +112,7 @@ def download_fund(session: Session, code: str) -> dict:
     fund_dir.mkdir(parents=True, exist_ok=True)
     result: dict = {"fund": code, "reports": 0, "files": 0, "reused": 0, "problems": []}
 
-    spike_profile = RAW / f"fonProfilBilgiGetir_{code}.body"
+    spike_profile = TEFAS_RESPONSES / f"fonProfilBilgiGetir_{code}.body"
     profile = cached_or_fetch(
         spike_profile if spike_profile.exists() else fund_dir / "tefas_profile.json",
         lambda: session.request("POST", f"{TEFAS_API}/fonProfilBilgiGetir", json={"fonKodu": code, "dil": "TR"}))
@@ -120,7 +123,7 @@ def download_fund(session: Session, code: str) -> dict:
         result["problems"].append(f"no usable KAP link: {link!r}")
         return result
 
-    spike_page = RAW / f"kap_page_{code}.body"
+    spike_page = KAP_DIR / f"kap_page_{code}.body"
     page = cached_or_fetch(spike_page if spike_page.exists() else fund_dir / "kap_fund_page.html",
                            lambda: session.request("GET", link))
     match = re.search(r'objId[\\"\':]+([A-Fa-f0-9]{32})', page.decode("utf-8", "replace")) if page else None
@@ -128,14 +131,14 @@ def download_fund(session: Session, code: str) -> dict:
         result["problems"].append("KAP fund id not found")
         return result
 
-    spike_list = RAW / f"kap_portfolio_reports_{code}.body"
+    spike_list = KAP_DIR / f"kap_portfolio_reports_{code}.body"
     listing = cached_or_fetch(
         spike_list if spike_list.exists() else fund_dir / "kap_report_list.json",
         lambda: session.request("GET", f"{KAP}/tr/api/disclosure/filter/FILTERYFBF/{match.group(1)}/{REPORT_TYPE}/365"))
     reports = [item.get("disclosureBasic", {}) for item in json.loads(listing)] if listing else []
     result["reports"] = len(reports)
 
-    spike_history = RAW / f"fonFiyatBilgiGetir_{code}.body"
+    spike_history = TEFAS_RESPONSES / f"fonFiyatBilgiGetir_{code}.body"
     if not spike_history.exists():
         cached_or_fetch(fund_dir / "tefas_history_3y.json",
                         lambda: session.request("POST", f"{TEFAS_API}/fonFiyatBilgiGetir",
@@ -146,7 +149,7 @@ def download_fund(session: Session, code: str) -> dict:
         if any(fund_dir.glob(f"{period}_{index}*")):
             result["reused"] += 1
             continue
-        earlier = RAW / f"kap_portfoy_dagilim_{code}_{period}.pdf"
+        earlier = KAP_DIR / f"kap_portfoy_dagilim_{code}_{period}.pdf"
         if earlier.exists():
             shutil.copyfile(earlier, fund_dir / f"{period}_{index}.pdf")
             result["reused"] += 1
@@ -192,7 +195,7 @@ def download(funds: list[str], pause: float, log_name: str) -> None:
 
 
 def tefas_history(code: str) -> dict[str, Decimal]:
-    path = RAW / f"fonFiyatBilgiGetir_{code}.body"
+    path = TEFAS_RESPONSES / f"fonFiyatBilgiGetir_{code}.body"
     if not path.exists():
         path = KAP_DIR / code / "tefas_history_3y.json"
     if not path.exists():
@@ -263,7 +266,7 @@ def check_pdf(pdf: Path, period: str, history: dict[str, Decimal]) -> dict:
 
 
 def check(funds_to_check: list[str], out: Path) -> None:
-    returns = json.loads((RAW / "fonGetiriBazliBilgiGetir_YAT.body").read_text(encoding="utf-8"))["resultList"]
+    returns = json.loads((TEFAS_RESPONSES / "fonGetiriBazliBilgiGetir_YAT.body").read_text(encoding="utf-8"))["resultList"]
     meta = {row["fonKodu"]: row for row in returns}
     funds = []
     for code in funds_to_check:
@@ -296,7 +299,7 @@ def main() -> None:
     parser.add_argument("command", choices=("download", "check"))
     parser.add_argument("--funds", nargs="+", default=FUNDS, help="fund codes (default: the original ten)")
     parser.add_argument("--pause", type=float, default=PAUSE_SECONDS, help="seconds between requests")
-    parser.add_argument("--log", default="download_log.json", help="download: request log file name in raw/kap/")
+    parser.add_argument("--log", default="download_log.json", help="download: request log file name in raw/kap/reports/")
     parser.add_argument("--out", type=Path, default=RESULTS, help="check: results file")
     args = parser.parse_args()
     funds = [code.upper() for code in args.funds]

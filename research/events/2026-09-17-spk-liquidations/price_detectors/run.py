@@ -1,11 +1,11 @@
 """Run the pre-registered price-only detectors on the top 100 funds (PREREGISTRATION.md).
 
-Run from the repo root once the price files are in ../raw/prices/:
+Run from the repo root once the price files are in raw/tefas/prices/:
     PYTHONPATH=services python research/events/2026-09-17-spk-liquidations/price_detectors/run.py
 
 Categories come from the local snapshot database (fund_snapshots.default_db_path()).
 Writes results.json next to this file, which names targets only, and
-../raw/price_detectors/funds.json with every fund's detail (gitignored).
+raw/tefas/price-detectors/funds.json with every fund's detail (gitignored).
 """
 from __future__ import annotations
 
@@ -20,6 +20,8 @@ from pathlib import Path
 import numpy as np
 
 HERE = Path(__file__).resolve().parent
+REPO = HERE.parents[3]
+RAW = REPO / "raw"
 sys.path.insert(0, str(HERE))
 import detectors as det  # noqa: E402
 from p50k.jobs.fund_snapshots import connect, default_db_path  # noqa: E402
@@ -143,7 +145,7 @@ def main() -> None:
     listed = {f["code"] for f in json.loads((EVENT / "liquidated_funds.json").read_text(encoding="utf-8"))["funds"]}
     targets = [c for c in universe if c in listed]
     category = categories(universe)
-    series = {c: load(EVENT / "raw" / "prices" / f"{c}.json") for c in universe}
+    series = {c: load(RAW / "tefas" / "prices" / f"{c}.json") for c in universe}
     days = sorted({d for rows in series.values() for d, _ in rows})
     cal = [date.fromisoformat(d) for d in days]
     pos = {d: i for i, d in enumerate(days)}
@@ -213,7 +215,7 @@ def main() -> None:
         },
     }
     (HERE / "results.json").write_text(json.dumps(results, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    detail_dir = EVENT / "raw" / "price_detectors"
+    detail_dir = RAW / "tefas" / "price-detectors"
     detail_dir.mkdir(parents=True, exist_ok=True)
     (detail_dir / "funds.json").write_text(json.dumps(
         {c: {"category": category[c], "target": c in targets, "first_priced": first_priced[c].isoformat()
