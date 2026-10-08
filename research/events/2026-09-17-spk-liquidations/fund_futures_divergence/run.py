@@ -37,6 +37,8 @@ HISTORY_SHA = "3abb345aa0809664aa62003a566180864f024e316eb947b6507f5ec60a264c3a"
 ADJUSTMENTS_SHA = "2ca395125373a9c8311dc6496effd35679ad1acef1429ec91a50a46d6f9d88fa"
 RECEIPTS = {"official-history-receipt.json": "f0b752955e5c99f42ed32cd9b8de6710e1971a073052fe6b9a949352b8af6f86",
             "official-adjustments-receipt.json": "ea747f54db5b00ab6001874aa7b6313b0aeaa58a439bb8fc61a28b40e736f554"}
+SAMPLE_RECEIPTS = {"official-sample-request-receipt.json": "e97945b290ea12c861dc544fd16122319f9d22240b2729f9577f25f9d6c668fb",
+                   "official-adjustments-sample-receipt.json": "147d1f92942b467b606060ca1042c8b1027c3d996753bfb6b26e13b6a4baebf9"}
 ADMISSION_SHA = "ab3222bcb845c67a419d7c5bf37ff796dae489d355c4a8711c1d5118e06f9f4d"
 PERIODS = _utilities.EXPECTED_PERIODS
 DAILY_FIELDS = {"trade_date": "TARIH", "maturity_date": "VADE TARIHI",
@@ -168,6 +170,29 @@ def verify_admission(admission: dict[str, Any], sources: dict[str, Any]) -> None
                 record["point_in_time_admitted"] is not False or record["rights_status"] != "UNKNOWN" or
                 record["data_mode"] != "HISTORICAL_REPLAY"):
             raise ResearchInputError("official archive admission differs")
+
+
+def verify_request(request: dict[str, Any], inputs: dict[str, Any], samples: dict[str, Any]) -> dict[str, Any]:
+    """Preserve unrecorded redirect endpoints only for bound original samples."""
+    path = request["path"]; registered = inputs.get(path)
+    expected_url = f"https://www.borsaistanbul.com/data/vadeli/{Path(path).name}"
+    if not registered or registered["sha256"] != request["sha256"] or request["status"] != 200 or request["url"] != expected_url:
+        raise ResearchInputError("official acquisition receipt differs")
+    original = samples.get(path) if request.get("reused_existing_sample") is True else None
+    if request.get("reused_existing_sample") is True:
+        if original is None or any(request.get(key) != original["request"].get(key) for key in (
+                "path", "sha256", "url", "status", "observed_at", "bytes")):
+            raise ResearchInputError("reused sample lacks matching original HTTP receipt")
+    recorded = request.get("final_url")
+    original_final = original["request"].get("final_url") if original else None
+    if (recorded is not None and recorded != expected_url) or (original_final is not None and original_final != expected_url):
+        raise ResearchInputError("official response endpoint differs")
+    if recorded is None and original is None:
+        raise ResearchInputError("unbound request lacks a recorded response endpoint")
+    final_url = recorded if recorded is not None else original_final
+    return {"path": path, "request_url": request["url"], "final_response_url": final_url,
+            "final_response_url_status": "RECORDED" if final_url is not None else "UNKNOWN",
+            "original_sample_receipt": original["source_receipt_path"] if original else None}
 
 
 def specification(identity: str, raw: dict[str, str] | None) -> Any:
@@ -319,15 +344,20 @@ def run(root: Path = ROOT) -> Path:
     if set(adjustments["dates"]) != set(history["dates"]) or adjustments["no_returns_calculated"] is not True:
         raise ResearchInputError("adjustment dates/scope differ")
     changes = {date.fromisoformat(day): verify_adjustments(register(item["source_path"], item["source_sha256"]), item, codes) for day, item in adjustments["dates"].items()}
+    samples, request_provenance = {}, []
+    for name, digest in SAMPLE_RECEIPTS.items():
+        sample = json.loads(register(f"raw/bist/THF/futures-audit/{name}", digest).read_text())
+        for request in sample["requests"]:
+            normalized = dict(request)
+            normalized["path"] = str(canonical_path(root, request["path"]).relative_to(root))
+            if normalized["path"] in samples: raise ResearchInputError("duplicate original sample receipt")
+            samples[normalized["path"]] = {"source_receipt_path": name, "request": normalized}
     for name, digest in RECEIPTS.items():
         receipt = json.loads(register(f"raw/bist/THF/futures-audit/{name}", digest).read_text())
         if receipt["point_in_time_admitted"] is not False or receipt["rights_status"] != "UNKNOWN" or receipt.get("historical_first_publication_time") is not None:
             raise ResearchInputError("unqualified archive admission must remain explicit")
         for request in receipt["requests"]:
-            registered = inputs.get(request["path"])
-            expected_url = f"https://www.borsaistanbul.com/data/vadeli/{Path(request['path']).name}"
-            if not registered or registered["sha256"] != request["sha256"] or request["status"] != 200 or request["url"] != expected_url or request["final_url"] != expected_url:
-                raise ResearchInputError("official acquisition receipt differs")
+            request_provenance.append(verify_request(request, inputs, samples))
     source_admission = json.loads(register("raw/bist/THF/futures-audit/official-source-admission.json", ADMISSION_SHA).read_text())
     csv_sources = {name: item for name, item in inputs.items() if name.startswith("raw/bist/THF/futures-audit/") and name.endswith(".csv")}
     verify_admission(source_admission, csv_sources)
@@ -361,10 +391,13 @@ def run(root: Path = ROOT) -> Path:
     if code_gate(root) != code: raise ResearchInputError("runtime changed before calculation")
     windows = [evaluate_window(*arguments) for arguments in prepared]
     for item in tuple(inputs.values()): register(item["path"], item["sha256"])
-    manifest = {"code": code, "equity_result_sha256": EQUITY_SHA, "inputs": sorted(inputs.values(), key=lambda i: i["path"])}
+    manifest = {"code": code, "equity_result_sha256": EQUITY_SHA, "inputs": sorted(inputs.values(), key=lambda i: i["path"]), "official_request_provenance": request_provenance}
     bundle = hashlib.sha256(json.dumps(manifest, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
     out = canonical_path(root, f"raw/bist/THF/futures-divergence/{bundle}/results.json")
     result = {"schema_version": 1, "fund_code": "THF", "data_mode": "HISTORICAL_REPLAY", "diagnostic_mode": "CONDITIONAL_ARCHIVE_DIAGNOSTIC", "point_in_time_admitted": False, "rights_status": "UNKNOWN", "alarm_threshold": None, "fund_status": "ABSTAINED", "fraud_status": "ABSTAINED", "actual_futures_pnl_status": "UNKNOWN", "manifest": manifest, "runtime_dependencies": {"python": sys.version, "PyMuPDF": fitz.VersionBind}, "windows": windows, "limitations": ["Static reported quantities, stale report NAV, no actual trades or daily positions", "Exact official settlement prices; no inferred rollover, interest or reinvestment", "Historical archive publication/revision times and data rights unqualified", "Observed agreement or residual does not establish actual causal attribution"]}
+    unknown_endpoints = [record["path"] for record in request_provenance if record["final_response_url_status"] == "UNKNOWN"]
+    if unknown_endpoints:
+        result["limitations"].append(f"Final response URL UNKNOWN for {len(unknown_endpoints)} bound reused HTTP-200 samples: {', '.join(unknown_endpoints)}; recorded request URLs are official BIST")
     payload = (json.dumps(jsonable(result), ensure_ascii=False, sort_keys=True, indent=2) + "\n").encode()
     out.parent.mkdir(parents=True, exist_ok=True)
     if out.exists() and out.read_bytes() != payload: raise ResearchInputError("existing bundle bytes differ")

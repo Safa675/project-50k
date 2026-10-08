@@ -241,6 +241,37 @@ class RunnerTests(unittest.TestCase):
             with self.assertRaises(runner.ResearchInputError): runner.verify_admission(mutated, sources)
         with self.assertRaises(runner.ResearchInputError): runner.verify_admission(admission, {**sources, "missing.csv": {"sha256": "unknown"}})
 
+    def test_reused_sample_preserves_unknown_final_url_with_original_http_proof(self):
+        path = "raw/bist/THF/futures-audit/viopsz_20260805.csv"
+        request = {"path": path, "sha256": "synthetic_digest", "bytes": 123, "url": "https://www.borsaistanbul.com/data/vadeli/viopsz_20260805.csv", "status": 200, "observed_at": "2026-10-08T12:00:00+00:00", "reused_existing_sample": True}
+        inputs = {path: {"sha256": "synthetic_digest"}}
+        original = {"source_receipt_path": "official-adjustments-sample-receipt.json", "request": {key: value for key, value in request.items() if key != "reused_existing_sample"}}
+        actual = runner.verify_request(request, inputs, {path: original})
+        self.assertIsNone(actual["final_response_url"])
+        self.assertEqual(actual["final_response_url_status"], "UNKNOWN")
+        self.assertEqual(actual["original_sample_receipt"], "official-adjustments-sample-receipt.json")
+        self.assertNotIn("final_url", request)
+        original["request"]["final_url"] = request["url"]
+        known = runner.verify_request(request, inputs, {path: original})
+        self.assertEqual(known["final_response_url"], request["url"])
+        self.assertEqual(known["final_response_url_status"], "RECORDED")
+
+    def test_unbound_missing_endpoint_and_changed_original_receipt_are_rejected(self):
+        path = "raw/bist/THF/futures-audit/viopsz_20260805.csv"
+        request = {"path": path, "sha256": "synthetic_digest", "bytes": 123, "url": "https://www.borsaistanbul.com/data/vadeli/viopsz_20260805.csv", "status": 200, "observed_at": "2026-10-08T12:00:00+00:00", "reused_existing_sample": True}
+        inputs = {path: {"sha256": "synthetic_digest"}}
+        original = {"source_receipt_path": "official-adjustments-sample-receipt.json", "request": dict(request)}
+        with self.assertRaises(runner.ResearchInputError): runner.verify_request(request, inputs, {})
+        fresh = dict(request); fresh["reused_existing_sample"] = False
+        with self.assertRaises(runner.ResearchInputError): runner.verify_request(fresh, inputs, {path: original})
+        for key, changed in (("sha256", "changed"), ("observed_at", "2026-10-08T13:00:00+00:00"), ("status", 500), ("bytes", 124), ("url", "https://example.invalid/file"), ("final_url", "https://example.invalid/redirect")):
+            mutated = copy.deepcopy(original); mutated["request"][key] = changed
+            with self.assertRaises(runner.ResearchInputError): runner.verify_request(request, inputs, {path: mutated})
+        wrong_final = dict(request); wrong_final["final_url"] = "https://example.invalid/redirect"
+        with self.assertRaises(runner.ResearchInputError): runner.verify_request(wrong_final, inputs, {path: original})
+        complete = dict(request); complete["reused_existing_sample"] = False; complete["final_url"] = request["url"]
+        self.assertEqual(runner.verify_request(complete, inputs, {})["final_response_url_status"], "RECORDED")
+
     def test_adjustment_csv_duplicate_records_are_preserved(self):
         raw = metadata(); raw["TARIH"] = "2026-08-05"
         with tempfile.TemporaryDirectory() as folder:
