@@ -25,10 +25,12 @@ prompts in English. Do not modify the Bilun repository or copy its health data.
 - Locate the actual Project-50K checkout and inspect its branch, HEAD, remotes
   and working tree. Preserve existing user changes; no destructive reset.
 - The required baseline is commit
-  `81bdfe8bed2fd217d62dcfdd1d8452b2cf19f012` or a descendant, on the source branch
-  `codex/thf-holdings-divergence`. It contains the app plan and market brief.
-  Verify the commit and plan are present. If the branch has not been transferred
-  or pushed, report that prerequisite rather than recreate the missing history.
+  `81bdfe8bed2fd217d62dcfdd1d8452b2cf19f012` or a descendant on `main`.
+  It contains the app plan and market brief. The former source branch
+  `codex/thf-holdings-divergence` has been integrated and may be deleted.
+  Verify the commit's ancestry and the plan on the actual `main` checkout. If the
+  required history has not been fetched or transferred, report that prerequisite
+  rather than recreate it or require the retired source branch.
 - Work on a `codex/` implementation branch based on the verified baseline.
 - Read `AGENTS.md`, `docs/notes/codex-context-2026-10-07.md`, the app plan,
   `docs/handoff-v0.5/AGENTS.md`, `DESIGN.md`, the relevant requirements and anomaly
