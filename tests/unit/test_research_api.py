@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from copy import deepcopy
+from decimal import Inexact, InvalidOperation, Rounded, localcontext
 import hashlib
 from pathlib import Path
 import tempfile
@@ -363,6 +364,31 @@ class ResearchApiTests(unittest.TestCase):
         _, summary, funds, _ = validate_public_bundle(built)
         self.assertEqual(summary.total, 100)
         self.assertEqual(next(fund for fund in funds if fund.code == "Z00").eligible_crossings, 2)
+
+    def test_decimal_validation_preserves_caller_flags_for_rejected_exponents(self):
+        from p50k.api.models import financial_string
+        for trapped in (False, True):
+            with localcontext() as caller:
+                caller.clear_flags()
+                caller.flags[Inexact] = True
+                caller.traps[InvalidOperation] = trapped
+                before = caller.flags.copy()
+                with self.assertRaises(ValueError):
+                    financial_string("1e999999999999999999999999999999999")
+                self.assertEqual(caller.flags, before)
+                self.assertEqual(caller.traps[InvalidOperation], trapped)
+
+    def test_full_decimal_validation_ignores_precision_and_preserves_caller_flags(self):
+        with localcontext() as caller:
+            caller.prec = 2
+            caller.traps[Inexact] = True
+            caller.traps[Rounded] = True
+            caller.clear_flags()
+            caller.flags[Rounded] = True
+            before = caller.flags.copy()
+            validate_public_bundle(self.payload)
+            self.assertEqual(caller.prec, 2)
+            self.assertEqual(caller.flags, before)
 
 
 if __name__ == "__main__":

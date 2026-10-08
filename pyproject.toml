@@ -12,7 +12,7 @@ api = [
   "uvicorn>=0.30,<1",
 ]
 api-test = ["httpx2"]
-research = ["numpy==2.4.6"]
+research = ["numpy==2.4.6", "pymupdf==1.27.2.3"]
 
 [tool.uv]
 package = false

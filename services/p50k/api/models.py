@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from datetime import date, datetime
-from decimal import Decimal, InvalidOperation
+from decimal import Decimal, InvalidOperation, localcontext
 import re
 from typing import Annotated, Literal
 
@@ -17,8 +17,11 @@ def financial_string(value: str) -> str:
     if not re.fullmatch(r"[+-]?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?", value):
         raise ValueError("Financial quantities must be finite decimal strings")
     try:
-        if not Decimal(value).is_finite():
-            raise ValueError("Financial quantities must be finite decimal strings")
+        # A rejected exponent can signal InvalidOperation during construction.
+        # Keep parsing flags inside a local context even when caller traps differ.
+        with localcontext():
+            if not Decimal(value).is_finite():
+                raise ValueError("Financial quantities must be finite decimal strings")
     except InvalidOperation as exc:
         raise ValueError("Invalid decimal string") from exc
     return value
