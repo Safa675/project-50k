@@ -1,5 +1,11 @@
 # SPK liquidation order of 17 September 2026
 
+**Path maintenance on 2026-10-08:** local raw file locations below now refer to
+repository-root `raw/`. The dated case-study observations and existing results
+are preserved. This move performs no new detector evaluation or statistical
+analysis. Ignored legacy symlinks preserve old paths; see
+[local raw data layout](../../../docs/notes/local-raw-data-layout.md).
+
 The case this project is measured against: on 17/09/2026 SPK ordered 131 funds of seven portfolio management companies liquidated (decisions 57/1707 and 57/1708; list in Bulletin 2026/61, section C). SPK later put the number of unique affected investors at 455,758. Companies: Pardus (42 funds), Hedef (31), Atlas (16), Bulls (15), Pusula (12), A1 Capital (9) and Tera (6).
 
 Files here:
@@ -10,7 +16,8 @@ Files here:
 | `stage1_funds.txt` | The first stage's funds: the top ten by investor count plus TP2 |
 | `top100_funds.txt` | The 100 funds with the most investors (2026-10-06), in rank order |
 | `price_detectors/` | Pre-registered price-only detectors on the top 100: rules, code, results |
-| `raw/` | Gitignored: the bulletin PDF and downloaded TEFAS price files. Data rights for TEFAS and KAP have not been reviewed, so no real fund values are committed. |
+| Repository-root `raw/tefas/prices/`, `raw/spk/` | Gitignored: downloaded TEFAS price files and the bulletin PDF. Data rights for TEFAS and KAP have not been reviewed, so no real fund values are committed. |
+| Repository-root `raw/tefas/logs/`, `raw/tefas/price-detectors/` | Local download logs and existing detailed detector output, relocated unchanged. Committed detector rules and aggregate results stay in `price_detectors/`. |
 
 ## Where the 131 funds rank
 

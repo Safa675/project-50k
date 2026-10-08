@@ -4,6 +4,13 @@ Backlog: T04 (provider interfaces and spike reports). Gate: G03 (fund history). 
 
 Updated later the same day with a full read of borsapy's fund-related code and a check of one KAP monthly portfolio report. Both are described below.
 
+**Path maintenance on 2026-10-08:** references to local files and reproduction
+locations below use the canonical repository-root `raw/` layout. The provider
+findings and dated results remain the original research record. Files were
+relocated without changing raw bytes or embedded provenance; ignored legacy
+symlinks preserve the old paths. See
+[local raw data layout](../../../docs/notes/local-raw-data-layout.md).
+
 ## Short answer
 
 - **Only the unit price (NAV) is dated day by day.** TEFAS returns one row per business day for a rolling 5-year window. In the sample, TEFAS dates each price one business day after its valuation date: the KAP report's September month-end price equals TEFAS's 1 October row, and its August month-end price equals the 1 September row.
@@ -33,7 +40,7 @@ Units: prices in TRY per unit (both funds are TL funds), fund size in TRY, retur
 
 ## Field by field: KAP monthly portfolio report
 
-One report checked: TTE's "Portföy Dağılım Raporu" for September 2026, published 05.10.2026 13:00:53. Checks are in `kap_pdf_results.json`; field values stay in `raw/`.
+One report checked: TTE's "Portföy Dağılım Raporu" for September 2026, published 05.10.2026 13:00:53. Checks are in `kap_pdf_results.json`; the original PDF now lives in repository-root `raw/kap/reports/`.
 
 | Field (report label) | Section | Dated? | Verdict |
 |---|---|---|---|
@@ -54,7 +61,7 @@ Notes for a parser:
 
 ## KAP batch: ten funds from ten companies
 
-Owner-approved batch, `kap_batch.py`: a year of reports for ten funds covering nine fund types and ten management companies (TTE, AAL, ACC, ADE, AHU, BCO, AHV, DBA, YAK, AC1). Checks are in `kap_batch_results.json`; files stay in `raw/kap/`.
+Owner-approved batch, `kap_batch.py`: a year of reports for ten funds covering nine fund types and ten management companies (TTE, AAL, ACC, ADE, AHU, BCO, AHV, DBA, YAK, AC1). Checks are in `kap_batch_results.json`; files now live in repository-root `raw/kap/reports/`.
 
 - **KAP stopped answering partway through.** After 180 successful KAP requests in about 9 minutes, 1.5 s apart, KAP started closing connections without a response (`RemoteProtocolError`), first on file downloads, then on disclosure pages. This is consistent with rate limiting, though the cause isn't confirmed. The script stopped itself after three consecutive failures. 78 of about 123 reports were downloaded (90 files, 122 MB); BCO, AHV and AC1 are missing and AHU is partial. Resume later at a much slower pace.
 - **borsapy can't find half of these funds on KAP.** Its fund-id pattern matches only upper-case ids. ACC, AHU, BCO, AHV and AC1 have lower-case ids, so `Fund.get_holdings` would report them as not found. Our scripts now match both.
@@ -85,7 +92,7 @@ Same script at a slower pace (`--pause 6`), for THF, TP2, HLL, TKM, GTL, YLB, HP
 
 ## KAP reports: reading the headline fields (2026-10-07)
 
-`p50k.providers.kap_report.read_headline` finds total value, units outstanding, period-end price, previous price and the period change by keyword in a report's first section. `kap_series.py` runs it over every downloaded PDF and writes monthly series to the gitignored `raw/kap_series/`; `kap_series_coverage.json` holds structure and checks only. Result on the 101 funds read (19 companies, 1,255 reports):
+`p50k.providers.kap_report.read_headline` finds total value, units outstanding, period-end price, previous price and the period change by keyword in a report's first section. `kap_series.py` runs it over every downloaded PDF and writes monthly series to the gitignored, repository-root `raw/kap/series/`; `kap_series_coverage.json` holds structure and checks only. Result on the 101 funds read (19 companies, 1,255 reports):
 
 - **1,246 of 1,255 reports parse completely.** Five are image-only PDFs with no text layer (they would need OCR). Four are KAP disclosures that carry only trade-section attachments and no headline section.
 - **units × price equals total value** within 0.01% in 1,123 of 1,246 reports and within 1% in 1,241. Of the 123 reports above 0.01%, 120 are Ziraat's (a systematic 0.1% to 0.4%), so for Ziraat the total value and price are safer than the unit count.
@@ -147,7 +154,13 @@ The first version of the snapshot collector (`p50k.jobs.fund_snapshots`) treated
 
 **Request shape and rate policy:** `spike.py` made one run of 13 requests, 1.5 s apart, no retries, certificate verification on, borsapy's default browser User-Agent with a JSON content type. An earlier run at 19:07 made 10 requests using AAK; it was discarded because AAK no longer exists. borsapy's parsing was run on the same raw responses with its network access blocked, so the comparison is exact. Three more KAP requests were made by hand, with the owner's approval for the PDF: the September report's disclosure page, its PDF (4.35 MB) and the 1,825-day list. That makes 26 requests for the day.
 
-**Sample response path + hash:** `raw/` next to this file, gitignored and not sanitized. Every `spike.py` request's URL, payload, status, size and SHA-256 is in `results.json` under `requests`. The PDF's size and SHA-256 are in `kap_pdf_results.json`.
+**Sample response path + hash:** responses originally lived in `raw/` next to this
+file. Their canonical locations after the 2026-10-08 relocation are
+repository-root `raw/tefas/responses/` and `raw/kap/reports/`, gitignored and not
+sanitized. Every `spike.py` request's URL, payload, status, size and SHA-256 is in
+`results.json` under `requests`. The PDF's size and SHA-256 are in
+`kap_pdf_results.json`. Historical path strings in those records and in the moved
+mixed-provider `requests.json` are preserved; local legacy aliases resolve them.
 
 **Actual observed fields, units, publication/availability times:** See the field tables. Today's price (2026-10-06) was already available at 19:09 Istanbul time on the same day; that is one observation, not an established publication schedule. The September KAP report was published on 5 October. KAP `publishDate` has the form `DD.MM.YYYY HH:MM:SS` with no offset; reading it as Europe/Istanbul is an assumption to verify.
 
@@ -199,7 +212,10 @@ From the repo root, with borsapy 0.10.1 and httpx installed:
 python research/spikes/2026-10-06-tefas/spike.py
 ```
 
-It makes about 13 requests and rewrites `results.json` and `raw/`. Live values change daily, so results will differ in values but should not differ in structure.
+It makes about 13 requests and rewrites `results.json` and local responses under
+repository-root `raw/tefas/responses/` and `raw/kap/reports/`. Live values change
+daily, so results will differ in values but should not differ in structure. This
+network reproduction command was not executed for the file relocation.
 
 Then:
 
@@ -207,7 +223,9 @@ Then:
 python research/spikes/2026-10-06-tefas/kap_pdf_check.py
 ```
 
-It checks the newest KAP report in `spike.py`'s saved list. It reads the PDF from `raw/` if present, otherwise downloads it (2 requests). It needs pymupdf, which borsapy installs, and writes `kap_pdf_results.json`.
+It checks the newest KAP report in `spike.py`'s saved list. It reads the PDF from
+repository-root `raw/kap/reports/` if present, otherwise downloads it (2 requests).
+It needs pymupdf, which borsapy installs, and writes `kap_pdf_results.json`.
 
 The ten-fund batch:
 
@@ -216,4 +234,7 @@ python research/spikes/2026-10-06-tefas/kap_batch.py download
 python research/spikes/2026-10-06-tefas/kap_batch.py check
 ```
 
-`download` reuses files already in `raw/kap/` and stops after three consecutive failures; mind KAP's throttling. `check` is offline and writes `kap_batch_results.json`.
+`download` reuses files already in repository-root `raw/kap/reports/` and stops
+after three consecutive failures; mind KAP's throttling. `check` is offline and
+writes `kap_batch_results.json`. Neither command was executed for the relocation;
+existing research result files are unchanged.

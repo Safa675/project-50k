@@ -13,7 +13,7 @@ Your first reply should verify the repo state (run the tests listed below) and p
 
 ## Rules that are easy to break
 
-- **No real TEFAS or KAP values in git.** Their data rights are not reviewed. Raw data lives in gitignored `raw/` folders and in `~/.local/share/project-50k/`. Tests use synthetic values only. Before committing, check staged files for real values.
+- **No real TEFAS or KAP values in git.** Their data rights are not reviewed. Raw files live under the repository-root, gitignored `raw/`; SQLite databases stay in `~/.local/share/project-50k/`. Legacy research paths are ignored compatibility symlinks. See [local data layout](docs/notes/local-raw-data-layout.md). Tests use synthetic values only. Before committing, check staged files for real values.
 - **Missing stays missing.** TEFAS writes `0` for "no price": treat it as `None`. Never fill gaps with zeros or invent dated history. Fund NAV is daily, published-cadence data; no intraday candles.
 - **Point in time.** Use a value only from the moment it was published: a TEFAS row dated D from about 11:05 on D, a KAP report from its publish time. Add a look-ahead test to any detector or replay code.
 - **Do not tune detectors on the funds you evaluate them on.** The owner's development/test split is still undecided. Until it is, **do not compute detector output, thresholds or any other statistic on the 1,922 downloaded price files outside `research/events/2026-09-17-spk-liquidations/top100_funds.txt`.** Read section 7 of the context file.
@@ -41,6 +41,7 @@ PYTHONPATH=services python -m unittest discover -s tests -t . -v                
 | `tests/unit/` | Unit tests for `services/p50k/` |
 | `research/spikes/` | Provider spikes with the field-by-field data report |
 | `research/events/2026-09-17-spk-liquidations/` | The SPK liquidation case study: notes, fund lists, pre-registered price detectors and results |
+| `raw/` | Local-only, gitignored data: `tefas/prices`, `tefas/responses`, `tefas/logs`, `tefas/price-detectors`, `kap/reports`, `kap/series`, `spk`. Absent from a fresh clone |
 | `docs/decisions/`, `docs/notes/` | Owner decisions and working notes. Record new decisions here |
 | `ops/systemd/` | Daily snapshot timer files (not installed) |
 | `docs/handoff-v0.5/` | Frozen v0.5 handoff: requirements, anomaly catalog, contracts, reference harness |

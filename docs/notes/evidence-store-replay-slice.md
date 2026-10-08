@@ -4,6 +4,12 @@ Approved by the owner in chat on 2026-10-08, after PR #3 was merged.
 Scope: DEC-024, Turkish investment funds only. This is a local data foundation;
 the application, detector service, public API and external delivery remain later work.
 
+**Path maintenance on 2026-10-08:** the import example below uses the canonical
+repository-root `raw/` layout. This relocation does not change slice-A time
+policies, source bytes, existing bundle locators or the recorded test outcomes.
+Ignored legacy symlinks preserve old local paths; databases remain outside the
+repository. See [local raw data layout](local-raw-data-layout.md).
+
 ## Requirement coverage
 
 - **FR-018:** original source timestamps are retained separately from normalized,
@@ -105,10 +111,10 @@ Example from the repository root (local input paths only; no data values):
 ```sh
 PYTHONPATH=services python -m p50k.jobs.import_evidence \
   --funds THF TP2 \
-  --price-file research/events/2026-09-17-spk-liquidations/raw/prices/THF.json \
-  --price-file research/events/2026-09-17-spk-liquidations/raw/prices/TP2.json \
-  --kap-file research/spikes/2026-10-06-tefas/raw/kap_series/THF.json \
-  --kap-file research/spikes/2026-10-06-tefas/raw/kap_series/TP2.json \
+  --price-file raw/tefas/prices/THF.json \
+  --price-file raw/tefas/prices/TP2.json \
+  --kap-file raw/kap/series/THF.json \
+  --kap-file raw/kap/series/TP2.json \
   --out ~/.local/share/project-50k/evidence.sqlite3
 ```
 

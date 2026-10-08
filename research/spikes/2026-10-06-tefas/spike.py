@@ -13,9 +13,9 @@ Deliberately not run:
 Run from the repo root:
     python research/spikes/2026-10-06-tefas/spike.py
 
-Raw responses go to raw/ next to this file, which is gitignored because TEFAS
-and KAP data rights have not been reviewed. results.json holds structure,
-dates, counts, consistency checks and hashes only.
+Raw responses go to the repo's raw/tefas/responses/ and raw/kap/reports/, which
+are gitignored because TEFAS and KAP data rights have not been reviewed.
+results.json holds structure, dates, counts, consistency checks and hashes only.
 """
 from __future__ import annotations
 
@@ -52,7 +52,10 @@ PAUSE_SECONDS = 1.5
 ISTANBUL = ZoneInfo("Europe/Istanbul")
 
 HERE = Path(__file__).resolve().parent
-RAW = HERE / "raw"
+REPO = HERE.parents[2]
+RAW = REPO / "raw"
+TEFAS_RESPONSES = RAW / "tefas" / "responses"
+KAP_DIR = RAW / "kap" / "reports"
 RESULTS = HERE / "results.json"
 
 DATE_KEY = re.compile(r"tarih|date|zaman|saat|donem|time", re.IGNORECASE)
@@ -114,7 +117,7 @@ def tls_checks() -> dict[str, Any]:
 
 
 class Fetcher:
-    """Records every request; raw bodies are written to raw/."""
+    """Records every request; raw bodies are written under the repo's raw/."""
 
     def __init__(self, client: httpx.Client) -> None:
         self.client = client
@@ -135,7 +138,8 @@ class Fetcher:
             record["error"] = f"{type(error).__name__}: {error}"
         else:
             body = response.content
-            path = RAW / f"{label}.body"
+            directory = KAP_DIR if label.startswith("kap_") else TEFAS_RESPONSES
+            path = directory / f"{label}.body"
             path.write_bytes(body)
             record.update({
                 "status": response.status_code,
@@ -143,7 +147,7 @@ class Fetcher:
                 "server_date_header": response.headers.get("date"),
                 "bytes": len(body),
                 "sha256": hashlib.sha256(body).hexdigest(),
-                "raw_file": f"raw/{path.name}",
+                "raw_file": path.relative_to(REPO).as_posix(),
             })
         self.requests.append(record)
         time.sleep(PAUSE_SECONDS)
@@ -356,7 +360,8 @@ def kap_probe(fetcher: Fetcher, code: str, kap_link: Any) -> dict[str, Any]:
 
 
 def main() -> None:
-    RAW.mkdir(exist_ok=True)
+    TEFAS_RESPONSES.mkdir(parents=True, exist_ok=True)
+    KAP_DIR.mkdir(parents=True, exist_ok=True)
     run_utc = datetime.now(timezone.utc)
     results: dict[str, Any] = {
         "run_at_utc": run_utc.isoformat(),
@@ -486,7 +491,7 @@ def main() -> None:
     results["requests"] = fetcher.requests
     client.close()
     RESULTS.write_text(json.dumps(results, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    (RAW / "requests.json").write_text(json.dumps(fetcher.requests, indent=2, ensure_ascii=False) + "\n",
+    (TEFAS_RESPONSES / "requests.json").write_text(json.dumps(fetcher.requests, indent=2, ensure_ascii=False) + "\n",
                                        encoding="utf-8")
     print(f"{len(fetcher.requests)} requests; results written to {RESULTS.relative_to(HERE.parents[2])}")
 

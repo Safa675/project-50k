@@ -5,13 +5,13 @@ sections I, II and IV, and cross-checks the month-end prices against the dated
 TEFAS price history that spike.py saved. No LLM is involved: the PDF has an
 extractable text layer.
 
-The PDF is downloaded only if it is not already in raw/ (two requests: the
-disclosure page, then the file). Run from the repo root:
+The PDF is downloaded only if it is not already in raw/kap/reports/ at the
+repo root (two requests: the disclosure page, then the file). Run from the repo root:
     python research/spikes/2026-10-06-tefas/kap_pdf_check.py
 
 Writes kap_pdf_results.json with which fields exist, their number formats and
-the date checks. Field values stay in raw/, which is gitignored because KAP
-data rights have not been reviewed.
+the date checks. Field values stay under the repo's raw/, which is gitignored
+because KAP data rights have not been reviewed.
 """
 from __future__ import annotations
 
@@ -27,9 +27,11 @@ import pymupdf
 
 FUND = "TTE"
 HERE = Path(__file__).resolve().parent
-RAW = HERE / "raw"
-REPORT_LIST = RAW / f"kap_portfolio_reports_{FUND}.body"  # saved by spike.py
-TEFAS_HISTORY = RAW / f"fonFiyatBilgiGetir_{FUND}.body"  # saved by spike.py
+REPO = HERE.parents[2]
+RAW = REPO / "raw"
+KAP_DIR = RAW / "kap" / "reports"
+REPORT_LIST = KAP_DIR / f"kap_portfolio_reports_{FUND}.body"  # saved by spike.py
+TEFAS_HISTORY = RAW / "tefas" / "responses" / f"fonFiyatBilgiGetir_{FUND}.body"  # saved by spike.py
 RESULTS = HERE / "kap_pdf_results.json"
 
 LABELS = {
@@ -115,7 +117,7 @@ def download(disclosure_index: int, target: Path) -> list[dict]:
 def main() -> None:
     latest = json.loads(REPORT_LIST.read_text(encoding="utf-8"))[0]["disclosureBasic"]
     year, month = latest["year"], latest["donem"]
-    pdf_path = RAW / f"kap_portfoy_dagilim_{FUND}_{year}-{month:02d}.pdf"
+    pdf_path = KAP_DIR / f"kap_portfoy_dagilim_{FUND}_{year}-{month:02d}.pdf"
     requests = [] if pdf_path.exists() else download(latest["disclosureIndex"], pdf_path)
 
     document = pymupdf.open(pdf_path)
@@ -180,9 +182,9 @@ def main() -> None:
         "fund": FUND,
         "report": {"disclosure_index": latest["disclosureIndex"], "year": year, "month": month,
                    "publish_date_raw": latest["publishDate"], "month_end": month_end.isoformat()},
-        "requests": requests or "none: used the PDF already in raw/",
+        "requests": requests or "none: used the PDF already in raw/kap/reports/",
         "pdf": {
-            "file": f"raw/{pdf_path.name}",
+            "file": pdf_path.relative_to(REPO).as_posix(),
             "bytes": pdf_path.stat().st_size,
             "sha256": hashlib.sha256(pdf_path.read_bytes()).hexdigest(),
             "pages": document.page_count,

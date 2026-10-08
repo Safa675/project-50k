@@ -3,9 +3,9 @@
 Run from the repo root:
     PYTHONPATH=services python research/spikes/2026-10-06-tefas/kap_series.py [--funds A B ...]
 
-Reads raw/kap/{code}/{period}_{index}[_n].pdf and each fund's report list (for publish
-times). When 5-year TEFAS prices are in the liquidation case folder it also checks the
-month-end prices against them. Writes raw/kap_series/{code}.json with the values
+Reads raw/kap/reports/{code}/{period}_{index}[_n].pdf and each fund's report list
+(for publish times). When 5-year TEFAS prices are in raw/tefas/prices/ it also
+checks the month-end prices against them. Writes raw/kap/series/{code}.json with the values
 (gitignored) and kap_series_coverage.json with structure and checks only.
 """
 from __future__ import annotations
@@ -26,11 +26,12 @@ from kap_pdf_check import page_lines
 from p50k.providers.kap_report import read_headline
 
 HERE = Path(__file__).resolve().parent
-RAW = HERE / "raw"
-KAP_DIR = RAW / "kap"
-SERIES_DIR = RAW / "kap_series"
+REPO = HERE.parents[2]
+RAW = REPO / "raw"
+KAP_DIR = RAW / "kap" / "reports"
+SERIES_DIR = RAW / "kap" / "series"
 COVERAGE = HERE / "kap_series_coverage.json"
-PRICES = HERE.parents[1] / "events" / "2026-09-17-spk-liquidations" / "raw" / "prices"
+PRICES = RAW / "tefas" / "prices"
 ISTANBUL = timezone(timedelta(hours=3))
 HEADER_PAGES = 3
 TOLERANCE = Decimal("0.0001")  # units x price against total value, relative
@@ -40,7 +41,7 @@ REQUIRED = ("total_value", "units_outstanding", "period_end_price", "previous_pe
 
 
 def report_list(code: str) -> dict[int, dict]:
-    for path in (KAP_DIR / code / "kap_report_list.json", RAW / f"kap_portfolio_reports_{code}.body"):
+    for path in (KAP_DIR / code / "kap_report_list.json", KAP_DIR / f"kap_portfolio_reports_{code}.body"):
         if path.exists():
             return {item["disclosureBasic"]["disclosureIndex"]: item["disclosureBasic"]
                     for item in json.loads(path.read_text(encoding="utf-8"))}
@@ -145,7 +146,7 @@ def build_fund(code: str) -> tuple[list[dict], dict]:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--funds", nargs="+", help="fund codes (default: every folder in raw/kap/ with PDFs)")
+    parser.add_argument("--funds", nargs="+", help="fund codes (default: every folder in raw/kap/reports/ with PDFs)")
     args = parser.parse_args()
     codes = [c.upper() for c in args.funds] if args.funds else sorted(
         d.name for d in KAP_DIR.iterdir() if d.is_dir() and any(d.glob("*.pdf")))
