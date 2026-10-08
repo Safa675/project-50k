@@ -401,6 +401,28 @@ class FundAllocationResearchTest(unittest.TestCase):
         self.assertEqual(second, first)
         self.assertEqual(destination.read_bytes(), original)
 
+    def test_idempotent_run_preserves_fractional_pdf_coordinates(self):
+        self.write_fund()
+
+        def fractional_geometry(raw):
+            cells, metadata = self.extract_fixture(raw)
+            return [TextCell(cell.page, float(cell.x0) + 0.125, float(cell.y0) + 0.125,
+                             float(cell.x1) + 0.125, float(cell.y1) + 0.125, cell.text)
+                    for cell in cells], metadata
+
+        with patch.object(research, "_extract_rows", side_effect=fractional_geometry):
+            first = self.run_research(codes=["THF"], run_at="2026-10-08T00:00:00+00:00")
+            path = Path(first["metadata"]["output_path"])
+            original = path.read_bytes()
+            second = self.run_research(codes=["THF"], run_at="2026-10-09T00:00:00+00:00")
+
+        self.assertEqual(second, first)
+        self.assertEqual(path.read_bytes(), original)
+        self.assertEqual(second["metadata"]["run_at_utc"], "2026-10-08T00:00:00+00:00")
+        coordinates = second["funds"][0]["reports"][0]["attachments"][0]["source_rows"][0]["rect"]
+        self.assertTrue(all(isinstance(value, float) for value in coordinates))
+        self.assertTrue(all(value % 1 == 0.125 for value in coordinates))
+
     def test_foreign_output_and_unrelated_directory_content_refused(self):
         self.write_fund()
         result = self.run_research(codes=["THF"])

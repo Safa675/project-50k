@@ -503,7 +503,10 @@ def _write_results(destination: Path, payload: dict) -> dict:
         raise ValueError("run directory contains unrelated files")
     if destination.exists():
         try:
-            old = json.loads(destination.read_bytes(), parse_float=Decimal)
+            # Financial Decimals are already stored as exact strings. Preserve
+            # JSON numbers for PDF geometry so canonical round trips compare
+            # identically rather than converting coordinates to strings.
+            old = json.loads(destination.read_bytes())
         except (ValueError, UnicodeDecodeError) as exc:
             raise ValueError("refusing to overwrite unrelated output") from exc
         prior = {key: value for key, value in old.items() if key != "metadata"} if isinstance(old, dict) else None
