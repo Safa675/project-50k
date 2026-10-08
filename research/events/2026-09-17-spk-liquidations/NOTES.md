@@ -54,6 +54,16 @@ What the prices show for the two liquidating funds in this stage, described with
 4. Count false alarms: the same detectors on the funds that were not liquidated.
 5. These are four companies and eight funds that move together: a case study, not statistical evidence. A fund with no visible warning in public data is a finding too.
 
+## KAP report cadence: a hypothesis that did not hold
+
+With the first 54 funds read, three liquidated funds (TLY and DOH of Tera, DFI of Atlas) looked like the only funds to switch from monthly to weekly KAP reports (KAP's period code `AB` to `HB`), with the first weekly report on 2 September. With all 101 funds read the picture is different:
+
+- All 15 Serbest Fon (hedge-type) funds in the set file weekly reports, and none of the other 86 funds do. Three of the 15 were liquidated; 12 were not.
+- All 15 stopped monthly reporting after July and published their first weekly report between 2 and 4 September.
+- The switch therefore applies to Serbest Funds in general (the cause is not known; it may be a rule), and says nothing about liquidation. The idea is dropped and will not be part of any test.
+
+The first impression came from a partial sample that held few Serbest Funds. Catching this on development data, before it reached a sealed test, is what the development/test split is for.
+
 ## Top 100: price-only detectors
 
 Five years of prices for all 100 funds were downloaded on 2026-10-07. Five price-only detectors were pre-registered and run once; see `price_detectors/RESULTS.md`.

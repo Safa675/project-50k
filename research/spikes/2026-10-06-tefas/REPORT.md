@@ -83,6 +83,16 @@ Same script at a slower pace (`--pause 6`), for THF, TP2, HLL, TKM, GTL, YLB, HP
   - Yapı Kredi (YLB), as before.
 - **Both cash-flow fields were zero in 34 of the 59 reports that have them,** including 8 of TP2's 11, while TP2's units outstanding rose more than fourfold. Month-to-month units outstanding is the usable flow measure; the cash-flow fields are not.
 
+## KAP reports: reading the headline fields (2026-10-07)
+
+`p50k.providers.kap_report.read_headline` finds total value, units outstanding, period-end price, previous price and the period change by keyword in a report's first section. `kap_series.py` runs it over every downloaded PDF and writes monthly series to the gitignored `raw/kap_series/`; `kap_series_coverage.json` holds structure and checks only. Result on the 101 funds read (19 companies, 1,255 reports):
+
+- **1,246 of 1,255 reports parse completely.** Five are image-only PDFs with no text layer (they would need OCR). Four are KAP disclosures that carry only trade-section attachments and no headline section.
+- **units × price equals total value** within 0.01% in 1,123 of 1,246 reports and within 1% in 1,241. Of the 123 reports above 0.01%, 120 are Ziraat's (a systematic 0.1% to 0.4%), so for Ziraat the total value and price are safer than the unit count.
+- **Dating differs by company.** The report's month-end price equals the TEFAS row dated the next business day in 1,014 of 1,053 monthly reports from the other companies (96%). In Ziraat's 120 reports it matches only 4 times; on three Ziraat funds it equals the row one business day earlier.
+- **Wording varies:** "Ay Sonu" (monthly), "Dönem Sonu" (Yapı Kredi's September 2026 reports) and "Haftalık" (weekly reports). Number formats mix 1.234,56 and 1,234.56, and a lone separator followed by three digits (1,234) is rejected as ambiguous.
+- **KAP's list carries a period code: `AB` for the monthly reports and `HB` for weekly ones** (the PDFs say "Haftalık Pay Fiyatı"). The report list therefore shows a change of reporting cadence without opening a PDF. In the 101 funds read, all 15 Serbest Fon switched to weekly reports in early September 2026 and no other category did, so the switch says nothing about liquidation.
+
 ## What borsapy 0.10.1 does with this
 
 Checked by reading all of borsapy's fund-related code (two readers and one reviewer trying to refute the findings; file and line references in `borsapy_fund_inventory.json`), plus the live comparison above.
@@ -172,7 +182,7 @@ The first version of the snapshot collector (`p50k.jobs.fund_snapshots`) treated
 
 1. Data rights for TEFAS and KAP (owner).
 2. Daily snapshot collector: built as `p50k.jobs.fund_snapshots` and first run on 2026-10-06 for the 1,071 funds traded on TEFAS. It dates a snapshot only when `sonFiyat` equals the newest dated price. Installing the daily timer (`ops/systemd/`) needs the owner's go-ahead.
-3. KAP PDF parsing: plain parsing works for one layout family (İş, Ak, Deniz, TEB, and Tera's money-market reports). Values on the next line (İstanbul, Tera's equity fund), Ziraat, Garanti and Yapı Kredi are not parsed yet. Ata/Atlas, Yapı Kredi and İstanbul need their own label rules. Layouts from 7 of about 66 management companies have been seen.
+3. KAP PDF parsing: solved for the headline fields (see the section above). Not read yet: the holdings tables (section III) and the asset mix, whose negative rows still need explaining (issue 8).
 4. KAP throttling: one request every six seconds ran 316 requests without a failure (2026-10-07); 1.5 seconds was cut off after 180 requests in about 9 minutes.
 5. Price dating held in 49 of 50 months across four funds. Explain TTE's year-end exception, check funds holding foreign assets, and check when prices publish.
 6. How to build peer sets for AN-FND-001 without dated category membership.
