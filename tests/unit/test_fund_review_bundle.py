@@ -9,7 +9,7 @@ import unittest
 import sqlite3
 import subprocess
 from datetime import date, timedelta
-from decimal import Decimal
+from decimal import Decimal, Inexact, InvalidOperation, Rounded, ROUND_DOWN, localcontext
 from pathlib import Path
 from unittest.mock import patch
 
@@ -18,6 +18,7 @@ from p50k.research_reviews.bundle import (
     flow_finding, load_bundle, load_frozen_detector, price_rows, read_fund_json,
     reconcile_report_list, resolve_pdf, selected_reports, validate_universe, write_bundle,
     selected_snapshot,
+    number,
 )
 from p50k.research_reviews.contracts import METADATA, SCHEMA, empty_finding
 from p50k.research_reviews.comments import describe, summarize
@@ -57,6 +58,38 @@ def all_missing_bundle(registry: SourceRegistry | None = None) -> dict:
 
 
 class FlowReviewTests(unittest.TestCase):
+    def test_number_parsing_preserves_caller_flags_traps_and_precision(self):
+        for invalid_trap in (True, False):
+            with localcontext() as caller:
+                caller.clear_flags()
+                caller.prec = 2
+                caller.rounding = ROUND_DOWN
+                caller.traps[InvalidOperation] = invalid_trap
+                caller.traps[Inexact] = True
+                caller.traps[Rounded] = True
+                caller.flags[Inexact] = True  # Existing signals must survive too.
+                before_flags, before_traps = caller.flags.copy(), caller.traps.copy()
+                for value in ("bad", "1e999999999999999999999", "NaN", "Infinity", "sNaN", None, True, 1.5):
+                    self.assertIsNone(number(value))
+                self.assertEqual(number("123456789.123456789"), Decimal("123456789.123456789"))
+                self.assertEqual(caller.flags, before_flags)
+                self.assertEqual(caller.traps, before_traps)
+                self.assertEqual((caller.prec, caller.rounding), (2, ROUND_DOWN))
+
+    def test_invalid_flow_inputs_preserve_caller_context(self):
+        with localcontext() as caller:
+            caller.clear_flags()
+            caller.prec = 2
+            caller.traps[InvalidOperation] = True
+            caller.traps[Inexact] = True
+            caller.traps[Rounded] = True
+            flags, traps = caller.flags.copy(), caller.traps.copy()
+            result = flow_finding(payload(period_end_price="bad"), None)
+            self.assertEqual(result["arithmetic_status"], "UNAVAILABLE")
+            self.assertEqual(caller.flags, flags)
+            self.assertEqual(caller.traps, traps)
+            self.assertEqual(caller.prec, 2)
+
     def test_both_signed_boundary_equalities_cross(self):
         for closing, direction in (("110", "INFLOW_ESTIMATE"), ("90", "OUTFLOW_ESTIMATE")):
             with self.subTest(closing=closing):

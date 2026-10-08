@@ -16,7 +16,7 @@ import shutil
 import sqlite3
 import tempfile
 from datetime import date, datetime, timedelta, timezone
-from decimal import Decimal, InvalidOperation
+from decimal import Decimal, InvalidOperation, localcontext
 from pathlib import Path
 from typing import Mapping, Sequence
 
@@ -52,7 +52,11 @@ def number(value: object) -> Decimal | None:
     if isinstance(value, bool) or not isinstance(value, (str, int, Decimal)):
         return None
     try:
-        result = Decimal(value)
+        # A failed string conversion signals InvalidOperation even when caught.
+        # Keep that signal local: parsing must neither dirty nor clear the caller's
+        # Decimal flags, and caller trap choices must not change missingness.
+        with localcontext():
+            result = Decimal(value)
     except (InvalidOperation, ValueError):
         return None
     return result if result.is_finite() else None
