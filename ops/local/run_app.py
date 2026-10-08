@@ -23,6 +23,9 @@ def port_number(value: str) -> int:
 
 def available_port(port: int) -> None:
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as probe:
+        # Match the servers' bind behavior: recently closed connections may be
+        # in TIME_WAIT, while an active listener must still prevent startup.
+        probe.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         try:
             probe.bind(("127.0.0.1", port))
         except OSError as exc:
