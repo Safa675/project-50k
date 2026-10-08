@@ -1,0 +1,5 @@
+Copyright (c) 2026 Safa Öksüz. All rights reserved.
+
+This software is proprietary and confidential. No part of this codebase
+may be copied, modified, distributed, or used without the express written
+permission of the copyright holder.
