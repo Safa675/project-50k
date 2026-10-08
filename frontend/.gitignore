@@ -9,3 +9,6 @@ node_modules/
 test-results/
 playwright-report/
 coverage/
+
+# Generated from the exact pinned npm package by prepare:pdfjs.
+/public/pdfjs/

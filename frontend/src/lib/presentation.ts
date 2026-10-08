@@ -30,12 +30,18 @@ const BACKEND_REASONS:Record<string,string>={kap_series_missing:'Aylık KAP seri
 export function reason(value:string):string{
  if(REASON_LABELS[value])return REASON_LABELS[value];if(BACKEND_REASONS[value])return BACKEND_REASONS[value];
  const monthly=/^(2026-07|2026-08)_(.*)$/.exec(value);if(monthly){const month=monthly[1]==='2026-07'?'Temmuz':'Ağustos';const labels:Record<string,string>={publication_missing_or_invalid:'raporunun yayın zamanı eksik veya geçersiz.',eligible_monthly_endpoint_missing:'için uygun aylık rapor bulunamadı.',duplicate_eligible_monthly_endpoint:'için birden fazla uygun aylık rapor var.'};return `${month} ${labels[monthly[2]]??'raporunun uygunluğu doğrulanamadı.'}`;}
- for(const [field,label] of Object.entries(FIELD_LABELS)){if(value===field+'_mismatch'||value===field+'_incompatible')return `${label} dönemler arasında karşılaştırılamıyor.`;if(value===field+'_unknown_common_report_field_assumption'||value===field+'_unknown')return `${label} doğrulanmadı; aynı rapor alanı kullanıldığı varsayılıyor.`;if(value===field+'_missing')return `${label} mevcut değil.`;if(value===field+'_nonfinite'||value===field+'_requires_decimal'||value===field+'_invalid_sign')return `${label} hesap için geçerli değil.`;}
+ for(const [field,label] of Object.entries(FIELD_LABELS)){if(value===field+'_mismatch'||value===field+'_incompatible')return `${label} dönemler arasında karşılaştırılamıyor.`;if(value===field+'_unknown_common_report_field_assumption')return `${label} doğrulanmadı; dönemlerin aynı rapor kapsamını kullandığı varsayılıyor.`;if(value===field+'_unknown')return `${label} doğrulanmadı.`;if(value===field+'_missing')return `${label} mevcut değil.`;if(value===field+'_nonfinite'||value===field+'_requires_decimal'||value===field+'_invalid_sign')return `${label} hesap için geçerli değil.`;}
  if(value==='assets_nav_units_incompatible')return 'Toplam değer ve pay fiyatının birimleri uyumlu değil.';
  if(value.toLowerCase().includes('timezone')||value.toLowerCase().includes('istanbul'))return 'Saat dilimi kaydı eksik olduğunda KAP yayın saati İstanbul saati kabul edilmiştir.';
  return 'Bu verinin uygunluğu doğrulanamadı; hesap sınırlı olabilir.';
 }
+export function reportedPdfPeriod(fileName: string): string | null {
+ return /^(\d{4}-(?:0[1-9]|1[0-2]))(?:\D|$)/.exec(fileName)?.[1] ?? null;
+}
 export function sourceTitle(source:{kind:string,fund_code:string|null,file_name:string}){
  const titles:Record<string,string>={PRICE:'Günlük fon fiyatları',KAP_SERIES:'KAP aylık sayısal serisi',KAP_PDF:'Orijinal KAP raporu',SNAPSHOT:'Fon kimliği ve kategori kaydı',CALIBRATION:'Kayıtlı kategori eşiği',UNIVERSE:'Seçili 100 fon listesi',PROTOCOL:'Sabit araştırma protokolü',CODE:'Hesaplama kodu'};
- return `${source.fund_code?source.fund_code+' · ':''}${titles[source.kind]??'Araştırma kaynağı'}`;
+ const prefix=reportedPdfPeriod(source.file_name);
+ if(source.kind==='KAP_SERIES'){titles.KAP_SERIES=source.file_name==='kap_report_list.json'||source.file_name.startsWith('kap_portfolio_reports_')?'KAP bildirim listesi':'PDF’den çıkarılan aylık veriler';}
+ const period=source.kind==='KAP_PDF'&&prefix?` · ${date(prefix)}`:'';
+ return `${source.fund_code?source.fund_code+' · ':''}${titles[source.kind]??'Araştırma kaynağı'}${period}`;
 }

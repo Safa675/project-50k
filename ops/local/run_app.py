@@ -71,6 +71,11 @@ def main(argv: list[str] | None = None) -> int:
             node = shutil.which("node")
             if node is None or not next_script.is_file():
                 raise ValueError("Install locked frontend dependencies explicitly with npm ci")
+            pdf_assets = ROOT / "frontend/public/pdfjs/6.4.299"
+            if (not (pdf_assets / "pdf.worker.min.mjs").is_file()
+                    or not all((pdf_assets / name).is_dir()
+                               for name in ("cmaps", "standard_fonts", "wasm", "iccs"))):
+                raise ValueError("Run npm run prepare:pdfjs --prefix frontend before launching the PDF viewer")
             if options.mode == "production" and not (ROOT / "frontend/.next/BUILD_ID").is_file():
                 raise ValueError("Run npm run build explicitly before --mode production")
         if options.check:
