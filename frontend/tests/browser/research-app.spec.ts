@@ -409,3 +409,76 @@ test('desktop-mounted detail chart resizes to mobile without overflow before and
   await expect.poll(async () => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   await expect(figure).toBeVisible(); await expect(table.locator('tbody tr')).toHaveCount(6);
 });
+
+test('concentration keeps subset share and portfolio coverage together without a third alert', async ({page}) => {
+  await mockResearch(page); await page.goto('/'); await listReady(page);
+  const row = rowFor(page, 'S00');
+  await expect(row.locator('.concentration-cell')).toContainText('%100,00');
+  await expect(row.locator('.concentration-cell')).toContainText('Portföy kapsamı: %75,00');
+  await expect(row.locator('.concentration-cell')).toContainText('Kısmi portföy');
+  await page.getByLabel('Bulgu', {exact: true}).selectOption('two'); await listReady(page, 1);
+  await row.getByRole('link', {name: 'S00 ↗', exact: true}).click(); await detailReady(page, 'S00');
+  const section = page.locator('.concentration-section');
+  await expect(section.getByRole('heading', {name: 'Son açıklanan portföyde yoğunlaşma', exact: true})).toBeVisible();
+  await expect(section).toContainText('Portföyün okunabilen payı: %75,00');
+  await expect(section).toContainText('Portföyün tamamını temsil etmez');
+  await expect(section).toContainText('Okunabilen menkul kıymetler içinde');
+  await expect(section).toContainText('16 gün');
+  await expect(section).toContainText('Örnek Kıymet Alfa'); await expect(section).toContainText('TRSYNA000001');
+  await expect(section).toContainText('değişim hesaplanmadı');
+  await expect(page.locator('.metric-panel')).toHaveCount(2);
+  await section.getByRole('button', {name: 'Yoğunlaşma raporunun PDF’sini aç', exact: true}).click();
+  await renderedPdfPage(page, 1);
+  await page.getByRole('dialog').getByRole('button', {name: 'Kapat', exact: true}).click();
+  await expect(section.getByRole('button', {name: 'Yoğunlaşma raporunun PDF’sini aç', exact: true})).toBeFocused();
+});
+
+test('unavailable and uncomputed concentration never render zero or a safety verdict', async ({page}) => {
+  const state: MockState = {}; await mockResearch(page, state);
+  await page.goto('/funds/S01'); await detailReady(page, 'S01');
+  const section = page.locator('.concentration-section');
+  await expect(section).toContainText('Portföy yoğunlaşması hesaplanamadı');
+  await expect(section.locator('.holding-table')).toHaveCount(0);
+  state.mutate = (path, payload) => {
+    if (path.endsWith('/funds/S00')) (payload as ReturnType<ReturnType<typeof researchFixture>['detail']>).fund!.concentration = null;
+    return payload;
+  };
+  await page.goto('/funds/S00'); await detailReady(page, 'S00');
+  await expect(section).toContainText('Bu pakette portföy yoğunlaşması hesaplanmadı');
+  await expect(section.locator('.holding-metrics')).toHaveCount(0);
+  await expect(page.locator('.metric-panel')).toHaveCount(2);
+});
+
+test('mobile concentration retains coverage and accessible PDF row details without body overflow', async ({page}) => {
+  await page.setViewportSize({width: 390, height: 844}); await mockResearch(page);
+  await page.goto('/'); await listReady(page);
+  const mobile = page.locator('.mobile-fund').filter({has: page.getByRole('link', {name: 'S00 ↗', exact: true})});
+  await expect(mobile.locator('.mobile-concentration')).toContainText('Portföy kapsamı: %75,00');
+  await mobile.getByRole('link', {name: 'S00 ↗', exact: true}).click(); await detailReady(page, 'S00');
+  const section = page.locator('.concentration-section');
+  await section.getByText('Sayfa 1', {exact: true}).click();
+  await expect(section).toContainText('Rapor değeri: 600,00');
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  await section.getByRole('button', {name: 'Yoğunlaşma raporunun PDF’sini aç', exact: true}).click();
+  await renderedPdfPage(page, 1);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+});
+
+test('current concentration PDF uses the exact report identity when two reports share a publication instant', async ({page}) => {
+  const state: MockState = {mutate: (path, payload) => {
+    if (path.endsWith('/funds/S00')) {
+      const detail = payload as ReturnType<ReturnType<typeof researchFixture>['detail']>;
+      const current = detail.sources.find(source => source.kind === 'KAP_PDF')!;
+      const previous = {...current, source_id: 'd'.repeat(64), file_name: '2026-07_authored-report.pdf'};
+      detail.sources.unshift(previous);
+      detail.fund!.concentration!.input_refs.push(previous.source_id);
+      detail.fund!.concentration!.comparison = {...detail.fund!.concentration!.comparison, previous_period: '2026-07', previous_effective_date: '2026-07-31', previous_published_at: previous.published_at, input_refs: [previous.source_id]};
+    }
+    return payload;
+  }};
+  const {fixture, requests} = await mockResearch(page, state);
+  await page.goto('/funds/S00'); await detailReady(page, 'S00');
+  await page.locator('.concentration-section').getByRole('button', {name: 'Yoğunlaşma raporunun PDF’sini aç', exact: true}).click();
+  await renderedPdfPage(page, 1);
+  expect(requests.filter(path => path.startsWith('/api/research/v1/sources/'))).toEqual([`/api/research/v1/sources/${fixture.detail('S00').fund!.concentration!.current_source_id}`]);
+});

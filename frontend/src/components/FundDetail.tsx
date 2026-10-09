@@ -8,6 +8,7 @@ import Chip from './primitives/Chip';
 import EmptyState from './primitives/EmptyState';
 import FundChart from './FundChart';
 import SourcePdfDialog from './SourcePdfDialog';
+import ConcentrationPanel from './ConcentrationPanel';
 
 interface Props {
   fund: Fund;
@@ -111,6 +112,7 @@ export default function FundDetail({fund, sources, synthetic = false, bundleId =
             </div>
           </div>
         </section>
+        <ConcentrationPanel holding={fund.concentration} sources={sources} openPdf={setPdf}/>
       </div>
       <aside>
         <section className="detail-section">

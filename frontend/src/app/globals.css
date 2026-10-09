@@ -80,3 +80,16 @@ dl {margin:16px 0;font-size:12px}dl div {display:flex;justify-content:space-betw
 .endpoint-record p {margin:8px 0}
 .metric-panel dd small {display:block;font-size:10px;color:var(--text-muted);margin-top:3px}
 .metric-panel details>p {margin-top:12px;overflow-wrap:anywhere}
+.concentration-cell {min-width:160px}
+.mobile-concentration {margin-top:14px;padding-top:10px;border-top:1px solid var(--border-subtle);font-size:12px}
+.concentration-status {font-size:13px;font-weight:650;color:var(--text-secondary)}
+.holding-coverage {border-left:3px solid var(--border-strong);padding:12px 16px;margin:20px 0;background:var(--surface-soft)}
+.holding-coverage strong {font-size:14px;display:block}
+.holding-coverage p {margin:6px 0 0}
+.holding-name {display:block;max-width:230px;overflow-wrap:anywhere;font-size:12px}
+.holding-table {max-width:100%;margin:15px 0}
+.holding-table summary {white-space:nowrap;cursor:pointer}
+.holding-table details>p {margin:10px 0;min-width:145px;max-width:210px}
+.holding-limitations {padding-left:18px;font-size:12px;color:var(--text-secondary);line-height:1.7}
+.holding-limitations li {margin-bottom:7px}
+.holding-comparison {margin:20px 0;padding-top:16px;border-top:1px solid var(--border-subtle)}

@@ -42,6 +42,10 @@ def fund_detail(code: str, request: Request) -> dict:
         raise request.app.state.api_error(503, "BUNDLE_INVALID", "Araştırma paketi doğrulanamadı.")
     ids = set(fund.evidence + fund.d1.input_refs + fund.flow.input_refs)
     ids.update(reference.source_id for reference in fund.flow.endpoint_refs)
+    if fund.concentration is not None:
+        ids.update(fund.concentration.input_refs)
+        ids.update(fund.concentration.comparison.input_refs)
+        ids.update(row.source_id for position in fund.concentration.positions for row in position.source_rows)
     return {
         **view.metadata,
         "fund": fund.model_dump(mode="json"),

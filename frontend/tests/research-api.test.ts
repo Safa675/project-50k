@@ -79,6 +79,27 @@ describe('fund detail identity and source isolation', () => {
     await expect(loadDetail('S00', undefined, 'malformed')).rejects.toMatchObject({code: 'INVALID_DATA'});
     expect(mock).not.toHaveBeenCalled();
   });
+
+  it('rejects concentration rows pointing at a price source rather than their PDF', async () => {
+    const detail = researchFixture().detail('S00');
+    const holding = detail.fund!.concentration!;
+    const price = detail.sources.find(source => source.kind === 'PRICE')!;
+    holding.input_refs.push(price.source_id);
+    holding.current_source_id = price.source_id;
+    holding.positions.forEach(position => {position.source_rows.forEach(row => {row.source_id = price.source_id;});});
+    holding.positions[0].source_rows[0].source_id = price.source_id;
+    respond(detail);
+    await expect(loadDetail('S00')).rejects.toMatchObject({code: 'INVALID_DATA'});
+  });
+
+  it('rejects mismatched holding publication and accepts the same instant with a different offset', async () => {
+    const detail = researchFixture().detail('S00');
+    const pdf = detail.sources.find(source => source.kind === 'KAP_PDF')!;
+    pdf.published_at = '2026-09-02T08:00:00Z';
+    respond(detail); await expect(loadDetail('S00')).resolves.toEqual(detail);
+    pdf.published_at = '2026-09-03T08:00:00Z';
+    respond(detail); await expect(loadDetail('S00')).rejects.toMatchObject({code: 'INVALID_DATA'});
+  });
 });
 
 describe('list and summary agreement', () => {
@@ -92,6 +113,32 @@ describe('list and summary agreement', () => {
   it('rejects summary counts that are internally valid but disagree with records', async () => {
     const fixture = researchFixture();
     fixture.summary.summary.d1_assessable = 97;
+    vi.stubGlobal('fetch', vi.fn().mockImplementation((path: string) =>
+      Promise.resolve(new Response(JSON.stringify(path.endsWith('/summary') ? fixture.summary : fixture.list)))));
+    await expect(loadList()).rejects.toMatchObject({code: 'INVALID_DATA'});
+  });
+
+  it('rejects internally balanced concentration counts that disagree with records', async () => {
+    const fixture = researchFixture();
+    fixture.summary.summary.concentration_partial = 2;
+    fixture.summary.summary.concentration_unavailable = 98;
+    vi.stubGlobal('fetch', vi.fn().mockImplementation((path: string) =>
+      Promise.resolve(new Response(JSON.stringify(path.endsWith('/summary') ? fixture.summary : fixture.list)))));
+    await expect(loadList()).rejects.toMatchObject({code: 'INVALID_DATA'});
+  });
+
+  it('preserves old bundle compatibility with null concentration counts and values', async () => {
+    const fixture = researchFixture();
+    fixture.list.funds.forEach(fund => {fund.concentration = null;});
+    Object.assign(fixture.summary.summary, {concentration_available: null, concentration_partial: null, concentration_unavailable: null});
+    vi.stubGlobal('fetch', vi.fn().mockImplementation((path: string) =>
+      Promise.resolve(new Response(JSON.stringify(path.endsWith('/summary') ? fixture.summary : fixture.list)))));
+    await expect(loadList()).resolves.toEqual({list: fixture.list, summary: fixture.summary});
+  });
+
+  it('rejects an omitted concentration summary when new fund results are present', async () => {
+    const fixture = researchFixture();
+    Object.assign(fixture.summary.summary, {concentration_available: null, concentration_partial: null, concentration_unavailable: null});
     vi.stubGlobal('fetch', vi.fn().mockImplementation((path: string) =>
       Promise.resolve(new Response(JSON.stringify(path.endsWith('/summary') ? fixture.summary : fixture.list)))));
     await expect(loadList()).rejects.toMatchObject({code: 'INVALID_DATA'});

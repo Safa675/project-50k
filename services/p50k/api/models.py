@@ -3,6 +3,8 @@ from __future__ import annotations
 
 from datetime import date, datetime
 from decimal import Decimal, InvalidOperation, localcontext
+from fractions import Fraction
+import math
 import re
 from typing import Annotated, Literal
 
@@ -247,6 +249,195 @@ class Chart(StrictModel):
         return self
 
 
+class ConcentrationSourceRow(StrictModel):
+    source_id: Hash
+    page: Annotated[int, Field(ge=1)]
+    bbox: tuple[float, float, float, float] | list[float]
+    reported_value: Financial
+
+    @model_validator(mode="after")
+    def valid_source_rectangle(self) -> ConcentrationSourceRow:
+        if len(self.bbox) != 4 or not all(math.isfinite(value) for value in self.bbox):
+            raise ValueError("Holding source rectangles must contain four finite coordinates")
+        x0, y0, x1, y1 = self.bbox
+        if not (0 <= x0 < x1 <= 950 and 0 <= y0 < y1 <= 1200):
+            raise ValueError("Holding source rectangles must use the supported PDF profile")
+        if Decimal(self.reported_value) <= 0:
+            raise ValueError("Concentration source rows require positive reported values")
+        return self
+
+
+class ConcentrationPosition(StrictModel):
+    isin: Annotated[str, Field(pattern=r"^[A-Z]{2}[A-Z0-9]{10}$")]
+    native_name: Annotated[str, Field(min_length=1)]
+    value: Financial
+    weight: Financial
+    source_rows: Annotated[list[ConcentrationSourceRow], Field(min_length=1)]
+
+    @model_validator(mode="after")
+    def positive_position(self) -> ConcentrationPosition:
+        if Decimal(self.value) <= 0 or not 0 < Decimal(self.weight) <= 1:
+            raise ValueError("Identified concentration positions must be positive")
+        if sum((Fraction(Decimal(row.reported_value)) for row in self.source_rows), Fraction()) != Fraction(Decimal(self.value)):
+            raise ValueError("Aggregated positions must retain their contributing source-row values")
+        return self
+
+
+class ConcentrationComparison(StrictModel):
+    status: Literal["AVAILABLE", "UNAVAILABLE"]
+    reason: str | None
+    previous_period: Period | None
+    previous_effective_date: Period | None
+    previous_published_at: Timestamp | None
+    input_refs: list[Hash]
+    previous_top1_ratio: Financial | None
+    previous_top5_ratio: Financial | None
+    previous_top10_ratio: Financial | None
+    previous_hhi: Financial | None
+    top1_ratio_delta: Financial | None
+    top5_ratio_delta: Financial | None
+    top10_ratio_delta: Financial | None
+    hhi_delta: Financial | None
+
+    @model_validator(mode="after")
+    def unavailable_comparison_is_unknown(self) -> ConcentrationComparison:
+        fields = (self.previous_top1_ratio, self.previous_top5_ratio, self.previous_top10_ratio, self.previous_hhi,
+                  self.top1_ratio_delta, self.top5_ratio_delta, self.top10_ratio_delta, self.hhi_delta)
+        if self.status == "UNAVAILABLE" and (not self.reason or any(value is not None for value in fields)):
+            raise ValueError("Unavailable concentration comparisons cannot invent historical metrics")
+        if self.status == "AVAILABLE" and (self.reason is not None or any(value is None for value in fields)):
+            raise ValueError("Available concentration comparisons require all previous metrics and deltas")
+        return self
+
+
+class Concentration(StrictModel):
+    model_config = ConfigDict(strict=True, extra="forbid", frozen=True, serialize_by_alias=True)
+    schema_version: Literal["p50k.holding-concentration.v1"] = Field(alias="schema")
+    status: Literal["AVAILABLE", "PARTIAL", "UNAVAILABLE"]
+    research_screen: Literal["NOT_SCREENED"]
+    production_status: Literal["ABSTAINED"]
+    scope: Literal["POSITIVE_IDENTIFIED_ISIN_SECURITIES"]
+    weight_basis: Literal["NORMALIZED_IDENTIFIED_SECURITIES_VALUE"]
+    coverage_basis: Literal["REPORTED_PORTFOLIO_VALUE"]
+    issuer_aggregation: Literal["NOT_AVAILABLE"]
+    fund_lookthrough: Literal["NOT_PERFORMED"]
+    cadence: Literal["MONTHLY"]
+    report_period: Period | None
+    effective_date: Period | None
+    published_at: Timestamp | None
+    age_days: Count | None
+    current_source_id: Hash | None
+    input_refs: list[Hash]
+    missing_reasons: list[str]
+    qualifications: list[str]
+    subset_value: Financial | None
+    reported_portfolio_value: Financial | None
+    portfolio_coverage_ratio: Financial | None
+    portfolio_rounding_bound: Financial | None
+    position_count: Count
+    top1_ratio: Financial | None
+    top5_ratio: Financial | None
+    top10_ratio: Financial | None
+    hhi: Financial | None
+    positions: Annotated[list[ConcentrationPosition], Field(max_length=10)]
+    comparison: ConcentrationComparison
+
+    @model_validator(mode="after")
+    def bounded_descriptive_arithmetic(self) -> Concentration:
+        from calendar import monthrange
+        from p50k.research_reviews.concentration import ratio_string, value_string
+
+        pairs = [(self.report_period, self.effective_date, self.published_at),
+                 (self.comparison.previous_period, self.comparison.previous_effective_date,
+                  self.comparison.previous_published_at)]
+        for period, effective, published in pairs:
+            if (period is None) != (effective is None) or (period is None) != (published is None):
+                raise ValueError("Monthly concentration provenance must retain period, month-end, and publication together")
+            if period is not None:
+                if len(period) != 7 or len(effective) != 10:
+                    raise ValueError("Concentration requires monthly periods and complete month-end dates")
+                year, month = map(int, period.split("-"))
+                if effective != date(year, month, monthrange(year, month)[1]).isoformat():
+                    raise ValueError("Concentration effective date must be the reported month-end")
+                if effective > CUTOFF_AT[:10] or datetime.fromisoformat(published) > datetime.fromisoformat(CUTOFF_AT):
+                    raise ValueError("Concentration report and publication must precede the cutoff")
+        expected_age = None if self.effective_date is None else (date.fromisoformat(CUTOFF_AT[:10]) - date.fromisoformat(self.effective_date)).days
+        if self.age_days != expected_age:
+            raise ValueError("Concentration age must match its reported month-end")
+        if (self.current_source_id is None) != (self.report_period is None):
+            raise ValueError("A selected concentration report requires its exact PDF source ID")
+        if self.current_source_id is not None and self.current_source_id not in self.input_refs:
+            raise ValueError("The selected concentration PDF must belong to its source union")
+        values = (self.subset_value, self.portfolio_coverage_ratio, self.portfolio_rounding_bound,
+                  self.top1_ratio, self.top5_ratio, self.top10_ratio, self.hhi)
+        if self.status == "UNAVAILABLE":
+            if any(value is not None for value in values) or self.position_count or self.positions or not self.missing_reasons:
+                raise ValueError("Unavailable concentration requires missing reasons and null metrics")
+        else:
+            if any(value is None for value in values) or self.reported_portfolio_value is None or self.portfolio_rounding_bound is None or self.report_period is None:
+                raise ValueError("Readable concentration requires every metric, denominator and date")
+            if self.missing_reasons:
+                raise ValueError("Readable concentration cannot retain blocking missing reasons")
+            subset, portfolio = Fraction(Decimal(self.subset_value)), Fraction(Decimal(self.reported_portfolio_value))
+            rounding = Fraction(Decimal(self.portfolio_rounding_bound))
+            if portfolio <= 0 or rounding < 0 or not 0 < subset <= portfolio + rounding or self.portfolio_coverage_ratio != ratio_string(subset / portfolio):
+                raise ValueError("Subset coverage must match its positive reported denominator")
+            if (subset > portfolio) != ("coverage_exceeds_one_within_printed_rounding" in self.qualifications):
+                raise ValueError("Coverage over one must identify its printed rounding overhang")
+            if not 0 < Decimal(self.top1_ratio) <= Decimal(self.top5_ratio) <= Decimal(self.top10_ratio) <= 1 or not 0 < Decimal(self.hhi) <= 1:
+                raise ValueError("Concentration shares and HHI must be bounded ratios")
+            if self.position_count < 1 or len(self.positions) != min(10, self.position_count):
+                raise ValueError("Concentration retains exactly the first ten positions, or all when fewer")
+            ordered = sorted(self.positions, key=lambda position: (-Fraction(Decimal(position.value)), position.isin))
+            if self.positions != ordered or len({position.isin for position in self.positions}) != len(self.positions):
+                raise ValueError("Concentration positions must be unique and ordered by value then ISIN")
+            for position in self.positions:
+                if position.weight != ratio_string(Fraction(Decimal(position.value)) / subset):
+                    raise ValueError("Concentration weights must use the identified-security subset")
+            for count, field in ((1, "top1_ratio"), (5, "top5_ratio"), (10, "top10_ratio")):
+                total = sum((Fraction(Decimal(position.value)) for position in self.positions[:count]), Fraction())
+                if getattr(self, field) != ratio_string(total / subset):
+                    raise ValueError("Top-N shares must match the retained largest positions")
+            retained = sum((Fraction(Decimal(position.value)) for position in self.positions), Fraction())
+            head_hhi = sum(((Fraction(Decimal(position.value)) / subset) ** 2 for position in self.positions), Fraction())
+            tail_weight = (subset - retained) / subset
+            tail_count = self.position_count - len(self.positions)
+            if retained > subset or (tail_count > 0 and tail_weight <= 0):
+                raise ValueError("Truncated concentration positions require positive unretained exposure")
+            lower = head_hhi + (tail_weight * tail_weight / tail_count if tail_count else Fraction())
+            upper = head_hhi + tail_weight * tail_weight
+            if not Decimal(ratio_string(lower)) <= Decimal(self.hhi) <= Decimal(ratio_string(upper)):
+                raise ValueError("HHI must be consistent with the retained head and remaining position count")
+            if self.position_count <= 10:
+                total = sum((Fraction(Decimal(position.value)) for position in self.positions), Fraction())
+                hhi = sum(((Fraction(Decimal(position.value)) / subset) ** 2 for position in self.positions), Fraction())
+                if total != subset or self.hhi != ratio_string(hhi):
+                    raise ValueError("Complete retained positions must reproduce the exact subset HHI")
+            partial_reasons = {"positive_security_without_identified_isin", "nonsecurity_or_derivative_positions_excluded"}
+            if self.status == "PARTIAL" and not partial_reasons.intersection(self.qualifications):
+                raise ValueError("Partial concentration must explain excluded exposure")
+            if self.status == "AVAILABLE" and partial_reasons.intersection(self.qualifications):
+                raise ValueError("Complete concentration cannot claim excluded exposure")
+        comparison = self.comparison
+        if not set(comparison.input_refs).issubset(self.input_refs):
+            raise ValueError("Historical concentration sources must belong to the same finding")
+        if any(row.source_id not in self.input_refs for position in self.positions for row in position.source_rows):
+            raise ValueError("Position source rows must belong to the concentration input union")
+        if any(row.source_id != self.current_source_id for position in self.positions for row in position.source_rows):
+            raise ValueError("Current positions must retain the exact selected PDF identity")
+        if comparison.status == "AVAILABLE":
+            if self.status != "AVAILABLE" or comparison.previous_period is None or comparison.previous_period >= self.report_period or not comparison.input_refs:
+                raise ValueError("Concentration changes require an earlier complete comparable report")
+            for field in ("top1_ratio", "top5_ratio", "top10_ratio", "hhi"):
+                current, previous = getattr(self, field), getattr(comparison, "previous_" + field)
+                if not 0 < Decimal(previous) <= 1:
+                    raise ValueError("Historical concentration metrics must be bounded ratios")
+                expected = value_string(Fraction(Decimal(current)) - Fraction(Decimal(previous)))
+                if getattr(comparison, field + "_delta") != expected:
+                    raise ValueError("Concentration deltas must match the retained current and previous metrics")
+        return self
+
+
 class Fund(StrictModel):
     code: Code
     name: str
@@ -258,6 +449,7 @@ class Fund(StrictModel):
     flow: FlowFinding
     chart: Chart
     evidence: list[Hash]
+    concentration: Concentration | None = None
 
     @model_validator(mode="after")
     def eligibility_claims(self) -> Fund:
@@ -310,6 +502,9 @@ class Summary(StrictModel):
     flow_assessable: Count
     d1_stale: Count
     denominator: Fixed100
+    concentration_available: Count | None = None
+    concentration_partial: Count | None = None
+    concentration_unavailable: Count | None = None
 
     @model_validator(mode="after")
     def counts_add_up(self) -> Summary:
@@ -317,6 +512,9 @@ class Summary(StrictModel):
             raise ValueError("Assessment counts must equal the denominator")
         if self.two_findings + self.one_finding + self.no_findings + self.unassessable_no_findings != self.total:
             raise ValueError("Finding counts must equal the denominator")
+        extension_counts = (self.concentration_available, self.concentration_partial, self.concentration_unavailable)
+        if any(value is not None for value in extension_counts) and (any(value is None for value in extension_counts) or sum(extension_counts) != self.total):
+            raise ValueError("Concentration coverage counts must retain the full denominator")
         return self
 
 
@@ -363,9 +561,33 @@ def validate_public_bundle(bundle: dict) -> tuple[Provenance, Summary, tuple[Fun
     if len({source.source_id for source in sources}) != len(sources):
         raise ValueError("Source identifiers must be unique")
     source_ids = {source.source_id for source in sources}
+    source_by_id = {source.source_id: source for source in sources}
     for fund in funds:
         references = set(fund.evidence + fund.d1.input_refs + fund.flow.input_refs)
         references.update(endpoint.source_id for endpoint in fund.flow.endpoint_refs)
+        if fund.concentration is not None:
+            concentration = fund.concentration
+            references.update(concentration.input_refs)
+            references.update(concentration.comparison.input_refs)
+            for reference in concentration.input_refs:
+                source = source_by_id.get(reference)
+                if source is not None and source.kind not in ("KAP_PDF", "KAP_SERIES", "CODE", "PROTOCOL", "UNIVERSE"):
+                    raise ValueError("Concentration sources must belong to its registered KAP-only scope")
+                if source is not None and source.kind in ("KAP_PDF", "KAP_SERIES") and source.fund_code != fund.code:
+                    raise ValueError("Concentration evidence must identify the same fund")
+                if source is not None and source.kind == "KAP_PDF" and (source.published_at is None or datetime.fromisoformat(source.published_at) > datetime.fromisoformat(CUTOFF_AT)):
+                    raise ValueError("Concentration PDF evidence requires known publication before cutoff")
+            current_pdf_ids = {row.source_id for position in concentration.positions for row in position.source_rows}
+            if concentration.current_source_id is not None:
+                current_pdf_ids.add(concentration.current_source_id)
+            for identifier in current_pdf_ids:
+                source = source_by_id.get(identifier)
+                if source is None or not source.pdf_available or source.fund_code != fund.code or source.published_at is None or datetime.fromisoformat(source.published_at) != datetime.fromisoformat(concentration.published_at):
+                    raise ValueError("Holding source rows require same-fund PDFs with the reported publication")
+            for identifier in concentration.comparison.input_refs:
+                source = source_by_id.get(identifier)
+                if source is None or not source.pdf_available or source.fund_code != fund.code or source.published_at is None or datetime.fromisoformat(source.published_at) != datetime.fromisoformat(concentration.comparison.previous_published_at):
+                    raise ValueError("Previous concentration sources require same-fund eligible PDF publication")
         if not references <= source_ids:
             raise ValueError("Every evidence reference must exist in the manifest")
     actual = {
@@ -382,4 +604,14 @@ def validate_public_bundle(bundle: dict) -> tuple[Provenance, Summary, tuple[Fun
     }
     if any(getattr(summary, key) != value for key, value in actual.items()):
         raise ValueError("Summary counts must match list/detail records")
+    extension_count = sum(fund.concentration is not None for fund in funds)
+    if extension_count:
+        if extension_count != 100:
+            raise ValueError("Concentration extensions must retain all 100 records")
+        for status in ("AVAILABLE", "PARTIAL", "UNAVAILABLE"):
+            count = sum(fund.concentration.status == status for fund in funds)
+            if getattr(summary, "concentration_" + status.lower()) != count:
+                raise ValueError("Concentration summary must match its 100 records")
+    elif any(getattr(summary, field) is not None for field in ("concentration_available", "concentration_partial", "concentration_unavailable")):
+        raise ValueError("Unextended v1 bundles cannot invent concentration coverage counts")
     return provenance, summary, funds, sources

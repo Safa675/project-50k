@@ -35,6 +35,7 @@ the cutoff. Current category and October-selected universe labels remain.
 
 For each fund, select the latest monthly (`AB`) reporting period whose month-end
 and unambiguous recorded publication timestamp are both at or before the cutoff.
+Reject publication dates before the stated monthly period ends as contradictory.
 Select the immediately preceding eligible monthly period separately for optional
 comparison. Multiple eligible disclosures for one selected period are ambiguous.
 Do not choose an older successfully parsed report when the selected latest source
@@ -44,6 +45,9 @@ Offset-free provider dates use the existing disclosed Istanbul-time assumption.
 Use the original KAP list and matching original PDF under `raw/kap/reports/`.
 Missing list, timing, identity, attachment or PDF remains unavailable. Show report
 month-end, publication timestamp, age in calendar days, cadence and source links.
+Verify the selected month/year against the monthly header printed inside the PDF,
+as well as the fund identity. A filename/list date cannot supply a missing or
+contradictory source period. Unknown or ambiguous printed periods are unavailable.
 Older monthly reports are identified by age; no empirical freshness threshold is
 invented. Weekly holdings and historical revisions are outside this first slice.
 

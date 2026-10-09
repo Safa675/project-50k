@@ -68,7 +68,7 @@ def create_app(bundle_dir: Path | str | None = None, *, frontend_origin: str | N
     except ValueError as exc:
         raise ValueError("Invalid frontend origin port") from exc
 
-    from p50k.research_reviews.bundle import load_bundle, resolve_pdf
+    from p50k.research_reviews.bundle_v2 import load_research_bundle as load_bundle, resolve_research_pdf as resolve_pdf
 
     configured_dir = bundle_dir if bundle_dir is not None else os.environ.get("P50K_RESEARCH_BUNDLE")
     app = FastAPI(title="Project 50K private archive research", docs_url=None,

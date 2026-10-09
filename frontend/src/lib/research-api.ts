@@ -63,6 +63,14 @@ export async function loadList(signal?: AbortSignal, expectedBundle?: string) {
   if (summary.summary.total !== list.funds.length || Object.entries(counts).some(([key, value]) => summary.summary[key as keyof typeof counts] !== value)) {
     throw new ResearchApiError('Özet sayıları fon listesiyle uyuşmuyor.', 'INVALID_DATA');
   }
+  if (summary.summary.concentration_available != null || list.funds.some(fund => fund.concentration != null)) {
+    const concentrationCounts = {concentration_available: 0, concentration_partial: 0, concentration_unavailable: 0};
+    for (const fund of list.funds) {
+      if (!fund.concentration) throw new ResearchApiError('Portföy yoğunlaşması özeti ile fon kayıtları uyuşmuyor.', 'INVALID_DATA');
+      concentrationCounts[fund.concentration.status === 'AVAILABLE' ? 'concentration_available' : fund.concentration.status === 'PARTIAL' ? 'concentration_partial' : 'concentration_unavailable']++;
+    }
+    if (Object.entries(concentrationCounts).some(([key, value]) => summary.summary[key as keyof typeof concentrationCounts] !== value)) throw new ResearchApiError('Portföy yoğunlaşması özeti ile fon kayıtları uyuşmuyor.', 'INVALID_DATA');
+  }
   return {list, summary};
 }
 export async function loadDetail(code: string, signal?: AbortSignal, expectedBundle?: string) {
@@ -75,9 +83,20 @@ export async function loadDetail(code: string, signal?: AbortSignal, expectedBun
     throw new ResearchApiError('Aylık rapor kaynağı seçilen fona ait değil.', 'INVALID_DATA');
   }
   const sourceIds = new Set(detail.sources.map(source => source.source_id));
-  const references = new Set([...detail.fund.evidence, ...detail.fund.d1.input_refs, ...detail.fund.flow.input_refs, ...detail.fund.flow.endpoint_refs.map(endpoint => endpoint.source_id)]);
+  const concentration = detail.fund.concentration;
+  const holdingReferences = concentration ? [...concentration.input_refs, ...concentration.comparison.input_refs, ...concentration.positions.flatMap(position => position.source_rows.map(row => row.source_id))] : [];
+  const references = new Set([...detail.fund.evidence, ...detail.fund.d1.input_refs, ...detail.fund.flow.input_refs, ...detail.fund.flow.endpoint_refs.map(endpoint => endpoint.source_id), ...holdingReferences]);
   if (sourceIds.size !== detail.sources.length || sourceIds.size !== references.size || [...references].some(reference => !sourceIds.has(reference))) {
     throw new ResearchApiError('Fonun kaynak kayıtları araştırma paketiyle uyuşmuyor.', 'INVALID_DATA');
   }
+  if (concentration?.status !== undefined && concentration.status !== 'UNAVAILABLE') {
+    const rowReferences = new Set(concentration.positions.flatMap(position => position.source_rows.map(row => row.source_id)));
+    if ([...rowReferences].some(reference => !detail.sources.some(source => source.source_id === reference && source.kind === 'KAP_PDF' && source.published_at !== null && Date.parse(source.published_at) === Date.parse(concentration.published_at!)))) throw new ResearchApiError('Portföy satırları doğrulanmış rapor kaynağıyla uyuşmuyor.', 'INVALID_DATA');
+  }
+  if (concentration?.current_source_id) {
+    const source = detail.sources.find(item => item.source_id === concentration.current_source_id);
+    if (!source || source.kind !== 'KAP_PDF' || !source.published_at || !concentration.published_at || Date.parse(source.published_at) !== Date.parse(concentration.published_at)) throw new ResearchApiError('Seçilen portföy raporunun kimliği veya yayın zamanı uyuşmuyor.', 'INVALID_DATA');
+  }
+  if (concentration && concentration.comparison.input_refs.some(reference => !detail.sources.some(source => source.source_id === reference && source.kind === 'KAP_PDF' && source.published_at !== null && concentration.comparison.previous_published_at !== null && Date.parse(source.published_at) === Date.parse(concentration.comparison.previous_published_at)))) throw new ResearchApiError('Önceki portföy raporunun kaynağı veya yayın zamanı uyuşmuyor.', 'INVALID_DATA');
   return detail;
 }

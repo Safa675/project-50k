@@ -3,7 +3,7 @@ import {useTranslations} from 'next-intl';
 import Link from 'next/link';
 import {useSearchParams} from 'next/navigation';
 import type {Fund, ResearchSummary} from '@/lib/research-contract';
-import {matchesFund, percent, screenLabel, flowLabel, assessmentLabel, type FindingFilter} from '@/lib/presentation';
+import {matchesFund, percent, screenLabel, flowLabel, assessmentLabel, concentrationLabel, type FindingFilter} from '@/lib/presentation';
 import {DataTable, DataTableHeader, DataTableHeaderCell, DataTableBody, DataTableRow, DataTableCell} from './primitives/DataTable';
 import Toolbar from './primitives/Toolbar';
 import Stat from './primitives/Stat';
@@ -62,7 +62,7 @@ export default function FundList({funds, summary, synthetic = false, bundleId = 
       <div>
         <p className="eyebrow">Sabit tarih · {synthetic ? 'Tasarım önizlemesi' : '100 fon'}</p>
         <h1>Fonların verileri ne söylüyor?</h1>
-        <p>Benzer fonlara göre getiri farkını ve tahmini para hareketini ayrı ayrı inceleyin. Her yorumun hesabı ve kaynakları fon detayında.</p>
+        <p>Getiri farkını, tahmini para hareketini ve açıklanan kıymetlerdeki yoğunlaşmayı inceleyin. Her hesabın kapsamı ve kaynakları fon detayında.</p>
       </div>
       <div className="cutoff"><span>İnceleme zamanı</span>{t('cutoff')}</div>
     </section>
@@ -77,6 +77,7 @@ export default function FundList({funds, summary, synthetic = false, bundleId = 
       <Stat label="Değerlendirilemiyor" value={summary.unavailable} hint={`${summary.unavailable} / ${summary.total} fon`}/>
     </div>
     <p className="detail-note">Güncel D1 hesabı: {summary.d1_assessable} / {summary.total} fon · Tahmini para hareketi hesabı: {summary.flow_assessable} / {summary.total} fon · Son gözlemi eski D1: {summary.d1_stale} / {summary.total} fon</p>
+    {summary.concentration_available != null && <p className="detail-note">Portföy yoğunlaşması: {summary.concentration_available} fonun kıymetleri hesaplandı · {summary.concentration_partial} fon kısmi · {summary.concentration_unavailable} fon hesaplanamadı. Yoğunlaşma, iki bulgu sayısına katılmaz.</p>}
     <Toolbar
       leading={<label className="w-full min-w-[240px]"><span className="mb-1 block text-xs text-[var(--text-secondary)]">Fon ara</span><input aria-label="Fon ara" className={inputClass} placeholder={t('search')} value={query} onChange={event => change({query: event.target.value})}/></label>}
       trailing={<button className="button" onClick={() => change({query: '', category: '', finding: 'all'})}>Filtreleri temizle</button>}
@@ -87,12 +88,13 @@ export default function FundList({funds, summary, synthetic = false, bundleId = 
     <div className="results-head"><span aria-live="polite">{filtered.length} / {summary.total} fon gösteriliyor</span><span>Sıra: iki bulgu → tek bulgu → veri yetersiz → eşik aşımı yok</span></div>
     {filtered.length === 0 ? <EmptyState title="Aramanızla eşleşen fon yok" description="Fon kodunu veya filtreleri değiştirin." action={<button className="button" onClick={() => change({query: '', category: '', finding: 'all'})}>Filtreleri temizle</button>}/> : <>
       <div className="desktop-funds">
-        <DataTable minWidth={960}>
-          <DataTableHeader><tr><DataTableHeaderCell>Fon</DataTableHeaderCell><DataTableHeaderCell>Getiri farkı · D1</DataTableHeaderCell><DataTableHeaderCell>Tahmini para hareketi</DataTableHeaderCell><DataTableHeaderCell>Veriye dayalı yorum</DataTableHeaderCell><DataTableHeaderCell>Veri durumu</DataTableHeaderCell></tr></DataTableHeader>
+        <DataTable minWidth={1120}>
+          <DataTableHeader><tr><DataTableHeaderCell>Fon</DataTableHeaderCell><DataTableHeaderCell>Getiri farkı · D1</DataTableHeaderCell><DataTableHeaderCell>Tahmini para hareketi</DataTableHeaderCell><DataTableHeaderCell>Okunan kıymetlerde ilk 5</DataTableHeaderCell><DataTableHeaderCell>Veriye dayalı yorum</DataTableHeaderCell><DataTableHeaderCell>İki hesabın veri durumu</DataTableHeaderCell></tr></DataTableHeader>
           <DataTableBody>{filtered.map(fund => <DataTableRow key={fund.code}>
             <DataTableCell><Link href={href(fund.code)} className="fund-code">{fund.code} ↗</Link><div className="fund-name">{fund.name}</div><span className="metric-hint">{fund.category ?? 'Kategori bilinmiyor'}</span></DataTableCell>
             <DataTableCell><span className="metric-value">{percent(fund.d1.statistic)}</span><span className="metric-hint">{screenLabel(fund.d1)}</span></DataTableCell>
             <DataTableCell><span className="metric-value">{percent(fund.flow.statistic)}</span><span className="metric-hint">{flowLabel(fund)}</span></DataTableCell>
+            <DataTableCell className="concentration-cell"><span className="metric-value">{percent(fund.concentration?.top5_ratio ?? null)}</span><span className="metric-hint">{concentrationLabel(fund.concentration)}</span>{fund.concentration?.status !== 'UNAVAILABLE' && fund.concentration && <span className="metric-hint">Portföy kapsamı: {percent(fund.concentration.portfolio_coverage_ratio)}</span>}</DataTableCell>
             <DataTableCell className="comment-cell">{fund.comment_tr}</DataTableCell>
             <DataTableCell><Chip variant={fund.assessment === 'FULL' ? 'outline' : 'warning'}>{assessmentLabel(fund)}</Chip></DataTableCell>
           </DataTableRow>)}</DataTableBody>
@@ -102,9 +104,11 @@ export default function FundList({funds, summary, synthetic = false, bundleId = 
         <div className="mobile-fund-head"><div><Link href={href(fund.code)} className="fund-code">{fund.code} ↗</Link><div className="fund-name">{fund.name}</div><span className="metric-hint">{fund.category ?? 'Kategori bilinmiyor'}</span></div><Chip variant={fund.assessment === 'FULL' ? 'outline' : 'warning'}>{assessmentLabel(fund)}</Chip></div>
         <p>{fund.comment_tr}</p>
         <div className="mobile-metrics"><div><span className="metric-hint">Getiri farkı · D1</span><span className="metric-value">{percent(fund.d1.statistic)}</span>{screenLabel(fund.d1)}</div><div><span className="metric-hint">Tahmini para hareketi</span><span className="metric-value">{percent(fund.flow.statistic)}</span>{flowLabel(fund)}</div></div>
+        <div className="mobile-concentration"><span className="metric-hint">Okunan kıymetlerde ilk 5</span><span className="metric-value">{percent(fund.concentration?.top5_ratio ?? null)}</span><span className="metric-hint">{concentrationLabel(fund.concentration)}{fund.concentration && fund.concentration.status !== 'UNAVAILABLE' ? ` · Portföy kapsamı: ${percent(fund.concentration.portfolio_coverage_ratio)}` : ''}</span></div>
       </article>)}</div>
     </>}
     <p className="detail-note mt-5">Getiri farkı: son 60 ortak fiyat tarihi. Tahmini para hareketi: Temmuz → Ağustos 2026. İki dönem aynı değildir.</p>
+    <p className="detail-note">İlk 5 payı, okunabilen menkul kıymetler içindeki dağılımdır. Kısmi kapsamda portföyün tamamını temsil etmez; şirket bazında bir ölçü değildir.</p>
     <details className="detail-note"><summary>Araştırma paketinin sürümü</summary><code className="source-hash">{synthetic ? 'Örnek veri' : bundleId}</code></details>
   </Shell>;
 }

@@ -1,6 +1,6 @@
 // Authored synthetic browser fixtures only. No private archive is imported.
 import {createHash} from 'node:crypto';
-import type {Fund, Source, ResearchSummary} from '../../src/lib/research-contract';
+import type {Fund, Source, ResearchSummary, Concentration} from '../../src/lib/research-contract';
 
 export const BUNDLE_ID = 'a'.repeat(64);
 export const CUTOFF_AT = '2026-09-16T23:59:59+03:00';
@@ -103,6 +103,33 @@ function flow(index: number, seriesId: string): Fund['flow'] {
   };
 }
 
+export function authoredConcentration(pdfId?: string): Concentration {
+  const available = !!pdfId;
+  return {
+    schema: 'p50k.holding-concentration.v1', status: available ? 'PARTIAL' : 'UNAVAILABLE',
+    research_screen: 'NOT_SCREENED', production_status: 'ABSTAINED', scope: 'POSITIVE_IDENTIFIED_ISIN_SECURITIES',
+    weight_basis: 'NORMALIZED_IDENTIFIED_SECURITIES_VALUE', coverage_basis: 'REPORTED_PORTFOLIO_VALUE',
+    issuer_aggregation: 'NOT_AVAILABLE', fund_lookthrough: 'NOT_PERFORMED', cadence: 'MONTHLY',
+    report_period: available ? '2026-08' : null, effective_date: available ? '2026-08-31' : null,
+    published_at: available ? '2026-09-02T11:00:00+03:00' : null, age_days: available ? 16 : null,
+    current_source_id: pdfId ?? null, input_refs: pdfId ? [pdfId] : [], missing_reasons: available ? [] : ['selected_monthly_holdings_missing'],
+    qualifications: ['historical_availability_unknown', 'security_concentration_not_issuer_concentration',
+      'normalized_identified_subset_not_whole_fund', 'no_anomaly_threshold_registered', ...(available ? ['nonsecurity_or_derivative_positions_excluded'] : [])],
+    subset_value: available ? '750' : null, reported_portfolio_value: available ? '1000' : null, portfolio_rounding_bound: available ? '0' : null,
+    portfolio_coverage_ratio: available ? '0.75' : null, position_count: available ? 2 : 0,
+    top1_ratio: available ? '0.8' : null, top5_ratio: available ? '1' : null,
+    top10_ratio: available ? '1' : null, hhi: available ? '0.68' : null,
+    positions: pdfId ? [
+      {isin: 'TRSYNA000001', native_name: 'Örnek Kıymet Alfa', value: '600', weight: '0.8', source_rows: [{source_id: pdfId, page: 1, bbox: [40, 80, 240, 100], reported_value: '600'}]},
+      {isin: 'TRSYNA000002', native_name: 'Örnek Kıymet Beta', value: '150', weight: '0.2', source_rows: [{source_id: pdfId, page: 2, bbox: [40, 80, 240, 100], reported_value: '150'}]},
+    ] : [],
+    comparison: {status: 'UNAVAILABLE', reason: 'both_reports_require_complete_comparable_security_coverage',
+      previous_period: null, previous_effective_date: null, previous_published_at: null, input_refs: [],
+      previous_top1_ratio: null, previous_top5_ratio: null, previous_top10_ratio: null, previous_hhi: null,
+      top1_ratio_delta: null, top5_ratio_delta: null, top10_ratio_delta: null, hhi_delta: null},
+  };
+}
+
 export function researchFixture() {
   const sourcesByCode: Record<string, Source[]> = {};
   const funds: Fund[] = Array.from({length: 100}, (_, index) => {
@@ -122,14 +149,15 @@ export function researchFixture() {
         points: [{date: '2026-07-01', fund: '100', peers: '100'}, {date: '2026-07-15', fund: '102', peers: '101'},
           {date: '2026-08-03', fund: null, peers: '102'}, {date: '2026-08-17', fund: '106', peers: '102.5'},
           {date: '2026-09-01', fund: '105.5', peers: '103'}, {date: '2026-09-16', fund: '108', peers: '104'}],
-      }, evidence: sources.map(item => item.source_id),
+      }, concentration: authoredConcentration(sources.find(item => item.kind === 'KAP_PDF')?.source_id), evidence: sources.map(item => item.source_id),
     };
   });
   const group = (fund: Fund) => fund.eligible_crossings === 2 ? 0 : fund.eligible_crossings === 1 ? 1 : fund.assessment === 'FULL' ? 3 : 2;
   funds.sort((left, right) => group(left) - group(right) || left.code.localeCompare(right.code));
   const summary: ResearchSummary = {total: 100, denominator: 100, fully_assessable: 97,
     partially_assessable: 2, unavailable: 1, two_findings: 1, one_finding: 2,
-    unassessable_no_findings: 2, no_findings: 95, d1_assessable: 98, flow_assessable: 98, d1_stale: 1};
+    unassessable_no_findings: 2, no_findings: 95, d1_assessable: 98, flow_assessable: 98, d1_stale: 1,
+    concentration_available: 0, concentration_partial: 1, concentration_unavailable: 99};
   return {list: {...METADATA, funds}, summary: {...METADATA, summary},
     detail: (code: string) => ({...METADATA, fund: funds.find(fund => fund.code === code), sources: sourcesByCode[code] ?? []})};
 }
