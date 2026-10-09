@@ -111,7 +111,7 @@ test('real list route retains all 100 funds, independent coverage counts and mis
     await expect(page.locator('.stats').getByText(label, {exact: true}).locator('..')).toContainText(String(count));
   }
   await expect(page.getByText('Güncel D1 hesabı: 98 / 100 fon · Tahmini para hareketi hesabı: 98 / 100 fon · Son gözlemi eski D1: 1 / 100 fon')).toBeVisible();
-  await expect(rowFor(page, 'S04').locator('.metric-value')).toHaveText(['—', '—']);
+  await expect(rowFor(page, 'S04').locator('.metric-value')).toHaveText(['—', '—', '—']);
   await expect(rowFor(page, 'S03')).toContainText('Güncel gözlem eksik');
   await expect(rowFor(page, 'S02')).toContainText('Eksik değerlendirme');
   await expect(rowFor(page, 'S01')).toContainText('Çıkış tahmini');
@@ -152,6 +152,18 @@ test('rapid filter edits keep the latest local choices without stale response ov
   await search.fill('s00'); await search.fill('iaa'); await search.fill('çığ');
   await listReady(page, 1); await expect(search).toHaveValue('çığ'); await expect(rowFor(page, 'S00')).toBeVisible();
   await expect(page).toHaveURL(url => url.searchParams.get('q') === 'çığ' && !url.searchParams.has('finding'));
+});
+
+test('brand navigation resets the local filters and returns to the complete list', async ({page}) => {
+  await mockResearch(page); await page.goto('/'); await listReady(page);
+  await page.getByLabel('Fon ara', {exact: true}).fill('s00');
+  await page.getByLabel('Kategori', {exact: true}).selectOption('Örnek Hisse');
+  await page.getByLabel('Bulgu', {exact: true}).selectOption('two'); await listReady(page, 1);
+  await page.locator('.site-header .brand').click(); await listReady(page);
+  await expect(page.getByLabel('Fon ara', {exact: true})).toHaveValue('');
+  await expect(page.getByLabel('Kategori', {exact: true})).toHaveValue('');
+  await expect(page.getByLabel('Bulgu', {exact: true})).toHaveValue('all');
+  await expect(page).toHaveURL(url => !url.searchParams.has('q') && !url.searchParams.has('category') && !url.searchParams.has('finding'));
 });
 
 test('detail and back navigation preserve all filters and the immutable bundle', async ({page}) => {

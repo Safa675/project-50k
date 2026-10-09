@@ -1,5 +1,6 @@
 'use client';
 import {useTranslations} from 'next-intl';
+import {useEffect, useRef, useState} from 'react';
 import Link from 'next/link';
 import {useSearchParams} from 'next/navigation';
 import type {Fund, ResearchSummary} from '@/lib/research-contract';
@@ -34,7 +35,20 @@ function readFilters(params: Pick<URLSearchParams, 'getAll'>): Filters {
 export default function FundList({funds, summary, synthetic = false, bundleId = 'synthetic'}: Props) {
   const t = useTranslations('app');
   const searchParams = useSearchParams();
-  const {query, category, finding} = readFilters(searchParams);
+  const [filterState, setFilterState] = useState<Filters>(() => readFilters(searchParams));
+  const currentFilters = useRef(filterState);
+  const {query, category, finding} = filterState;
+  useEffect(() => {
+    // Genuine history traversal chooses the destination entry's filters.
+    // Router transitions from our own filter edits must not restore older choices.
+    const restore = () => {
+      const next = readFilters(new URLSearchParams(window.location.search));
+      currentFilters.current = next;
+      setFilterState(next);
+    };
+    window.addEventListener('popstate', restore);
+    return () => window.removeEventListener('popstate', restore);
+  }, []);
   const categories = [...new Set(funds.flatMap(fund => fund.category ? [fund.category] : []))].sort((a, b) => a.localeCompare(b, 'tr'));
   const filtered = funds.filter(fund => matchesFund(fund, query, category, finding));
   function filters(q: string, c: string, f: FindingFilter) {
@@ -46,9 +60,11 @@ export default function FundList({funds, summary, synthetic = false, bundleId = 
     return params;
   }
   function change(update: Partial<Filters>) {
-    // Filter-only history updates avoid delayed RSC responses restoring old controls.
-    // Read the latest URL so rapid edits cannot use a stale render's sibling filters.
-    const next = {...readFilters(new URLSearchParams(window.location.search)), ...update};
+    // Next.js may rewrite an earlier canonical URL while a restore transition
+    // commits. Keep the latest user choices synchronously, including sibling fields.
+    const next = {...currentFilters.current, ...update};
+    currentFilters.current = next;
+    setFilterState(next);
     const params = filters(next.query, next.category, next.finding);
     window.history.replaceState(null, '', `${synthetic ? '/preview' : '/'}${params.size ? '?' + params.toString() : ''}`);
   }
@@ -57,7 +73,11 @@ export default function FundList({funds, summary, synthetic = false, bundleId = 
     if (synthetic) { params.set('detail', code); return `/preview?${params.toString()}`; }
     return `/funds/${code}?${params.toString()}`;
   }
-  return <Shell synthetic={synthetic}>
+  return <Shell synthetic={synthetic} onHomeNavigate={() => {
+    const next: Filters = {query: '', category: '', finding: 'all'};
+    currentFilters.current = next;
+    setFilterState(next);
+  }}>
     <section className="page-intro">
       <div>
         <p className="eyebrow">Sabit tarih · {synthetic ? 'Tasarım önizlemesi' : '100 fon'}</p>
