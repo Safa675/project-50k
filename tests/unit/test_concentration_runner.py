@@ -106,6 +106,21 @@ class MonthlySelectionTests(unittest.TestCase):
     def test_identity_normalization_preserves_turkish_words(self):
         self.assertEqual(self.runner._normalized("ÖRNEK PORTFÖY (TL) FONU"), "ornek portfoy tl fonu")
 
+    def test_exact_masthead_fund_code_accepts_abbreviated_name(self):
+        self.assertTrue(self.runner.printed_fund_identity("Ağustos-2026\nZ00-Synthetic PYŞ Fonu", "body", "Z00", "Synthetic Portfolio Management Fund"))
+
+    def test_wrong_or_ambiguous_header_code_cannot_use_matching_body_name(self):
+        for header in ("Z01-Other Fund", "Z00-Synthetic Fund\nZ01-Other Fund"):
+            self.assertFalse(self.runner.printed_fund_identity(header, "Synthetic Fund", "Z00", "Synthetic Fund"))
+
+    def test_body_or_unanchored_code_does_not_establish_identity(self):
+        for header in ("Ağustos 2026", "Fund code Z00-Synthetic Fund", "Z000-Synthetic Fund"):
+            self.assertFalse(self.runner.printed_fund_identity(header, "Z00-short name", "Z00", "Synthetic Fund"))
+        self.assertTrue(self.runner.printed_fund_identity("Ağustos 2026", "Synthetic Fund", "Z00", "Synthetic Fund"))
+
+    def test_blank_recorded_name_cannot_be_validated_by_code(self):
+        self.assertFalse(self.runner.printed_fund_identity("Z00-Synthetic Fund", "Synthetic Fund", "Z00", "  "))
+
     def test_printed_month_and_year_must_be_unique(self):
         self.assertEqual(self.runner.printed_monthly_period("Ağustos-2026\nSynthetic Fund"), "2026-08")
         self.assertEqual(self.runner.printed_monthly_period("2026 TEMMUZ"), "2026-07")
@@ -114,7 +129,8 @@ class MonthlySelectionTests(unittest.TestCase):
 
     def test_future_period_inside_renamed_pdf_never_reaches_parser(self):
         class Page:
-            def get_text(self, mode):
+            rect = SimpleNamespace(width=950, height=1200)
+            def get_text(self, mode, **kwargs):
                 return "EKİM 2026\nSynthetic Fund"
         class Document:
             def __enter__(self): return self
@@ -134,6 +150,36 @@ class MonthlySelectionTests(unittest.TestCase):
         self.assertIsNotNone(ref)
         self.assertIn("selected_pdf_monthly_period_mismatch", snapshot.problems)
         self.assertFalse(snapshot.reconciled)
+        self.assertEqual(reasons, [])
+
+    def test_inception_date_in_body_cannot_make_monthly_header_ambiguous(self):
+        class Page:
+            rect = SimpleNamespace(width=950, height=1200)
+            def get_text(self, mode, **kwargs):
+                if mode == "words": return []
+                if "clip" in kwargs:
+                    self.assert_clip = kwargs["clip"]
+                    return "Ağustos-2026\nSynthetic Fund"
+                return "Ağustos-2026\nSynthetic Fund\n24 Şubat 2025"
+        class Document:
+            def __enter__(self): return self
+            def __exit__(self, *args): return False
+            def __len__(self): return 1
+            def __getitem__(self, index): return Page()
+            def __iter__(self): return iter([Page()])
+        fake_fitz = SimpleNamespace(open=lambda **kwargs: Document())
+        periods, _ = self.runner.monthly_candidates([report()])
+        expected = object()
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            folder = root / "raw/kap/reports/Z00"
+            folder.mkdir(parents=True)
+            (folder / "2026-08_1.pdf").write_bytes(b"%PDF-synthetic")
+            with patch.dict(sys.modules, {"fitz": fake_fitz}), patch.object(self.runner,
+                    "read_security_holdings", return_value=expected) as parser:
+                snapshot, _, reasons = self.runner._snapshot(root, "Z00", "Synthetic Fund", ["Z00"], periods[0], self.runner.SourceRegistry())
+        self.assertIs(snapshot, expected)
+        parser.assert_called_once()
         self.assertEqual(reasons, [])
 
 

@@ -132,6 +132,20 @@ def printed_monthly_period(text: str) -> str | None:
     return next(iter(found)) if len(found) == 1 else None
 
 
+def printed_fund_identity(header: str, introduction: str, code: str, name: str) -> bool:
+    """Exact printed code may establish identity when the recorded name changed.
+
+    A contradictory masthead code cannot be bypassed by a matching body name.
+    Codes mentioned in holdings/body text do not become header identity evidence.
+    """
+    if not _normalized(name):
+        return False
+    printed_codes = set(re.findall(r"(?m)^\s*([A-Z0-9]{3})\s*[-–—]\s*\S", header))
+    if printed_codes:
+        return printed_codes == {code}
+    return _normalized(name) in _normalized(introduction)
+
+
 def _listing(repo: Path, code: str, codes: list[str], registry: SourceRegistry):
     require_opened(code, codes)
     root = repo / "raw/kap/reports"
@@ -177,11 +191,16 @@ def _snapshot(repo: Path, code: str, name: str, selected: list[str],
         with fitz.open(stream=data, filetype="pdf") as document:
             if not 1 <= len(document) <= 250:
                 return failed("selected_pdf_page_bound_exceeded")
-            header = document[0].get_text("text")[:2000]
-            title = _normalized(header)
-            if not _normalized(name) or _normalized(name) not in title:
+            first_page = document[0]
+            if (float(first_page.rect.width), float(first_page.rect.height)) != (950.0, 1200.0):
+                return failed("unsupported_page_geometry")
+            # The audited monthly masthead ends above y=80. Inception dates in
+            # section I are body metadata and cannot establish report periods.
+            monthly_header = first_page.get_text("text", clip=(0, 0, 950, 80))
+            introduction = first_page.get_text("text")[:2000]
+            if not printed_fund_identity(monthly_header, introduction, code, name):
                 return failed("selected_pdf_fund_identity_unverified")
-            printed_period = printed_monthly_period(header)
+            printed_period = printed_monthly_period(monthly_header)
             if printed_period is None:
                 return failed("selected_pdf_monthly_period_unverified")
             if printed_period != chosen.period:

@@ -48,6 +48,12 @@ month-end, publication timestamp, age in calendar days, cadence and source links
 Verify the selected month/year against the monthly header printed inside the PDF,
 as well as the fund identity. A filename/list date cannot supply a missing or
 contradictory source period. Unknown or ambiguous printed periods are unavailable.
+For the supported 950-by-1200 form, the monthly masthead is the first page's
+top 80-point band. Section-I inception dates cannot become reporting periods.
+Verify fund identity from a unique exact line-anchored three-character fund-code
+prefix in that masthead. A contradictory code rejects the source even when the
+body matches a name. Without a printed code, require the exact normalized recorded
+nonempty fund name in the introductory text; never infer aliases or fuzzy names.
 Older monthly reports are identified by age; no empirical freshness threshold is
 invented. Weekly holdings and historical revisions are outside this first slice.
 
