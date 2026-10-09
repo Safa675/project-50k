@@ -8,7 +8,70 @@ Investment intelligence for Turkish retail investors. When something notable hap
 
 ## Status
 
-Planning and research only. There is no application yet, and all 284 requirements are `NOT_IMPLEMENTED`. Thresholds are provisional, detector frequencies are unknown, and no customer validation has been done.
+The repository includes immutable top-100 archive bundles, a private read-only
+research API and a Turkish app for the selected 100 funds. The owner approved
+the list/detail design on 2026-10-08. The app requires the owner's local
+raw archive. The frozen registry's
+284 requirement statuses remain `NOT_IMPLEMENTED`; this prototype provides
+partial research coverage rather than production acceptance. No fraud accuracy,
+historical alert validity or customer validation has been established.
+
+## Local fund-research app
+
+The first view is fixed at `2026-09-16T23:59:59+03:00` (Europe/Istanbul).
+The app keeps all 100 selected funds, separates D1 peer-return context from the
+July-to-August estimated-flow screen, and displays missing/stale evidence.
+This is `HISTORICAL_REPLAY` / `EXPLORATORY_ARCHIVE` research with unknown rights
+and historical source-version availability. Production decisions stay
+`ABSTAINED`. It does not enable arbitrary dates or a public event/auth contract.
+
+Install the locked dependencies explicitly, from the repository root:
+
+```sh
+uv sync --locked --extra api --extra api-test --extra research --python /home/safa/miniforge3/bin/python3
+npm ci --prefix frontend
+```
+
+The frontend install prepares locally served PDF.js assets from the pinned
+package. The launcher checks their presence; the viewer needs no CDN connection.
+
+A fresh Git clone has no private data. The inputs are the selected codes in
+`research/events/2026-09-17-spk-liquidations/top100_funds.txt`, their
+`raw/tefas/prices/` and `raw/kap/series/` files, original selected KAP report
+lists/PDFs under `raw/kap/reports/`, and the existing
+`~/.local/share/project-50k/fund_snapshots.sqlite3`. Missing fund inputs remain
+visible; no current downloads replace the archived versions. The 1,922 unopened
+fund price files are excluded. Bilun's source and health data are not runtime
+dependencies.
+
+Create the private sealed bundle explicitly after the protocol and calculation
+source are committed. The command verifies committed source hashes, never
+downloads, and prints its exact ignored output directory:
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=services .venv/bin/python research/events/2026-09-17-spk-liquidations/fund_review_app/run.py
+```
+
+Start the exact bundle printed by that command; replace `<fingerprint>` below:
+
+```sh
+.venv/bin/python ops/local/run_app.py --bundle raw/research/fund-review-app/<fingerprint>
+```
+
+Open `http://127.0.0.1:3060`. The separate API listens on
+`http://127.0.0.1:8767/research/v1/health`. Both processes bind to loopback;
+Ctrl+C stops the processes started by the launcher. Startup performs no data
+collection, detector calibration, dependency installation or database migration.
+The main route shows the actual sealed bundle. Search and category/finding
+filters persist when opening a fund and returning to the list. Fund detail
+shows separate calculations, a common-baseline chart with explicit gaps,
+recorded publication dates and original manifest-backed PDFs.
+The separate `/preview` route uses explicitly labelled synthetic design data.
+
+See [local launcher options](ops/local/README.md), the
+[bounded protocol](research/events/2026-09-17-spk-liquidations/fund_review_app/PROTOCOL.md),
+the [app plan](plans/2026-10-08-top100-fund-research-app.md) and
+[executed verification](docs/notes/top100-fund-app-completion.md).
 
 ## Layout
 
@@ -34,10 +97,13 @@ The handoff is kept as a frozen snapshot so its `MANIFEST.json` hashes keep veri
 
 ## Local checks
 
-Both test suites need only the Python standard library. From the repo root:
+Core service checks keep standard-library imports. Research regression checks
+need the pinned NumPy and PyMuPDF extra; API checks require the locked API/test extras. Missing optional
+dependencies are explicit skips, not successful API/D1 verification. With all
+extras installed, from the repo root:
 
 ```sh
-PYTHONPATH=services python -m unittest discover -s tests -t . -v
+PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=services .venv/bin/python -m unittest discover -s tests -t . -v
 ```
 
 The handoff's offline reference tests:
@@ -46,6 +112,18 @@ The handoff's offline reference tests:
 cd docs/handoff-v0.5
 python -m unittest discover -s tests -v
 ```
+
+Frontend checks, from `frontend/`:
+
+```sh
+npm run typecheck
+npm test
+NEXT_TELEMETRY_DISABLED=1 npm run build
+npm run test:browser
+```
+
+Browser tests use authored synthetic responses; actual private-bundle verification
+is recorded separately and is not a detector performance measurement.
 
 ## Daily fund snapshots
 

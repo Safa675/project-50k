@@ -1,0 +1,26 @@
+import {describe,it,expect} from 'vitest';
+import {FundSchema,SourceSchema,ListResponseSchema} from '../src/lib/research-contract';
+import {syntheticFunds} from '../src/lib/synthetic';
+const hash='a'.repeat(64);
+describe('runtime contract validation',()=>{
+ it('accepts string quantities and nullable input',()=>{expect(FundSchema.safeParse(syntheticFunds[0]).success).toBe(true);expect(FundSchema.safeParse(syntheticFunds[3]).success).toBe(true);});
+ it('rejects numeric substitutes and nonfinite values',()=>{for(const statistic of [0,'NaN','Infinity','1e999'])expect(FundSchema.safeParse({...syntheticFunds[0],d1:{...syntheticFunds[0].d1,statistic}}).success).toBe(false);});
+ it('rejects unit/status substitutions',()=>{expect(FundSchema.safeParse({...syntheticFunds[0],flow:{...syntheticFunds[0].flow,input_units:{assets:'TRY',nav:'TRY'}}}).success).toBe(false);expect(FundSchema.safeParse({...syntheticFunds[0],assessment:'SAFE'}).success).toBe(false);});
+ it('rejects unknown source URLs',()=>{expect(SourceSchema.safeParse({source_id:hash,kind:'KAP_PDF',label:'Örnek PDF',fund_code:'AAA',sha256:hash,file_name:'example.pdf',media_type:'application/pdf',pdf_available:true,published_at:null,retrieved_at:null,historical_availability:'UNKNOWN',rights_status:'UNKNOWN',origin:'HISTORICAL_REPLAY',disclosure_id:'123',disclosure_url:'http://127.0.0.1/private'}).success).toBe(false);});
+ it('rejects a missing fixed bundle identifier and short universe',()=>expect(ListResponseSchema.safeParse({funds:syntheticFunds}).success).toBe(false));
+});
+describe('semantic status validation',()=>{
+ it('rejects false D1 crossings and accepts strict equality as no crossing',()=>{const d1={...syntheticFunds[0].d1,statistic:'-1'};expect(FundSchema.safeParse({...syntheticFunds[0],d1}).success).toBe(false);expect(FundSchema.safeParse({...syntheticFunds[0],d1:{...d1,statistic:d1.threshold,research_screen:'CROSSING'}}).success).toBe(false);});
+ it('rejects future/null windows and incorrect stale claims',()=>{for(const changed of [{metric_period:{start:null,end:null}},{metric_period:{start:'2026-08-01',end:'2026-09-17'}},{latest_contributing_at:'2026-09-17'},{latest_contributing_at:'2026-09-15',freshness:'FRESH'}])expect(FundSchema.safeParse({...syntheticFunds[0],d1:{...syntheticFunds[0].d1,...changed}}).success).toBe(false);});
+ it('rejects available flow with missing or invalid input and wrong direction',()=>{for(const changed of [{previous_nav:null},{previous_nav:'0'},{previous_assets:'-1'},{current_assets:'-1'},{direction:'OUTFLOW_ESTIMATE'},{residual:'-240000'},{threshold:'0.05'}])expect(FundSchema.safeParse({...syntheticFunds[0],flow:{...syntheticFunds[0].flow,...changed}}).success).toBe(false);});
+ it('rejects future/unknown/duplicate flow endpoints and wrong periods',()=>{const flow=syntheticFunds[0].flow;for(const endpoint_refs of [[],[flow.endpoint_refs[0],flow.endpoint_refs[0]],[flow.endpoint_refs[0],{...flow.endpoint_refs[1],published_at:null}],[flow.endpoint_refs[0],{...flow.endpoint_refs[1],published_at:'2026-09-17T00:00:00+03:00'}]])expect(FundSchema.safeParse({...syntheticFunds[0],flow:{...flow,endpoint_refs}}).success).toBe(false);});
+ it('handles inclusive signed flow boundaries',()=>{const base=syntheticFunds[0];for(const statistic of ['0.10','-0.10']){const positive=statistic[0]!=='-';const fund={...base,flow:{...base.flow,statistic,residual:positive?'100000':'-100000',current_assets:positive?'1120000':'920000',direction:positive?'INFLOW_ESTIMATE':'OUTFLOW_ESTIMATE'}};expect(FundSchema.safeParse(fund).success).toBe(true);expect(FundSchema.safeParse({...fund,flow:{...fund.flow,research_screen:'NO_CROSSING'}}).success).toBe(false);}});
+ it('rejects unsafe source codes, unsupported media and false PDF flags',()=>{const source={source_id:hash,kind:'KAP_PDF',label:'Örnek PDF',fund_code:'AAA',sha256:hash,file_name:'example.pdf',media_type:'application/pdf',pdf_available:true,published_at:null,retrieved_at:null,historical_availability:'UNKNOWN',rights_status:'UNKNOWN',origin:'HISTORICAL_REPLAY',disclosure_id:null,disclosure_url:null};for(const changed of [{fund_code:'../etc'},{fund_code:null},{media_type:'text/html'},{pdf_available:false}])expect(SourceSchema.safeParse({...source,...changed}).success).toBe(false);});
+ it('rejects impossible dates and invalid timestamp clocks',()=>{expect(SourceSchema.safeParse({source_id:hash,kind:'PRICE',label:'Örnek',fund_code:'AAA',sha256:hash,file_name:'example.json',media_type:'application/json',pdf_available:false,published_at:'2026-02-31T10:00:00+03:00',retrieved_at:null,historical_availability:'UNKNOWN',rights_status:'UNKNOWN',origin:'HISTORICAL_REPLAY',disclosure_id:null,disclosure_url:null}).success).toBe(false);});
+});
+it('D1 accepts threshold equality only as no crossing and rejects coverage below minimum',()=>{
+ const base=syntheticFunds[0];
+ const equality={...base,eligible_crossings:1,d1:{...base.d1,statistic:base.d1.threshold,research_screen:'NO_CROSSING'}};
+ expect(FundSchema.safeParse(equality).success).toBe(true);
+ for(const changed of [{usable_observations:49},{eligible_peers:9},{window_positions:61}])expect(FundSchema.safeParse({...base,d1:{...base.d1,...changed}}).success).toBe(false);
+});

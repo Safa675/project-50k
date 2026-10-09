@@ -1,0 +1,41 @@
+{
+  "name": "project-50k-fund-research",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "prepare:pdfjs": "node scripts/prepare-pdfjs.mjs",
+    "postinstall": "npm run prepare:pdfjs",
+    "predev": "npm run prepare:pdfjs",
+    "dev": "next dev --webpack --hostname 127.0.0.1 --port 3060",
+    "prebuild": "npm run prepare:pdfjs",
+    "build": "next build --webpack",
+    "prestart": "npm run prepare:pdfjs",
+    "start": "next start --hostname 127.0.0.1 --port 3060",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "pretest:browser": "npm run prepare:pdfjs",
+    "test:browser": "playwright test"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "4.3.3",
+    "clsx": "2.1.1",
+    "lightweight-charts": "5.2.1",
+    "next": "16.4.0",
+    "next-intl": "4.14.9",
+    "pdfjs-dist": "6.4.299",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "tailwind-merge": "3.7.0",
+    "tailwindcss": "4.3.3",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.0",
+    "@types/node": "26.6.4",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "typescript": "7.0.2",
+    "vitest": "5.0.3"
+  },
+  "type": "module"
+}

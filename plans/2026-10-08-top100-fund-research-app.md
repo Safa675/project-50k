@@ -1,6 +1,11 @@
 # Top-100 fund research app: first prototype plan
 
-Status: **DRAFT — owner review; planning only, implementation not authorized.**
+Status: **P0–P5 implemented and verified locally on 2026-10-08.**
+The owner authorized laptop implementation and approved the concrete list/detail
+design ("design is okay go on"). All 100 funds, real API-backed detail, charts
+and verified local PDFs are implemented. See the
+[screen review](../docs/notes/top100-fund-app-design.md) and
+[completion evidence](../docs/notes/top100-fund-app-completion.md).
 Prepared: 2026-10-08. Target repository: `/home/safa/Documents/project-50k`.
 
 ## Goal and first delivery
@@ -28,7 +33,9 @@ do not establish what was historically knowable before the liquidation order.
 - `services/p50k/detectors/fund_flow.py`: existing Decimal endpoint-change
   arithmetic; its production admission/baseline checks remain unchanged.
 - `raw/tefas/prices/`, `raw/kap/reports/`, `raw/kap/series/`: local inputs only.
-- No Project-50K API or frontend currently exists.
+- At planning time no Project-50K API or frontend existed. The local research
+  adapter, actual list/detail app and separately labelled synthetic preview now
+  exist; executed verification is recorded in the completion note.
 
 Related requirements, with partial coverage only:
 
@@ -188,15 +195,17 @@ production authentication to make a demo run.
 
 ## Implementation slices and proposed file changes
 
-Review each slice's concrete result before starting the next.
+The following file plan records the approved scope. P0–P5 are complete for the
+private local prototype; production and public-release gates remain separate.
 
 ### P0 — protocol and screen review
 
 - Add `research/events/2026-09-17-spk-liquidations/fund_review_app/PROTOCOL.md`.
 - Add `docs/notes/top100-fund-app-design.md` with the two-screen hierarchy,
   Turkish copy, responsive/empty/stale/error states and selected Bilun primitives.
-- Confirm the recorded research-contract exception and G09 design review before
-  full UI implementation. Until then, only an approved scaffold/wireframe.
+- Confirm the recorded research-contract exception and owner layout review before
+  full UI implementation. Both were recorded before P3/P4; formal G09 audit work
+  remains separate from the owner's concrete layout approval.
 - Commit the protocol before new real joined calculations. No detector tuning.
 
 ### P1 — immutable research bundle and comments
@@ -287,12 +296,14 @@ record with actual locked tools. A test named in this plan is planned, not passe
 
 ## Decisions and boundaries before implementation
 
-- The owner must approve this plan's fixed cutoff, July/August pairing, freshness
-  gate, default finding order and separate internal research contract. The request
-  to write this plan does not authorize code implementation.
-- G09 is still pending: the proposed Bilun-derived layout is a design reference,
-  not completed designer approval. Preserve G01 competition eligibility and all
-  source-rights/public-release gates; planning clears none of them.
+- The initial request to write this plan did not authorize implementation.
+  Subsequent owner requests authorized implementation on the laptop, and the
+  concrete list/detail layout was approved before P3/P4. The fixed cutoff,
+  July/August pairing, freshness, finding order and internal research contract
+  were implemented as specified.
+- Owner layout approval is recorded; formal G09 audit/designer work remains
+  incomplete. Preserve G01 competition eligibility and all source-rights/public-
+  release gates; private implementation clears none of them.
 - Bilun `LICENSE` is proprietary while its Python project metadata declares MIT;
   do not propagate that inconsistent metadata or infer public redistribution rights.
   Any later public distribution requires an explicit applicable license decision.
@@ -310,7 +321,11 @@ for all 100 list/detail records, explains available and unavailable findings,
 opens eligible sources and passes the relevant regression/browser checks.
 Completion includes the exact verification output and unresolved limitations.
 
-For this planning task, only this English plan is added. No app, API, detector,
-dataset, source repository, frozen document or database is changed. Data mode
-described: `HISTORICAL_REPLAY` + `EXPLORATORY_ARCHIVE`; rights remain UNKNOWN;
-migrations: none. Next action: owner review of this plan, then P0 only if approved.
+The approved local prototype is implemented. Verification passed: 600 Python
+regression tests across the root and frozen suites, 47 frontend unit tests,
+26 production-build browser tests, typecheck and optimized build. Actual
+100-record API/source consistency and private input/frozen-manifest hashes were
+also checked. Full commands, results and limits are in the completion note.
+Data mode remains `HISTORICAL_REPLAY` + `EXPLORATORY_ARCHIVE`; rights remain
+UNKNOWN; migrations: none. Frozen handoff, detector thresholds and original
+private archives are unchanged. The optional date-selector slice is not included.

@@ -1,0 +1,10 @@
+The frontend PDF viewer uses Mozilla PDF.js (pdfjs-dist 6.4.299),
+licensed under the Apache License, Version 2.0.
+Project: https://mozilla.github.io/pdf.js/
+Source: https://github.com/mozilla/pdf.js
+
+The pinned npm package supplies the locally served worker, fonts, CMaps,
+ICC profiles and decoders. The preparation script copies their license
+files alongside the generated assets; the full Apache license is served
+at /pdfjs/6.4.299/LICENSE. These assets are generated locally and are not
+downloaded from a CDN when a source document is viewed.
