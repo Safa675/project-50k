@@ -43,6 +43,11 @@ The diagnostic variant should leave only these three Windows residuals:
 
 ## Frontend (`frontend/`)
 
+First check which checkout serves port 3060 (`Get-NetTCPConnection -LocalPort 3060` and the owning process's
+command line, or `ss -ltnp`). If a running demo serves this checkout's `frontend/.next`, do not build here:
+Next.js deletes `.next` first and the running pages break. Verify in another clone or worktree, or stop the demo,
+build and restart it with `/p50k-demo`.
+
 ```sh
 npm run typecheck
 npm test

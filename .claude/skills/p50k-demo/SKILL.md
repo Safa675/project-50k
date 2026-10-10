@@ -15,11 +15,14 @@ Everything binds to 127.0.0.1 and serves sealed bundles only; startup computes a
 
 Both launchers take an exact sealed directory and never pick the newest one. The fixed bundle is the
 concentration-extended `fund-review-app` bundle; the dated index is under `raw/research/fund-review-dated/index/`.
-Bundles are tied to the machine and paths they were sealed with.
+Bundles are tied to the machine and paths they were sealed with, and re-hash the registered files of the checkout
+they were sealed in on every load. On the team's Windows machine the demo runs from the dated-view clone while its
+fixed bundle belongs to the main checkout, so while the demo runs, leave the main checkout's branch, registered files
+and `raw/snapshots/fund_snapshots.sqlite3` alone, and never run `npm run build` in the dated-view clone.
 
 ## Start or restart
 
-Windows (repository root):
+Run the scripts from the root of the checkout that runs the demo. Windows:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .claude/skills/p50k-demo/start-demo.ps1 -FixedBundle <dir> -DatedIndex <dir> [-Restart]
@@ -40,9 +43,10 @@ Before a production start, build once: `cd frontend && NEXT_TELEMETRY_DISABLED=1
 
 ## Stop
 
-`powershell -File .claude/skills/p50k-demo/stop-demo.ps1` or `.claude/skills/p50k-demo/stop-demo.sh`. Only
-process trees recorded by the start script, or listeners whose command line points into this repository, are
-stopped. A demo running from another checkout is left alone and reported.
+`powershell -ExecutionPolicy Bypass -File .claude/skills/p50k-demo/stop-demo.ps1` or
+`.claude/skills/p50k-demo/stop-demo.sh`. They stop only processes that still run this checkout's launchers, API or
+frontend. They check the recorded PIDs first, so a stale PID file after a reboot cannot kill an unrelated process.
+A demo running from another checkout is left alone and reported.
 
 ## Health check without restarting
 

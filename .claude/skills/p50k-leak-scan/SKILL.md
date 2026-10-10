@@ -21,7 +21,9 @@ The script:
   `research/events/2026-09-17-spk-liquidations/top100_funds.txt`) and the fund names in the snapshot database
   (`raw/snapshots/fund_snapshots.sqlite3`, `$P50K_DATA_DIR`, or `~/.local/share/project-50k`);
 - in a clone without private data, set `P50K_RAW_DIR` to another checkout's `raw/` directory;
-- scans every new, modified or staged text file outside `raw/`;
+- scans the working copy and, when staged, the index copy of every new, modified or staged text file, including
+  names with non-ASCII characters;
+- reports any changed or staged path under `raw/`, or matching `.gitignore`, as a hit;
 - reports counts and `file:line` locations, never the matching values.
 
 Exit code 0 means no hits; 1 means hits to fix before committing; 2 means the private data is absent, so the

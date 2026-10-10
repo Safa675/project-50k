@@ -19,7 +19,10 @@ Set-Location $repo
 [IO.File]::AppendAllText($log, "=== $(Get-Date -Format o) start`n")
 # cmd does the redirection: Windows PowerShell 5.1 turns redirected stderr (Python's logging) into errors.
 $arguments = "/d /s /c `"`"$py`" -m p50k.jobs.fund_snapshots --tefas-only --db `"$Db`" >> `"$log`" 2>&1`""
-$process = Start-Process -FilePath $env:ComSpec -ArgumentList $arguments -NoNewWindow -Wait -PassThru
+$process = Start-Process -FilePath $env:ComSpec -ArgumentList $arguments -NoNewWindow -PassThru
+$null = $process.Handle  # keeps the exit code readable in Windows PowerShell 5.1
+$process.WaitForExit()
 $code = $process.ExitCode
+if ($null -eq $code) { $code = 1 }
 [IO.File]::AppendAllText($log, "=== $(Get-Date -Format o) exit $code`n")
 exit $code

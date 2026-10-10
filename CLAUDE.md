@@ -19,7 +19,7 @@ The handoff instructions imported below, and the handoff's own `CLAUDE.md`, `STA
 
 ## Agent tooling
 
-`.claude/` holds project skills (`/p50k-verify`, `/p50k-leak-scan`, `/p50k-demo`, `/p50k-seal-dated`, `/p50k-new-research-slice`), path-scoped rules and hooks. The hooks block edits to frozen files, `raw/` and files bound into sealed bundles, and block force pushes, squash merges and staging private data. See `docs/notes/agent-tooling.md`, including why there is no MCP server. Reply in the language of the person you work with (the owner prefers simple, short Turkish); code, commits and docs stay in English.
+`.claude/` holds project skills (`/p50k-verify`, `/p50k-leak-scan`, `/p50k-demo`, `/p50k-seal-dated`, `/p50k-new-research-slice`), path-scoped rules and hooks. The hooks block file-tool edits and common shell writes or deletions of frozen files, `raw/` and files bound into sealed bundles, block force pushes, squash merges and staging private data, and report protected files that changed anyway. They are heuristics, not a boundary. See `docs/notes/agent-tooling.md`, including why there is no MCP server. External actions (spending, accounts, deployment, installing the Linux snapshot timer, contacting third parties) need the owner's say-so; DEC-027 records what the team may do on its own machine. Reply in the language of the person you work with (the owner prefers simple, short Turkish); code, commits and docs stay in English.
 
 ## Handoff instructions
 

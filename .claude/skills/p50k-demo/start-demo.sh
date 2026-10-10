@@ -4,7 +4,8 @@
 set -euo pipefail
 repo="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
 cd "$repo"
-py=.venv/bin/python
+# Absolute paths put this checkout into the launchers' command lines, which stop-demo.sh checks.
+py="$repo/.venv/bin/python"
 [[ -x "$py" ]] || { echo "Missing $py; run uv sync --locked --extra api --extra api-test --extra research" >&2; exit 2; }
 fixed="${1:-}"; dated="${2:-}"
 if [[ -z "$fixed" || -z "$dated" ]] && [[ -f .claude/p50k-demo.local.json ]]; then
@@ -21,9 +22,9 @@ mkdir -p .claude/demo-logs
 # interrupt a launcher and let it stop its API and frontend children.
 set -m
 export PYTHONDONTWRITEBYTECODE=1 NEXT_TELEMETRY_DISABLED=1 P50K_DATED_API_ORIGIN=http://127.0.0.1:8768
-nohup "$py" ops/local/run_dated_app.py --index "$dated" --api-port 8768 > .claude/demo-logs/dated.log 2>&1 &
+nohup "$py" "$repo/ops/local/run_dated_app.py" --index "$dated" --api-port 8768 > .claude/demo-logs/dated.log 2>&1 &
 echo $! > .claude/p50k-demo.dated.pid
-nohup "$py" ops/local/run_app.py --bundle "$fixed" --mode production > .claude/demo-logs/fixed.log 2>&1 &
+nohup "$py" "$repo/ops/local/run_app.py" --bundle "$fixed" --mode production > .claude/demo-logs/fixed.log 2>&1 &
 echo $! > .claude/p50k-demo.fixed.pid
 for url in http://127.0.0.1:8767/research/v1/health http://127.0.0.1:8768/research-dated/v1/dates http://127.0.0.1:3060/; do
   ok=0
