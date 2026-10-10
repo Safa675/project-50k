@@ -2,7 +2,8 @@
 
 **Status: CONFIRMED by delegation** ([DEC-030](../docs/decisions/DEC-030-blackswan-working-agreements.md), 2026-10-10 about 14:30).
 - Agents confirm the defaults in section 2 that serve the team's interest, and ask Mirza about problematic ones.
-- Still open: D7, the rest of D9, D1 and T1.7a (see `docs/notes/team-asks.md`).
+- D7, D9 and D1 were answered by Mirza during takeover and recorded in DEC-031. The closest-name identity is
+  confirmed; ten exact-name checks remain pending. Key readiness is also pending (see `docs/notes/team-asks.md`).
 - The $25 budget is a target, not a hard cap. The product contains no placeholders (DEC-030).
 - Codex continues from `plans/2026-10-10-codex-handoff-prompt.md`.
 
@@ -384,25 +385,25 @@ Owner: **C** = Claude, **M** = Mirza, **S** = Safa, **B** = Barış, **T** = tea
 
 ### Phase 0
 
-- [ ] T0.1 (M) Confirm the plan: D1–D14 (D12 is the agent-team approach), the timeline, the after-freeze list
-- [ ] T0.3 (M) Answer D7 and D9; (S) answer D7 when he can
+- [x] T0.1 (M) Confirm the plan: delegated by DEC-030; D1 confirmed during takeover
+- [x] T0.3 (M) Answer D7 and D9 (DEC-031); Safa's separate D7 answer remains open
 - [ ] T0.4 (M) Relay the asks
 - [ ] T0.5 (S, T) Story pick, with Safa's insurance or B2B details, by 22:00. With no pick by 23:00, B2B
 - [ ] T0.6 (B) Tokens as values by 23:00; otherwise the current tokens ship
 
 ### Phase 1
 
-- [ ] Pre-pull `postgres:18.6`, `python:3.13-slim`, `node:24-slim` and the uv image
-- [ ] T1.1 Worktree; deny-all `.dockerignore`; ignores for `secrets/`, `backups/`, test output, `*.sqlite3`, `*.dump`
+- [x] Pre-pull `postgres:18.6`, `python:3.13-slim`, `node:24-slim` and uv 0.12.17
+- [x] T1.1 Worktree; deny-all `.dockerignore`; ignores for `secrets/`, `backups/`, test output, `*.sqlite3`, `*.dump`
   and `compose.override.yaml`; the read-blocking hook
 - [ ] T0.2 (M) Put the OpenAI key in the worktree's `secrets/openai_api_key`; set a $25 hard limit with alerts
-- [ ] T1.3 The `product` extra, locked
-- [ ] T1.4 SQL migrations: seven schemas, roles, append-only triggers; the runner
-- [ ] T1.2 Dockerfiles, `compose.yaml` and the override example; the proxy check
-- [ ] T1.5 Settings, redacting logs, health endpoints
-- [ ] T1.7 `import-archive` CLI (staging plus ON CONFLICT), with verified counts
+- [x] T1.3 The `product` extra, verified on PyPI and locked
+- [x] T1.4 SQL migrations: seven schemas, roles, append-only triggers; the runner
+- [x] T1.2 Dockerfiles, `compose.yaml` and the override example; the isolated proxy check
+- [x] T1.5 Settings, redacting logs, health endpoints
+- [x] T1.7 `import-archive` CLI (staging plus ON CONFLICT), with verified counts and zero-insert rerun
 - [ ] T1.7a (M) Check the 2026/61 mapping: the closest-name match and 10 exact matches
-- [ ] The Linux baseline in WSL2
+- [x] The Linux baseline in WSL2: 663 + 9 + 88 tests pass at `19989c5`, zero skips
 
 ### Phase 2
 

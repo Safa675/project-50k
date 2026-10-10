@@ -1,0 +1,16 @@
+# Optional runtime credential mount after Mirza supplies the key.
+# This does not enable live AI; Phase 1 remains P50K_AI_MODE=off.
+services:
+  api:
+    environment:
+      P50K_OPENAI_KEY_FILE: /run/secrets/openai_api_key
+    secrets:
+      - openai_api_key
+  worker:
+    environment:
+      P50K_OPENAI_KEY_FILE: /run/secrets/openai_api_key
+    secrets:
+      - openai_api_key
+secrets:
+  openai_api_key:
+    file: ./secrets/openai_api_key
