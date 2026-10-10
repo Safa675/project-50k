@@ -1,6 +1,7 @@
 """Scan new, modified and staged files for real price values, real fund names and non-target fund codes.
 
-Reads only the 100 opened price files and snapshot names; prints counts and file:line locations, never values.
+Reads every price file and the fund names in the snapshot databases (all funds are open, DEC-029); prints counts
+and file:line locations, never values.
 Staged copies are scanned as well as working copies. Changed paths under raw/ or other ignored paths are hits.
 Exit codes: 0 no hits, 1 hits found, 2 private data absent (value/name checks skipped).
 """
@@ -45,26 +46,30 @@ def changed_files(repo: Path) -> list[tuple[str, bool]]:
 
 
 def snapshot_names(raw: Path) -> set[str] | None:
-    candidates = [raw / "snapshots/fund_snapshots.sqlite3"]
-    if os.environ.get("P50K_DATA_DIR"):
-        candidates.append(Path(os.environ["P50K_DATA_DIR"]) / "fund_snapshots.sqlite3")
-    candidates.append(Path.home() / ".local/share/project-50k/fund_snapshots.sqlite3")
-    for path in candidates:
-        if path.is_file():
-            names = set()
-            connection = sqlite3.connect(f"{path.absolute().as_uri()}?mode=ro", uri=True)
-            try:
-                for (raw_row,) in connection.execute("SELECT raw_snapshot FROM fund_snapshots"):
-                    try:
-                        name = json.loads(raw_row).get("fonUnvan")
-                    except (TypeError, ValueError, AttributeError):
-                        continue
-                    if isinstance(name, str) and len(name.strip()) >= 12:
-                        names.add(name.strip().casefold())
-            finally:
-                connection.close()
-            return names
-    return None
+    """Fund names from every snapshot database found; None when there is none."""
+    data_dir = Path(os.environ["P50K_DATA_DIR"]) if os.environ.get("P50K_DATA_DIR") else None
+    home = Path.home() / ".local/share/project-50k"
+    candidates = [raw / "snapshots/fund_snapshots.sqlite3", home / "fund_snapshots.sqlite3",
+                  home / "fund_snapshots_forward.sqlite3"]
+    if data_dir:
+        candidates += [data_dir / "fund_snapshots.sqlite3", data_dir / "fund_snapshots_forward.sqlite3"]
+    names: set[str] | None = None
+    for path in dict.fromkeys(candidates):
+        if not path.is_file():
+            continue
+        names = names or set()
+        connection = sqlite3.connect(f"{path.absolute().as_uri()}?mode=ro", uri=True)
+        try:
+            for (raw_row,) in connection.execute("SELECT raw_snapshot FROM fund_snapshots"):
+                try:
+                    name = json.loads(raw_row).get("fonUnvan")
+                except (TypeError, ValueError, AttributeError):
+                    continue
+                if isinstance(name, str) and len(name.strip()) >= 12:
+                    names.add(name.strip().casefold())
+        finally:
+            connection.close()
+    return names
 
 
 def texts(repo: Path, path: str, staged: bool) -> list[str]:
@@ -93,12 +98,11 @@ def main() -> int:
     codes = (repo / UNIVERSE).read_text(encoding="utf-8").split()
     nontarget = sorted(set(codes) - TARGETS)
     values: set[str] = set()
-    for code in codes:
-        path = raw / "tefas/prices" / f"{code}.json"
-        if path.is_file():
-            for token in re.findall(r"\d+\.\d+", path.read_text(encoding="utf-8")):
-                if len(token.replace(".", "").lstrip("0")) >= 7:
-                    values.add(token)
+    prices = raw / "tefas/prices"
+    for path in sorted(prices.glob("*.json")) if prices.is_dir() else []:
+        for token in re.findall(r"\d+\.\d+", path.read_text(encoding="utf-8")):
+            if len(token.replace(".", "").lstrip("0")) >= 7:
+                values.add(token)
     names = snapshot_names(raw)
     code_pattern = re.compile(r"(?<![A-Z0-9])(" + "|".join(map(re.escape, nontarget)) + r")(?![A-Z0-9])")
     hits: dict[str, list[str]] = {"private or ignored path": [], "price value": [], "fund name": [], "non-target code": []}

@@ -3,23 +3,39 @@
 Updated 2026-10-10 (Europe/Istanbul), the Saturday of Startup Weekend Urla (9–11 October 2026). Start here.
 [codex-context-2026-10-07.md](codex-context-2026-10-07.md) keeps the detailed data-source facts (its section 5),
 the case study (section 6), the evaluation rules (section 7) and the do-not-claim list (section 11); those still
-apply. Where the two files differ, this one is newer.
+apply, except that DEC-029 replaces section 7's development/test split. Where the two files differ, this one is
+newer.
 
 ## In one minute
 
-- **Product:** Turkish-language monitoring of Turkish investment funds. When something notable happens to a fund,
-  show what changed, when it became known and its sources. No advice, no prediction, no fraud claims.
-- **Scope:** Turkish investment funds only ([DEC-024](../decisions/DEC-024-turkish-funds-first.md)). The event
-  pitch is fund-risk and disclosure monitoring for fund distributors and their compliance teams
-  ([DEC-025](../decisions/DEC-025-b2b-fund-monitoring-pitch.md)). Stocks stay postponed: institutional use of
-  Borsa Istanbul data needs a paid data distribution agreement.
-- **Built:** a private local research app for the 100 funds with the most investors, served from sealed bundles of
-  real archived data. It has a fixed 16 September 2026 view and a dated D1 view at 12 preregistered dates. Turkish
-  Next.js UI and read-only FastAPI, both on loopback.
-- **Not built:** sign-in, accounts, hosting, alerts, email, AI investigation, live data. All 284 requirement IDs
-  remain `NOT_IMPLEMENTED`.
-- **Blocks evaluation:** the development/test split of the liquidated funds is undecided. The 1,922 other
-  downloaded price files stay unopened, and no accuracy figure exists.
+- **Team ([DEC-028](../decisions/DEC-028-deploy-ready-ai-native-build.md)).**
+  - Mirza: technical lead; all development and data gathering.
+  - Safa: business person and repository owner; he only pulls.
+  - Barış: designer of the pitch deck and the website's design system.
+- **Goal.** Scientific, mathematical anomaly detection for Turkish investment funds. Stocks come later, only if
+  time and licensed data allow.
+- **Product (open).** Two candidate offers run on one shared core (see [product direction](product-direction.md)):
+  - insurance policies designed from fund-risk data, sold B2B to insurers, brokers and banks;
+  - B2B anomaly data.
+  The team picks the headline story on Saturday evening.
+- **Build target (DEC-028).** A deploy-ready full-stack product with real data on localhost, not deployed.
+  - Stack: Next.js frontend, FastAPI backend, PostgreSQL with its own email/password auth, and a worker, in Docker.
+  - Code freeze: Sunday 2026-10-11 13:00.
+- **AI-native (DEC-028, non-negotiable).**
+  - An OpenAI LLM decides from the deterministic detector evidence.
+  - A human can override every LLM decision.
+  - Users chat with the LLM in the UI.
+- **Data ([DEC-029](../decisions/DEC-029-open-all-funds.md)).** Every downloaded fund is open for product use.
+  There is no held-out test set, so every detector figure is a development result.
+- **Built so far.**
+  - A private local research app for the 100 funds with the most investors, served from sealed bundles of real
+    archived data. It has a fixed 16 September 2026 view and a dated D1 view at 12 preregistered dates.
+  - The data layer and the preregistered detectors D1–D5.
+  - Forward TEFAS snapshot collection.
+  - The research app remains the fallback demo.
+- **Not built yet.** The product database, worker, auth, AI layer, B2B API and Docker setup. All 284 requirement
+  IDs remain `NOT_IMPLEMENTED`.
+- **Plan.** `plans/2026-10-10-product-build-plan.md`, proposed and awaiting Mirza's confirmation.
 
 ## Decisions after the handoff
 
@@ -29,18 +45,20 @@ apply. Where the two files differ, this one is newer.
 | [DEC-025](../decisions/DEC-025-b2b-fund-monitoring-pitch.md) | 2026-10-09 | Pitch B2B fund-risk monitoring; B2B demand is a hypothesis; scope stays on funds |
 | [DEC-026](../decisions/DEC-026-dated-d1-research-view.md) | 2026-10-10 | Dated D1 view at 12 preregistered dates, D1 only, with a separate API and `/dates` pages |
 | [DEC-027](../decisions/DEC-027-event-weekend-operations.md) | 2026-10-10 | The owner only pulls and the team makes all writes. Merge commits only. Real data appears only in the private local demo. Forward snapshots run on the team's machine |
+| [DEC-028](../decisions/DEC-028-deploy-ready-ai-native-build.md) | 2026-10-10 | Team roles; deploy-ready, AI-native build on localhost; OpenAI with a $25 limit; plain PostgreSQL with its own auth; code freeze Sunday 13:00; earlier specs are guides |
+| [DEC-029](../decisions/DEC-029-open-all-funds.md) | 2026-10-10 | Every downloaded fund is open for product use; the development/test split is dropped |
 
-Still binding:
+Still binding (the integrity rules hold even though product requirements flex):
 
 - the TRY 5,000 cumulative ceiling, which is not spending authorization;
-- no service accounts;
-- unreviewed data rights for TEFAS, KAP and MKK data;
+- no service accounts beyond the OpenAI key DEC-028 authorizes;
+- unreviewed data rights for TEFAS, KAP and MKK data, so real data stays on localhost;
 - the release gates in `docs/handoff-v0.5/docs/25_Release_Gates_and_Open_Decisions.md`, as DEC-024 scopes them:
   G03 is the critical data gate, and G02, G04 and G11 return only with the postponed markets.
 
-**Owner actions needed now: none.** The owner pulls `main` to see changes. One owner decision is still pending,
-asked on 2026-10-07: the development/test split (see Open questions). GitHub repository settings, such as
-collaborators and branch protection, remain his.
+**Who needs to do what:** see [team asks](team-asks.md). The owner, Safa, only pulls `main`. His open asks are the
+headline story (due Saturday evening), the regulatory checks and his data sources. GitHub repository settings, such
+as collaborators and branch protection, remain his.
 
 ## What exists
 
@@ -127,8 +145,11 @@ Treat any new failure name as a finding, not only a changed count.
 
 ## Open questions and gates
 
-- **Development/test split:** the owner's decision, pending since 2026-10-07. The proposal splits by company; see
-  section 7 of the codex context. Until it is decided, compute nothing on the 1,922 unopened price files.
+- **Development/test split:** closed by DEC-029. All funds are open, there is no held-out test set, and every
+  detector figure is a development result.
+- **Headline product story:** insurance policies or B2B anomaly data. Safa decides with the team, Saturday evening.
+- **Regulation:** for insurance (SEDDK) and for selling signals (SPK), Safa checks before the pitch claims either
+  (see `product-direction.md`).
 - **G01, competition eligibility:** the team's position and the pre-event commit dates are recorded in DEC-027. No
   organizer ruling was requested.
 - **G03, dated fund history:** open. Forward snapshots now build dated size, unit and investor history from
@@ -139,15 +160,17 @@ Treat any new failure name as a finding, not only a changed count.
 - **Pitch facts to verify:** check SPK decision 52/1589 of 28 August 2026 against the bulletin before quoting it.
   B2B demand has no interviews, pricing test or letter of intent.
 
-## Next recommended work
+## Next work
 
-1. **Per-date estimated flow.** Write a new versioned protocol, committed alone before any calculation, that applies
-   DEC-026's pre-recorded (M-2, M-1) rule.
-2. **Windows test hygiene.** Make the root suite pass on Windows. The causes are a missing `tzdata`, CRLF test
-   fixtures, the cp1252 console, SQLite file handles and `SO_REUSEADDR`. Start on the test side. The SQLite lock
+**The product build plan** (`plans/2026-10-10-product-build-plan.md`) comes first once Mirza confirms it. Items
+recommended before 2026-10-10 are carried into that plan, not dropped:
+
+1. **Per-date estimated flow.** Now a candidate detector inside the product pipeline. Fix its parameters in a dated
+   note first, using DEC-026's pre-recorded (M-2, M-1) rule.
+2. **Windows test hygiene.** Largely solved by running the Python suites in a Linux container. Remaining causes: a
+   missing `tzdata`, CRLF test fixtures, the cp1252 console, SQLite file handles and `SO_REUSEADDR`. The SQLite lock
    errors may involve the registered `evidence_store.py`, and changing that file needs an approved reseal.
-3. **The owner's split decision.** It unblocks the sealed-test runner (slice E in the codex context) and any
-   measured evaluation.
+3. **The split decision.** Closed by DEC-029.
 
 ## Do not claim
 
@@ -156,4 +179,7 @@ Section 11 of the codex context still applies. In addition, the pitch and demo m
 - that the dated view "caught", "warned about" or "would have flagged" a fund early, or any lead time;
 - that the per-date counts are detection performance;
 - that institutions want to buy the product (demand is a hypothesis);
-- that SPK's reasons for the 17 September order are known.
+- that SPK's reasons for the 17 September order are known;
+- that any detector figure is validated accuracy (there is no held-out test, DEC-029);
+- that the LLM's decisions are predictions, or advice to buy, hold or sell;
+- that a policy price is actuarially sound before base rates exist.
