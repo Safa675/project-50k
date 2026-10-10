@@ -24,6 +24,9 @@ July-to-August estimated-flow screen, and displays missing/stale evidence.
 This is `HISTORICAL_REPLAY` / `EXPLORATORY_ARCHIVE` research with unknown rights
 and historical source-version availability. Production decisions stay
 `ABSTAINED`. It does not enable arbitrary dates or a public event/auth contract.
+An optional dated view ([DEC-026](docs/decisions/DEC-026-dated-d1-research-view.md))
+shows the D1 screen alone at 12 preregistered dates from its own sealed index
+and loopback API; see [ops/local/README.md](ops/local/README.md).
 
 Install the locked dependencies explicitly, from the repository root:
 
@@ -81,19 +84,24 @@ the [app plan](plans/2026-10-08-top100-fund-research-app.md) and
 | `docs/notes/` | Working notes, such as what to reuse from bist-quant |
 | `docs/handoff-v0.5/` | The v0.5 research handoff, unchanged: requirements, anomaly catalog, contracts, research, reports and an offline reference harness |
 | `research/spikes/` | Provider spikes with live samples, starting with [TEFAS / borsapy](research/spikes/2026-10-06-tefas/REPORT.md) |
-| `services/p50k/` | Backend package. So far: provider retry and circuit breaker, a JSON disk cache and series math (ported from bist-quant), a TEFAS client and the daily fund snapshot job |
-| `tests/unit/` | Unit tests for `services/p50k/` |
-| `ops/systemd/` | Timer files for running the daily fund snapshot job (not installed by default) |
+| `services/p50k/` | Backend package: TEFAS client, KAP report and holdings readers, retry and circuit breaker, snapshot and price-history jobs, evidence store, sealed research bundles and the read-only APIs |
+| `frontend/` | Next.js app in Turkish: the fixed-date view, `/dates` and synthetic `/preview` scaffolds |
+| `research/events/` | The SPK liquidation case study, preregistered detectors and the protocols and runners of the sealed views |
+| `tests/unit/` | Unit tests for `services/p50k/`, the runners and the launchers |
+| `ops/local/` | Loopback launchers for the local apps |
+| `ops/systemd/`, `ops/windows/` | Daily fund snapshot schedule for Linux (not installed by default) and Windows |
+| `.claude/` | Claude Code skills, hooks and path rules ([agent tooling](docs/notes/agent-tooling.md)) |
 
 The handoff is kept as a frozen snapshot so its `MANIFEST.json` hashes keep verifying. Record changes as new files in `docs/decisions/` or `docs/notes/` instead of editing it.
 
 ## Start here
 
-1. [DEC-024: Turkish funds first](docs/decisions/DEC-024-turkish-funds-first.md)
-2. [Handoff START_HERE](docs/handoff-v0.5/START_HERE.md)
-3. [Anomaly catalog](docs/handoff-v0.5/docs/12_Anomaly_Catalog.md)
-4. [Release gates](docs/handoff-v0.5/docs/25_Release_Gates_and_Open_Decisions.md)
-5. [bist-quant reuse notes](docs/notes/bist-quant-reuse.md)
+1. [Current state](docs/notes/current-state.md): what exists, what is decided and open, what comes next
+2. [DEC-024: Turkish funds first](docs/decisions/DEC-024-turkish-funds-first.md) and the later records in [docs/decisions/](docs/decisions/)
+3. [Handoff START_HERE](docs/handoff-v0.5/START_HERE.md)
+4. [Anomaly catalog](docs/handoff-v0.5/docs/12_Anomaly_Catalog.md)
+5. [Release gates](docs/handoff-v0.5/docs/25_Release_Gates_and_Open_Decisions.md)
+6. [bist-quant reuse notes](docs/notes/bist-quant-reuse.md)
 
 ## Local checks
 
@@ -105,6 +113,11 @@ extras installed, from the repo root:
 ```sh
 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=services .venv/bin/python -m unittest discover -s tests -t . -v
 ```
+
+On Windows use `.venv/Scripts/python.exe`. The suite there has known platform
+failures; [/p50k-verify](.claude/skills/p50k-verify/SKILL.md) lists them and a
+diagnostic variant. `.gitattributes` keeps every checkout on LF line endings,
+which the sealed bundles and the handoff manifest require.
 
 The handoff's offline reference tests:
 
@@ -133,4 +146,4 @@ TEFAS serves only today's fund size, units outstanding and investor count, so th
 PYTHONPATH=services python -m p50k.jobs.fund_snapshots --tefas-only
 ```
 
-It takes about an hour for the 1,071 funds traded on TEFAS and stores rows in `~/.local/share/project-50k/fund_snapshots.sqlite3`, outside git. To run it every weekday evening, see [ops/systemd](ops/systemd/README.md).
+It takes one to several hours for the 1,071 funds traded on TEFAS, depending on TEFAS response times, and stores rows in `~/.local/share/project-50k/fund_snapshots.sqlite3`, outside git. To run it every weekday evening, see [ops/systemd](ops/systemd/README.md) (Linux) or [ops/windows](ops/windows/README.md). Collection on the team's Windows machine writes to a separate `fund_snapshots_forward.sqlite3` that no sealed bundle reads ([DEC-027](docs/decisions/DEC-027-event-weekend-operations.md)).

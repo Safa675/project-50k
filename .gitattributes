@@ -1,0 +1,15 @@
+# Check out text files with LF on every platform, Windows included. Sealed research bundles, runner
+# registration and the frozen handoff MANIFEST hash exact LF bytes; CRLF working trees break all three.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.parquet binary
+*.sqlite3 binary
+*.woff binary
+*.woff2 binary
