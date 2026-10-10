@@ -44,7 +44,7 @@ def evaluate(settings: Settings, code: str, config: AIConfig | None=None) -> dic
         existing=connection.execute("SELECT decision_id,validation_state FROM ai.decisions WHERE packet_id=%s AND ai_mode=%s AND model_id=%s AND prompt_version=%s AND schema_version=%s AND effort=%s ORDER BY decision_id DESC LIMIT 1",
             (packet_id,config.mode,config.model if config.mode=='live' else 'synthetic' if config.mode=='mock' else 'deterministic',PROMPT_VERSION,SCHEMA_VERSION,config.effort if config.mode!='off' else 'none')).fetchone()
         if existing:
-            return {'decision_id':existing[0],'cached':True,'validation_state':existing[1]}
+            return {'decision_id':existing[0],'cached':existing[1]=='VALID','blocked':existing[1]=='INVALID','validation_state':existing[1]}
     if config.mode=='off' and packet.allowed_options!=['INSUFFICIENT_EVIDENCE']:
         raise AIUnavailable('AI_OFF')
     call_id,model,mode,valid='deterministic:'+uuid4().hex,'deterministic','off',None

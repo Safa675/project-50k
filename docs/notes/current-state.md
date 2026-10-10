@@ -36,8 +36,8 @@ newer.
   - BlackSwan Phase 1: Docker PostgreSQL, role-separated migrations, immutable evidence/AI storage,
     real archive import, health API/worker, public web page and tested proxy. Details below.
   - The research app remains the fallback demo.
-- **Not built yet.** Product detectors/API, auth, AI queue/validator/decisions, review screens, chat and story screens.
-  The Phase 1 heartbeat worker is not the AI queue. All 284 legacy end-to-end requirement IDs remain
+- **Not built yet.** Live model/account checks, chat, agent-team/story screens and overnight refresh import.
+  Product auth, fund API/screens, AI queue/validator/decision storage and review now exist. All 284 legacy end-to-end requirement IDs remain
   `NOT_IMPLEMENTED`; Phase 1 support is reported by slice.
 - **Plan.** `plans/2026-10-10-product-build-plan.md`, confirmed by delegation (DEC-030). The open questions are in `team-asks.md`.
 - **Running at handoff:** the all-fund TEFAS snapshot download (started 14:30, 2,136 funds, into `~/.local/share/project-50k/overnight/2026-10-10/`) and the live research demo.
@@ -74,6 +74,12 @@ newer.
   one immutable calibration, and an idempotent rerun. API/DTO checks pass and all 131 events remain candidates.
   Linux `c8bd652`: 810 tests OK (37 explained skips); frozen 9 and 88 pass. See the
   [Phase 2 completion report](blackswan-phase2-completion.md). Phase 3 full-stack work is underway.
+- Phase 3 `2158638`: login/session auth, protected real fund pages/evidence, original/effective decision display,
+  review, bounded AI wrapper/egress/validator and leased worker. Isolated browser login→override→logout passes.
+  Linux 827 OK (44 explained skips), frozen 9/88 pass; [completion report](blackswan-phase3-completion.md).
+- Local admin credentials were generated into ignored `secrets/local-admin-login.json` without displaying them.
+  Product is healthy on 3070/8770, real mock count zero. OpenAI key file is absent; live AI remains off.
+- Snapshots and KAP lists completed; SPK has 194 discovered PDFs. Profiles/prices continue externally.
 
 ## Decisions after the handoff
 

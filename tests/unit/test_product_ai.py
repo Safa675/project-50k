@@ -11,6 +11,7 @@ from uuid import uuid4
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from types import SimpleNamespace
+from concurrent.futures import ThreadPoolExecutor
 from pydantic import ValidationError
 from p50k.product.ai_client import AIUnavailable,reserve,settle,AIConfig,decide
 from p50k.product.egress import Packet,Evidence,allowed_options
@@ -98,3 +99,26 @@ class AIRuntimeDatabaseTests(TestCase):
         self.assertIsNotNone(job)
         self.assertFalse(finish(self.settings,str(job[0]),'wrong-owner'))
         self.assertTrue(finish(self.settings,str(job[0]),'synthetic-owner'))
+
+    def test_concurrent_reservations_cannot_exceed_the_bucket_cap(self):
+        def attempt(_):
+            try:return reserve(self.settings,self.bucket,Decimal('.75'))
+            except AIUnavailable:return None
+        with ThreadPoolExecutor(max_workers=2) as workers:
+            outcomes=list(workers.map(attempt,range(2)))
+        self.assertEqual(sum(value is not None for value in outcomes),1)
+        settle(self.settings,next(value for value in outcomes if value is not None),Decimal('.75'))
+
+    def test_two_workers_claim_distinct_jobs_and_expired_lease_changes_owner(self):
+        jobs={enqueue(self.settings,'THF',uuid4().hex*2),enqueue(self.settings,'TP2',uuid4().hex*2)}
+        owners=('synthetic-first-'+uuid4().hex,'synthetic-second-'+uuid4().hex)
+        with ThreadPoolExecutor(max_workers=2) as workers:
+            claimed=list(workers.map(lambda owner:claim(self.settings,owner),owners))
+        self.assertEqual({str(job[0]) for job in claimed},jobs)
+        with connect(self.settings) as connection:
+            connection.execute("UPDATE ops.jobs SET lease_until=now()-interval '1 second' WHERE job_id=%s",(claimed[0][0],))
+        recovered=claim(self.settings,'synthetic-recovery')
+        self.assertEqual(recovered[0],claimed[0][0])
+        self.assertFalse(finish(self.settings,str(recovered[0]),owners[0]))
+        self.assertTrue(finish(self.settings,str(recovered[0]),'synthetic-recovery'))
+        self.assertTrue(finish(self.settings,str(claimed[1][0]),owners[1]))

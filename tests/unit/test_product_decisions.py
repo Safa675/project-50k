@@ -12,6 +12,7 @@ from p50k.product.db import connect
 from p50k.product.decisions import build_packet,evaluate,decision_rows,review
 from p50k.product.settings import Settings
 from p50k.product import detector_pipeline as pipeline
+from p50k.product import decisions as decision_module
 
 @unittest.skipUnless(os.environ.get('P50K_TEST_DATABASE')=='1','Requires isolated p50k_dev')
 class DecisionFlowTests(TestCase):
@@ -41,3 +42,13 @@ class DecisionFlowTests(TestCase):
         with self.assertRaises(ValueError):review(settings,first['decision_id'],str(actor),'OVERRIDE',changed,'')
         review(settings,first['decision_id'],str(actor),'REJECT',None,'Synthetic rejection')
         self.assertEqual(decision_rows(settings,code)[0]['effective_value'],'UNDECIDED')
+        bad={'decision':'MATERIAL','cited_evidence_ids':[packet.evidence[0].evidence_id],
+             'rationale_tr':'İki katına çıktı.','missing_evidence_tr':''}
+        with patch.object(decision_module,'PROMPT_VERSION','synthetic-invalid-v2'),patch.object(decision_module,'decide',return_value=(bad,'synthetic-bad-call','synthetic')) as model:
+            failed=evaluate(settings,code,AIConfig(mode='mock'))
+            self.assertEqual(failed['validation_state'],'INVALID')
+            blocked=evaluate(settings,code,AIConfig(mode='mock'))
+            self.assertTrue(blocked['blocked'])
+            self.assertFalse(blocked['cached'])
+            self.assertEqual(model.call_count,2)
+        self.assertEqual(decision_rows(settings,code)[0]['decided_by'],'HUMAN')
