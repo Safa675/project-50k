@@ -60,7 +60,11 @@ The team is looking at [TauricResearch/TradingAgents](https://github.com/tauricr
   - Agents never issue buy/sell calls.
   - Any policy PDF is a draft for an insurer's review, not an issued or priced policy.
   - The $20 LLM cap holds.
-- **Status.** The study and design go into the build plan once they are reviewed.
+- **Status.** Studied, designed and critiqued on 2026-10-10; see `docs/notes/research-2026-10-10/agents-*.md` and
+  section 7 of the build plan. TradingAgents' code is not reused; we copy only its structure, as a fixed pipeline in our
+  own worker. Before the freeze that means server-written briefs, then a challenger, then a committee with human
+  override. For insurance, the policy writer becomes a deterministic insurer-review print view, "Tetikleyici Endeksi
+  ve Kanıt Spesifikasyonu", never a policy schedule. LLM policy writing and PDFs come after the event.
 
 The final business plan is due Saturday evening, after the mentor meetings.
 
