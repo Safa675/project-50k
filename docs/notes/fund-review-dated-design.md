@@ -39,7 +39,15 @@ sealed.
 
 - Review point A (protocol and DEC-026): approved in chat on 2026-10-10 and
   committed as `d8e445b` before any dated runtime commit.
-- Review point B (synthetic `/preview/dates` layout): pending.
-- Review point C (real `/dates` after sealing): pending.
+- Review point B (synthetic `/preview/dates` layout): delegated to the agent by DEC-027 and done on
+  2026-10-10 before the real view was opened, from private screenshots at 390, 768 and 1440 px of the ready,
+  earliest-date, detail and unregistered-date states. No horizontal overflow, the guard sentence on every
+  state, no fabricated rows in error states. The only console message was one 404 for the absent favicon.
+- Review point C (real `/dates` after sealing): delegated likewise and done on 2026-10-10 on the sealed index
+  `6623c78d…`, at the same widths for the default date, 2025-10-31, an unregistered date and a fund detail
+  page. Same results. Notes: the native select truncates the long window-end label on desktop (the full text
+  shows when opened); at early dates the eligible crossings that sort first include liquidated targets, which
+  is exactly the reading the guard sentence and DEC-025's pitch limits address.
 
-These reviews approve layout and wording only. G09 (design gate) stays open.
+These reviews approve layout and wording only. Screenshots of real data stay private. G09 (design gate)
+stays open.
