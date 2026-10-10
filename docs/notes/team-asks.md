@@ -8,6 +8,7 @@ Newest first within each person. Times are Europe/Istanbul.
 
 | Since | Type | Ask | Status |
 |---|---|---|---|
+| 2026-10-10 | Product decision | Make the product understandable for nontechnical users and explain how conclusions are reached | Closed in DEC-033: plain-language UI, method/result disclosures, dated last-known prices, genuine logos and validated streaming chat implemented; internals remain in audit/API records |
 | 2026-10-10 | Delegation | Handle all Git work, including pushes and safe pulls | Confirmed: Codex owns commits, merge commits, pushes and protected-path-checked pulls. Mirza need not perform routine Git steps |
 | 2026-10-10 | Decision | Select the stock universe | Closed: current BIST 30; real catalog, daily charts and source evidence implemented; stock classifier/AI remains outside this slice |
 | 2026-10-10 | Action | Refresh Figma design tools for all 22 supplied nodes | Closed 2026-10-10: Figma tools available; all 22 contexts/screenshots read and mapped. No reinstall or token is needed |

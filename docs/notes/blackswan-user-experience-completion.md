@@ -93,6 +93,52 @@ Three official SVGs had CRLF source bytes; only their line endings were normaliz
 to LF. Provenance retains both source hashes and served-file hashes. All 87 asset
 hashes match; their graphical content is unchanged.
 
+Final browser run against the built images on isolated PostgreSQL:
+
+```text
+npm run test:browser -- --workers=1
+16 passed (27.3s)
+```
+
+This includes the fixed review/logout flow, no hydration errors with the browser
+in Istanbul and Docker in UTC, actual paragraphs visible before HTTP completion,
+method disclosures, charts, feedback, notifications and mobile layouts. Code
+checkpoint: `84438f7`. The pre-commit leak scan checked 144 changed paths and
+returned zero private-path, real-price, fund-name and non-target-code hits.
+
+Linux verification in the clean isolated clone at `84438f7`:
+
+```text
+PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=services .venv/bin/python -m unittest discover -s tests -t . -v
+904 discovered in 88.061s; OK (skipped=73)
+831 executed passes; 71 PostgreSQL checks and 2 Windows launcher checks skipped
+
+cd research/events/2026-09-17-spk-liquidations/price_detectors
+../../../../.venv/bin/python -m unittest test_detectors -v
+9 passed in 0.676s; zero skips
+
+cd docs/handoff-v0.5
+../../.venv/bin/python -m unittest discover -s tests -v
+88 passed in 0.008s; zero skips
+```
+
+PostgreSQL skips are not passes; the separate executed database suites are listed
+above. Logs remain outside Git at
+`/home/mirza/p50k-baseline-20261010/logs/release-84438f7-*.log`.
+The local rollout on 3070/8770 is healthy with eleven migrations, live AI mode,
+2,133 funds, 870 stock observations and zero mock decisions. The fallback
+processes on 3060/8767/8768 are unchanged.
+
+The fresh backup/restore rehearsal verified 39 tables and eleven migrations,
+including the paragraph-audit table and new live proposals. Retained artifact:
+`backups/p50k-20261010T180646Z-c6a0b94390324035849de26df9ea8875.dump`.
+The first attempt exposed an initialization-readiness race in the isolated
+restore container. A narrow TCP readiness check now waits for PostgreSQL's final
+server instead of its temporary initialization socket; the corrected script
+completed a full restore. All attempts and hashes are preserved in
+[the backup report](blackswan-backup-restore-rehearsal.md). No product volume was
+removed. The Sunday freeze/cold-boot rehearsal remains separate.
+
 ## Live quality checks
 
 The initial chat v3 pilot produced two valid responses and withheld one unknown

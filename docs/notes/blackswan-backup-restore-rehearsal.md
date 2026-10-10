@@ -136,6 +136,85 @@ and volume had been removed. Both retained artifact paths passed `git check-igno
 No other tests or fixture changes were performed during this rehearsal. The
 same database-only recovery limitations below still apply.
 
+## Release snapshot after migration 011 and startup-readiness correction
+
+The first two verified runs above are preserved. After the updated product
+release, the same standard command was run again:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File ops/local/backup-restore-product.ps1
+```
+
+The first attempt retained
+`p50k-20261010T180440Z-b9c7378c96cf441a9ca1fd518b09ee63.dump`, but failed while
+creating the credential-free role in the isolated restore database. This dump
+is **not verified** and has no successful restore summary. The product database
+was not changed. The script's cleanup removed its isolated restore resources;
+the dump was kept.
+
+A standard retry succeeded without script changes:
+
+```text
+Backup/restore VERIFIED: p50k-20261010T180524Z-b73e0eb6106e4fdd912b448edd2072af.dump; bytes=34419954; tables=39; migrations=11
+```
+
+Its completion time was `2026-10-10T18:06:19.8501864Z`, with SHA-256
+`0ff9804e5051c00985f49a101122b62924c81e5c7453f5711547945085a72763`.
+The dump and matching `.summary.json` remain in ignored `backups/`.
+
+The readiness race was then corrected with one command-argument change:
+`pg_isready -h 127.0.0.1` now waits for the final PostgreSQL TCP listener inside
+the isolated container. The pinned image's `/usr/local/bin/docker-entrypoint.sh`
+was inspected read-only: line 297 starts its temporary initialization server
+with `listen_addresses=''`, so a Unix-socket readiness probe could succeed
+before normal startup was complete. Network mode remains `none`; no host port,
+credential, ownership, restore or cleanup behavior was changed.
+
+The updated script completed a further full dump/restore verification, exit 0:
+
+```text
+Backup/restore VERIFIED: p50k-20261010T180646Z-c6a0b94390324035849de26df9ea8875.dump; bytes=34419956; tables=39; migrations=11
+```
+
+Completed at `2026-10-10T18:07:36.7497218Z` (21:07 Istanbul). Latest verified
+artifact SHA-256:
+`71c3ec93fb8926265be29931a7d05392ca2e5df9f7c7122c7f01e3b0d5618c19`.
+Both its dump and matching `.summary.json` are retained under ignored `backups/`.
+
+All 39 table counts, eleven migration hashes, detector/AI row checksums and
+immutable-trigger registrations matched the exported source snapshot in both
+successful release runs. Their representative counts were identical:
+
+| Table | Rows |
+|---|---:|
+| `ref.funds` | 2,133 |
+| `obs.fund_prices` | 1,755,010 |
+| `obs.fund_snapshots` | 3,304 |
+| `obs.kap_documents` | 12,111 |
+| `ref.stock_instruments` | 30 |
+| `obs.stock_prices` | 870 |
+| `obs.stock_actions` | 5 |
+| `det.signals` | 51,192 |
+| `det.detector_versions` | 1 |
+| `ai.decisions` | 15 |
+| `ai.chat_turns` | 6 |
+| `ai.chat_stream_chunks` | 0 |
+| `auth.users` | 1 |
+
+Migration `011_chat_stream_chunks.sql` and its table/ACL definitions are included.
+The table had no rows at the snapshot; its migration hash, trigger registration
+and empty checksum matched. Populated paragraph restoration and a separate
+application-role query against that table were not exercised.
+The standard owner-update rejection checks for evidence, decisions and stock
+prices and the restored application-role checks passed.
+
+`KeepRestore` was false. After the corrected-script run, Docker listings showed
+zero containers and zero volumes with that run's ownership label. The restore
+had network mode `none` and zero published ports. Product ports remained present;
+the fallback listener PIDs remained 27116/19280/32216 on 3060/8767/8768.
+No secrets or data rows were printed, and no other test fixtures were mutated.
+The remaining recovery limitations below still apply.
+
 ## Scope and remaining work
 
 The backup carries the private DELAYED product data and immutable development
