@@ -46,6 +46,24 @@ what the shared platform must provide for each, and what is still open. Decision
 Both ideas run on the same pipeline: ingestion, detectors, decision records and the API. That is why the core is
 built first.
 
+### Agent team (under study since 2026-10-10)
+
+The team is looking at [TauricResearch/TradingAgents](https://github.com/tauricresearch/tradingagents)
+(Apache-2.0) as a model.
+
+- **How it would work.** A team of LLM agents reads the data, analysts report, a challenger debates them, and a
+  committee reaches an outcome.
+- **Policy writer.** For the insurance route, a policy-writer agent would draft the policy document as a PDF.
+- **Our constraints.**
+  - Scores stay deterministic.
+  - Every agent decision can be overridden by a human.
+  - Agents never issue buy/sell calls.
+  - Any policy PDF is a draft for an insurer's review, not an issued or priced policy.
+  - The $20 LLM cap holds.
+- **Status.** The study and design go into the build plan once they are reviewed.
+
+The final business plan is due Saturday evening, after the mentor meetings.
+
 ## Open questions
 
 | Question | Who | Status |
@@ -57,6 +75,45 @@ built first.
 | How would a policy be priced? A defensible price needs event base rates, and the archive has one labelled event cluster (the 17 September 2026 SPK order, 131 funds) | Team | Open |
 | Which institutions to name in the pitch without implying a partnership | Safa | Open |
 
-## Research notes
+## Research notes (2026-10-10; orientation, not legal advice; verify before relying on them)
 
-The build plan's research pass fills this section with sourced findings. Treat it as orientation, not legal advice.
+**Insurance.**
+- **Who may do what.** Under Insurance Law 5684:
+  - only licensed insurers carry risk (art. 5);
+  - policy wording follows general conditions approved by the regulator (art. 11);
+  - only registered agencies, licensed brokers or banks may sell (art. 23).
+
+  A data company cannot issue, price or sell policies itself. The defensible role is the insurer's **trigger and
+  evidence engine**.
+- **Channels.** Banks are exempt from agency registration. A brokerage app such as Midas would probably need an
+  agency or broker partner (unverified).
+- **Defensible trigger.** An objective public regulatory event: an SPK order halting a fund's TEFAS trading or
+  liquidating it. Never a NAV fall. That is market risk, which would turn the product into an option or a
+  guarantee under SPK.
+- **Claims.** We supply a trigger report and the insurer decides the claim. A 2026 amendment reportedly made claims
+  handling a licensed support service (secondary source, unverified).
+- **Existing protection.**
+  - YTM (the investor compensation scheme) excludes fund value declines and liquidation shortfalls.
+  - TMSF does not cover funds.
+  - SPK's own interim payments (1 October 2026) are capped per investor per fund.
+  - So the gap is real. A gap does not prove demand.
+- **Pricing.** The archive holds one correlated event cluster. A single cluster in five years gives a 95% interval of
+  roughly 0.005 to 1.1 clusters a year, so there is no actuarial premium. The defensible next step is a base-rate study
+  of SPK bulletins from 2005 on. The insurer prices with scenario stress tests and aggregate limits.
+- **Comparable.** Nexus Mutual's "Custody Cover" paid on withdrawal halts after a 90-day wait with proof of loss. It
+  was later discontinued.
+
+**B2B anomaly data.**
+- **SPK line.** Under Communiqué III-37.1 art. 45(2), "general recommendations and financial information" are not
+  investment advice. Services called buy/sell signals may breach capital-markets law. Sell **descriptive** anomalies
+  with evidence to licensed institutions, never buy or sell calls, and disclose conflicts of interest.
+- **Data rights are the larger blocker.**
+  - TEFAS (Takasbank) has no published redistribution licence.
+  - KAP sends high-volume use to its contracted REST service, which needs MKK authorization.
+  - Real data stays on localhost until rights are reviewed (DEC-027).
+
+**Technical view.** Both stories run on the same core and each adds about two screens. B2B is easier to defend by
+Sunday; insurance can be shown on the same engine with a licensed insurer as the risk carrier.
+
+Sources and details: `docs/notes/research-2026-10-10/research-product.md` (regulation and products) and
+`inventory-data.md` (data sources).
