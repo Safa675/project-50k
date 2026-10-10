@@ -13,6 +13,7 @@ from fastapi.responses import JSONResponse, StreamingResponse
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
 from p50k.product.logging import configure_logging
+from p50k.product.routes import router
 from p50k.product.settings import Settings
 
 
@@ -36,6 +37,8 @@ def create_app(settings: Settings | None = None, readiness: Callable[[Settings],
         yield
 
     application = FastAPI(title="BlackSwan", docs_url=None, redoc_url=None, openapi_url=None, lifespan=lifespan)
+    application.state.product_settings = config
+    application.include_router(router)
     application.add_middleware(TrustedHostMiddleware, allowed_hosts=list(config.allowed_hosts))
     public_paths = {"/health/live", "/health/ready"}
     if config.test_endpoints:

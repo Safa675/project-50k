@@ -292,7 +292,7 @@ class PostgreSQLFoundationTests(unittest.TestCase):
                 (directory / path.name).write_bytes(path.read_bytes())
             original = directory / "001_foundations.sql"
             original.write_bytes(original.read_bytes() + b"\n-- synthetic mutation\n")
-            (directory / "003_synthetic.sql").write_bytes(b"CREATE TABLE ops.synthetic_must_not_exist (value INTEGER);\n")
+            (directory / "005_synthetic.sql").write_bytes(b"CREATE TABLE ops.synthetic_must_not_exist (value INTEGER);\n")
             with self.assertRaises(MigrationError):
                 run_migrations(self.owner, directory=directory, app_password=app_password)
             self.assertIsNone(self.owner.execute("SELECT to_regclass('ops.synthetic_must_not_exist')").fetchone()[0])
@@ -303,14 +303,14 @@ class PostgreSQLFoundationTests(unittest.TestCase):
             directory = Path(temporary)
             for path in DEFAULT_DIRECTORY.glob("*.sql"):
                 (directory / path.name).write_bytes(path.read_bytes())
-            (directory / "003_synthetic_failure.sql").write_bytes(
+            (directory / "005_synthetic_failure.sql").write_bytes(
                 b"CREATE TABLE ops.synthetic_rollback (value INTEGER);\nSELECT 1 / 0;\n",
             )
             with self.assertRaises(psycopg.errors.DivisionByZero):
                 run_migrations(self.owner, directory=directory, app_password=app_password)
             self.assertIsNone(self.owner.execute("SELECT to_regclass('ops.synthetic_rollback')").fetchone()[0])
             self.assertIsNone(self.owner.execute(
-                "SELECT filename FROM ops.schema_migrations WHERE filename = '003_synthetic_failure.sql'",
+                "SELECT filename FROM ops.schema_migrations WHERE filename = '005_synthetic_failure.sql'",
             ).fetchone())
 
     def test_mock_and_synthetic_guards_outside_development_database(self):

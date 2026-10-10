@@ -8,6 +8,8 @@
 !research/events/2026-09-17-spk-liquidations/
 !research/events/2026-09-17-spk-liquidations/price_detectors/
 !research/events/2026-09-17-spk-liquidations/price_detectors/detectors.py
+!research/events/2026-09-17-spk-liquidations/all_funds_v2/
+!research/events/2026-09-17-spk-liquidations/all_funds_v2/PROTOCOL.md
 !db/
 !db/**
 !web/
