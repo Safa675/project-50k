@@ -23,3 +23,13 @@ research/events/*/raw/
 
 # Hand-off packages that carry private data.
 /friend-handoff/
+
+# Product secrets, local binds, database backups and private test artifacts.
+/secrets/
+/backups/
+**/test-results/
+**/playwright-report/
+*.sqlite3
+*.sqlite3-*
+*.dump
+/compose.override.yaml

@@ -1,0 +1,21 @@
+# Copy to the gitignored compose.override.yaml and set only these local input paths.
+# Every archive input is read-only and is mounted only for CLI import jobs.
+services:
+  worker:
+    volumes:
+      - type: bind
+        source: ${P50K_INPUT_RAW_DIR:?Set the repository-root raw directory}
+        target: /inputs/raw
+        read_only: true
+      - type: bind
+        source: ${P50K_INPUT_SNAPSHOT_LOCAL:?Set the existing local snapshot database path}
+        target: /inputs/snapshots-local.sqlite3
+        read_only: true
+      - type: bind
+        source: ${P50K_INPUT_SNAPSHOT_FORWARD:?Set the existing forward snapshot database path}
+        target: /inputs/snapshots-forward.sqlite3
+        read_only: true
+      - type: bind
+        source: ${P50K_INPUT_SPK_MAP:?Set the existing SPK fund-mapping JSON path}
+        target: /inputs/spk-mapping.json
+        read_only: true

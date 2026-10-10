@@ -13,6 +13,11 @@ api = [
 ]
 api-test = ["httpx2"]
 research = ["numpy==2.4.6", "pymupdf==1.27.2.3"]
+product = [
+  "openai==3.28.0",
+  "psycopg[binary,pool]==3.3.6",
+  "argon2-cffi==25.1.0",
+]
 
 [tool.uv]
 package = false

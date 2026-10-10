@@ -39,6 +39,31 @@ newer.
 - **Plan.** `plans/2026-10-10-product-build-plan.md`, confirmed by delegation (DEC-030). The open questions are in `team-asks.md`.
 - **Running at handoff:** the all-fund TEFAS snapshot download (started 14:30, 2,136 funds, into `~/.local/share/project-50k/overnight/2026-10-10/`) and the live research demo.
 
+## Codex takeover, 2026-10-10
+
+- Main remains clean on `main` at `19989c5`; the live demo stays on its original ports.
+- Mirza approved all four takeover recommendations. [DEC-031](../decisions/DEC-031-derived-evidence-openai-egress.md)
+  records D7 and the other answers; the ten exact-name spot checks remain pending.
+- Build work now runs in `C:\Users\mirza\Desktop\Hackathon\project-50k-app`, branch `product/build`.
+- Docker Desktop started locally; the four pinned images were pulled. The product extra is locked and installed.
+- D9 downloads are authorized immediately, not only overnight. Restartable runners preserve one paced stream per host
+  and write only to the external overnight folder. SPK completed 194 PDFs; KAP is collecting the authorized missing
+  TEFAS-traded report lists using the official public directory. Profiles and refreshed prices wait for the existing
+  all-fund snapshot collector before requesting TEFAS.
+- Baseline at `19989c5`: frontend typecheck/build exit 0, 118 unit tests and 65 browser tests pass; frozen Python
+  suites pass 9 and 88 tests. Root Windows suite: 663 tests, 6 failures, 30 errors, 1 skip. Diagnostic: 663 tests,
+  the three known residual failing names only (1 failure, 2 errors), 1 skip. Linux baseline at that commit passes
+  all 663 root, 9 frozen detector and 88 handoff tests, with no skips.
+- Archive audit: 2,133 listed funds; 2,022 price files contain 1,725,078 dated rows, including 1,673,412 positive
+  prices and 51,666 nulls. The importer must preserve missing rows, not count only positive prices.
+- Phase 1 foundations run on loopback 3070/8770, with PostgreSQL on 5433 under the dev overlay. Real archive counts
+  reconcile: 2,133 funds, 1,725,078 prices, 1,173 snapshots, 1,292 KAP document entries, 1,255 report-index rows,
+  and 131 candidate regulatory events. Repeat imports add zero observation rows. Permissions and isolated proxy
+  checks pass; real-data access defaults to denied until Phase 3 auth. AI is off. See the
+  [completion report](blackswan-phase1-completion.md) for actual checks and limitations.
+- T0.2 key readiness and T1.7a ten exact-match human checks remain pending; all SPK events remain candidates.
+  K1–K6 and every do-not-claim item below remain carried forward. No frozen requirement registry was changed.
+
 ## Decisions after the handoff
 
 | Record | Date | Decision |
@@ -50,6 +75,7 @@ newer.
 | [DEC-028](../decisions/DEC-028-deploy-ready-ai-native-build.md) | 2026-10-10 | Team roles; deploy-ready, AI-native build on localhost; OpenAI with a $25 limit; plain PostgreSQL with its own auth; code freeze Sunday 13:00; earlier specs are guides |
 | [DEC-029](../decisions/DEC-029-open-all-funds.md) | 2026-10-10 | Every downloaded fund is open for product use; the development/test split is dropped |
 | [DEC-030](../decisions/DEC-030-blackswan-working-agreements.md) | 2026-10-10 | Product name BlackSwan; no placeholders; $25 a target, not a hard cap; plan confirmed by delegation; persistent reminders for critical unanswered items; downloads started; Codex handoff |
+| [DEC-031](../decisions/DEC-031-derived-evidence-openai-egress.md) | 2026-10-10 | Mirza approved derived-evidence-only OpenAI processing, all D9 downloads now, the product worktree, and the closest-name identity; Safa's D7 answer and ten exact-name checks remain open |
 
 Still binding (the integrity rules hold even though product requirements flex):
 

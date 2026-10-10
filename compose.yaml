@@ -1,0 +1,122 @@
+name: p50k
+
+x-app-environment: &app-environment
+  P50K_DB_HOST: db
+  P50K_DB_PORT: "5432"
+  P50K_DB_NAME: ${P50K_DB_NAME:-p50k}
+  P50K_DB_USER: p50k_app
+  P50K_DB_PASSWORD_FILE: /run/secrets/db_app_password
+  P50K_AI_MODE: "off"
+  P50K_TEST_ENDPOINTS: ${P50K_TEST_ENDPOINTS:-false}
+  P50K_ALLOWED_HOSTS: 127.0.0.1,localhost,api
+  P50K_ALLOWED_ORIGINS: http://127.0.0.1:3070,http://localhost:3070,http://127.0.0.1:3071,http://localhost:3071
+
+x-python-build: &python-build
+  context: .
+  dockerfile: ops/docker/api.Dockerfile
+
+services:
+  db:
+    image: postgres:18.6
+    environment:
+      POSTGRES_DB: ${P50K_DB_NAME:-p50k}
+      POSTGRES_USER: p50k_owner
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_owner_password
+      POSTGRES_INITDB_ARGS: --auth-host=scram-sha-256
+    secrets:
+      - db_owner_password
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"']
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    restart: unless-stopped
+
+  migrate:
+    build: *python-build
+    image: p50k-product-api:local
+    command: [python, -m, p50k.product.migrate]
+    environment:
+      <<: *app-environment
+      P50K_DB_USER: p50k_owner
+      P50K_DB_PASSWORD_FILE: /run/secrets/db_owner_password
+      P50K_APP_PASSWORD_FILE: /run/secrets/db_app_password
+    secrets:
+      - db_owner_password
+      - db_app_password
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+
+  api:
+    build: *python-build
+    image: p50k-product-api:local
+    environment: *app-environment
+    secrets:
+      - db_app_password
+      - auth_pepper
+    ports:
+      - "127.0.0.1:${P50K_API_PORT:-8770}:8000"
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health/ready', timeout=5)"]
+      interval: 10s
+      timeout: 6s
+      retries: 6
+    restart: unless-stopped
+
+  worker:
+    build: *python-build
+    image: p50k-product-api:local
+    command: [python, -m, p50k.product.worker]
+    environment: *app-environment
+    secrets:
+      - db_app_password
+      - auth_pepper
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      test: [CMD, python, -c, "import pathlib,time; assert time.time()-float(pathlib.Path('/tmp/p50k-worker-heartbeat').read_text()) < 35"]
+      interval: 10s
+      timeout: 5s
+      retries: 4
+    restart: unless-stopped
+
+  web:
+    build:
+      context: .
+      dockerfile: ops/docker/web.Dockerfile
+    image: p50k-product-web:local
+    environment:
+      P50K_API_ORIGIN: http://api:8000
+      HOSTNAME: 0.0.0.0
+      PORT: "3000"
+      NEXT_TELEMETRY_DISABLED: "1"
+    ports:
+      - "127.0.0.1:${P50K_WEB_PORT:-3070}:3000"
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: [CMD, node, -e, "fetch('http://127.0.0.1:3000/api/p/health/ready').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"]
+      interval: 10s
+      timeout: 6s
+      retries: 6
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+
+secrets:
+  db_owner_password:
+    file: ./secrets/db_owner_password
+  db_app_password:
+    file: ./secrets/db_app_password
+  auth_pepper:
+    file: ./secrets/auth_pepper

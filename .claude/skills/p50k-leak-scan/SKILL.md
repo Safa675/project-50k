@@ -20,8 +20,10 @@ The script:
 - reads every price file in `raw/tefas/prices/` (all funds are open, DEC-029) and the fund names in every snapshot
   database it finds (`raw/snapshots/`, `$P50K_DATA_DIR`, `~/.local/share/project-50k`, including the forward
   database);
-- checks the non-target codes of the top-100 list (`top100_funds.txt`), because short codes for all funds would
-  collide with ordinary abbreviations;
+- checks complete non-target ticker tokens from the top-100 list (`top100_funds.txt`); checks all saved fund-list
+  codes as complete quoted values and filenames in tests, fixtures, seeds and JSON/CSV. Unit labels, environment
+  names, license identifiers and mixed-case dependency hashes are not fund identifiers;
+- includes names from the entire saved fund list and price files in external overnight output;
 - in a clone without private data, set `P50K_RAW_DIR` to another checkout's `raw/` directory;
 - scans the working copy and, when staged, the index copy of every new, modified or staged text file, including
   names with non-ASCII characters;

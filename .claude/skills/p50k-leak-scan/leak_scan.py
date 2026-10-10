@@ -7,6 +7,7 @@ Exit codes: 0 no hits, 1 hits found, 2 private data absent (value/name checks sk
 """
 from __future__ import annotations
 
+import csv
 import json
 import os
 import re
@@ -54,6 +55,13 @@ def snapshot_names(raw: Path) -> set[str] | None:
     if data_dir:
         candidates += [data_dir / "fund_snapshots.sqlite3", data_dir / "fund_snapshots_forward.sqlite3"]
     names: set[str] | None = None
+    listing = raw / "tefas/responses/fonGetiriBazliBilgiGetir_YAT.body"
+    if listing.is_file():
+        names = set()
+        for row in json.loads(listing.read_text(encoding="utf-8")).get("resultList", []):
+            name = row.get("fonUnvan")
+            if isinstance(name, str) and len(name.strip()) >= 12:
+                names.add(name.strip().casefold())
     for path in dict.fromkeys(candidates):
         if not path.is_file():
             continue
@@ -70,6 +78,22 @@ def snapshot_names(raw: Path) -> set[str] | None:
         finally:
             connection.close()
     return names
+
+
+def code_pattern(codes: list[str]) -> re.Pattern[str]:
+    """A ticker is a complete token, not a substring of a mixed-case hash or word."""
+    return re.compile(r"(?<![A-Za-z0-9])(" + "|".join(map(re.escape, codes)) + r")(?![A-Za-z0-9])")
+
+
+def fixture_code_pattern(codes: list[str]) -> re.Pattern[str]:
+    """All-fund IDs in string values and file paths; not units, env names or licenses."""
+    alternatives = "|".join(map(re.escape, codes))
+    return re.compile(r"(?<=[\"'])((?:" + alternatives + r"))(?=[\"'])"
+                      r"|(?<=[/\\\"'])((?:" + alternatives + r"))(?=[_.][0-9]|\.json|\.csv|\.pdf)")
+
+
+def csv_codes(line: str, codes: set[str]) -> set[str]:
+    return {cell.strip() for row in csv.reader([line]) for cell in row if cell.strip() in codes}
 
 
 def texts(repo: Path, path: str, staged: bool) -> list[str]:
@@ -99,12 +123,20 @@ def main() -> int:
     nontarget = sorted(set(codes) - TARGETS)
     values: set[str] = set()
     prices = raw / "tefas/prices"
-    for path in sorted(prices.glob("*.json")) if prices.is_dir() else []:
+    price_paths = list(prices.glob("*.json")) if prices.is_dir() else []
+    overnight = Path.home() / ".local/share/project-50k/overnight"
+    price_paths += list(overnight.glob("*/prices/*.json")) if overnight.is_dir() else []
+    for path in sorted(price_paths):
         for token in re.findall(r"\d+\.\d+", path.read_text(encoding="utf-8")):
             if len(token.replace(".", "").lstrip("0")) >= 7:
                 values.add(token)
     names = snapshot_names(raw)
-    code_pattern = re.compile(r"(?<![A-Z0-9])(" + "|".join(map(re.escape, nontarget)) + r")(?![A-Z0-9])")
+    top100_pattern = code_pattern(nontarget)
+    listing = raw / "tefas/responses/fonGetiriBazliBilgiGetir_YAT.body"
+    all_codes = set(codes)
+    if listing.is_file():
+        all_codes.update(row["fonKodu"] for row in json.loads(listing.read_text(encoding="utf-8")).get("resultList", []))
+    all_fund_pattern = fixture_code_pattern(sorted(all_codes - TARGETS))
     hits: dict[str, list[str]] = {"private or ignored path": [], "price value": [], "fund name": [], "non-target code": []}
     files = changed_files(repo)
     ignored = set()
@@ -126,7 +158,10 @@ def main() -> int:
                 if names and any(name in line.casefold() for name in names):
                     seen.add(f"fund name|{rel}:{number}")
                 if rel != UNIVERSE:
-                    seen.update(f"non-target code|{rel}:{number}:{m.group(1)}" for m in code_pattern.finditer(line))
+                    pattern = all_fund_pattern if rel.endswith((".json", ".csv")) or rel.startswith(("tests/", "fixtures/", "seeds/")) else top100_pattern
+                    seen.update(f"non-target code|{rel}:{number}:{m.group(1) or m.group(2)}" for m in pattern.finditer(line))
+                    if rel.endswith(".csv"):
+                        seen.update(f"non-target code|{rel}:{number}:{code}" for code in csv_codes(line, all_codes - TARGETS))
         for item in sorted(seen):
             kind, location = item.split("|", 1)
             hits[kind].append(location)

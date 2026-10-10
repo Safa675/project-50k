@@ -9,12 +9,12 @@ Newest first within each person. Times are Europe/Istanbul.
 | Since | Type | Ask | Status |
 |---|---|---|---|
 | 2026-10-10 | Decision | Read and confirm the build plan | Closed 2026-10-10: confirmed by delegation (DEC-030); agents ask only about problematic items |
-| 2026-10-10 | Decision | D1: build in the separate worktree folder `C:\Users\mirza\Desktop\Hackathon\project-50k-app` (opened in VS Code), because the main checkout feeds the live demo | Open |
+| 2026-10-10 | Decision | D1: build in the separate worktree folder `C:\Users\mirza\Desktop\Hackathon\project-50k-app` (opened in VS Code), because the main checkout feeds the live demo | Closed 2026-10-10: Mirza confirmed; worktree created on `product/build` |
 | 2026-10-10 | Action, after T1.1 creates the worktree | Put the OpenAI API key in the worktree's gitignored `secrets/openai_api_key` (never in chat or git), and set a $25 hard limit with alerts on the OpenAI project | Open |
-| 2026-10-10 | Decision | D7: only derived evidence goes to OpenAI (detector values, dates, categories, public fund codes and names, event text). No raw series, PDFs or personal data | Open |
-| 2026-10-10 | Decision | D9: the all-fund TEFAS snapshot is already running (started 14:30 on Mirza's "start the download now"). Still to decide: (a) TEFAS fund profiles (a small fetcher; about 1 h), (b) SPK bulletin PDFs 2024–2026 (a downloader; about 25 min), (c) optional overnight KAP report lists for about 970 more funds (3–7 h; the machine must stay on) | Open |
+| 2026-10-10 | Decision | D7: only derived evidence goes to OpenAI (detector values, dates, categories, public fund codes and names, SPK metadata and short quotes). No raw series, TEFAS size/units/investors, KAP text or personal data | Closed 2026-10-10: Mirza approved; recorded in DEC-031. Safa's answer remains open |
+| 2026-10-10 | Decision | D9: profiles, SPK bulletin PDFs 2024–2026 and additional KAP report lists; all output in the external overnight folder | Closed 2026-10-10: Mirza authorized all three, confirmed the laptop stays on, and requested immediate starts. Preserve one paced stream per host |
 | 2026-10-10 | Action | Relay the Safa and Barış asks below | Open |
-| 2026-10-10 | Action, by 17:00 | T1.7a: check the 2026/61 fund mapping (the closest-name match and 10 exact matches) before the events are marked confirmed | Open |
+| 2026-10-10 | Action, by 17:00 | T1.7a: check the 2026/61 fund mapping (the closest-name match and 10 exact matches) before the events are marked confirmed | Partial 2026-10-10: Mirza confirmed the closest-name identity. Ten exact-match checks remain open; delegation requested in chat. Events remain candidates |
 | 2026-10-10 | Action, before 21:00 | T4.0: prepare the machine for the overnight jobs (AC power, sleep set to Never, Windows Update paused until Monday, Docker Desktop starting at login); check the logs at 07:00 | Open |
 
 ## Safa (business, repository owner)
