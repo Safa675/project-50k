@@ -2,7 +2,7 @@
 
 Run product commands from `project-50k-app` on `product/build`, never from the
 dated demo clone. The original demo stays on 3060/8767/8768. Product web/API use
-3070/8770 and do not expose real fund routes before Phase 3 auth. AI is off.
+3070/8770. Real fund routes require session auth. AI defaults to off.
 
 ## Start the product
 
@@ -19,6 +19,11 @@ printing values or overwriting existing files. The base stack does not require
 an OpenAI key. Mirza alone places it in `secrets/openai_api_key`, never in chat.
 `compose.ai.yaml` mounts that file only into API/worker and does not turn AI on.
 Agents never read `.env*` or `secrets/`; runtime consumers read the mounted files.
+
+Local admin: `mirza@blackswan.local`. Mirza can open ignored
+`secrets/local-admin-login.json` manually for its generated password; agents never
+inspect it. Visit `http://127.0.0.1:3070/login`, then fund pages and review.
+There is no public signup or email service.
 
 Check `http://127.0.0.1:3070/api/p/health/ready`. Product containers should be healthy;
 `migrate` should have exited successfully. Add `-f compose.dev.yaml` only when

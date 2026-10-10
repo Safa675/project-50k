@@ -1,0 +1,4 @@
+import Link from 'next/link';
+import {requireUser,serverApi} from '@/lib/auth';
+import DecisionPanel,{Decision} from '@/components/DecisionPanel';
+export default async function Review(){const user=await requireUser();if(user.role==='viewer')return <section><h1>İnceleme yetkisi gerekiyor</h1><p>Bu bölüm analist ve yönetici kullanıcılar içindir.</p></section>;const response=await serverApi('/review');if(!response.ok)throw new Error('İnceleme kuyruğu yüklenemiyor.');const {items}=await response.json();return <section><h1>İnceleme kuyruğu</h1><p>Yapay zekâ kararını kabul edin, gerekçeyle değiştirin veya reddedin. Önceki kararlar korunur.</p>{items.length?items.map((decision:Decision)=><article key={decision.packet_sha256??decision.fund_code}><Link href={`/funds/${decision.fund_code}`}>{decision.fund_code}</Link><DecisionPanel decision={decision} canReview/></article>):<p>İnceleme bekleyen karar bulunmuyor.</p>}</section>;}

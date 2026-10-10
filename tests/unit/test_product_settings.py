@@ -17,10 +17,14 @@ class ProductSettingsTests(unittest.TestCase):
         settings = Settings.from_env({"P50K_TEST_ENDPOINTS": "true", "P50K_DB_NAME": "p50k_dev"})
         self.assertTrue(settings.test_endpoints)
 
-    def test_ai_off_is_the_only_phase_one_mode(self):
-        for mode in ("live", "mock"):
-            with self.subTest(mode=mode), self.assertRaises(ValueError):
-                Settings.from_env({"P50K_AI_MODE": mode})
+    def test_ai_modes_are_explicit_and_mock_requires_development_database(self):
+        self.assertEqual(Settings.from_env({}).ai_mode, "off")
+        self.assertEqual(Settings.from_env({"P50K_AI_MODE":"live"}).ai_mode, "live")
+        with self.assertRaises(ValueError):
+            Settings.from_env({"P50K_AI_MODE":"mock"})
+        self.assertEqual(Settings.from_env({"P50K_AI_MODE":"mock","P50K_DB_NAME":"p50k_dev"}).ai_mode, "mock")
+        with self.assertRaises(ValueError):
+            Settings.from_env({"P50K_AI_MODE":"invalid"})
 
     def test_external_or_wildcard_hosts_and_origins_rejected(self):
         for env in ({"P50K_ALLOWED_HOSTS": "*"}, {"P50K_ALLOWED_HOSTS": "evil.example"}, {"P50K_ALLOWED_ORIGINS": "http://evil.example:3070"}, {"P50K_ALLOWED_ORIGINS": "http://localhost:3070/path"}):

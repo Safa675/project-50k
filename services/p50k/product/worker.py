@@ -7,6 +7,7 @@ import logging
 import signal
 import threading
 import time
+from uuid import uuid4
 
 from p50k.product.logging import configure_logging
 from p50k.product.settings import Settings
@@ -20,6 +21,19 @@ def main() -> None:
         signal.signal(signum, lambda *_: stopped.set())
     logger = logging.getLogger(__name__)
     heartbeat = Path("/tmp/p50k-worker-heartbeat")
+    owner='worker:'+uuid4().hex
+    def keep_alive() -> None:
+        while not stopped.is_set():
+            try:
+                from p50k.product.db import connect
+                with connect(settings) as connection:
+                    connection.execute("SELECT 1")
+                    connection.execute("UPDATE ops.jobs SET lease_until=now()+interval '3 minutes' WHERE status='RUNNING' AND lease_owner=%s",(owner,))
+                heartbeat.write_text(str(time.time()), encoding="ascii")
+            except Exception as error:
+                logger.warning("worker_heartbeat_unavailable",extra={"error_class":type(error).__name__})
+            stopped.wait(10)
+    threading.Thread(target=keep_alive,daemon=True).start()
     while not stopped.is_set():
         try:
             import psycopg
@@ -30,7 +44,8 @@ def main() -> None:
                     "ON CONFLICT (worker_id) DO UPDATE SET "
                     "last_seen_at=EXCLUDED.last_seen_at, status=EXCLUDED.status, details=EXCLUDED.details"
                 )
-            heartbeat.write_text(str(time.time()), encoding="ascii")
+            from p50k.product.ai_worker import step
+            step(settings,owner)
             logger.info("worker_database_heartbeat")
         except Exception as error:
             logger.warning("worker_database_unavailable", extra={"error_class": type(error).__name__})

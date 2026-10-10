@@ -415,14 +415,14 @@ Owner: **C** = Claude, **M** = Mirza, **S** = Safa, **B** = Barış, **T** = tea
 
 ### Phase 3
 
-- [ ] T1.6 Login, with every rule in section 3 and its tests
-- [ ] T3.1 OpenAI wrapper: env model IDs, smoke test, `store: false`, ledger, reservations, caps, modes
-- [ ] T3.2 Egress module and its allowlist test
-- [ ] T3.3 Validator and the Turkish corpus
-- [ ] T3.4 Decision engine (materiality): packets, allowed options, cache, INVALID
-- [ ] T3.5 Review queue and override, effective value per packet, audit trail
-- [ ] T1.8 Queue and worker for `ai_decide`
-- [ ] T3.6 Web: shell, token layer, login, fund list, fund page
+- [x] T1.6 Login, CSRF, expiry/revocation/throttling and PostgreSQL tests
+- [ ] T3.1 Wrapper/caps/reservations/modes built; paid model/account smoke awaits T0.2 key
+- [x] T3.2 Typed egress and allowlist test
+- [x] T3.3 Validator/Turkish corpus; live quality measurement remains gated
+- [x] T3.4 Immutable packets/options/cache/INVALID block; synthetic flow tested
+- [x] T3.5 Review queue, original/human values/reason, override survives rerun
+- [x] T1.8 Leased/deduplicated queue; concurrent claim/lease recovery tests
+- [x] T3.6 Login, protected fund pages/evidence/review; isolated browser flow passes
 
 ### Overnight
 

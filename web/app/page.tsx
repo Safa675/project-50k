@@ -20,7 +20,7 @@ export default async function Home() {
       <h1 id="title">Veriyi görün.<br/>Kararı sorgulayın.</h1>
       <p className="intro">BlackSwan, yatırım fonlarının yayımlanmış verilerini ve düzenleyici olaylarını incelemek için geliştiriliyor. Fon verilerine erişim oturum açmayı gerektirir.</p>
       <div className="service-status" role="status"><span className={available ? 'dot available' : 'dot'}/><span>{available ? 'Veritabanı bağlantısı hazır' : 'Veritabanına şu anda erişilemiyor'}</span></div>
-      <p className="access-state">Bu kurulumda fon inceleme erişimi henüz etkin değil.</p>
+      <p className="access-state"><a className="button-link" href="/login">Çalışma alanına giriş yap</a></p>
     </section>
     <footer><p>Geliştirme sonucu · Veri hakları incelenmedi · Yatırım tavsiyesi değildir</p></footer>
   </main>;
