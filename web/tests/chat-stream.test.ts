@@ -11,6 +11,14 @@ function response(parts: string[], newline = '\n'): Response {
 }
 
 describe('validated chat stream', () => {
+  it('reports the persisted thread immediately and rejects a mismatched final thread',async()=>{
+    const started={thread_id:result.thread_id,analysis_scope_key:'asof:2026-09-12'};
+    const frame=`event: thread\ndata: ${JSON.stringify(started)}\n\n`;
+    const seen:unknown[]=[];
+    expect(await readChatAnswer(response([frame,`event: answer\ndata: ${JSON.stringify(result)}\n\n`]),()=>undefined,()=>undefined,()=>undefined,item=>seen.push(item))).toEqual(result);
+    expect(seen).toEqual([started]);
+    await expect(readChatAnswer(response([frame,`event: answer\ndata: ${JSON.stringify({...result,thread_id:'00000000-0000-4000-8000-000000000002'})}\n\n`]),()=>undefined)).rejects.toMatchObject({code:'STREAM_INVALID'});
+  });
   it('shows a checked paragraph before completion, then requires a matching final answer', async () => {
     let send:ReadableStreamDefaultController<Uint8Array>;
     const encoder=new TextEncoder();

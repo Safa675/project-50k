@@ -2,12 +2,13 @@
 
 from __future__ import annotations
 
-from datetime import date, datetime
+from datetime import date, datetime,timezone
 from typing import Any, Literal
 
 from psycopg import Connection
 from psycopg.rows import dict_row
 from pydantic import AwareDatetime, BaseModel, ConfigDict, Field
+from p50k.product.analysis_context import historical_mode
 
 
 class Contract(BaseModel):
@@ -25,7 +26,7 @@ class RunProvenance(Contract):
     cutoff: AwareDatetime
     created_at: AwareDatetime
     calibration_cutoff: AwareDatetime
-    origin: Literal["DELAYED", "SYNTHETIC"]
+    origin: Literal["DELAYED", "SYNTHETIC", "HISTORICAL_REPLAY"]
 
 
 class EvidenceTotals(Contract):
@@ -84,7 +85,7 @@ class StockAvailability(Contract):
 
 class WorkflowOverview(Contract):
     observed_at: AwareDatetime
-    data_mode: Literal["DELAYED", "SYNTHETIC"]
+    data_mode: Literal["DELAYED", "SYNTHETIC", "HISTORICAL_REPLAY"]
     fund_catalog_count: int = Field(ge=0)
     run: RunProvenance | None
     evidence: EvidenceTotals
@@ -154,7 +155,8 @@ class WorkflowQueries:
             return cursor.fetchall()
 
     def overview(self, cutoff: datetime, *, synthetic: bool = False) -> WorkflowOverview:
-        origin = "SYNTHETIC" if synthetic else "DELAYED"
+        origin = "SYNTHETIC" if synthetic else 'HISTORICAL_REPLAY' if historical_mode() else "DELAYED"
+        wall_time=datetime.now(timezone.utc)
         catalog = self.rows("SELECT count(*) AS total FROM ref.funds")[0]["total"]
         runs = self.rows("""
             SELECT run.run_id::text, inputs.version_id, run.protocol_version,
@@ -166,7 +168,7 @@ class WorkflowQueries:
                 AND run.cutoff <= %s AND run.created_at <= %s
                 AND version.calibration_cutoff <= run.cutoff
             ORDER BY run.cutoff DESC, run.created_at DESC, run.run_id DESC LIMIT 1
-        """, (origin, cutoff, cutoff))
+        """, (origin, cutoff, wall_time))
         run = RunProvenance(**runs[0]) if runs else None
         evidence = EvidenceTotals(total=0, funds=0, triggered=0, not_triggered=0, abstained=0, attributes=0)
         decisions = DecisionTotals(packets=0, valid_live=0, valid_synthetic=0, valid_deterministic=0,
@@ -182,7 +184,7 @@ class WorkflowQueries:
                 WHERE signal.run_id=%s AND signal.as_of<=%s
                     AND (item.available_at<=%s OR (item.available_at IS NULL AND signal.state='ABSTAINED'))
             """, (run.run_id, run.as_of, cutoff))[0])
-            parameters = (run.run_id, origin, cutoff, cutoff, cutoff)
+            parameters = (run.run_id, origin, wall_time, wall_time, wall_time)
             totals = self.rows(CURRENT_PACKETS + """
                 SELECT count(*) AS packets,
                     count(*) FILTER (WHERE validation_state='VALID' AND ai_mode='live') AS valid_live,
@@ -203,7 +205,7 @@ class WorkflowQueries:
                 WHERE decision.created_at<=%s
                 GROUP BY decision.model_id, decision.prompt_version, decision.schema_version, decision.ai_mode
                 ORDER BY latest_at DESC LIMIT 8
-            """, parameters + (cutoff,))
+            """, parameters + (wall_time,))
             decisions = DecisionTotals(**totals, models=[ModelProvenance(**row) for row in models])
         ingests = self.rows("""
             SELECT run_id::text, status, started_at, finished_at, counts FROM obs.ingest_runs

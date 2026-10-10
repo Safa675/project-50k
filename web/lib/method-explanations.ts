@@ -13,8 +13,26 @@ export const fundMethods:Record<string,MethodExplanation>={
 };
 
 export function methodFor(code:string):MethodExplanation|undefined{return fundMethods[code];}
-export function explainResult(signal:{detector_id:string;state:string;reason:string;is_attribute?:boolean}):string{
+type ResultSummary={detector_id:string;state:string;reason:string;is_attribute?:boolean;value?:string|null;threshold?:string|null};
+export function resultStatus(signal:ResultSummary):string{
+  if(signal.state==='ABSTAINED')return 'Bilgi yetersiz';
+  if(signal.is_attribute)return 'Fiyat geçmişi';
+  if(signal.state==='NOT_TRIGGERED'){
+    if(signal.detector_id==='AN-DQ-001')return 'Fiyatın güncelliği kontrol edildi';
+    if(signal.detector_id==='AN-DQ-002')return 'Son fiyat mevcut';
+    if(signal.reason==='WITHIN_THRESHOLD'&&typeof signal.value==='string'&&typeof signal.threshold==='string')return 'Karşılaştırma tamamlandı';
+    return 'Sonuç değerlendirilemiyor';
+  }
+  if(signal.state==='TRIGGERED')return signal.detector_id.startsWith('AN-DQ')?'Fiyat bilgisi eksik veya gecikmiş':signal.detector_id==='AN-FND-005'?'Resmî kayıt doğrulandı':'İnceleme gerektiren değişim';
+  return 'Henüz incelenmedi';
+}
+export function explainResult(signal:ResultSummary):string{
   if(signal.is_attribute&&signal.state!=='ABSTAINED')return 'Bu kayıt yalnızca arşivdeki fiyat geçmişinin uzunluğunu gösterir; bir uyarı değildir.';
+  if(signal.state==='NOT_TRIGGERED'&&signal.reason==='WITHIN_THRESHOLD'){
+    if(typeof signal.value!=='string'||typeof signal.threshold!=='string')return 'Karşılaştırmanın tamamlanması için gereken bilgi eksik. Bu durum, değişim olmadığı anlamına gelmez.';
+    const descriptions:Record<string,string>={D1:'Son 60 tarih için benzer fonlara göre hesaplanan getiri farkı, bu karşılaştırmanın üst sınırını aşmadı.',D2:'Son 60 tarih ile ondan önceki 120 tarih karşılaştırıldığında, benzer fonlarla farktaki artış inceleme sınırını aşmadı.',D3:'Son 120 tarihte ardışık günlük fiyat değişimleri arasındaki ilişki, geçmiş karşılaştırmaların üst sınırını aşmadı.',D4:'Son 120 tarihte fonun benzer fonlarla hareket ilişkisi, ayrışma için kullanılan alt sınırın altına düşmedi.'};
+    return descriptions[signal.detector_id]??'Bu karşılaştırma tamamlandı; kullanılan inceleme sınırı aşılmadı. Diğer incelemelerin sonuçları farklı olabilir.';
+  }
   if(signal.state==='TRIGGERED'&&signal.detector_id==='D4')return 'Fonun günlük hareketleri ile benzer fonlar arasındaki ilişki, bu incelemede kullanılan alt sınırın altında kaldı.';
   return reasonTr(signal.reason);
 }

@@ -47,7 +47,9 @@ def login(body: LoginBody, request: Request, response: Response):
 
 @router.get("/me")
 def me(request: Request, principal: Principal = Depends(require_session)):
-    return {"user": principal.user(), "data_mode": "SYNTHETIC" if request.app.state.product_settings.db_name=='p50k_dev' else "DELAYED"}
+    from p50k.product.analysis_context import public_context,historical_mode
+    return {"user": principal.user(), "data_mode": "SYNTHETIC" if request.app.state.product_settings.db_name=='p50k_dev' else 'HISTORICAL_REPLAY' if historical_mode() else "DELAYED",
+            'analysis_context':public_context(request.app.state.product_settings)}
 
 @router.post("/logout")
 def logout(request: Request, response: Response, principal: Principal = Depends(require_session)):

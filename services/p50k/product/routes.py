@@ -41,11 +41,15 @@ def get_queries(request: Request) -> Iterator[FundQueries]:
 def resolve_cutoff(cutoff: datetime | None) -> datetime:
     now = datetime.now(timezone.utc)
     if cutoff is None:
-        return now
+        from p50k.product.analysis_context import current_cutoff
+        return current_cutoff()
     if cutoff.tzinfo is None or cutoff.utcoffset() is None:
         raise HTTPException(status_code=422, detail="CUTOFF_REQUIRES_TIMEZONE")
     if cutoff > now:
         raise HTTPException(status_code=422, detail="FUTURE_CUTOFF_REJECTED")
+    from p50k.product.analysis_context import current_cutoff,historical_mode
+    if historical_mode() and cutoff>current_cutoff():
+        raise HTTPException(status_code=422,detail='CUTOFF_AFTER_SELECTED_DATE')
     return cutoff.astimezone(timezone.utc)
 
 
@@ -91,9 +95,13 @@ event is under review and cannot trigger a confirmed regulatory signal.
 def list_signals(reader: Reader,
                  fund_code: Annotated[str | None, Query(pattern=r"^[A-Z0-9]{2,12}$")] = None,
                  state: Annotated[Literal["TRIGGERED", "NOT_TRIGGERED", "ABSTAINED"] | None, Query()] = None,
-                 cutoff: Cutoff = None, limit: Limit = 25, offset: SignalsOffset = 0) -> SignalsPage:
+                 cutoff: Cutoff = None, limit: Limit = 25, offset: SignalsOffset = 0,
+                 q: Annotated[str,Query(max_length=80)]='',
+                 category: Annotated[str|None,Query(min_length=1,max_length=200)]=None) -> SignalsPage:
     """Latest complete DELAYED detector run; every figure is a development result."""
     resolved = resolve_cutoff(cutoff)
+    if q or category is not None:
+        return reader.signals(fund_code,state,resolved.astimezone(ISTANBUL).date(),resolved,limit,offset,q.strip(),category)
     return reader.signals(fund_code, state, resolved.astimezone(ISTANBUL).date(), resolved, limit, offset)
 
 

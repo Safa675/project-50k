@@ -13,6 +13,8 @@ from p50k.product.archive import canonical_json
 from p50k.product.db import connect
 from p50k.product.egress import Evidence, Packet, allowed_options
 from p50k.product.settings import Settings
+from p50k.product.analysis_context import current_cutoff,data_origins,historical_mode
+from p50k.product.archive import ISTANBUL
 
 
 @dataclass(frozen=True)
@@ -26,8 +28,9 @@ class ChatContext:
 
 def load_context(settings: Settings, code: str, evidence_id: str | None = None) -> ChatContext:
     """Read existing evidence without creating/changing a decision packet."""
-    now = datetime.now(timezone.utc)
-    origins = ['DELAYED', 'SYNTHETIC'] if settings.db_name == 'p50k_dev' else ['DELAYED']
+    now = current_cutoff(settings)
+    origins = data_origins(settings)
+    if settings.db_name=='p50k_dev':origins.append('SYNTHETIC')
     with connect(settings) as connection:
         connection.execute('SET TRANSACTION READ ONLY')
         connection.execute("SET LOCAL statement_timeout='5s'")
@@ -37,17 +40,19 @@ def load_context(settings: Settings, code: str, evidence_id: str | None = None) 
         run = connection.execute("""SELECT run.run_id,input.as_of,run.origin,run.cutoff
             FROM det.detector_runs run JOIN det.run_inputs input USING(run_id)
             WHERE run.origin=ANY(%s) AND input.complete AND run.cutoff<=%s
+              AND (NOT %s OR (run.cutoff AT TIME ZONE 'Europe/Istanbul')::date=%s)
               AND (%s::text IS NULL OR EXISTS(SELECT 1 FROM det.evidence_items selected
                   WHERE selected.run_id=run.run_id AND selected.fund_code=%s AND selected.evidence_id=%s))
-            ORDER BY run.cutoff DESC,run.created_at DESC,run.run_id DESC LIMIT 1""", (origins, now, evidence_id, code, evidence_id)).fetchone()
+            ORDER BY run.cutoff DESC,run.created_at DESC,run.run_id DESC LIMIT 1""", (origins, now, historical_mode(settings),now.astimezone(ISTANBUL).date(),evidence_id, code, evidence_id)).fetchone()
         if not run:
             raise AIUnavailable('EVIDENCE_UNAVAILABLE')
         rows = connection.execute("""SELECT item.evidence_id,item.detector_id,item.state,
             signal.value,signal.threshold,item.effective_date,item.metadata
             FROM det.signals signal JOIN det.evidence_items item USING(evidence_id)
             WHERE signal.run_id=%s AND signal.fund_code=%s
+              AND signal.as_of<=%s AND (item.effective_date IS NULL OR item.effective_date<=%s)
               AND (item.available_at<=%s OR (item.available_at IS NULL AND signal.state='ABSTAINED'))
-            ORDER BY signal.detector_id LIMIT 8""", (run[0], code, run[3])).fetchall()
+            ORDER BY signal.detector_id LIMIT 8""", (run[0], code, run[1],run[1],run[3])).fetchall()
     if not rows or (evidence_id is not None and evidence_id not in {row[0] for row in rows}):
         raise AIUnavailable('EVIDENCE_UNAVAILABLE')
     evidence = [Evidence(evidence_id=row[0], detector_id=row[1], state=row[2],
@@ -89,6 +94,8 @@ def bounded_json(payload: Any) -> str:
 
 
 def invoke_tool(settings: Settings, context: ChatContext, name: str, raw: str) -> str:
+    if context.origin=='HISTORICAL_REPLAY' and name in {'search_funds','get_fund_profile'}:
+        raise AIUnavailable('TOOL_UNAVAILABLE_FOR_HISTORICAL_CONTEXT')
     if name not in ARGUMENTS or len(raw.encode()) > 1024:
         raise AIUnavailable('TOOL_ARGUMENT_REJECTED')
     try:

@@ -10,6 +10,7 @@ from psycopg.rows import dict_row
 from p50k.product.db import connect
 from p50k.product.queries import decimal_text
 from p50k.product.settings import Settings
+from p50k.product.analysis_context import current_cutoff,historical_mode
 
 MAX_SAVED_FUNDS = 100
 
@@ -48,8 +49,9 @@ def _snapshot(connection: Any, settings: Settings, user_id: str, now: datetime) 
             FROM det.detector_runs run JOIN det.run_inputs inputs USING(run_id)
             WHERE run.origin=%s AND inputs.complete AND run.cutoff<=%s
                 AND run.created_at<=%s
+                AND (NOT %s OR (run.cutoff AT TIME ZONE 'Europe/Istanbul')::date=%s)
             ORDER BY run.cutoff DESC,run.created_at DESC,run.run_id DESC LIMIT 1""",
-            ("SYNTHETIC" if settings.db_name == "p50k_dev" else "DELAYED", now, now))
+            ("SYNTHETIC" if settings.db_name == "p50k_dev" else 'HISTORICAL_REPLAY' if historical_mode(settings) else "DELAYED", now, datetime.now(timezone.utc),historical_mode(settings),now.astimezone(ZoneInfo('Europe/Istanbul')).date()))
         run = cursor.fetchone()
         cursor.execute("""SELECT saved.fund_code,fund.name,fund.category,saved.saved_at
             FROM auth.watchlist_funds saved JOIN ref.funds fund USING(fund_code)
@@ -98,12 +100,12 @@ def _snapshot(connection: Any, settings: Settings, user_id: str, now: datetime) 
                 "run_created_at": run["created_at"] if run else None,
                 "cutoff": run["cutoff"] if run else None,
                 "notifications_enabled": enabled, "development_result": True,
-                "data_mode": "SYNTHETIC" if settings.db_name == "p50k_dev" else "DELAYED"}
+                "data_mode": "SYNTHETIC" if settings.db_name == "p50k_dev" else 'HISTORICAL_REPLAY' if historical_mode(settings) else "DELAYED"}
 
 
 def watchlist(settings: Settings, user_id: str, now: datetime | None = None) -> dict[str, Any]:
     with connect(settings) as connection:
-        return _snapshot(connection, settings, user_id, now or datetime.now(timezone.utc))
+        return _snapshot(connection, settings, user_id, now or current_cutoff(settings))
 
 
 def notifications(settings: Settings, user_id: str, *, unread_only: bool = False,

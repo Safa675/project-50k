@@ -17,3 +17,6 @@
 .chat-drawer textarea:focus-visible{outline:2px solid var(--bs-accent-text);outline-offset:3px}.chat-drawer .chat-transcript{margin:0}.chat-close img,.chat-controls button img{display:block;flex:none}
 
 .chat-privacy{margin:0;font-size:12px;line-height:1.5;color:var(--bs-muted,#a1a1a6)}
+.chat-history-controls{display:flex;align-items:end;gap:8px;min-width:0}.chat-history-controls label{flex:1;min-width:0;font-size:12px;color:var(--bs-muted,#a1a1a6);gap:4px}.chat-history-controls select{min-width:0;width:100%;height:38px;min-height:38px;padding:8px 12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px}.chat-history-controls>button,.chat-history-retry{flex:none;background:var(--bs-surface-2,#2e2e32);color:var(--bs-text,#f2f2f3);font-size:12px;min-height:38px;padding:8px 12px}.chat-message-time,.chat-message-state{display:block;font-size:11px;line-height:16px;margin-top:8px;color:var(--bs-subtle,#808086)}.chat-drawer .chat-controls>p{max-width:calc(100% - 46px);line-height:16px}.chat-drawer .chat-controls>button{bottom:23px}@media(max-width:600px){.chat-drawer .chat-controls>button{bottom:28px}}
+.chat-scope-label{margin:0;font-size:11px;line-height:16px;color:var(--bs-subtle,#808086)}
+.chat-history-older{font-size:12px;align-self:center;padding:8px 12px;background:var(--bs-surface-2,#2e2e32);color:var(--bs-text,#f2f2f3)}

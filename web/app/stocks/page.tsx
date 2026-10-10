@@ -15,7 +15,7 @@ export default async function Stocks({searchParams}: {searchParams: Promise<{q?:
   }
   return <section><p className="eyebrow">BIST 30</p><h1>Türkiye hisseleri</h1>
     <p>Katalog güncel BIST 30 üyeliğini gösterir. Bu üyelik geçmiş tarihli endeks kapsamı olarak kullanılamaz.</p>
-    <p className="notice">Yayımlanmış günlük kapanış fiyatları · Türk lirası.</p>
+    <p className="muted">Yayımlanmış günlük kapanış fiyatları · Türk lirası.</p>{data.items.length>0&&data.items.every((stock:Stock)=>stock.last_close===null)&&<p className="notice">Seçilen inceleme tarihinde kullanılabilir bir hisse fiyat kaydı bulunmuyor. Daha sonra alınan fiyatlar geçmişte biliniyormuş gibi gösterilmez. İnceleme tarihinden güncel görünüme geçebilirsiniz.</p>}
     <form className="toolbar" action="/stocks"><label>Hisse kodu veya adı<input name="q" defaultValue={q} maxLength={80}/></label><button>Ara</button></form>
     <p role="status">{data.total.toLocaleString('tr-TR')} hisse</p>
     {data.items.length ? <div className="table-scroll"><table><thead><tr><th>Hisse</th><th>Adı</th><th>Son kapanış · TL</th><th>Veri tarihi</th></tr></thead>

@@ -32,6 +32,7 @@ class Settings:
     )
     test_endpoints: bool = False
     ai_mode: str = "off"
+    analysis_date: str = "live"
     db_connect_timeout: int = 5
     auth_pepper_file: Path = Path("/run/secrets/auth_pepper")
     cookie_secure: bool = False
@@ -53,6 +54,7 @@ class Settings:
             ).split(",")),
             test_endpoints=_boolean(env.get("P50K_TEST_ENDPOINTS", "false"), "P50K_TEST_ENDPOINTS"),
             ai_mode=env.get("P50K_AI_MODE", "off"),
+            analysis_date=env.get("P50K_ANALYSIS_DATE", "live"),
             db_connect_timeout=int(env.get("P50K_DB_CONNECT_TIMEOUT", "5")),
             auth_pepper_file=Path(env.get("P50K_AUTH_PEPPER_FILE", "/run/secrets/auth_pepper")),
             cookie_secure=_boolean(env.get("P50K_COOKIE_SECURE", "false"), "P50K_COOKIE_SECURE"),
@@ -81,6 +83,10 @@ class Settings:
             raise ValueError("Invalid AI mode")
         if self.ai_mode == "mock" and self.db_name != "p50k_dev":
             raise ValueError("Mock AI requires the separate development database")
+        if self.analysis_date!='live':
+            from datetime import date
+            if date.fromisoformat(self.analysis_date).isoformat()!=self.analysis_date:
+                raise ValueError('Invalid analysis date')
 
     def database_password(self) -> SecretStr:
         value = self.db_password_file.read_text(encoding="utf-8").strip()

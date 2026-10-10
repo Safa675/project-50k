@@ -13,6 +13,7 @@ from fastapi import APIRouter, Depends, HTTPException, Request
 from p50k.product.auth import require_session
 from p50k.product.db import connect
 from p50k.product.workflow import WorkflowOverview, WorkflowQueries
+from p50k.product.analysis_context import current_cutoff
 
 
 def get_workflow_queries(request: Request) -> Iterator[WorkflowQueries]:
@@ -33,4 +34,4 @@ router = APIRouter(dependencies=[Depends(require_session)], tags=["Workflow"])
 @router.get("/workflow", response_model=WorkflowOverview)
 def workflow(request: Request, reader: Reader) -> WorkflowOverview:
     """Actual pipeline counts; fund decisions and reviews match the current complete run."""
-    return reader.overview(datetime.now(timezone.utc), synthetic=request.app.state.product_settings.db_name == "p50k_dev")
+    return reader.overview(current_cutoff(request.app.state.product_settings), synthetic=request.app.state.product_settings.db_name == "p50k_dev")
