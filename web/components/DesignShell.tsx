@@ -39,7 +39,7 @@ export function SiteHeader({user}:{user?:User}){
 }
 
 export function SiteFooter({dataMode}:{dataMode?:string}){
-  return <footer className="bs-footer"><p>Gösterilen bilgiler yatırım tavsiyesi değildir. Bir gelişmenin gösterilmesi, fonun riskli ya da güvenli olduğu anlamına gelmez. Kaynak ve erişilebilirlik zamanı her kanıtla birlikte gösterilir.</p><p>{dataMode&&(dataMode==='SYNTHETIC'?'Sentetik test verisi · ':'Gecikmeli kaynak verisi · ')}Geliştirme sonucu · Veri hakları incelenmedi · Yatırım tavsiyesi değildir</p><div className="bs-footer-links"><Link href="/stocks">BIST 30</Link><Link href="/workflow">Kurumsal çalışma alanı ve API</Link></div></footer>;
+  return <footer className="bs-footer"><p>Gösterilen bilgiler yatırım tavsiyesi değildir. Bir gelişmenin gösterilmesi, fonun riskli ya da güvenli olduğu anlamına gelmez. Kaynak ve erişilebilirlik zamanı her kanıtla birlikte gösterilir.</p><p>{dataMode&&(dataMode==='SYNTHETIC'?'Sentetik test verisi · ':'Gecikmeli kaynak verisi · ')}Geliştirme sonucu · Yatırım tavsiyesi değildir</p><div className="bs-footer-links"><Link href="/stocks">BIST 30</Link><Link href="/workflow">Kurumsal çalışma alanı ve API</Link></div></footer>;
 }
 
 export function DesignShell({children,user,compact=false}:{children:React.ReactNode;user?:User;compact?:boolean}){

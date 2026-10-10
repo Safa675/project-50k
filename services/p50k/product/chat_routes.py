@@ -1,4 +1,4 @@
-"""Authenticated JSON POST/SSE with session CSRF; no raw token stream."""
+"""Authenticated POST/SSE: validated paragraphs stream before the final answer."""
 from __future__ import annotations
 import json
 from fastapi import APIRouter, Depends, HTTPException, Request, Query

@@ -1,11 +1,28 @@
 import {describe, expect, it} from 'vitest';
-import {FundPoint, fundSeries, fundWindow} from '../lib/fund-display';
+import {FundPoint, fundSeries, fundWindow,latestKnownNav,sourceName,friendlyEvidenceText} from '../lib/fund-display';
 
 function point(day: number, nav: string | null, ambiguous_revision = false): FundPoint {
   return {effective_date: `2000-01-${String(day).padStart(2, '0')}`, nav, ambiguous_revision};
 }
 
 describe('fund chart evidence integrity', () => {
+  it('shows the dated last known price without moving it to a missing or conflicting day',()=>{
+    const points=[point(1,'10'),point(2,'12'),point(3,null),point(4,'15',true),point(5,'0')];
+    expect(latestKnownNav(points)).toBe(points[1]);
+    expect(points[2].nav).toBeNull();
+    expect(fundSeries(points).coordinates[2].y).toBeNull();
+    expect(latestKnownNav([point(1,null)])).toBeUndefined();
+  });
+  it('presents provider names without exposing internal source identifiers',()=>{
+    expect(sourceName('tefas-prices')).toBe('TEFAS');
+    expect(sourceName('kap_report_index')).toBe('KAP');
+    expect(sourceName('internal-unknown-source')).toBe('Yayımlanmış kaynak');
+  });
+  it('explains saved assessments without showing internal codes or comparison numbers',()=>{
+    expect(friendlyEvidenceText('D1 [değer: 0.012; eşik: 0.01; eşik aşıldı]')).toBe('Benzer fonlara göre fiyat farkı (inceleme gerekiyor)');
+    const text=friendlyEvidenceText('D2 [değer: bilinmiyor; eşik: bilinmiyor; kanıt yetersiz]');
+    expect(text).toBe('Benzer fonlarla farkın değişimi (bilgi yetersiz)');
+  });
   it('breaks the line at missing, ambiguous, zero and nonfinite observations', () => {
     const result = fundSeries([point(1, '10'), point(2, '12'), point(3, null), point(4, '14'), point(5, '16', true), point(6, '0'), point(7, 'NaN'), point(8, '18')]);
     expect(result.segments.map(segment => segment.length)).toEqual([2, 1, 1]);

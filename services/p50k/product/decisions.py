@@ -4,25 +4,56 @@ import hashlib
 from typing import Any
 from uuid import uuid4
 from psycopg.types.json import Jsonb
-from p50k.product.ai_client import AIConfig, AIUnavailable, decide
+from p50k.product.ai_client import AIConfig, AIUnavailable, decide, MATERIALITY_PROMPT_VERSION, DECISION_SCHEMA_VERSION
 from p50k.product.archive import canonical_json
 from p50k.product.db import connect
 from p50k.product.egress import Evidence, Packet, allowed_options
 from p50k.product.settings import Settings
-from p50k.product.validator import validate_output, render
+from p50k.product.validator import validate_output, render, InvalidOutput, PLACEHOLDER
+from p50k.product.chat_language import render_chat
 
-PROMPT_VERSION='materiality-v1'
-SCHEMA_VERSION='decision-v1'
+PROMPT_VERSION=MATERIALITY_PROMPT_VERSION
+SCHEMA_VERSION=DECISION_SCHEMA_VERSION
+
+
+def render_proposal(text: str, packet: Packet, prompt_version: str | None) -> str:
+    # Keep the original renderer for stored v1 proposals. Future prompt changes
+    # must retain this explicit version mapping instead of silently reinterpreting
+    # older output. Both renderers preserve the same numeric validation guard.
+    if prompt_version in {'materiality-v2-plain-language','materiality-v3-plain-language'}:
+        return render_chat(text, packet)
+    return render(text, packet)
+
+
+def validate_proposal_output(raw: dict, packet: Packet, prompt_version: str | None = None):
+    output=validate_output(raw,packet)
+    if (prompt_version or PROMPT_VERSION)=='materiality-v3-plain-language':
+        for text in (output.rationale_tr,output.missing_evidence_tr):
+            if any(match.group(1) for match in PLACEHOLDER.finditer(text)):
+                raise InvalidOutput('Proposal prose must use qualitative text and separate evidence citations')
+    return output
 
 def build_packet(settings: Settings, code: str) -> tuple[Packet,int,str]:
     with connect(settings) as connection:
         fund=connection.execute('SELECT name,category FROM ref.funds WHERE fund_code=%s',(code,)).fetchone()
         if not fund:
             raise ValueError('FUND_NOT_FOUND')
-        run=connection.execute("SELECT run.run_id,input.as_of,run.origin,run.cutoff FROM det.detector_runs run JOIN det.run_inputs input USING(run_id) WHERE run.origin IN ('DELAYED','SYNTHETIC') AND input.complete ORDER BY run.created_at DESC,run.run_id DESC LIMIT 1").fetchone()
+        origins=['DELAYED','SYNTHETIC'] if settings.db_name=='p50k_dev' else ['DELAYED']
+        run=connection.execute("""SELECT run.run_id,input.as_of,run.origin,run.cutoff
+            FROM det.detector_runs run JOIN det.run_inputs input USING(run_id)
+            WHERE run.origin=ANY(%s) AND input.complete AND run.cutoff IS NOT NULL
+              AND run.cutoff<=now()
+            ORDER BY run.cutoff DESC,run.created_at DESC,run.run_id DESC LIMIT 1""",(origins,)).fetchone()
         if not run:
             raise AIUnavailable('EVIDENCE_UNAVAILABLE')
-        rows=connection.execute('SELECT item.evidence_id,item.detector_id,item.state,signal.value,signal.threshold,item.effective_date,item.metadata FROM det.signals signal JOIN det.evidence_items item USING(evidence_id) WHERE signal.run_id=%s AND signal.fund_code=%s ORDER BY signal.detector_id',(run[0],code)).fetchall()
+        rows=connection.execute('''SELECT item.evidence_id,item.detector_id,item.state,
+            signal.value,signal.threshold,item.effective_date,item.metadata
+            FROM det.signals signal JOIN det.evidence_items item USING(evidence_id)
+            WHERE signal.run_id=%s AND signal.fund_code=%s AND item.origin=%s
+              AND signal.as_of<=%s
+              AND (item.effective_date IS NULL OR item.effective_date<=%s)
+              AND (item.available_at<=%s OR (item.available_at IS NULL AND item.state='ABSTAINED'))
+            ORDER BY signal.detector_id''',(run[0],code,run[2],run[1],run[1],run[3])).fetchall()
         items=[Evidence(evidence_id=row[0],detector_id=row[1],state=row[2],value=str(row[3]) if row[3] is not None else None,
             threshold=str(row[4]) if row[4] is not None else None,effective_date=row[5].isoformat() if row[5] else None,is_attribute=bool(row[6].get('is_attribute'))) for row in rows]
         if not items:
@@ -56,7 +87,7 @@ def evaluate(settings: Settings, code: str, config: AIConfig | None=None) -> dic
             else:
                 raw,call_id,model=decide(settings,config,packet)
                 mode=config.mode
-            valid=validate_output(raw,packet)
+            valid=validate_proposal_output(raw,packet)
             break
         except AIUnavailable as error:
             if str(error)=='MODEL_CALL_FAILED':
@@ -85,7 +116,7 @@ def decision_rows(settings: Settings, code: str | None=None, review_only: bool=F
         rows=connection.execute("""SELECT effective.fund_code,effective.packet_sha256,effective.decision_id,
             effective.effective_value,effective.effective_source,effective.review_id,effective.has_current_review,
             effective.stale_review_exists,decision.validation_state,decision.rationale,packet.payload,packet.allowed_options,decision.model_id,
-            decision.decision_value,actual_review.reason,actual_review.created_at,reviewer.email,decision.ai_mode
+            decision.decision_value,actual_review.reason,actual_review.created_at,reviewer.email,decision.ai_mode,decision.prompt_version
             FROM (SELECT DISTINCT ON (value.fund_code) value.* FROM ai.effective_decisions value
                 JOIN ai.packets current_packet USING(packet_id)
                 WHERE value.origin IN ('DELAYED','SYNTHETIC')
@@ -102,7 +133,7 @@ def decision_rows(settings: Settings, code: str | None=None, review_only: bool=F
         results.append({'fund_code':row[0],'packet_sha256':row[1],'decision_id':row[2],
             'effective_value':row[3],'decided_by':'DETERMINISTIC' if row[4]!='HUMAN' and row[12]=='deterministic' else row[4],'review_id':row[5],'has_current_review':row[6],
             'stale_review_exists':row[7],'validation_state':row[8],
-            'rationale_tr':render(row[9],packet) if row[9] else 'Yapay zekâ önerisi üretilemedi; insan incelemesi gerekli',
+            'rationale_tr':render_proposal(row[9],packet,row[18]) if row[9] else 'Yapay zekâ önerisi üretilemedi; insan incelemesi gerekli',
             'allowed_options':row[11],'evidence_ids':[item.evidence_id for item in packet.evidence],
             'original_value':row[13],'review_reason':row[14],'reviewed_at':row[15].isoformat() if row[15] else None,
             'reviewer_email':row[16],'ai_mode':row[17]})

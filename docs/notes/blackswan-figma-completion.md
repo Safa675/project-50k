@@ -1,5 +1,8 @@
 # BlackSwan Figma implementation, 2026-10-10
 
+The subsequent [nontechnical experience and streaming update](blackswan-user-experience-completion.md)
+records Mirza's later feedback, algorithm explanations, price display fixes and verified asset logos.
+
 Implementation report for T5.5, with T3.6 fund screens, T5.2 contextual chat and
 T5.6 stock navigation. The supplied designs are running on the local product at
 `http://127.0.0.1:3070`. Code commit: `0b394a1` on `product/build`.

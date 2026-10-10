@@ -11,6 +11,28 @@ function response(parts: string[], newline = '\n'): Response {
 }
 
 describe('validated chat stream', () => {
+  it('shows a checked paragraph before completion, then requires a matching final answer', async () => {
+    let send:ReadableStreamDefaultController<Uint8Array>;
+    const encoder=new TextEncoder();
+    const incoming=new ReadableStream<Uint8Array>({start(controller){send=controller;}});
+    const seen:string[]=[];
+    const reading=readChatAnswer(new Response(incoming,{headers:{'content-type':'text/event-stream'}}),()=>undefined,item=>seen.push(item.content));
+    send!.enqueue(encoder.encode(`event: paragraph\ndata: ${JSON.stringify({index:0,content:result.content,evidence_ids:result.evidence_ids})}\n\n`));
+    await new Promise(resolve=>setTimeout(resolve,0));
+    expect(seen).toEqual([result.content]);
+    send!.enqueue(encoder.encode(`event: answer\ndata: ${JSON.stringify(result)}\n\n`));
+    expect(await reading).toEqual(result);
+  });
+
+  it('resets rejected attempts and rejects changed final content or out-of-order paragraphs',async()=>{
+    const paragraph={index:0,content:result.content,evidence_ids:result.evidence_ids};
+    const frame=`event: paragraph\ndata: ${JSON.stringify(paragraph)}\n\n`;
+    let reset=0;
+    expect(await readChatAnswer(response([frame,'event: reset\ndata: {}\n\n',`event: answer\ndata: ${JSON.stringify(result)}\n\n`]),()=>undefined,()=>undefined,()=>reset++)).toEqual(result);
+    expect(reset).toBe(1);
+    await expect(readChatAnswer(response([frame,`event: answer\ndata: ${JSON.stringify({...result,content:'Changed text'})}\n\n`]),()=>undefined)).rejects.toMatchObject({code:'STREAM_INVALID'});
+    await expect(readChatAnswer(response([`event: paragraph\ndata: ${JSON.stringify({...paragraph,index:1})}\n\n`]),()=>undefined)).rejects.toMatchObject({code:'STREAM_INVALID'});
+  });
   it('assembles fragmented UTF-8 frames and exposes tools before the complete answer', async () => {
     const events = `: keep-alive\n\nevent: tool\ndata: {"name":"get_signals"}\n\nevent: answer\ndata: ${JSON.stringify(result)}\n\n`;
     const encoded = new TextEncoder().encode(events);

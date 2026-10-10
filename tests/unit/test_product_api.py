@@ -21,7 +21,7 @@ from p50k.product.models import (
     DailyChart, EventsPage, Fund, FundsPage, PricePoint, RegulatoryEvent,
     Signal, SignalsPage,
 )
-from p50k.product.queries import FundQueries, coverage_for, evidence_values, source_reference, source_url
+from p50k.product.queries import FundQueries, coverage_for, evidence_values, price_summary_for, source_reference, source_url
 from p50k.product.routes import get_queries, require_session, router
 from p50k.product.settings import Settings
 
@@ -132,6 +132,12 @@ class ProductReadApiTests(unittest.TestCase):
         self.assertTrue(result["development_result"])
         self.assertEqual(result["chart"]["cadence"], "DAILY_NAV")
         self.assertEqual([point["nav"] for point in result["chart"]["points"]], ["1.250000", None])
+        self.assertEqual(result["price_summary"]["status"], "LATEST_MISSING")
+        self.assertEqual(result["price_summary"]["scope"], "CHART_WINDOW")
+        self.assertIsNone(result["price_summary"]["latest_observation"]["nav"])
+        self.assertEqual(result["price_summary"]["latest_observation"]["effective_date"], "2020-01-04")
+        self.assertEqual(result["price_summary"]["last_available"]["effective_date"], "2020-01-03")
+        self.assertEqual(result["price_summary"]["last_available"]["nav"], "1.250000")
         self.assertEqual(result["coverage"]["state"], "ABSTAINED")
         self.assertEqual(result["coverage"]["evidence_ids"], ["synthetic-D1"])
         self.assertEqual(result["signals"][0]["as_of"], "2020-01-05")
@@ -186,6 +192,35 @@ class ProductReadApiTests(unittest.TestCase):
 
 
 class ReadContractTests(unittest.TestCase):
+    def test_price_summary_excludes_later_availability_and_preserves_dated_missing_row(self):
+        chart = SyntheticReader().chart("ZZZ", date(2020, 1, 1), DAY, CUTOFF)
+        original = chart.model_dump()
+        summary = price_summary_for(chart)
+        self.assertEqual(summary.status, "LATEST_MISSING")
+        self.assertIsNone(summary.latest_observation.nav)
+        self.assertEqual(summary.last_available.effective_date, DAY - timedelta(days=2))
+        future = chart.points[0].model_copy(update={"effective_date": DAY, "nav": "9.000000",
+                                                   "available_at": CUTOFF + timedelta(seconds=1)})
+        chart.points.append(future)
+        self.assertEqual(price_summary_for(chart), summary)
+        chart.points[-1] = future.model_copy(update={"available_at": CUTOFF,
+                                                     "published_at": CUTOFF + timedelta(seconds=1)})
+        self.assertEqual(price_summary_for(chart), summary)
+        self.assertEqual(chart.model_dump()["points"][:2], original["points"])
+
+    def test_price_summary_reports_conflicting_missing_and_empty_windows_without_filling(self):
+        chart = SyntheticReader().chart("ZZZ", date(2020, 1, 1), DAY, CUTOFF)
+        chart.points[-1] = chart.points[-1].model_copy(update={"ambiguous_revision": True})
+        summary = price_summary_for(chart)
+        self.assertEqual(summary.status, "LATEST_CONFLICTING")
+        self.assertEqual(summary.last_available.nav, "1.250000")
+        self.assertIsNone(chart.points[-1].nav)
+        chart.points = [chart.points[-1]]
+        self.assertIsNone(price_summary_for(chart).last_available)
+        chart.points = []
+        self.assertEqual(price_summary_for(chart).status, "NO_OBSERVATIONS")
+        self.assertIsNone(price_summary_for(chart).latest_observation)
+
     def test_unknown_and_attribute_only_coverage_never_become_normal(self):
         for signals in ([], [synthetic_signal()], [synthetic_signal("NOT_TRIGGERED", detector="D5", attribute=True)]):
             with self.subTest(signals=signals):
@@ -265,6 +300,11 @@ class ProductReadDatabaseTests(unittest.TestCase):
         self.assertEqual([(point.effective_date, point.nav) for point in chart.points],
                          [(date(2020, 1, 1), "1.250000"), (date(2020, 1, 3), None)])
         self.assertTrue(all(point.available_at <= CUTOFF for point in chart.points))
+        summary = price_summary_for(chart)
+        self.assertEqual(summary.status, "LATEST_MISSING")
+        self.assertEqual(summary.last_available.nav, "1.250000")
+        self.assertEqual(summary.last_available.effective_date, date(2020, 1, 1))
+        self.assertEqual(summary.latest_observation.effective_date, date(2020, 1, 3))
 
     def test_chart_conflicting_tied_revisions_remain_unknown_until_a_later_revision_is_available(self):
         pairs = ((date(2020, 1, 1), Decimal("1.1000"), Decimal("1.1000")),
@@ -281,6 +321,8 @@ class ProductReadDatabaseTests(unittest.TestCase):
         later = self.reader.chart(self.code, date(2020, 1, 1), DAY, CUTOFF + timedelta(days=1))
         self.assertEqual(later.points[1].nav, "3.3000")
         self.assertFalse(later.points[1].ambiguous_revision)
+        self.assertEqual(price_summary_for(chart).last_available.effective_date, date(2020, 1, 1))
+        self.assertEqual(price_summary_for(later).last_available.effective_date, date(2020, 1, 2))
 
     def test_catalog_search_is_literal_paginated_and_current_only(self):
         result = self.reader.funds(self.name, 1, 0)

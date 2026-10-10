@@ -17,11 +17,14 @@ test('protected stock catalog and daily-close evidence use the isolated syntheti
   await page.getByRole('button', {name: 'Ara', exact: true}).click();
   await page.getByRole('link', {name: 'TESTA', exact: true}).click();
   await expect(page.getByRole('heading', {name: 'Yayımlanmış günlük kapanış fiyatı', exact: true})).toBeVisible();
+  await expect(page.locator('.stock-latest strong')).toBeVisible();
+  await expect(page.locator('.stock-latest')).toContainText('Son yayımlanmış kapanış');
   await expect(page.getByRole('img', {name: /günlük hisse kapanış fiyatı, TRY/})).toBeVisible();
   await expect(page.getByText(/Bölünme ve temettü düzeltmesinin yapıldığı doğrulanmadı/)).toBeVisible();
   await page.getByText('Kapanış fiyatlarını ve kaynaklarını tablo olarak göster', {exact: true}).click();
   await expect(page.getByRole('columnheader', {name: 'Kaynak erişim zamanı', exact: true})).toBeVisible();
   await expect(page.getByRole('cell', {name: 'Veri yok', exact: true}).first()).toBeVisible();
+  expect(await page.locator('body').innerText()).not.toMatch(/\b(?:DELAYED|SYNTHETIC)\b|\b[a-f0-9]{64}\b|Veri hakları incelenmedi/);
   await page.setViewportSize({width: 390, height: 844});
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();
   await page.getByRole('link', {name: 'Keşfet', exact: true}).click();

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import {serverApi} from '@/lib/auth';
-import {dateTr,decimal,reasonTr,stateTr} from '@/lib/client';
+import {dateTr,reasonTr,stateTr} from '@/lib/client';
+import {signalName} from '@/lib/fund-display';
 
 export default async function RealEvidenceExample(){
   const auth=await serverApi('/auth/me');
@@ -9,6 +10,6 @@ export default async function RealEvidenceExample(){
   if(!response.ok)return <div className="real-evidence-example"><h3>Kaynaklara şu anda erişilemiyor</h3><Link href="/funds/THF">Fon incelemesini aç →</Link></div>;
   const data=await response.json();
   const item=data.signals?.find((signal:{state:string;is_attribute:boolean})=>signal.state==='TRIGGERED'&&!signal.is_attribute)??data.signals?.[0];
-  if(!item)return <div className="real-evidence-example"><h3>THF kaynak incelemesi</h3><p>Bu fon için tamamlanmış gösterge kaydı bulunmuyor.</p><Link href="/funds/THF">Kaynakları incele →</Link></div>;
-  return <div className="real-evidence-example"><p className="bs-label">{dateTr(item.as_of)} · Geliştirme sonucu</p><h3>THF · {stateTr[item.state]}</h3><p>{reasonTr(item.reason)}</p><p>{item.detector_id} · Değer: {decimal(item.value)} · Eşik: {decimal(item.threshold)}</p><Link href={`/developments/${encodeURIComponent(item.evidence_id)}?fund=THF`}>Gelişmeyi incele →</Link></div>;
+  if(!item)return <div className="real-evidence-example"><h3>THF kaynak incelemesi</h3><p>Bu fon için tamamlanmış inceleme bulunmuyor.</p><Link href="/funds/THF">Kaynakları incele →</Link></div>;
+  return <div className="real-evidence-example"><p className="bs-label">{dateTr(item.as_of)} · Son inceleme</p><h3>THF · {signalName(item.detector_id)}</h3><p>{reasonTr(item.reason)}</p><p>{stateTr[item.state]??'İnceleme sonucu'}</p><Link href={`/developments/${encodeURIComponent(item.evidence_id)}?fund=THF`}>Gelişmeyi incele →</Link></div>;
 }

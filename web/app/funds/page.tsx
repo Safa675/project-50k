@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import AssetLogo from '@/components/AssetLogo';
 import {requireUser, serverApi} from '@/lib/auth';
 import {FundSignal} from '@/lib/fund-display';
 import FundEvidence from '@/components/FundEvidence';
@@ -10,7 +11,7 @@ type Fund = {fund_code: string; name: string; category: string | null};
 function FundList({funds, offset = 0, full = false}: {funds: Fund[]; offset?: number; full?: boolean}) {
   return <ol className={`${styles.catalog} ${full ? styles.catalogFull : ''}`}>
     {funds.map((fund, index) => <li key={fund.fund_code}>
-      <span className={styles.catalogNumber}>{offset + index + 1}</span><span className={styles.avatar} aria-hidden="true">{fund.fund_code.slice(0, 2)}</span>
+      <span className={styles.catalogNumber}>{offset + index + 1}</span><AssetLogo kind="fund" code={fund.fund_code} name={fund.name} decorative/>
       <span className={styles.catalogText}><Link href={`/funds/${fund.fund_code}`}>{fund.fund_code}</Link>
         <Link href={`/funds/${fund.fund_code}`} title={fund.name}>{fund.name}</Link><span className={styles.caption}>{fund.category ?? 'Kategori bilinmiyor'}</span></span>
     </li>)}
@@ -41,7 +42,7 @@ export default async function Funds({searchParams}: {searchParams: Promise<{q?: 
   }
   return <section className={styles.page} data-figma-node="27:508">
     <div><FundTooltip pill title="Yayımlanmış arşiv verileri" text="Katalog güncel fon kimliklerini gösterir. Fiyatlar ve kanıtlar kendi kaynak tarihlerine göre sunulur. Kategori ve üyelik bilgisi geçmiş üyeliği göstermez.">
-      <img src="/figma/funds/info.svg" alt=""/>{user.data_mode === 'SYNTHETIC' ? 'SYNTHETIC · Sentetik test verileri' : 'DELAYED · Yayımlanmış veriler'}
+      <img src="/figma/funds/info.svg" alt=""/>{user.data_mode === 'SYNTHETIC' ? 'Örnek test verileri' : 'Yayımlanmış veriler'}
     </FundTooltip></div>
     <h1>Keşfet</h1>
     <form className={styles.search} action="/funds"><label><span className={styles.srOnly}>Fon kodu veya adı</span><img src="/design/search-large.svg" alt=""/><input name="q" defaultValue={q} maxLength={80} placeholder="Fon adı ya da kodu ara"/></label>{category && <input type="hidden" name="category" value={category}/>}<button type="submit">Ara</button></form>
@@ -50,8 +51,8 @@ export default async function Funds({searchParams}: {searchParams: Promise<{q?: 
       {categories.length > 5 && <Link href="/funds?view=catalog#fund-catalog">Tüm kategoriler</Link>}
     </nav>
     {featured && <div className={styles.columns}>
-      <div><div className={styles.sectionTitle}><h2>Detektör bulguları</h2><Link className={styles.textButton} href={user.role === 'viewer' ? '/method' : '/review'}>{user.role === 'viewer' ? 'Yöntemde oku' : 'İnceleme kuyruğu'}<img src="/design/arrow.svg" alt=""/></Link></div>
-        <p className={styles.caption}>En son tamamlanmış koşudan geliştirme bulguları. Fon koduna göre sıralıdır.</p><FundEvidence signals={signals} showFund/>
+      <div><div className={styles.sectionTitle}><h2>Gelişmeler</h2><Link className={styles.textButton} href={user.role === 'viewer' ? '/method' : '/review'}>{user.role === 'viewer' ? 'Yöntemde oku' : 'İnceleme kuyruğu'}<img src="/design/arrow.svg" alt=""/></Link></div>
+        <p className={styles.caption}>Son tamamlanan incelemeler. Fon koduna göre sıralıdır.</p><FundEvidence signals={signals} showFund/>
       </div>
       <aside><div className={styles.sectionTitle}><h2>Fon kataloğu</h2></div><p className={styles.caption}>Fon koduna göre alfabetik sıralama · {data.total.toLocaleString('tr-TR')} fon</p><FundList funds={data.items.slice(0, 5)}/><Link className={styles.textButton} href="/funds?view=catalog">Daha fazla göster<img src="/design/arrow.svg" alt=""/></Link></aside>
     </div>}
@@ -60,6 +61,6 @@ export default async function Funds({searchParams}: {searchParams: Promise<{q?: 
       {data.items.length ? <FundList funds={data.items} offset={offset} full/> : <p className={styles.empty}>Aramanızla eşleşen fon bulunamadı.</p>}
       <nav className={styles.pagination} aria-label="Sayfalar">{offset > 0 && <Link href={href(Math.max(0, offset - 50))}>Önceki</Link>}{offset + 50 < data.total && <Link href={href(offset + 50)}>Sonraki</Link>}</nav>
     </div>}
-    <p className={styles.integrity}>Geliştirme sonucu; eşikler olaydan sonra belirlendi. Kategori ve işlem durumu güncel katalog bilgisidir; geçmiş üyelik olarak kullanılamaz.</p>
+
   </section>;
 }

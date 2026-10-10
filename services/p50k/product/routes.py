@@ -20,7 +20,7 @@ from pydantic import AwareDatetime
 from p50k.product.archive import ISTANBUL
 from p50k.product.db import connect
 from p50k.product.models import EventsPage, FundDetail, FundsPage, SignalsPage
-from p50k.product.queries import FundQueries, coverage_for
+from p50k.product.queries import FundQueries, coverage_for, price_summary_for
 
 
 from p50k.product.auth import require_session
@@ -83,7 +83,7 @@ event is under review and cannot trigger a confirmed regulatory signal.
     chart = reader.chart(fund_code, as_of - timedelta(days=days - 1), as_of, resolved)
     signals = reader.signals(fund_code, None, as_of, resolved, 100, 0).items
     events = reader.events(fund_code, as_of, resolved, 100, 0)
-    return FundDetail(fund=fund, chart=chart, signals=signals, coverage=coverage_for(signals),
+    return FundDetail(fund=fund, chart=chart, price_summary=price_summary_for(chart), signals=signals, coverage=coverage_for(signals),
                       events=events.items, events_total=events.total, cutoff=resolved)
 
 

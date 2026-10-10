@@ -61,6 +61,15 @@ class DailyChart(Provenance):
     missing_dates: Literal["ABSENT_OBSERVATIONS"] = "ABSENT_OBSERVATIONS"
 
 
+class FundPriceSummary(Contract):
+    """Dated display references, never a replacement for missing observations."""
+
+    scope: Literal["CHART_WINDOW"] = "CHART_WINDOW"
+    latest_observation: PricePoint | None = None
+    last_available: PricePoint | None = None
+    status: Literal["AVAILABLE", "LATEST_MISSING", "LATEST_CONFLICTING", "NO_OBSERVATIONS"] = "NO_OBSERVATIONS"
+
+
 class SourceReference(Contract):
     source_id: str
     source_sha256: Annotated[str, Field(pattern=r"^[a-f0-9]{64}$")]
@@ -141,6 +150,7 @@ class EventsPage(Provenance):
 class FundDetail(Provenance):
     fund: Fund
     chart: DailyChart
+    price_summary: FundPriceSummary = Field(default_factory=FundPriceSummary)
     signals: list[Signal]
     coverage: Coverage
     events: list[RegulatoryEvent]

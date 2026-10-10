@@ -4,6 +4,13 @@ The current product and hackathon demo scope is **Turkish investment funds and T
 
 **Current direction (2026-10-10):**
 
+- **[DEC-033](docs/decisions/DEC-033-nontechnical-product-experience.md).**
+  - The product is for nontechnical users. Keep hashes, storage names, internal IDs, detector codes and status enums in audit/API records, not product screens.
+  - Explain actual calculations, dated inputs, limits and the calculation-to-AI-to-human review process in plain language beside results.
+  - Show the last usable price with its actual date when the latest entry is missing; preserve chart gaps and point-in-time rules.
+  - Use verified company/manager logos. Never invent a brand or a missing financial value.
+  - Stream server-validated chat paragraphs as generated. Explanations must answer the question, describe the evidence and cite its sources.
+  - Rights-review status remains in operational documentation/API metadata; Mirza explicitly removed that warning from end-user screens. This does not authorize redistribution.
 - **[DEC-032](docs/decisions/DEC-032-b2b-evidence-data-api.md).**
   - Sell evidence data and API access through an agent workflow to banks and financial institutions.
   - Insurance is permanently deferred; no insurance screens, policy workflows or insurer-review print view.

@@ -24,15 +24,34 @@ export type FundSignal = {
 };
 
 export const detectorNames: Record<string, string> = {
-  D1: 'Kategoriye göre fazla getiri medyanı',
-  D2: 'Fazla getiri medyanındaki değişim',
-  D3: 'Ardışık günlük getirilerin ilişkisi',
-  D4: 'Kategori getirisiyle ilişki',
-  D5: 'Gözlenen fiyat geçmişi',
+  D1: 'Benzer fonlara göre fiyat farkı',
+  D2: 'Benzer fonlarla farkın değişimi',
+  D3: 'Günlük fiyat hareketlerinin benzerliği',
+  D4: 'Benzer fonlarla birlikte hareket',
+  D5: 'Eldeki fiyat geçmişi',
   'AN-DQ-001': 'Fiyatın güncelliği',
   'AN-DQ-002': 'Birim fiyatın erişilebilirliği',
   'AN-FND-005': 'Düzenleyici kayıt',
 };
+
+export function signalName(code:string):string{return detectorNames[code]??'Fon incelemesi';}
+export function sourceName(code:string|null|undefined):string{
+  const name=(code??'').toLocaleLowerCase('en-US');
+  if(name.includes('tefas'))return 'TEFAS';
+  if(name.includes('kap'))return 'KAP';
+  if(name.includes('spk'))return 'Sermaye Piyasası Kurulu';
+  if(name.includes('forinvest'))return 'ForInvest';
+  return 'Yayımlanmış kaynak';
+}
+export function latestKnownNav(points:FundPoint[]):FundPoint|undefined{return [...points].reverse().find(point=>knownNav(point)!==null);}
+export function friendlyEvidenceText(text:string):string{
+  let result=text.replace(/\b(D[1-5]|AN-DQ-\d{3}|AN-FND-\d{3}) \[değer: ([^;]+); eşik: ([^;]+); ([^\]]+)\]/g,(_,code:string,value:string,threshold:string,state:string)=>{
+    const parts=[state==='kanıt yetersiz'?'bilgi yetersiz':state==='eşik aşıldı'?'inceleme gerekiyor':'belirgin değişim görülmedi'];
+    return `${signalName(code)} (${parts.join('; ')})`;
+  });
+  for(const [code,name] of Object.entries(detectorNames))result=result.replace(new RegExp(`\\b${code}\\b`,'g'),name);
+  return result;
+}
 
 export function sourceTime(value: string | null | undefined): string {
   return value ? new Intl.DateTimeFormat('tr-TR', {dateStyle: 'medium', timeStyle: 'short', timeZone: 'Europe/Istanbul'}).format(new Date(value)) : 'Zaman bilinmiyor';

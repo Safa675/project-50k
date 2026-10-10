@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import AssetLogo from '@/components/AssetLogo';
 import {serverApi} from '@/lib/auth';
 import {dateTr, decimal} from '@/lib/client';
 
@@ -12,14 +13,14 @@ export default async function Stocks({searchParams}: {searchParams: Promise<{q?:
   if (!Array.isArray(data.items) || !Number.isInteger(data.total) || data.universe !== 'BIST30_CURRENT_CATALOG') {
     throw new Error('Hisse yanıtı doğrulanamadı.');
   }
-  return <section><p className="eyebrow">BIST 30 · {data.data_mode}</p><h1>Türkiye hisseleri</h1>
+  return <section><p className="eyebrow">BIST 30</p><h1>Türkiye hisseleri</h1>
     <p>Katalog güncel BIST 30 üyeliğini gösterir. Bu üyelik geçmiş tarihli endeks kapsamı olarak kullanılamaz.</p>
-    <p className="notice">Yayımlanmış günlük kapanış verileri · TRY. Veri hakları incelenmedi; yalnızca yerel inceleme.</p>
+    <p className="notice">Yayımlanmış günlük kapanış fiyatları · Türk lirası.</p>
     <form className="toolbar" action="/stocks"><label>Hisse kodu veya adı<input name="q" defaultValue={q} maxLength={80}/></label><button>Ara</button></form>
     <p role="status">{data.total.toLocaleString('tr-TR')} hisse</p>
-    {data.items.length ? <div className="table-scroll"><table><thead><tr><th>Hisse</th><th>Adı</th><th>Son kapanış · TRY</th><th>Veri tarihi</th></tr></thead>
+    {data.items.length ? <div className="table-scroll"><table><thead><tr><th>Hisse</th><th>Adı</th><th>Son kapanış · TL</th><th>Veri tarihi</th></tr></thead>
       <tbody>{data.items.map((stock: Stock) => <tr key={stock.symbol}>
-        <td><Link href={`/stocks/${encodeURIComponent(stock.symbol)}`}>{stock.symbol}</Link></td>
+        <td><Link className="stock-symbol" href={`/stocks/${encodeURIComponent(stock.symbol)}`}><AssetLogo kind="stock" code={stock.symbol} name={stock.name} decorative/>{stock.symbol}</Link></td>
         <td><Link href={`/stocks/${encodeURIComponent(stock.symbol)}`}>{stock.name}</Link></td>
         <td>{decimal(stock.last_close)}</td><td>{dateTr(stock.last_date)}</td>
       </tr>)}</tbody></table></div> : <p>{q ? 'Aramanızla eşleşen hisse bulunamadı.' : 'Kaynaklı BIST 30 hisse kaydı bulunmuyor.'}</p>}

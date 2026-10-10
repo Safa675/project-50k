@@ -1,4 +1,6 @@
 import {expect, test} from '@playwright/test';
+import {createServer} from 'node:http';
+import type {AddressInfo} from 'node:net';
 
 test.beforeEach(async ({page}) => {
   await page.goto('/login');
@@ -30,8 +32,8 @@ test('chat sends CSRF and renders only the complete synthetic validated answer a
   const log = page.getByRole('log', {name: 'Sohbet mesajları'});
   await expect(log.getByText(answer, {exact: true})).toBeVisible();
   expect(await log.locator('strong').allTextContents()).toEqual(['Siz', 'BlackSwan']);
-  await log.getByText('Yanıtın kanıt bağlantıları', {exact: true}).click();
-  await expect(log.getByRole('link', {name:'Kaynak kanıtı 1'})).toHaveAttribute('href','/developments/ev%3Asynthetic-browser?fund=THF');
+  await log.getByText('Yanıtın kaynakları', {exact: true}).click();
+  await expect(log.getByRole('link', {name:'Kaynak bilgisi 1'})).toHaveAttribute('href','/developments/ev%3Asynthetic-browser?fund=THF');
   await page.getByLabel('Fon kanıtları hakkında sorunuz').fill('Bu sınırlamayı açıklar mısın?');
   await page.getByRole('button', {name: 'Soruyu gönder', exact: true}).click();
   await expect(log.locator('.chat-assistant')).toHaveCount(2);
@@ -59,6 +61,38 @@ test('chat rejects partial model text and keeps AI off failures explicit', async
   await page.getByRole('button', {name: 'Soruyu gönder', exact: true}).click();
   await expect(page.locator('.chat-panel').getByRole('alert')).toHaveText('Sohbet şu anda kapalı. Bir model yanıtı üretilmedi.');
   await expect(page.locator('.chat-assistant')).toHaveCount(0);
+});
+
+test('a checked paragraph appears while the HTTP response is still streaming',async({page})=>{
+  const content='Son fiyat kaydı güncel değil. Önceki fiyat kendi tarihiyle incelenebilir.';
+  let release:()=>void=()=>undefined;
+  const pending=new Promise<void>(resolve=>{release=resolve;});
+  const server=createServer(async(request,response)=>{
+    response.setHeader('Access-Control-Allow-Origin','http://127.0.0.1:3071');
+    response.setHeader('Access-Control-Allow-Credentials','true');
+    response.setHeader('Access-Control-Allow-Headers','content-type,x-csrf-token');
+    if(request.method==='OPTIONS'){response.writeHead(204);response.end();return;}
+    response.writeHead(200,{'Content-Type':'text/event-stream','Cache-Control':'no-store'});
+    response.write(`event: paragraph\ndata: ${JSON.stringify({index:0,content,evidence_ids:['ev:synthetic-browser']})}\n\n`);
+    await pending;
+    response.end(`event: answer\ndata: ${JSON.stringify({thread_id:'00000000-0000-4000-8000-000000000001',content,evidence_ids:['ev:synthetic-browser'],evidence_labels:{'ev:synthetic-browser':'Fiyat bilgisinin güncelliği'},model:'synthetic-test-model'})}\n\n`);
+  });
+  await new Promise<void>(resolve=>server.listen(0,'127.0.0.1',resolve));
+  try{
+    const port=(server.address() as AddressInfo).port;
+    await page.route('**/api/p/chat',route=>route.continue({url:`http://127.0.0.1:${port}/chat`}));
+    await page.getByLabel('Fon kanıtları hakkında sorunuz').fill('Fiyat bilgisi neden eksik?');
+    await page.getByRole('button',{name:'Soruyu gönder',exact:true}).click();
+    await expect(page.locator('.chat-streaming')).toContainText(content);
+    await expect(page.getByRole('button',{name:'Soruyu gönder',exact:true})).toBeDisabled();
+    release();
+    await expect(page.locator('.chat-streaming')).toHaveCount(0);
+    await expect(page.locator('.chat-assistant')).toHaveCount(1);
+    await page.getByText('Yanıtın kaynakları',{exact:true}).click();
+    await expect(page.getByRole('link',{name:'Fiyat bilgisinin güncelliği'})).toBeVisible();
+  }finally{
+    release();server.closeAllConnections();await new Promise<void>(resolve=>server.close(()=>resolve()));
+  }
 });
 
 test('chat displays the actual isolated backend AI off response without a fabricated answer', async ({page}) => {
