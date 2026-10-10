@@ -8,6 +8,7 @@ Newest first within each person. Times are Europe/Istanbul.
 
 | Since | Type | Ask | Status |
 |---|---|---|---|
+| 2026-10-10 | Action | Refresh Figma design tools for all 22 supplied nodes | Installed/enabled verified; Mirza confirms Connected. Current long-running session has no callable Figma methods; session refresh required. Do not reinstall or send tokens |
 | 2026-10-10 | Decision | Stocks are in product scope (DEC-032): include real stock support in the hackathon demo, or complete the historical fund case first and implement stocks next? | Closed 2026-10-10: Mirza requires stocks working in the hackathon demo. Implement new isolated stock support on resume; no claim it already works |
 | 2026-10-10 | Action | Finish immediate work, then stop for alignment | Confirmed: finish current chat/import/documentation block, then pause until Mirza resumes; start no new feature now |
 | 2026-10-10 | Decision | Read and confirm the build plan | Closed 2026-10-10: confirmed by delegation (DEC-030); agents ask only about problematic items |

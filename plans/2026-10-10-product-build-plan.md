@@ -468,7 +468,7 @@ Owner: **C** = Claude, **M** = Mirza, **S** = Safa, **B** = Barış, **T** = tea
   - the `/ekip/[run]` page
 - [ ] T5.4 B2B evidence/feed/API screens and the historical fund case (section 8); no insurance work
 - [ ] T5.5 Barış's tokens; Turkish copy and accessibility pass
-- [ ] T5.6 Real stock support required by DEC-032: new isolated modules, entitled source data, timestamps and a
+- [x] T5.6 Real stock support required by DEC-032: new isolated modules, entitled source data, timestamps and a
   new versioned detector record; implement on resume, preserve existing fund protocols
 
 ### Phase 6
@@ -528,3 +528,10 @@ Owner: **C** = Claude, **M** = Mirza, **S** = Safa, **B** = Barış, **T** = tea
 | Proxy or streaming problems | Proxy and SSE check before M1 |
 | Over-claiming in the pitch | Development-result labels; v2 "thresholds fixed after the event"; the reworded pitch line |
 | Regulatory exposure | Descriptive evidence only; no assumed partnership or resale rights; legal/data-rights opinions before contracts |
+
+Stock slice boundary: current BIST30 data/catalog/chart/corporate-record API is
+implemented; adjustment semantics and redistribution rights are unreviewed.
+Stock anomaly classification/AI is separate work. T5.4 B2B workflow overview
+implemented with actual counts; challenger/committee remains unfinished.
+Figma22 frame restyle is tracked in docs/notes/figma-implementation-2026-10-10.md
+and requires the connected tool catalog to become available.

@@ -260,3 +260,30 @@ Section 11 of the codex context still applies. In addition, the pitch and demo m
 - that any detector figure is validated accuracy (there is no held-out test, DEC-029);
 - that the LLM's decisions are predictions, or advice to buy, hold or sell;
 - that a policy price is actuarially sound before base rates exist.
+
+## Resumed stock and design build
+
+Mirza resumed the build and confirmed current BIST 30 as the stock universe.
+He delegated all Git work, including safe pulls. Root verified protected paths
+and fast-forwarded local main to `3b7bf4c`; development stays in the app worktree.
+
+Stock data-only protocol was committed alone at `853d3ae`, before ingestion.
+The first real BIST30 capture contains 30 current members, 870 daily closes
+(2026-09-01 through 2026-10-09) and five observed corporate-action records.
+All 33 MCP structured-response captures were hash-verified. Normalized manifest
+SHA `8e26ff013cf667f773566986b8341a545b9813a653c82bba20fd758536c770b5`.
+Actual import succeeded; repeat added zero rows. Availability is capture time,
+price adjustment is UNVERIFIED, and rights remain UNREVIEWED. This is stock
+catalog/chart/evidence/API support, without a stock anomaly classifier or AI
+materiality decision. Fund calibration and sealed sources are unchanged.
+
+A real B2B workflow overview reports ingestion, deterministic evidence, AI
+proposal and human-review counts, with current-run provenance and API docs.
+It explicitly describes the existing single-proposal/human-review workflow;
+there is no fabricated challenger/committee transcript. Synthetic stock and
+workflow checks pass; stock UI browser integration passes eight tests.
+
+Mirza supplied [22 Figma nodes](figma-implementation-2026-10-10.md). The plugin
+is installed/enabled and he confirms Connected, but this session has no Figma
+design methods. Design work awaits tool-catalog refresh, with all links retained.
+Do not ask for another key or reinstall. Backup/restore rehearsal runs in parallel.
