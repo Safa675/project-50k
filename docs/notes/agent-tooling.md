@@ -18,17 +18,47 @@ Change `CLAUDE.md` and `AGENTS.md` together so they never disagree.
 
 | Event | Script | Effect |
 |---|---|---|
-| `SessionStart` | `session-orientation.mjs` | Adds branch, HEAD, uncommitted count, `core.autocrlf`, private-data presence, key rules and the skill list to the session context |
-| `PreToolUse` on `Edit`, `Write`, `MultiEdit`, `NotebookEdit` | `protect-paths.mjs` | Blocks edits to the frozen handoff, the frozen detectors and their results, committed protocols and preregistrations, `raw/` data, and files bound into sealed bundles |
-| `PreToolUse` on `Bash`, `PowerShell` | `guard-git.mjs` | Blocks force pushes, remote branch deletion, squash and rebase merges, force-adds and staging `raw/` |
+| `SessionStart` | `session-orientation.mjs` | Adds branch, HEAD, uncommitted count, `core.autocrlf`, private-data presence, key rules and the skill list to the session context, and warns when protected files differ from HEAD |
+| `PreToolUse` on `Edit`, `Write`, `MultiEdit`, `NotebookEdit` | `protect-paths.mjs` | Blocks edits to protected files (below) |
+| `PreToolUse` on `Bash`, `PowerShell` | `guard-shell.mjs` | Blocks history rewrites, private-data staging, and shell writes or deletions of protected files (below) |
+| `PostToolUse` on `Bash`, `PowerShell` | `tripwire.mjs` | After each shell command, reports protected tracked files that now differ from HEAD, so a write the guard missed is restored at once |
+
+**Protected files:**
+
+- the frozen handoff;
+- the frozen detectors and their results;
+- committed protocols and preregistrations;
+- `raw/` data;
+- files bound into sealed bundles.
+
+The shared rules are in `.claude/hooks/lib/protected.mjs`.
+
+**What the shell guard blocks:**
+
+- force, mirror, prune and delete pushes, in any flag spelling;
+- squash merges and squash pulls, and squash or rebase merges through `gh`;
+- branch deletion or forced ref updates through `gh api`;
+- force-adds and staging `raw/`;
+- `git clean -x/-X` and `git stash --all`, which would remove `raw/`;
+- `rm`/`Remove-Item`, `mv`, in-place `sed`/`perl`, redirects, `tee`, `Set-Content` or `cp` that hit a protected
+  file or a directory containing one, including through globs, `cd` and absolute paths.
+
+Quoted text and heredoc bodies, such as commit messages, are ignored.
 
 - **How they run:** the hooks start `node` directly, without a shell (exec form). They behave the same on Linux
   and Windows and need Node on `PATH`.
-- **Limits:** they guard against mistakes and are not a security boundary. If Node is missing or a script fails,
-  the action goes ahead.
+- **Limits:**
+  - The hooks guard against mistakes and are not a security boundary.
+  - The shell guard reads command text. Code that writes files itself, such as `python -c`, gets past it; the
+    tripwire then reports the change.
+  - If Node is missing or a script fails, the action goes ahead.
+  - The hooks protect only the checkout the session started in, not sibling clones.
 - **Self-test:** `node --test .claude/hooks/hooks.test.mjs`.
-- **Intended reseal:** create `.claude/allow-registered-edits.local`, then edit and commit. Reseal every affected
-  bundle, record the new IDs, and delete the file.
+- **Intended reseal, only with the user's approval:**
+  1. Create `.claude/allow-registered-edits.local`.
+  2. Edit and commit the file.
+  3. Reseal every affected bundle and record the new IDs.
+  4. Delete the override file.
 
 ## Path rules (`.claude/rules/`)
 

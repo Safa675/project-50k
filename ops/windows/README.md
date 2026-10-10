@@ -7,8 +7,8 @@ snapshot database that sealed research bundles read, so collection never invalid
 `ops/systemd/README.md` for that hazard). Logs: `~/.local/share/project-50k/snapshots-<date>.log`.
 
 Run once by hand. A full run takes one to several hours: the job pauses 1.5 s between requests, and TEFAS
-responses were slow on 2026-10-10. If TEFAS errors stop it early, run it again: rows already stored are kept,
-not duplicated.
+responses were slow on 2026-10-10. If TEFAS errors stop it early, run it again. A rerun requests every fund again; dated rows
+already stored are kept and not duplicated, and undated rows are stored again.
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File ops\windows\fund-snapshots.ps1

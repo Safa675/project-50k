@@ -27,13 +27,20 @@ if ((-not $FixedBundle -or -not $DatedIndex) -and (Test-Path $config)) {
   if (-not $DatedIndex) { $DatedIndex = $c.dated_index }
 }
 if (-not $FixedBundle -or -not $DatedIndex) { throw 'Pass -FixedBundle and -DatedIndex, or create .claude/p50k-demo.local.json.' }
+# A trailing separator would escape the closing quote added below.
+$FixedBundle = $FixedBundle.TrimEnd([char[]]'\/')
+$DatedIndex = $DatedIndex.TrimEnd([char[]]'\/')
 if (-not (Test-Path $py)) { throw "Missing $py. Run: uv sync --locked --extra api --extra api-test --extra research" }
 if (-not (Test-Path (Join-Path $repo 'frontend\.next\BUILD_ID'))) { throw 'Missing frontend build. Run in frontend/: npm run build' }
 
 if ($Restart) { & (Join-Path $PSScriptRoot 'stop-demo.ps1') -FrontendPort $FrontendPort -ApiPort $ApiPort -DatedApiPort $DatedApiPort }
-foreach ($port in @($FrontendPort, $ApiPort, $DatedApiPort)) {
-  $busy = Get-NetTCPConnection -LocalPort $port -State Listen -ErrorAction SilentlyContinue
-  if ($busy) { throw "Port $port is in use by PID $($busy[0].OwningProcess). Stop it first or use -Restart." }
+$ports = @($FrontendPort, $ApiPort, $DatedApiPort)
+$freeBy = (Get-Date).AddSeconds($(if ($Restart) { 20 } else { 0 }))
+while ($true) {
+  $busy = @(Get-NetTCPConnection -LocalPort $ports -State Listen -ErrorAction SilentlyContinue)
+  if (-not $busy) { break }
+  if ((Get-Date) -gt $freeBy) { throw "Port $($busy[0].LocalPort) is in use by PID $($busy[0].OwningProcess). Stop it first or use -Restart." }
+  Start-Sleep -Milliseconds 500
 }
 
 $logs = Join-Path $repo '.claude\demo-logs'

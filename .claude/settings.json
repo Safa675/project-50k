@@ -18,7 +18,15 @@
       {
         "matcher": "Bash|PowerShell",
         "hooks": [
-          {"type": "command", "command": "node", "args": ["${CLAUDE_PROJECT_DIR}/.claude/hooks/guard-git.mjs"], "timeout": 15}
+          {"type": "command", "command": "node", "args": ["${CLAUDE_PROJECT_DIR}/.claude/hooks/guard-shell.mjs"], "timeout": 15}
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {"type": "command", "command": "node", "args": ["${CLAUDE_PROJECT_DIR}/.claude/hooks/tripwire.mjs"], "timeout": 15}
         ]
       }
     ]

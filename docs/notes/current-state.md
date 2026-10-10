@@ -35,9 +35,11 @@ Still binding:
 - the TRY 5,000 cumulative ceiling, which is not spending authorization;
 - no service accounts;
 - unreviewed data rights for TEFAS, KAP and MKK data;
-- every gate in `docs/handoff-v0.5/docs/25_Release_Gates_and_Open_Decisions.md`.
+- the release gates in `docs/handoff-v0.5/docs/25_Release_Gates_and_Open_Decisions.md`, as DEC-024 scopes them:
+  G03 is the critical data gate, and G02, G04 and G11 return only with the postponed markets.
 
-**Owner-only steps right now: none.** The owner pulls `main` to see changes. GitHub repository settings, such as
+**Owner actions needed now: none.** The owner pulls `main` to see changes. One owner decision is still pending,
+asked on 2026-10-07: the development/test split (see Open questions). GitHub repository settings, such as
 collaborators and branch protection, remain his.
 
 ## What exists
@@ -68,24 +70,41 @@ they were sealed with, so every machine seals its own.
 
 ## Running the demo
 
-On the team's Windows machine, in the dated-view clone, the demo serves:
+On the team's Windows machine the demo runs from the dated-view clone and serves:
 
 - the fixed view at `http://127.0.0.1:3060/`;
 - the dated view at `http://127.0.0.1:3060/dates`.
 
-The bundle paths are in that clone's `.claude/p50k-demo.local.json`. To restart or stop the demo:
+The bundle paths are in that clone's `.claude/p50k-demo.local.json`. Run these from the dated-view clone's root;
+from another checkout they leave the demo alone:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .claude/skills/p50k-demo/start-demo.ps1 -Restart
 powershell -ExecutionPolicy Bypass -File .claude/skills/p50k-demo/stop-demo.ps1
 ```
 
+**The main checkout is load-bearing.** The demo's fixed bundle lives in the main checkout's `raw/`. On every load
+it re-hashes the main checkout's registered files and `raw/snapshots/fund_snapshots.sqlite3`. While the demo runs,
+in the main checkout:
+
+- do not switch branches;
+- do not pull or edit changes to registered files;
+- do not touch that database.
+
+Otherwise the fixed view answers 503. Do not run `npm run build` in the dated-view clone while the demo runs:
+Next.js deletes the `.next` folder the running server uses.
+
 On Linux:
 
 1. Pull `main`.
-2. Seal the bundles: follow the README's local app section, then the "Optional dated D1 view" section in
+2. Seal the fixed-date bundles:
+   - seal v1 as in the README's local app section;
+   - then extend it with concentration:
+     `PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=services .venv/bin/python research/events/2026-09-17-spk-liquidations/fund_concentration_app/run.py --base-bundle raw/research/fund-review-app/<v1>`.
+     It prints the v2 directory.
+3. Seal the dated index from the v1 bundle: see "Optional dated D1 view" in
    [ops/local/README.md](../../ops/local/README.md).
-3. Start the demo with `.claude/skills/p50k-demo/start-demo.sh <fixed bundle> <dated index>`.
+4. Start the demo with `.claude/skills/p50k-demo/start-demo.sh <v2 bundle> <dated index>`.
 
 The `/p50k-demo` and `/p50k-seal-dated` skills hold the details.
 
@@ -108,8 +127,8 @@ Treat any new failure name as a finding, not only a changed count.
 
 ## Open questions and gates
 
-- **Development/test split:** undecided. The proposal splits by company; see section 7 of the codex context. Until
-  it is decided, compute nothing on the 1,922 unopened price files.
+- **Development/test split:** the owner's decision, pending since 2026-10-07. The proposal splits by company; see
+  section 7 of the codex context. Until it is decided, compute nothing on the 1,922 unopened price files.
 - **G01, competition eligibility:** the team's position and the pre-event commit dates are recorded in DEC-027. No
   organizer ruling was requested.
 - **G03, dated fund history:** open. Forward snapshots now build dated size, unit and investor history from
@@ -125,10 +144,10 @@ Treat any new failure name as a finding, not only a changed count.
 1. **Per-date estimated flow.** Write a new versioned protocol, committed alone before any calculation, that applies
    DEC-026's pre-recorded (M-2, M-1) rule.
 2. **Windows test hygiene.** Make the root suite pass on Windows. The causes are a missing `tzdata`, CRLF test
-   fixtures, the cp1252 console, SQLite file handles and `SO_REUSEADDR`. Fix them without editing files bound into
-   sealed bundles.
-3. **The split decision.** It unblocks the sealed-test runner (slice E in the codex context) and any measured
-   evaluation.
+   fixtures, the cp1252 console, SQLite file handles and `SO_REUSEADDR`. Start on the test side. The SQLite lock
+   errors may involve the registered `evidence_store.py`, and changing that file needs an approved reseal.
+3. **The owner's split decision.** It unblocks the sealed-test runner (slice E in the codex context) and any
+   measured evaluation.
 
 ## Do not claim
 
