@@ -11,6 +11,7 @@ They are the inputs to `plans/2026-10-10-product-build-plan.md`.
 | `research-product.md` | Insurance and B2B data ideas: Turkish regulation, comparables, defensible product shapes, questions for Safa |
 | `research-runtime.md` | Docker, PostgreSQL, worker, auth, OpenAI integration, CI, effort estimate |
 | `plan-review-integrity.md`, `plan-review-feasibility.md` | Adversarial reviews of the first plan draft; their fixes are folded into the plan |
+| `agents-repo.md`, `agents-alternatives.md`, `agents-design.md`, `agents-critique.md` | TradingAgents v0.6.0 deep read, alternatives (OpenAI Agents SDK, LangGraph, PDF tools, debate research), the agent-team design and its adversarial critique; the plan's section 7 adopts the critique's cut form |
 
 How to read them:
 

@@ -8,7 +8,7 @@ Newest first within each person. Times are Europe/Istanbul.
 
 | Since | Type | Ask | Status |
 |---|---|---|---|
-| 2026-10-10 | Decision | Read and confirm the build plan, `plans/2026-10-10-product-build-plan.md`: decisions D1–D11, the timeline and the cut order | Open |
+| 2026-10-10 | Decision | Read and confirm the build plan, `plans/2026-10-10-product-build-plan.md`: decisions D1–D14 (D12 is the TradingAgents-inspired agent team), the timeline and the after-freeze list | Open |
 | 2026-10-10 | Action, after T1.1 creates the worktree | Put the OpenAI API key in the worktree's gitignored `secrets/openai_api_key` (never in chat or git), and set a $25 hard limit with alerts on the OpenAI project | Open |
 | 2026-10-10 | Decision | D7: only derived evidence goes to OpenAI (detector values, dates, categories, public fund codes and names, event text). No raw series, PDFs or personal data | Open |
 | 2026-10-10 | Decision | D9: unattended overnight collection from public TEFAS, SPK and KAP endpoints at the agreed pacing, into new directories; keep the machine on | Open |
@@ -23,7 +23,8 @@ Newest first within each person. Times are Europe/Istanbul.
 | 2026-10-10 | Decision, Saturday evening after the mentor meetings (by 22:00; with no pick by 23:00 the build defaults to B2B) | Headline story and final business plan: insurance (as the trigger and evidence engine for a licensed insurer, possibly with a policy-writer agent that drafts a PDF for the insurer's review), B2B anomaly data, or both kept thin | Open |
 | 2026-10-10 | Decision | Insurance details, if chosen: trigger scope (SPK-ordered TEFAS halts and liquidations; licence cancellations? price falls excluded), payout shape, policyholder (investor or a group policy through the distributor), channel (bank apps, or brokerage apps through an agency or broker partner) | Open |
 | 2026-10-10 | Decision | B2B details, if chosen: the first buyer, and which decision our data changes for them; the revenue model hypothesis | Open |
-| 2026-10-10 | Decision | Which institutions may be named in the pitch, and with what wording (no implied partnership) | Open |
+| 2026-10-10 | Decision | Which institutions may be named in the pitch, and with what wording (no implied partnership). The default is to name no insurer | Open |
+| 2026-10-10 | Decision | Disclaimer wording for the insurer-review print view; whether a print view about a real fund may appear in the live demo (localhost only); if B2B, a product name without "risk raporu" or "sinyal" | Open |
 | 2026-10-10 | Decision | Agree with D7 (only derived evidence goes to OpenAI)? | Open |
 | 2026-10-10 | Action | Share the data sources he found (links or files) and their terms | Open |
 | 2026-10-10 | Action, optional | Copy his full 2026-10-06 snapshot database (2,133 funds) to Mirza privately, not through git | Open |

@@ -24,9 +24,12 @@ confirms it. Confirming it accepts the recommended defaults in section 2 unless 
     packets. It never writes a number.
   - Every decision is append-only, and a human can override it.
   - Chat answers pass the same validator before anyone sees them.
+- **Agent team.** TradingAgents-inspired, as a fixed pipeline in our own worker: server-written briefs, then a
+  challenger, then a committee whose decision a human can override. No framework and no copied code. It is built
+  only if the AI core is on time.
 - **Story screens.** On Sunday morning, after the team's pick: insurance (the trigger and evidence engine for a
-  licensed insurer, possibly with an agent team and a policy-writer draft PDF) or B2B descriptive data. With no pick
-  by 23:00, B2B.
+  licensed insurer, with a deterministic insurer-review print view) or B2B descriptive data. With no pick by 23:00,
+  B2B.
 - **Scope.** The work was about 30 hours against 14–16 available. The plan now moves a defined list to after the
   freeze (section 10) and builds the demo path first.
 
@@ -67,6 +70,9 @@ On this machine, one `docker compose up` starts the following, with every host p
 | D9 | Overnight collection | Restartable runners built in T2.6 and dry-run on THF and TP2 first. They run on the host from the worktree's environment. Output goes under `~/.local/share/project-50k/overnight/2026-10-10/` only.<br>Jobs: TEFAS 12-month prices, snapshots and profiles for all funds; SPK bulletin PDFs for 2024–2026 (download only). Pacing 1.5 s / 6 s; each job stops after 3 consecutive failures |
 | D10 | Real-data pages | Behind login. A public landing page shows no real data |
 | D11 | AI decision types | Materiality only: `MATERIAL`, `NOT_MATERIAL`, `DATA_ISSUE` or `INSUFFICIENT_EVIDENCE`, with the server computing the allowed options. The insurance trigger assessment is added only if insurance is picked |
+| D12 | Agent team | A fixed pipeline in our worker, TradingAgents-inspired, with no framework and no copied code (section 7). Before the freeze it is a challenger plus a committee, run only if M3 lands by 01:00. Recorded in DEC-030 together with D7 |
+| D13 | Data-mode labels | `DELAYED` for current published TEFAS data, with its as-of date; `HISTORICAL_REPLAY` only for replays with a cutoff. A replay packet never carries later TEFAS status (the 2026-10-06 status would reveal the halt) |
+| D14 | Who approves documents | Admins approve insurer-review print views; analysts review AI decisions |
 
 ## 3. Architecture and safety rails
 
@@ -161,11 +167,20 @@ Decisions, chat answers and any summaries are validated before anything is shown
 
 1. **Schema.** The output matches its strict schema.
 2. **Citations.** Cited IDs must exist in the packet or in the thread's tool results.
-3. **Numbers.** Numbers, dates and identifiers appear only as placeholders. Validation fails on any digit, and on any
-   Turkish number or magnitude word, outside a placeholder.
-4. **Wording.** Phrase lists for allegation, advice, prediction or safety, SPK motives and performance claims, tested
-   with a Turkish corpus.
-5. **Failure.** One retry, then `INVALID` and a fixed "kanıt yetersiz" text.
+3. **Numbers.** Numbers, dates and identifiers appear only as placeholders. Each placeholder renders as a labelled
+   value with its threshold and a magnitude band computed on the server. Validation fails on:
+   - any digit outside a placeholder;
+   - a Turkish number word used as a numeral, that is, before a unit, time or magnitude noun (gün, ay, yıl, kat,
+     puan, yüzde, bin, milyon). "Bir" as the article stays valid;
+   - intensity adjectives ("olağanüstü", "çok üzerinde").
+4. **Wording.**
+   - Phrase lists cover allegation, advice, prediction or safety, SPK motives, performance claims and coverage
+     vocabulary.
+   - İ, I, ı and i are folded together before matching.
+   - The Turkish test corpus includes valid sentences with many "bir" and invalid sentences in capitals.
+5. **Failure.** One retry, then `INVALID`. The text reads "Yapay zekâ önerisi üretilemedi; insan incelemesi gerekli",
+   and the fund goes to the queue. "Kanıt yetersiz" is shown only when the server finds the evidence insufficient,
+   never for a model failure.
 6. **Chat.** Tool-progress events stream; the answer is sent only after validation. Evidence chips appear only for IDs
    the tools returned.
 
@@ -174,10 +189,20 @@ Decisions, chat answers and any summaries are validated before anything is shown
 1. **Allowed options.** The server computes them from the packet:
    - no covering detector and no event: `INSUFFICIENT_EVIDENCE`, with no model call;
    - `NOT_MATERIAL` needs a covering detector;
+   - a confirmed in-scope SPK event removes `NOT_MATERIAL` and `DATA_ISSUE`;
    - `MATERIAL` and `DATA_ISSUE` must cite a triggered signal or a data-quality event;
    - every decision cites at least one ID.
 2. **Review.** Analysts accept, override (with a required reason) or reject.
+   - The effective value is the latest human review on any decision for the current packet, single-call or team.
+   - A later AI decision never displaces it; it is shown as "farklı yapay zekâ önerisi".
+   - Each decision field gets its own review.
 3. **Failure.** It fails closed to `UNDECIDED`.
+4. **Client settings.**
+   - The OpenAI client runs with `max_retries=0` and `timeout=60`. The runner does the retries and reserves budget for
+     each one.
+   - Every step sets `max_output_tokens`, and its reservation is priced from that.
+   - Reservations are rows with `expires_at`. A timeout or expiry settles at the worst case.
+   - After an `INVALID`, the same packet and prompt are blocked from rerunning.
 
 ### Schedule and budget
 
@@ -186,11 +211,19 @@ Decisions, chat answers and any summaries are validated before anything is shown
 - **By Sunday 08:30:** one live pass of at most 300 decisions, run after the final detector run with 6 concurrent jobs.
 - **Demo overrides:** made after that pass.
 - **If D9 is declined:** the pass runs right after M2.
+- **Gate.** The 08:30 pass runs only if the 20 tuning calls show an acceptable `INVALID` rate. The pass is sized from
+  the measured p90 cost, with the demo funds first.
 - **Caps:**
-  - $20 of our own; each call reserves its worst-case cost first;
-  - $5 held for Sunday 11:00–13:00;
-  - chat limited to 30 turns per user per day;
-  - "Yeniden değerlendir" for analysts only, and deduplicated.
+  - $20 of our own, split into buckets:
+    - tuning, $1;
+    - the morning single-call pass, $5;
+    - the agent team, $3 (batch $1.5, on demand $1.5);
+    - chat, $5;
+    - the Sunday 11:00–13:00 reserve, $5;
+    - unallocated, $1.
+  - Each call reserves its worst-case cost first.
+  - Chat is limited to 30 turns per user per day.
+  - "Yeniden değerlendir" is for analysts only, and deduplicated.
 - **Cache key:** mode, model, effort, prompt version, schema version and packet hash. `INVALID` output is never cached.
 
 ### Chat
@@ -200,29 +233,76 @@ Decisions, chat answers and any summaries are validated before anything is shown
 - **Limits per turn:** 3 model calls, 6 tool calls, 45 s.
 - **Threads:** scoped to their owner.
 
-## 7. Agent team (TradingAgents-style; the study's results follow)
+## 7. Agent team (TradingAgents-inspired)
 
-The team asked whether to reuse TradingAgents or build something similar: agents use the data to reach an outcome,
-and a policy writer produces a PDF. The working design below is pending the study and its critique.
+The study, design and critique are in
+[docs/notes/research-2026-10-10/](../docs/notes/research-2026-10-10/) (`agents-*.md`).
 
-- **The pattern, not the framework.**
-  - A small orchestrator in our worker runs fixed steps with the OpenAI Responses API and strict schemas.
-  - It runs under the validator, egress, budget and override rules above.
-  - There is no LangGraph: the handoff guides against a multi-agent framework, and it adds weight.
-  - TradingAgents is Apache-2.0. We take its structure, and credit it if any code is copied.
-- **Roster:**
-  1. **Analysts** (cheap model): briefs per evidence slice (price and peers, regulatory events, data quality).
-  2. **Challenger:** argues the benign explanations.
-  3. **Committee** (strong model): issues the materiality decision from the allowed options.
-  4. **Compliance:** the validator plus a critic pass.
-  5. **Insurance only, a policy writer:** an insurer-review **TASLAK** term sheet and trigger specification as a PDF.
-     - Payout and premium fields are insurer inputs or left blank.
-     - The PDF is marked final only after human approval.
-     - It is stored with its hash, model, prompt version and evidence IDs.
-- **Cost.** About 8 calls per run, mostly on the cheap model, so about $0.03 per run. It runs on triggered funds and
-  on demand only.
-- **Time.** It is an add-on to the single-call decision. The thin version (analysts plus committee, plus an agent-run
-  timeline screen) fits only if M3 is on time. The policy-writer PDF is built only if insurance is picked.
+### What TradingAgents is
+
+- **Basics.** v0.6.0 (2026-10-03), Apache-2.0, LangGraph/LangChain.
+- **Flow.**
+  1. Four analysts (market, news, fundamentals, sentiment) run in parallel.
+  2. Bull and bear researchers debate, and a research manager decides.
+  3. A trader proposes a trade.
+  4. Aggressive, conservative and neutral risk analysts debate.
+  5. A portfolio manager outputs a Buy…Sell rating.
+- **Calls.** At least 15 LLM calls per run, typically 20–25.
+- **Data.** US and crypto only: yfinance, SEC, Reddit, StockTwits, news.
+- **Findings for us:**
+  - It leaves OpenAI's `store` unset, so OpenAI keeps responses for 30 days by default.
+  - Its structured outputs use a forced tool call, not a strict schema, with a free-text regex fallback.
+- **Verdict.** Use the pattern, not the code. Its output is investment advice, it has no TEFAS, KAP or SPK support,
+  it would add a framework dependency, and its call count does not fit the budget.
+
+### Our design (the critique's cut form)
+
+- **A fixed pipeline in our own worker.** No framework, no model routing and no tools. It runs on the same step runner
+  as the single-call decision, and every rule in section 6 applies: allowed options, validator, egress, reservations
+  and override.
+- **No code is copied.** We say "TradingAgents-inspired" and cite arXiv 2412.20138. DEC-030 records this.
+- **Before the freeze** (only if M3 lands by 01:00; otherwise the single call stays):
+  1. **Server briefs.** The server writes the analyst briefs deterministically, one per evidence slice: price and
+     peers, regulatory events, data quality.
+  2. **The challenger (C), cheap model.** It may argue only the benign alternatives the server allows for that
+     packet:
+     - `SHORT_HISTORY` needs a D5 age bound;
+     - `DATA_QUALITY` needs a data-quality event that a halt does not explain;
+     - `NATURALLY_SMOOTH_FUND_TYPE` needs a fixed category list;
+     - `MARKET_WIDE_MOVE` needs a fixed same-date share of category triggers;
+     - `OTHER` can never support `NOT_MATERIAL`.
+  3. **The committee (K), strong model at low effort.**
+     - It receives the server slice: every item ID and its state.
+     - It answers each allowed alternative and issues the decision from the allowed options.
+     - A confirmed in-scope SPK event removes `NOT_MATERIAL` and `DATA_ISSUE`, and alternatives cannot target it.
+  4. **Human review.** Only K's decision is reviewed and overridable. The challenger's text shows as "ara çıktı" and
+     never goes into an export.
+  5. **The `/ekip/[run]` page.** It shows the step timeline, the transcript with evidence chips, and the decision
+     panel.
+- **Cost and timing.**
+  - About $0.035–0.055 per run; the committee dominates.
+  - Batch: at most 25 funds by a fixed rule (a confirmed event, or 2 or more triggered D1–D4 signals), after the final
+    detector run, by 08:30.
+  - On demand: analysts only, 10 runs per user per day.
+  - Never across all funds (about $95).
+  - The demo uses stored runs. A live moment runs C → K only, with priority over batch jobs, and falls back to the
+    stored run after 60 s.
+- **Insurance, if picked: a deterministic HTML print view, not an LLM policy writer.**
+  - Title: "Tetikleyici Endeksi ve Kanıt Spesifikasyonu (sigortacı incelemesi için taslak)".
+  - Contents: the trigger definition, the confirmed event evidence, and K's decision with its human review.
+  - Cover, premium, payment and eligibility are covered by one fixed sentence: they belong to a licensed insurer, and
+    no agreement with an insurer or channel exists. There are no blank premium or payout rows. Safa's answers appear
+    as questions, not values.
+  - Statuses: "İNCELEME BEKLİYOR" and "İÇ İNCELEMEDEN GEÇTİ".
+  - Approval binds to `data_sha256`, `decision_id`, `review_id` and `packet_sha256`. A change after approval returns
+    409.
+  - The AI trigger assessment appears only in the app, with its override.
+  - Coverage vocabulary is banned in all LLM text: teminat, kapsam, tazminat, hasar, prim, poliçe, sigortalı,
+    sigorta ettiren, ödenecek, hak kazanır, muafiyet.
+- **After the freeze:** LLM analysts, an LLM policy writer, Typst PDFs (with DejaVu fonts), approval re-rendering, and
+  B2B report PDFs.
+- **What the debate is worth.** Research says debate adds little at equal compute. We present it as an audit trail
+  (alternatives considered and answered), never as accuracy.
 
 ## 8. Story layer (Sunday by 10:30)
 
@@ -231,7 +311,8 @@ and a policy writer produces a PDF. The working design below is pending the stud
   is contract terms only, and no detector tiers are shown.
 - **AI assessment.** Beside the deterministic `trigger_fired`, labelled "bilgi amaçlı; hasar kararı sigortacıya
   aittir".
-- **Policy-writer draft PDF:** if time allows (section 7).
+- **The insurer-review print view** (section 7).
+- **After the freeze:** an LLM policy writer and PDFs.
 - **Pitch line:** "Designed so that a licensed insurer issues the policy and a bank distributes it; we would supply
   the trigger and evidence. No insurer or bank partnership exists."
 
@@ -275,7 +356,7 @@ and a policy writer produces a PDF. The working design below is pending the stud
 | 2 Detectors and API | Sat 20:30 | T2.1 v2 protocol committed alone; T2.2 `run-detectors` CLI for D1–D5 v2, data quality and events; T2.4 API (funds, detail, signals, events, OpenAPI); T2.6 overnight runners, dry-run, then started. T4.0 machine prep (M) | Signals for every fund via the API; overnight jobs running |
 | 3 AI core and screens | Sun 01:00 | T1.6 login; T3.1 OpenAI wrapper with caps and modes; T3.2 egress; T3.3 validator; T3.4 decision engine (materiality); T3.5 review queue and override; T1.8 queue for `ai_decide`; T3.6 web shell, login, fund list, fund page | A mock decision flows from packet to queue to override in the UI |
 | Overnight | | D9 jobs; machine on; a 07:00 log check (M) | |
-| 5 Live, chat and story | Sun 10:30 (feature freeze) | T5.1 import overnight data, rerun detectors, live AI pass by 08:30; T5.2 chat with 4 tools; T5.3 agent team (thin) if on time; T5.4 story screens; T5.5 tokens (if received by 23:00) and Turkish/accessibility pass | Demo path works end to end |
+| 5 Live, chat and story | Sun 10:30 (feature freeze) | T5.1 import overnight data, rerun detectors, live AI pass by 08:30; T5.2 chat with 4 tools; T5.3 agent team (challenger, committee, `/ekip` page) if M3 landed by 01:00; T5.4 story screens; T5.5 tokens (if received by 23:00) and Turkish/accessibility pass | Demo path works end to end |
 | 6 Freeze | Sun 13:00 | 10:30–11:00 fixes only; 11:00 `pg_dump` and restore rehearsal; smoke test; leak and secret scans; demo seed and overrides (T6.2); cold-boot rehearsal; T6.3 freeze merge in the worktree (`freeze-merge` from `origin/main`, `--no-ff`, no registered paths touched, push after Mirza's OK, tag); T6.4 demo script with Safa and Barış | Tagged `event-freeze` |
 
 **Moved after the freeze now:**
@@ -300,7 +381,7 @@ Owner: **C** = Claude, **M** = Mirza, **S** = Safa, **B** = Barış, **T** = tea
 
 ### Phase 0
 
-- [ ] T0.1 (M) Confirm the plan: D1–D11, the agent-team approach, the timeline, the after-freeze list
+- [ ] T0.1 (M) Confirm the plan: D1–D14 (D12 is the agent-team approach), the timeline, the after-freeze list
 - [ ] T0.3 (M) Answer D7 and D9; (S) answer D7 when he can
 - [ ] T0.4 (M) Relay the asks
 - [ ] T0.5 (S, T) Story pick, with Safa's insurance or B2B details, by 22:00. With no pick by 23:00, B2B
@@ -347,8 +428,15 @@ Owner: **C** = Claude, **M** = Mirza, **S** = Safa, **B** = Barış, **T** = tea
 
 - [ ] T5.1 `import-overnight`; rerun the detectors; the live AI pass by 08:30
 - [ ] T5.2 Chat with 4 tools, server-sent events through the proxy, evidence chips
-- [ ] T5.3 The agent team, thin (if M3 was on time)
-- [ ] T5.4 The story screens (section 8)
+- [ ] T5.3 The agent team (if M3 landed by 01:00):
+  - the step runner;
+  - server briefs;
+  - the challenger with server-allowed alternatives;
+  - the committee;
+  - batch runs (at most 25 funds by the fixed rule);
+  - the `/ekip/[run]` page
+- [ ] T5.4 The story screens (section 8). For insurance, the insurer-review print view with approval bound to its
+  hashes
 - [ ] T5.5 Barış's tokens; Turkish copy and accessibility pass
 
 ### Phase 6
@@ -378,13 +466,16 @@ Owner: **C** = Claude, **M** = Mirza, **S** = Safa, **B** = Barış, **T** = tea
 - **Mirza:** T0.1, T0.2, T0.3, T0.4, T1.7a, T4.0 and the 07:00 check.
 - **Safa:**
   1. The story and the final business plan this evening. If insurance, also: trigger scope, payout shape,
-     policyholder and channel.
-  2. B2B details, if chosen.
-  3. Which institutions may be named, and with what wording.
-  4. D7.
-  5. His data sources and their terms; optionally, his full 2026-10-06 snapshot, shared privately.
-  6. Legal opinions after the event.
-  7. The Bilun primitives question.
+     policyholder and channel. Unanswered items appear as questions in the print view, never as values.
+  2. The disclaimer wording, and the default of naming no insurer.
+  3. If B2B, a product name without "risk raporu" or "sinyal" (SPK III-37.1 art. 45(2)).
+  4. Whether a print view about a real fund may appear in the live demo (localhost only).
+  5. B2B details, if chosen.
+  6. Which institutions may be named, and with what wording.
+  7. D7.
+  8. His data sources and their terms; optionally, his full 2026-10-06 snapshot, shared privately.
+  9. Legal opinions after the event.
+  10. The Bilun primitives question.
 - **Barış:**
   - tokens as values by 23:00;
   - his screens;
