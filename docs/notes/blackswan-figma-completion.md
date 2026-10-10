@@ -1,8 +1,8 @@
 # BlackSwan Figma implementation, 2026-10-10
 
-Implementation checkpoint for T5.5, with T3.6 fund screens and T5.2 contextual
-chat integration. Final integrated verification and release are still in progress;
-this report does not claim the final build has been deployed or merged.
+Implementation report for T5.5, with T3.6 fund screens, T5.2 contextual chat and
+T5.6 stock navigation. The supplied designs are running on the local product at
+`http://127.0.0.1:3070`. Code commit: `0b394a1` on `product/build`.
 
 ## Result and scope
 
@@ -92,10 +92,9 @@ artifacts remain outside git in Windows TEMP.
 All 29 shared SVG files were checked for nonempty valid XML and root dimensions.
 The exact logo remains approximately 26 pixels, feature icons 40 pixels, method
 icons 20 pixels and small contextual icons 16/14/6 pixels as designed. Font files
-include their upstream license. The last shared-shell typecheck attempt observed
-only the then-in-progress contextual ChatPanel property changes; it was not
-reported as a pass. Final combined typecheck/build/browser results must be
-recorded after root integration.
+include their upstream license. The earlier shared-shell typecheck observed
+then-in-progress contextual ChatPanel changes. The combined typecheck and build
+subsequently passed, as recorded below.
 
 ## Additional per-agent checks
 
@@ -155,6 +154,60 @@ and verified keyboard focus when reopening a busy chat drawer. The first full
 browser run passed 13 tests and failed one stale stock-navigation selector. The
 selector was adapted to the supplied account menu; its targeted rerun passed.
 
+After the final landing/method copy and notification-badge refresh corrections:
+
+```text
+docker compose -f compose.yaml build api
+Exit 0
+docker compose -f compose.yaml build web
+Exit 0; all 15 product routes built
+cd web
+npm run test:browser -- --workers=1
+14 passed (28.9s)
+```
+
+The browser run covers login/logout, human review, funds, stocks, chart gaps,
+source disclosures, theme, mobile overflow, watchlist persistence, notification
+preferences/badge state, evidence feedback, scoped chat, rejected partial
+answers, real AI-off behavior and busy-modal keyboard focus. Browser model
+responses are synthetic fixtures; live model quality is not inferred from them.
+
+The production rollout used the existing four Compose files with
+`P50K_AI_MODE=live` and `up -d --no-build --wait --wait-timeout 60`. PostgreSQL,
+API, worker and web reported healthy. All ten migrations are registered, one
+calibration remains, zero mock decisions exist and no jobs were queued/running.
+Landing, method and readiness returned 200; anonymous stock/evidence access
+returned 401. Fallback listener PIDs stayed 27116/19280/32216 on
+3060/8767/8768. No frozen or registered source path changed.
+
+The pre-commit leak scan checked 122 changed paths against 1,214,549 reference
+values, 2,133 fund names and 92 non-target codes: zero private-path, value, name
+or code hits. Font license whitespace was normalized without changing its text;
+the repeated scan also returned zero hits.
+
+Linux verification ran in the clean isolated WSL clone, detached at `0b394a1`:
+
+```text
+PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=services .venv/bin/python -m unittest discover -s tests -t . -v
+Ran 888 tests in 112.419s; OK (skipped=72)
+816 executed passes; 70 isolated PostgreSQL checks and 2 Windows launcher checks skipped
+
+cd research/events/2026-09-17-spk-liquidations/price_detectors
+../../../../.venv/bin/python -m unittest test_detectors -v
+Ran 9 tests in 0.592s; OK; zero skips
+
+cd docs/handoff-v0.5
+../../.venv/bin/python -m unittest discover -s tests -v
+Ran 88 tests in 0.011s; OK; zero skips
+```
+
+The skipped PostgreSQL tests are not passes. This slice separately executed the
+42-test evidence/watchlist/chat/API run and 16-test migration run above on real
+isolated PostgreSQL, both with zero skips. The preceding stock/workflow slice
+also executed 14 and six PostgreSQL tests respectively, recorded in current
+state. Logs remain outside git under
+`/home/mirza/p50k-baseline-20261010/logs/figma-0b394a1-*.log`.
+
 ## Data mode and remaining work
 
 Product data is local DELAYED source data, with UNREVIEWED redistribution rights.
@@ -173,9 +226,14 @@ tokens and 3,232 output tokens, with zero reservations and no queued/running
 jobs. This smoke does not replace measured tuning quality or authorize an
 ungated batch.
 
-The successful backup/restore rehearsal covered a consistent snapshot of 34
-tables and eight migrations. It predates the final refresh and migrations
-009/010; repeat it after final data and review changes. Final integration tests,
-leak scan, merge/push, runtime verification, freeze backup/tag and cold-boot/demo
-rehearsals remain distinct completion steps. Optional challenger/committee work
-is not represented as implemented.
+The second successful backup/restore rehearsal includes the final refresh and
+migrations 009/010: 38 table counts and ten migration hashes matched, with
+evidence checksums, immutability and permissions verified. The ignored dump is
+`backups/p50k-20261010T170943Z-0b862fc9099648388892a0a85f31e52a.dump`;
+details and SHA-256 are in [the backup report](blackswan-backup-restore-rehearsal.md).
+The Sunday freeze backup/tag and cold-boot/demo rehearsals remain separate.
+Optional challenger/committee work is not represented as implemented.
+
+Next recommended task: measure live tuning quality before any gated batch,
+then rehearse the institutional fund/stock evidence path and complete the
+Sunday freeze checklist. No Figma account action is required from Mirza.

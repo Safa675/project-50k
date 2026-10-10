@@ -40,10 +40,11 @@ newer.
   decisions/chat, human review, the B2B workflow overview and protected API documentation. Real BIST 30
   catalog, daily charts and source-backed API contain 30 stocks, 870 daily closes and five observed
   corporate-action records. Stock classification/AI is not implemented.
-- **Design.** All 22 supplied Figma contexts and screenshots are mapped to ten base pages/states and twelve
-  hover/context variants. Final integration checks are in progress; see [Figma implementation](figma-implementation-2026-10-10.md).
-- **Remaining.** Measured live tuning and the gated batch; optional challenger/committee workflow; final
-  browser/Linux integration checks, Sunday freeze backup/tag and cold-boot/demo rehearsal. The frozen
+- **Design.** All 22 supplied Figma contexts and screenshots are implemented as ten base pages/states and twelve
+  hover/context variants, running at `http://127.0.0.1:3070`. Typecheck/build, 14 browser tests and 16 web unit tests
+  pass; see [Figma implementation](figma-implementation-2026-10-10.md) and its linked completion report.
+- **Remaining.** Measured live tuning and the gated batch; optional challenger/committee workflow;
+  Sunday freeze backup/tag and cold-boot/demo rehearsal. The frozen
   requirement registry remains unchanged; implementation is reported by slice.
 - **Plan.** `plans/2026-10-10-product-build-plan.md`, confirmed by delegation (DEC-030). The open questions are in `team-asks.md`.
 - **Current data checkpoint.** 2,133 funds; 1,755,010 stored price rows; 3,304 snapshots; 12,111 KAP document
@@ -52,6 +53,17 @@ newer.
 - **Git and resume.** Mirza resumed and delegated pushes, merges and safe pulls to Codex. Build work stays
   in `project-50k-app` on `product/build`, in the same repository. Main was safely advanced to `3b7bf4c`
   before Figma integration; subsequent pulls must preserve the live demo registered paths.
+
+Final Figma code checkpoint `0b394a1`: Linux root 816 passed / 72 skipped (70
+PostgreSQL, two Windows-only); frozen detector nine and handoff 88 passed.
+Separate PostgreSQL evidence/watchlist/chat/API 42 and migration 16 passed with
+zero skips. The real product has ten migrations, zero mock decisions and live
+AI enabled. Seven completed paid calls conservatively book USD 0.0615725; no
+queued/running jobs at the release check. Every result remains developmental.
+The second backup/restore rehearsal includes final imported data and all ten
+migrations: 38 table counts, evidence checksums and permissions matched. Its
+ignored dump and full recovery limits are recorded in
+[the backup report](blackswan-backup-restore-rehearsal.md).
 
 ## Codex takeover and milestone history, 2026-10-10
 

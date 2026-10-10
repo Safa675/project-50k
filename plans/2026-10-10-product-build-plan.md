@@ -15,7 +15,7 @@
 - **Alignment resumed.** Mirza resumed, selected current BIST 30, supplied 22 Figma designs and delegated all
   Git work. Independent frontend/backend/database work proceeds in parallel; fund protocols remain immutable.
 - **Design access fixed.** All 22 Figma contexts/screenshots are read and mapped to ten base pages/states and
-  twelve hover/context variants. Implementation is present; final integration verification is in progress.
+  twelve hover/context variants. Implementation is running at localhost:3070; typecheck, web build and all 14 browser tests pass.
 
 - **Freezes:** features Sunday 2026-10-11 at 10:30; code at 13:00.
 - **Implements:** [DEC-028](../docs/decisions/DEC-028-deploy-ready-ai-native-build.md) and
@@ -474,7 +474,7 @@ Owner: **C** = Claude, **M** = Mirza, **S** = Safa, **B** = Barış, **T** = tea
   - batch runs (at most 25 funds by the fixed rule);
   - the `/ekip/[run]` page
 - [ ] T5.4 B2B workflow overview, historical fund evidence and protected OpenAPI docs implemented; final demo/feed review remains. Challenger/committee is separate unfinished work; no insurance screens
-- [ ] T5.5 All 22 Figma designs mapped and implemented with supplied tokens/logo/assets; per-agent visual/interaction checks recorded. Final integrated browser/typecheck/build pass remains before closure
+- [x] T5.5 All 22 Figma designs mapped and implemented with supplied tokens/logo/assets; final typecheck/build and 14 browser tests pass. Dark-reference desktop/mobile checks and truthful data adaptations are recorded; the populated KAP marker remains an explicit browser-coverage gap
 - [x] T5.6 Real current BIST 30 source-data catalog/chart/API, capture timestamps and corporate-action records; data-only protocol committed before ingestion. No stock anomaly classifier/AI; fund protocols preserved
 
 ### Phase 6
@@ -536,4 +536,4 @@ implemented; adjustment semantics and redistribution rights are unreviewed.
 Stock anomaly classification/AI is separate work. T5.4 B2B workflow overview
 implemented with actual counts; challenger/committee remains unfinished.
 The 22-frame Figma implementation is tracked in `docs/notes/figma-implementation-2026-10-10.md`;
-tool access is fixed and implementation is present, with final integrated verification in progress.
+tool access is fixed and implementation is running locally with passing integrated web checks.

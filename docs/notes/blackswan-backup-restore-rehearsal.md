@@ -83,6 +83,59 @@ To retain the isolated restored database for local inspection, pass
 private summary. Cleanup is restricted to the run token labels and the
 `p50k-restore-rehearsal-<token>` names. Never remove the product volume.
 
+## Second actual run after final import and migrations 009/010
+
+The first rehearsal above is retained as history. A second standard run from
+the same `product/build` worktree captured the updated product database after
+the final data import and Figma workflow migrations:
+
+```powershell
+& .\ops\local\backup-restore-product.ps1
+```
+
+Exit 0. Completed at `2026-10-10T17:11:15.4253906Z` (20:11 Istanbul).
+Final output:
+
+```text
+Backup/restore VERIFIED: p50k-20261010T170943Z-0b862fc9099648388892a0a85f31e52a.dump; bytes=34400149; tables=38; migrations=10
+```
+
+Retained local artifacts under the ignored worktree `backups/` folder:
+
+- `p50k-20261010T170943Z-0b862fc9099648388892a0a85f31e52a.dump`
+- `p50k-20261010T170943Z-0b862fc9099648388892a0a85f31e52a.summary.json`
+
+Dump SHA-256:
+`37750467446b9fd07f40c27e301d673acdec36a8c92c5baf4f44fed469f5562f`.
+The dump contains 34,400,149 bytes. All 38 table counts, all ten migration hashes,
+detector/AI row checksums and immutable-trigger registrations matched the exact
+exported source snapshot. Migrations `009_watchlist_notifications.sql` and
+`010_evidence_feedback.sql` are included.
+
+Representative restored counts for this second snapshot:
+
+| Table | Rows |
+|---|---:|
+| `ref.funds` | 2,133 |
+| `obs.fund_prices` | 1,755,010 |
+| `obs.fund_snapshots` | 3,304 |
+| `obs.kap_documents` | 12,111 |
+| `ref.stock_instruments` | 30 |
+| `obs.stock_prices` | 870 |
+| `obs.stock_actions` | 5 |
+| `det.signals` | 51,192 |
+| `det.detector_versions` | 1 |
+| `ai.decisions` | 2 |
+| `ai.chat_turns` | 3 |
+| `auth.users` | 1 |
+
+Restored immutability and application-role permission checks passed. The restore
+used network mode `none` with zero published ports. `KeepRestore` was false;
+post-run Docker listings confirmed that this run's labelled restore container
+and volume had been removed. Both retained artifact paths passed `git check-ignore`.
+No other tests or fixture changes were performed during this rehearsal. The
+same database-only recovery limitations below still apply.
+
 ## Scope and remaining work
 
 The backup carries the private DELAYED product data and immutable development

@@ -1,14 +1,14 @@
 # Project 50K: instructions for coding agents
 
-The current product and hackathon demo scope is **Turkish investment funds and Turkish stocks**, set by [DEC-032](docs/decisions/DEC-032-b2b-evidence-data-api.md) on 2026-10-10. The first demonstrated case is the historical fund case; Mirza requires real stock support in the hackathon demo too. Stock implementation is still to be built through new isolated modules and versioned evidence rules; existing fund protocols remain immutable. Crypto, US equities and on-chain remain postponed. DEC-032 supersedes DEC-024's stock postponement; DEC-024's fund-first history and the frozen handoff remain preserved.
+The current product and hackathon demo scope is **Turkish investment funds and Turkish stocks**, set by [DEC-032](docs/decisions/DEC-032-b2b-evidence-data-api.md) on 2026-10-10. The first demonstrated case is the historical fund case; Mirza requires real stock support in the hackathon demo too. Current BIST 30 catalog, daily closes, source evidence and corporate-action observations are implemented in isolated modules under a new committed stock protocol. Stock anomaly classification/AI is not implemented; existing fund protocols remain immutable. Crypto, US equities and on-chain remain postponed. DEC-032 supersedes DEC-024's stock postponement; DEC-024's fund-first history and the frozen handoff remain preserved.
 
 **Current direction (2026-10-10):**
 
 - **[DEC-032](docs/decisions/DEC-032-b2b-evidence-data-api.md).**
   - Sell evidence data and API access through an agent workflow to banks and financial institutions.
   - Insurance is permanently deferred; no insurance screens, policy workflows or insurer-review print view.
-  - The historical fund case is first. Stocks must also work in the hackathon demo; do not claim stock support is already built.
-  - Mirza requested an alignment pause after the immediate chat/import/documentation block. Finish that block and stop until he resumes; start no new stock features during the pause.
+  - The historical fund case is first. Real BIST 30 data support is built; do not claim stock anomaly classification or stock AI.
+  - Mirza's earlier alignment pause ended when he resumed, selected BIST 30 and requested parallel implementation of the supplied 22 Figma designs. No current pause is active.
   - Buyer class and revenue direction are decided; demand, pricing, partnerships and redistribution rights remain unvalidated.
 - **[DEC-028](docs/decisions/DEC-028-deploy-ready-ai-native-build.md).**
   - Build a deploy-ready full-stack product that runs on localhost with real data: frontend, backend, PostgreSQL with its own email/password auth, and a worker, all in Docker.
@@ -18,7 +18,7 @@ The current product and hackathon demo scope is **Turkish investment funds and T
 - **[DEC-029](docs/decisions/DEC-029-open-all-funds.md).** Every downloaded fund is open for product use.
 - **Specs.** The handoff's product requirements are guides, not hard rules. Raise important collisions instead of silently choosing. The integrity rules below stay binding.
 - **[DEC-030](docs/decisions/DEC-030-blackswan-working-agreements.md) working agreements (2026-10-10).**
-  - The product is called **BlackSwan**; Mirza will supply logos and designs.
+  - The product is called **BlackSwan**; Mirza supplied the Figma designs and logo, now implemented. See `docs/notes/blackswan-figma-completion.md` for verification and remaining limits.
   - **No placeholders** in the product: no lorem ipsum, fake values, "coming soon" screens, blank template rows, mock AI output or notes to the team. Messages for Mirza go in chat. Required integrity labels are real content, not placeholders.
   - **The $25 OpenAI budget is a target, not a hard cap.** Don't waste it; raise it only with a valid reason and Mirza's OK.
   - **The plan is confirmed by delegation.** Confirm items that serve the team's interest yourself; ask Mirza only about problematic ones, with clear options and a recommendation.
@@ -47,7 +47,7 @@ Your first reply should verify the repo state (run the tests listed below) and p
   - Chat tools are read-only and bounded, and the server validates their arguments.
   - Material claims cite evidence, and insufficient evidence is said plainly.
   - No buy/hold/sell or personalized advice, and no fraud or manipulation claims.
-  - The OpenAI key lives only in a gitignored `.env`.
+  - The OpenAI key stays server-side and gitignored. Mirza supplied the approved `secrets/openai_api_key` file, mounted into Docker; never read or print it in agent tools, chat, logs or Git.
 - **Do not edit the pre-registered detectors** (`research/events/2026-09-17-spk-liquidations/price_detectors/detectors.py`, `PREREGISTRATION.md`, `results.json`) or any committed `PROTOCOL.md` or `PREREGISTRATION.md` under `research/events/` (for example in `fund_futures_divergence/` and `fund_holdings_divergence/`). Write a v2 or a new versioned protocol beside them.
 - **Sealed bundles re-hash their registered files on every load.** Editing one (listed in `tests/unit/registered_sources.lock.json`, plus the `dated_*.py` modules and the event's `run.py` runners) makes the running app answer 503 until every affected bundle is resealed. Add new modules beside them instead.
 - **Naming.** Committed files name only the eight liquidated top-100 funds. Never name other funds as flagged or suspicious. An anomaly is not fraud, and SPK's reasons for its order are not in our files.

@@ -43,7 +43,7 @@ Newest first within each person. Times are Europe/Istanbul.
 | Since | Type | Ask | Status |
 |---|---|---|---|
 | 2026-10-10 | Action, by Saturday 23:00 (otherwise the current tokens ship) | The design system as values: colours, typography, spacing, radii, shadows and component states (a Figma variables export, or a style guide with the values written on it) | Closed 2026-10-10: supplied Figma variables/context provide typography, dark colors, spacing, radii and states. Local font includes its license. Light theme is an adaptation; dark frames are the visual reference |
-| 2026-10-10 | Action | The screens he is designing, as exports or a viewable Figma link; the product name and logo to show | Closed 2026-10-10: all 22 linked frames and the exact Figma logo/SVG assets are accessible and implemented; final integration verification is in progress |
+| 2026-10-10 | Action | The screens he is designing, as exports or a viewable Figma link; the product name and logo to show | Closed 2026-10-10: all 22 linked frames and the exact Figma logo/SVG assets are implemented at localhost:3070; final typecheck/build and all 14 browser tests pass |
 | 2026-10-10 | Decision | Whether a public landing page (with no real data) is wanted beside the login-protected app | Closed 2026-10-10: Mirza requested landing frame 25:456. Private evidence stays behind login |
 
 ## Team

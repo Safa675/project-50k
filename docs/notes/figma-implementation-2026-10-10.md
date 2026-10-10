@@ -13,9 +13,10 @@ No further installation, account action or token is required from Mirza.
 
 Four agents implemented independent areas in parallel: shared shell/landing/method
 (two frames), catalog/fund detail and contextual variants (ten), watchlist and
-notifications (four), and development detail/chat plus variants (six). Final
-integrated verification is in progress; the [completion report](blackswan-figma-completion.md)
-records actual checks and limits.
+notifications (four), and development detail/chat plus variants (six). The final
+web build, typecheck and all 14 integrated browser tests passed; the updated
+local product runs at `http://127.0.0.1:3070`. The
+[completion report](blackswan-figma-completion.md) records actual checks and limits.
 
 Figma dark tokens, typography, spacing and radii are implemented in project-native
 CSS. Exact SVGs and the logo are local, with intrinsic sizes retained; Google Sans
