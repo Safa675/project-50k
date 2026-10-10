@@ -23,7 +23,7 @@ class ChatContext:
     checksum: str
 
 
-def load_context(settings: Settings, code: str) -> ChatContext:
+def load_context(settings: Settings, code: str, evidence_id: str | None = None) -> ChatContext:
     """Read existing evidence without creating/changing a decision packet."""
     now = datetime.now(timezone.utc)
     origins = ['DELAYED', 'SYNTHETIC'] if settings.db_name == 'p50k_dev' else ['DELAYED']
@@ -36,7 +36,9 @@ def load_context(settings: Settings, code: str) -> ChatContext:
         run = connection.execute("""SELECT run.run_id,input.as_of,run.origin,run.cutoff
             FROM det.detector_runs run JOIN det.run_inputs input USING(run_id)
             WHERE run.origin=ANY(%s) AND input.complete AND run.cutoff<=%s
-            ORDER BY run.cutoff DESC,run.created_at DESC,run.run_id DESC LIMIT 1""", (origins, now)).fetchone()
+              AND (%s::text IS NULL OR EXISTS(SELECT 1 FROM det.evidence_items selected
+                  WHERE selected.run_id=run.run_id AND selected.fund_code=%s AND selected.evidence_id=%s))
+            ORDER BY run.cutoff DESC,run.created_at DESC,run.run_id DESC LIMIT 1""", (origins, now, evidence_id, code, evidence_id)).fetchone()
         if not run:
             raise AIUnavailable('EVIDENCE_UNAVAILABLE')
         rows = connection.execute("""SELECT item.evidence_id,item.detector_id,item.state,
@@ -44,8 +46,8 @@ def load_context(settings: Settings, code: str) -> ChatContext:
             FROM det.signals signal JOIN det.evidence_items item USING(evidence_id)
             WHERE signal.run_id=%s AND signal.fund_code=%s
               AND (item.available_at<=%s OR (item.available_at IS NULL AND signal.state='ABSTAINED'))
-            ORDER BY signal.detector_id LIMIT 8""", (run[0], code, now)).fetchall()
-    if not rows:
+            ORDER BY signal.detector_id LIMIT 8""", (run[0], code, run[3])).fetchall()
+    if not rows or (evidence_id is not None and evidence_id not in {row[0] for row in rows}):
         raise AIUnavailable('EVIDENCE_UNAVAILABLE')
     evidence = [Evidence(evidence_id=row[0], detector_id=row[1], state=row[2],
         value=str(row[3]) if row[3] is not None else None, threshold=str(row[4]) if row[4] is not None else None,

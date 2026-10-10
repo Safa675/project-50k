@@ -24,7 +24,7 @@ def chat(body: ChatBody, request: Request, actor: Principal=Depends(require_sess
     try:
         body.question = check_question(body.question, body.fund_code)
         check_mode(settings, config)
-        context = load_context(settings, body.fund_code)
+        context = load_context(settings, body.fund_code, body.evidence_id)
         thread, turn, previous = begin_turn(settings, actor.user_id, body, context)
     except AIUnavailable as error:
         raise chat_error(error) from None

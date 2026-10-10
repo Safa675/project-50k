@@ -8,9 +8,11 @@ Newest first within each person. Times are Europe/Istanbul.
 
 | Since | Type | Ask | Status |
 |---|---|---|---|
-| 2026-10-10 | Action | Refresh Figma design tools for all 22 supplied nodes | Installed/enabled verified; Mirza confirms Connected. Current long-running session has no callable Figma methods; session refresh required. Do not reinstall or send tokens |
-| 2026-10-10 | Decision | Stocks are in product scope (DEC-032): include real stock support in the hackathon demo, or complete the historical fund case first and implement stocks next? | Closed 2026-10-10: Mirza requires stocks working in the hackathon demo. Implement new isolated stock support on resume; no claim it already works |
-| 2026-10-10 | Action | Finish immediate work, then stop for alignment | Confirmed: finish current chat/import/documentation block, then pause until Mirza resumes; start no new feature now |
+| 2026-10-10 | Delegation | Handle all Git work, including pushes and safe pulls | Confirmed: Codex owns commits, merge commits, pushes and protected-path-checked pulls. Mirza need not perform routine Git steps |
+| 2026-10-10 | Decision | Select the stock universe | Closed: current BIST 30; real catalog, daily charts and source evidence implemented; stock classifier/AI remains outside this slice |
+| 2026-10-10 | Action | Refresh Figma design tools for all 22 supplied nodes | Closed 2026-10-10: Figma tools available; all 22 contexts/screenshots read and mapped. No reinstall or token is needed |
+| 2026-10-10 | Decision | Stocks are in product scope (DEC-032): include real stock support in the hackathon demo, or complete the historical fund case first and implement stocks next? | Closed 2026-10-10: Mirza requires stocks working in the hackathon demo. Current BIST 30 was selected and its real data/catalog/chart/API slice is implemented; no stock classifier/AI claim |
+| 2026-10-10 | Action | Finish immediate work, then stop for alignment | Closed 2026-10-10: immediate block finished; Mirza resumed and requested parallel stock, backend and supplied-design implementation |
 | 2026-10-10 | Decision | Read and confirm the build plan | Closed 2026-10-10: confirmed by delegation (DEC-030); agents ask only about problematic items |
 | 2026-10-10 | Decision | D1: build in the separate worktree folder `C:\Users\mirza\Desktop\Hackathon\project-50k-app` (opened in VS Code), because the main checkout feeds the live demo | Closed 2026-10-10: Mirza confirmed; worktree created on `product/build` |
 | 2026-10-10 | Action, after T1.1 creates the worktree | Put the OpenAI API key in the worktree's gitignored `secrets/openai_api_key` (never in chat or git), and configure budget alerts | Key supplied and runtime model/decision/chat smoke passed; on-demand AI live. Budget-alert configuration still open. DEC-030 keeps $25 a target and the internal $20 cap |
@@ -40,13 +42,13 @@ Newest first within each person. Times are Europe/Istanbul.
 
 | Since | Type | Ask | Status |
 |---|---|---|---|
-| 2026-10-10 | Action, by Saturday 23:00 (otherwise the current tokens ship) | The design system as values: colours, typography, spacing, radii, shadows and component states (a Figma variables export, or a style guide with the values written on it) | Open: Mirza promises the design system soon; existing tokens remain until received |
-| 2026-10-10 | Action | The screens he is designing, as exports or a viewable Figma link; the product name and logo to show | Open: Mirza promises logos soon; BlackSwan text wordmark remains until received |
-| 2026-10-10 | Decision | Whether a public landing page (with no real data) is wanted beside the login-protected app | Open |
+| 2026-10-10 | Action, by Saturday 23:00 (otherwise the current tokens ship) | The design system as values: colours, typography, spacing, radii, shadows and component states (a Figma variables export, or a style guide with the values written on it) | Closed 2026-10-10: supplied Figma variables/context provide typography, dark colors, spacing, radii and states. Local font includes its license. Light theme is an adaptation; dark frames are the visual reference |
+| 2026-10-10 | Action | The screens he is designing, as exports or a viewable Figma link; the product name and logo to show | Closed 2026-10-10: all 22 linked frames and the exact Figma logo/SVG assets are accessible and implemented; final integration verification is in progress |
+| 2026-10-10 | Decision | Whether a public landing page (with no real data) is wanted beside the login-protected app | Closed 2026-10-10: Mirza requested landing frame 25:456. Private evidence stays behind login |
 
 ## Team
 
 | Since | Type | Ask | Status |
 |---|---|---|---|
-| 2026-10-10 | Decision | The product name | Closed 2026-10-10: **BlackSwan** (DEC-030); Mirza supplies logos and designs later |
+| 2026-10-10 | Decision | The product name | Closed 2026-10-10: **BlackSwan** (DEC-030); Mirza subsequently supplied the Figma designs and logo |
 | 2026-10-10 | Decision | Pitch wording within the do-not-claim list in `docs/notes/current-state.md` | Open |

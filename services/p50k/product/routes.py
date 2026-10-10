@@ -60,9 +60,10 @@ router = APIRouter(dependencies=[Depends(require_session)])
 
 @router.get("/funds", response_model=FundsPage, tags=["Funds"])
 def list_funds(reader: Reader, q: Annotated[str, Query(max_length=80)] = "",
-               limit: Limit = 25, offset: Offset = 0) -> FundsPage:
+               limit: Limit = 25, offset: Offset = 0,
+               category: Annotated[str | None, Query(min_length=1,max_length=200)] = None) -> FundsPage:
     """Search the downloaded fund catalog; category and status are current metadata."""
-    return reader.funds(q.strip(), limit, offset)
+    return reader.funds(q.strip(), limit, offset, category) if category is not None else reader.funds(q.strip(), limit, offset)
 
 
 @router.get("/funds/{fund_code}", response_model=FundDetail, tags=["Funds"])

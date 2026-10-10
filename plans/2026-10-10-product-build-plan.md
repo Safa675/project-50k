@@ -2,17 +2,20 @@
 
 **Status: CONFIRMED by delegation** ([DEC-030](../docs/decisions/DEC-030-blackswan-working-agreements.md), 2026-10-10 about 14:30).
 - Agents confirm the defaults in section 2 that serve the team's interest, and ask Mirza about problematic ones.
-- D7, D9 and D1 were answered by Mirza during takeover and recorded in DEC-031. The closest-name identity is
-  confirmed; ten exact-name checks remain pending. Key readiness is also pending (see `docs/notes/team-asks.md`).
+- D7, D9 and D1 are recorded in DEC-031. Mirza supplied the key; live decision/chat smoke passed. The
+  closest-name identity and ten delegated exact-name checks are complete. Unknown publication times still
+  prevent regulatory triggers. Budget-alert configuration and Safa's separate D7 answer remain open.
 - The $25 budget is a target, not a hard cap. The product contains no placeholders (DEC-030).
 - Codex continues from `plans/2026-10-10-codex-handoff-prompt.md`.
 - **Current direction ([DEC-032](../docs/decisions/DEC-032-b2b-evidence-data-api.md)).** B2B evidence data and API
   access through an agent workflow for banks and financial institutions. Insurance is permanently deferred;
   retained insurance designs below are historical, not implementation tasks. The historical fund case is first,
-  and Mirza requires real stock support in the hackathon demo too. Stock support is not implemented yet.
-- **Alignment pause.** Finish the immediate chat/import/documentation block, then stop until Mirza resumes.
-  On resume, stocks need new isolated modules, entitled real data and a versioned detector record; existing fund
-  protocols remain immutable. Start no new feature during the requested pause.
+  and Mirza requires real stock support in the demo. Current BIST 30 catalog/chart/evidence/API support is built;
+  stock anomaly classification and stock AI remain unimplemented.
+- **Alignment resumed.** Mirza resumed, selected current BIST 30, supplied 22 Figma designs and delegated all
+  Git work. Independent frontend/backend/database work proceeds in parallel; fund protocols remain immutable.
+- **Design access fixed.** All 22 Figma contexts/screenshots are read and mapped to ten base pages/states and
+  twelve hover/context variants. Implementation is present; final integration verification is in progress.
 
 - **Freezes:** features Sunday 2026-10-11 at 10:30; code at 13:00.
 - **Implements:** [DEC-028](../docs/decisions/DEC-028-deploy-ready-ai-native-build.md) and
@@ -40,8 +43,9 @@
   only if the AI core is on time.
 - **Story screens.** B2B evidence data and API access for banks and financial institutions, with the agent
   evidence/review workflow and the historical fund case. Insurance screens and documents are permanently deferred.
-- **Stock requirement.** Real stock support must work in the hackathon demo. It remains to be implemented after
-  the alignment pause; no placeholder stock pages or synthetic product values stand in for it.
+- **Stock requirement.** The real current BIST 30 data/catalog/chart/API slice is implemented with 30 stocks,
+  870 daily closes and five corporate-action observations. Availability is capture time; price adjustment
+  semantics and redistribution rights remain unreviewed. No stock classifier/AI claim.
 - **Scope.** The work was about 30 hours against 14–16 available. The plan now moves a defined list to after the
   freeze (section 10) and builds the demo path first.
 
@@ -50,35 +54,37 @@
 On this machine, one `docker compose up` starts the following, with every host port on 127.0.0.1 and nothing deployed.
 
 1. **PostgreSQL 18** with:
-   - 1,673,412 daily prices for 2,020 funds, plus the overnight refresh;
+   - 1,755,010 stored daily price rows after the final refresh, preserving nulls;
    - names, categories and TEFAS status for about 2,133 funds;
-   - TEFAS snapshots;
-   - an index of 101 KAP series;
-   - the human-confirmed SPK order of 17 September 2026 (131 funds).
+   - 3,304 TEFAS snapshots;
+   - 12,111 KAP document-index entries, with original report series retained;
+   - 131 identity-confirmed SPK event versions; unknown publication time still prevents a trigger;
+   - 30 BIST 30 instruments, 870 daily closes and five observed corporate-action records.
 2. **The API:**
    - email/password sessions and roles;
    - fund, signal, decision and event endpoints;
    - validated chat;
    - OpenAPI docs, which double as the B2B API documentation.
 3. **The worker,** with a PostgreSQL job queue for AI decisions. Imports and detectors run as command-line jobs.
-4. **The web app** (Turkish, in Barış's design system if his tokens arrive by 23:00):
+4. **The web app** (Turkish, using the supplied Figma design system and exact local logo/assets):
    - fund list and fund pages, with chart, detector evidence and the SPK timeline;
    - a review queue of AI decisions with human override;
    - chat;
    - B2B evidence/feed/API screens;
-   - required real stock support, implemented separately from immutable fund protocols on resume.
+   - real BIST 30 support, implemented separately from immutable fund protocols;
+   - watchlists, notification preferences/read state, evidence feedback and contextual chat.
 
 ## 2. Decisions in this plan (recommended defaults; change any of them)
 
 | # | Decision | Default |
 |---|---|---|
-| D1 | Where to build | A git worktree at `C:\Users\mirza\Desktop\Hackathon\project-50k-app` on branch `product/build`. Host bind mounts (the main checkout's `raw/` and the forward snapshot SQLite, both read-only) live in a gitignored `compose.override.yaml`, with an example committed. Main stays on `main` with registered files untouched. Mirza safely pulled it to `603a09d`; verify registered paths before any future pull. K4 still decouples the live demo |
+| D1 | Where to build | A git worktree at `C:\Users\mirza\Desktop\Hackathon\project-50k-app` on branch `product/build`. Host bind mounts (the main checkout's `raw/` and the forward snapshot SQLite, both read-only) live in a gitignored `compose.override.yaml`, with an example committed. Main stays on `main` with registered files untouched. Main was safely advanced to `3b7bf4c` before Figma integration; Codex handles subsequent protected-path-checked pulls. K4 still decouples the live demo |
 | D2 | Frontend | A new Next.js app in `web/` with the same pinned versions as `frontend/`. It copies only the chart and the Turkish formatters. `frontend/` stays the research app and fallback |
 | D3 | Backend | A new package, `services/p50k/product/`, with psycopg 3 and plain SQL. Plain SQL migrations run through a small runner. It imports the providers and the frozen detectors read-only |
 | D4 | Ports | web 127.0.0.1:3070, API 127.0.0.1:8770, PostgreSQL 127.0.0.1:5433 (dev profile). The smoke test runs as its own compose project on 3071/8771 |
 | D5 | Versions (resolved 2026-10-10, locked at setup) | `postgres:18.6` (volume at `/var/lib/postgresql`), `python:3.13-slim`, `node:24-slim`, `openai` 3.28.0, `psycopg[binary,pool]` 3.3.x, `argon2-cffi` 25.1.0 |
 | D6 | LLM models | `gpt-6.1-sol` for decisions and chat; `gpt-6-luna` for cheap steps; fallback `gpt-5.4-nano`. IDs come from env and are checked by a smoke test. Responses API with `store: false` (not stored for retrieval; OpenAI keeps abuse logs for up to 30 days) |
-| D7 | What real data goes to OpenAI | **Derived evidence only**, enforced by one egress module with a field allowlist and a test. Raw prices, TEFAS size/units/investors, KAP text and personal data are excluded. The chat panel warns users. **AI stays in mock mode until Mirza answers.** Live mode starts once D7 is recorded in DEC-030, with Safa's answer or a note that he has not answered |
+| D7 | What real data goes to OpenAI | **Derived evidence only**, enforced by one egress module with a field allowlist and a test. Raw prices, TEFAS size/units/investors, KAP text and personal data are excluded. The chat panel warns users. **D7 is approved in DEC-031.** The supplied key passed live model/decision/chat smoke; on-demand AI is live under existing caps. Safa's separate answer remains recorded as pending |
 | D8 | Detectors for all funds | **D1–D5 v2.** Peers come from all funds. The single category source for every fund is `fonTurAciklama` from the saved 2026-10-06 fund list, a stated change from the frozen run.<br>The v2 protocol is committed alone before any all-fund percentile is computed. It lists what was already seen: the frozen results, the 100-fund thresholds, the 17 September order and its 131 funds.<br>It runs once on Saturday and is never recalibrated on overnight data. Labels read "geliştirme sonucu; eşikler olaydan sonra belirlendi". If M2 slips by more than an hour, drop v2: uncovered categories then abstain with "kategori için kalibre eşik yok" |
 | D9 | Overnight collection | Restartable runners built in T2.6 and dry-run on THF and TP2 first. They run on the host from the worktree's environment. Output goes under `~/.local/share/project-50k/overnight/2026-10-10/` only.<br>Jobs: TEFAS 12-month prices, snapshots and profiles for all funds; SPK bulletin PDFs for 2024–2026 (download only). Pacing 1.5 s / 6 s; each job stops after 3 consecutive failures |
 | D10 | Real-data pages | Behind login. A public landing page shows no real data |
@@ -86,7 +92,7 @@ On this machine, one `docker compose up` starts the following, with every host p
 | D12 | Agent team | A fixed pipeline in our worker, TradingAgents-inspired, with no framework and no copied code (section 7). Before the freeze it is a challenger plus a committee, run only if M3 lands by 01:00. Recorded in DEC-030 together with D7 |
 | D13 | Data-mode labels | `DELAYED` for current published TEFAS data, with its as-of date; `HISTORICAL_REPLAY` only for replays with a cutoff. A replay packet never carries later TEFAS status (the 2026-10-06 status would reveal the halt) |
 | D14 | Review authority | Analysts review AI decisions. Insurer-review print views and their document approval are permanently deferred (DEC-032) |
-| D15 | Product and demo scope | Turkish funds and stocks; historical fund case first, real stock support required in the hackathon demo (DEC-032). Stock implementation is outstanding and resumes through new isolated modules and a new versioned detector record after alignment |
+| D15 | Product and demo scope | Turkish funds and stocks; historical fund case first, real stock support required in the hackathon demo (DEC-032). Current BIST 30 source-data support is implemented through isolated modules and a versioned data-only protocol; stock classification/AI remains separate |
 
 ## 3. Architecture and safety rails
 
@@ -331,7 +337,7 @@ The study, design and critique are in
 - **Docs.** The protected OpenAPI page serves as the API documentation; API keys come after the freeze. The
   commercial offer does not authorize external resale or deployment; real data remains on localhost.
 - **Stock support.** Required in the hackathon demo, with real source-backed data and separate versioned evidence
-  rules. This is outstanding implementation, starting on resume after the requested alignment pause.
+  rules. Current BIST 30 catalog/chart/evidence/API support is implemented; stock anomaly classification/AI is not.
 
 **Historical A. Insurance — permanently deferred, not a demo path.**
 
@@ -386,14 +392,14 @@ active task.
 | 2 Detectors and API | Sat 20:30 | T2.1 v2 protocol committed alone; T2.2 `run-detectors` CLI for D1–D5 v2, data quality and events; T2.4 API (funds, detail, signals, events, OpenAPI); T2.6 overnight runners, dry-run, then started. T4.0 machine prep (M) | Signals for every fund via the API; overnight jobs running |
 | 3 AI core and screens | Sun 01:00 | T1.6 login; T3.1 OpenAI wrapper with caps and modes; T3.2 egress; T3.3 validator; T3.4 decision engine (materiality); T3.5 review queue and override; T1.8 queue for `ai_decide`; T3.6 web shell, login, fund list, fund page | A mock decision flows from packet to queue to override in the UI |
 | Overnight | | D9 jobs; machine on; a 07:00 log check (M) | |
-| 5 Live, chat and B2B story | Sun 10:30 (feature freeze) | T5.1 import overnight data, rerun detectors, live AI pass by 08:30; T5.2 chat with 4 tools; T5.3 agent team (challenger, committee, `/ekip` page) if M3 landed by 01:00; T5.4 B2B evidence/API screens; T5.5 tokens (if received by 23:00) and Turkish/accessibility pass; T5.6 real stock support through new isolated modules after alignment resume | Fund case and required stock path work end to end |
+| 5 Live, chat and B2B story | Sun 10:30 (feature freeze) | T5.1 import overnight data, rerun detectors, live AI pass by 08:30; T5.2 chat with 4 tools; T5.3 agent team (challenger, committee, `/ekip` page) if M3 landed by 01:00; T5.4 B2B evidence/API screens; T5.5 supplied Figma implementation and Turkish/accessibility pass; T5.6 real stock data support through isolated modules | Fund case and required stock path work end to end |
 | 6 Freeze | Sun 13:00 | 10:30–11:00 fixes only; 11:00 `pg_dump` and restore rehearsal; smoke test; leak and secret scans; demo seed and overrides (T6.2); cold-boot rehearsal; T6.3 freeze merge in the worktree (`freeze-merge` from `origin/main`, `--no-ff`, no registered paths touched, push after Mirza's OK, tag); T6.4 demo script with Safa and Barış | Tagged `event-freeze` |
 
 **Moved after the freeze now:**
 - the SPK web-service and KAP-event spikes;
 - AN-FND-002/004 and K1;
 - SPK text extraction, and SPK 2005–2023;
-- KAP report lists;
+- KAP report-list expansion beyond the authorized completed cohort;
 - B2B API keys (the OpenAPI page stands in);
 - the partner panel;
 - summaries for all funds;
@@ -415,15 +421,16 @@ Owner: **C** = Claude, **M** = Mirza, **S** = Safa, **B** = Barış, **T** = tea
 - [x] T0.3 (M) Answer D7 and D9 (DEC-031); Safa's separate D7 answer remains open
 - [ ] T0.4 (M) Relay the asks
 - [x] T0.5 (M, S, T) Story/buyer/revenue direction: Mirza confirmed B2B evidence data/API for banks and financial institutions (DEC-032); commercial validation still open
-- [x] T0.7 (M) Stock timing: Mirza requires real stock support in the hackathon demo; implementation outstanding, resume after alignment pause
-- [ ] T0.6 (B) Tokens as values by 23:00; otherwise the current tokens ship
+- [x] T0.7 (M) Stock timing/universe: Mirza requires stocks in the demo and selected current BIST 30; data-only slice implemented
+- [x] T0.6 (B) Supplied Figma variables, typography, logo, assets and component states received; all 22 contexts/screenshots accessible
 
 ### Phase 1
 
 - [x] Pre-pull `postgres:18.6`, `python:3.13-slim`, `node:24-slim` and uv 0.12.17
 - [x] T1.1 Worktree; deny-all `.dockerignore`; ignores for `secrets/`, `backups/`, test output, `*.sqlite3`, `*.dump`
   and `compose.override.yaml`; the read-blocking hook
-- [ ] T0.2 (M) Put the OpenAI key in the worktree's `secrets/openai_api_key`; set a $25 hard limit with alerts
+- [x] T0.2 (M) Key supplied in the approved ignored runtime location; live model/decision/chat smoke passed
+  - Budget-alert configuration remains open. DEC-030 makes $25 a target, with the internal $20 buckets retained.
 - [x] T1.3 The `product` extra, verified on PyPI and locked
 - [x] T1.4 SQL migrations: seven schemas, roles, append-only triggers; the runner
 - [x] T1.2 Dockerfiles, `compose.yaml` and the override example; the isolated proxy check
@@ -437,7 +444,7 @@ Owner: **C** = Claude, **M** = Mirza, **S** = Safa, **B** = Barış, **T** = tea
 - [x] T2.1 The D1–D5 v2 protocol, committed alone at `e9b7ba7`
 - [x] T2.2 `run-detectors`: 17,064 results for 2,133 funds; immutable calibration, evidence and completed runs
 - [x] T2.4 API: funds, detail, signals, events, OpenAPI; protected until Phase 3 auth
-- [x] T2.6 Immediate restartable downloads; two-fund smoke checks; profiles/prices queued behind snapshots
+- [x] T2.6 Restartable downloads completed with explicit gaps: 2,129 price files/four failures; 2,134 profile files/one failure/five empty responses; 1,071-fund KAP cohort completed with reuse; 194 discovered SPK PDFs saved
 - [ ] T4.0 (M) AC power, sleep set to Never, Windows Update paused until Monday, Docker Desktop starting at login
 
 ### Phase 3
@@ -457,8 +464,8 @@ Owner: **C** = Claude, **M** = Mirza, **S** = Safa, **B** = Barış, **T** = tea
 
 ### Phase 5 (feature freeze at 10:30)
 
-- [ ] T5.1 `import-overnight`; rerun the detectors; the live AI pass by 08:30
-- [x] T5.2 Chat with 4 bounded read-only tools, owner threads, budgets/daily limits, validated SSE and evidence chips; synthetic/browser verified, live quality pending
+- [ ] T5.1 Final available download import and deterministic rerun completed (1,755,010 prices; 17,064 results; original calibration). Measured tuning/gated live pass still due by 08:30
+- [x] T5.2 Chat with four bounded read-only tools, owner threads, budgets/daily limits, validated SSE and evidence chips; paid smoke passed. Figma contextual drawer added; wider live quality remains unmeasured
 - [ ] T5.3 The agent team (if M3 landed by 01:00):
   - the step runner;
   - server briefs;
@@ -466,16 +473,15 @@ Owner: **C** = Claude, **M** = Mirza, **S** = Safa, **B** = Barış, **T** = tea
   - the committee;
   - batch runs (at most 25 funds by the fixed rule);
   - the `/ekip/[run]` page
-- [ ] T5.4 B2B evidence/feed/API screens and the historical fund case (section 8); no insurance work
-- [ ] T5.5 Barış's tokens; Turkish copy and accessibility pass
-- [x] T5.6 Real stock support required by DEC-032: new isolated modules, entitled source data, timestamps and a
-  new versioned detector record; implement on resume, preserve existing fund protocols
+- [ ] T5.4 B2B workflow overview, historical fund evidence and protected OpenAPI docs implemented; final demo/feed review remains. Challenger/committee is separate unfinished work; no insurance screens
+- [ ] T5.5 All 22 Figma designs mapped and implemented with supplied tokens/logo/assets; per-agent visual/interaction checks recorded. Final integrated browser/typecheck/build pass remains before closure
+- [x] T5.6 Real current BIST 30 source-data catalog/chart/API, capture timestamps and corporate-action records; data-only protocol committed before ingestion. No stock anomaly classifier/AI; fund protocols preserved
 
 ### Phase 6
 
 - [ ] T6.1 Smoke test (separate project); key and mock-row scans; the Linux suites with no new failing names
 - [ ] T6.2 Demo seed with generated passwords; demo overrides after the live pass
-- [ ] T6.3 Backup and restore rehearsal at 11:00; the freeze merge in the worktree; the tag
+- [ ] T6.3 Early backup/restore rehearsal verified 34 tables/eight migrations. Repeat at Sunday 11:00 after final changes, including migrations 009/010; then freeze merge/tag
 - [ ] T6.4 Demo script with Safa and Barış; cold-boot rehearsal, including the fallback demo on 3060
 
 ### Carried over and after the freeze (kept, not dropped)
@@ -495,7 +501,7 @@ Owner: **C** = Claude, **M** = Mirza, **S** = Safa, **B** = Barış, **T** = tea
 
 ## 12. Asks (also in `docs/notes/team-asks.md`)
 
-- **Mirza:** T0.1, T0.2, T0.3, T0.4, T1.7a, T4.0 and the 07:00 check.
+- **Mirza:** T0.1/T0.2 key/T0.3/T1.7a closed. Remaining: budget alerts, relay open business asks, T4.0 machine preparation and the 07:00 check. Routine Git work is delegated to Codex.
 - **Safa:**
   1. Detailed commercial plan, first institutional workflow, pilot and pricing validation. B2B story, buyer class
      and evidence-data/API revenue direction are already confirmed by DEC-032.
@@ -506,12 +512,8 @@ Owner: **C** = Claude, **M** = Mirza, **S** = Safa, **B** = Barış, **T** = tea
   6. Capital-markets and commercial data-rights opinions before contracts or external redistribution. Insurance
      questions and the insurer-review print view are permanently deferred.
   7. The Bilun primitives question.
-- **Barış:**
-  - tokens as values by 23:00;
-  - his screens;
-  - the name and logo;
-  - whether he wants a landing page;
-  - deck screenshots only from the synthetic seed or the eight targets.
+- **Barış:** designs, tokens, logo and public landing direction received through Mirza's 22 Figma links.
+  Review final design adaptation if needed; deck screenshots must still use synthetic data or the eight targets.
 - **Team:** the product name and the pitch wording within the do-not-claim list.
 
 ## 13. Risks
@@ -520,8 +522,8 @@ Owner: **C** = Claude, **M** = Mirza, **S** = Safa, **B** = Barış, **T** = tea
 |---|---|
 | Not enough time | The after-freeze list, phase order with the data import first, the feature freeze at 10:30 |
 | Breaking the live demo | Worktree; separate ports; the main checkout untouched; freeze merge done in the worktree |
-| Data egress to OpenAI | Mock mode until D7 is answered; the egress module and its tests; `store: false` |
-| Overspending | $25 hard limit, $20 cap, one live pass, the Sunday reserve, per-user limits |
+| Data egress to OpenAI | DEC-031 derived-only approval; enforced egress allowlist, bounded tools and `store: false` |
+| Overspending | $25 target (DEC-030), internal $20 buckets, reserved worst-case call cost, Sunday reserve and per-user limits |
 | Invented numbers, advice or claims | One validator, allowed options, human override |
 | Losing the database | Never `down -v`; correct volume path; backup and restore rehearsal at 11:00 |
 | The overnight machine restarts | T4.0 preparation; restartable runners; the archive data still works |
@@ -533,5 +535,5 @@ Stock slice boundary: current BIST30 data/catalog/chart/corporate-record API is
 implemented; adjustment semantics and redistribution rights are unreviewed.
 Stock anomaly classification/AI is separate work. T5.4 B2B workflow overview
 implemented with actual counts; challenger/committee remains unfinished.
-Figma22 frame restyle is tracked in docs/notes/figma-implementation-2026-10-10.md
-and requires the connected tool catalog to become available.
+The 22-frame Figma implementation is tracked in `docs/notes/figma-implementation-2026-10-10.md`;
+tool access is fixed and implementation is present, with final integrated verification in progress.
