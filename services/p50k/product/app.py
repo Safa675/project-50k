@@ -39,15 +39,30 @@ def create_app(settings: Settings | None = None, readiness: Callable[[Settings],
     application = FastAPI(title="BlackSwan", docs_url=None, redoc_url=None, openapi_url=None, lifespan=lifespan)
     application.state.product_settings = config
     application.include_router(router)
+    from p50k.product.auth_routes import router as auth_router
+    application.include_router(auth_router)
+    from p50k.product.decision_routes import router as decision_router
+    application.include_router(decision_router)
     application.add_middleware(TrustedHostMiddleware, allowed_hosts=list(config.allowed_hosts))
     public_paths = {"/health/live", "/health/ready"}
+    public_paths.update({"/auth/csrf", "/auth/login"})
     if config.test_endpoints:
         public_paths.update({"/__test__/login", "/__test__/csrf", "/__test__/sse"})
 
     @application.middleware("http")
     async def deny_unprotected_routes(request: Request, call_next):
         if request.url.path not in public_paths:
-            return JSONResponse({"error": "AUTHENTICATION_REQUIRED"}, status_code=401)
+            from p50k.product.auth import SESSION_COOKIE, AuthenticationError, AuthService, check_session_csrf
+            try:
+                principal = await asyncio.to_thread(AuthService(config).authenticate, request.cookies.get(SESSION_COOKIE, ""))
+                request.state.principal = principal
+                if request.method not in {"GET", "HEAD", "OPTIONS"}:
+                    check_session_csrf(request, config, principal)
+            except AuthenticationError as error:
+                return JSONResponse({"error": error.code}, status_code=error.status, headers={"Cache-Control": "no-store"})
+            except Exception as error:
+                logging.getLogger(__name__).warning("session_unavailable", extra={"error_class": type(error).__name__})
+                return JSONResponse({"error": "SESSION_UNAVAILABLE"}, status_code=503, headers={"Cache-Control": "no-store"})
         response = await call_next(request)
         response.headers["Cache-Control"] = "no-store"
         response.headers["X-Content-Type-Options"] = "nosniff"
@@ -61,7 +76,7 @@ def create_app(settings: Settings | None = None, readiness: Callable[[Settings],
     @application.get("/health/ready")
     async def ready():
         available = await asyncio.to_thread(readiness, config)
-        return JSONResponse({"service": "BlackSwan", "database": "available" if available else "unavailable", "ai_mode": "off"}, status_code=200 if available else 503)
+        return JSONResponse({"service": "BlackSwan", "database": "available" if available else "unavailable", "ai_mode": config.ai_mode}, status_code=200 if available else 503)
 
     if config.test_endpoints:
         probe_sessions: dict[str, str] = {}

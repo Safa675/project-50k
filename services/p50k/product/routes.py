@@ -23,9 +23,7 @@ from p50k.product.models import EventsPage, FundDetail, FundsPage, SignalsPage
 from p50k.product.queries import FundQueries, coverage_for
 
 
-async def require_session() -> None:
-    """Authentication must exist before any real-data route becomes accessible."""
-    raise HTTPException(status_code=401, detail="AUTHENTICATION_REQUIRED")
+from p50k.product.auth import require_session
 
 
 def get_queries(request: Request) -> Iterator[FundQueries]:

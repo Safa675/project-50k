@@ -53,6 +53,9 @@ export async function proxyRequest(request: Request, path: string[], send: typeo
     const value = request.headers.get(name);
     if (value !== null) headers.set(name, value);
   }
+  // This loopback-only installation has one verified local browser source.
+  // Overwrite the value rather than trusting a caller's forwarded header.
+  headers.set('x-p50k-client-ip', '127.0.0.1');
   let body: Uint8Array | undefined;
   try {
     body = ['GET', 'HEAD'].includes(request.method) ? undefined : await boundedBody(request);

@@ -33,6 +33,9 @@ class Settings:
     test_endpoints: bool = False
     ai_mode: str = "off"
     db_connect_timeout: int = 5
+    auth_pepper_file: Path = Path("/run/secrets/auth_pepper")
+    cookie_secure: bool = False
+    trusted_proxy_hosts: tuple[str, ...] = ("web",)
 
     @classmethod
     def from_env(cls, environ: Mapping[str, str] | None = None) -> Settings:
@@ -51,6 +54,9 @@ class Settings:
             test_endpoints=_boolean(env.get("P50K_TEST_ENDPOINTS", "false"), "P50K_TEST_ENDPOINTS"),
             ai_mode=env.get("P50K_AI_MODE", "off"),
             db_connect_timeout=int(env.get("P50K_DB_CONNECT_TIMEOUT", "5")),
+            auth_pepper_file=Path(env.get("P50K_AUTH_PEPPER_FILE", "/run/secrets/auth_pepper")),
+            cookie_secure=_boolean(env.get("P50K_COOKIE_SECURE", "false"), "P50K_COOKIE_SECURE"),
+            trusted_proxy_hosts=tuple(env.get("P50K_TRUSTED_PROXY_HOSTS", "web").split(",")),
         )
         settings.validate()
         return settings
@@ -71,13 +77,21 @@ class Settings:
                 raise ValueError("Origins must contain only scheme, loopback host and port")
         if self.test_endpoints and self.db_name != "p50k_dev":
             raise ValueError("Proxy test endpoints require the isolated p50k_dev database")
-        if self.ai_mode != "off":
-            raise ValueError("Phase 1 permits AI mode off only")
+        if self.ai_mode not in {"off", "mock", "live"}:
+            raise ValueError("Invalid AI mode")
+        if self.ai_mode == "mock" and self.db_name != "p50k_dev":
+            raise ValueError("Mock AI requires the separate development database")
 
     def database_password(self) -> SecretStr:
         value = self.db_password_file.read_text(encoding="utf-8").strip()
         if len(value) < 24:
             raise ValueError("Database credential file is absent or invalid")
+        return SecretStr(value)
+
+    def auth_pepper(self) -> SecretStr:
+        value = self.auth_pepper_file.read_text(encoding="utf-8").strip()
+        if len(value) < 32:
+            raise ValueError("Authentication pepper is absent or invalid")
         return SecretStr(value)
 
     def connect_kwargs(self) -> dict[str, object]:

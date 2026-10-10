@@ -1,0 +1,4 @@
+import {requireUser,serverApi} from '@/lib/auth';
+import DecisionPanel,{Decision} from './DecisionPanel';
+import EvaluateButton from './EvaluateButton';
+export default async function FundDecision({code}:{code:string}){const user=await requireUser();const response=await serverApi(`/decisions?fund_code=${code}`);if(!response.ok)return <article><h2>İnceleme kararı</h2><p>Karar kayıtlarına şu anda erişilemiyor.</p></article>;const {items}=await response.json();return <article><h2>İnceleme kararı</h2>{items.length?items.map((decision:Decision)=><DecisionPanel key={decision.packet_sha256??decision.fund_code} decision={decision} canReview={user.role!=='viewer'}/>):<p>Bu kanıt için henüz bir yapay zekâ değerlendirmesi yapılmadı.</p>}{user.role!=='viewer'&&<EvaluateButton code={code}/>}</article>;}
