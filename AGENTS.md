@@ -1,9 +1,15 @@
 # Project 50K: instructions for coding agents
 
-The current scope is **Turkish investment funds (TEFAS) only**, set by [DEC-024](docs/decisions/DEC-024-turkish-funds-first.md) on 2026-10-06. BIST, crypto, US equities and on-chain are postponed, not dropped. DEC-024 overrides every statement in `docs/handoff-v0.5/` that calls the four-market/on-chain target binding.
+The current product and hackathon demo scope is **Turkish investment funds and Turkish stocks**, set by [DEC-032](docs/decisions/DEC-032-b2b-evidence-data-api.md) on 2026-10-10. The first demonstrated case is the historical fund case; Mirza requires real stock support in the hackathon demo too. Stock implementation is still to be built through new isolated modules and versioned evidence rules; existing fund protocols remain immutable. Crypto, US equities and on-chain remain postponed. DEC-032 supersedes DEC-024's stock postponement; DEC-024's fund-first history and the frozen handoff remain preserved.
 
 **Current direction (2026-10-10):**
 
+- **[DEC-032](docs/decisions/DEC-032-b2b-evidence-data-api.md).**
+  - Sell evidence data and API access through an agent workflow to banks and financial institutions.
+  - Insurance is permanently deferred; no insurance screens, policy workflows or insurer-review print view.
+  - The historical fund case is first. Stocks must also work in the hackathon demo; do not claim stock support is already built.
+  - Mirza requested an alignment pause after the immediate chat/import/documentation block. Finish that block and stop until he resumes; start no new stock features during the pause.
+  - Buyer class and revenue direction are decided; demand, pricing, partnerships and redistribution rights remain unvalidated.
 - **[DEC-028](docs/decisions/DEC-028-deploy-ready-ai-native-build.md).**
   - Build a deploy-ready full-stack product that runs on localhost with real data: frontend, backend, PostgreSQL with its own email/password auth, and a worker, all in Docker.
   - Code freeze: Sunday 2026-10-11 13:00.
@@ -23,7 +29,7 @@ The current scope is **Turkish investment funds (TEFAS) only**, set by [DEC-024]
 
 1. [docs/notes/current-state.md](docs/notes/current-state.md): where the project stands, what is decided and open, what to do next. Start here. Then [product direction](docs/notes/product-direction.md), the [open asks](docs/notes/team-asks.md) and the current plan in `plans/`.
 2. [docs/notes/codex-context-2026-10-07.md](docs/notes/codex-context-2026-10-07.md): the detailed 2026-10-07 record. Its data-source facts, case study, evaluation rules and do-not-claim list (sections 5, 6, 7 and 11) still apply.
-3. `docs/handoff-v0.5/AGENTS.md`: the shared integrity, auth, design and completion-report rules. They still apply except where DEC-024 differs. Do not edit anything under `docs/handoff-v0.5/` (frozen; its `MANIFEST.json` hashes verify it).
+3. `docs/handoff-v0.5/AGENTS.md`: the shared integrity, auth, design and completion-report rules. They still apply except where later decisions, including DEC-024 and DEC-032, differ. Do not edit anything under `docs/handoff-v0.5/` (frozen; its `MANIFEST.json` hashes verify it).
 4. `research/spikes/2026-10-06-tefas/REPORT.md`: what TEFAS and KAP actually return. Read it before touching a data adapter or a detector.
 5. `docs/handoff-v0.5/docs/12_Anomaly_Catalog.md`: detector definitions. Use thresholds as written.
 

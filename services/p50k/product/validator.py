@@ -35,8 +35,12 @@ def validate_text(text: str, packet: Packet) -> None:
             raise InvalidOutput('Unknown placeholder')
     plain = PLACEHOLDER.sub('',text)
     normalized = fold(plain).replace("'",'').replace('’','')
+    if re.search(r'\b'+re.escape(fold(packet.fund_code))+r'\b',normalized) or 'ev:' in normalized:
+        raise InvalidOutput('Identifier must use a server placeholder')
     if re.search(r'\d|\{\{|\}\}',plain) or NUMBER_WORD.search(normalized) or re.search(r'\b(yuzde|bin|milyon|milyar|yari|ceyrek|bucuk)\b',normalized):
         raise InvalidOutput('Model numeric claim')
+    if re.search(r'\b(iki|uc|dort|bes|alti|yedi|sekiz|dokuz|on|yirmi|otuz|kirk|elli|altmis|yetmis|seksen|doksan|yuz)\b',normalized):
+        raise InvalidOutput('Model number word')
     if any(word in normalized for word in BANNED):
         raise InvalidOutput('Disallowed wording')
 

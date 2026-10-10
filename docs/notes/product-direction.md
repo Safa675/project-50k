@@ -1,21 +1,43 @@
-# Product direction (open)
+# Product direction: B2B evidence data and API
 
-Living note, started 2026-10-10. The market and the headline product are not decided. This file records the ideas,
-what the shared platform must provide for each, and what is still open. Decisions that close a question go into
-`docs/decisions/`.
+Living note, started and updated 2026-10-10. Mirza confirmed the direction in
+[DEC-032](../decisions/DEC-032-b2b-evidence-data-api.md). Earlier options and research below are retained with their
+status; insurance is permanently deferred and is no longer an implementation path.
+
+## Confirmed direction
+
+- **Offer and buyers.** Sell evidence data and API access through an agent workflow to banks and financial
+  institutions. The buyer class and revenue direction are decided; pricing, a pilot and customer demand remain
+  hypotheses to test.
+- **Asset focus.** Turkish funds and Turkish stocks. Start with the existing historical fund case. Mirza confirmed
+  that stocks must also work in the hackathon demo; stock support is required, not yet implemented. Build it on
+  resume with real entitled data and new stock-specific evidence rules, preserving immutable fund protocols.
+- **Alignment pause.** Finish the immediate chat/import/documentation block, then stop until Mirza resumes.
+  Do not start a new stock feature during this requested pause.
+- **Institutional workflow.** Deterministic detectors produce evidence, agents explain and assess it, and human
+  reviewers can override every decision. Preserve the original decision, evidence references and review trail.
+- **Insurance.** Permanently deferred. Build no insurance screens, eligibility checks, policy writer, policy PDFs
+  or insurer-review print view.
+- **Publication.** Commercial data rights remain unreviewed. Real data stays on localhost; the revenue direction
+  does not authorize resale, deployment or a claim that institutions already want to buy it.
+- **Design.** Mirza will supply the design system and logos soon; existing approved tokens and the text wordmark
+  remain until then.
 
 ## What stays constant
 
-- **The core.** Scientific, mathematical anomaly detection in Turkish investment funds. Stocks come later, only if
-  time and licensed data allow.
+- **The core.** Scientific, mathematical anomaly evidence for Turkish funds and stocks, with the historical fund
+  case implemented first. Stock support is required in the hackathon demo; implementation and entitled sources
+  still need work after the alignment pause.
 - **AI-native.** An LLM decides from the deterministic detector evidence, a human can override every decision,
   and users talk to the LLM in the product (DEC-028).
 - **Data scope.** Every downloaded fund is in scope (DEC-029). Each detector result is a development result, not a
   validated accuracy figure.
 
-## Ideas under consideration
+## Earlier options (superseded by DEC-032; retained as history)
 
-### 1. Insurance policies designed from fund-risk data
+### 1. Insurance policies designed from fund-risk data — permanently deferred
+
+The proposal below is historical. Its requirements are not active build work.
 
 - **Product.** Event-triggered policies for fund investors, designed from fund-risk and anomaly data.
 - **Customers.** Sold B2B to insurers, brokers such as Midas, and banks' investment apps, which sell them on to
@@ -32,9 +54,11 @@ what the shared platform must provide for each, and what is still open. Decision
   - human override of every LLM decision;
   - a partner view for the institution.
 
-### 2. B2B anomaly data
+### 2. Earlier B2B anomaly-data proposal — refined by DEC-032
 
-- **Product.** Sell the anomaly-detection output to institutions for their own investment strategies.
+- **Product.** The earlier proposal sold anomaly-detection output to institutions. DEC-032 specifies evidence
+  data and API access for banks and financial institutions, supplied through an agent workflow for research and
+  monitoring.
 - **What the platform must provide:**
   - an anomaly feed with evidence;
   - per-fund history;
@@ -43,8 +67,8 @@ what the shared platform must provide for each, and what is still open. Decision
   - usage limits;
   - clear data-mode labels.
 
-Both ideas run on the same pipeline: ingestion, detectors, decision records and the API. That is why the core is
-built first.
+The proposals shared ingestion, detectors, decision records and the API. That core remains; only the confirmed
+B2B direction receives story-specific implementation.
 
 ### Agent team (under study since 2026-10-10)
 
@@ -53,35 +77,39 @@ The team is looking at [TauricResearch/TradingAgents](https://github.com/tauricr
 
 - **How it would work.** A team of LLM agents reads the data, analysts report, a challenger debates them, and a
   committee reaches an outcome.
-- **Policy writer.** For the insurance route, a policy-writer agent would draft the policy document as a PDF.
+- **Historical policy-writer proposal.** Permanently deferred with insurance; no policy-writing or PDF task is
+  active.
 - **Our constraints.**
   - Scores stay deterministic.
   - Every agent decision can be overridden by a human.
   - Agents never issue buy/sell calls.
-  - Any policy PDF is a draft for an insurer's review, not an issued or priced policy.
+  - The retained insurance research never established an issued or priced policy; insurance is now deferred.
   - The $20 LLM cap holds.
 - **Status.** Studied, designed and critiqued on 2026-10-10; see `docs/notes/research-2026-10-10/agents-*.md` and
   section 7 of the build plan. TradingAgents' code is not reused; we copy only its structure, as a fixed pipeline in our
   own worker. Before the freeze that means server-written briefs, then a challenger, then a committee with human
-  override. For insurance, the policy writer becomes a deterministic insurer-review print view, "Tetikleyici Endeksi
-  ve Kanıt Spesifikasyonu", never a policy schedule. LLM policy writing and PDFs come after the event.
+  override. The earlier insurer-review print-view and policy-writer/PDF proposals are superseded by DEC-032 and
+  receive no implementation slot.
 
-The final business plan is due Saturday evening, after the mentor meetings.
+The B2B choice, buyer class and revenue direction are now confirmed. Safa still develops the commercial plan and
+validates the customer workflow, pricing and data-rights route.
 
 ## Open questions
 
 | Question | Who | Status |
 |---|---|---|
-| Headline story for the demo and pitch | Safa, with the team | Due Saturday 2026-10-10, about 22:00 |
-| Can a data/model company design or sell insurance policies in Turkey, or must a licensed insurer issue them (SEDDK rules, product approval)? | Safa | Open; research notes below once verified |
+| Headline story for the demo and pitch | Mirza, with the team | Closed 2026-10-10: B2B evidence data and API for banks and financial institutions (DEC-032) |
+| Include stocks in the hackathon implementation, or complete the historical fund case first and add stocks next? | Mirza | Closed 2026-10-10: stocks must work in the hackathon demo too. Build new isolated stock support on resume; fund protocols remain immutable |
+| First institutional workflow, pilot and pricing for evidence data/API | Safa | Open; buyer class and revenue direction confirmed, customer demand unvalidated |
+| Can a data/model company design or sell insurance policies in Turkey, or must a licensed insurer issue them (SEDDK rules, product approval)? | Safa | Deferred with insurance by DEC-032; retained research only |
 | Does selling fund anomaly signals to institutions count as investment advice or research under SPK rules? | Safa | Open |
 | Commercial rights to TEFAS, KAP and MKK data, or to signals derived from them | Safa | Open; real data stays on localhost until reviewed (DEC-027) |
-| How would a policy be priced? A defensible price needs event base rates, and the archive has one labelled event cluster (the 17 September 2026 SPK order, 131 funds) | Team | Open |
+| How would a policy be priced? A defensible price needs event base rates, and the archive has one labelled event cluster (the 17 September 2026 SPK order, 131 funds) | Team | Deferred with insurance by DEC-032; no policy pricing task |
 | Which institutions to name in the pitch without implying a partnership | Safa | Open |
 
 ## Research notes (2026-10-10; orientation, not legal advice; verify before relying on them)
 
-**Insurance.**
+**Insurance — historical research, permanently deferred by DEC-032.**
 - **Who may do what.** Under Insurance Law 5684:
   - only licensed insurers carry risk (art. 5);
   - policy wording follows general conditions approved by the regulator (art. 11);
@@ -116,8 +144,8 @@ The final business plan is due Saturday evening, after the mentor meetings.
   - KAP sends high-volume use to its contracted REST service, which needs MKK authorization.
   - Real data stays on localhost until rights are reviewed (DEC-027).
 
-**Technical view.** Both stories run on the same core and each adds about two screens. B2B is easier to defend by
-Sunday; insurance can be shown on the same engine with a licensed insurer as the risk carrier.
+**Historical technical view, superseded by DEC-032.** The research compared two stories on the same core. The
+current implementation serves B2B evidence data and API access; insurance is no longer a demo path.
 
 Sources and details: `docs/notes/research-2026-10-10/research-product.md` (regulation and products) and
 `inventory-data.md` (data sources).

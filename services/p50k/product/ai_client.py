@@ -13,7 +13,9 @@ from p50k.product.settings import Settings
 from p50k.product.validator import DecisionOutput
 
 class AIUnavailable(RuntimeError):
-    pass
+    def __init__(self,code: str,call_id: str | None=None):
+        self.call_id=call_id
+        super().__init__(code)
 
 @dataclass(frozen=True)
 class AIConfig:
@@ -36,6 +38,8 @@ class AIConfig:
 
 def reserve(settings: Settings, bucket: str, amount: Decimal) -> str:
     with connect(settings) as connection:
+        connection.execute("SET LOCAL statement_timeout='5s'")
+        connection.execute("SET LOCAL lock_timeout='3s'")
         connection.execute('SELECT pg_advisory_xact_lock(50000033)')
         # Expired uncertain calls settle at the full reserved amount, not zero.
         expired = connection.execute('SELECT reservation_id,bucket,amount_usd FROM ai.reservations WHERE settled_at IS NULL AND expires_at<now() FOR UPDATE').fetchall()
@@ -51,6 +55,8 @@ def reserve(settings: Settings, bucket: str, amount: Decimal) -> str:
 
 def settle(settings: Settings, reservation: str, amount: Decimal) -> None:
     with connect(settings) as connection:
+        connection.execute("SET LOCAL statement_timeout='5s'")
+        connection.execute("SET LOCAL lock_timeout='3s'")
         connection.execute('SELECT pg_advisory_xact_lock(50000033)')
         row = connection.execute('SELECT bucket,amount_usd,settled_at FROM ai.reservations WHERE reservation_id=%s FOR UPDATE',(reservation,)).fetchone()
         if not row or row[2] is not None:
@@ -67,6 +73,8 @@ def decide(settings: Settings, config: AIConfig, packet: Packet, bucket: str='tu
             raise AIUnavailable('MOCK_DATABASE_REJECTED')
         return {'decision':packet.allowed_options[0],'cited_evidence_ids':[packet.evidence[0].evidence_id],
                 'rationale_tr':'Kaynak kanıtı insan incelemesi gerektiriyor.','missing_evidence_tr':''},'mock:'+uuid4().hex,'synthetic'
+    if config.mode=='live' and settings.db_name!='p50k':
+        raise AIUnavailable('LIVE_DATABASE_REJECTED')
     if config.mode!='live' or not config.key_file.is_file():
         raise AIUnavailable('KEY_UNAVAILABLE')
     payload=packet.model_dump_json()
@@ -77,6 +85,7 @@ def decide(settings: Settings, config: AIConfig, packet: Packet, bucket: str='tu
     reservation=reserve(settings,bucket,maximum)
     schema=DecisionOutput.model_json_schema()
     schema['properties']['decision']['enum']=packet.allowed_options
+    response=None
     try:
         client=OpenAI(api_key=config.key_file.read_text(encoding='utf-8').strip(),max_retries=0,timeout=60)
         response=client.responses.create(model=config.model,store=False,max_output_tokens=config.max_output_tokens,service_tier='default',
@@ -92,4 +101,4 @@ def decide(settings: Settings, config: AIConfig, packet: Packet, bucket: str='tu
         return json.loads(response.output_text),response.id,config.model
     except Exception:
         settle(settings,reservation,maximum)
-        raise AIUnavailable('MODEL_CALL_FAILED') from None
+        raise AIUnavailable('MODEL_CALL_FAILED',getattr(response,'id',None) or 'reservation:'+reservation) from None
