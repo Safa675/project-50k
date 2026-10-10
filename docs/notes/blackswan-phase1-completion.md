@@ -70,8 +70,8 @@ From the worktree unless noted; Python uses `PYTHONPATH=services`,
 |---|---|
 | `uv lock`; `uv sync --locked --extra api --extra api-test --extra research --extra product` | Exit 0; OpenAI 3.28.0, psycopg 3.3.6/pool 3.3.3, argon2-cffi 25.1.0 locked |
 | `.venv/Scripts/python.exe -m unittest discover -s tests/unit -p 'test_product_*.py' -v` | 78 tests; OK, 14 PostgreSQL-only skips; these skips are not passes |
-| `docker compose -p p50k-smoke -f compose.yaml run --no-deps --rm -e P50K_DB_NAME=p50k_dev -e P50K_TEST_ENDPOINTS=true -e P50K_TEST_DATABASE=1 -v ./tests:/app/tests:ro -v ./services:/app/services:ro -v ./db:/app/db:ro migrate python -m unittest tests.unit.test_product_migrations -v` | 16 passed, zero skips; includes 11 actual database checks |
-| `docker compose -p p50k-smoke -f compose.yaml run --rm --no-deps -e P50K_DB_NAME=p50k_dev -e P50K_TEST_ENDPOINTS=true -e P50K_TEST_DATABASE=1 -v ./tests:/app/tests:ro -v ./services:/app/services:ro worker python -m unittest tests.unit.test_product_import_database -v` | 3 passed, zero skips; COPY/nulls/idempotency, rollback and attachment conflict |
+| `docker compose --project-name p50k-smoke -f compose.yaml run --no-deps --rm -e P50K_DB_NAME=p50k_dev -e P50K_TEST_ENDPOINTS=true -e P50K_TEST_DATABASE=1 -v C:/Users/mirza/Desktop/Hackathon/project-50k-app/tests:/app/tests:ro -v C:/Users/mirza/Desktop/Hackathon/project-50k-app/services:/app/services:ro -v C:/Users/mirza/Desktop/Hackathon/project-50k-app/db:/app/db:ro migrate python -m unittest tests.unit.test_product_migrations -v` | 16 passed, zero skips; includes 11 actual database checks |
+| `docker compose -p p50k-smoke -f compose.yaml run --rm --no-deps -e P50K_DB_NAME=p50k_dev -e P50K_TEST_ENDPOINTS=true -e P50K_TEST_DATABASE=1 --volume ./tests:/app/tests:ro --volume ./services:/app/services:ro worker python -m unittest tests.unit.test_product_import_database -v` | 3 passed, zero skips; COPY/nulls/idempotency, rollback and attachment conflict |
 | `docker compose -f compose.yaml build api web` | Both images built; API rebuilt after final importer changes |
 | `docker compose -f compose.yaml -f compose.override.yaml -f compose.dev.yaml config --no-interpolate --quiet` | Exit 0 |
 | `powershell -NoProfile -ExecutionPolicy Bypass -File ops/docker/check-smoke.ps1 -KeepRunning` | Exit 0; isolated healthy services; Cookie/Set-Cookie, Origin/CSRF and 10 individually streamed one-second SSE events for both loopback origins |
@@ -90,8 +90,15 @@ Results: 663, 9 and 88 pass, zero skips. Windows root baseline: 663 tests,
 6 failures/30 errors/1 skip; UTF8/autocrlf-disabled diagnostic has only the three
 documented residual names (1 failure/2 errors/1 skip). No diagnostic regression.
 Main frontend baseline: typecheck/build exit 0, 118 unit tests, 65 browser tests
-on spare port 3061 pass. The final product-commit Linux result is recorded below
-after it runs; the baseline alone is not claimed as final regression verification.
+on spare port 3061 pass.
+
+Final implementation commit `8c07f66`: fetched into the isolated Linux clone,
+then `../bin/uv sync --locked --python 3.13.15 --extra api --extra api-test --extra research --extra product`.
+The exact root command above reports `Ran 741 tests in 67.367s; OK (skipped=16)`.
+Skips are 14 separately executed PostgreSQL integration checks and two new
+Windows-only download-launcher checks; no existing research test skipped or failed.
+Both frozen commands still pass 9 and 88 tests. These results establish no new
+failure against the zero-failure baseline; skips are not reported as passes.
 
 Full logs stay outside git: Windows TEMP `p50k-takeover-baseline-20261010`,
 `p50k-codex-frontend-baseline-20261010`, `p50k-product-infra-20261010`,
@@ -119,4 +126,5 @@ Next recommended task: Phase 2, beginning with the v2 detector protocol committe
 alone before computation, then detectors and the authenticated-ready API. Retain
 K1–K6, Safa's story/legal/source asks, Barış's tokens/design asks and all do-not-claim
 rules. Main remains untouched until demo decoupling; integration merges use a
-separate checkout and merge commits only.
+separate checkout and merge commits only. [Local operating instructions](../../ops/local/BLACKSWAN.md)
+explain startup, imports and immediate download resumes without exposing secrets.

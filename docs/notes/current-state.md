@@ -63,6 +63,8 @@ newer.
   [completion report](blackswan-phase1-completion.md) for actual checks and limitations.
 - T0.2 key readiness and T1.7a ten exact-match human checks remain pending; all SPK events remain candidates.
   K1–K6 and every do-not-claim item below remain carried forward. No frozen requirement registry was changed.
+- Final Phase 1 implementation `8c07f66`: Linux root 741 tests OK (16 explained skips), frozen 9 and 88 pass.
+  The 14 skipped PostgreSQL checks pass separately in isolated `p50k_dev`; two skips require Windows.
 
 ## Decisions after the handoff
 
