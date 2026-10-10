@@ -33,9 +33,12 @@ newer.
     archived data. It has a fixed 16 September 2026 view and a dated D1 view at 12 preregistered dates.
   - The data layer and the preregistered detectors D1–D5.
   - Forward TEFAS snapshot collection.
+  - BlackSwan Phase 1: Docker PostgreSQL, role-separated migrations, immutable evidence/AI storage,
+    real archive import, health API/worker, public web page and tested proxy. Details below.
   - The research app remains the fallback demo.
-- **Not built yet.** The product database, worker, auth, AI layer, B2B API and Docker setup. All 284 requirement
-  IDs remain `NOT_IMPLEMENTED`.
+- **Not built yet.** Product detectors/API, auth, AI queue/validator/decisions, review screens, chat and story screens.
+  The Phase 1 heartbeat worker is not the AI queue. All 284 legacy end-to-end requirement IDs remain
+  `NOT_IMPLEMENTED`; Phase 1 support is reported by slice.
 - **Plan.** `plans/2026-10-10-product-build-plan.md`, confirmed by delegation (DEC-030). The open questions are in `team-asks.md`.
 - **Running at handoff:** the all-fund TEFAS snapshot download (started 14:30, 2,136 funds, into `~/.local/share/project-50k/overnight/2026-10-10/`) and the live research demo.
 
@@ -65,6 +68,8 @@ newer.
   K1–K6 and every do-not-claim item below remain carried forward. No frozen requirement registry was changed.
 - Final Phase 1 implementation `8c07f66`: Linux root 741 tests OK (16 explained skips), frozen 9 and 88 pass.
   The 14 skipped PostgreSQL checks pass separately in isolated `p50k_dev`; two skips require Windows.
+- Product branch was pushed and merged into remote `main` with merge commit `67af615` using a separate temporary
+  worktree. The main checkout still holds `19989c5`, unchanged for the live demo. Do not pull it until K4.
 
 ## Decisions after the handoff
 
@@ -193,7 +198,8 @@ Treat any new failure name as a finding, not only a changed count.
 
 ## Next work
 
-**The product build plan** (`plans/2026-10-10-product-build-plan.md`) comes first once Mirza confirms it. Items
+**The product build plan** (`plans/2026-10-10-product-build-plan.md`) is confirmed. Phase 1 foundations have landed;
+Phase 2 starts with the v2 detector protocol committed alone before computation. Items
 recommended before 2026-10-10 are carried into that plan, not dropped:
 
 1. **Per-date estimated flow.** Now a candidate detector inside the product pipeline. Fix its parameters in a dated
