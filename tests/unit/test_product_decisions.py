@@ -13,6 +13,8 @@ from p50k.product.decisions import build_packet,evaluate,decision_rows,review
 from p50k.product.settings import Settings
 from p50k.product import detector_pipeline as pipeline
 from p50k.product import decisions as decision_module
+from p50k.product.queue import enqueue
+from p50k.product.ai_worker import step
 
 @unittest.skipUnless(os.environ.get('P50K_TEST_DATABASE')=='1','Requires isolated p50k_dev')
 class DecisionFlowTests(TestCase):
@@ -27,9 +29,15 @@ class DecisionFlowTests(TestCase):
             actor=connection.execute("INSERT INTO auth.users(email,password_hash) VALUES (%s,'synthetic-hash') RETURNING user_id",(uuid4().hex+'@example.invalid',)).fetchone()[0]
         with patch.object(pipeline,'VERSION_ID','synthetic-decision-'+uuid4().hex),connect(settings) as connection:
             pipeline.run_detectors(connection,datetime(2030,2,6,12,tzinfo=timezone.utc),'SYNTHETIC')
-        packet,_,_=build_packet(settings,code)
+        packet,packet_id,packet_hash=build_packet(settings,code)
         self.assertNotIn('nav',packet.model_dump())
-        first=evaluate(settings,code,AIConfig(mode='mock'))
+        with patch.dict(os.environ,{'P50K_AI_MODE':'mock'}):
+            job=enqueue(settings,code,packet_hash)
+            self.assertTrue(step(settings,'synthetic-flow-worker'))
+        with connect(settings) as connection:
+            self.assertEqual(connection.execute('SELECT status FROM ops.jobs WHERE job_id=%s',(job,)).fetchone()[0],'SUCCEEDED')
+            decision_id,validation=connection.execute('SELECT decision_id,validation_state FROM ai.decisions WHERE packet_id=%s ORDER BY decision_id DESC LIMIT 1',(packet_id,)).fetchone()
+        first={'decision_id':decision_id,'validation_state':validation}
         self.assertEqual(first['validation_state'],'VALID')
         changed=next(option for option in packet.allowed_options if option!='INSUFFICIENT_EVIDENCE')
         review_id=review(settings,first['decision_id'],str(actor),'OVERRIDE',changed,'Synthetic human reason')

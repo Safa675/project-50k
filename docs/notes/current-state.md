@@ -77,6 +77,8 @@ newer.
 - Phase 3 `2158638`: login/session auth, protected real fund pages/evidence, original/effective decision display,
   review, bounded AI wrapper/egress/validator and leased worker. Isolated browser login→override→logout passes.
   Linux 827 OK (44 explained skips), frozen 9/88 pass; [completion report](blackswan-phase3-completion.md).
+- Final Phase 3 Python `6714f43`: Linux 829 tests OK (46 explained skips); the actual isolated queue→proposal→
+  override/rejection flow and concurrent reservation/lease tests pass. No calibrated detector code changed.
 - Local admin credentials were generated into ignored `secrets/local-admin-login.json` without displaying them.
   Product is healthy on 3070/8770, real mock count zero. OpenAI key file is absent; live AI remains off.
 - Snapshots and KAP lists completed; SPK has 194 discovered PDFs. Profiles/prices continue externally.

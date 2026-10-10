@@ -59,6 +59,14 @@ Python uses `PYTHONPATH=services`, `PYTHONDONTWRITEBYTECODE=1`, `PYTHONUTF8=1`.
 | Frozen handoff `../../.venv/bin/python -m unittest discover -s tests -v` | 88 pass |
 | Leak scan with `P50K_RAW_DIR` pointing at main raw; `git diff --check` | Zero hits; clean |
 
+Final Python implementation `6714f43`: the same Linux root command reports
+`Ran 829 tests in 70.053s; OK (skipped=46)`. The skips are 44 isolated-PostgreSQL
+checks and two Windows launcher checks; the PostgreSQL checks ran separately.
+The final decision-flow database test also passed after it was strengthened to
+enqueue an actual job and process it through `ai_worker.step` before override.
+Turkish reason descriptions were added to the web evidence details; typecheck
+and proxy unit tests still pass. No calibrated detector bytes changed.
+
 Count-only real-session/HTTP checks verified catalog 2,133, eight THF signals,
 its candidate event and authenticated server-rendered web. The temporary session
 was deleted afterward. One local admin account exists; credentials were generated
