@@ -3,7 +3,10 @@ export type ChatAnswer = {
   content: string;
   evidence_ids: string[];
   model: string;
+  evidence_labels?: Record<string,string>;
 };
+
+export type ChatParagraph = {index:number;content:string;evidence_ids:string[]};
 
 export class ChatError extends Error {
   constructor(public readonly code: string) {super(code); this.name = 'ChatError';}
@@ -23,15 +26,18 @@ function answer(value: unknown): ChatAnswer {
       typeof value.content !== 'string' || !value.content.trim() || value.content.length > 24000 ||
       typeof value.model !== 'string' || !value.model || value.model.length > 120 ||
       !Array.isArray(value.evidence_ids) || value.evidence_ids.length > 32 ||
-      !value.evidence_ids.every(id => typeof id === 'string' && id.length > 0 && id.length <= 160)) {
+      !value.evidence_ids.every(id => typeof id === 'string' && id.length > 0 && id.length <= 160) ||
+      (value.evidence_labels!==undefined&&(!object(value.evidence_labels)||
+        Object.entries(value.evidence_labels).some(([key,label])=>!(value.evidence_ids as unknown[]).includes(key)||typeof label!=='string'||!label.trim()||label.length>200)))) {
     throw new ChatError('STREAM_INVALID');
   }
   return value as ChatAnswer;
 }
 
-// The server sends tool activity, then one fully validated answer. Partial model
-// text is never a displayable event, even if a transport endpoint supplies it.
-export async function readChatAnswer(response: Response, onTool: (name: string) => void): Promise<ChatAnswer> {
+// Only complete server-validated paragraphs are displayable; raw token deltas
+// remain invalid. The final persisted answer must match the streamed paragraphs.
+export async function readChatAnswer(response: Response, onTool: (name: string) => void,
+  onParagraph: (paragraph:ChatParagraph)=>void=()=>undefined,onReset:()=>void=()=>undefined): Promise<ChatAnswer> {
   if (!response.ok) {
     let code = response.status === 401 ? 'AUTHENTICATION_REQUIRED' : 'CHAT_UNAVAILABLE';
     try {
@@ -49,6 +55,8 @@ export async function readChatAnswer(response: Response, onTool: (name: string) 
   const reader = response.body.getReader();
   const decoder = new TextDecoder('utf-8', {fatal: true});
   let buffer = '', byteCount = 0, toolCount = 0;
+  let paragraphs:ChatParagraph[]=[];
+  let resetCount=0;
   try {
     while (true) {
       const {value, done} = await reader.read();
@@ -75,8 +83,21 @@ export async function readChatAnswer(response: Response, onTool: (name: string) 
             throw new ChatError('STREAM_INVALID');
           }
           onTool(payload.name);
+        } else if (event === 'paragraph') {
+          if(!object(payload)||payload.index!==paragraphs.length||paragraphs.length>=4||
+            typeof payload.content!=='string'||!payload.content.trim()||payload.content.length>12000||
+            !Array.isArray(payload.evidence_ids)||!payload.evidence_ids.length||payload.evidence_ids.length>8||
+            !payload.evidence_ids.every(id=>typeof id==='string'&&id.length>0&&id.length<=100))throw new ChatError('STREAM_INVALID');
+          const paragraph=payload as ChatParagraph;
+          paragraphs.push(paragraph);onParagraph(paragraph);
+        } else if(event==='reset'){
+          if(!object(payload)||Object.keys(payload).length||++resetCount>3)throw new ChatError('STREAM_INVALID');
+          paragraphs=[];onReset();
         } else if (event === 'answer') {
-          return answer(payload);
+          const result=answer(payload);
+          if(paragraphs.length&&(result.content!==paragraphs.map(item=>item.content).join('\n\n')||
+            paragraphs.some(item=>item.evidence_ids.some(id=>!result.evidence_ids.includes(id)))))throw new ChatError('STREAM_INVALID');
+          return result;
         } else if (event === 'error') {
           throw new ChatError(object(payload) && typeof payload.code === 'string' && /^[A-Z_]{1,80}$/.test(payload.code)
             ? payload.code : 'CHAT_UNAVAILABLE');

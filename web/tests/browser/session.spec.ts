@@ -1,5 +1,8 @@
 import {test,expect} from '@playwright/test';
+test.use({timezoneId:'Europe/Istanbul'});
 test('login, fund evidence, human review and logout use the isolated real backend',async({page})=>{
+  const hydrationErrors:string[]=[];
+  page.on('pageerror',error=>{if(/hydrat|#418|server rendered|didn.t match/i.test(error.message))hydrationErrors.push(error.message);});
   await page.goto('/funds');await expect(page).toHaveURL(/\/login$/);
   await page.getByLabel('E-posta').fill('synthetic-browser@example.invalid');
   await page.getByLabel('Parola',{exact:true}).fill('synthetic-browser-password');
@@ -13,12 +16,13 @@ test('login, fund evidence, human review and logout use the isolated real backen
   await page.getByLabel('İnceleme işlemi').selectOption('OVERRIDE');
   await page.getByLabel('Değiştirilen karar').selectOption('MATERIAL');
   await page.getByLabel('Gerekçe',{exact:true}).fill('Synthetic browser review reason');
-  await page.getByRole('button',{name:'İncelemeyi kaydet',exact:true}).click();
+  await Promise.all([page.waitForEvent('domcontentloaded'),page.getByRole('button',{name:'İncelemeyi kaydet',exact:true}).click()]);
   await expect(page.getByText('Etkin karar insan incelemesine dayanıyor.',{exact:true})).toBeVisible();
   await page.getByLabel('Hesap ve çalışma alanı').click();
   await page.getByRole('button',{name:'Çıkış yap',exact:true}).click();
   await expect(page).toHaveURL(/\/login$/);
   await page.goto('/funds');await expect(page).toHaveURL(/\/login$/);
+  expect(hydrationErrors).toEqual([]);
 });
 test('login remains usable at mobile width without document overflow',async({page})=>{
   await page.setViewportSize({width:390,height:844});await page.goto('/login');

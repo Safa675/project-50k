@@ -8,6 +8,14 @@ newer.
 
 ## In one minute
 
+- **Latest usability release (DEC-033).** The product now uses plain-language source/results, dated last-known
+  prices, verified asset logos and actual streamed AI explanations. "Bu sonuca nasıl ulaştık?" explains the
+  registered methods beside results and on `/method`. Internal hashes/codes remain in audit/API records.
+  Code checkpoint `84438f7`; [completion report](blackswan-user-experience-completion.md). All 16 browser tests,
+  21 web unit tests, typecheck/build and separate PostgreSQL checks pass. Chat v4 passed three live questions;
+  proposal v3 passed eight readable, evidence-supported cases. These are small development checks.
+  Linux verification: 831 passed, 73 skipped; frozen suites 9/88 passed. Latest backup/restore verified
+  39 tables and eleven migrations, including the new paragraph audit and live proposal records.
 - **Name: BlackSwan** ([DEC-030](../decisions/DEC-030-blackswan-working-agreements.md)). Codex continues the build from `plans/2026-10-10-codex-handoff-prompt.md`, written 2026-10-10 14:35.
 - **Team ([DEC-028](../decisions/DEC-028-deploy-ready-ai-native-build.md)).**
   - Mirza: technical lead; all development and data gathering.
@@ -43,7 +51,7 @@ newer.
 - **Design.** All 22 supplied Figma contexts and screenshots are implemented as ten base pages/states and twelve
   hover/context variants, running at `http://127.0.0.1:3070`. Typecheck/build, 14 browser tests and 16 web unit tests
   pass; see [Figma implementation](figma-implementation-2026-10-10.md) and its linked completion report.
-- **Remaining.** Measured live tuning and the gated batch; optional challenger/committee workflow;
+- **Remaining.** Wider quality coverage and separately budgeted batch wiring/pass; optional challenger/committee workflow;
   Sunday freeze backup/tag and cold-boot/demo rehearsal. The frozen
   requirement registry remains unchanged; implementation is reported by slice.
 - **Plan.** `plans/2026-10-10-product-build-plan.md`, confirmed by delegation (DEC-030). The open questions are in `team-asks.md`.
@@ -64,6 +72,13 @@ The second backup/restore rehearsal includes final imported data and all ten
 migrations: 38 table counts, evidence checksums and permissions matched. Its
 ignored dump and full recovery limits are recorded in
 [the backup report](blackswan-backup-restore-rehearsal.md).
+
+After usability tuning, at 20:59 Istanbul: 15/20 tuning attempts used, USD 0.09712
+of the USD 1 tuning bucket spent; total AI booked USD 0.267445; zero reservations
+or queued/running jobs. No 300-fund batch ran. Current backend completion is an
+engineering estimate of roughly 85% of the local hackathon scope; stock anomaly
+classification and stock AI are still unimplemented. No production-readiness or
+validated financial-performance claim follows from that estimate.
 
 ## Codex takeover and milestone history, 2026-10-10
 

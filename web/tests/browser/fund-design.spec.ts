@@ -19,7 +19,9 @@ test('fund design preserves source gaps, keyboard chart access and source tabs',
   await expect(page.getByRole('status').filter({hasText: 'TEFAS · günlük birim fiyat'})).toContainText(firstPrice!);
   await page.keyboard.press('Escape');
   await page.getByRole('tab', {name: 'Kaynaklar', exact: true}).click();
-  await expect(page.getByRole('heading', {name: 'Detektör kanıtları', exact: true})).toBeVisible();
+  await expect(page.getByRole('heading', {name: 'İncelemenin dayanakları', exact: true})).toBeVisible();
+  await page.locator('#panel-sources details').evaluateAll(nodes=>nodes.forEach(node=>{(node as HTMLDetailsElement).open=true;}));
+  expect(await page.locator('#panel-sources').innerText()).not.toMatch(/\b(?:D[1-5]|AN-DQ-\d+|AN-FND-\d+)\b|tefas-prices|\b[a-f0-9]{64}\b/);
   await page.getByRole('tab', {name: 'Genel bakış', exact: true}).click();
   const disclosure = page.getByRole('button', {name: 'Günlük fon pay fiyatı', exact: true});
   await disclosure.focus();

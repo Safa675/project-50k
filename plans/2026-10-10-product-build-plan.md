@@ -465,7 +465,7 @@ Owner: **C** = Claude, **M** = Mirza, **S** = Safa, **B** = Barış, **T** = tea
 ### Phase 5 (feature freeze at 10:30)
 
 - [ ] T5.1 Final available download import and deterministic rerun completed (1,755,010 prices; 17,064 results; original calibration). Measured tuning/gated live pass still due by 08:30
-- [x] T5.2 Chat with four bounded read-only tools, owner threads, budgets/daily limits, validated SSE and evidence chips; paid smoke passed. Figma contextual drawer added; wider live quality remains unmeasured
+- [x] T5.2 Chat with four bounded read-only tools, owner threads, budgets/daily limits and cited source links. DEC-033 adds plain explanations and real validated-paragraph streaming; chat v4 passed three live questions and a before-completion browser test. Wider quality remains a separate gate
 - [ ] T5.3 The agent team (if M3 landed by 01:00):
   - the step runner;
   - server briefs;
@@ -474,7 +474,7 @@ Owner: **C** = Claude, **M** = Mirza, **S** = Safa, **B** = Barış, **T** = tea
   - batch runs (at most 25 funds by the fixed rule);
   - the `/ekip/[run]` page
 - [ ] T5.4 B2B workflow overview, historical fund evidence and protected OpenAPI docs implemented; final demo/feed review remains. Challenger/committee is separate unfinished work; no insurance screens
-- [x] T5.5 All 22 Figma designs mapped and implemented with supplied tokens/logo/assets; final typecheck/build and 14 browser tests pass. Dark-reference desktop/mobile checks and truthful data adaptations are recorded; the populated KAP marker remains an explicit browser-coverage gap
+- [x] T5.5 All 22 Figma designs implemented; DEC-033 adds nontechnical results/source labels, understandable method disclosures, last-known dated prices and genuine asset logos. Final typecheck/build, 21 web unit tests and 16 browser tests pass. The populated KAP marker remains an explicit browser-coverage gap
 - [x] T5.6 Real current BIST 30 source-data catalog/chart/API, capture timestamps and corporate-action records; data-only protocol committed before ingestion. No stock anomaly classifier/AI; fund protocols preserved
 
 ### Phase 6

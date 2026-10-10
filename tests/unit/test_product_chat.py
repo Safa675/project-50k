@@ -31,6 +31,17 @@ def answer(**changes):
             'cited_evidence_ids':['ev:synthetic'], 'missing_evidence_tr':'', **changes}
 
 
+def streamed_answer(**changes):
+    value=answer(**changes)
+    value.pop('missing_evidence_tr')
+    return {'paragraphs':[value]}
+
+
+def transport(reply, paragraphs=()):
+    yield from paragraphs
+    return reply
+
+
 class ChatBoundaryTests(unittest.TestCase):
     def test_private_secret_and_raw_numeric_questions_are_blocked_before_egress(self):
         for question in ('mail@example.invalid', 'TR123456789', 'sk-synthetic-secret', 'NAV 100,42',
@@ -70,18 +81,19 @@ class ChatBoundaryTests(unittest.TestCase):
         chat.validate_answer(answer(text_tr='Mevcut kanıt yeterli değil.'),current)
 
     def test_invalid_text_is_not_streamed_and_only_valid_final_answer_is_persisted(self):
-        replies = [SimpleNamespace(id='synthetic-bad', output=[], output_text=json.dumps(answer(text_tr='100 kazandırır.'))),
-                   SimpleNamespace(id='synthetic-valid', output=[], output_text=json.dumps(answer()))]
-        with patch.object(chat,'model_call',side_effect=replies), patch.object(chat,'finish_turn') as saved:
+        replies = [SimpleNamespace(id='synthetic-bad', output=[], output_text=json.dumps(streamed_answer(text_tr='100 kazandırır.'))),
+                   SimpleNamespace(id='synthetic-valid', output=[], output_text=json.dumps(streamed_answer()))]
+        with patch.object(chat,'model_call',side_effect=[transport(reply) for reply in replies]), patch.object(chat,'save_chunk'), patch.object(chat,'finish_turn') as saved:
             emitted = list(chat.events(Settings(), AIConfig(mode='live'), chat.ChatBody(fund_code='THF',question='Kanıtları açıkla'), context(), 'thread','turn', []))
-        self.assertEqual([name for name,_ in emitted], ['answer'])
+        self.assertEqual([name for name,_ in emitted], ['paragraph','answer'])
         self.assertNotIn('kazandırır', emitted[0][1]['content'])
-        self.assertIn('değer: 100; eşik: 50', emitted[0][1]['content'])
+        self.assertIn('Benzer fonlara göre getiri farkı', emitted[0][1]['content'])
+        self.assertNotIn('D1', emitted[0][1]['content'])
         self.assertEqual(saved.call_args.args[3], 'VALID')
 
     def test_three_invalid_calls_fail_closed_without_assistant_content(self):
-        reply = SimpleNamespace(id='synthetic-bad', output=[], output_text=json.dumps(answer(text_tr='satın al')))
-        with patch.object(chat,'model_call',return_value=reply) as called, patch.object(chat,'finish_turn') as saved:
+        reply = SimpleNamespace(id='synthetic-bad', output=[], output_text=json.dumps(streamed_answer(text_tr='satın al')))
+        with patch.object(chat,'model_call',side_effect=lambda *args:transport(reply)) as called, patch.object(chat,'finish_turn') as saved:
             emitted = list(chat.events(Settings(), AIConfig(mode='live'), chat.ChatBody(fund_code='THF',question='Kanıtları açıkla'), context(), 'thread','turn', []))
         self.assertEqual(called.call_count, 3)
         self.assertEqual(emitted, [('error', {'code':'CHAT_VALIDATION_OR_CALL_LIMIT'})])
@@ -96,7 +108,7 @@ class ChatBoundaryTests(unittest.TestCase):
             call_id='synthetic-call'
             def model_dump(self, **_): return {'type':self.type,'name':self.name,'arguments':self.arguments,'call_id':self.call_id}
         reply = SimpleNamespace(id='synthetic-tools', output=[Tool() for _ in range(7)], output_text='')
-        with patch.object(chat,'model_call',return_value=reply) as called, patch.object(chat,'finish_turn'):
+        with patch.object(chat,'model_call',side_effect=lambda *args:transport(reply)) as called, patch.object(chat,'finish_turn'):
             emitted = list(chat.events(Settings(), AIConfig(mode='live'), chat.ChatBody(fund_code='THF',question='Kanıtları açıkla'), context(), 'thread','turn', []))
         self.assertEqual(called.call_count, 1)
         self.assertEqual(sum(name=='tool' for name,_ in emitted), 6)
@@ -107,8 +119,9 @@ class ChatBoundaryTests(unittest.TestCase):
             key=Path(folder)/'synthetic-key'
             key.write_text('synthetic-api-credential',encoding='utf-8')
             with patch.object(chat,'OpenAI') as factory, patch.object(chat,'reserve',return_value='synthetic-reservation') as reserved, patch.object(chat,'settle'), patch.object(chat,'connect'):
-                factory.return_value.responses.create.return_value=SimpleNamespace(status='completed', id='synthetic-call', usage=SimpleNamespace(input_tokens=10,output_tokens=10))
-                chat.model_call(Settings(), AIConfig(mode='live',key_file=key), [{'role':'user','content':'synthetic'}], 20)
+                stream=factory.return_value.responses.create.return_value
+                stream.__iter__.return_value=iter([SimpleNamespace(type='response.completed',response=SimpleNamespace(status='completed', id='synthetic-call', usage=SimpleNamespace(input_tokens=10,output_tokens=10)))])
+                list(chat.model_call(Settings(), AIConfig(mode='live',key_file=key), [{'role':'user','content':'synthetic'}], 20,context()))
                 self.assertEqual(reserved.call_args.args[1], 'chat')
                 self.assertGreater(reserved.call_args.args[2], Decimal(0))
                 self.assertEqual(factory.call_args.kwargs['max_retries'],0)
@@ -116,6 +129,7 @@ class ChatBoundaryTests(unittest.TestCase):
                 self.assertGreater(factory.call_args.kwargs['timeout'],0)
                 request=factory.return_value.responses.create.call_args.kwargs
                 self.assertFalse(request['store'])
+                self.assertTrue(request['stream'])
                 self.assertEqual(len(request['tools']),4)
                 self.assertTrue(request['text']['format']['strict'])
 
@@ -152,7 +166,11 @@ class ChatDatabaseTests(unittest.TestCase):
         with self.assertRaisesRegex(AIUnavailable,'THREAD_NOT_FOUND'):chat.history(self.settings,self.other,thread,'THF')
         with self.assertRaisesRegex(AIUnavailable,'THREAD_BUSY'):chat.begin_turn(self.settings,self.actor,repeated,self.context)
         emitted=list(chat.events(self.settings,AIConfig(mode='mock'),self.body,self.context,thread,turn,[]))
-        self.assertEqual(emitted[0][0],'answer')
+        self.assertEqual([name for name,_ in emitted],['paragraph','answer'])
+        with connect(self.settings) as connection:
+            chunk=connection.execute('SELECT content FROM ai.chat_stream_chunks WHERE turn_id=%s',(turn,)).fetchone()
+            self.assertEqual(chunk[0],emitted[0][1]['content'])
+            with self.assertRaises(Exception):connection.execute('DELETE FROM ai.chat_stream_chunks WHERE turn_id=%s',(turn,))
         self.assertEqual([row['role'] for row in chat.history(self.settings,self.actor,thread,'THF')],['user','assistant'])
         with connect(self.settings) as connection:
             self.assertEqual(connection.execute('SELECT packet_sha256 FROM ai.chat_turns WHERE turn_id=%s',(turn,)).fetchone()[0],self.context.checksum)

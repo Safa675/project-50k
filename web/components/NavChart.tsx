@@ -2,7 +2,7 @@
 
 import {useId, useMemo, useState} from 'react';
 import {decimal, dateTr} from '@/lib/client';
-import {FundPoint, fundSeries, fundWindow, sourceTime} from '@/lib/fund-display';
+import {FundPoint, fundSeries, fundWindow, sourceTime,sourceName} from '@/lib/fund-display';
 import {useReady} from '@/lib/use-ready';
 import styles from './Funds.module.css';
 
@@ -62,7 +62,7 @@ export default function NavChart({points, markers = []}: {points: FundPoint[]; m
         onKeyDown={event => {if (event.key === 'Escape') setMarker(null);}}><img src="/design/important-dot.svg" alt=""/></button>)}
       {(point || marker) && <div className={styles.chartTooltip} role="status" style={{left: `${Math.max(17, Math.min(78, coordinate ? coordinate.x / 896 * 100 : (12 + (Date.parse(marker!.date) - start) * 780 / Math.max(1, end - start)) / 896 * 100))}%`}}>
         <span>{dateTr(marker?.date ?? point!.effective_date)}</span>
-        {marker ? <><strong>{marker.label}</strong><a href={marker.href} target={marker.href.startsWith('https://') ? '_blank' : undefined} rel="noreferrer">Kaynağı incele<img src="/design/arrow.svg" alt=""/></a></> : <><strong>{point!.ambiguous_revision ? 'Çelişkili kaynak sürümü' : point!.nav === null ? 'Veri yok' : decimal(point!.nav)}</strong><span>TEFAS · günlük birim fiyat</span></>}
+        {marker ? <><strong>{marker.label}</strong><a href={marker.href} target={marker.href.startsWith('https://') ? '_blank' : undefined} rel="noreferrer">Kaynağı incele<img src="/design/arrow.svg" alt=""/></a></> : <><strong>{point!.ambiguous_revision ? 'Kaynaklarda farklı fiyatlar var' : point!.nav === null ? 'Veri yok' : decimal(point!.nav)}</strong><span>TEFAS · günlük birim fiyat</span></>}
         <img className={styles.chartTooltipArrow} src="/figma/funds/tooltip-down.svg" alt=""/>
       </div>}
     </div> : <p className={styles.empty}>Bu dönem için yayımlanmış birim fiyat bulunmuyor.</p>}
@@ -70,7 +70,7 @@ export default function NavChart({points, markers = []}: {points: FundPoint[]; m
       {([[31, '1A'], [93, '3A'], [365, '1Y'], [null, '2Y']] as const).map(([value, label]) => <button disabled={!ready} key={label} type="button" className={days === value ? styles.selected : ''}
         aria-pressed={days === value} onClick={() => {setDays(value); setActive(null); setMarker(null);}}>{label}</button>)}
     </div><button disabled={!ready} type="button" className={styles.textButton} aria-expanded={table} onClick={() => setTable(value => !value)}>{table ? 'Tabloyu gizle' : 'Tablo olarak gör'}<img src="/design/arrow.svg" alt=""/></button></div>
-    <p className={styles.caption}>Son iki yıl içindeki günlük yayımlanmış birim fiyat. Kaynakta para birimi belirtilmemiştir. Eksik veya çelişkili değerler doldurulmaz.</p>
-    {table && <div className="table-scroll"><table><caption>Yayımlanmış günlük birim fiyat verileri</caption><thead><tr><th>Tarih</th><th>Birim fiyat</th><th>Bilginin erişim zamanı</th><th>Kaynak</th></tr></thead><tbody>{visible.map(item => <tr key={item.effective_date}><td>{dateTr(item.effective_date)}</td><td>{item.ambiguous_revision ? 'Çelişkili kaynak sürümü' : decimal(item.nav)}</td><td>{sourceTime(item.available_at)}</td><td><details><summary>{item.source_id ?? 'TEFAS'}</summary><code>{item.source_sha256}</code><p>{item.availability_rule}</p></details></td></tr>)}</tbody></table></div>}
+    <p className={styles.caption}>Son iki yıl içinde yayımlanmış günlük fiyatlar. Fiyat alınamayan günler grafikte boş bırakılır.</p>
+    {table && <div className="table-scroll"><table><caption>Yayımlanmış günlük birim fiyat verileri</caption><thead><tr><th>Tarih</th><th>Birim fiyat</th><th>İncelemede kullanılabildiği tarih</th><th>Kaynak</th></tr></thead><tbody>{visible.map(item => <tr key={item.effective_date}><td>{dateTr(item.effective_date)}</td><td>{item.ambiguous_revision ? 'Kaynaklarda farklı fiyatlar var' : decimal(item.nav)}</td><td>{sourceTime(item.available_at)}</td><td>{sourceName(item.source_id)}</td></tr>)}</tbody></table></div>}
   </div>;
 }

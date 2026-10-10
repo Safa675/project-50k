@@ -15,7 +15,7 @@ from psycopg import Connection
 from psycopg.rows import dict_row
 
 from p50k.product.models import (
-    Coverage, DailyChart, EventsPage, Fund, FundsPage, PricePoint,
+    Coverage, DailyChart, EventsPage, Fund, FundsPage, FundPriceSummary, PricePoint,
     RegulatoryEvent, Signal, SignalsPage, SourceReference,
 )
 
@@ -56,6 +56,30 @@ def coverage_for(signals: list[Signal]) -> Coverage:
         reason="TRIGGER_PRESENT" if triggered else "COVERING_DETECTORS" if covering else "INSUFFICIENT_COVERAGE",
         evidence_ids=[item.evidence_id for item in signals],
     )
+
+
+def price_summary_for(chart: DailyChart) -> FundPriceSummary:
+    """Keep the latest missing row visible beside the last actual positive NAV.
+
+    Both references retain their own dates and provenance within the requested
+    chart window. No value is carried forward or interpreted as today's price.
+    Repeat the availability guard here so later appended observations cannot
+    alter a summary evaluated against the same cutoff.
+    """
+    points = sorted((point for point in chart.points
+                     if chart.start_date <= point.effective_date <= chart.end_date
+                     and point.available_at <= chart.cutoff
+                     and (point.published_at is None or point.published_at <= chart.cutoff)),
+                    key=lambda point: point.effective_date)
+    if not points:
+        return FundPriceSummary()
+    latest = points[-1]
+    known = [point for point in points if not point.ambiguous_revision
+             and point.nav is not None and Decimal(point.nav) > 0]
+    status = ("LATEST_CONFLICTING" if latest.ambiguous_revision else "AVAILABLE"
+              if latest.nav is not None and Decimal(latest.nav) > 0 else "LATEST_MISSING")
+    return FundPriceSummary(latest_observation=latest,
+                            last_available=known[-1] if known else None, status=status)
 
 
 def source_url(value: Any) -> str | None:

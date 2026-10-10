@@ -6,7 +6,7 @@ test('Figma landing preserves access boundaries and theme choice',async({page,re
   await expect(page.locator('html')).toHaveAttribute('lang','tr');
   await expect(page.getByRole('heading',{level:1})).toContainText('Kara kuğu öngörülemez.');
   await expect(page.getByRole('navigation',{name:'Ana gezinme'}).getByRole('link',{name:'Yöntem'})).toHaveAttribute('href','/method');
-  await expect(page.locator('footer')).toContainText('Veri hakları incelenmedi');
+  await expect(page.locator('body')).not.toContainText('Veri hakları incelenmedi');
   await expect(page.locator('footer')).toContainText('Yatırım tavsiyesi değildir');
   const toggle=page.getByRole('switch',{name:'Açık tema'});
   await toggle.click();

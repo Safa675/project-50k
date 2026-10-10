@@ -1,0 +1,1239 @@
+{
+  "source_policy": "Official KAP issuer directory or issuer-owned website; files preserved without graphical changes. Fund branding identifies the named portfolio manager, not a distinct fund logo.",
+  "retrieved_on": "2026-10-10",
+  "assets": [
+    {
+      "kind": "fund-manager",
+      "id": "a1-capital-portfoy",
+      "issuer": "A1 CAPİTAL PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "A1 CAPITAL PORTFOY"
+      ],
+      "source_page": "https://www.kap.org.tr/tr/sirketler/PYS",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/8acae2c494bafc93019566721bf70ddf",
+      "path": "/asset-logos/manager-a1-capital-portfoy.jpg",
+      "retrieved_on": "2026-10-10",
+      "sha256": "090354651eb5f9c555986c0e4526bf534d8d3996dc0bf1c31d0d654c7cdcab5f",
+      "bytes": 130964,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "ahlatci-portfoy",
+      "issuer": "AHLATCI PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "AHLATCI PORTFOY"
+      ],
+      "source_page": "https://www.kap.org.tr/tr/sirketler/PYS",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/8acae2c59145e00a019667f2cfb61c13",
+      "path": "/asset-logos/manager-ahlatci-portfoy.png",
+      "retrieved_on": "2026-10-10",
+      "sha256": "b9a2aa94fe885b8e0af64de65964950b5f12f4cf1fc19839622edf69314fd109",
+      "bytes": 38224,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "ak",
+      "issuer": "Ak Portföy",
+      "name_prefixes": [
+        "AK PORTFOY"
+      ],
+      "path": "/asset-logos/manager-ak.svg",
+      "source_page": "https://www.akportfoy.com.tr/tr",
+      "source_url": "https://www.akportfoy.com.tr/images/logo-bf73802c5e7beb4af700311c8e1f5b0c.svg",
+      "retrieved_on": "2026-10-10",
+      "sha256": "f9edf5627ba57623016b21718d4514c2f5f0837aafbab994ffe46b2b70b7ebce",
+      "bytes": 6134,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "aktif-portfoy",
+      "issuer": "AKTİF PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "AKTIF PORTFOY"
+      ],
+      "source_page": "https://www.kap.org.tr/tr/sirketler/PYS",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/8acae2c45835eb6601594aab49376642",
+      "path": "/asset-logos/manager-aktif-portfoy.png",
+      "retrieved_on": "2026-10-10",
+      "sha256": "2ea8256047fabfb033c3b28fc4e1175e769d737e11f7ec00d4e612f777d974d6",
+      "bytes": 11707,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "albaraka-portfoy",
+      "issuer": "ALBARAKA PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "ALBARAKA PORTFOY"
+      ],
+      "source_page": "https://www.kap.org.tr/tr/sirketler/PYS",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/8acae2c4508ff72301513da7a3690e68",
+      "path": "/asset-logos/manager-albaraka-portfoy.jpg",
+      "retrieved_on": "2026-10-10",
+      "sha256": "6c8795d2d380362e9a47ae14c0e82f113e1941def55938216f5cc5618ef10f64",
+      "bytes": 17789,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "allbatross-portfoy",
+      "issuer": "ALLBATROSS PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "ALLBATROSS PORTFOY"
+      ],
+      "source_page": "https://www.kap.org.tr/tr/sirketler/PYS",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/8acae2c469cee2a4016ad972e7f11276",
+      "path": "/asset-logos/manager-allbatross-portfoy.png",
+      "retrieved_on": "2026-10-10",
+      "sha256": "6f5fd6733edc059f67e941435a99ed49419c1c1ddab864a1327612f6bdd2d90e",
+      "bytes": 9909,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "astra-portfoy",
+      "issuer": "ASTRA PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "ASTRA PORTFOY"
+      ],
+      "source_page": "https://astraportfoy.com.tr/",
+      "source_url": "https://astraportfoy.com.tr/assets/img/dark-logo.png",
+      "path": "/asset-logos/manager-astra-portfoy.png",
+      "retrieved_on": "2026-10-10",
+      "sha256": "c574f2af47b0a35f08e6e3d6b429754c5dfc88bc59619175d044891387a88b50",
+      "bytes": 40460,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "ata-portfoy",
+      "issuer": "ATA PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "ATA PORTFOY"
+      ],
+      "source_page": "https://www.kap.org.tr/tr/sirketler/PYS",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a140e95bea0140ede30ded013f",
+      "path": "/asset-logos/manager-ata-portfoy.jpg",
+      "retrieved_on": "2026-10-10",
+      "sha256": "227e74f3c34a9e7259ecbcfdc8b49b18ba3162000c8320e155eed40a2976204c",
+      "bytes": 1872,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "atlas-portfoy",
+      "issuer": "ATLAS PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "ATLAS PORTFOY"
+      ],
+      "source_page": "https://www.kap.org.tr/tr/sirketler/PYS",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a141558bdd0141561817540562",
+      "path": "/asset-logos/manager-atlas-portfoy.jpg",
+      "retrieved_on": "2026-10-10",
+      "sha256": "4d5dd0ab6235d8955b32c449b67133f3cff77810f03f3e4f022b91905d18e38c",
+      "bytes": 21720,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "aura-portfoy",
+      "issuer": "AURA PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "AURA PORTFOY"
+      ],
+      "source_page": "https://www.kap.org.tr/tr/sirketler/PYS",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a243dd5e8f01448d9c23ae7e93",
+      "path": "/asset-logos/manager-aura-portfoy.png",
+      "retrieved_on": "2026-10-10",
+      "sha256": "ead0c7bcc199d101ef79668750f5713734a0f0feef6791af1efc988e19cd94da",
+      "bytes": 18610,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "azimut",
+      "issuer": "Azimut Portföy",
+      "name_prefixes": [
+        "AZIMUT PORTFOY",
+        "AZIMUT PYS"
+      ],
+      "path": "/asset-logos/manager-azimut.svg",
+      "source_page": "https://azimutportfoy.com/",
+      "source_url": "https://azimutportfoy.com/wp-content/uploads/2022/05/azimut-logo.svg",
+      "retrieved_on": "2026-10-10",
+      "sha256": "0342e295fe135744a2ae30810aef9247886ab062712d27446b485aebb453a3ae",
+      "bytes": 4449,
+      "transformed": false,
+      "background": "#102139"
+    },
+    {
+      "kind": "fund-manager",
+      "id": "btcturk-portfoy",
+      "issuer": "BTCTURK PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "BTCTURK PORTFOY"
+      ],
+      "source_page": "https://www.kap.org.tr/tr/sirketler/PYS",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/8acae2c4998f24d8019a4e14810301dc",
+      "path": "/asset-logos/manager-btcturk-portfoy.png",
+      "retrieved_on": "2026-10-10",
+      "sha256": "bcc51ec5d0d04212f5466f91e4574f3b223c5dbcbe345c3790f3f9a152645fd9",
+      "bytes": 6563,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "bulls-portfoy",
+      "issuer": "BULLS PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "BULLS PORTFOY"
+      ],
+      "source_page": "https://www.kap.org.tr/tr/sirketler/PYS",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/8acae2c59145e00a0193abc32de87981",
+      "path": "/asset-logos/manager-bulls-portfoy.png",
+      "retrieved_on": "2026-10-10",
+      "sha256": "4ccbfc8442641855ec088c152a3544e19e93b6b2a938037f814f10463c93d2c7",
+      "bytes": 24764,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "bv-portfoy",
+      "issuer": "BV PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "BV PORTFOY"
+      ],
+      "source_page": "https://www.bvportfoy.com/tr",
+      "source_url": "https://www.bvportfoy.com/storage/site-images/logo.svg",
+      "path": "/asset-logos/manager-bv-portfoy.svg",
+      "retrieved_on": "2026-10-10",
+      "sha256": "a8f4aeee09ad82fea2a71bc408dd6cb801cf915242a615db88d85e2dc2dd5440",
+      "bytes": 6163,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "deniz",
+      "issuer": "Deniz Portföy",
+      "name_prefixes": [
+        "DENIZ PORTFOY"
+      ],
+      "path": "/asset-logos/manager-deniz.png",
+      "source_page": "https://www.denizportfoy.com/",
+      "source_url": "https://www.denizportfoy.com/asset/img/denizportfoy-header-logo.png",
+      "retrieved_on": "2026-10-10",
+      "sha256": "98e362965e4b4029fe508168824b3863362cba7291cd10548d0b90420c9c5461",
+      "bytes": 3006,
+      "transformed": false,
+      "background": "#102139"
+    },
+    {
+      "kind": "fund-manager",
+      "id": "emaa-blue-portfoy",
+      "issuer": "EMAA BLUE PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "EMAA BLUE PORTFOY"
+      ],
+      "source_page": "https://emaaportfoy.com.tr/",
+      "source_url": "https://emaaportfoy.com.tr/images/logo-400.png",
+      "path": "/asset-logos/manager-emaa-blue-portfoy.png",
+      "retrieved_on": "2026-10-10",
+      "sha256": "ac64c14ee5a3353437acd01aa38f1c5f050288374560872fb783dc2e99de6735",
+      "bytes": 31815,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "fiba-portfoy",
+      "issuer": "FİBA PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "FIBA PORTFOY"
+      ],
+      "source_page": "https://www.kap.org.tr/tr/sirketler/PYS",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a2422d9a780142ec1bd59a193c",
+      "path": "/asset-logos/manager-fiba-portfoy.png",
+      "retrieved_on": "2026-10-10",
+      "sha256": "8a2ffbb0623dcf97ac3e117ff16f945552df33af7c164d735e44b099ffa5bf1b",
+      "bytes": 334823,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "fonmap-portfoy",
+      "issuer": "FONMAP PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "FONMAP PORTFOY"
+      ],
+      "source_page": "https://www.kap.org.tr/tr/sirketler/PYS",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/8acae2c486d22a3b01894e77f0b63fed",
+      "path": "/asset-logos/manager-fonmap-portfoy.png",
+      "retrieved_on": "2026-10-10",
+      "sha256": "efeb54b92b2592623f6b2800405e423a434b31eb1fd5bf1bd4a79b963390cf78",
+      "bytes": 5728,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "garanti",
+      "issuer": "Garanti BBVA Portföy",
+      "name_prefixes": [
+        "GARANTI PORTFOY",
+        "GARANTI BBVA PORTFOY"
+      ],
+      "path": "/asset-logos/manager-garanti.svg",
+      "source_page": "https://www.garantibbvaportfoy.com.tr/",
+      "source_url": "https://www.garantibbvaportfoy.com.tr/assets/garanti-favicon.svg?cache=31536000",
+      "retrieved_on": "2026-10-10",
+      "sha256": "540579622781d68e7952ca60d0ef582b94a4773b0562da4c917d01c3e5e221f2",
+      "bytes": 3884,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "global-md-portfoy",
+      "issuer": "GLOBAL MD PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "GLOBAL MD PORTFOY"
+      ],
+      "source_page": "https://www.kap.org.tr/tr/sirketler/PYS",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a14158e41f01415b1b93e3618a",
+      "path": "/asset-logos/manager-global-md-portfoy.jpg",
+      "retrieved_on": "2026-10-10",
+      "sha256": "dd7bc35555f52900f309ff6bec809b53b016d53e1f2861a082ff1e3e1006cbe2",
+      "bytes": 53456,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "golden-global-portfoy",
+      "issuer": "GOLDEN GLOBAL PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "GOLDEN GLOBAL PORTFOY"
+      ],
+      "source_page": "https://www.kap.org.tr/tr/sirketler/PYS",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/8acae2c4998f24d80199c3afb0d320dc",
+      "path": "/asset-logos/manager-golden-global-portfoy.png",
+      "retrieved_on": "2026-10-10",
+      "sha256": "195f9134efe31910f1ec01ae93247fde758f3232107b2db15ab6368cf08e500d",
+      "bytes": 11970,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "has-portfoy",
+      "issuer": "HAS PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "HAS PORTFOY"
+      ],
+      "source_page": "https://www.kap.org.tr/tr/sirketler/PYS",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/8acae2c57f7cbb490180d71931c56213",
+      "path": "/asset-logos/manager-has-portfoy.png",
+      "retrieved_on": "2026-10-10",
+      "sha256": "be28a7be4c550cfcc5df4ce171e50fc172fc23c854a2aef43636e9f056d730b5",
+      "bytes": 44965,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "hedef",
+      "issuer": "Hedef Portföy",
+      "name_prefixes": [
+        "HEDEF PORTFOY"
+      ],
+      "path": "/asset-logos/manager-hedef.png",
+      "source_page": "https://hedefportfoy.com.tr/",
+      "source_url": "https://hedefportfoy.com.tr/media/img/Hedef_Portfoy_Logo_new.png",
+      "retrieved_on": "2026-10-10",
+      "sha256": "929379ac43cca180368e1963ff88c9a30c810920e089607789cdbc1bc015f7fe",
+      "bytes": 4776,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "hsbc-portfoy",
+      "issuer": "HSBC PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "HSBC PORTFOY",
+        "HSBC PYS"
+      ],
+      "source_page": "https://www.kap.org.tr/tr/sirketler/PYS",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a2413b80ca01413b9b10830009",
+      "path": "/asset-logos/manager-hsbc-portfoy.png",
+      "retrieved_on": "2026-10-10",
+      "sha256": "acbb7df0386bca3373fbdc494e6bc3619c2d8ebbe9f62871a8bddaef1185d6cc",
+      "bytes": 22697,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "inveo-portfoy",
+      "issuer": "INVEO PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "INVEO PORTFOY"
+      ],
+      "source_page": "https://www.kap.org.tr/tr/sirketler/PYS",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a240f2ef4c01413b5ccdb3075e",
+      "path": "/asset-logos/manager-inveo-portfoy.png",
+      "retrieved_on": "2026-10-10",
+      "sha256": "21577d0b23a50bae9000f7599d4ef4331f302330b2a51f51840ff7c6ae50a856",
+      "bytes": 132928,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "is",
+      "issuer": "İş Portföy",
+      "name_prefixes": [
+        "IS PORTFOY"
+      ],
+      "path": "/asset-logos/manager-is.png",
+      "source_page": "https://www.isportfoy.com.tr/",
+      "source_url": "https://www.isportfoy.com.tr/_assets/images/favicon/android-icon-192x192.png",
+      "retrieved_on": "2026-10-10",
+      "sha256": "e6edca426c663471cbcb9a8db5eaaf75a055559ad2c0c06a2e637ec108412eee",
+      "bytes": 12230,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "istanbul",
+      "issuer": "İstanbul Portföy",
+      "name_prefixes": [
+        "ISTANBUL PORTFOY"
+      ],
+      "path": "/asset-logos/manager-istanbul.svg",
+      "source_page": "https://www.istanbulportfoy.com/",
+      "source_url": "https://www.istanbulportfoy.com/assets/img/logo_black.svg",
+      "retrieved_on": "2026-10-10",
+      "sha256": "7f35591f05ae1ee1594d00b136caa7f2a1fadff878fe0250bc50efe140b77097",
+      "bytes": 31814,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "kare-portfoy",
+      "issuer": "KARE PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "KARE PORTFOY"
+      ],
+      "source_page": "https://www.kap.org.tr/tr/sirketler/PYS",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/402821814da3a99c014e2ab71fee6e8e",
+      "path": "/asset-logos/manager-kare-portfoy.jpg",
+      "retrieved_on": "2026-10-10",
+      "sha256": "8470d9851b852702cf9998bfbde7bbce258deaa731001dca027d4fa7f5f9132a",
+      "bytes": 103533,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "kuveyt-turk",
+      "issuer": "Kuveyt Türk Portföy",
+      "name_prefixes": [
+        "KUVEYT TURK PORTFOY",
+        "KT PORTFOY"
+      ],
+      "path": "/asset-logos/manager-kuveyt-turk.png",
+      "source_page": "https://www.kuveytturkportfoy.com.tr/",
+      "source_url": "https://www.kuveytturkportfoy.com.tr/Content/images/favicon/apple-touch-icon.png",
+      "retrieved_on": "2026-10-10",
+      "sha256": "37fcfc4ecd54acc6e33585d8b0cca5e4c42026049edaee494f42b68cd14c2b18",
+      "bytes": 15252,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "logos-portfoy",
+      "issuer": "LOGOS PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "LOGOS PORTFOY"
+      ],
+      "source_page": "https://www.kap.org.tr/tr/sirketler/PYS",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/9376ae46e2b841f38f024cada869f7cb",
+      "path": "/asset-logos/manager-logos-portfoy.jpg",
+      "retrieved_on": "2026-10-10",
+      "sha256": "0a865750daf2cc48e0c30f8d5de8cd282e881220f827e24d1b11fe19b8645dd3",
+      "bytes": 11255,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "marmara-capital-portfoy",
+      "issuer": "MARMARA CAPİTAL PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "MARMARA CAPITAL PORTFOY"
+      ],
+      "source_page": "https://www.kap.org.tr/tr/sirketler/PYS",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/402821814da3a99c014e49c9dbfb5a38",
+      "path": "/asset-logos/manager-marmara-capital-portfoy.png",
+      "retrieved_on": "2026-10-10",
+      "sha256": "0b3a0a610f40091d37a1dbf8dc70edce58b9e2ef6296a8351599f64bd1672511",
+      "bytes": 14684,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "mt-portfoy",
+      "issuer": "MT PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "MT PORTFOY"
+      ],
+      "source_page": "https://www.kap.org.tr/tr/sirketler/PYS",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/8acae2c48c3efabf019053c36ee94619",
+      "path": "/asset-logos/manager-mt-portfoy.png",
+      "retrieved_on": "2026-10-10",
+      "sha256": "2d73e75913f87c9943a480a45fd35f1f7804cf5ae33d9d728a65af79b25c755f",
+      "bytes": 4169,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "neo",
+      "issuer": "Neo Portföy",
+      "name_prefixes": [
+        "NEO PORTFOY"
+      ],
+      "path": "/asset-logos/manager-neo.svg",
+      "source_page": "https://www.neoportfoy.com.tr/TR",
+      "source_url": "https://www.neoportfoy.com.tr/TR/Content/images/neo_portfoy_logo-01.svg",
+      "retrieved_on": "2026-10-10",
+      "sha256": "557f2b33bc9af1750fef00e2ad96b7290ecc68c770e29c2183c740014375fd6d",
+      "bytes": 6539,
+      "transformed": true,
+      "source_sha256": "9d0bd18749f764cfc44e3c899b5d4b2bc4a96a30608bf68e1b94fa600ff1cc8a",
+      "source_bytes": 6606,
+      "transformation": "LF line endings only; graphical content unchanged"
+    },
+    {
+      "kind": "fund-manager",
+      "id": "nurol-portfoy",
+      "issuer": "NUROL PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "NUROL PORTFOY"
+      ],
+      "source_page": "https://www.kap.org.tr/tr/sirketler/PYS",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/8acae2c57902e74f0179139e5075055d",
+      "path": "/asset-logos/manager-nurol-portfoy.jpg",
+      "retrieved_on": "2026-10-10",
+      "sha256": "d64200aaa0f3616037fe13adc62c51a3087a5efdb3dd69ed53a923e27b6b8142",
+      "bytes": 12615,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "one-portfoy",
+      "issuer": "ONE PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "ONE PORTFOY"
+      ],
+      "source_page": "https://www.kap.org.tr/tr/sirketler/PYS",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/8acae2c57d3bf001017f2aacfe03557e",
+      "path": "/asset-logos/manager-one-portfoy.jpg",
+      "retrieved_on": "2026-10-10",
+      "sha256": "5c3dbc762671cf7940b02098c876a1b31844962c4dabeda6b25db574c9a0a9e8",
+      "bytes": 24745,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "osmanli-portfoy",
+      "issuer": "OSMANLI PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "OSMANLI PORTFOY"
+      ],
+      "source_page": "https://www.kap.org.tr/tr/sirketler/PYS",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/402821814da3a99c014e8702206748d8",
+      "path": "/asset-logos/manager-osmanli-portfoy.png",
+      "retrieved_on": "2026-10-10",
+      "sha256": "b6afbe8135503a38c22a24374d81a8a8e1f29876b5a0ecd96b23629ce8c318f4",
+      "bytes": 7776,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "oyak-portfoy",
+      "issuer": "OYAK PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "OYAK PORTFOY"
+      ],
+      "source_page": "https://www.kap.org.tr/tr/sirketler/PYS",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a140ee35c70140ee4bf71b0032",
+      "path": "/asset-logos/manager-oyak-portfoy.png",
+      "retrieved_on": "2026-10-10",
+      "sha256": "0f03f9e5426d3626e6d7bd0494efbb6a73a9c3493169197b6a4fe8ae1d6f6ea3",
+      "bytes": 50909,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "pardus",
+      "issuer": "Pardus Portföy",
+      "name_prefixes": [
+        "PARDUS PORTFOY"
+      ],
+      "path": "/asset-logos/manager-pardus.png",
+      "source_page": "https://pardusportfoy.com/",
+      "source_url": "https://pardusportfoy.com/wp-content/uploads/2026/02/PARDUS-PORTFOY-LOGO-fav.png",
+      "retrieved_on": "2026-10-10",
+      "sha256": "207b4a5e8487e475dafd18d831c5c51ddf8565de966a26083cc96c715b5d1622",
+      "bytes": 16291,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "perform-portfoy",
+      "issuer": "PERFORM PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "PERFORM PORTFOY"
+      ],
+      "source_page": "https://www.kap.org.tr/tr/sirketler/PYS",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a1413b7ef5014144ecbaca00a2",
+      "path": "/asset-logos/manager-perform-portfoy.png",
+      "retrieved_on": "2026-10-10",
+      "sha256": "59fa86398945a11a1c638a9f2dd8865efccef1fd239a4fd411d2f0de99412975",
+      "bytes": 20075,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "phillip-portfoy",
+      "issuer": "PHİLLİP PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "PHILLIP PORTFOY"
+      ],
+      "source_page": "https://www.kap.org.tr/tr/sirketler/PYS",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/8acae2c5794d3d6a01795675f77d0208",
+      "path": "/asset-logos/manager-phillip-portfoy.png",
+      "retrieved_on": "2026-10-10",
+      "sha256": "280e353353489717269b686403a4fa6fadb4c19306823bde0c13aff9dc3d8440",
+      "bytes": 8833,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "piramit-portfoy",
+      "issuer": "PİRAMİT PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "PIRAMIT PORTFOY"
+      ],
+      "source_page": "https://www.piramitportfoy.com.tr/",
+      "source_url": "https://www.piramitportfoy.com.tr/logo.png",
+      "path": "/asset-logos/manager-piramit-portfoy.png",
+      "retrieved_on": "2026-10-10",
+      "sha256": "bbfe3100dc1ba729c4078c19d27e353177d98f7b8f0e44aaaa44c5d9823d13e1",
+      "bytes": 40226,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "pusula-portfoy",
+      "issuer": "PUSULA PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "PUSULA PORTFOY"
+      ],
+      "source_page": "https://www.kap.org.tr/tr/sirketler/PYS",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/8acae2c58b2fa64e018c4892184924cb",
+      "path": "/asset-logos/manager-pusula-portfoy.png",
+      "retrieved_on": "2026-10-10",
+      "sha256": "545ba1a387d15054586230a736e206a44f433781b5bd32d85de69953af95f254",
+      "bytes": 195306,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "qnb",
+      "issuer": "QNB Portföy",
+      "name_prefixes": [
+        "QNB PORTFOY",
+        "QNB FINANS PORTFOY"
+      ],
+      "path": "/asset-logos/manager-qnb.png",
+      "source_page": "https://www.qnbportfoy.com.tr/",
+      "source_url": "https://www.qnbportfoy.com.tr/assets/qnb/qnb-logo.png",
+      "retrieved_on": "2026-10-10",
+      "sha256": "d51278f09ae665225378c17bb42090162ff58c8a690defe24dc0aa15e3f09a94",
+      "bytes": 16802,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "re-pie-portfoy",
+      "issuer": "RE-PIE PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "RE-PIE PORTFOY"
+      ],
+      "source_page": "https://www.kap.org.tr/tr/sirketler/PYS",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a1486ec80b0149cd1831905a49",
+      "path": "/asset-logos/manager-re-pie-portfoy.jpg",
+      "retrieved_on": "2026-10-10",
+      "sha256": "ac39e84df010530b1da1bdbdb36abdef035375cc2cffff0e108a9a5349a76e86",
+      "bytes": 114656,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "rota",
+      "issuer": "Rota Portföy",
+      "name_prefixes": [
+        "ROTA PORTFOY"
+      ],
+      "path": "/asset-logos/manager-rota.png",
+      "source_page": "https://www.rotaportfoy.com.tr/",
+      "source_url": "https://www.rotaportfoy.com.tr/images/favicon/favicon-96x96.png",
+      "retrieved_on": "2026-10-10",
+      "sha256": "4a6a94bb4183dd9e27ad5640ae75c96e3614aeb37397c3768df4efe17e14dee3",
+      "bytes": 12011,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "sparta-portfoy",
+      "issuer": "SPARTA PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "SPARTA PORTFOY"
+      ],
+      "source_page": "https://www.kap.org.tr/tr/sirketler/PYS",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/8acae2c59145e00a0193f2cc94b21877",
+      "path": "/asset-logos/manager-sparta-portfoy.png",
+      "retrieved_on": "2026-10-10",
+      "sha256": "dfa10b3670aa348598e0ba111868a6cfbf2f386b8bbfeaaf9804b9f7aee41ad5",
+      "bytes": 6185,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "statech-portfoy",
+      "issuer": "STATECH PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "STATECH PORTFOY"
+      ],
+      "source_page": "https://www.kap.org.tr/tr/sirketler/PYS",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/8acae2c47d3bee4e017ebfae3ef118d6",
+      "path": "/asset-logos/manager-statech-portfoy.jpg",
+      "retrieved_on": "2026-10-10",
+      "sha256": "e9c3a6738867225f9e49f82ddf3e548a21fad7dcc19563ce3c9c29ede7f3e81f",
+      "bytes": 235108,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "strateji-portfoy",
+      "issuer": "STRATEJİ PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "STRATEJI PORTFOY"
+      ],
+      "source_page": "https://www.kap.org.tr/tr/sirketler/PYS",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/1DE05DAA83D6073AE0530A4A622A2EBD",
+      "path": "/asset-logos/manager-strateji-portfoy.png",
+      "retrieved_on": "2026-10-10",
+      "sha256": "52e7f8feefd9dc2668e35031113ae25078abc674551dd5410c48a380eb449399",
+      "bytes": 6053,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "tacirler",
+      "issuer": "Tacirler Portföy",
+      "name_prefixes": [
+        "TACIRLER PORTFOY"
+      ],
+      "path": "/asset-logos/manager-tacirler.svg",
+      "source_page": "https://www.tacirlerportfoy.com.tr/",
+      "source_url": "https://tacirlerportfoy.com.tr/upload/images/tacirler_portfoy/portfoy-logo.svg",
+      "retrieved_on": "2026-10-10",
+      "sha256": "d0e0923470e5871b846549b50797367dfe15dce5ee67720ff0b0af062c23412a",
+      "bytes": 13790,
+      "transformed": false,
+      "background": "#102139"
+    },
+    {
+      "kind": "fund-manager",
+      "id": "teb",
+      "issuer": "TEB Portföy",
+      "name_prefixes": [
+        "TEB PORTFOY"
+      ],
+      "path": "/asset-logos/manager-teb.svg",
+      "source_page": "https://www.tebportfoy.com.tr/",
+      "source_url": "https://www.tebportfoy.com.tr/_assets/img/logo.svg",
+      "retrieved_on": "2026-10-10",
+      "sha256": "4efb037b10f703a984c9a46ecf2a0f8532260b78fc362e5aedc3a59f8c8515fa",
+      "bytes": 18723,
+      "transformed": true,
+      "background": "#102139",
+      "source_sha256": "731effd4a001f8ba4f492f965c7dfcd998958adb62143606d7fac9ffa8130fa3",
+      "source_bytes": 18796,
+      "transformation": "LF line endings only; graphical content unchanged"
+    },
+    {
+      "kind": "fund-manager",
+      "id": "tera",
+      "issuer": "Tera Portföy",
+      "name_prefixes": [
+        "TERA PORTFOY"
+      ],
+      "path": "/asset-logos/manager-tera.png",
+      "source_page": "https://www.teraportfoy.com/",
+      "source_url": "https://www.teraportfoy.com/img/android-icon-192x192.png",
+      "retrieved_on": "2026-10-10",
+      "sha256": "2abb6bd3f3c9654c5bcbf3b7144d5a9927d3488386a98b435f9d3bd1bce3d85b",
+      "bytes": 3405,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "trive-portfoy",
+      "issuer": "TRIVE PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "TRIVE PORTFOY"
+      ],
+      "source_page": "https://www.kap.org.tr/tr/sirketler/PYS",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/8acae2c57f7cbb48018046fa790f7a84",
+      "path": "/asset-logos/manager-trive-portfoy.jpg",
+      "retrieved_on": "2026-10-10",
+      "sha256": "8c2c2846efcb9c83ee6caf698e0424be6cadeef65db7ead8cfaf6eb381a831d1",
+      "bytes": 9975,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "unlu-portfoy",
+      "issuer": "ÜNLÜ PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "UNLU PORTFOY"
+      ],
+      "source_page": "https://www.kap.org.tr/tr/sirketler/PYS",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a142140a8c014222e48869248c",
+      "path": "/asset-logos/manager-unlu-portfoy.png",
+      "retrieved_on": "2026-10-10",
+      "sha256": "cf5844b10b5ebd24f6178f192116222e618c5e0ce352978f5706bb13fbb26b4d",
+      "bytes": 3912,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "v-portfoy",
+      "issuer": "V PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "V PORTFOY"
+      ],
+      "source_page": "https://www.kap.org.tr/tr/sirketler/PYS",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/8acae2c59b85fa03019bbc9da18f365b",
+      "path": "/asset-logos/manager-v-portfoy.png",
+      "retrieved_on": "2026-10-10",
+      "sha256": "bc6fbf557e75ecca54c927419869ae02c6ae7bdd1ddbfdbf4eac3bd94f6019b6",
+      "bytes": 29791,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "vega-portfoy",
+      "issuer": "VEGA PORTFÖY YÖNETİMİ A.Ş.",
+      "name_prefixes": [
+        "VEGA PORTFOY"
+      ],
+      "source_page": "https://www.kap.org.tr/tr/sirketler/PYS",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/8acae2c58b2fa64e018b956289953cdd",
+      "path": "/asset-logos/manager-vega-portfoy.png",
+      "retrieved_on": "2026-10-10",
+      "sha256": "ad00eb9e952dfde9375cb503395a3c177eeee38206a66936f59811bb968bbcd5",
+      "bytes": 2646,
+      "transformed": false
+    },
+    {
+      "kind": "fund-manager",
+      "id": "yapi-kredi",
+      "issuer": "Yapı Kredi Portföy",
+      "name_prefixes": [
+        "YAPI KREDI PORTFOY"
+      ],
+      "path": "/asset-logos/manager-yapi-kredi.svg",
+      "source_page": "https://www.yapikrediportfoy.com.tr/",
+      "source_url": "https://www.yapikrediportfoy.com.tr/assets/images/logo-mobile.svg",
+      "retrieved_on": "2026-10-10",
+      "sha256": "c5a7c4626b4683a198530873ce8ef4a4b16cb2601cb04646ec9e5bedcddd9e62",
+      "bytes": 13662,
+      "transformed": true,
+      "source_sha256": "a533c0c8a09680c98997e6d4bba500a7118f64ea9c271d11d8e0c29d74cdbb60",
+      "source_bytes": 13695,
+      "transformation": "LF line endings only; graphical content unchanged"
+    },
+    {
+      "kind": "fund-manager",
+      "id": "ziraat",
+      "issuer": "Ziraat Portföy",
+      "name_prefixes": [
+        "ZIRAAT PORTFOY"
+      ],
+      "path": "/asset-logos/manager-ziraat.png",
+      "source_page": "https://www.ziraatportfoy.com.tr/",
+      "source_url": "https://www.ziraatportfoy.com.tr/media/hkfjhysg/favicon180x180.png",
+      "retrieved_on": "2026-10-10",
+      "sha256": "d55b84a8c6d3ae9e4653c8ef90b995af845341fb35ef62800931ca96a99d5dde",
+      "bytes": 4289,
+      "transformed": false
+    },
+    {
+      "kind": "stock",
+      "symbol": "AEFES",
+      "issuer": "ANADOLU EFES BİRACILIK VE MALT SANAYİİ A.Ş.",
+      "path": "/asset-logos/aefes.png",
+      "source_page": "https://www.kap.org.tr/tr/bist-sirketler",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a140e95bea0140ed2fde10009d",
+      "retrieved_on": "2026-10-10",
+      "sha256": "f52d8088f7c0c637a8456106bbc73bc524f35d39a2d631f6b4049ecfd7915326",
+      "bytes": 5928,
+      "transformed": false
+    },
+    {
+      "kind": "stock",
+      "symbol": "AKBNK",
+      "issuer": "AKBANK T.A.Ş.",
+      "path": "/asset-logos/akbnk.jpg",
+      "source_page": "https://www.kap.org.tr/tr/bist-sirketler",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a240e8d1830140e905edcd0006",
+      "retrieved_on": "2026-10-10",
+      "sha256": "c35c5aeeb9613494b728c12d31493d334aec0c33cad8cd0b8096d425ca6840d4",
+      "bytes": 25423,
+      "transformed": false
+    },
+    {
+      "kind": "stock",
+      "symbol": "ASELS",
+      "issuer": "ASELSAN ELEKTRONİK SANAYİ VE TİCARET A.Ş.",
+      "path": "/asset-logos/asels.png",
+      "source_page": "https://www.kap.org.tr/tr/bist-sirketler",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a1413b7ef401413bc2251e0047",
+      "retrieved_on": "2026-10-10",
+      "sha256": "5fc0a05f0865495f498493585c2e8f42cbb479b9e447e4364afe8b6215c78c3a",
+      "bytes": 260412,
+      "transformed": false
+    },
+    {
+      "kind": "stock",
+      "symbol": "ASTOR",
+      "issuer": "ASTOR ENERJİ A.Ş.",
+      "path": "/asset-logos/astor.jpg",
+      "source_page": "https://www.kap.org.tr/tr/bist-sirketler",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/8acae2c562329bd10164405fe6c17996",
+      "retrieved_on": "2026-10-10",
+      "sha256": "d96dae62cce86563c50ea8c49065e619802d4f4c49a5247927abe4c826073961",
+      "bytes": 8029,
+      "transformed": false
+    },
+    {
+      "kind": "stock",
+      "symbol": "BIMAS",
+      "issuer": "BİM BİRLEŞİK MAĞAZALAR A.Ş.",
+      "path": "/asset-logos/bimas.png",
+      "source_page": "https://www.kap.org.tr/tr/bist-sirketler",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a140e95be70140ee1b7b030119",
+      "retrieved_on": "2026-10-10",
+      "sha256": "e63dc822f028cd38d458d6c1e63ca4fca0747dc37c3c5503b696a98adb2cdb34",
+      "bytes": 21269,
+      "transformed": false
+    },
+    {
+      "kind": "stock",
+      "symbol": "EKGYO",
+      "issuer": "EMLAK KONUT GAYRİMENKUL YATIRIM ORTAKLIĞI A.Ş.",
+      "path": "/asset-logos/ekgyo.png",
+      "source_page": "https://www.kap.org.tr/tr/bist-sirketler",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a2422d9a780142513cda5b232e",
+      "retrieved_on": "2026-10-10",
+      "sha256": "229ff8a882ac40bffe56f771eca9677ce0034aab7bc3f38708a6951059bdb6b3",
+      "bytes": 16845,
+      "transformed": false
+    },
+    {
+      "kind": "stock",
+      "symbol": "ENKAI",
+      "issuer": "ENKA İNŞAAT VE SANAYİ A.Ş.",
+      "path": "/asset-logos/enkai.jpg",
+      "source_page": "https://www.kap.org.tr/tr/bist-sirketler",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a240e95dc90140ed3883fe0093",
+      "retrieved_on": "2026-10-10",
+      "sha256": "a617414fd94632d0b8ee69be50c28f88cd0bc6c0942be97ea61da2b33a53a9dc",
+      "bytes": 13218,
+      "transformed": false
+    },
+    {
+      "kind": "stock",
+      "symbol": "EREGL",
+      "issuer": "EREĞLİ DEMİR VE ÇELİK FABRİKALARI T.A.Ş.",
+      "path": "/asset-logos/eregl.jpg",
+      "source_page": "https://www.kap.org.tr/tr/bist-sirketler",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a240e95dc90140ede4c12a0133",
+      "retrieved_on": "2026-10-10",
+      "sha256": "61585029bef37a366bcfe6e2f7defa4591380f9fd16a2f48bf95f88d3e5945ab",
+      "bytes": 2563,
+      "transformed": false
+    },
+    {
+      "kind": "stock",
+      "symbol": "FROTO",
+      "issuer": "FORD OTOMOTİV SANAYİ A.Ş.",
+      "path": "/asset-logos/froto.png",
+      "source_page": "https://www.kap.org.tr/tr/bist-sirketler",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a140f2ed71014106890fae0138",
+      "retrieved_on": "2026-10-10",
+      "sha256": "d18875393bd086815c383510ed4ad345060f91e134ded8f98d077085f0e468c8",
+      "bytes": 2196,
+      "transformed": false
+    },
+    {
+      "kind": "stock",
+      "symbol": "GARAN",
+      "issuer": "TÜRKİYE GARANTİ BANKASI A.Ş.",
+      "path": "/asset-logos/garan.png",
+      "source_page": "https://www.kap.org.tr/tr/bist-sirketler",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a140f2ed720140f37cb2a601b7",
+      "retrieved_on": "2026-10-10",
+      "sha256": "715512ea8d58b9a0a84d09ca4c7a7ddf65b3b3859beb65f23eb38abd70f858b1",
+      "bytes": 15182,
+      "transformed": false
+    },
+    {
+      "kind": "stock",
+      "symbol": "GUBRF",
+      "issuer": "GÜBRE FABRİKALARI T.A.Ş.",
+      "path": "/asset-logos/gubrf.jpg",
+      "source_page": "https://www.kap.org.tr/tr/bist-sirketler",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a241733d4a01417989f3760a4d",
+      "retrieved_on": "2026-10-10",
+      "sha256": "48cd660b046534e6cedc2f8e50f6533dac14c2a3e07a322c3dcfac81a6fed652",
+      "bytes": 101284,
+      "transformed": false
+    },
+    {
+      "kind": "stock",
+      "symbol": "ISCTR",
+      "issuer": "TÜRKİYE İŞ BANKASI A.Ş.",
+      "path": "/asset-logos/isctr.png",
+      "source_page": "https://www.kap.org.tr/tr/bist-sirketler",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a140f2ed7201411682b0cb05c6",
+      "retrieved_on": "2026-10-10",
+      "sha256": "14e389b83f74b3fccdedfcff9b27c90667edab58393e06cfdc09e946188b255e",
+      "bytes": 3598,
+      "transformed": false
+    },
+    {
+      "kind": "stock",
+      "symbol": "KCHOL",
+      "issuer": "KOÇ HOLDİNG A.Ş.",
+      "path": "/asset-logos/kchol.png",
+      "source_page": "https://www.kap.org.tr/tr/bist-sirketler",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a140f2ed710140f2f4d6c70039",
+      "retrieved_on": "2026-10-10",
+      "sha256": "075a3acd0bd2143dc10d61014f52c3fa1db659309d30384f1a56256ae6754fcc",
+      "bytes": 21600,
+      "transformed": false
+    },
+    {
+      "kind": "stock",
+      "symbol": "KRDMD",
+      "issuer": "KARDEMİR KARABÜK DEMİR ÇELİK SANAYİ VE TİCARET A.Ş.",
+      "path": "/asset-logos/krdmd.png",
+      "source_page": "https://www.kap.org.tr/tr/bist-sirketler",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a140f2ed7201412ace3ada0707",
+      "retrieved_on": "2026-10-10",
+      "sha256": "4bbbf025c10d52dbd417e9f9fc007a2561d6742dd5741ec9960bbdb1b722eac9",
+      "bytes": 7608,
+      "transformed": false
+    },
+    {
+      "kind": "stock",
+      "symbol": "MGROS",
+      "issuer": "MİGROS TİCARET A.Ş.",
+      "path": "/asset-logos/mgros.jpg",
+      "source_page": "https://www.kap.org.tr/tr/bist-sirketler",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a141462df2014150162e1c3424",
+      "retrieved_on": "2026-10-10",
+      "sha256": "ab26eb7760cb991d7e1f994f6d49c8c0450fe9da6e8a3b2bd5a6297cd6fc6b4c",
+      "bytes": 99626,
+      "transformed": false
+    },
+    {
+      "kind": "stock",
+      "symbol": "PETKM",
+      "issuer": "PETKİM PETROKİMYA HOLDİNG A.Ş.",
+      "path": "/asset-logos/petkm.jpg",
+      "source_page": "https://www.kap.org.tr/tr/bist-sirketler",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a240f2ef470141165c566a03e4",
+      "retrieved_on": "2026-10-10",
+      "sha256": "62f7f1ebc5a49fa87abd62572226d997454cf6de1ab1c71a7adc3eea75470d22",
+      "bytes": 30992,
+      "transformed": false
+    },
+    {
+      "kind": "stock",
+      "symbol": "PGSUS",
+      "issuer": "PEGASUS HAVA TAŞIMACILIĞI A.Ş.",
+      "path": "/asset-logos/pgsus.jpg",
+      "source_page": "https://www.kap.org.tr/tr/bist-sirketler",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a2422d9a78014232e751bc22a4",
+      "retrieved_on": "2026-10-10",
+      "sha256": "1fd327c0a5896adafd9f9ee69fca2913d6e762d9cfaba0f426b91340c021d2f2",
+      "bytes": 43688,
+      "transformed": false
+    },
+    {
+      "kind": "stock",
+      "symbol": "SAHOL",
+      "issuer": "HACI ÖMER SABANCI HOLDİNG A.Ş.",
+      "path": "/asset-logos/sahol.jpg",
+      "source_page": "https://www.kap.org.tr/tr/bist-sirketler",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a240ee37a90140ee50087e000b",
+      "retrieved_on": "2026-10-10",
+      "sha256": "4ef2856d3d8544fa6c2fdd75b6447d2b0d9014153ed78e8d98830622a740e29b",
+      "bytes": 2278,
+      "transformed": false
+    },
+    {
+      "kind": "stock",
+      "symbol": "SASA",
+      "issuer": "SASA POLYESTER SANAYİ A.Ş.",
+      "path": "/asset-logos/sasa.png",
+      "source_page": "https://www.kap.org.tr/tr/bist-sirketler",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a240ee866c0140f20abd9500cc",
+      "retrieved_on": "2026-10-10",
+      "sha256": "054d08d3c430b49e02e09ddcdb8aef3f3ba65a8725776b4e761b6b18771f3412",
+      "bytes": 15075,
+      "transformed": false
+    },
+    {
+      "kind": "stock",
+      "symbol": "SISE",
+      "issuer": "TÜRKİYE ŞİŞE VE CAM FABRİKALARI A.Ş.",
+      "path": "/asset-logos/sise.jpg",
+      "source_page": "https://www.kap.org.tr/tr/bist-sirketler",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a140f2ed710140f385d5690102",
+      "retrieved_on": "2026-10-10",
+      "sha256": "de5658759f3af7d87f513b1c3c825cdc70f7d83a153c3b70f4d7694d7c1763ba",
+      "bytes": 10281,
+      "transformed": false
+    },
+    {
+      "kind": "stock",
+      "symbol": "TAVHL",
+      "issuer": "TAV HAVALİMANLARI HOLDİNG A.Ş.",
+      "path": "/asset-logos/tavhl.png",
+      "source_page": "https://www.kap.org.tr/tr/bist-sirketler",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a140f2ed720140f31195ef010e",
+      "retrieved_on": "2026-10-10",
+      "sha256": "ebac2a31dec26d1a040fbb0cd0c750a256e47fcc891df8128d749d62e26cc742",
+      "bytes": 12574,
+      "transformed": false
+    },
+    {
+      "kind": "stock",
+      "symbol": "TCELL",
+      "issuer": "TURKCELL İLETİŞİM HİZMETLERİ A.Ş.",
+      "path": "/asset-logos/tcell.png",
+      "source_page": "https://www.kap.org.tr/tr/bist-sirketler",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a1486ec80a0148c55510d71d31",
+      "retrieved_on": "2026-10-10",
+      "sha256": "8b80060b5923f8374f547e665fc9e9a9635d3c427c9df46ba0c4eec4ff9a030c",
+      "bytes": 3615,
+      "transformed": false
+    },
+    {
+      "kind": "stock",
+      "symbol": "THYAO",
+      "issuer": "TÜRK HAVA YOLLARI A.O.",
+      "path": "/asset-logos/thyao.jpg",
+      "source_page": "https://www.kap.org.tr/tr/bist-sirketler",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a140f2ed720140f376bebb01a7",
+      "retrieved_on": "2026-10-10",
+      "sha256": "cabaa9b5307246281b0a3d96855ab3cb7f8f0aa9b8f9a3fbc0bd2bb53d4441c2",
+      "bytes": 56031,
+      "transformed": false
+    },
+    {
+      "kind": "stock",
+      "symbol": "TOASO",
+      "issuer": "TOFAŞ TÜRK OTOMOBİL FABRİKASI A.Ş.",
+      "path": "/asset-logos/toaso.png",
+      "source_page": "https://www.kap.org.tr/tr/bist-sirketler",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a140f2ed710140f328bed700a5",
+      "retrieved_on": "2026-10-10",
+      "sha256": "974c8448c9ddeff22f3844648e12032c351bf1016686ea38a3edadf9bb30eab2",
+      "bytes": 4750,
+      "transformed": false
+    },
+    {
+      "kind": "stock",
+      "symbol": "TRALT",
+      "issuer": "TÜRK ALTIN İŞLETMELERİ A.Ş.",
+      "path": "/asset-logos/tralt.jpg",
+      "source_page": "https://www.kap.org.tr/tr/bist-sirketler",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a2422d9a6e0142bd91d3687a69",
+      "retrieved_on": "2026-10-10",
+      "sha256": "86071266cffe15b65d6b97c97898485ef009b9cf2b43c38df1a12f9f3d68c614",
+      "bytes": 16610,
+      "transformed": false
+    },
+    {
+      "kind": "stock",
+      "symbol": "TRMET",
+      "issuer": "TR ANADOLU METAL MADENCİLİK İŞLETMELERİ A.Ş.",
+      "path": "/asset-logos/trmet.jpg",
+      "source_page": "https://www.kap.org.tr/tr/bist-sirketler",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a2422d9a6e0142bd921d307a6d",
+      "retrieved_on": "2026-10-10",
+      "sha256": "767075481826de7e771ef3aa4fd8dedf57ee7ea4c6ec62228f3908c0f713ac05",
+      "bytes": 12154,
+      "transformed": false
+    },
+    {
+      "kind": "stock",
+      "symbol": "TTKOM",
+      "issuer": "TÜRK TELEKOMÜNİKASYON A.Ş.",
+      "path": "/asset-logos/ttkom.png",
+      "source_page": "https://www.kap.org.tr/tr/bist-sirketler",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a241e538ab0141ea9c96912c8b",
+      "retrieved_on": "2026-10-10",
+      "sha256": "a6dc9577a9a20f1ebdf8a743898907b913cab528147d8c82e90e77cafa398c5e",
+      "bytes": 13447,
+      "transformed": false
+    },
+    {
+      "kind": "stock",
+      "symbol": "TUPRS",
+      "issuer": "TÜPRAŞ-TÜRKİYE PETROL RAFİNERİLERİ A.Ş.",
+      "path": "/asset-logos/tuprs.jpg",
+      "source_page": "https://www.kap.org.tr/tr/bist-sirketler",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a140f2ed720140f37f139c01bc",
+      "retrieved_on": "2026-10-10",
+      "sha256": "776728883c5620b6999f1b3009c6f6c04c62fb346718de0403565174b6c7ab65",
+      "bytes": 144760,
+      "transformed": false
+    },
+    {
+      "kind": "stock",
+      "symbol": "VAKBN",
+      "issuer": "TÜRKİYE VAKIFLAR BANKASI T.A.O.",
+      "path": "/asset-logos/vakbn.jpg",
+      "source_page": "https://www.kap.org.tr/tr/bist-sirketler",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a1415f4d9b01415fe3340f36e4",
+      "retrieved_on": "2026-10-10",
+      "sha256": "7da1d9acbc9c8127ef3e38f1b0b481e1d51a51f6fbc8d9c472cd8432ce3eaa44",
+      "bytes": 23798,
+      "transformed": false
+    },
+    {
+      "kind": "stock",
+      "symbol": "YKBNK",
+      "issuer": "YAPI VE KREDİ BANKASI A.Ş.",
+      "path": "/asset-logos/ykbnk.jpg",
+      "source_page": "https://www.kap.org.tr/tr/bist-sirketler",
+      "source_url": "https://www.kap.org.tr/tr/api/member/logo/4028e4a240f2ef4c01412ae6d6630538",
+      "retrieved_on": "2026-10-10",
+      "sha256": "a302d30ff6adaa2ce870396cab133bc9e0c5999b258b0ea45508253fc62c262c",
+      "bytes": 5959,
+      "transformed": false
+    }
+  ]
+}

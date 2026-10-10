@@ -1,7 +1,7 @@
 """Four typed, bounded read-only chat tools with the D7 evidence allowlist."""
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime, timezone
 import hashlib
 import json
@@ -21,6 +21,7 @@ class ChatContext:
     run_id: str
     origin: str
     checksum: str
+    reasons: dict[str, str] = field(default_factory=dict)
 
 
 def load_context(settings: Settings, code: str, evidence_id: str | None = None) -> ChatContext:
@@ -55,7 +56,8 @@ def load_context(settings: Settings, code: str, evidence_id: str | None = None) 
     packet = Packet(fund_code=code, fund_name=fund[0], category=fund[1], as_of=run[1].isoformat(),
                     evidence=evidence, allowed_options=allowed_options(evidence))
     payload = {**packet.model_dump(), 'run_id':str(run[0]), 'origin':run[2], 'cutoff':run[3].isoformat()}
-    return ChatContext(packet, str(run[0]), run[2], hashlib.sha256(canonical_json(payload).encode()).hexdigest())
+    return ChatContext(packet, str(run[0]), run[2], hashlib.sha256(canonical_json(payload).encode()).hexdigest(),
+                       {row[0]:str(row[6].get('reason','')) for row in rows})
 
 
 class FundArguments(BaseModel):
