@@ -29,3 +29,13 @@ systemctl --user daemon-reload
 ```
 
 User timers run while you are logged in. If the machine is asleep at 21:00, the run happens when it wakes.
+
+## Warning: snapshot runs and sealed research bundles
+
+The service sets no `P50K_DATA_DIR`, so a run writes the default
+`~/.local/share/project-50k/fund_snapshots.sqlite3`. Sealed v1/v2 research bundles
+built from that database re-read it on every load, and a new row for one of the 100
+selected funds changes their name/category projection, so the app then refuses the
+bundle until it is resealed. Dated bundles (DEC-026) read only rows retrieved before
+the D1 calibration run and tolerate rows appended later. Installing the timer remains
+an owner decision.

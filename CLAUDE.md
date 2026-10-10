@@ -15,6 +15,7 @@ The handoff instructions imported below, and the handoff's own `CLAUDE.md`, `STA
 - The daily TEFAS snapshot job is `services/p50k/jobs/fund_snapshots.py`. Its data lives in `~/.local/share/project-50k/`, outside git; never commit real TEFAS or KAP values (data rights not reviewed). Timer files are in `ops/systemd/`.
 - Where the project stands, what is decided and open, and what to do next: `docs/notes/codex-context-2026-10-07.md` (written for Codex, useful to any agent). Codex reads the root `AGENTS.md`; keep it consistent with this file.
 - Backend code lives in `services/p50k/`; tests in `tests/unit/`. Run them from the repo root with `PYTHONPATH=services python -m unittest discover -s tests -t . -v`.
+- Dated D1 view: [DEC-026](docs/decisions/DEC-026-dated-d1-research-view.md) and `research/events/2026-09-17-spk-liquidations/fund_review_dated/PROTOCOL.md` (frozen once a real date index is sealed). Event-weekend rules are in [DEC-027](docs/decisions/DEC-027-event-weekend-operations.md): the owner only pulls; merge with merge commits only, never squash or force-push, so protocol commits stay in `main`'s history.
 
 ## Handoff instructions
 

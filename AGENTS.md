@@ -22,6 +22,7 @@ Your first reply should verify the repo state (run the tests listed below) and p
 - **Pacing.** TEFAS: 1.5 s between requests. KAP: 6 s (a 1.5 s pace got us cut off after about 180 requests).
 - **No external actions without the owner's say-so:** spending, creating accounts (Google OAuth, Supabase, LLM keys, email, hosting), deploying, installing the systemd timer in `ops/systemd/`, contacting third parties. The TRY 5,000 ceiling is not authorization to spend.
 - The untracked `docs/notes/2026-10-06-market-research-brief.md` belongs to no change. Leave it alone.
+- **Dated D1 view and merging.** DEC-026 and `fund_review_dated/PROTOCOL.md` govern the dated view (frozen once a real date index is sealed). Per DEC-027 the owner only pulls; merge with merge commits only, never squash or force-push, so protocol commits stay in `main`'s history.
 
 ## Commands
 
