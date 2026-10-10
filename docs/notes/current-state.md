@@ -70,6 +70,10 @@ newer.
   The 14 skipped PostgreSQL checks pass separately in isolated `p50k_dev`; two skips require Windows.
 - Product branch was pushed and merged into remote `main` with merge commit `67af615` using a separate temporary
   worktree. The main checkout still holds `19989c5`, unchanged for the live demo. Do not pull it until K4.
+- Phase 2: v2 protocol committed alone at `e9b7ba7`; real run has 17,064 evidence/results for 2,133 funds,
+  one immutable calibration, and an idempotent rerun. API/DTO checks pass and all 131 events remain candidates.
+  Linux `c8bd652`: 810 tests OK (37 explained skips); frozen 9 and 88 pass. See the
+  [Phase 2 completion report](blackswan-phase2-completion.md). Phase 3 full-stack work is underway.
 
 ## Decisions after the handoff
 

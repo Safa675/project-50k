@@ -9,6 +9,7 @@ RUN uv sync --locked --no-dev --extra api --extra research --extra product
 COPY services/ ./services/
 COPY db/ ./db/
 COPY research/events/2026-09-17-spk-liquidations/price_detectors/detectors.py ./research/events/2026-09-17-spk-liquidations/price_detectors/detectors.py
+COPY research/events/2026-09-17-spk-liquidations/all_funds_v2/PROTOCOL.md ./research/events/2026-09-17-spk-liquidations/all_funds_v2/PROTOCOL.md
 RUN groupadd --gid 10001 p50k && useradd --uid 10001 --gid p50k --no-create-home p50k
 USER p50k
 CMD ["python", "-m", "uvicorn", "p50k.product.app:app", "--host", "0.0.0.0", "--port", "8000", "--no-access-log", "--no-proxy-headers"]

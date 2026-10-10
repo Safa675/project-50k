@@ -126,6 +126,7 @@ def main() -> int:
     price_paths = list(prices.glob("*.json")) if prices.is_dir() else []
     overnight = Path.home() / ".local/share/project-50k/overnight"
     price_paths += list(overnight.glob("*/prices/*.json")) if overnight.is_dir() else []
+    price_paths += list(overnight.glob("*/tefas/prices/*.json")) if overnight.is_dir() else []
     for path in sorted(price_paths):
         for token in re.findall(r"\d+\.\d+", path.read_text(encoding="utf-8")):
             if len(token.replace(".", "").lstrip("0")) >= 7:

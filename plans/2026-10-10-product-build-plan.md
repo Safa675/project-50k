@@ -407,10 +407,10 @@ Owner: **C** = Claude, **M** = Mirza, **S** = Safa, **B** = Barış, **T** = tea
 
 ### Phase 2
 
-- [ ] T2.1 The D1–D5 v2 protocol, committed alone
-- [ ] T2.2 `run-detectors` CLI: D1–D5 v2, the data-quality guards, AN-FND-005 events, evidence items, the coverage view
-- [ ] T2.4 API: funds, detail, signals, events, OpenAPI
-- [ ] T2.6 Overnight runners: prices, snapshots, profiles, SPK PDFs. Dry-run on THF and TP2, then start them
+- [x] T2.1 The D1–D5 v2 protocol, committed alone at `e9b7ba7`
+- [x] T2.2 `run-detectors`: 17,064 results for 2,133 funds; immutable calibration, evidence and completed runs
+- [x] T2.4 API: funds, detail, signals, events, OpenAPI; protected until Phase 3 auth
+- [x] T2.6 Immediate restartable downloads; two-fund smoke checks; profiles/prices queued behind snapshots
 - [ ] T4.0 (M) AC power, sleep set to Never, Windows Update paused until Monday, Docker Desktop starting at login
 
 ### Phase 3
