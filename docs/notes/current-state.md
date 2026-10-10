@@ -8,6 +8,7 @@ newer.
 
 ## In one minute
 
+- **Name: BlackSwan** ([DEC-030](../decisions/DEC-030-blackswan-working-agreements.md)). Codex continues the build from `plans/2026-10-10-codex-handoff-prompt.md`, written 2026-10-10 14:35.
 - **Team ([DEC-028](../decisions/DEC-028-deploy-ready-ai-native-build.md)).**
   - Mirza: technical lead; all development and data gathering.
   - Safa: business person and repository owner; he only pulls.
@@ -35,7 +36,8 @@ newer.
   - The research app remains the fallback demo.
 - **Not built yet.** The product database, worker, auth, AI layer, B2B API and Docker setup. All 284 requirement
   IDs remain `NOT_IMPLEMENTED`.
-- **Plan.** `plans/2026-10-10-product-build-plan.md`, proposed and awaiting Mirza's confirmation.
+- **Plan.** `plans/2026-10-10-product-build-plan.md`, confirmed by delegation (DEC-030). The open questions are in `team-asks.md`.
+- **Running at handoff:** the all-fund TEFAS snapshot download (started 14:30, 2,136 funds, into `~/.local/share/project-50k/overnight/2026-10-10/`) and the live research demo.
 
 ## Decisions after the handoff
 
@@ -47,6 +49,7 @@ newer.
 | [DEC-027](../decisions/DEC-027-event-weekend-operations.md) | 2026-10-10 | The owner only pulls and the team makes all writes. Merge commits only. Real data appears only in the private local demo. Forward snapshots run on the team's machine |
 | [DEC-028](../decisions/DEC-028-deploy-ready-ai-native-build.md) | 2026-10-10 | Team roles; deploy-ready, AI-native build on localhost; OpenAI with a $25 limit; plain PostgreSQL with its own auth; code freeze Sunday 13:00; earlier specs are guides |
 | [DEC-029](../decisions/DEC-029-open-all-funds.md) | 2026-10-10 | Every downloaded fund is open for product use; the development/test split is dropped |
+| [DEC-030](../decisions/DEC-030-blackswan-working-agreements.md) | 2026-10-10 | Product name BlackSwan; no placeholders; $25 a target, not a hard cap; plan confirmed by delegation; persistent reminders for critical unanswered items; downloads started; Codex handoff |
 
 Still binding (the integrity rules hold even though product requirements flex):
 

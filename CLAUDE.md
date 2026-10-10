@@ -11,6 +11,13 @@
 - **Stack.** Plain PostgreSQL with the product's own email/password auth, in Docker.
 - **Data.** Every downloaded fund is open for product use (DEC-029); every detector figure is a development result.
 - **Specs.** The handoff's product requirements and earlier product decisions are guides, not hard rules: raise important collisions with Mirza, or with Safa, Barış or the team when it is their call. The integrity rules stay binding.
+- **DEC-030 working agreements (2026-10-10).**
+  - The product is called **BlackSwan**; Mirza will supply logos and designs.
+  - **No placeholders** in the product: no lorem ipsum, fake values, "coming soon" screens, blank template rows, mock AI output or notes to the team. Messages for Mirza go in chat. Required integrity labels are real content, not placeholders.
+  - **The $25 OpenAI budget is a target, not a hard cap.** Don't waste it; raise it only with a valid reason and Mirza's OK.
+  - **The plan is confirmed by delegation.** Confirm items that serve the team's interest yourself; ask Mirza only about problematic ones, with clear options and a recommendation.
+  - **Persistent reminders.** If Mirza misses something important (an unanswered question or unconfirmed information that affects everything), raise it again in every reply until he answers. Only for truly critical items.
+- **Codex handoff:** `plans/2026-10-10-codex-handoff-prompt.md` holds the full state and next steps as of 2026-10-10 14:35.
 - **Read before product work:**
   - `docs/notes/product-direction.md` (insurance policies or B2B anomaly data; still open);
   - `docs/notes/team-asks.md` (open asks: add yours);
