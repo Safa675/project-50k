@@ -48,6 +48,7 @@ class PricePoint(Provenance):
     source_sha256: Annotated[str, Field(pattern=r"^[a-f0-9]{64}$")]
     unit: str
     availability_rule: str
+    ambiguous_revision: bool = False
 
 
 class DailyChart(Provenance):
@@ -79,6 +80,7 @@ class Signal(Provenance):
     threshold: DecimalText | None
     evidence_id: str
     as_of: date
+    effective_date: date | None = None
     development_result: Literal[True] = True
     values: dict[str, JsonValue]
     thresholds: dict[str, JsonValue]
@@ -93,7 +95,7 @@ class SignalsPage(Provenance):
     items: list[Signal]
     total: int = Field(ge=0)
     limit: int = Field(ge=1, le=100)
-    offset: int = Field(ge=0, le=10000)
+    offset: int = Field(ge=0, le=50000)
     cutoff: AwareDatetime
     development_result: Literal[True] = True
 
@@ -122,9 +124,10 @@ class RegulatoryEvent(Provenance):
     source_sha256: Annotated[str, Field(pattern=r"^[a-f0-9]{64}$")]
     source_url: str | None
     published_at: AwareDatetime | None
-    available_at: AwareDatetime
+    available_at: AwareDatetime | None
     confirmed_at: AwareDatetime | None
     availability_rule: str
+    availability_unknown: bool = False
 
 
 class EventsPage(Provenance):

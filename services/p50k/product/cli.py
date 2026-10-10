@@ -25,7 +25,7 @@ def main() -> int:
     try:
         if args.command == "run-detectors":
             from p50k.product.db import connect
-            from p50k.product.detector_pipeline import run_detectors
+            from p50k.product.detector_runner import run
             from p50k.product.settings import Settings
             if args.origin == "HISTORICAL_REPLAY" and not args.cutoff:
                 raise ValueError("Historical replay requires an explicit cutoff")
@@ -33,7 +33,7 @@ def main() -> int:
             if cutoff.tzinfo is None or cutoff > datetime.now(timezone.utc):
                 raise ValueError("Cutoff must be timezone-aware and cannot be in the future")
             with connect(Settings.from_env()) as connection:
-                print(json.dumps(run_detectors(connection, cutoff, args.origin)))
+                print(json.dumps(run(connection, cutoff, args.origin)))
             return 0
         archive = Archive(args.raw_dir.resolve(), tuple(path.resolve() for path in args.snapshot_db),
                           args.event_map.resolve() if args.event_map else None)

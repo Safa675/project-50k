@@ -86,15 +86,30 @@ def source_reference(value: dict[str, Any]) -> SourceReference:
 
 FUND_COLUMNS = "fund_code, name, category, tefas_status, listing_as_of"
 PRICE_SQL = """
-    SELECT DISTINCT ON (effective_date)
-        effective_date, nav, published_at, available_at, source_id,
-        source_sha256, unit, availability_rule, origin
-    FROM obs.fund_prices
-    WHERE fund_code = %s AND effective_date BETWEEN %s AND %s
-        AND available_at IS NOT NULL AND available_at <= %s
-        AND (published_at IS NULL OR published_at <= %s)
-    ORDER BY effective_date, available_at DESC, observed_at DESC NULLS LAST,
-        source_sha256 DESC
+    WITH eligible AS (
+        SELECT effective_date, nav, published_at, available_at, observed_at,
+            source_id, source_sha256, unit, availability_rule, origin,
+            dense_rank() OVER (PARTITION BY effective_date
+                ORDER BY available_at DESC, observed_at DESC NULLS LAST) AS priority
+        FROM obs.fund_prices
+        WHERE fund_code = %s AND effective_date BETWEEN %s AND %s
+            AND available_at IS NOT NULL AND available_at <= %s
+            AND (published_at IS NULL OR published_at <= %s)
+    ), latest AS (
+        SELECT * FROM eligible WHERE priority = 1
+    ), conflicts AS (
+        SELECT effective_date,
+            (count(DISTINCT nav) > 1 OR (count(nav) > 0 AND count(nav) < count(*))) AS ambiguous_revision
+        FROM latest GROUP BY effective_date
+    )
+    SELECT DISTINCT ON (latest.effective_date)
+        latest.effective_date,
+        CASE WHEN conflicts.ambiguous_revision THEN NULL::numeric ELSE latest.nav END AS nav,
+        latest.published_at, latest.available_at, latest.source_id,
+        latest.source_sha256, latest.unit, latest.availability_rule, latest.origin,
+        conflicts.ambiguous_revision
+    FROM latest JOIN conflicts USING (effective_date)
+    ORDER BY latest.effective_date, latest.source_sha256 DESC
 """
 SIGNALS_CTE = """
     WITH latest_run AS (
@@ -106,7 +121,7 @@ SIGNALS_CTE = """
     ), selected AS (
         SELECT signal.fund_code, signal.detector_id, latest_run.version_id,
             signal.run_id, signal.state, signal.reason, signal.value,
-            signal.threshold, signal.evidence_id, signal.as_of,
+            signal.threshold, signal.evidence_id, signal.as_of, item.effective_date,
             item.origin, item.values, item.thresholds, item.unit, item.available_at, item.source_references,
             COALESCE((item.metadata->>'is_attribute')::boolean, false) AS is_attribute
         FROM det.signals signal
@@ -125,7 +140,7 @@ EVENTS_CTE = """
             quotation, source_id, source_sha256, metadata,
             published_at, available_at, confirmed_at, availability_rule, origin
         FROM obs.regulatory_events
-        WHERE available_at IS NOT NULL AND available_at <= %s
+        WHERE (available_at <= %s OR (available_at IS NULL AND ingested_at <= %s))
             AND (published_at IS NULL OR published_at <= %s)
             AND (effective_date IS NULL OR effective_date <= %s)
             AND (status = 'CANDIDATE' OR confirmed_at <= %s)
@@ -188,7 +203,7 @@ class FundQueries:
 
     def events(self, code: str | None, as_of: date, cutoff: datetime,
                limit: int, offset: int) -> EventsPage:
-        parameters = (cutoff, cutoff, as_of, cutoff, code, code)
+        parameters = (cutoff, cutoff, cutoff, as_of, cutoff, code, code)
         total = self._count(EVENTS_CTE + "SELECT count(*) AS total FROM selected", parameters)
         rows = self._rows(EVENTS_CTE + "SELECT * FROM selected ORDER BY effective_date DESC NULLS LAST, event_id LIMIT %s OFFSET %s",
                           parameters + (limit, offset))
@@ -196,14 +211,16 @@ class FundQueries:
         for row in rows:
             metadata = row.pop("metadata")
             confirmed = row["status"] == "CONFIRMED"
+            availability_unknown = row["available_at"] is None
             in_scope = (row["source_id"] in {"SPK", "spk-bulletins"}
                         and row["event_type"] == "SPK_LIQUIDATION_ORDER"
                         and metadata.get("bulletin_id") == "2026-61")
             row["quotation"] = row["quotation"] or metadata.get("quotation")
             items.append(RegulatoryEvent(
                 **row, source_url=source_url(metadata.get("source_url")),
-                review_state="HUMAN_CONFIRMED" if confirmed else "UNDER_REVIEW",
-                triggers_regulatory_signal=confirmed and in_scope,
+                review_state="HUMAN_CONFIRMED" if confirmed and not availability_unknown else "UNDER_REVIEW",
+                triggers_regulatory_signal=confirmed and in_scope and not availability_unknown and row["effective_date"] is not None,
                 bulletin_id=metadata.get("bulletin_id"), in_monitoring_scope=in_scope,
+                availability_unknown=availability_unknown,
             ))
         return EventsPage(items=items, total=total, limit=limit, offset=offset, cutoff=cutoff)

@@ -55,6 +55,7 @@ Reader = Annotated[FundQueries, Depends(get_queries)]
 Code = Annotated[str, Path(pattern=r"^[A-Z0-9]{2,12}$")]
 Limit = Annotated[int, Query(ge=1, le=100)]
 Offset = Annotated[int, Query(ge=0, le=10000)]
+SignalsOffset = Annotated[int, Query(ge=0, le=50000)]
 Cutoff = Annotated[AwareDatetime | None, Query(description="Observation availability cutoff with explicit timezone; catalog metadata remains current.")]
 router = APIRouter(dependencies=[Depends(require_session)])
 
@@ -91,7 +92,7 @@ event is under review and cannot trigger a confirmed regulatory signal.
 def list_signals(reader: Reader,
                  fund_code: Annotated[str | None, Query(pattern=r"^[A-Z0-9]{2,12}$")] = None,
                  state: Annotated[Literal["TRIGGERED", "NOT_TRIGGERED", "ABSTAINED"] | None, Query()] = None,
-                 cutoff: Cutoff = None, limit: Limit = 25, offset: Offset = 0) -> SignalsPage:
+                 cutoff: Cutoff = None, limit: Limit = 25, offset: SignalsOffset = 0) -> SignalsPage:
     """Latest complete DELAYED detector run; every figure is a development result."""
     resolved = resolve_cutoff(cutoff)
     return reader.signals(fund_code, state, resolved.astimezone(ISTANBUL).date(), resolved, limit, offset)

@@ -36,7 +36,7 @@ def synthetic_signal(state="ABSTAINED", *, detector="D1", attribute=False) -> Si
         fund_code="ZZZ", detector_id=detector, version_id="synthetic-api-v1",
         run_id=str(uuid4()), state=state, reason="SYNTHETIC_TEST_REASON",
         value=None, threshold=None, evidence_id="synthetic-" + detector,
-        as_of=DAY, origin="SYNTHETIC", values={}, thresholds={}, unit="ratio",
+        as_of=DAY, effective_date=DAY - timedelta(days=2), origin="SYNTHETIC", values={}, thresholds={}, unit="ratio",
         available_at=CUTOFF, is_attribute=attribute,
     )
 
@@ -134,6 +134,8 @@ class ProductReadApiTests(unittest.TestCase):
         self.assertEqual([point["nav"] for point in result["chart"]["points"]], ["1.250000", None])
         self.assertEqual(result["coverage"]["state"], "ABSTAINED")
         self.assertEqual(result["coverage"]["evidence_ids"], ["synthetic-D1"])
+        self.assertEqual(result["signals"][0]["as_of"], "2020-01-05")
+        self.assertEqual(result["signals"][0]["effective_date"], "2020-01-03")
         self.assertEqual(result["events"][0]["review_state"], "UNDER_REVIEW")
         self.assertFalse(result["events"][0]["triggers_regulatory_signal"])
         chart_call = next(call for call in self.reader.calls if call[0] == "chart")
@@ -158,10 +160,19 @@ class ProductReadApiTests(unittest.TestCase):
         self.authenticate_test_client()
         for path in ("/signals", "/events"):
             self.assertEqual(self.client.get(path, params={"limit": 101}).status_code, 422)
-            self.assertEqual(self.client.get(path, params={"offset": 10001}).status_code, 422)
+            self.assertEqual(self.client.get(path, params={"offset": 50001 if path == "/signals" else 10001}).status_code, 422)
             self.assertEqual(self.client.get(path, params={"fund_code": "invalid"}).status_code, 422)
             self.assertEqual(self.client.get(path, params={"fund_code": "ZZZ", "cutoff": CUTOFF.isoformat()}).status_code, 200)
         self.assertEqual(self.client.get("/signals", params={"state": "NORMAL"}).status_code, 422)
+
+    def test_global_signal_pagination_reaches_beyond_ten_thousand_and_remains_bounded(self):
+        self.authenticate_test_client()
+        for offset in (10001, 50000):
+            response = self.client.get("/signals", params={"offset": offset})
+            self.assertEqual(response.status_code, 200)
+            self.assertEqual(response.json()["offset"], offset)
+        self.assertEqual(self.client.get("/signals", params={"offset": 50001}).status_code, 422)
+        self.assertEqual(self.client.get("/signals", params={"offset": -1}).status_code, 422)
 
     def test_openapi_and_documentation_are_available_only_to_authenticated_client(self):
         self.authenticate_test_client()
@@ -255,6 +266,22 @@ class ProductReadDatabaseTests(unittest.TestCase):
                          [(date(2020, 1, 1), "1.250000"), (date(2020, 1, 3), None)])
         self.assertTrue(all(point.available_at <= CUTOFF for point in chart.points))
 
+    def test_chart_conflicting_tied_revisions_remain_unknown_until_a_later_revision_is_available(self):
+        pairs = ((date(2020, 1, 1), Decimal("1.1000"), Decimal("1.1000")),
+                 (date(2020, 1, 2), Decimal("1.1000"), Decimal("2.2000")),
+                 (date(2020, 1, 3), Decimal("1.1000"), None),
+                 (date(2020, 1, 4), None, None))
+        for day, first, second in pairs:
+            self.price(day, first, CUTOFF - timedelta(days=1), suffix=day.isoformat() + "-first")
+            self.price(day, second, CUTOFF - timedelta(days=1), suffix=day.isoformat() + "-second")
+        self.price(date(2020, 1, 2), Decimal("3.3000"), CUTOFF + timedelta(days=1), suffix="future-resolution")
+        chart = self.reader.chart(self.code, date(2020, 1, 1), DAY, CUTOFF)
+        self.assertEqual([(point.nav, point.ambiguous_revision) for point in chart.points],
+                         [("1.1000", False), (None, True), (None, True), (None, False)])
+        later = self.reader.chart(self.code, date(2020, 1, 1), DAY, CUTOFF + timedelta(days=1))
+        self.assertEqual(later.points[1].nav, "3.3000")
+        self.assertFalse(later.points[1].ambiguous_revision)
+
     def test_catalog_search_is_literal_paginated_and_current_only(self):
         result = self.reader.funds(self.name, 1, 0)
         self.assertEqual(result.total, 1)
@@ -297,7 +324,35 @@ class ProductReadDatabaseTests(unittest.TestCase):
         self.assertFalse(outside.in_monitoring_scope)
         self.assertFalse(outside.triggers_regulatory_signal)
 
-    def detector_run(self, cutoff, *, finalize=True, state="ABSTAINED", available_at=None, origin="DELAYED"):
+    def test_unknown_event_availability_is_visible_for_review_only_when_already_ingested(self):
+        event_ids = []
+        cases = (("CANDIDATE", CUTOFF - timedelta(hours=1), None),
+                 ("CONFIRMED", CUTOFF - timedelta(hours=1), None),
+                 ("CANDIDATE", CUTOFF + timedelta(hours=1), None),
+                 ("CANDIDATE", CUTOFF - timedelta(hours=1), CUTOFF + timedelta(hours=1)))
+        for status, ingested, published in cases:
+            event_id = "synthetic-unknown-event-" + uuid4().hex
+            event_ids.append(event_id)
+            self.connection.execute("""
+                INSERT INTO obs.regulatory_events (event_id,fund_code,event_type,effective_date,status,
+                    confirmed_by,confirmed_at,source_sha256,origin,published_at,available_at,availability_rule,
+                    metadata,ingested_at)
+                VALUES (%s,%s,'SPK_LIQUIDATION_ORDER',%s,%s,%s,%s,%s,
+                    'SYNTHETIC',%s,NULL,'unknown','{"bulletin_id":"2026-61"}',%s)
+            """, (event_id, self.code, DAY, status, "synthetic-reviewer" if status == "CONFIRMED" else None,
+                  CUTOFF - timedelta(hours=1) if status == "CONFIRMED" else None, self.sha, published, ingested))
+        current = self.reader.events(self.code, DAY, CUTOFF, 10, 0)
+        self.assertEqual(current.total, 2)
+        self.assertEqual({item.event_id for item in current.items}, set(event_ids[:2]))
+        for item in current.items:
+            self.assertIsNone(item.available_at)
+            self.assertTrue(item.availability_unknown)
+            self.assertEqual(item.review_state, "UNDER_REVIEW")
+            self.assertFalse(item.triggers_regulatory_signal)
+        earlier = self.reader.events(self.code, DAY, CUTOFF - timedelta(hours=2), 10, 0)
+        self.assertEqual(earlier.total, 0)
+
+    def detector_run(self, cutoff, *, finalize=True, state="ABSTAINED", available_at=None, origin="DELAYED", effective_date=DAY):
         version_id = "synthetic-api-" + uuid4().hex
         self.connection.execute("""
             INSERT INTO det.detector_versions (version_id,protocol_version,protocol_sha256,code_sha256,
@@ -314,10 +369,10 @@ class ProductReadDatabaseTests(unittest.TestCase):
             INSERT INTO det.evidence_items (evidence_id,fund_code,run_id,detector_id,origin,effective_date,
                 available_at,unit,values,thresholds,triggered,state,source_references)
             VALUES (%s,%s,%s,'D1',%s,%s,%s,'ratio',%s,%s,%s,%s,%s)
-        """, (evidence_id, self.code, run_id, origin, DAY, available_at,
+        """, (evidence_id, self.code, run_id, origin, effective_date, available_at,
               Jsonb({"excess": "1.2500"}), Jsonb({"upper": "0.5000"}), triggered, state,
               Jsonb([{"source_id": "synthetic-provider", "source_sha256": self.sha,
-                      "effective_date": DAY.isoformat(), "available_at": available_at.isoformat() if available_at else None,
+                      "effective_date": effective_date.isoformat() if effective_date else None, "available_at": available_at.isoformat() if available_at else None,
                       "source_url": None}])))
         self.connection.execute("""
             INSERT INTO det.signals (run_id,fund_code,detector_id,state,reason,value,threshold,evidence_id,as_of)
@@ -331,7 +386,7 @@ class ProductReadDatabaseTests(unittest.TestCase):
         return run_id
 
     def test_signals_use_complete_current_run_and_do_not_leak_future_or_replay(self):
-        current = self.detector_run(CUTOFF, state="ABSTAINED")
+        current = self.detector_run(CUTOFF, state="ABSTAINED", effective_date=DAY - timedelta(days=2))
         self.detector_run(CUTOFF + timedelta(hours=1), finalize=False, state="TRIGGERED", available_at=CUTOFF)
         self.detector_run(CUTOFF + timedelta(hours=2), state="TRIGGERED", available_at=CUTOFF, origin="HISTORICAL_REPLAY")
         self.detector_run(CUTOFF + timedelta(days=1), state="TRIGGERED", available_at=CUTOFF)
@@ -340,6 +395,8 @@ class ProductReadDatabaseTests(unittest.TestCase):
         item, = result.items
         self.assertEqual(item.run_id, str(current))
         self.assertEqual(item.state, "ABSTAINED")
+        self.assertEqual(item.as_of, DAY)
+        self.assertEqual(item.effective_date, DAY - timedelta(days=2))
         self.assertIsNone(item.available_at)
         self.assertEqual(item.value, "1.2500")
         self.assertEqual(item.threshold, "0.5000")
@@ -353,6 +410,13 @@ class ProductReadDatabaseTests(unittest.TestCase):
         result = self.reader.signals(self.code, None, DAY, CUTOFF, 10, 0)
         self.assertEqual(result.total, 0)
         self.assertEqual(coverage_for(result.items).state, "ABSTAINED")
+
+    def test_global_signal_offset_can_exceed_ten_thousand_without_invalidating_contract(self):
+        self.detector_run(CUTOFF, state="ABSTAINED", available_at=None)
+        result = self.reader.signals(None, None, DAY, CUTOFF, 100, 50000)
+        self.assertEqual(result.offset, 50000)
+        self.assertEqual(result.total, 1)
+        self.assertEqual(result.items, [])
 
 
 if __name__ == "__main__":
