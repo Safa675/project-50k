@@ -14,3 +14,12 @@ coverage/
 /raw/
 research/spikes/*/raw/
 research/events/*/raw/
+
+# Local agent and demo state: settings.local.json, demo PIDs and logs, opt-in override files.
+.claude/*.local.json
+.claude/*.local
+.claude/*.pid
+.claude/demo-logs/
+
+# Hand-off packages that carry private data.
+/friend-handoff/

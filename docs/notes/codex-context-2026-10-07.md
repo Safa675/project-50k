@@ -2,6 +2,11 @@
 
 Written by Claude Code at the owner's request so that Codex can continue the implementation. It describes the project as of 2026-10-07 22:59 (Europe/Istanbul). For the current phase, DEC-024 and this file win over the handoff where they conflict; where they are silent, `docs/handoff-v0.5/` applies.
 
+**Superseded as the entry point on 2026-10-10:** read [current-state.md](current-state.md) first. This file stays
+as the 2026-10-07 record. Sections 5, 6, 7 and 11 still apply. Sections 1–4 and 8–10 describe 2026-10-07 and are partly
+out of date: the app, API and UI now exist, the unit-test count is no longer 81, and the market research brief is
+tracked.
+
 **Path maintenance on 2026-10-08:** local file locations and rebuild paths below now
 refer to the repository-root `raw/` layout. The original dated findings, pending
 decisions and test counts are preserved as a historical snapshot, not a new run.

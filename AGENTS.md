@@ -4,12 +4,13 @@ The current scope is **Turkish investment funds (TEFAS) only**, set by [DEC-024]
 
 ## Read first, in this order
 
-1. [docs/notes/codex-context-2026-10-07.md](docs/notes/codex-context-2026-10-07.md): where the project stands, what is decided and open, what to do next. Start here.
-2. `docs/handoff-v0.5/AGENTS.md`: the shared integrity, auth, design and completion-report rules. They still apply except where DEC-024 differs. Do not edit anything under `docs/handoff-v0.5/` (frozen; its `MANIFEST.json` hashes verify it).
-3. `research/spikes/2026-10-06-tefas/REPORT.md`: what TEFAS and KAP actually return. Read it before touching a data adapter or a detector.
-4. `docs/handoff-v0.5/docs/12_Anomaly_Catalog.md`: detector definitions. Use thresholds as written.
+1. [docs/notes/current-state.md](docs/notes/current-state.md): where the project stands, what is decided and open, what to do next. Start here.
+2. [docs/notes/codex-context-2026-10-07.md](docs/notes/codex-context-2026-10-07.md): the detailed 2026-10-07 record. Its data-source facts, case study, evaluation rules and do-not-claim list (sections 5, 6, 7 and 11) still apply.
+3. `docs/handoff-v0.5/AGENTS.md`: the shared integrity, auth, design and completion-report rules. They still apply except where DEC-024 differs. Do not edit anything under `docs/handoff-v0.5/` (frozen; its `MANIFEST.json` hashes verify it).
+4. `research/spikes/2026-10-06-tefas/REPORT.md`: what TEFAS and KAP actually return. Read it before touching a data adapter or a detector.
+5. `docs/handoff-v0.5/docs/12_Anomaly_Catalog.md`: detector definitions. Use thresholds as written.
 
-Your first reply should verify the repo state (run the tests listed below) and propose **one** vertical slice with requirement IDs, a file-change plan and acceptance tests. Implement only after the owner approves.
+Your first reply should verify the repo state (run the tests listed below) and propose **one** vertical slice with requirement IDs, a file-change plan and acceptance tests. Implement only after the person you work with approves. Under DEC-027 the team and its agents make all repository writes; the owner only pulls.
 
 ## Rules that are easy to break
 
@@ -17,39 +18,48 @@ Your first reply should verify the repo state (run the tests listed below) and p
 - **Missing stays missing.** TEFAS writes `0` for "no price": treat it as `None`. Never fill gaps with zeros or invent dated history. Fund NAV is daily, published-cadence data; no intraday candles.
 - **Point in time.** Use a value only from the moment it was published: a TEFAS row dated D from about 11:05 on D, a KAP report from its publish time. Add a look-ahead test to any detector or replay code.
 - **Do not tune detectors on the funds you evaluate them on.** The owner's development/test split is still undecided. Until it is, **do not compute detector output, thresholds or any other statistic on the 1,922 downloaded price files outside `research/events/2026-09-17-spk-liquidations/top100_funds.txt`.** Read section 7 of the context file.
-- **Do not edit the pre-registered detectors** (`research/events/2026-09-17-spk-liquidations/price_detectors/detectors.py`, `PREREGISTRATION.md`). Write a v2 beside them.
+- **Do not edit the pre-registered detectors** (`research/events/2026-09-17-spk-liquidations/price_detectors/detectors.py`, `PREREGISTRATION.md`, `results.json`) or any committed `PROTOCOL.md`. Write a v2 or a new versioned protocol beside them.
+- **Sealed bundles re-hash their registered files on every load.** Editing one (listed in `tests/unit/registered_sources.lock.json`, plus the `dated_*.py` modules and the event's `run.py` runners) makes the running app answer 503 until every affected bundle is resealed. Add new modules beside them instead.
 - **Naming.** Committed files name only the eight liquidated top-100 funds. Never name other funds as flagged or suspicious. An anomaly is not fraud, and SPK's reasons for its order are not in our files.
 - **Pacing.** TEFAS: 1.5 s between requests. KAP: 6 s (a 1.5 s pace got us cut off after about 180 requests).
 - **No external actions without the owner's say-so:** spending, creating accounts (Google OAuth, Supabase, LLM keys, email, hosting), deploying, installing the systemd timer in `ops/systemd/`, contacting third parties. The TRY 5,000 ceiling is not authorization to spend.
-- The untracked `docs/notes/2026-10-06-market-research-brief.md` belongs to no change. Leave it alone.
+- **Line endings.** `.gitattributes` forces LF; sealed bundles, runner registration and the handoff `MANIFEST.json` hash LF bytes. On Windows, never re-save tracked files with CRLF.
+- **Claude Code hooks** in `.claude/` block most of these mistakes for Claude Code sessions only; other agents must follow the rules by hand. See [agent tooling](docs/notes/agent-tooling.md).
 - **Dated D1 view and merging.** DEC-026 and `fund_review_dated/PROTOCOL.md` govern the dated view (frozen once a real date index is sealed). Per DEC-027 the owner only pulls; merge with merge commits only, never squash or force-push, so protocol commits stay in `main`'s history.
 
 ## Commands
 
-Python 3.13 (`~/miniforge3/bin/python3`). From the repo root:
+Install the locked environment with `uv sync --locked --extra api --extra api-test --extra research` and `npm ci --prefix frontend`. `PY` is `.venv/bin/python` (Windows: `.venv/Scripts/python.exe`). From the repo root:
 
 ```sh
-PYTHONPATH=services python -m unittest discover -s tests -t . -v                              # 81 unit tests, standard library only
-(cd research/events/2026-09-17-spk-liquidations/price_detectors && python -m unittest test_detectors -v)   # 9 detector tests, needs numpy
-(cd docs/handoff-v0.5 && python -m unittest discover -s tests -v)                           # 88 offline reference tests
+PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=services $PY -m unittest discover -s tests -t . -v   # 605 tests at 33c6064; missing extras are skips, not passes
+(cd research/events/2026-09-17-spk-liquidations/price_detectors && ../../../../$PY -m unittest test_detectors -v)   # 9 frozen detector tests
+(cd docs/handoff-v0.5 && ../../$PY -m unittest discover -s tests -v)                     # 88 offline reference tests
+(cd frontend && npm run typecheck && npm test && NEXT_TELEMETRY_DISABLED=1 npm run build)  # browser tests: npm run test:browser against a server on 127.0.0.1:3060
 ```
+
+On Windows the root suite has known platform failures (tzdata, CRLF fixtures, console encoding, SQLite locks, `SO_REUSEADDR`); `.claude/skills/p50k-verify/SKILL.md` lists them and the diagnostic variant. Compare failing test names, not only counts.
 
 ## Layout
 
 | Path | Content |
 |---|---|
-| `services/p50k/` | Backend package: `providers/` (TEFAS client, KAP report reader, retry and circuit breaker, disk cache), `jobs/` (fund snapshots, price history), `series.py` |
+| `services/p50k/` | Backend package: `providers/` (TEFAS client, KAP report reader, holdings parsers, retry and circuit breaker, disk cache), `jobs/` (fund snapshots, price history), `evidence_store.py`, `replay.py`, `research_reviews/` (sealed research bundles), `api/` (read-only FastAPI apps) |
+| `frontend/` | Next.js App Router app in Turkish: the fixed-date view, `/dates` and synthetic `/preview` scaffolds |
+| `ops/local/` | Loopback launchers for the fixed-date and dated apps |
 | `tests/unit/` | Unit tests for `services/p50k/` |
 | `research/spikes/` | Provider spikes with the field-by-field data report |
-| `research/events/2026-09-17-spk-liquidations/` | The SPK liquidation case study: notes, fund lists, pre-registered price detectors and results |
-| `raw/` | Local-only, gitignored data: `tefas/prices`, `tefas/responses`, `tefas/logs`, `tefas/price-detectors`, `kap/reports`, `kap/series`, `spk`. Absent from a fresh clone |
+| `research/events/2026-09-17-spk-liquidations/` | The SPK liquidation case study: notes, fund lists, pre-registered price detectors and results, and the protocols and runners of the sealed research views |
+| `raw/` | Local-only, gitignored data: `tefas/prices`, `tefas/responses`, `tefas/logs`, `tefas/price-detectors`, `kap/reports`, `kap/series`, `spk`, and sealed outputs in `research/`. Absent from a fresh clone |
 | `docs/decisions/`, `docs/notes/` | Owner decisions and working notes. Record new decisions here |
-| `ops/systemd/` | Daily snapshot timer files (not installed) |
+| `ops/systemd/`, `ops/windows/` | Daily snapshot timer (Linux, not installed) and the Windows scheduled-task script |
+| `plans/` | Implementation plans and session prompts |
+| `.claude/` | Claude Code skills, hooks and path rules ([agent tooling](docs/notes/agent-tooling.md)) |
 | `docs/handoff-v0.5/` | Frozen v0.5 handoff: requirements, anomaly catalog, contracts, reference harness |
 
 ## Working style
 
-- Code, commit messages, docs and prompts in English. Replies to the owner in simple, short Turkish.
+- Code, commit messages, docs and prompts in English. Reply in the language of the person you work with; the owner prefers simple, short Turkish.
 - Small vertical slices with tests. Before editing, list ambiguities that could cause an irreversible or unsafe choice.
 - Match the surrounding code: `from __future__ import annotations`, type hints, `Decimal` for prices, `None` for unknown, atomic file writes, `unittest` (not pytest).
 - End every task with the handoff's completion report: requirement IDs, changed files, the exact tests run and their output, what is untested, the data mode, limitations, and the next recommended task. Never report a test as passed that you did not run.
