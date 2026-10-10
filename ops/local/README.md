@@ -62,3 +62,34 @@ were resolved against the official [FastAPI](https://fastapi.tiangolo.com/),
 [Pydantic strict-mode](https://docs.pydantic.dev/latest/concepts/strict_mode/)
 and [Starlette TestClient](https://starlette.dev/testclient/) documentation.
 NumPy stays at the original detector environment's `2.4.6` version.
+
+## Optional dated D1 view (DEC-026)
+
+A separate read-only API (loopback port 8768) and the `/dates` pages of the same
+frontend show the frozen D1 screen at 12 preregistered dates; see
+`research/events/2026-09-17-spk-liquidations/fund_review_dated/PROTOCOL.md`. The
+fixed-date app above is unchanged.
+
+Seal once, offline, from an LF checkout (`core.autocrlf=false`) that holds the 100
+selected price files under `raw/tefas/prices/`, a snapshot database and a sealed v1
+base bundle under `raw/research/fund-review-app/`. Verify the v1 bundle first, then
+seal (the runner prints the index directory):
+
+```sh
+.venv/bin/python ops/local/run_app.py --bundle raw/research/fund-review-app/<v1-base> --api-port 8797 --frontend-port 3097 --check
+PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=services .venv/bin/python research/events/2026-09-17-spk-liquidations/fund_review_dated/run.py \
+    --v1-bundle raw/research/fund-review-app/<v1-base> --snapshot-db <path to fund_snapshots.sqlite3>
+```
+
+Rebuild the frontend once so `/dates` exists, then check and start the dated API
+next to the fixed-date launcher:
+
+```sh
+.venv/bin/python ops/local/run_dated_app.py --index raw/research/fund-review-dated/index/<index-id> --check
+.venv/bin/python ops/local/run_dated_app.py --index raw/research/fund-review-dated/index/<index-id>
+```
+
+Open `http://127.0.0.1:3060/dates`. If the dated API uses another port, set
+`P50K_DATED_API_ORIGIN=http://127.0.0.1:<port>` for the frontend process. On Windows
+use `.venv\Scripts\python.exe` and `$env:NAME='value'`. Dated bundles are tied to
+the machine and paths they were sealed with, like the v1 bundles.

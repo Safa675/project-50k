@@ -1,0 +1,106 @@
+{
+  "description": "LF blob bytes of the registered v1/v2 sealed-bundle sources and price_detectors/PREREGISTRATION.md. Code and protocol hashes only; no data values.",
+  "commit": "8d6b199ad1e3cfa9bd9b4596f7c7df05ee025dfe",
+  "files": [
+    {
+      "path": "research/events/2026-09-17-spk-liquidations/fund_review_app/PROTOCOL.md",
+      "bytes": 10059,
+      "sha256": "e1483c4ad66f687b7f11fc53dc089abdf89dcd2e59e49efd1beb6cd1846d7f3a"
+    },
+    {
+      "path": "research/events/2026-09-17-spk-liquidations/top100_funds.txt",
+      "bytes": 400,
+      "sha256": "19d83afeb2d688d07051c58e6205fd490a57eec52d876a4cdb00683b25129937"
+    },
+    {
+      "path": "research/events/2026-09-17-spk-liquidations/price_detectors/results.json",
+      "bytes": 20753,
+      "sha256": "aab9a6189fb9b165df66b3c862b931aafb4c800415042b5388e07b230830f5bc"
+    },
+    {
+      "path": "research/events/2026-09-17-spk-liquidations/price_detectors/detectors.py",
+      "bytes": 4096,
+      "sha256": "b292948c19341c9e9ea76f7e97a3a8613ca8f80a4016330550861ee199a51568"
+    },
+    {
+      "path": "research/events/2026-09-17-spk-liquidations/fund_review_app/run.py",
+      "bytes": 8695,
+      "sha256": "09ba2862a618b2e9d20050199761daaa0c375f5074c12ffb56c519472309cdfb"
+    },
+    {
+      "path": "services/p50k/research_reviews/__init__.py",
+      "bytes": 84,
+      "sha256": "de183f812542d8d8a8b1e140057193cc95df0ee104812b8a279240a12007cfca"
+    },
+    {
+      "path": "services/p50k/research_reviews/contracts.py",
+      "bytes": 2206,
+      "sha256": "c7d7bb3063d10701f7c75f331d224453c8dbb46db36952613ea900d72bbe6993"
+    },
+    {
+      "path": "services/p50k/research_reviews/bundle.py",
+      "bytes": 38168,
+      "sha256": "4bb7649c44e556463a154c2fb51732f013d9089d244cf97eb87de9aceb906a8f"
+    },
+    {
+      "path": "services/p50k/research_reviews/comments.py",
+      "bytes": 2983,
+      "sha256": "f55e61300957f9cd03d38f8cdc4f4de65e5f665e2040f1c5338b24593d3ce561"
+    },
+    {
+      "path": "services/p50k/detectors/fund_flow.py",
+      "bytes": 13361,
+      "sha256": "1488307fd5d50c344f357398662839ead6cb25dfd3110195332fc74474bd48cd"
+    },
+    {
+      "path": "services/p50k/evidence_store.py",
+      "bytes": 17791,
+      "sha256": "4768c74642082c9a9c9b517756f2960c2f0f08eb62e1091b6977ae4403ac0149"
+    },
+    {
+      "path": "services/p50k/replay.py",
+      "bytes": 2060,
+      "sha256": "f049ba3d06169b25b5fc63fca1c6ec92cf88dcbc253ea47e62287417fbc49710"
+    },
+    {
+      "path": "research/events/2026-09-17-spk-liquidations/fund_concentration_app/PROTOCOL.md",
+      "bytes": 8475,
+      "sha256": "9e4d6717d8db144449dbcde3f47e8f510ee691089245b85628a2161898d9745e"
+    },
+    {
+      "path": "research/events/2026-09-17-spk-liquidations/fund_concentration_app/run.py",
+      "bytes": 13825,
+      "sha256": "b692fba7579dff74496c21be02e06c682f2f32ea026ef57a246648abe8c0a23e"
+    },
+    {
+      "path": "services/p50k/providers/security_holdings.py",
+      "bytes": 17288,
+      "sha256": "135ad971c996a12ad06cccf538e57dfb6bb2962727dcf06707cda90f50cb6b09"
+    },
+    {
+      "path": "services/p50k/providers/thf_holdings.py",
+      "bytes": 12814,
+      "sha256": "c71deaacf5935ebd2b198b849ece2e3b72fbf67334fd5fd3bff73d4239dc15a1"
+    },
+    {
+      "path": "services/p50k/providers/kap_report.py",
+      "bytes": 5066,
+      "sha256": "0501279d5796b1b30f9200c6c3e70493885e230e9f545b70369040a784686ebf"
+    },
+    {
+      "path": "services/p50k/research_reviews/concentration.py",
+      "bytes": 12978,
+      "sha256": "dfe9399864149754b0dd31dfe2cb89486e2c427d4a6704cfa6cbaf90b8f5d6cb"
+    },
+    {
+      "path": "services/p50k/research_reviews/bundle_v2.py",
+      "bytes": 8204,
+      "sha256": "80940190522bc2d2ec7f25692a370a751b9c7915c9bb5f14691e6f2d60ffbd08"
+    },
+    {
+      "path": "research/events/2026-09-17-spk-liquidations/price_detectors/PREREGISTRATION.md",
+      "bytes": 5323,
+      "sha256": "259b2b25a47f55a95385a2137f8d85501e1537ed32896b797d68cf6425e71e8b"
+    }
+  ]
+}
