@@ -7,6 +7,8 @@ test.beforeEach(async ({page}) => {
   await page.getByRole('button', {name: 'Giriş yap', exact: true}).click();
   await expect(page).toHaveURL(/\/funds$/);
   await page.goto('/funds/THF');
+  await page.getByRole('button', {name: 'Kanıtlarla sohbet', exact:true}).click();
+  await expect(page.getByRole('dialog')).toBeVisible();
 });
 
 test('chat sends CSRF and renders only the complete synthetic validated answer as plain text', async ({page}) => {
@@ -29,7 +31,7 @@ test('chat sends CSRF and renders only the complete synthetic validated answer a
   await expect(log.getByText(answer, {exact: true})).toBeVisible();
   expect(await log.locator('strong').allTextContents()).toEqual(['Siz', 'BlackSwan']);
   await log.getByText('Yanıtın kanıt bağlantıları', {exact: true}).click();
-  await expect(log.getByText('ev:synthetic-browser', {exact: true})).toBeVisible();
+  await expect(log.getByRole('link', {name:'Kaynak kanıtı 1'})).toHaveAttribute('href','/developments/ev%3Asynthetic-browser?fund=THF');
   await page.getByLabel('Fon kanıtları hakkında sorunuz').fill('Bu sınırlamayı açıklar mısın?');
   await page.getByRole('button', {name: 'Soruyu gönder', exact: true}).click();
   await expect(log.locator('.chat-assistant')).toHaveCount(2);
@@ -39,6 +41,8 @@ test('chat sends CSRF and renders only the complete synthetic validated answer a
   ]);
   await page.setViewportSize({width: 390, height: 844});
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('dialog')).toHaveCount(0);
 });
 
 test('chat rejects partial model text and keeps AI off failures explicit', async ({page}) => {
@@ -66,4 +70,37 @@ test('chat displays the actual isolated backend AI off response without a fabric
   expect(await result.json()).toEqual({detail: 'AI_OFF'});
   await expect(page.locator('.chat-panel').getByRole('alert')).toHaveText('Sohbet şu anda kapalı. Bir model yanıtı üretilmedi.');
   await expect(page.locator('.chat-assistant')).toHaveCount(0);
+});
+
+test('busy chat can reopen with keyboard focus contained and restores the composer when finished', async ({page}) => {
+  let release!: () => void;
+  const delayed = new Promise<void>(resolve => {release = resolve;});
+  await page.route('**/api/p/chat', async route => {
+    await delayed;
+    await route.fulfill({status: 503, contentType: 'application/json', body: '{"error":"AI_OFF"}'});
+  });
+  try {
+    const input = page.getByLabel('Fon kanıtları hakkında sorunuz');
+    await input.fill('Bu kanıtın sınırları nelerdir?');
+    await page.getByRole('button', {name: 'Soruyu gönder', exact: true}).click();
+    await expect(input).toBeDisabled();
+    await expect(page.getByRole('button', {name: 'Sohbeti kapat', exact: true})).toBeFocused();
+    await page.keyboard.press('Escape');
+    await expect(page.getByRole('dialog')).toHaveCount(0);
+    await page.getByRole('button', {name: 'Kanıtlarla sohbet', exact: true}).click();
+    const dialog = page.getByRole('dialog');
+    await expect(dialog).toBeVisible();
+    await expect(input).toBeDisabled();
+    await expect(dialog.getByRole('button', {name: 'Sohbeti kapat', exact: true})).toBeFocused();
+    await page.keyboard.press('Shift+Tab');
+    expect(await dialog.evaluate(element => element.contains(document.activeElement))).toBe(true);
+    await page.getByRole('link', {name: 'BlackSwan ana sayfa', exact: true}).focus();
+    await page.keyboard.press('Tab');
+    expect(await dialog.evaluate(element => element.contains(document.activeElement))).toBe(true);
+    release();
+    await expect(dialog.getByRole('alert')).toHaveText('Sohbet şu anda kapalı. Bir model yanıtı üretilmedi.');
+    await expect(input).toBeEnabled();
+    await expect(input).toBeFocused();
+    await expect(dialog.locator('.chat-assistant')).toHaveCount(0);
+  } finally {release();}
 });

@@ -36,14 +36,39 @@ newer.
   - BlackSwan Phase 1: Docker PostgreSQL, role-separated migrations, immutable evidence/AI storage,
     real archive import, health API/worker, public web page and tested proxy. Details below.
   - The research app remains the fallback demo.
-- **Not built yet.** Live tuning/gated batch, agent-team/B2B story screens and stock support.
-  The chat UI and bounded SSE path are built and pass synthetic transport/browser checks; live chat remains gated.
-  Product auth, fund API/screens, AI queue/validator/decision storage and review now exist. All 284 legacy end-to-end requirement IDs remain
-  `NOT_IMPLEMENTED`; Phase 1 support is reported by slice.
+- **Product built.** Login, fund catalog/detail/charts, immutable evidence, live derived-evidence AI
+  decisions/chat, human review, the B2B workflow overview and protected API documentation. Real BIST 30
+  catalog, daily charts and source-backed API contain 30 stocks, 870 daily closes and five observed
+  corporate-action records. Stock classification/AI is not implemented.
+- **Design.** All 22 supplied Figma contexts and screenshots are implemented as ten base pages/states and twelve
+  hover/context variants, running at `http://127.0.0.1:3070`. Typecheck/build, 14 browser tests and 16 web unit tests
+  pass; see [Figma implementation](figma-implementation-2026-10-10.md) and its linked completion report.
+- **Remaining.** Measured live tuning and the gated batch; optional challenger/committee workflow;
+  Sunday freeze backup/tag and cold-boot/demo rehearsal. The frozen
+  requirement registry remains unchanged; implementation is reported by slice.
 - **Plan.** `plans/2026-10-10-product-build-plan.md`, confirmed by delegation (DEC-030). The open questions are in `team-asks.md`.
-- **Running at handoff:** the all-fund TEFAS snapshot download (started 14:30, 2,136 funds, into `~/.local/share/project-50k/overnight/2026-10-10/`) and the live research demo.
+- **Current data checkpoint.** 2,133 funds; 1,755,010 stored price rows; 3,304 snapshots; 12,111 KAP document
+  entries; one immutable calibration. Latest detector run: 17,064 results. External outputs stay in
+  `~/.local/share/project-50k/overnight/2026-10-10/`; provider failures remain explicit.
+- **Git and resume.** Mirza resumed and delegated pushes, merges and safe pulls to Codex. Build work stays
+  in `project-50k-app` on `product/build`, in the same repository. Main was safely advanced to `3b7bf4c`
+  before Figma integration; subsequent pulls must preserve the live demo registered paths.
 
-## Codex takeover, 2026-10-10
+Final Figma code checkpoint `0b394a1`: Linux root 816 passed / 72 skipped (70
+PostgreSQL, two Windows-only); frozen detector nine and handoff 88 passed.
+Separate PostgreSQL evidence/watchlist/chat/API 42 and migration 16 passed with
+zero skips. The real product has ten migrations, zero mock decisions and live
+AI enabled. Seven completed paid calls conservatively book USD 0.0615725; no
+queued/running jobs at the release check. Every result remains developmental.
+The second backup/restore rehearsal includes final imported data and all ten
+migrations: 38 table counts, evidence checksums and permissions matched. Its
+ignored dump and full recovery limits are recorded in
+[the backup report](blackswan-backup-restore-rehearsal.md).
+
+## Codex takeover and milestone history, 2026-10-10
+
+The following records retain checks at each milestone. The current checkpoint and resumed-build section
+supersede milestone-only pending items.
 
 - Mirza pulled 14 commits into the main checkout, from `19989c5` to `603a09d`. It is clean on `main`; the same
   fallback listener processes remain on 3060/8767/8768. The main checkout is still load-bearing: do not switch
@@ -67,8 +92,9 @@ newer.
   and 131 candidate regulatory events. Repeat imports add zero observation rows. Permissions and isolated proxy
   checks pass; real-data access defaults to denied until Phase 3 auth. AI is off. See the
   [completion report](blackswan-phase1-completion.md) for actual checks and limitations.
-- T0.2 key readiness and T1.7a ten exact-match human checks remain pending; all SPK events remain candidates.
-  K1–K6 and every do-not-claim item below remain carried forward. No frozen requirement registry was changed.
+- At Phase 1, key readiness and the ten exact-name checks were pending. Both were subsequently completed:
+  Mirza supplied the key and authorized the independent audit. Unknown publication times still prevent
+  regulatory triggers. K1–K6 remain carried forward; the frozen requirement registry was not changed.
 - Final Phase 1 implementation `8c07f66`: Linux root 741 tests OK (16 explained skips), frozen 9 and 88 pass.
   The 14 skipped PostgreSQL checks pass separately in isolated `p50k_dev`; two skips require Windows.
 - Product branch was pushed and merged into remote `main` with merge commit `67af615` using a separate temporary
@@ -96,13 +122,13 @@ newer.
   Synthetic PostgreSQL integration passes 48 tests with zero skips; web unit 9 and browser 7 pass.
   Live proposal and chat smoke passed (five calls, conservative booked USD 0.048630). Latest Linux suite
   at `726c81d`: 858 OK, 55 explained skips; frozen 9/88 pass. See [chat/refresh report](blackswan-chat-refresh-completion.md).
-  Live validation quality, stock support and the agent-team/B2B story remain unfinished.
+  At that milestone, live validation quality, stocks and the agent-team/B2B story were unfinished;
+  subsequent stock and B2B workflow implementation is recorded below.
 - DEC-032 records Mirza's confirmed B2B direction: evidence data/API for banks and financial institutions through
   an agent workflow; Turkish funds and stocks required in the hackathon demo, historical fund case first, insurance
-  permanently deferred. Stock support remains to be implemented through new isolated modules on resume. Mirza
-  requested finishing the immediate chat/import/documentation block, then stopping for alignment; no new stock
-  features start during that pause. Design system and logos are promised soon; current tokens
-  and wordmark remain until received. Work continues tonight and Sunday morning within the existing freezes.
+  permanently deferred. Mirza requested an alignment pause after this block and subsequently resumed.
+  He selected current BIST 30, supplied Figma designs and the logo, and requested parallel implementation.
+  Work continues tonight and Sunday morning within the existing freezes.
 
 ## Decisions after the handoff
 
@@ -115,8 +141,8 @@ newer.
 | [DEC-028](../decisions/DEC-028-deploy-ready-ai-native-build.md) | 2026-10-10 | Team roles; deploy-ready, AI-native build on localhost; OpenAI with a $25 limit; plain PostgreSQL with its own auth; code freeze Sunday 13:00; earlier specs are guides |
 | [DEC-029](../decisions/DEC-029-open-all-funds.md) | 2026-10-10 | Every downloaded fund is open for product use; the development/test split is dropped |
 | [DEC-030](../decisions/DEC-030-blackswan-working-agreements.md) | 2026-10-10 | Product name BlackSwan; no placeholders; $25 a target, not a hard cap; plan confirmed by delegation; persistent reminders for critical unanswered items; downloads started; Codex handoff |
-| [DEC-031](../decisions/DEC-031-derived-evidence-openai-egress.md) | 2026-10-10 | Mirza approved derived-evidence-only OpenAI processing, all D9 downloads now, the product worktree, and the closest-name identity; Safa's D7 answer and ten exact-name checks remain open |
-| [DEC-032](../decisions/DEC-032-b2b-evidence-data-api.md) | 2026-10-10 | B2B evidence data and API through an agent workflow for banks and financial institutions; insurance permanently deferred; Turkish funds and stocks required in the hackathon demo, historical fund case first; stock implementation on resume after alignment pause |
+| [DEC-031](../decisions/DEC-031-derived-evidence-openai-egress.md) | 2026-10-10 | Mirza approved derived-evidence-only OpenAI processing, all D9 downloads now, the product worktree, and the closest-name identity; the later delegated ten-check audit is complete; Safa's separate D7 answer remains open |
+| [DEC-032](../decisions/DEC-032-b2b-evidence-data-api.md) | 2026-10-10 | B2B evidence data and API through an agent workflow for banks and financial institutions; insurance permanently deferred; Turkish funds and stocks required in the hackathon demo, historical fund case first; stock implementation proceeded after Mirza resumed |
 
 Still binding (the integrity rules hold even though product requirements flex):
 
@@ -220,15 +246,16 @@ Treat any new failure name as a finding, not only a changed count.
   detector figure is a development result.
 - **Headline product story:** closed by DEC-032: B2B evidence data and API for banks and financial institutions.
   Insurance is permanently deferred.
-- **Stock timing:** closed by Mirza: stocks must work in the hackathon demo. Stock implementation remains
-  outstanding; resume it through new isolated modules and a new versioned record after the alignment pause.
+- **Stock timing/universe:** closed by Mirza: current BIST 30 must work in the demo. The real catalog/chart/
+  evidence/API slice is built; stock classification and AI remain separate unimplemented work.
 - **Regulation:** Safa checks the capital-markets and data-rights route before any commercial claim or external
   resale. Insurance research is retained as history, not an active build or legal-work task.
 - **G01, competition eligibility:** the team's position and the pre-event commit dates are recorded in DEC-027. No
   organizer ruling was requested.
 - **G03, dated fund history:** open. Forward snapshots now build dated size, unit and investor history from
   2026-10-09.
-- **G09, design:** open. The owner approved the fixed-view layout, and the agent reviewed the dated-view layouts.
+- **G09, design:** supplied Figma designs are implemented, with final integration checks in progress.
+  The approved research layouts remain the fallback; the frozen gate registry is unchanged.
 - **G10, detector validity:** open. There is no measured evaluation; the per-date counts are descriptive.
 - **Data rights:** unreviewed for TEFAS, KAP and MKK data. Nothing real is published.
 - **Pitch facts to verify:** check SPK decision 52/1589 of 28 August 2026 against the bulletin before quoting it.
@@ -238,9 +265,9 @@ Treat any new failure name as a finding, not only a changed count.
 
 **The product build plan** (`plans/2026-10-10-product-build-plan.md`) is confirmed, with DEC-032 setting the active
 B2B story and fund/stock product scope. Phase 1 foundations, Phase 2 fund detectors/API and Phase 3 auth/review
-have landed. Finish the current chat/import/documentation block, then pause for Mirza's requested alignment.
-On resume, complete the agent workflow, B2B feed/API presentation and real stock support. Items
-recommended before 2026-10-10 are carried into that plan, not dropped:
+have landed. Mirza resumed; real stocks, the B2B workflow overview and supplied Figma designs are present.
+Finish integration checks, measured live tuning/batch gates, demo preparation and freeze operations.
+Challenger/committee work remains conditional. Earlier recommendations are retained in the plan:
 
 1. **Per-date estimated flow.** Now a candidate detector inside the product pipeline. Fix its parameters in a dated
    note first, using DEC-026's pre-recorded (M-2, M-1) rule.
@@ -260,3 +287,45 @@ Section 11 of the codex context still applies. In addition, the pitch and demo m
 - that any detector figure is validated accuracy (there is no held-out test, DEC-029);
 - that the LLM's decisions are predictions, or advice to buy, hold or sell;
 - that a policy price is actuarially sound before base rates exist.
+
+## Resumed stock and design build
+
+Mirza resumed the build and confirmed current BIST 30 as the stock universe.
+He delegated all Git work, including safe pulls. Root verified protected paths
+and fast-forwarded local main to `3b7bf4c`; development stays in the app worktree.
+
+Stock data-only protocol was committed alone at `853d3ae`, before ingestion.
+The first real BIST30 capture contains 30 current members, 870 daily closes
+(2026-09-01 through 2026-10-09) and five observed corporate-action records.
+All 33 MCP structured-response captures were hash-verified. Normalized manifest
+SHA `8e26ff013cf667f773566986b8341a545b9813a653c82bba20fd758536c770b5`.
+Actual import succeeded; repeat added zero rows. Availability is capture time,
+price adjustment is UNVERIFIED, and rights remain UNREVIEWED. This is stock
+catalog/chart/evidence/API support, without a stock anomaly classifier or AI
+materiality decision. Fund calibration and sealed sources are unchanged.
+
+A real B2B workflow overview reports ingestion, deterministic evidence, AI
+proposal and human-review counts, with current-run provenance and API docs.
+It explicitly describes the existing single-proposal/human-review workflow;
+there is no fabricated challenger/committee transcript. Synthetic stock and
+workflow checks pass; stock UI browser integration passes eight tests.
+
+Mirza supplied [22 Figma nodes](figma-implementation-2026-10-10.md). Figma access is fixed: all contexts and
+screenshots were read. Four agents implemented the shared shell, landing/method, funds, watchlists/
+notifications, development detail and contextual chat in parallel. Tokens, the exact logo and SVG assets
+are local; Figma sample financial values were not copied into the product.
+
+Final fund refresh: 1,755,010 prices, 3,304 snapshots and 12,111 KAP document entries for the unchanged
+2,133-fund universe. Run `4dcee718-6c5b-4506-b251-2ed563260b60` contains 17,064 results using the original
+single calibration. Six live paid model/decision/chat calls have completed; measured tuning quality and
+the gated batch remain unfinished. Earlier cost figures above are milestone figures, not the final ledger.
+
+Collection finished with explicit source gaps: 2,129 price files and four failures; 2,134 profile files,
+one profile failure and five empty responses; the 1,071-fund KAP cohort completed through 996 on-disk
+lists and reused existing inputs; all 194 discovered SPK PDFs completed. Failed or empty responses are
+not invented observations. Outputs remain in the external overnight folder.
+
+The [backup/restore rehearsal](blackswan-backup-restore-rehearsal.md) verified a consistent snapshot of
+34 tables and eight migrations, including permissions and immutability. Its dump predates the final
+refresh and migrations 009/010, so it is not a backup of the completed design/watchlist build. Repeat
+backup after final data/review changes at the Sunday freeze.

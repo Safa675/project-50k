@@ -45,6 +45,14 @@ def create_app(settings: Settings | None = None, readiness: Callable[[Settings],
     application.include_router(decision_router)
     from p50k.product.chat_routes import router as chat_router
     application.include_router(chat_router)
+    from p50k.product.stock_routes import router as stock_router
+    application.include_router(stock_router)
+    from p50k.product.workflow_routes import router as workflow_router
+    application.include_router(workflow_router)
+    from p50k.product.evidence_routes import router as evidence_router
+    application.include_router(evidence_router)
+    from p50k.product.watchlist_routes import router as watchlist_router
+    application.include_router(watchlist_router)
     application.add_middleware(TrustedHostMiddleware, allowed_hosts=list(config.allowed_hosts))
     public_paths = {"/health/live", "/health/ready"}
     public_paths.update({"/auth/csrf", "/auth/login"})

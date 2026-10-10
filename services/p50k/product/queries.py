@@ -76,6 +76,8 @@ def source_url(value: Any) -> str | None:
 
 def source_reference(value: dict[str, Any]) -> SourceReference:
     payload = dict(value)
+    for field in ('effective_date','available_at','source_url'):
+        payload.setdefault(field,None)
     if isinstance(payload.get("effective_date"), str):
         payload["effective_date"] = date.fromisoformat(payload["effective_date"])
     if isinstance(payload.get("available_at"), str):
@@ -115,7 +117,7 @@ SIGNALS_CTE = """
     WITH latest_run AS (
         SELECT run.run_id, inputs.version_id FROM det.detector_runs run
         JOIN det.run_inputs inputs ON inputs.run_id = run.run_id
-        WHERE run.origin = 'DELAYED' AND run.cutoff IS NOT NULL AND run.cutoff <= %s
+        WHERE run.origin = ANY(%s) AND run.cutoff IS NOT NULL AND run.cutoff <= %s
             AND inputs.complete
         ORDER BY run.cutoff DESC, run.created_at DESC, run.run_id DESC LIMIT 1
     ), selected AS (
@@ -164,11 +166,11 @@ class FundQueries:
         row, = self._rows(statement, parameters)
         return int(row["total"])
 
-    def funds(self, query: str, limit: int, offset: int) -> FundsPage:
+    def funds(self, query: str, limit: int, offset: int, category: str | None = None) -> FundsPage:
         # Escape LIKE metacharacters so every character is a literal search.
         term = "%" + query.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_") + "%"
-        where = " WHERE fund_code ILIKE %s OR name ILIKE %s"
-        parameters = (term, term)
+        where = " WHERE (fund_code ILIKE %s OR name ILIKE %s) AND (%s::text IS NULL OR category=%s)"
+        parameters = (term, term, category, category)
         total = self._count("SELECT count(*) AS total FROM ref.funds" + where, parameters)
         rows = self._rows("SELECT " + FUND_COLUMNS + " FROM ref.funds" + where
                           + " ORDER BY fund_code LIMIT %s OFFSET %s", parameters + (limit, offset))
@@ -185,7 +187,8 @@ class FundQueries:
 
     def signals(self, code: str | None, state: str | None, as_of: date,
                 cutoff: datetime, limit: int, offset: int) -> SignalsPage:
-        parameters = (cutoff, as_of, cutoff, code, code, state, state)
+        origins = ['DELAYED','SYNTHETIC'] if getattr(getattr(self.connection,'info',None),'dbname',None)=='p50k_dev' else ['DELAYED']
+        parameters = (origins, cutoff, as_of, cutoff, code, code, state, state)
         total = self._count(SIGNALS_CTE + "SELECT count(*) AS total FROM selected", parameters)
         rows = self._rows(SIGNALS_CTE + "SELECT * FROM selected ORDER BY fund_code, detector_id LIMIT %s OFFSET %s",
                           parameters + (limit, offset))

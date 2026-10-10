@@ -1,0 +1,32 @@
+import {expect, test} from '@playwright/test';
+
+test('fund design preserves source gaps, keyboard chart access and source tabs', async ({page}) => {
+  await page.goto('/login');
+  await page.getByLabel('E-posta').fill('synthetic-browser@example.invalid');
+  await page.getByLabel('Parola', {exact: true}).fill('synthetic-browser-password');
+  await page.getByRole('button', {name: 'Giriş yap', exact: true}).click();
+  await expect(page).toHaveURL(/\/funds$/);
+  await page.getByLabel('Fon kodu veya adı').fill('THF');
+  await page.getByRole('button', {name: 'Ara', exact: true}).click();
+  await page.getByRole('link', {name: 'THF', exact: true}).click();
+  const chart = page.getByRole('img', {name: /Yayımlanmış günlük fon birim fiyatı/});
+  await expect(chart).toBeVisible();
+  await page.getByRole('button', {name: 'Tablo olarak gör', exact: true}).click();
+  const table = page.getByRole('table', {name: 'Yayımlanmış günlük birim fiyat verileri'});
+  await expect(table.getByText('Veri yok', {exact: true}).first()).toBeVisible();
+  await chart.focus(); await page.keyboard.press('Home');
+  const firstPrice = await table.locator('tbody tr').first().locator('td').nth(1).textContent();
+  await expect(page.getByRole('status').filter({hasText: 'TEFAS · günlük birim fiyat'})).toContainText(firstPrice!);
+  await page.keyboard.press('Escape');
+  await page.getByRole('tab', {name: 'Kaynaklar', exact: true}).click();
+  await expect(page.getByRole('heading', {name: 'Detektör kanıtları', exact: true})).toBeVisible();
+  await page.getByRole('tab', {name: 'Genel bakış', exact: true}).click();
+  const disclosure = page.getByRole('button', {name: 'Günlük fon pay fiyatı', exact: true});
+  await disclosure.focus();
+  await expect(page.getByRole('tooltip')).toContainText('Gün içi işlem fiyatı değildir.');
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('tooltip')).toHaveCount(0);
+  await page.setViewportSize({width: 390, height: 844});
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  await expect(page.getByRole('heading', {level: 1})).toBeVisible();
+});

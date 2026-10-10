@@ -15,6 +15,7 @@ test('login, fund evidence, human review and logout use the isolated real backen
   await page.getByLabel('Gerekçe',{exact:true}).fill('Synthetic browser review reason');
   await page.getByRole('button',{name:'İncelemeyi kaydet',exact:true}).click();
   await expect(page.getByText('Etkin karar insan incelemesine dayanıyor.',{exact:true})).toBeVisible();
+  await page.getByLabel('Hesap ve çalışma alanı').click();
   await page.getByRole('button',{name:'Çıkış yap',exact:true}).click();
   await expect(page).toHaveURL(/\/login$/);
   await page.goto('/funds');await expect(page).toHaveURL(/\/login$/);
