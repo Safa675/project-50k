@@ -1,4 +1,4 @@
-# BlackSwan build plan: deploy-ready, AI-native fund anomaly platform
+# BlackSwan build plan: B2B evidence data and API for Turkish funds and stocks
 
 **Status: CONFIRMED by delegation** ([DEC-030](../docs/decisions/DEC-030-blackswan-working-agreements.md), 2026-10-10 about 14:30).
 - Agents confirm the defaults in section 2 that serve the team's interest, and ask Mirza about problematic ones.
@@ -6,10 +6,17 @@
   confirmed; ten exact-name checks remain pending. Key readiness is also pending (see `docs/notes/team-asks.md`).
 - The $25 budget is a target, not a hard cap. The product contains no placeholders (DEC-030).
 - Codex continues from `plans/2026-10-10-codex-handoff-prompt.md`.
+- **Current direction ([DEC-032](../docs/decisions/DEC-032-b2b-evidence-data-api.md)).** B2B evidence data and API
+  access through an agent workflow for banks and financial institutions. Insurance is permanently deferred;
+  retained insurance designs below are historical, not implementation tasks. The historical fund case is first,
+  and Mirza requires real stock support in the hackathon demo too. Stock support is not implemented yet.
+- **Alignment pause.** Finish the immediate chat/import/documentation block, then stop until Mirza resumes.
+  On resume, stocks need new isolated modules, entitled real data and a versioned detector record; existing fund
+  protocols remain immutable. Start no new feature during the requested pause.
 
 - **Freezes:** features Sunday 2026-10-11 at 10:30; code at 13:00.
 - **Implements:** [DEC-028](../docs/decisions/DEC-028-deploy-ready-ai-native-build.md) and
-  [DEC-029](../docs/decisions/DEC-029-open-all-funds.md).
+  [DEC-029](../docs/decisions/DEC-029-open-all-funds.md), with direction and stock scope updated by DEC-032.
 - **Inputs:**
   - five read-only reviews in [docs/notes/research-2026-10-10/](../docs/notes/research-2026-10-10/);
   - two adversarial reviews of this plan, on integrity and feasibility, folded in below;
@@ -31,9 +38,10 @@
 - **Agent team.** TradingAgents-inspired, as a fixed pipeline in our own worker: server-written briefs, then a
   challenger, then a committee whose decision a human can override. No framework and no copied code. It is built
   only if the AI core is on time.
-- **Story screens.** On Sunday morning, after the team's pick: insurance (the trigger and evidence engine for a
-  licensed insurer, with a deterministic insurer-review print view) or B2B descriptive data. With no pick by 23:00,
-  B2B.
+- **Story screens.** B2B evidence data and API access for banks and financial institutions, with the agent
+  evidence/review workflow and the historical fund case. Insurance screens and documents are permanently deferred.
+- **Stock requirement.** Real stock support must work in the hackathon demo. It remains to be implemented after
+  the alignment pause; no placeholder stock pages or synthetic product values stand in for it.
 - **Scope.** The work was about 30 hours against 14–16 available. The plan now moves a defined list to after the
   freeze (section 10) and builds the demo path first.
 
@@ -57,13 +65,14 @@ On this machine, one `docker compose up` starts the following, with every host p
    - fund list and fund pages, with chart, detector evidence and the SPK timeline;
    - a review queue of AI decisions with human override;
    - chat;
-   - the chosen story's screens.
+   - B2B evidence/feed/API screens;
+   - required real stock support, implemented separately from immutable fund protocols on resume.
 
 ## 2. Decisions in this plan (recommended defaults; change any of them)
 
 | # | Decision | Default |
 |---|---|---|
-| D1 | Where to build | A git worktree at `C:\Users\mirza\Desktop\Hackathon\project-50k-app` on branch `product/build`. Host bind mounts (the main checkout's `raw/` and the forward snapshot SQLite, both read-only) live in a gitignored `compose.override.yaml`, with an example committed. The main checkout stays untouched until after the event (K4) |
+| D1 | Where to build | A git worktree at `C:\Users\mirza\Desktop\Hackathon\project-50k-app` on branch `product/build`. Host bind mounts (the main checkout's `raw/` and the forward snapshot SQLite, both read-only) live in a gitignored `compose.override.yaml`, with an example committed. Main stays on `main` with registered files untouched. Mirza safely pulled it to `603a09d`; verify registered paths before any future pull. K4 still decouples the live demo |
 | D2 | Frontend | A new Next.js app in `web/` with the same pinned versions as `frontend/`. It copies only the chart and the Turkish formatters. `frontend/` stays the research app and fallback |
 | D3 | Backend | A new package, `services/p50k/product/`, with psycopg 3 and plain SQL. Plain SQL migrations run through a small runner. It imports the providers and the frozen detectors read-only |
 | D4 | Ports | web 127.0.0.1:3070, API 127.0.0.1:8770, PostgreSQL 127.0.0.1:5433 (dev profile). The smoke test runs as its own compose project on 3071/8771 |
@@ -73,10 +82,11 @@ On this machine, one `docker compose up` starts the following, with every host p
 | D8 | Detectors for all funds | **D1–D5 v2.** Peers come from all funds. The single category source for every fund is `fonTurAciklama` from the saved 2026-10-06 fund list, a stated change from the frozen run.<br>The v2 protocol is committed alone before any all-fund percentile is computed. It lists what was already seen: the frozen results, the 100-fund thresholds, the 17 September order and its 131 funds.<br>It runs once on Saturday and is never recalibrated on overnight data. Labels read "geliştirme sonucu; eşikler olaydan sonra belirlendi". If M2 slips by more than an hour, drop v2: uncovered categories then abstain with "kategori için kalibre eşik yok" |
 | D9 | Overnight collection | Restartable runners built in T2.6 and dry-run on THF and TP2 first. They run on the host from the worktree's environment. Output goes under `~/.local/share/project-50k/overnight/2026-10-10/` only.<br>Jobs: TEFAS 12-month prices, snapshots and profiles for all funds; SPK bulletin PDFs for 2024–2026 (download only). Pacing 1.5 s / 6 s; each job stops after 3 consecutive failures |
 | D10 | Real-data pages | Behind login. A public landing page shows no real data |
-| D11 | AI decision types | Materiality only: `MATERIAL`, `NOT_MATERIAL`, `DATA_ISSUE` or `INSUFFICIENT_EVIDENCE`, with the server computing the allowed options. The insurance trigger assessment is added only if insurance is picked |
+| D11 | AI decision types | Materiality only: `MATERIAL`, `NOT_MATERIAL`, `DATA_ISSUE` or `INSUFFICIENT_EVIDENCE`, with the server computing the allowed options. Insurance assessments are permanently deferred (DEC-032) |
 | D12 | Agent team | A fixed pipeline in our worker, TradingAgents-inspired, with no framework and no copied code (section 7). Before the freeze it is a challenger plus a committee, run only if M3 lands by 01:00. Recorded in DEC-030 together with D7 |
 | D13 | Data-mode labels | `DELAYED` for current published TEFAS data, with its as-of date; `HISTORICAL_REPLAY` only for replays with a cutoff. A replay packet never carries later TEFAS status (the 2026-10-06 status would reveal the halt) |
-| D14 | Who approves documents | Admins approve insurer-review print views; analysts review AI decisions |
+| D14 | Review authority | Analysts review AI decisions. Insurer-review print views and their document approval are permanently deferred (DEC-032) |
+| D15 | Product and demo scope | Turkish funds and stocks; historical fund case first, real stock support required in the hackathon demo (DEC-032). Stock implementation is outstanding and resumes through new isolated modules and a new versioned detector record after alignment |
 
 ## 3. Architecture and safety rails
 
@@ -156,7 +166,7 @@ lists for more funds. The Windows forward-snapshot task keeps running and first 
 |---|---|
 | D1/D2 excess return (≈ AN-FND-001), D3 autocorrelation, D4 peer correlation (v2) | All funds with enough history, run as a CLI on Saturday |
 | D5 fund age | An attribute, not an anomaly |
-| AN-FND-005 regulatory event | The confirmed 17 September order. The best insurance trigger |
+| AN-FND-005 regulatory event | The 17 September order with human entity verification; descriptive institutional evidence, not an insurance assessment |
 | AN-DQ-001/002 stale or placeholder data | All funds. A stopped price is a data-quality event, not a liquidation trigger |
 | AN-FND-002/004 flow and allocation (monthly, about 100 funds) and K1 | **After the freeze** |
 
@@ -291,7 +301,7 @@ The study, design and critique are in
   - Never across all funds (about $95).
   - The demo uses stored runs. A live moment runs C → K only, with priority over batch jobs, and falls back to the
     stored run after 60 s.
-- **Insurance, if picked: a deterministic HTML print view, not an LLM policy writer.**
+- **Historical insurance design — permanently deferred by DEC-032; no implementation tasks below.**
   - Title: "Tetikleyici Endeksi ve Kanıt Spesifikasyonu (sigortacı incelemesi için taslak)".
   - Contents: the trigger definition, the confirmed event evidence, and K's decision with its human review.
   - Cover, premium, payment and eligibility are covered by one fixed sentence: they belong to a licensed insurer, and
@@ -303,14 +313,30 @@ The study, design and critique are in
   - The AI trigger assessment appears only in the app, with its override.
   - Coverage vocabulary is banned in all LLM text: teminat, kapsam, tazminat, hasar, prim, poliçe, sigortalı,
     sigorta ettiren, ödenecek, hak kazanır, muafiyet.
-- **After the freeze:** LLM analysts, an LLM policy writer, Typst PDFs (with DejaVu fonts), approval re-rendering, and
-  B2B report PDFs.
+- **After the freeze:** LLM analysts and B2B report PDFs. The earlier policy writer, insurance PDF and approval
+  re-rendering proposals are retained as history and permanently deferred by DEC-032.
 - **What the debate is worth.** Research says debate adds little at equal compute. We present it as an audit trail
   (alternatives considered and answered), never as accuracy.
 
 ## 8. Story layer (Sunday by 10:30)
 
-**A. Insurance.**
+**Active: B2B evidence data and API (DEC-032).**
+- **Buyer and offer.** Banks and financial institutions; evidence data and API access through an agent workflow.
+  Pricing, demand and partnerships are hypotheses, not demonstrated facts.
+- **Historical fund case.** Show stored observations, deterministic evidence, the agent assessment and human
+  override. Do not imply prediction, fraud findings, validated accuracy or advance warning.
+- **Feed.** An evidence feed with CSV export. Every row is labelled `development_result`, `origin`,
+  `rights_status=UNREVIEWED`, `decided_by` and its review state.
+- **CSV header:** "Geliştirme sonucu; veri hakları incelenmedi; yatırım tavsiyesi değildir".
+- **Docs.** The protected OpenAPI page serves as the API documentation; API keys come after the freeze. The
+  commercial offer does not authorize external resale or deployment; real data remains on localhost.
+- **Stock support.** Required in the hackathon demo, with real source-backed data and separate versioned evidence
+  rules. This is outstanding implementation, starting on resume after the requested alignment pause.
+
+**Historical A. Insurance — permanently deferred, not a demo path.**
+
+The earlier proposal is retained below only as a record; none of its screens, assessments or documents is an
+active task.
 - **Trigger check.** Labelled `HISTORICAL_REPLAY`, it uses only observations available before the cutoff. Eligibility
   is contract terms only, and no detector tiers are shown.
 - **AI assessment.** Beside the deterministic `trigger_fired`, labelled "bilgi amaçlı; hasar kararı sigortacıya
@@ -320,7 +346,7 @@ The study, design and critique are in
 - **Pitch line:** "Designed so that a licensed insurer issues the policy and a bank distributes it; we would supply
   the trigger and evidence. No insurer or bank partnership exists."
 
-**B. B2B descriptive data.**
+**Historical B. Earlier B2B descriptive-data proposal — refined by the active direction above.**
 - **Feed.** An anomaly feed with CSV export. Every row is labelled `development_result`, `origin`,
   `rights_status=UNREVIEWED`, `decided_by` and its review state.
 - **CSV header:** "Geliştirme sonucu; veri hakları incelenmedi; yatırım tavsiyesi değildir".
@@ -360,7 +386,7 @@ The study, design and critique are in
 | 2 Detectors and API | Sat 20:30 | T2.1 v2 protocol committed alone; T2.2 `run-detectors` CLI for D1–D5 v2, data quality and events; T2.4 API (funds, detail, signals, events, OpenAPI); T2.6 overnight runners, dry-run, then started. T4.0 machine prep (M) | Signals for every fund via the API; overnight jobs running |
 | 3 AI core and screens | Sun 01:00 | T1.6 login; T3.1 OpenAI wrapper with caps and modes; T3.2 egress; T3.3 validator; T3.4 decision engine (materiality); T3.5 review queue and override; T1.8 queue for `ai_decide`; T3.6 web shell, login, fund list, fund page | A mock decision flows from packet to queue to override in the UI |
 | Overnight | | D9 jobs; machine on; a 07:00 log check (M) | |
-| 5 Live, chat and story | Sun 10:30 (feature freeze) | T5.1 import overnight data, rerun detectors, live AI pass by 08:30; T5.2 chat with 4 tools; T5.3 agent team (challenger, committee, `/ekip` page) if M3 landed by 01:00; T5.4 story screens; T5.5 tokens (if received by 23:00) and Turkish/accessibility pass | Demo path works end to end |
+| 5 Live, chat and B2B story | Sun 10:30 (feature freeze) | T5.1 import overnight data, rerun detectors, live AI pass by 08:30; T5.2 chat with 4 tools; T5.3 agent team (challenger, committee, `/ekip` page) if M3 landed by 01:00; T5.4 B2B evidence/API screens; T5.5 tokens (if received by 23:00) and Turkish/accessibility pass; T5.6 real stock support through new isolated modules after alignment resume | Fund case and required stock path work end to end |
 | 6 Freeze | Sun 13:00 | 10:30–11:00 fixes only; 11:00 `pg_dump` and restore rehearsal; smoke test; leak and secret scans; demo seed and overrides (T6.2); cold-boot rehearsal; T6.3 freeze merge in the worktree (`freeze-merge` from `origin/main`, `--no-ff`, no registered paths touched, push after Mirza's OK, tag); T6.4 demo script with Safa and Barış | Tagged `event-freeze` |
 
 **Moved after the freeze now:**
@@ -388,7 +414,8 @@ Owner: **C** = Claude, **M** = Mirza, **S** = Safa, **B** = Barış, **T** = tea
 - [x] T0.1 (M) Confirm the plan: delegated by DEC-030; D1 confirmed during takeover
 - [x] T0.3 (M) Answer D7 and D9 (DEC-031); Safa's separate D7 answer remains open
 - [ ] T0.4 (M) Relay the asks
-- [ ] T0.5 (S, T) Story pick, with Safa's insurance or B2B details, by 22:00. With no pick by 23:00, B2B
+- [x] T0.5 (M, S, T) Story/buyer/revenue direction: Mirza confirmed B2B evidence data/API for banks and financial institutions (DEC-032); commercial validation still open
+- [x] T0.7 (M) Stock timing: Mirza requires real stock support in the hackathon demo; implementation outstanding, resume after alignment pause
 - [ ] T0.6 (B) Tokens as values by 23:00; otherwise the current tokens ship
 
 ### Phase 1
@@ -402,7 +429,7 @@ Owner: **C** = Claude, **M** = Mirza, **S** = Safa, **B** = Barış, **T** = tea
 - [x] T1.2 Dockerfiles, `compose.yaml` and the override example; the isolated proxy check
 - [x] T1.5 Settings, redacting logs, health endpoints
 - [x] T1.7 `import-archive` CLI (staging plus ON CONFLICT), with verified counts and zero-insert rerun
-- [ ] T1.7a (M) Check the 2026/61 mapping: the closest-name match and 10 exact matches
+- [x] T1.7a Closest identity confirmed; ten delegated exact-name checks pass; unknown publication still cannot trigger
 - [x] The Linux baseline in WSL2: 663 + 9 + 88 tests pass at `19989c5`, zero skips
 
 ### Phase 2
@@ -416,7 +443,7 @@ Owner: **C** = Claude, **M** = Mirza, **S** = Safa, **B** = Barış, **T** = tea
 ### Phase 3
 
 - [x] T1.6 Login, CSRF, expiry/revocation/throttling and PostgreSQL tests
-- [ ] T3.1 Wrapper/caps/reservations/modes built; paid model/account smoke awaits T0.2 key
+- [x] T3.1 Wrapper/caps/reservations/modes and paid model/account/decision/chat smoke pass; full tuning remains a batch gate
 - [x] T3.2 Typed egress and allowlist test
 - [x] T3.3 Validator/Turkish corpus; live quality measurement remains gated
 - [x] T3.4 Immutable packets/options/cache/INVALID block; synthetic flow tested
@@ -431,7 +458,7 @@ Owner: **C** = Claude, **M** = Mirza, **S** = Safa, **B** = Barış, **T** = tea
 ### Phase 5 (feature freeze at 10:30)
 
 - [ ] T5.1 `import-overnight`; rerun the detectors; the live AI pass by 08:30
-- [ ] T5.2 Chat with 4 tools, server-sent events through the proxy, evidence chips
+- [x] T5.2 Chat with 4 bounded read-only tools, owner threads, budgets/daily limits, validated SSE and evidence chips; synthetic/browser verified, live quality pending
 - [ ] T5.3 The agent team (if M3 landed by 01:00):
   - the step runner;
   - server briefs;
@@ -439,9 +466,10 @@ Owner: **C** = Claude, **M** = Mirza, **S** = Safa, **B** = Barış, **T** = tea
   - the committee;
   - batch runs (at most 25 funds by the fixed rule);
   - the `/ekip/[run]` page
-- [ ] T5.4 The story screens (section 8). For insurance, the insurer-review print view with approval bound to its
-  hashes
+- [ ] T5.4 B2B evidence/feed/API screens and the historical fund case (section 8); no insurance work
 - [ ] T5.5 Barış's tokens; Turkish copy and accessibility pass
+- [ ] T5.6 Real stock support required by DEC-032: new isolated modules, entitled source data, timestamps and a
+  new versioned detector record; implement on resume, preserve existing fund protocols
 
 ### Phase 6
 
@@ -469,17 +497,15 @@ Owner: **C** = Claude, **M** = Mirza, **S** = Safa, **B** = Barış, **T** = tea
 
 - **Mirza:** T0.1, T0.2, T0.3, T0.4, T1.7a, T4.0 and the 07:00 check.
 - **Safa:**
-  1. The story and the final business plan this evening. If insurance, also: trigger scope, payout shape,
-     policyholder and channel. Unanswered items appear as questions in the print view, never as values.
-  2. The disclaimer wording, and the default of naming no insurer.
-  3. If B2B, a product name without "risk raporu" or "sinyal" (SPK III-37.1 art. 45(2)).
-  4. Whether a print view about a real fund may appear in the live demo (localhost only).
-  5. B2B details, if chosen.
-  6. Which institutions may be named, and with what wording.
-  7. D7.
-  8. His data sources and their terms; optionally, his full 2026-10-06 snapshot, shared privately.
-  9. Legal opinions after the event.
-  10. The Bilun primitives question.
+  1. Detailed commercial plan, first institutional workflow, pilot and pricing validation. B2B story, buyer class
+     and evidence-data/API revenue direction are already confirmed by DEC-032.
+  2. Descriptive B2B copy and disclaimers; retain the current integrity labels and avoid advice wording.
+  3. Which institutions may be named, with no implied partnership; default to naming none.
+  4. His separate D7 answer.
+  5. His data sources and their terms; optionally, his full 2026-10-06 snapshot, shared privately.
+  6. Capital-markets and commercial data-rights opinions before contracts or external redistribution. Insurance
+     questions and the insurer-review print view are permanently deferred.
+  7. The Bilun primitives question.
 - **Barış:**
   - tokens as values by 23:00;
   - his screens;
@@ -501,4 +527,4 @@ Owner: **C** = Claude, **M** = Mirza, **S** = Safa, **B** = Barış, **T** = tea
 | The overnight machine restarts | T4.0 preparation; restartable runners; the archive data still works |
 | Proxy or streaming problems | Proxy and SSE check before M1 |
 | Over-claiming in the pitch | Development-result labels; v2 "thresholds fixed after the event"; the reworded pitch line |
-| Regulatory exposure | Descriptive data only; licensed partners; legal opinions before contracts |
+| Regulatory exposure | Descriptive evidence only; no assumed partnership or resale rights; legal/data-rights opinions before contracts |

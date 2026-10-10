@@ -13,12 +13,12 @@ newer.
   - Mirza: technical lead; all development and data gathering.
   - Safa: business person and repository owner; he only pulls.
   - Barış: designer of the pitch deck and the website's design system.
-- **Goal.** Scientific, mathematical anomaly detection for Turkish investment funds. Stocks come later, only if
-  time and licensed data allow.
-- **Product (open).** Two candidate offers run on one shared core (see [product direction](product-direction.md)):
-  - insurance policies designed from fund-risk data, sold B2B to insurers, brokers and banks;
-  - B2B anomaly data.
-  The team picks the headline story on Saturday evening.
+- **Goal ([DEC-032](../decisions/DEC-032-b2b-evidence-data-api.md)).** Evidence data for Turkish funds and Turkish
+  stocks. The historical fund case is first; Mirza requires real stock support in the hackathon demo too.
+- **Product (confirmed).** B2B evidence data and API access through an agent workflow for banks and financial
+  institutions. Insurance is permanently deferred. Buyer class and revenue direction are decided; customer
+  demand, pricing, partnerships and redistribution rights remain unvalidated. See
+  [product direction](product-direction.md).
 - **Build target (DEC-028).** A deploy-ready full-stack product with real data on localhost, not deployed.
   - Stack: Next.js frontend, FastAPI backend, PostgreSQL with its own email/password auth, and a worker, in Docker.
   - Code freeze: Sunday 2026-10-11 13:00.
@@ -36,7 +36,8 @@ newer.
   - BlackSwan Phase 1: Docker PostgreSQL, role-separated migrations, immutable evidence/AI storage,
     real archive import, health API/worker, public web page and tested proxy. Details below.
   - The research app remains the fallback demo.
-- **Not built yet.** Live model/account checks, chat, agent-team/story screens and overnight refresh import.
+- **Not built yet.** Live tuning/gated batch, agent-team/B2B story screens and stock support.
+  The chat UI and bounded SSE path are built and pass synthetic transport/browser checks; live chat remains gated.
   Product auth, fund API/screens, AI queue/validator/decision storage and review now exist. All 284 legacy end-to-end requirement IDs remain
   `NOT_IMPLEMENTED`; Phase 1 support is reported by slice.
 - **Plan.** `plans/2026-10-10-product-build-plan.md`, confirmed by delegation (DEC-030). The open questions are in `team-asks.md`.
@@ -44,9 +45,11 @@ newer.
 
 ## Codex takeover, 2026-10-10
 
-- Main remains clean on `main` at `19989c5`; the live demo stays on its original ports.
+- Mirza pulled 14 commits into the main checkout, from `19989c5` to `603a09d`. It is clean on `main`; the same
+  fallback listener processes remain on 3060/8767/8768. The main checkout is still load-bearing: do not switch
+  branches or change registered files, and verify registered paths before any future pull.
 - Mirza approved all four takeover recommendations. [DEC-031](../decisions/DEC-031-derived-evidence-openai-egress.md)
-  records D7 and the other answers; the ten exact-name spot checks remain pending.
+  records D7 and the other answers; the delegated ten exact-name spot checks are now complete.
 - Build work now runs in `C:\Users\mirza\Desktop\Hackathon\project-50k-app`, branch `product/build`.
 - Docker Desktop started locally; the four pinned images were pulled. The product extra is locked and installed.
 - D9 downloads are authorized immediately, not only overnight. Restartable runners preserve one paced stream per host
@@ -69,7 +72,8 @@ newer.
 - Final Phase 1 implementation `8c07f66`: Linux root 741 tests OK (16 explained skips), frozen 9 and 88 pass.
   The 14 skipped PostgreSQL checks pass separately in isolated `p50k_dev`; two skips require Windows.
 - Product branch was pushed and merged into remote `main` with merge commit `67af615` using a separate temporary
-  worktree. The main checkout still holds `19989c5`, unchanged for the live demo. Do not pull it until K4.
+  worktree. At that milestone the main checkout still held `19989c5`; Mirza's later safe pull to `603a09d` is
+  recorded above. K4 still means decoupling the demo, not permission to alter registered paths.
 - Phase 2: v2 protocol committed alone at `e9b7ba7`; real run has 17,064 evidence/results for 2,133 funds,
   one immutable calibration, and an idempotent rerun. API/DTO checks pass and all 131 events remain candidates.
   Linux `c8bd652`: 810 tests OK (37 explained skips); frozen 9 and 88 pass. See the
@@ -80,8 +84,25 @@ newer.
 - Final Phase 3 Python `6714f43`: Linux 829 tests OK (46 explained skips); the actual isolated queue→proposal→
   override/rejection flow and concurrent reservation/lease tests pass. No calibrated detector code changed.
 - Local admin credentials were generated into ignored `secrets/local-admin-login.json` without displaying them.
-  Product is healthy on 3070/8770, real mock count zero. OpenAI key file is absent; live AI remains off.
-- Snapshots and KAP lists completed; SPK has 194 discovered PDFs. Profiles/prices continue externally.
+  Product is healthy on 3070/8770, real mock count zero. Key supplied; live model/decision/chat smoke passed. On-demand AI is live under the existing caps.
+- Snapshots, profiles and KAP cohort completed; SPK has 194 discovered PDFs. Prices continue externally; source failures are retained in status logs.
+- T5.1 refresh imported 13,101 additional prices, 2,131 snapshots and 10,819 KAP indexes. Catalog/categories and
+  calibration remain unchanged; two newly discovered snapshot codes stay external. New data is admitted at acquisition
+  (KAP: conservative import admission because response-completion time is unknown), never backdated.
+- Refreshed run `133a58c1-606c-42f4-8750-0102af458bcb`: 17,064 results, 2,133 funds, as-of 2026-10-09,
+  same immutable calibration. All regulatory signals abstain. Ten authorized exact-name checks passed; 131
+  confirmed event versions retain unknown publication time and remain ineligible to trigger.
+- T5.2 owner-scoped chat backend, four read-only tools, budget/daily/call limits, validated SSE and UI exist.
+  Synthetic PostgreSQL integration passes 48 tests with zero skips; web unit 9 and browser 7 pass.
+  Live proposal and chat smoke passed (five calls, conservative booked USD 0.048630). Latest Linux suite
+  at `726c81d`: 858 OK, 55 explained skips; frozen 9/88 pass. See [chat/refresh report](blackswan-chat-refresh-completion.md).
+  Live validation quality, stock support and the agent-team/B2B story remain unfinished.
+- DEC-032 records Mirza's confirmed B2B direction: evidence data/API for banks and financial institutions through
+  an agent workflow; Turkish funds and stocks required in the hackathon demo, historical fund case first, insurance
+  permanently deferred. Stock support remains to be implemented through new isolated modules on resume. Mirza
+  requested finishing the immediate chat/import/documentation block, then stopping for alignment; no new stock
+  features start during that pause. Design system and logos are promised soon; current tokens
+  and wordmark remain until received. Work continues tonight and Sunday morning within the existing freezes.
 
 ## Decisions after the handoff
 
@@ -95,18 +116,20 @@ newer.
 | [DEC-029](../decisions/DEC-029-open-all-funds.md) | 2026-10-10 | Every downloaded fund is open for product use; the development/test split is dropped |
 | [DEC-030](../decisions/DEC-030-blackswan-working-agreements.md) | 2026-10-10 | Product name BlackSwan; no placeholders; $25 a target, not a hard cap; plan confirmed by delegation; persistent reminders for critical unanswered items; downloads started; Codex handoff |
 | [DEC-031](../decisions/DEC-031-derived-evidence-openai-egress.md) | 2026-10-10 | Mirza approved derived-evidence-only OpenAI processing, all D9 downloads now, the product worktree, and the closest-name identity; Safa's D7 answer and ten exact-name checks remain open |
+| [DEC-032](../decisions/DEC-032-b2b-evidence-data-api.md) | 2026-10-10 | B2B evidence data and API through an agent workflow for banks and financial institutions; insurance permanently deferred; Turkish funds and stocks required in the hackathon demo, historical fund case first; stock implementation on resume after alignment pause |
 
 Still binding (the integrity rules hold even though product requirements flex):
 
 - the TRY 5,000 cumulative ceiling, which is not spending authorization;
 - no service accounts beyond the OpenAI key DEC-028 authorizes;
 - unreviewed data rights for TEFAS, KAP and MKK data, so real data stays on localhost;
-- the release gates in `docs/handoff-v0.5/docs/25_Release_Gates_and_Open_Decisions.md`, as DEC-024 scopes them:
-  G03 is the critical data gate, and G02, G04 and G11 return only with the postponed markets.
+- the release gates in `docs/handoff-v0.5/docs/25_Release_Gates_and_Open_Decisions.md`, scoped by DEC-024 and
+  DEC-032: G03 remains the fund-history gate; stock implementation must address G02 data rights. G04/G11 for the
+  remaining postponed markets are not brought into the hackathon by this direction decision.
 
-**Who needs to do what:** see [team asks](team-asks.md). The owner, Safa, only pulls `main`. His open asks are the
-headline story (due Saturday evening), the regulatory checks and his data sources. GitHub repository settings, such
-as collaborators and branch protection, remain his.
+**Who needs to do what:** see [team asks](team-asks.md). The owner, Safa, only pulls `main`. The B2B story is
+confirmed; his open asks are the first customer workflow, pricing validation, regulatory/data-rights checks and
+his data sources. GitHub repository settings, such as collaborators and branch protection, remain his.
 
 ## What exists
 
@@ -195,9 +218,12 @@ Treat any new failure name as a finding, not only a changed count.
 
 - **Development/test split:** closed by DEC-029. All funds are open, there is no held-out test set, and every
   detector figure is a development result.
-- **Headline product story:** insurance policies or B2B anomaly data. Safa decides with the team, Saturday evening.
-- **Regulation:** for insurance (SEDDK) and for selling signals (SPK), Safa checks before the pitch claims either
-  (see `product-direction.md`).
+- **Headline product story:** closed by DEC-032: B2B evidence data and API for banks and financial institutions.
+  Insurance is permanently deferred.
+- **Stock timing:** closed by Mirza: stocks must work in the hackathon demo. Stock implementation remains
+  outstanding; resume it through new isolated modules and a new versioned record after the alignment pause.
+- **Regulation:** Safa checks the capital-markets and data-rights route before any commercial claim or external
+  resale. Insurance research is retained as history, not an active build or legal-work task.
 - **G01, competition eligibility:** the team's position and the pre-event commit dates are recorded in DEC-027. No
   organizer ruling was requested.
 - **G03, dated fund history:** open. Forward snapshots now build dated size, unit and investor history from
@@ -210,8 +236,10 @@ Treat any new failure name as a finding, not only a changed count.
 
 ## Next work
 
-**The product build plan** (`plans/2026-10-10-product-build-plan.md`) is confirmed. Phase 1 foundations have landed;
-Phase 2 starts with the v2 detector protocol committed alone before computation. Items
+**The product build plan** (`plans/2026-10-10-product-build-plan.md`) is confirmed, with DEC-032 setting the active
+B2B story and fund/stock product scope. Phase 1 foundations, Phase 2 fund detectors/API and Phase 3 auth/review
+have landed. Finish the current chat/import/documentation block, then pause for Mirza's requested alignment.
+On resume, complete the agent workflow, B2B feed/API presentation and real stock support. Items
 recommended before 2026-10-10 are carried into that plan, not dropped:
 
 1. **Per-date estimated flow.** Now a candidate detector inside the product pipeline. Fix its parameters in a dated

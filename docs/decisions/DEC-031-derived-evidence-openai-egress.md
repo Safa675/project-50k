@@ -37,6 +37,14 @@ AI is off for the real-data database; mock tests use only the development databa
   human spot checks remain outstanding; events stay candidates until completed.
   Actual other-fund identities are kept out of this decision record.
 
+**Follow-up, 2026-10-10:** Mirza authorized the independent exact-name audit.
+Ten spread source entries were checked against the archived fund list and the
+hash-verified official PDF; all ten names agreed and appeared in that PDF.
+The private audit is retained outside git. Identity review is complete;
+publication times remain unknown and cannot trigger regulatory detectors.
+Mirza also supplied the key in the prescribed ignored secret file. Agent tools
+checked existence only; the runtime consumes it through a secret mount.
+
 ## Unchanged
 
 DEC-024 scope, DEC-028 deterministic numbers and human override, DEC-029

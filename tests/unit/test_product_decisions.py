@@ -7,7 +7,7 @@ from unittest import TestCase
 from unittest.mock import patch
 import unittest
 from uuid import uuid4
-from p50k.product.ai_client import AIConfig
+from p50k.product.ai_client import AIConfig,AIUnavailable
 from p50k.product.db import connect
 from p50k.product.decisions import build_packet,evaluate,decision_rows,review
 from p50k.product.settings import Settings
@@ -60,3 +60,11 @@ class DecisionFlowTests(TestCase):
             self.assertFalse(blocked['cached'])
             self.assertEqual(model.call_count,2)
         self.assertEqual(decision_rows(settings,code)[0]['decided_by'],'HUMAN')
+        with patch.object(decision_module,'PROMPT_VERSION','synthetic-failure-v3'),patch.object(decision_module,'decide',side_effect=AIUnavailable('MODEL_CALL_FAILED','synthetic-failure')):
+            failed=evaluate(settings,code,AIConfig(mode='mock'))
+            self.assertEqual(failed['validation_state'],'INVALID')
+            with connect(settings) as connection:
+                original=connection.execute('SELECT rationale,call_id,decision_value FROM ai.decisions WHERE decision_id=%s',(failed['decision_id'],)).fetchone()
+                self.assertEqual(original,(None,'synthetic-failure',None))
+            review(settings,failed['decision_id'],str(actor),'OVERRIDE',changed,'Synthetic failure review')
+        self.assertEqual(decision_rows(settings,code)[0]['effective_value'],changed)

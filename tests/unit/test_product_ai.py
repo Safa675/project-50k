@@ -41,7 +41,7 @@ class AIUnitTests(TestCase):
         self.assertIn('değer: 100; eşik: 50',render('{{ev:ev:synthetic}}',packet()))
 
     def test_turkish_corpus_rejects_numbers_intensity_allegations_advice_and_safety(self):
-        for text in ('Yüzde kırk arttı.','İki kat yükseldi.','17 Eylül','MANİPÜLASYON','RISKSIZ','ÇOK ÜZERİNDE','SATIN AL','tasfiye edilebilir','teminat','Bir yıl sonra'):
+        for text in ('Yüzde kırk arttı.','İki kat yükseldi.','iki yüz seviyesinde','THF hakkında','ev:synthetic','17 Eylül','MANİPÜLASYON','RISKSIZ','ÇOK ÜZERİNDE','SATIN AL','tasfiye edilebilir','teminat','Bir yıl sonra'):
             with self.subTest(text=text),self.assertRaises(InvalidOutput):
                 validate_text(text,packet())
 
@@ -54,6 +54,8 @@ class AIUnitTests(TestCase):
     def test_mock_never_enters_real_database(self):
         with self.assertRaises(AIUnavailable):decide(Settings(),AIConfig(mode='mock'),packet())
         with self.assertRaises(AIUnavailable):decide(Settings(),AIConfig(mode='off'),packet())
+        with self.assertRaisesRegex(AIUnavailable,'LIVE_DATABASE_REJECTED'):
+            decide(Settings(db_name='p50k_dev'),AIConfig(mode='live'),packet())
 
     def test_live_boundary_reserves_first_disables_sdk_retries_and_response_storage(self):
         events=[]

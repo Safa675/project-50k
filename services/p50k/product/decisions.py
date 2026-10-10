@@ -58,7 +58,15 @@ def evaluate(settings: Settings, code: str, config: AIConfig | None=None) -> dic
                 mode=config.mode
             valid=validate_output(raw,packet)
             break
-        except AIUnavailable:
+        except AIUnavailable as error:
+            if str(error)=='MODEL_CALL_FAILED':
+                model=config.model if config.mode=='live' else 'synthetic'
+                mode=config.mode
+                call_id=error.call_id or 'failed:'+uuid4().hex
+                break
+            if str(error) in {'BUDGET_UNAVAILABLE','TUNING_CALL_LIMIT'}:
+                model,mode,call_id='budget-gate','off','gate:'+uuid4().hex
+                break
             raise
         except Exception:
             if attempt==1:
