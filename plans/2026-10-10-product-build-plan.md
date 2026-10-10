@@ -1,7 +1,10 @@
-# Product build plan: deploy-ready, AI-native fund anomaly platform
+# BlackSwan build plan: deploy-ready, AI-native fund anomaly platform
 
-**Status: PROPOSED.** Written 2026-10-10 at about 13:30 (Europe/Istanbul). Nothing in this plan starts until Mirza
-confirms it. Confirming it accepts the recommended defaults in section 2 unless he changes them.
+**Status: CONFIRMED by delegation** ([DEC-030](../docs/decisions/DEC-030-blackswan-working-agreements.md), 2026-10-10 about 14:30).
+- Agents confirm the defaults in section 2 that serve the team's interest, and ask Mirza about problematic ones.
+- Still open: D7, the rest of D9, D1 and T1.7a (see `docs/notes/team-asks.md`).
+- The $25 budget is a target, not a hard cap. The product contains no placeholders (DEC-030).
+- Codex continues from `plans/2026-10-10-codex-handoff-prompt.md`.
 
 - **Freezes:** features Sunday 2026-10-11 at 10:30; code at 13:00.
 - **Implements:** [DEC-028](../docs/decisions/DEC-028-deploy-ready-ai-native-build.md) and

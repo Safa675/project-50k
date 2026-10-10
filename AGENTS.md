@@ -11,6 +11,13 @@ The current scope is **Turkish investment funds (TEFAS) only**, set by [DEC-024]
   - Team: Mirza is the technical lead; Safa is business and owner; Barış is design.
 - **[DEC-029](docs/decisions/DEC-029-open-all-funds.md).** Every downloaded fund is open for product use.
 - **Specs.** The handoff's product requirements are guides, not hard rules. Raise important collisions instead of silently choosing. The integrity rules below stay binding.
+- **[DEC-030](docs/decisions/DEC-030-blackswan-working-agreements.md) working agreements (2026-10-10).**
+  - The product is called **BlackSwan**; Mirza will supply logos and designs.
+  - **No placeholders** in the product: no lorem ipsum, fake values, "coming soon" screens, blank template rows, mock AI output or notes to the team. Messages for Mirza go in chat. Required integrity labels are real content, not placeholders.
+  - **The $25 OpenAI budget is a target, not a hard cap.** Don't waste it; raise it only with a valid reason and Mirza's OK.
+  - **The plan is confirmed by delegation.** Confirm items that serve the team's interest yourself; ask Mirza only about problematic ones, with clear options and a recommendation.
+  - **Persistent reminders.** If Mirza misses something important (an unanswered question or unconfirmed information that affects everything), raise it again in every reply until he answers. Only for truly critical items.
+- **Start here if you are Codex taking over:** `plans/2026-10-10-codex-handoff-prompt.md`.
 
 ## Read first, in this order
 
