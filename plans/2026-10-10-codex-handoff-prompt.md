@@ -71,8 +71,15 @@ Claude Code's hooks do not protect you, so follow these by hand.
 
 **Product**
 - **No placeholders (DEC-030):** no lorem ipsum, fake values, "coming soon" screens, blank template rows, mock AI
-  output or notes to the team. Required integrity labels are real content. If something cannot be done properly, tell
-  Mirza.
+  output or notes to the team. If something cannot be done properly, tell Mirza.
+- **These are not placeholders, and they stay:**
+  - the required integrity labels: data mode, "geliştirme sonucu", "veri hakları incelenmedi", "yatırım tavsiyesi
+    değildir";
+  - real empty, error and stale states;
+  - the plain-text "BlackSwan" wordmark until Mirza's logos arrive;
+  - the current research-app colours and fonts until Barış's design system arrives.
+
+  If Mirza says he would rather not show any of these, follow him.
 - **AI (DEC-028):**
   - Detectors compute every number.
   - The OpenAI model chooses only among options the server allows. It never writes numbers, and it cites evidence
@@ -110,6 +117,8 @@ Claude Code's hooks do not protect you, so follow these by hand.
    - It collects 2,136 funds, about 4,272 requests at 1.5 s pacing, so roughly 2–3 hours.
    - Output: `%USERPROFILE%\.local\share\project-50k\overnight\2026-10-10\snapshots-all.sqlite3`, with its log in
      `snapshots-all.log` in the same folder.
+   - Mirza's laptop must stay on and online until it finishes. Check the log; if it stopped early, rerun it.
+   - Mirza wants downloads started as soon as they can run (DEC-030), not held for the night.
    - It is restartable: rerun the same command, and dated rows already stored are kept. From the main checkout:
      `$env:PYTHONDONTWRITEBYTECODE='1'; $env:PYTHONPATH='services'; .venv\Scripts\python.exe -m p50k.jobs.fund_snapshots --db "$HOME\.local\share\project-50k\overnight\2026-10-10\snapshots-all.sqlite3"`
 
