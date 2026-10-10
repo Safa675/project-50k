@@ -1,10 +1,26 @@
 # Project 50K — Claude Code entry
 
+## Current direction: DEC-028 and DEC-029 (2026-10-10)
+
+- **Team.** Mirza is the technical lead: all development and data gathering. Safa is the business person and repository owner; he only pulls. Barış designs the pitch deck and the website's design system.
+- **Build target.** A deploy-ready full-stack product (frontend, backend, PostgreSQL, worker, all connected) that runs on localhost with real data. It is not deployed. Code freeze: Sunday 2026-10-11 13:00.
+- **AI-native, never forget.**
+  - An LLM (OpenAI API, Mirza's key in a gitignored `.env`, $25 limit) decides responsibly from deterministic detector evidence, and users chat with it in the UI.
+  - Detectors compute every score.
+  - Every LLM decision is stored with its evidence, and a human must be able to override it.
+- **Stack.** Plain PostgreSQL with the product's own email/password auth, in Docker.
+- **Data.** Every downloaded fund is open for product use (DEC-029); every detector figure is a development result.
+- **Specs.** The handoff's product requirements and earlier product decisions are guides, not hard rules: raise important collisions with Mirza, or with Safa, Barış or the team when it is their call. The integrity rules stay binding.
+- **Read before product work:**
+  - `docs/notes/product-direction.md` (insurance policies or B2B anomaly data; still open);
+  - `docs/notes/team-asks.md` (open asks: add yours);
+  - the current plan in `plans/`.
+
 ## Current scope: DEC-024 (2026-10-06)
 
 Read `docs/decisions/DEC-024-turkish-funds-first.md` before any task. The active scope is **Turkish investment funds only**. BIST, crypto, US equities and on-chain are postponed, not dropped.
 
-The handoff instructions imported below, and the handoff's own `CLAUDE.md`, `START_HERE.md`, `PRODUCT.md`, `research/USER_DECISIONS_2026-10-02.md` and docs 04, 21, 22, 23 and 25, say the four-market/on-chain target is binding and that a reduced target is not approved. DEC-024 supersedes those statements. Everything else in the handoff still applies: the TRY 5,000 cumulative ceiling, no service accounts, G01 open, the integrity rules, and all 284 requirement IDs `NOT_IMPLEMENTED`.
+The handoff instructions imported below, and the handoff's own `CLAUDE.md`, `START_HERE.md`, `PRODUCT.md`, `research/USER_DECISIONS_2026-10-02.md` and docs 04, 21, 22, 23 and 25, say the four-market/on-chain target is binding and that a reduced target is not approved. DEC-024 supersedes those statements. Everything else in the handoff still applies as a guide (DEC-028): the TRY 5,000 cumulative ceiling, no service accounts beyond the OpenAI key DEC-028 authorizes, G01's status as recorded in DEC-027, the integrity rules (binding), and all 284 requirement IDs `NOT_IMPLEMENTED` until delivered and tested.
 
 ## Repository layout
 
@@ -19,7 +35,7 @@ The handoff instructions imported below, and the handoff's own `CLAUDE.md`, `STA
 
 ## Agent tooling
 
-`.claude/` holds project skills (`/p50k-verify`, `/p50k-leak-scan`, `/p50k-demo`, `/p50k-seal-dated`, `/p50k-new-research-slice`), path-scoped rules and hooks. The hooks block file-tool edits and common shell writes or deletions of frozen files, `raw/` and files bound into sealed bundles, block force pushes, squash merges and staging private data, and report protected files that changed anyway. They are heuristics, not a boundary. See `docs/notes/agent-tooling.md`, including why there is no MCP server. External actions (spending, accounts, deployment, installing the Linux snapshot timer, contacting third parties) need the owner's say-so; DEC-027 records what the team may do on its own machine. Reply in the language of the person you work with (the owner prefers simple, short Turkish); code, commits and docs stay in English.
+`.claude/` holds project skills (`/p50k-meta` for persisting new context and keeping instructions consistent, `/p50k-verify`, `/p50k-leak-scan`, `/p50k-demo`, `/p50k-seal-dated`, `/p50k-new-research-slice`), path-scoped rules and hooks. When the user gives new context, decisions or preferences, run `/p50k-meta` before continuing. The hooks block file-tool edits and common shell writes or deletions of frozen files, `raw/` and files bound into sealed bundles, block force pushes, squash merges and staging private data, and report protected files that changed anyway. They are heuristics, not a boundary. See `docs/notes/agent-tooling.md`, including why there is no MCP server. External actions (spending, new accounts, deployment, installing the Linux snapshot timer, contacting third parties) need explicit authorization from Mirza or Safa. DEC-028 authorizes the OpenAI key with a $25 limit, and DEC-027 the forward snapshots on the team's machine. Reply in the language of the person you work with: Mirza wants concise English; Safa prefers simple, short Turkish. Code, commits and docs stay in English.
 
 ## Handoff instructions
 

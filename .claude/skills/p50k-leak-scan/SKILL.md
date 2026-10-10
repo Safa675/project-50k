@@ -17,9 +17,11 @@ $PY "${CLAUDE_SKILL_DIR}/leak_scan.py"
 
 The script:
 
-- reads only the 100 opened price files in `raw/tefas/prices/` (codes from
-  `research/events/2026-09-17-spk-liquidations/top100_funds.txt`) and the fund names in the snapshot database
-  (`raw/snapshots/fund_snapshots.sqlite3`, `$P50K_DATA_DIR`, or `~/.local/share/project-50k`);
+- reads every price file in `raw/tefas/prices/` (all funds are open, DEC-029) and the fund names in every snapshot
+  database it finds (`raw/snapshots/`, `$P50K_DATA_DIR`, `~/.local/share/project-50k`, including the forward
+  database);
+- checks the non-target codes of the top-100 list (`top100_funds.txt`), because short codes for all funds would
+  collide with ordinary abbreviations;
 - in a clone without private data, set `P50K_RAW_DIR` to another checkout's `raw/` directory;
 - scans the working copy and, when staged, the index copy of every new, modified or staged text file, including
   names with non-ASCII characters;
@@ -27,5 +29,4 @@ The script:
 - reports counts and `file:line` locations, never the matching values.
 
 Exit code 0 means no hits; 1 means hits to fix before committing; 2 means the private data is absent, so the
-value and name checks were skipped (the code check still ran). Never commit with hits. Never widen the scan to
-the other 1,922 downloaded price files.
+value and name checks were skipped (the code check still ran). Never commit with hits.

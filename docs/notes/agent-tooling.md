@@ -8,6 +8,7 @@ Change `CLAUDE.md` and `AGENTS.md` together so they never disagree.
 
 | Skill | Use |
 |---|---|
+| `/p50k-meta` | Meta work: persist new context and decisions, and keep instructions, current state, team asks, plans, skills, hooks and memory consistent |
 | `/p50k-verify` | Full verification, the Windows diagnostic variant and a spare-port browser config for when a demo holds port 3060 |
 | `/p50k-leak-scan` | Pre-commit scan for real price values, real fund names and non-target codes; it prints locations, never values |
 | `/p50k-demo` | Start, stop, restart or health-check the local demo, with PowerShell and Linux scripts |

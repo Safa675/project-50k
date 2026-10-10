@@ -18,8 +18,8 @@ const changed = drift();
 const lines = [
   `Project 50K session context: branch ${branch} at ${head}; ${dirty} uncommitted path(s); core.autocrlf=${eol}.`,
   `Private data here: raw/ ${existsSync(join(root, 'raw')) ? 'present' : 'absent'}; sealed fixed-date bundles: ${count('raw/research/fund-review-app')}; dated indexes: ${count('raw/research/fund-review-dated/index')}.`,
-  'Rules: Turkish funds only (DEC-024); real data never enters git; never change docs/handoff-v0.5, committed protocols, raw/ or files bound into sealed bundles; merge commits only, no squash or force-push; the owner only pulls (DEC-027).',
-  'Skills: /p50k-verify, /p50k-leak-scan, /p50k-demo, /p50k-seal-dated, /p50k-new-research-slice. Current state: docs/notes/current-state.md.',
+  'Rules: Turkish funds only (DEC-024); real data never enters git; never change docs/handoff-v0.5, committed protocols, raw/ or files bound into sealed bundles; merge commits only, no squash or force-push; the owner only pulls (DEC-027). Product: deploy-ready and AI-native; LLM decisions need human override (DEC-028); all funds open, figures are development results (DEC-029).',
+  'Skills: /p50k-meta (persist new context first), /p50k-verify, /p50k-leak-scan, /p50k-demo, /p50k-seal-dated, /p50k-new-research-slice. Read: docs/notes/current-state.md, docs/notes/team-asks.md, plans/.',
 ];
 if (changed.length) {
   lines.push(`WARNING: protected files differ from HEAD: ${changed.slice(0, 8).join(', ')}. Ask the user before keeping these changes.`);

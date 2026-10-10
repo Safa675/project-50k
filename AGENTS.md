@@ -2,9 +2,19 @@
 
 The current scope is **Turkish investment funds (TEFAS) only**, set by [DEC-024](docs/decisions/DEC-024-turkish-funds-first.md) on 2026-10-06. BIST, crypto, US equities and on-chain are postponed, not dropped. DEC-024 overrides every statement in `docs/handoff-v0.5/` that calls the four-market/on-chain target binding.
 
+**Current direction (2026-10-10):**
+
+- **[DEC-028](docs/decisions/DEC-028-deploy-ready-ai-native-build.md).**
+  - Build a deploy-ready full-stack product that runs on localhost with real data: frontend, backend, PostgreSQL with its own email/password auth, and a worker, all in Docker.
+  - Code freeze: Sunday 2026-10-11 13:00.
+  - The product is **AI-native**. An LLM (OpenAI API) decides from deterministic detector evidence, a human can override every LLM decision, and users chat with the LLM in the UI.
+  - Team: Mirza is the technical lead; Safa is business and owner; Barış is design.
+- **[DEC-029](docs/decisions/DEC-029-open-all-funds.md).** Every downloaded fund is open for product use.
+- **Specs.** The handoff's product requirements are guides, not hard rules. Raise important collisions instead of silently choosing. The integrity rules below stay binding.
+
 ## Read first, in this order
 
-1. [docs/notes/current-state.md](docs/notes/current-state.md): where the project stands, what is decided and open, what to do next. Start here.
+1. [docs/notes/current-state.md](docs/notes/current-state.md): where the project stands, what is decided and open, what to do next. Start here. Then [product direction](docs/notes/product-direction.md), the [open asks](docs/notes/team-asks.md) and the current plan in `plans/`.
 2. [docs/notes/codex-context-2026-10-07.md](docs/notes/codex-context-2026-10-07.md): the detailed 2026-10-07 record. Its data-source facts, case study, evaluation rules and do-not-claim list (sections 5, 6, 7 and 11) still apply.
 3. `docs/handoff-v0.5/AGENTS.md`: the shared integrity, auth, design and completion-report rules. They still apply except where DEC-024 differs. Do not edit anything under `docs/handoff-v0.5/` (frozen; its `MANIFEST.json` hashes verify it).
 4. `research/spikes/2026-10-06-tefas/REPORT.md`: what TEFAS and KAP actually return. Read it before touching a data adapter or a detector.
@@ -17,12 +27,19 @@ Your first reply should verify the repo state (run the tests listed below) and p
 - **No real TEFAS or KAP values in git.** Their data rights are not reviewed. Raw files live under the repository-root, gitignored `raw/`; SQLite databases stay in `~/.local/share/project-50k/`. Legacy research paths are ignored compatibility symlinks. See [local data layout](docs/notes/local-raw-data-layout.md). Tests use synthetic values only. Before committing, check staged files for real values.
 - **Missing stays missing.** TEFAS writes `0` for "no price": treat it as `None`. Never fill gaps with zeros or invent dated history. Fund NAV is daily, published-cadence data; no intraday candles.
 - **Point in time.** Use a value only from the moment it was published: a TEFAS row dated D from about 11:05 on D, a KAP report from its publish time. Add a look-ahead test to any detector or replay code.
-- **Do not tune detectors on the funds you evaluate them on.** The owner's development/test split is still undecided. Until it is, **do not compute detector output, thresholds or any other statistic on the 1,922 downloaded price files outside `research/events/2026-09-17-spk-liquidations/top100_funds.txt`.** Read section 7 of the context file.
+- **All downloaded funds are in scope (DEC-029), and there is no held-out test set.** Label every detector figure a development result; never present it as validated accuracy, recall or lead time. Commit a short dated note fixing the parameters before running a recalibration or a new detector.
+- **AI rules (DEC-028).**
+  - Detectors compute every score, threshold and trigger. The LLM never changes a number.
+  - LLM decisions are stored with their evidence references, model and prompt version, and a human override is stored beside the original.
+  - Chat tools are read-only and bounded, and the server validates their arguments.
+  - Material claims cite evidence, and insufficient evidence is said plainly.
+  - No buy/hold/sell or personalized advice, and no fraud or manipulation claims.
+  - The OpenAI key lives only in a gitignored `.env`.
 - **Do not edit the pre-registered detectors** (`research/events/2026-09-17-spk-liquidations/price_detectors/detectors.py`, `PREREGISTRATION.md`, `results.json`) or any committed `PROTOCOL.md` or `PREREGISTRATION.md` under `research/events/` (for example in `fund_futures_divergence/` and `fund_holdings_divergence/`). Write a v2 or a new versioned protocol beside them.
 - **Sealed bundles re-hash their registered files on every load.** Editing one (listed in `tests/unit/registered_sources.lock.json`, plus the `dated_*.py` modules and the event's `run.py` runners) makes the running app answer 503 until every affected bundle is resealed. Add new modules beside them instead.
 - **Naming.** Committed files name only the eight liquidated top-100 funds. Never name other funds as flagged or suspicious. An anomaly is not fraud, and SPK's reasons for its order are not in our files.
 - **Pacing.** TEFAS: 1.5 s between requests. KAP: 6 s (a 1.5 s pace got us cut off after about 180 requests).
-- **No external actions without the owner's say-so:** spending, creating accounts (Google OAuth, Supabase, LLM keys, email, hosting), deploying, installing the systemd timer in `ops/systemd/`, contacting third parties. The TRY 5,000 ceiling is not authorization to spend.
+- **No external actions without explicit authorization from Mirza or Safa:** spending, creating accounts (Google OAuth, Supabase, email, hosting), deploying, installing the systemd timer in `ops/systemd/`, contacting third parties. DEC-028 authorizes the OpenAI API key that Mirza provides, with a $25 limit. The TRY 5,000 ceiling is not authorization to spend.
 - **Line endings.** `.gitattributes` forces LF; sealed bundles, runner registration and the handoff `MANIFEST.json` hash LF bytes. On Windows, never re-save tracked files with CRLF.
 - **Claude Code hooks** in `.claude/` block most of these mistakes for Claude Code sessions only; other agents must follow the rules by hand. See [agent tooling](docs/notes/agent-tooling.md).
 - **The local demo depends on two checkouts.** On the team's Windows machine the demo runs from the dated-view clone, but its fixed bundle re-hashes the main checkout's registered files and snapshot database on every load. While it runs, do not switch branches or change those files in the main checkout, and do not run `npm run build` in the clone whose `.next` the demo serves. See `docs/notes/current-state.md`.
@@ -60,7 +77,8 @@ On Windows the root suite has known platform failures (tzdata, CRLF fixtures, co
 
 ## Working style
 
-- Code, commit messages, docs and prompts in English. Reply in the language of the person you work with; the owner prefers simple, short Turkish.
+- Code, commit messages, docs and prompts in English. Reply in the language of the person you work with: Mirza wants concise English; Safa prefers simple, short Turkish.
+- When you need a decision or an action from Mirza, Safa, Barış or the team, add it to `docs/notes/team-asks.md` and say so in your reply.
 - Small vertical slices with tests. Before editing, list ambiguities that could cause an irreversible or unsafe choice.
 - Match the surrounding code: `from __future__ import annotations`, type hints, `Decimal` for prices, `None` for unknown, atomic file writes, `unittest` (not pytest).
 - End every task with the handoff's completion report: requirement IDs, changed files, the exact tests run and their output, what is untested, the data mode, limitations, and the next recommended task. Never report a test as passed that you did not run.

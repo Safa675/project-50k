@@ -11,8 +11,8 @@ description: Plan and implement a new Project 50K research or app slice the way 
 - Propose exactly one vertical slice: requirement IDs (partial contribution only; all 284 stay
   NOT_IMPLEMENTED), file plan, acceptance tests, dependencies, data mode and open choices. List ambiguities that
   could cause an irreversible or unsafe choice. Implement only after the user approves.
-- Scope is Turkish funds only (DEC-024). Use only the 100 opened funds in `top100_funds.txt`; never read or compute
-  anything on the other 1,922 downloaded price files.
+- Scope is Turkish funds (DEC-024); every downloaded fund is in scope (DEC-029). Label every detector figure a
+  development result. Product slices follow DEC-028: deploy-ready stack, AI decisions with human override.
 
 ## 2. Preregister
 
