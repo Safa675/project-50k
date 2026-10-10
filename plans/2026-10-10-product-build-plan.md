@@ -443,7 +443,7 @@ Owner: **C** = Claude, **M** = Mirza, **S** = Safa, **B** = Barış, **T** = tea
 ### Phase 3
 
 - [x] T1.6 Login, CSRF, expiry/revocation/throttling and PostgreSQL tests
-- [ ] T3.1 Wrapper/caps/reservations/modes built; paid model/account smoke awaits T0.2 key
+- [x] T3.1 Wrapper/caps/reservations/modes and paid model/account/decision/chat smoke pass; full tuning remains a batch gate
 - [x] T3.2 Typed egress and allowlist test
 - [x] T3.3 Validator/Turkish corpus; live quality measurement remains gated
 - [x] T3.4 Immutable packets/options/cache/INVALID block; synthetic flow tested

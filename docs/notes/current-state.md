@@ -36,7 +36,7 @@ newer.
   - BlackSwan Phase 1: Docker PostgreSQL, role-separated migrations, immutable evidence/AI storage,
     real archive import, health API/worker, public web page and tested proxy. Details below.
   - The research app remains the fallback demo.
-- **Not built yet.** Live tuning, agent-team/B2B story screens and stock support.
+- **Not built yet.** Live tuning/gated batch, agent-team/B2B story screens and stock support.
   The chat UI and bounded SSE path are built and pass synthetic transport/browser checks; live chat remains gated.
   Product auth, fund API/screens, AI queue/validator/decision storage and review now exist. All 284 legacy end-to-end requirement IDs remain
   `NOT_IMPLEMENTED`; Phase 1 support is reported by slice.
@@ -84,7 +84,7 @@ newer.
 - Final Phase 3 Python `6714f43`: Linux 829 tests OK (46 explained skips); the actual isolated queue→proposal→
   override/rejection flow and concurrent reservation/lease tests pass. No calibrated detector code changed.
 - Local admin credentials were generated into ignored `secrets/local-admin-login.json` without displaying them.
-  Product is healthy on 3070/8770, real mock count zero. Key supplied; bounded model check underway.
+  Product is healthy on 3070/8770, real mock count zero. Key supplied; live model/decision/chat smoke passed. On-demand AI is live under the existing caps.
 - Snapshots, profiles and KAP cohort completed; SPK has 194 discovered PDFs. Prices continue externally; source failures are retained in status logs.
 - T5.1 refresh imported 13,101 additional prices, 2,131 snapshots and 10,819 KAP indexes. Catalog/categories and
   calibration remain unchanged; two newly discovered snapshot codes stay external. New data is admitted at acquisition
@@ -94,6 +94,8 @@ newer.
   confirmed event versions retain unknown publication time and remain ineligible to trigger.
 - T5.2 owner-scoped chat backend, four read-only tools, budget/daily/call limits, validated SSE and UI exist.
   Synthetic PostgreSQL integration passes 48 tests with zero skips; web unit 9 and browser 7 pass.
+  Live proposal and chat smoke passed (five calls, conservative booked USD 0.048630). Latest Linux suite
+  at `726c81d`: 858 OK, 55 explained skips; frozen 9/88 pass. See [chat/refresh report](blackswan-chat-refresh-completion.md).
   Live validation quality, stock support and the agent-team/B2B story remain unfinished.
 - DEC-032 records Mirza's confirmed B2B direction: evidence data/API for banks and financial institutions through
   an agent workflow; Turkish funds and stocks required in the hackathon demo, historical fund case first, insurance

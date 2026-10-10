@@ -44,8 +44,7 @@ docker compose run --rm worker python -m p50k.product.cli import-archive --raw-d
 The existing Windows override already contains the correct paths. The importer
 prints only aggregate counts and hashes; a repeat inserts no observations.
 Changing input bytes during import, active SQLite journals or attachment revisions
-without new list provenance fail closed. Missing NAV stays missing. All SPK events
-remain candidates until the outstanding human mapping check is complete.
+without new list provenance fail closed. Missing NAV stays missing. Identity mapping checks are complete; confirmed versions retain unknown publication time and cannot trigger.
 
 ## Resume authorized downloads immediately
 
@@ -69,5 +68,27 @@ the real-data database. The script may remove only that synthetic volume.
 Product/archive counts, exact checks and limitations are in
 [`blackswan-phase1-completion.md`](../../docs/notes/blackswan-phase1-completion.md).
 
-Do not pull remote `main` into the load-bearing main checkout during the demo.
+Verify registered paths before pulling remote `main` into the load-bearing main checkout during the demo.
 Continue in the product worktree; decoupling the demo remains K4 after the event.
+
+## Live AI and completed-download refresh
+
+The key is supplied in the ignored `secrets/openai_api_key` file. Runtime checks
+passed; the current product runs live on-demand AI under existing budgets. To
+recreate that configuration, use all current local overlays:
+
+```powershell
+$env:P50K_AI_MODE='live'
+docker compose -f compose.yaml -f compose.override.yaml -f compose.dev.yaml -f compose.ai.yaml up -d --no-build --wait
+```
+
+After remaining downloads complete, run the incremental importer (read-only inputs):
+
+```powershell
+docker compose -f compose.yaml run --rm --no-deps --volume C:/Users/mirza/.local/share/project-50k/overnight/2026-10-10:/inputs/overnight:ro worker python -m p50k.product.overnight_import --overnight-dir /inputs/overnight
+```
+
+It preserves the fixed fund/category universe and admits revisions conservatively.
+Run detectors afterward with the existing calibration; never recalibrate silently.
+The final tuning/batch gate, stocks and freeze rehearsals remain outstanding.
+See [chat/refresh completion](../../docs/notes/blackswan-chat-refresh-completion.md).
