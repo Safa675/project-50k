@@ -596,3 +596,7 @@ button.ag-task-row:focus-visible{outline:2px solid var(--bs-accent-text);outline
 .ag-task-line .ag-task-title{white-space:normal;overflow-wrap:anywhere;min-width:0;flex-basis:55%}
 .ag-workspace-head>div{min-width:0}
 @media(max-width:760px){.ag-layer .ag-block,.ag-page .ag-block{padding:16px}.ag-output-block .ag-timeline{max-height:none;overflow:visible}}
+/* Global team control keeps the queue visible while admissions are paused. */
+.ag-team-control {display:flex;align-items:center;flex-shrink:0;}
+.ag-team-control button {white-space:nowrap;}
+.ag-control-error {margin:0;padding:8px 18px;flex-shrink:0;}

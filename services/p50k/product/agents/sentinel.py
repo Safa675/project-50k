@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 import logging
 from typing import Any
 
-from p50k.product.agents import store
+from p50k.product.agents import control, store
 from p50k.product.agents.config import AgentConfig
 from p50k.product.agents.vocabulary import REGULATORY_BONUS
 from p50k.product.analysis_context import use_analysis_date, validate_date
@@ -126,6 +126,9 @@ def scan(settings: Settings, scope: str, config: AgentConfig | None = None) -> d
     reopened = None
     with use_analysis_date(store.scope_date(scope)), connect(settings) as connection:
         connection.execute("SET LOCAL statement_timeout='30s'")
+        if not control.allows_new_work(connection):
+            return {'scope': scope, 'run_id': None, 'funds_scanned': 0,
+                    'cases_opened': 0, 'cases_refreshed': 0, 'paused': True}
         connection.execute('SELECT pg_advisory_xact_lock(hashtextextended(%s,%s))', (scope, SCAN_LOCK))
         run = store.scope_run(connection, settings)
         if run:
@@ -179,6 +182,8 @@ def tick(settings: Settings, config: AgentConfig | None = None) -> list[dict[str
     results = []
     with connect(settings) as connection:
         connection.execute("SET LOCAL statement_timeout='5s'")
+        if not control.allows_new_work(connection):
+            return []
         scopes = active_scopes(connection, settings)
         due = [scope for scope in scopes if is_due(connection, settings, scope)]
     for scope in due:

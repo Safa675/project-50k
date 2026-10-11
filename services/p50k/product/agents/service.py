@@ -12,7 +12,7 @@ import re
 from typing import Any
 from uuid import UUID
 
-from p50k.product.agents import llm, store
+from p50k.product.agents import control, llm, store
 from p50k.product.agents.config import AgentConfig
 from p50k.product.agents.vocabulary import (ACTIVITY_TR, AI_OFF_ACTIVITY_TR, AI_ROLES, CASE_STATUS_TR, COUNTER_TYPE_TR,
                                             DECISION_TR, HYPOTHESIS_TYPE_TR, PAGE_VISIT_PRIORITY, REOPEN_CLOSE_NOTE_TR,
@@ -130,9 +130,11 @@ def team(settings: Settings, scope: str, config: AgentConfig | None = None) -> d
     now = datetime.now(timezone.utc)
     with connect(settings) as connection:
         read_only(connection)
+        team_control = control.state(connection)
         budget = budget_state(connection, config)
         current = {row[4]: row for row in connection.execute(f"""SELECT DISTINCT ON (task.role) {TASK_COLUMNS}
             {TASK_FROM} WHERE item.analysis_scope_key=%s AND task.status IN ('running','waiting_budget')
+              AND (task.status<>'running' OR task.lease_until>now())
             ORDER BY task.role,(task.status='running') DESC,task.started_at DESC NULLS LAST,task.created_at DESC""",
             (scope,)).fetchall()}
         queued = dict(connection.execute("""SELECT task.role,count(*) FROM agents.tasks task JOIN agents.cases item USING(case_id)
@@ -162,7 +164,12 @@ def team(settings: Settings, scope: str, config: AgentConfig | None = None) -> d
     agents = [sentinel_agent(scan, opened, counts[0], now)]
     for role in AI_ROLES:
         agents.append(ai_agent(role, current.get(role), queued.get(role, 0), last.get(role), config))
+    if team_control['paused']:
+        for agent in agents:
+            if agent['role'] == 'sentinel' or agent['state'] != 'working':
+                agent.update(state='waiting', activity_tr='Ekip durduruldu; sıradaki işler devam etmeyi bekliyor.')
     return {'scope': scope, 'now': now.isoformat(), 'budget': budget, 'agents': agents,
+            'control': team_control,
             'links': [{'from': row[0], 'to': row[1], 'kind': row[2], 'at': iso(row[3]), 'case_id': str(row[4])}
                       for row in links],
             'counts': {'open_cases': counts[0], 'queued': counts[1], 'running': counts[2], 'done_today': counts[3]}}

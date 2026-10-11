@@ -1,11 +1,8 @@
-import Link from 'next/link';
-import {serverApi} from '@/lib/auth';
-import ResultsReport from './ResultsReport';
-import styles from './results.module.css';
+import {permanentRedirect} from 'next/navigation';
 
-export default async function Results(){
-  const response=await serverApi('/evaluation/retrospective');
-  if(response.status===404)return <div className={styles.page}><header className={styles.hero}><span className={styles.eyebrow}>Geriye dönük karşılaştırma</span><h1>12 Eylül taraması</h1><p>Bu tarihe ait tamamlanmış tarama kaydı bulunamadığı için bir sonuç hesaplanamıyor.</p><Link href="/method">Yöntemi inceleyin</Link></header></div>;
-  if(!response.ok)throw new Error('Karşılaştırma sonuçları yüklenemiyor.');
-  return <ResultsReport report={await response.json()}/>;
+/** Preserve saved links to the previous Turkish route. */
+export default async function LegacyResults({searchParams}:{searchParams:Promise<Record<string,string|string[]|undefined>>}){
+  const query=new URLSearchParams();
+  for(const [key,value] of Object.entries(await searchParams))for(const item of Array.isArray(value)?value:value===undefined?[]:[value])query.append(key,item);
+  permanentRedirect(`/results${query.size?`?${query}`:''}`);
 }

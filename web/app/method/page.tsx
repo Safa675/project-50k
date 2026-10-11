@@ -33,7 +33,7 @@ function TeamPipeline(){
     </div>
     <div className={styles.evidenceTrail} aria-label="Bir önerinin izlenebilir dayanakları"><div className={styles.trailIntro}><span className={styles.eyebrow}>Bir önerinin izi</span><h3>Sonuca geri dönüp bakabilirsiniz.</h3></div><ol><li><span>Kaynakta</span><strong>Belge ve zaman</strong><p>Fiyatın veya raporun kaynağı, tarihi ve ne zaman bilinebildiği görünür.</p></li><li><span>Gelişmede</span><strong>Ölçüm ve dayanağı</strong><p>İnceleme sınırını aşan ölçüm, kullanılan tarihli bilgilerle birlikte açıklanır.</p></li><li><span>Kararda</span><strong>Öneri ve inceleme</strong><p>İlk öneri korunur. İnsan kararı ve varsa değişiklik gerekçesi ayrı kaydedilir.</p></li></ol></div>
     <p className={styles.pipelineNote}>Her açıklama dayandığı kaynaklara bağlanır. Yapay zekâ hesaplanan sayıları veya karşılaştırma sınırlarını değiştiremez. Yetersiz ya da çelişen kanıt açıkça belirtilir; bir bulgu, tek başına kesin bir sonuç değildir.</p>
-    <div className={styles.links}><Link href="/ekip">Ekibin çalışmasını izle <span aria-hidden="true">↗</span></Link><Link href="/sonuclar">Geriye dönük sonuçlar <span aria-hidden="true">→</span></Link></div>
+    <div className={styles.links}><Link href="/ekip">Ekibin çalışmasını izle <span aria-hidden="true">↗</span></Link><Link href="/results">Geriye dönük sonuçlar <span aria-hidden="true">→</span></Link></div>
   </section>;
 }
 

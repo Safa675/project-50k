@@ -1,9 +1,10 @@
 'use client';
 import Link from 'next/link';
 import {useEffect,useId,useRef,useState} from 'react';
+import AssetLogo from '@/components/AssetLogo';
 import {friendlyEvidenceText} from '@/lib/fund-display';
 import ReviewActions from './ReviewActions';
-import {decisionLabel,decisionTone,proposerLabel,reviewedAtTr,type Decision} from './review-logic';
+import {decisionLabel,decisionTone,proposalOriginLabel,proposalSource,reviewStateLabel,reviewedAtTr,type Decision} from './review-logic';
 import styles from './review.module.css';
 
 export const toneClass={important:'bs-tag bs-tag-important',attention:'bs-tag bs-tag-attention',neutral:'bs-tag'};
@@ -33,16 +34,18 @@ export function EvidenceLinks({decision}:{decision:Pick<Decision,'evidence_ids'|
 
 export default function ReviewCard({decision,onSaved}:{decision:Decision;onSaved:(message:string)=>void}){
   const code=decision.fund_code,headingId=`review-${code}`,reviewed=decision.has_current_review;
-  return <article className={styles.card} aria-labelledby={headingId}>
+  return <article className={`${styles.card}${proposalSource(decision)==='team'?` ${styles.teamCard}`:''}`} aria-labelledby={headingId}>
     <div className={styles.main}>
+      <div className={styles.proposalLine}><p className={styles.source}>{proposalOriginLabel(decision)}</p><span className={styles.reviewState}>{reviewStateLabel(decision)}</span></div>
       <div className={styles.head}>
         <div className={styles.identity}>
-          {decision.fund_name&&<span className={styles.code}>{code}</span>}
-          <h2 id={headingId} className={styles.name}><Link href={`/funds/${code}`}>{decision.fund_name||code}</Link></h2>
+          <AssetLogo kind="fund" code={code} name={decision.fund_name??undefined} size={44} decorative/>
+          <div className={styles.identityText}>{decision.fund_name&&<span className={styles.code}>{code}</span>}
+          <h3 id={headingId} className={styles.name}><Link href={`/funds/${code}`}>{decision.fund_name||code}</Link></h3></div>
         </div>
         <span className={toneClass[decisionTone(decision.effective_value)]}>{decisionLabel(decision.effective_value)}</span>
       </div>
-      <p className={styles.meta}>{proposerLabel(decision)}{reviewed&&<> · {reviewedAtTr(decision.reviewed_at)}</>}</p>
+      {reviewed&&<p className={styles.meta}>İnsan incelemesi · {reviewedAtTr(decision.reviewed_at)}</p>}
       <Rationale text={friendlyEvidenceText(decision.rationale_tr)}/>
       {decision.stale_review_exists&&!reviewed&&<p className={styles.stale}>Önceki insan kararı farklı kanıta aitti. Bu kanıt için yeni inceleme gerekiyor.</p>}
       <div className={styles.links}>
@@ -54,7 +57,7 @@ export default function ReviewCard({decision,onSaved}:{decision:Decision;onSaved
     <div className={styles.side}>
       {reviewed?<>
         <dl className={styles.record}>
-          <div><dt>Özgün öneri</dt><dd>{decisionLabel(decision.original_value)}</dd></div>
+          <div><dt>İlk öneri (korunur)</dt><dd>{decisionLabel(decision.original_value)}</dd></div>
           <div><dt>İnceleyen</dt><dd>{decision.reviewer_email??'Kayıtlı değil'}</dd></div>
           <div><dt>Gerekçe</dt><dd>{decision.review_reason??'Öneri gerekçe yazılmadan kabul edildi.'}</dd></div>
         </dl>

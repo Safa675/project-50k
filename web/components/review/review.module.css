@@ -13,6 +13,7 @@
 .count{display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:20px;padding:0 6px;border-radius:999px;background:var(--bs-surface-2);color:var(--bs-text);font-size:12px;line-height:16px;font-variant-numeric:tabular-nums}
 
 .queue{display:flex;flex-direction:column;gap:16px;min-width:0}
+.queueCount{margin:0;color:var(--bs-muted);font-size:13px;line-height:20px}
 .notice{margin:0;padding:12px 16px;border-radius:12px;border:1px solid var(--bs-border);border-left:3px solid var(--bs-accent-text);background:var(--bs-card);font-size:14px;line-height:20px}
 .notice:focus{outline:none}
 .notice:focus-visible{outline:2px solid var(--bs-accent-text);outline-offset:4px}
@@ -23,13 +24,23 @@
 .chip span{color:var(--bs-subtle);font-variant-numeric:tabular-nums}
 .chip[aria-pressed="true"] span{color:var(--bs-muted)}
 .list{display:flex;flex-direction:column;gap:12px;min-width:0}
+.sourceGroup{display:flex;flex-direction:column;gap:12px;min-width:0;padding:0!important;max-width:none;flex:none}
+.sourceHeading{display:flex;flex-direction:column;gap:8px;padding:8px 0}
+.page .sourceHeading h2{display:flex;align-items:center;gap:10px;margin:0;font-size:22px;line-height:30px;font-weight:500}
+.sourceHeading p,.sourceNote{color:var(--bs-muted);font-size:14px;line-height:21px;margin:0}
+.sourceNote{padding:16px;border:1px solid var(--bs-divider);border-radius:12px;background:var(--bs-card)}
 .empty{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:32px 24px;border-radius:16px;background:var(--bs-card);color:var(--bs-muted);font-size:16px;line-height:24px}
 .empty a{font-size:14px}
 
 .card{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:24px;padding:24px;border-radius:16px;border:1px solid var(--bs-divider);background:var(--bs-card);min-width:0}
+.teamCard{border-color:color-mix(in srgb,var(--bs-accent-text) 45%,var(--bs-divider))}
+.proposalLine{display:flex;align-items:center;justify-content:space-between;gap:8px 16px;flex-wrap:wrap}
+.source{font-size:13px;line-height:19px;font-weight:500;color:var(--bs-accent-text);margin:0}
+.reviewState{display:inline-flex;align-items:center;min-height:28px;padding:4px 10px;background:var(--bs-surface-2);border-radius:999px;color:var(--bs-text);font-size:12px;line-height:18px}
 .main{display:flex;flex-direction:column;gap:12px;min-width:0}
 .head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .identity{display:flex;align-items:center;gap:12px;min-width:0}
+.identityText{display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-width:0}
 .code{flex:none;font-size:12px;font-weight:500;line-height:16px;letter-spacing:.1px;background:var(--bs-surface-2);padding:4px 8px;border-radius:4px;color:var(--bs-text)}
 .card .name{margin:0;font-size:20px;line-height:28px;font-weight:400;letter-spacing:-.1px;overflow-wrap:anywhere}
 .name a{color:var(--bs-text);text-decoration:none}

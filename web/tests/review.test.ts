@@ -1,5 +1,5 @@
 import {describe,expect,it,vi} from 'vitest';
-import {canAccept,defaultOverride,proposerLabel,reviewBody,submitReview,validateReview} from '../components/review/review-logic';
+import {canAccept,defaultOverride,proposalOriginLabel,proposalSource,proposalSourceOrder,proposerLabel,reviewBody,reviewStateLabel,submitReview,validateReview} from '../components/review/review-logic';
 
 const proposal={decision_id:42,allowed_options:['MATERIAL','DATA_ISSUE','INSUFFICIENT_EVIDENCE']};
 describe('human review contract',()=>{
@@ -42,5 +42,20 @@ describe('human review contract',()=>{
     expect(proposerLabel({decided_by:'HUMAN',team_proposal:true})).toBe('İnsan incelemesi');
     expect(proposerLabel({decided_by:'UNDECIDED',decision_id:42,validation_state:'INVALID',team_proposal:true})).toContain('doğrulamadan geçmedi');
     expect(defaultOverride({...proposal,original_value:'MATERIAL',effective_value:'MATERIAL'})).toBe('DATA_ISSUE');
+  });
+  it('does not call an off or deterministic result an AI or team proposal',()=>{
+    expect(proposalSource({decided_by:'AI',team_proposal:true,ai_mode:'off'})).toBe('rules');
+    expect(proposerLabel({decided_by:'AI',team_proposal:true,ai_mode:'off'})).toBe('Kurala dayalı sonuç');
+    expect(proposalSource({decided_by:'DETERMINISTIC',ai_mode:'live'})).toBe('rules');
+    expect(proposalOriginLabel({decided_by:'AI',team_proposal:true,ai_mode:'mock'})).toBe('Örnek test önerisi');
+    expect(proposalSource({decided_by:'AI',team_proposal:true,ai_mode:'live'})).toBe('team');
+    expect(proposalSource({decided_by:'UNDECIDED',ai_mode:'off',validation_state:'INVALID'})).toBe('none');
+    expect(proposalSourceOrder[0]).toBe('team');
+  });
+  it('keeps the original team provenance beside the final human state',()=>{
+    expect(proposalOriginLabel({decided_by:'HUMAN',team_proposal:true,ai_mode:'live'})).toBe('Ajan ekibinin Raportör önerisi');
+    expect(reviewStateLabel({has_current_review:true,decision_id:42,validation_state:'VALID'})).toBe('İnsan kararı kaydedildi');
+    expect(reviewStateLabel({has_current_review:false,decision_id:42,validation_state:'VALID'})).toBe('İnsan incelemesi bekliyor');
+    expect(reviewStateLabel({has_current_review:false,decision_id:42,validation_state:'INVALID'})).toBe('İnsan kararı gerekiyor');
   });
 });

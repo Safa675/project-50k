@@ -1,5 +1,28 @@
 # Codex handoff — Sunday 2026-10-11, about 10:40 Istanbul
 
+## Final continuation — 2026-10-11 about 12:15 Istanbul
+
+Read the newest `docs/notes/current-state.md` first. Migration015, persistent admin team pause/resume, Review navbar
+and logos/source grouping, full fund-sidecard layout, canonical `/results` plus old-link redirect, coverage/eight-case
+metrics, and the separately preregistered KAP experiment are deployed and checked. See DEC-037 and the release record.
+Baseline23/131 and4/8 remain unchanged; separate price+monthly union24/131 and5/8, with only101funds assessable.
+The experiment does not feed the agents or change the old run. Its new protocol100ddfb was committed before analysis;
+existing immutable paths remain untouched. No OpenAI key request, duplicate import, recalibration or broad regression.
+Complete the final protected Git landing if it has not happened, then record the ready THF flow. Deadline12:30 remains.
+
+## Continuation update — 2026-10-11 about 11:35 Istanbul
+
+The nine priorities below have been implemented and deployed. Core release `569c2db` was merged/pushed as `ac3cd26`
+and safely pulled into the main checkout. Read `docs/notes/current-state.md` and
+`docs/notes/sunday-product-release-2026-10-11.md` first: they hold the actual tests, source import, environment,
+screenshots, remaining limitations and subsequent small UI corrections. The original handoff/specification remains
+below so no prior detail is lost. Do not repeat the old WIP/import tasks or ask for the supplied OpenAI key.
+
+Mirza additionally requested a larger draggable companion, expanded workflow by default with useful chat space,
+clean workspace lists, 12 September on both stacks, a branded login, and unclipped method headings. These changes
+are implemented; final isolated login/method spacing checks passed. Complete only the final documented landing,
+then record the working product. No new detector/calibration work before code freeze.
+
 You are taking over BlackSwan (Project 50K) from Claude, whose usage limit ran out. Read this file in full, then
 `plans/2026-10-11-sprint-briefs.md`, which holds the detailed spec of every open workstream. Read `CLAUDE.md` and
 `AGENTS.md` first; their rules bind.
