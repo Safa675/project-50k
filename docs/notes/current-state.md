@@ -1,5 +1,30 @@
 # Project 50K: current state
 
+## Full-cohort agent evaluation running - 2026-10-11 13:22 Istanbul
+
+Mirza requested actual agent-workflow measurements for ALL original 100 funds and
+approved up to USD 5 additional (DEC-039). The fixed rules are committed in
+`plans/2026-10-11-agent-case-evaluation.md`. Claude is recording the real demo now:
+do not operate its browser, mutate its queue/budget or restart its services.
+
+The batch runs independently on a snapshot in `p50k-evaluation-db` with no published
+ports, separate network/volume, and the exact production image
+`sha256:b2cda0f09d92751f44b2d4ae78a14e1665a609be77892277019f6aa3dd6baf54`.
+`p50k-evaluation-runner` uses two real agent task workers, restricted to the frozen
+100 case IDs. No product source, model, prompt, detector or validator was changed.
+92 cases were newly queued, two existing cases promoted, six terminal first cases
+preserved. Actual paid calls and new task completions are confirmed; completion of
+all 100 and outcome figures are not yet claimed. Allow roughly 25-45 minutes.
+
+Local-only artifacts, manifest and progress:
+`C:/Users/mirza/.local/share/project-50k/evaluations/2026-10-11-agent-cohort-100/`.
+The copied daily budget retains USD 5.0023225 prior booked spend and permits exactly
+USD 5 additional; production's USD 5.25 ceiling and remainder are untouched. Results
+must distinguish all-cohort requested reviews from first automatic sentinel cases,
+and require real output from every AI role before calling a review fully completed.
+Later SPK labels are joined only by the read-only evaluator, never supplied to agents.
+No evaluation results will be silently imported into the recorded demo.
+
 ## Video planning — 2026-10-11 after code freeze readiness
 
 Mirza's new video requirements are recorded in DEC-038:40–50seconds,16:9landscape, short Turkish captions,
