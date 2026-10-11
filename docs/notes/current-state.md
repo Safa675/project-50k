@@ -1,5 +1,16 @@
 # Project 50K: current state
 
+## Video planning — 2026-10-11 after code freeze readiness
+
+Mirza's new video requirements are recorded in DEC-038:40–50seconds,16:9landscape, short Turkish captions,
+no voiceover/music, subtle sound effects, actual website interactions only. Agent orchestration is the priority;
+Nöbetçi workspace, Sıra, Raportör, THF findings and human review must appear. He chose a fresh THF investigation and
+its actual completed result, with waiting transparently shortened in editing. The earlier 25-second storyboard is
+superseded. `plans/2026-10-11-demo-video-plan.md` holds the proposed 45-second sequence;
+`plans/2026-10-11-claude-demo-video-prompt.md` is the production handoff. This step only writes planning documents;
+no new investigation or video recording has been executed. The product remains frozen.
+Pitch-ready plain-language figures and denominator explanations are saved in `docs/notes/pitch-metrics-2026-10-11.md`.
+
 ## Final continuation — 2026-10-11 about 12:15 Istanbul (newest)
 
 Read [the complete Sunday release record](sunday-product-release-2026-10-11.md) and
