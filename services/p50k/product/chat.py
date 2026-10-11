@@ -15,17 +15,27 @@ from psycopg.types.json import Jsonb
 from pydantic import BaseModel, ConfigDict, Field
 
 from p50k.product.ai_client import AIConfig, AIUnavailable, reserve, settle
-from p50k.product.chat_tools import ChatContext, TOOLS, invoke_tool, load_context
+from p50k.product.analysis_context import analysis_scope_key
+from p50k.product.chat_tools import ChatContext, HISTORICAL_TOOLS, TOOLS, invoke_tool, load_context
 from p50k.product.chat_language import explanations, label, render_chat
-from p50k.product.evidence_aliases import model_packet, references, resolve_ids, resolve_text
+from p50k.product.evidence_aliases import blind_question, model_packet, references, resolve_ids, resolve_text
 from p50k.product.db import connect
 from p50k.product.settings import Settings
 from p50k.product.validator import InvalidOutput, PLACEHOLDER, NUMBER_WORD, fold, render, validate_text
 
-PROMPT_VERSION = 'chat-v4-plain-language-stream'
+PROMPT_VERSION = 'chat-v6-reporter'
 SCHEMA_VERSION = 'chat-paragraphs-v2'
+REPORTER = (
+    'You are Raportör, the reporter agent of the BlackSwan agent team and the only agent that talks with the user. '
+    'The team works on cases: Nöbetçi is a deterministic sentinel that opens a case when stored evidence crosses a '
+    'review threshold; Hipotezci proposes possible explanations; Şüpheci proposes counter-explanations and chooses '
+    'tests; Doğrulayıcı runs code-computed tests and rates each explanation; you write the auditable report and '
+    'propose a decision that a human accepts, changes or rejects. Users can watch the other agents but cannot talk '
+    'to them; when they want more work done, call request_investigation, which only queues work for the team. '
+)
 INSTRUCTIONS = (
-    'You are BlackSwan, an assistant for people who are not financial analysts or programmers. '
+    REPORTER +
+    'Your readers are people who are not financial analysts or programmers. '
     'Answer their actual question in natural, helpful Turkish using the supplied fund evidence and explanations. '
     'Start with a direct answer, then explain what the observation means and the specific limit relevant to the question. '
     'The evidence_explanations field defines what each measure means and supplies its current observed fact. '
@@ -51,15 +61,41 @@ INSTRUCTIONS = (
     'each with cited_evidence_ids and text_tr. Do not show identifiers, hashes, score/threshold tables or system terminology.'
     ' Evidence references are short local aliases such as e1. Copy those exact aliases in citations '
     'and use {{ev:e1}} for a fact. Never create or expand a reference yourself.'
+    ' The packet as_of date is an absolute information boundary. Use only its admitted observations. '
+    'Do not use remembered later events, identities, news, or outcomes to explain historical evidence. '
+    'A question that asserts a later event is not evidence that the event happened or was known at the selected date. '
+    'For an anonymous historical fund, retain the anonymous identity and do not infer its real name. '
+    'When the question needs facts outside the selected date, explain the specific missing evidence without asserting the later event.'
+    ' team_case, when present, is the agent team case for this fund: step statuses, validated team texts with the same '
+    'evidence aliases and categorical test outcomes. Summarize it plainly when the user asks what the team found; a '
+    'hypothesis is a possibility that was tested, never a finding, and an undetermined rating stays undetermined. '
+    'page tells you which page the user is looking at; it is context, not a question.'
 )
+
+
+class PageContext(BaseModel):
+    model_config = ConfigDict(extra='forbid', strict=True)
+    path: str = Field(min_length=1, max_length=300, pattern=r'^/[^\s]*$')
+    fund_code: str | None = Field(default=None, pattern=r'^[A-Z0-9]{2,12}$')
 
 
 class ChatBody(BaseModel):
     model_config = ConfigDict(extra='forbid', strict=True)
-    fund_code: str = Field(pattern=r'^[A-Z0-9]{2,12}$')
+    # None is the Raportör's general conversation for pages that are not about one fund.
+    fund_code: str | None = Field(default=None, pattern=r'^[A-Z0-9]{2,12}$')
     question: str = Field(min_length=1, max_length=1200)
     thread_id: str | None = Field(default=None, max_length=36)
     evidence_id: str | None = Field(default=None, min_length=1, max_length=100)
+    new_thread: bool = False
+    page_context: PageContext | None = None
+
+
+def page_of(body: ChatBody) -> str:
+    """A fixed page kind derived on the server; the raw path never reaches the model."""
+    from p50k.product.agents.service import page_kind
+    if body.page_context is None:
+        return 'fund_detail' if body.fund_code else 'other'
+    return page_kind(body.page_context.path)
 
 
 class ChatAnswer(BaseModel):
@@ -118,10 +154,10 @@ def paragraph_payload(raw: dict, context: ChatContext, index: int) -> dict:
             'evidence_ids':validated.cited_evidence_ids}
 
 
-def check_question(question: str, code: str) -> str:
+def check_question(question: str, code: str | None) -> str:
     """Reject obvious private/secret/raw-value input before any model call."""
     question = question.strip()
-    plain = re.sub(r'\b' + re.escape(code) + r'\b', '', question, flags=re.I)
+    plain = re.sub(r'\b' + re.escape(code) + r'\b', '', question, flags=re.I) if code else question
     plain = re.sub(r'\b(?:D[1-5]|AN-DQ-00[12]|AN-FND-005)\b', '', plain, flags=re.I)
     if not question or re.search(r'@|https?://|www\.|sk[-_]|\bTR\s*\d|\d|[\x00-\x08\x0b-\x1f]', plain, re.I):
         raise AIUnavailable('QUESTION_REJECTED')
@@ -144,6 +180,17 @@ def check_mode(settings: Settings, config: AIConfig) -> None:
 
 
 def begin_turn(settings: Settings, actor: str, body: ChatBody, context: ChatContext) -> tuple[str, str, list[str]]:
+    return open_turn(settings, actor, body, context.checksum,
+                     {**context.packet.model_dump(), 'focus_evidence_id': body.evidence_id,
+                      'evidence_explanations': explanations(context.packet, context.reasons)}, context.run_id)
+
+
+def open_turn(settings: Settings, actor: str, body: ChatBody, checksum: str, packet: dict,
+              run_id: str) -> tuple[str, str, list[str]]:
+    """Owner- and view-scoped thread selection, busy and daily limits, and the append-only turn audit."""
+    if body.thread_id and body.new_thread:
+        raise AIUnavailable('QUESTION_REJECTED')
+    scope = analysis_scope_key(settings)
     if body.thread_id:
         try:
             UUID(body.thread_id)
@@ -153,9 +200,18 @@ def begin_turn(settings: Settings, actor: str, body: ChatBody, context: ChatCont
         connection.execute("SET LOCAL statement_timeout='5s'")
         connection.execute('SELECT pg_advisory_xact_lock(hashtextextended(%s,50000034))', (actor,))
         thread = body.thread_id
+        if not thread and not body.new_thread:
+            latest = connection.execute("""SELECT thread.thread_id FROM ai.chat_threads thread
+                LEFT JOIN LATERAL (SELECT max(message_id) AS last_message FROM ai.chat_messages
+                    WHERE thread_id=thread.thread_id) recent ON TRUE
+                WHERE thread.user_id=%s AND thread.fund_code IS NOT DISTINCT FROM %s AND thread.analysis_scope_key=%s
+                ORDER BY recent.last_message DESC NULLS LAST,thread.created_at DESC,thread.thread_id DESC LIMIT 1""",
+                (actor, body.fund_code, scope)).fetchone()
+            if latest:
+                thread = str(latest[0])
         if thread:
-            if not connection.execute('SELECT 1 FROM ai.chat_threads WHERE thread_id=%s AND user_id=%s AND fund_code=%s',
-                                      (thread, actor, body.fund_code)).fetchone():
+            if not connection.execute('SELECT 1 FROM ai.chat_threads WHERE thread_id=%s AND user_id=%s AND fund_code IS NOT DISTINCT FROM %s AND analysis_scope_key=%s',
+                                      (thread, actor, body.fund_code, scope)).fetchone():
                 raise AIUnavailable('THREAD_NOT_FOUND')
             busy = connection.execute("""SELECT 1 FROM ai.chat_turns turn LEFT JOIN ai.chat_results result USING(turn_id)
                 WHERE thread_id=%s AND result.turn_id IS NULL AND turn.created_at>now()-interval '60 seconds' LIMIT 1""", (thread,)).fetchone()
@@ -166,26 +222,73 @@ def begin_turn(settings: Settings, actor: str, body: ChatBody, context: ChatCont
         if count >= 30:
             raise AIUnavailable('CHAT_DAILY_LIMIT')
         if not thread:
-            thread = str(connection.execute('INSERT INTO ai.chat_threads(user_id,fund_code) VALUES (%s,%s) RETURNING thread_id',
-                                            (actor, body.fund_code)).fetchone()[0])
+            thread = str(connection.execute('INSERT INTO ai.chat_threads(user_id,fund_code,analysis_scope_key) VALUES (%s,%s,%s) RETURNING thread_id',
+                                            (actor, body.fund_code, scope)).fetchone()[0])
         previous = [row[0] for row in connection.execute("SELECT content FROM ai.chat_messages WHERE thread_id=%s AND role='user' ORDER BY message_id DESC LIMIT 3", (thread,)).fetchall()][::-1]
         turn = str(connection.execute('INSERT INTO ai.chat_turns(thread_id,user_id,packet_sha256,packet,run_id) VALUES (%s,%s,%s,%s,%s) RETURNING turn_id',
-            (thread, actor, context.checksum, Jsonb({**context.packet.model_dump(),'focus_evidence_id':body.evidence_id,
-                'evidence_explanations':explanations(context.packet,context.reasons)}), context.run_id)).fetchone()[0])
+            (thread, actor, checksum, Jsonb(packet), run_id)).fetchone()[0])
         connection.execute("INSERT INTO ai.chat_messages(thread_id,turn_id,role,content) VALUES (%s,%s,'user',%s)", (thread, turn, body.question))
     return thread, turn, previous
 
 
-def history(settings: Settings, actor: str, thread: str, code: str) -> list[dict]:
+def history(settings: Settings, actor: str, thread: str, code: str | None, before_message_id: int | None = None) -> list[dict]:
     try:
         UUID(thread)
     except ValueError:
         raise AIUnavailable('THREAD_NOT_FOUND') from None
     with connect(settings) as connection:
-        if not connection.execute('SELECT 1 FROM ai.chat_threads WHERE thread_id=%s AND user_id=%s AND fund_code=%s', (thread, actor, code)).fetchone():
+        connection.execute('SET TRANSACTION READ ONLY')
+        connection.execute("SET LOCAL statement_timeout='5s'")
+        if not connection.execute('SELECT 1 FROM ai.chat_threads WHERE thread_id=%s AND user_id=%s AND fund_code IS NOT DISTINCT FROM %s AND analysis_scope_key=%s',
+                                  (thread, actor, code, analysis_scope_key(settings))).fetchone():
             raise AIUnavailable('THREAD_NOT_FOUND')
-        rows = connection.execute("SELECT role,content,evidence_ids FROM (SELECT message_id,role,content,evidence_ids FROM ai.chat_messages WHERE thread_id=%s ORDER BY message_id DESC LIMIT 60) recent ORDER BY message_id", (thread,)).fetchall()
-    return [{'role':row[0], 'content':row[1], 'evidence_ids':row[2]} for row in rows]
+        rows = connection.execute("""SELECT role,content,evidence_ids,message_id,created_at,outcome,error_code,pending,packet
+            FROM (SELECT message.role,message.content,message.evidence_ids,message.message_id,message.created_at,
+                result.outcome,result.error_code,
+                (turn.turn_id IS NOT NULL AND result.turn_id IS NULL AND turn.created_at>now()-interval '60 seconds') pending,
+                turn.packet
+                FROM ai.chat_messages message
+                LEFT JOIN ai.chat_turns turn ON turn.turn_id=message.turn_id
+                LEFT JOIN ai.chat_results result ON result.turn_id=message.turn_id
+                WHERE message.thread_id=%s AND (message.role='user' OR result.outcome='VALID')
+                    AND (%s::bigint IS NULL OR message.message_id<%s)
+                ORDER BY message.message_id DESC LIMIT 60) recent ORDER BY message_id""", (thread,before_message_id,before_message_id)).fetchall()
+    from p50k.product.egress import Evidence
+    output = []
+    for row in rows:
+        labels = {}
+        for raw in (row[8] or {}).get('evidence', []):
+            try:
+                item = Evidence.model_validate(raw)
+                if item.evidence_id in row[2]:
+                    labels[item.evidence_id] = label(item)
+            except ValueError:
+                continue
+        output.append({'role':row[0], 'content':row[1], 'evidence_ids':row[2],
+            'message_id':str(row[3]), 'created_at':row[4], 'status':row[5] or ('PENDING' if row[7] else 'INTERRUPTED'),
+            'error_code':row[6], 'evidence_labels':labels})
+    return output
+
+
+def thread_list(settings: Settings, actor: str, code: str | None, limit: int = 20, offset: int = 0) -> dict:
+    """Restore only this owner's asset (or general, code None) conversations in the current analysis view."""
+    scope = analysis_scope_key(settings)
+    with connect(settings) as connection:
+        connection.execute('SET TRANSACTION READ ONLY')
+        connection.execute("SET LOCAL statement_timeout='5s'")
+        rows = connection.execute("""SELECT thread.thread_id,thread.created_at,recent.last_at,recent.message_count,
+                left(first_question.content,120) AS title
+            FROM ai.chat_threads thread
+            LEFT JOIN LATERAL (SELECT max(message_id) AS last_id,max(created_at) AS last_at,count(*) AS message_count
+                FROM ai.chat_messages WHERE thread_id=thread.thread_id) recent ON TRUE
+            LEFT JOIN LATERAL (SELECT content FROM ai.chat_messages WHERE thread_id=thread.thread_id AND role='user'
+                ORDER BY message_id LIMIT 1) first_question ON TRUE
+            WHERE thread.user_id=%s AND thread.fund_code IS NOT DISTINCT FROM %s AND thread.analysis_scope_key=%s
+            ORDER BY recent.last_id DESC NULLS LAST,thread.created_at DESC,thread.thread_id DESC LIMIT %s OFFSET %s""",
+            (actor, code, scope, limit, offset)).fetchall()
+    return {'fund_code':code, 'analysis_scope_key':scope, 'limit':limit,'offset':offset,'items':[
+        {'thread_id':str(row[0]), 'created_at':row[1], 'last_message_at':row[2], 'message_count':row[3],
+         'title':row[4] or ''} for row in rows]}
 
 
 def validate_answer(raw: dict, context: ChatContext) -> ChatAnswer:
@@ -208,13 +311,19 @@ def validate_answer(raw: dict, context: ChatContext) -> ChatAnswer:
     return answer
 
 
-def model_call(settings: Settings, config: AIConfig, inputs: list, remaining: float, context: ChatContext):
+def model_call(settings: Settings, config: AIConfig, inputs: list, remaining: float, context: ChatContext | None, *,
+               schema: dict | None = None, tools: list | None = None, instructions: str | None = None, paragraph=None):
+    """One budgeted streaming call. The general conversation passes its own schema, tools and validator."""
     deadline = time.monotonic() + remaining
     if remaining <= 10:
         raise AIUnavailable('CHAT_TIMEOUT')
-    schema = StreamAnswer.model_json_schema()
-    schema['$defs']['ChatParagraph']['properties']['cited_evidence_ids']['items']['enum']=list(references(context.packet))
-    payload = json.dumps({'input':inputs, 'tools':TOOLS, 'schema':schema, 'instructions':INSTRUCTIONS}, ensure_ascii=False)
+    if schema is None:
+        schema = StreamAnswer.model_json_schema()
+        schema['$defs']['ChatParagraph']['properties']['cited_evidence_ids']['items']['enum']=list(references(context.packet))
+    allowed_tools = tools if tools is not None else [tool for tool in TOOLS if context.origin!='HISTORICAL_REPLAY' or tool['name'] in HISTORICAL_TOOLS]
+    instructions = instructions or INSTRUCTIONS
+    paragraph = paragraph or (lambda raw, index: paragraph_payload(raw, context, index))
+    payload = json.dumps({'input':inputs, 'tools':allowed_tools, 'schema':schema, 'instructions':instructions}, ensure_ascii=False)
     if len(payload.encode()) > 32768 or config.input_price <= 0 or config.output_price <= 0:
         raise AIUnavailable('INPUT_OR_PRICING_REJECTED')
     maximum = (Decimal(len(payload.encode())+3000)*config.input_price + Decimal(config.max_output_tokens)*config.output_price)/Decimal(1000000)
@@ -227,8 +336,8 @@ def model_call(settings: Settings, config: AIConfig, inputs: list, remaining: fl
     try:
         client = OpenAI(api_key=config.key_file.read_text(encoding='utf-8').strip(), max_retries=0, timeout=max(.1, min(timeout, 35)))
         stream = client.responses.create(model=config.model, store=False, stream=True, max_output_tokens=config.max_output_tokens,
-            service_tier='default', reasoning={'effort':config.effort}, instructions=INSTRUCTIONS,
-            include=['reasoning.encrypted_content'], input=inputs, tools=TOOLS, parallel_tool_calls=False,
+            service_tier='default', reasoning={'effort':config.effort}, instructions=instructions,
+            include=['reasoning.encrypted_content'], input=inputs, tools=allowed_tools, parallel_tool_calls=False,
             text={'format':{'type':'json_schema', 'name':'chat_answer', 'strict':True, 'schema':schema}})
         text = ''
         emitted = 0
@@ -241,9 +350,9 @@ def model_call(settings: Settings, config: AIConfig, inputs: list, remaining: fl
                     raise AIUnavailable('CHAT_TIMEOUT')
                 if event.type == 'response.output_text.delta':
                     text += event.delta
-                    for index, paragraph in enumerate(completed_paragraphs(text)):
+                    for index, item in enumerate(completed_paragraphs(text)):
                         if index >= emitted:
-                            yield 'paragraph', paragraph_payload(paragraph, context, index)
+                            yield 'paragraph', paragraph(item, index)
                             emitted += 1
                 elif event.type == 'response.completed':
                     response = event.response
@@ -283,11 +392,12 @@ def save_chunk(settings: Settings, turn: str, attempt: int, value: dict) -> None
 
 
 def finish_turn(settings: Settings, thread: str, turn: str, outcome: Literal['VALID','FAILED'], model: str,
-                calls: list[str], content: str | None = None, evidence: list[str] | None = None, error: str | None = None):
+                calls: list[str], content: str | None = None, evidence: list[str] | None = None, error: str | None = None,
+                *, prompt_version: str | None = None, schema_version: str | None = None):
     with connect(settings) as connection:
         connection.execute("SET LOCAL statement_timeout='5s'")
         connection.execute('INSERT INTO ai.chat_results(turn_id,outcome,error_code,model_id,prompt_version,schema_version,call_ids) VALUES (%s,%s,%s,%s,%s,%s,%s)',
-            (turn, outcome, error, model, PROMPT_VERSION, SCHEMA_VERSION, Jsonb(calls)))
+            (turn, outcome, error, model, prompt_version or PROMPT_VERSION, schema_version or SCHEMA_VERSION, Jsonb(calls)))
         if content:
             connection.execute("INSERT INTO ai.chat_messages(thread_id,turn_id,role,content,evidence_ids) VALUES (%s,%s,'assistant',%s,%s)",
                                (thread, turn, content, Jsonb(evidence or [])))
@@ -300,10 +410,17 @@ def events(settings: Settings, config: AIConfig, body: ChatBody, context: ChatCo
     tool_count = 0
     model = config.model if config.mode == 'live' else 'synthetic'
     inverse={value:key for key,value in references(context.packet).items()}
-    projected=model_packet(context.packet)
-    inputs = [{'role':'user', 'content':json.dumps({'packet':projected.model_dump(),
-                'evidence_explanations':explanations(projected,{inverse[key]:value for key,value in context.reasons.items() if key in inverse}),
-                'focus_evidence_id':inverse.get(body.evidence_id), 'recent_questions':previous, 'question':body.question}, ensure_ascii=False)}]
+    anonymous=context.origin=='HISTORICAL_REPLAY'
+    projected=model_packet(context.packet,anonymous=anonymous)
+    current_question=blind_question(body.question,context.packet) if anonymous else body.question
+    recent_questions=[blind_question(value,context.packet) for value in previous] if anonymous else previous
+    request_input = {'packet':projected.model_dump(),
+               'evidence_explanations':explanations(projected,{inverse[key]:value for key,value in context.reasons.items() if key in inverse}),
+               'focus_evidence_id':inverse.get(body.evidence_id), 'recent_questions':recent_questions, 'question':current_question,
+               'page':page_of(body)}
+    if context.team_case is not None:
+        request_input['team_case'] = context.team_case
+    inputs = [{'role':'user', 'content':json.dumps(request_input, ensure_ascii=False)}]
     try:
         for attempt in range(3):
             streamed = []
@@ -348,7 +465,17 @@ def events(settings: Settings, config: AIConfig, body: ChatBody, context: ChatCo
                         if item.name in {tool['name'] for tool in TOOLS}:
                             yield 'tool', {'name':item.name}
                         try:
-                            result = invoke_tool(settings, context, item.name, item.arguments)
+                            arguments=item.arguments
+                            if anonymous:
+                                if item.name not in HISTORICAL_TOOLS:
+                                    raise AIUnavailable('TOOL_SCOPE_REJECTED')
+                                try:
+                                    parsed=json.loads(arguments)
+                                except ValueError:
+                                    raise AIUnavailable('TOOL_ARGUMENT_REJECTED') from None
+                                if isinstance(parsed,dict) and parsed.get('fund_code')=='FUND':
+                                    arguments=json.dumps({**parsed,'fund_code':body.fund_code})
+                            result = invoke_tool(settings, context, item.name, arguments)
                             if item.name=='get_signals':
                                 result=projected.model_dump_json()
                             elif item.name=='get_decision':

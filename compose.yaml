@@ -7,6 +7,7 @@ x-app-environment: &app-environment
   P50K_DB_USER: p50k_app
   P50K_DB_PASSWORD_FILE: /run/secrets/db_app_password
   P50K_AI_MODE: ${P50K_AI_MODE:-off}
+  P50K_ANALYSIS_DATE: ${P50K_ANALYSIS_DATE:-2026-09-12}
   P50K_TEST_ENDPOINTS: ${P50K_TEST_ENDPOINTS:-false}
   P50K_ALLOWED_HOSTS: 127.0.0.1,localhost,api
   P50K_ALLOWED_ORIGINS: http://127.0.0.1:3070,http://localhost:3070,http://127.0.0.1:3071,http://localhost:3071

@@ -7,6 +7,7 @@ export type ChatAnswer = {
 };
 
 export type ChatParagraph = {index:number;content:string;evidence_ids:string[]};
+export type ChatThreadStarted = {thread_id:string;analysis_scope_key:string};
 
 export class ChatError extends Error {
   constructor(public readonly code: string) {super(code); this.name = 'ChatError';}
@@ -14,7 +15,7 @@ export class ChatError extends Error {
 
 const MAX_STREAM_BYTES = 256 * 1024;
 const MAX_FRAME_CHARS = 32768;
-const TOOL_NAMES = new Set(['search_funds', 'get_fund_profile', 'get_signals', 'get_decision']);
+const TOOL_NAMES = new Set(['search_funds', 'get_fund_profile', 'get_signals', 'get_decision', 'get_case_status', 'request_investigation']);
 
 function object(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
@@ -37,7 +38,8 @@ function answer(value: unknown): ChatAnswer {
 // Only complete server-validated paragraphs are displayable; raw token deltas
 // remain invalid. The final persisted answer must match the streamed paragraphs.
 export async function readChatAnswer(response: Response, onTool: (name: string) => void,
-  onParagraph: (paragraph:ChatParagraph)=>void=()=>undefined,onReset:()=>void=()=>undefined): Promise<ChatAnswer> {
+  onParagraph: (paragraph:ChatParagraph)=>void=()=>undefined,onReset:()=>void=()=>undefined,
+  onThread:(thread:ChatThreadStarted)=>void=()=>undefined): Promise<ChatAnswer> {
   if (!response.ok) {
     let code = response.status === 401 ? 'AUTHENTICATION_REQUIRED' : 'CHAT_UNAVAILABLE';
     try {
@@ -57,6 +59,7 @@ export async function readChatAnswer(response: Response, onTool: (name: string) 
   let buffer = '', byteCount = 0, toolCount = 0;
   let paragraphs:ChatParagraph[]=[];
   let resetCount=0;
+  let startedThread:string|null=null;
   try {
     while (true) {
       const {value, done} = await reader.read();
@@ -78,7 +81,12 @@ export async function readChatAnswer(response: Response, onTool: (name: string) 
         if (!data) continue; // Comment-only keep-alive frames carry no model text.
         let payload: unknown;
         try {payload = JSON.parse(data);} catch {throw new ChatError('STREAM_INVALID');}
-        if (event === 'tool') {
+        if(event==='thread'){
+          if(startedThread!==null||!object(payload)||typeof payload.thread_id!=='string'||
+            !/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(payload.thread_id)||
+            typeof payload.analysis_scope_key!=='string'||!/^(live|asof:\d{4}-\d{2}-\d{2})$/.test(payload.analysis_scope_key))throw new ChatError('STREAM_INVALID');
+          startedThread=payload.thread_id;onThread(payload as ChatThreadStarted);
+        } else if (event === 'tool') {
           if (!object(payload) || typeof payload.name !== 'string' || !TOOL_NAMES.has(payload.name) || ++toolCount > 6) {
             throw new ChatError('STREAM_INVALID');
           }
@@ -95,6 +103,7 @@ export async function readChatAnswer(response: Response, onTool: (name: string) 
           paragraphs=[];onReset();
         } else if (event === 'answer') {
           const result=answer(payload);
+          if(startedThread!==null&&result.thread_id!==startedThread)throw new ChatError('STREAM_INVALID');
           if(paragraphs.length&&(result.content!==paragraphs.map(item=>item.content).join('\n\n')||
             paragraphs.some(item=>item.evidence_ids.some(id=>!result.evidence_ids.includes(id)))))throw new ChatError('STREAM_INVALID');
           return result;

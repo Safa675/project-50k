@@ -6,6 +6,9 @@ import {useEffect,useState} from 'react';
 import type {User} from '@/lib/auth';
 import {NOTIFICATIONS_CHANGED} from '@/lib/notification-events';
 import SessionActions from './SessionActions';
+import DateContextControl from './DateContextControl';
+import AgentDock from './agents/AgentDock';
+import {AgentPageProvider} from './agents/AgentPage';
 
 export function ThemeToggle(){
   const [theme,setTheme]=useState<'dark'|'light'>('dark');
@@ -34,16 +37,16 @@ export function SiteHeader({user}:{user?:User}){
     refresh();window.addEventListener(NOTIFICATIONS_CHANGED,refresh);
     return()=>{controller?.abort();window.removeEventListener(NOTIFICATIONS_CHANGED,refresh);};
   },[user?.user_id,pathname]);
-  const links=[['/funds','Keşfet'],['/watchlist','Takip listem'],['/method','Yöntem']];
-  return <header className="bs-header"><Link href="/" className="bs-brand" aria-label="BlackSwan ana sayfa"><span className="bs-logo"><img src={user?'/design/logo-auth.svg':'/design/logo.svg'} alt=""/></span><span><span className="bs-brand-light">Black</span><span className="bs-brand-medium">Swan</span></span></Link><nav className="bs-nav" aria-label="Ana gezinme">{links.map(([href,label])=><Link key={href} href={href} aria-current={pathname===href||pathname.startsWith(href+'/')?'page':undefined}>{label}</Link>)}</nav><div className="bs-header-search"><SearchField/></div><div className="bs-header-actions"><ThemeToggle/>{user?<><Link href="/notifications" className="bs-icon-button bs-notifications-link" aria-label={unread?`Bildirimler, ${unread} okunmamış`:'Bildirimler'}><img src="/design/bell.svg" alt=""/>{unread>0&&<img className="bs-notification-dot" src="/design/unread-dot.svg" alt=""/>}</Link><details className="bs-account"><summary aria-label="Hesap ve çalışma alanı"><span>{user.email.slice(0,2).toLocaleUpperCase('tr-TR')}</span></summary><div className="bs-account-menu"><p>{user.email}</p><Link href="/stocks">BIST 30 hisseleri</Link><Link href="/workflow">İş akışı ve API</Link>{user.role!=='viewer'&&<Link href="/review">İnceleme kuyruğu</Link>}<SessionActions/></div></details></>:<Link href="/login" className="bs-button bs-button-small bs-button-secondary">Giriş yap</Link>}</div></header>;
+  const links=[['/funds','Keşfet'],['/stocks','Hisseler'],['/watchlist','Takip listem'],['/method','Yöntem']];
+  return <header className="bs-header"><Link href="/" className="bs-brand" aria-label="BlackSwan ana sayfa"><span className="bs-logo"><img src={user?'/design/logo-auth.svg':'/design/logo.svg'} alt=""/></span><span><span className="bs-brand-light">Black</span><span className="bs-brand-medium">Swan</span></span></Link><nav className="bs-nav" aria-label="Ana gezinme">{links.map(([href,label])=><Link key={href} href={href} aria-current={pathname===href||pathname.startsWith(href+'/')?'page':undefined}>{label}</Link>)}</nav><div className="bs-header-search"><SearchField/></div><div className="bs-header-actions"><DateContextControl initial={user?.analysis_context} canChange={!!user}/><ThemeToggle/>{user?<><Link href="/notifications" className="bs-icon-button bs-notifications-link" aria-label={unread?`Bildirimler, ${unread} okunmamış`:'Bildirimler'}><img src="/design/bell.svg" alt=""/>{unread>0&&<img className="bs-notification-dot" src="/design/unread-dot.svg" alt=""/>}</Link><details className="bs-account"><summary aria-label="Hesap ve çalışma alanı"><span>{user.email.slice(0,2).toLocaleUpperCase('tr-TR')}</span></summary><div className="bs-account-menu"><p>{user.email}</p><Link href="/stocks">BIST 30 hisseleri</Link><Link href="/ekip">Ajan ekibi</Link><Link href="/workflow">İş akışı ve API</Link>{user.role!=='viewer'&&<Link href="/review">İnceleme kuyruğu</Link>}<SessionActions/></div></details></>:<Link href="/login" className="bs-button bs-button-small bs-button-secondary">Giriş yap</Link>}</div></header>;
 }
 
 export function SiteFooter({dataMode}:{dataMode?:string}){
-  return <footer className="bs-footer"><p>Gösterilen bilgiler yatırım tavsiyesi değildir. Bir gelişmenin gösterilmesi, fonun riskli ya da güvenli olduğu anlamına gelmez. Kaynak ve erişilebilirlik zamanı her kanıtla birlikte gösterilir.</p><p>{dataMode&&(dataMode==='SYNTHETIC'?'Sentetik test verisi · ':'Gecikmeli kaynak verisi · ')}Geliştirme sonucu · Yatırım tavsiyesi değildir</p><div className="bs-footer-links"><Link href="/stocks">BIST 30</Link><Link href="/workflow">Kurumsal çalışma alanı ve API</Link></div></footer>;
+  return <footer className="bs-footer"><p>Gösterilen bilgiler yatırım tavsiyesi değildir. Bir gelişmenin gösterilmesi, fonun riskli ya da güvenli olduğu anlamına gelmez. Kaynak ve erişilebilirlik zamanı her kanıtla birlikte gösterilir.</p><p>{dataMode&&(dataMode==='SYNTHETIC'?'Sentetik test verisi · ':'Tarihli kaynak verileri · ')}Geliştirme sonucu · Yatırım tavsiyesi değildir</p><div className="bs-footer-links"><Link href="/stocks">BIST 30</Link><Link href="/workflow">Kurumsal çalışma alanı ve API</Link></div></footer>;
 }
 
 export function DesignShell({children,user,compact=false}:{children:React.ReactNode;user?:User;compact?:boolean}){
-  return <div className={`bs-shell${compact?' bs-shell-compact':''}`}><a href="#main-content" className="bs-skip">İçeriğe geç</a><SiteHeader user={user}/><main id="main-content" className="bs-main">{children}</main><SiteFooter dataMode={user?.data_mode}/></div>;
+  return <AgentPageProvider><div className={`bs-shell${compact?' bs-shell-compact':''}`}><a href="#main-content" className="bs-skip">İçeriğe geç</a><SiteHeader user={user}/><main id="main-content" className="bs-main">{children}</main><SiteFooter dataMode={user?.data_mode}/><AgentDock user={user}/></div></AgentPageProvider>;
 }
 
 export function MethodTabs(){

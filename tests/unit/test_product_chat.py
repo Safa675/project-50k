@@ -43,6 +43,38 @@ def transport(reply, paragraphs=()):
 
 
 class ChatBoundaryTests(unittest.TestCase):
+    def test_historical_projection_blinds_identity_and_remaps_only_bounded_tools(self):
+        current=replace(context(),origin='HISTORICAL_REPLAY')
+        class Tool:
+            type='function_call';name='get_signals';arguments='{"fund_code":"FUND"}';call_id='synthetic-historical-tool'
+            def model_dump(self,**_):return {'type':self.type,'name':self.name,'arguments':self.arguments,'call_id':self.call_id}
+        replies=[SimpleNamespace(id='synthetic-lookup',output=[Tool()],output_text=''),
+                 SimpleNamespace(id='synthetic-final',output=[],output_text=json.dumps({'paragraphs':[{'text_tr':'Mevcut bilgi inceleme gerektiriyor.','cited_evidence_ids':['e1']}]}))]
+        body=chat.ChatBody(fund_code=current.packet.fund_code,question=current.packet.fund_name+' '+current.packet.fund_code+' neden değişti?')
+        with patch.object(chat,'model_call',side_effect=[transport(reply) for reply in replies]) as model, \
+                patch.object(chat,'invoke_tool',return_value=current.packet.model_dump_json()) as tool, \
+                patch.object(chat,'save_chunk'),patch.object(chat,'finish_turn'):
+            emitted=list(chat.events(Settings(),AIConfig(mode='live'),body,current,'thread','turn',[current.packet.fund_code+' önceki soru']))
+        self.assertEqual(emitted[-1][0],'answer')
+        first=json.loads(model.call_args_list[0].args[2][0]['content'])
+        self.assertEqual(first['packet']['fund_code'],'FUND')
+        serialized=json.dumps(first,ensure_ascii=False)
+        self.assertNotIn(current.packet.fund_code,serialized)
+        self.assertNotIn(current.packet.fund_name,serialized)
+        self.assertEqual(json.loads(tool.call_args.args[3])['fund_code'],current.packet.fund_code)
+
+    def test_historical_transport_does_not_offer_catalog_or_identity_tools(self):
+        current=replace(context(),origin='HISTORICAL_REPLAY')
+        with TemporaryDirectory() as folder:
+            key=Path(folder)/'synthetic-key';key.write_text('synthetic-api-credential',encoding='utf-8')
+            with patch.object(chat,'OpenAI') as factory,patch.object(chat,'reserve',return_value='synthetic-reservation'),patch.object(chat,'settle'),patch.object(chat,'connect'):
+                stream=factory.return_value.responses.create.return_value
+                stream.__iter__.return_value=iter([SimpleNamespace(type='response.completed',response=SimpleNamespace(status='completed',id='synthetic-call',usage=SimpleNamespace(input_tokens=10,output_tokens=10)))])
+                list(chat.model_call(Settings(),AIConfig(mode='live',key_file=key),[{'role':'user','content':'synthetic'}],20,current))
+                sent=factory.return_value.responses.create.call_args.kwargs
+                # Identity tools stay hidden; the agent tools reveal no fund identity.
+                self.assertEqual({item['name'] for item in sent['tools']},{'get_signals','get_decision','get_case_status','request_investigation'})
+
     def test_private_secret_and_raw_numeric_questions_are_blocked_before_egress(self):
         for question in ('mail@example.invalid', 'TR123456789', 'sk-synthetic-secret', 'NAV 100,42',
                          'https://example.invalid', 'şifrem nedir', 'telefon numaram', '   '):
@@ -130,7 +162,8 @@ class ChatBoundaryTests(unittest.TestCase):
                 request=factory.return_value.responses.create.call_args.kwargs
                 self.assertFalse(request['store'])
                 self.assertTrue(request['stream'])
-                self.assertEqual(len(request['tools']),4)
+                self.assertEqual(len(request['tools']),6)
+                self.assertIn('Raportör',request['instructions'])
                 self.assertTrue(request['text']['format']['strict'])
 
 
@@ -178,9 +211,10 @@ class ChatDatabaseTests(unittest.TestCase):
             connection.execute('DELETE FROM ai.chat_messages WHERE thread_id=%s',(thread,))
 
     def test_concurrent_final_daily_turn_allows_exactly_one(self):
-        for _ in range(29):chat.begin_turn(self.settings,self.actor,self.body,self.context)
+        new_conversation=self.body.model_copy(update={'new_thread':True})
+        for _ in range(29):chat.begin_turn(self.settings,self.actor,new_conversation,self.context)
         def attempt(_):
-            try:return chat.begin_turn(self.settings,self.actor,self.body,self.context)[1]
+            try:return chat.begin_turn(self.settings,self.actor,new_conversation,self.context)[1]
             except AIUnavailable as error:return str(error)
         with ThreadPoolExecutor(max_workers=2) as pool:outcomes=list(pool.map(attempt,range(2)))
         self.assertEqual(outcomes.count('CHAT_DAILY_LIMIT'),1)
@@ -198,3 +232,105 @@ class ChatDatabaseTests(unittest.TestCase):
                 cutoff=connection.execute('SELECT cutoff FROM det.detector_runs WHERE run_id=%s',(selected.run_id,)).fetchone()[0]
             self.assertLessEqual(cutoff,datetime.now(timezone.utc))
             self.assertLessEqual(selected.packet.as_of,datetime.now(timezone.utc).date().isoformat())
+
+    def test_latest_asset_conversation_restores_and_reuses_its_persisted_thread(self):
+        with patch.object(chat,'analysis_scope_key',return_value='live'):
+            thread,turn,_=chat.begin_turn(self.settings,self.actor,self.body,self.context)
+            list(chat.events(self.settings,AIConfig(mode='mock'),self.body,self.context,thread,turn,[]))
+            saved=chat.thread_list(self.settings,self.actor,'THF')
+            self.assertEqual(saved['items'][0]['thread_id'],thread)
+            self.assertEqual(saved['items'][0]['message_count'],2)
+            rows=chat.history(self.settings,self.actor,thread,'THF')
+            self.assertEqual([r['role'] for r in rows],['user','assistant'])
+            self.assertEqual(rows[1]['status'],'VALID')
+            self.assertTrue(rows[1]['evidence_labels'])
+            # A remounted client can omit its lost React thread id and continue.
+            continued,_,previous=chat.begin_turn(self.settings,self.actor,self.body,self.context)
+            self.assertEqual(continued,thread)
+            self.assertEqual(previous,[self.body.question])
+            self.assertEqual(chat.thread_list(self.settings,self.other,'THF')['items'],[])
+            self.assertEqual(chat.thread_list(self.settings,self.actor,'TP2')['items'],[])
+
+    def test_analysis_scopes_hide_and_reject_other_dates_without_deleting_history(self):
+        with patch.object(chat,'analysis_scope_key',return_value='live'):
+            live,turn,_=chat.begin_turn(self.settings,self.actor,self.body,self.context)
+            list(chat.events(self.settings,AIConfig(mode='mock'),self.body,self.context,live,turn,[]))
+        with patch.object(chat,'analysis_scope_key',return_value='asof:2026-09-12'):
+            self.assertEqual(chat.thread_list(self.settings,self.actor,'THF')['items'],[])
+            with self.assertRaisesRegex(AIUnavailable,'THREAD_NOT_FOUND'):
+                chat.history(self.settings,self.actor,live,'THF')
+            with self.assertRaisesRegex(AIUnavailable,'THREAD_NOT_FOUND'):
+                chat.begin_turn(self.settings,self.actor,self.body.model_copy(update={'thread_id':live}),self.context)
+            dated,_,_=chat.begin_turn(self.settings,self.actor,self.body,self.context)
+            self.assertNotEqual(live,dated)
+        with patch.object(chat,'analysis_scope_key',return_value='live'):
+            self.assertEqual(chat.thread_list(self.settings,self.actor,'THF')['items'][0]['thread_id'],live)
+            self.assertEqual(len(chat.history(self.settings,self.actor,live,'THF')),2)
+
+    def test_failed_turn_retains_question_but_never_restores_unvalidated_assistant_content(self):
+        thread,turn,_=chat.begin_turn(self.settings,self.actor,self.body,self.context)
+        self.assertEqual(chat.history(self.settings,self.actor,thread,'THF')[0]['status'],'PENDING')
+        chat.finish_turn(self.settings,thread,turn,'FAILED','synthetic',[],
+                         content='Synthetic content from an invalid legacy writer',error='SYNTHETIC_REJECTED')
+        rows=chat.history(self.settings,self.actor,thread,'THF')
+        self.assertEqual(len(rows),1)
+        self.assertEqual(rows[0]['role'],'user')
+        self.assertEqual(rows[0]['status'],'FAILED')
+        self.assertEqual(rows[0]['error_code'],'SYNTHETIC_REJECTED')
+
+    def test_new_conversation_is_explicit_and_saved_selector_remains_owner_scoped(self):
+        first,turn,_=chat.begin_turn(self.settings,self.actor,self.body,self.context)
+        list(chat.events(self.settings,AIConfig(mode='mock'),self.body,self.context,first,turn,[]))
+        second,_,_=chat.begin_turn(self.settings,self.actor,self.body.model_copy(update={'new_thread':True}),self.context)
+        self.assertNotEqual(first,second)
+        self.assertEqual([r['thread_id'] for r in chat.thread_list(self.settings,self.actor,'THF')['items']],[second,first])
+        with self.assertRaisesRegex(AIUnavailable,'QUESTION_REJECTED'):
+            chat.begin_turn(self.settings,self.actor,self.body.model_copy(update={'thread_id':first,'new_thread':True}),self.context)
+
+    def test_history_pages_are_bounded_and_can_recover_older_messages(self):
+        thread,turn,_=chat.begin_turn(self.settings,self.actor,self.body,self.context)
+        with connect(self.settings) as connection:
+            for index in range(65):
+                connection.execute("INSERT INTO ai.chat_messages(thread_id,turn_id,role,content) VALUES(%s,%s,'user',%s)",
+                                   (thread,turn,'Synthetic saved question '+str(index)))
+        recent=chat.history(self.settings,self.actor,thread,'THF')
+        self.assertEqual(len(recent),60)
+        earlier=chat.history(self.settings,self.actor,thread,'THF',int(recent[0]['message_id']))
+        self.assertEqual(len(earlier),6)
+        self.assertEqual(len({row['message_id'] for row in earlier+recent}),66)
+        with self.assertRaisesRegex(AIUnavailable,'THREAD_NOT_FOUND'):
+            chat.history(self.settings,self.other,thread,'THF',int(recent[0]['message_id']))
+
+    def test_thread_selector_can_page_past_twenty_conversations(self):
+        for _ in range(23):
+            chat.begin_turn(self.settings,self.actor,self.body.model_copy(update={'new_thread':True}),self.context)
+        first=chat.thread_list(self.settings,self.actor,'THF')
+        older=chat.thread_list(self.settings,self.actor,'THF',offset=20)
+        self.assertEqual(len(first['items']),20)
+        self.assertEqual(len(older['items']),3)
+        self.assertEqual(len({row['thread_id'] for row in first['items']+older['items']}),23)
+        self.assertEqual(chat.thread_list(self.settings,self.other,'THF',offset=20)['items'],[])
+
+    def test_http_history_follows_server_date_cookie_and_never_client_supplied_scope(self):
+        from fastapi.testclient import TestClient
+        from p50k.product.app import create_app
+        from p50k.product.auth import Principal,CSRF_COOKIE,digest_token
+        from p50k.product.analysis_context import use_analysis_date
+        with use_analysis_date('live'):
+            thread,turn,_=chat.begin_turn(self.settings,self.actor,self.body,self.context)
+            list(chat.events(self.settings,AIConfig(mode='mock'),self.body,self.context,thread,turn,[]))
+        csrf='s'*43
+        actor=Principal(self.actor,'synthetic@example.invalid','viewer','synthetic-session',digest_token(csrf))
+        with patch('p50k.product.auth.AuthService.authenticate',return_value=actor),TestClient(create_app(self.settings,readiness=lambda _:True),base_url='http://127.0.0.1:3071') as client:
+            client.cookies.set('p50k_as_of','live')
+            self.assertEqual(client.get('/chat/threads?fund_code=THF').json()['items'][0]['thread_id'],thread)
+            self.assertEqual(client.get('/chat/'+thread+'?fund_code=THF').status_code,200)
+            client.cookies.set('p50k_as_of','2026-09-12')
+            hidden=client.get('/chat/threads?fund_code=THF&analysis_scope_key=live').json()
+            self.assertEqual(hidden['analysis_scope_key'],'asof:2026-09-12')
+            self.assertEqual(hidden['items'],[])
+            self.assertEqual(client.get('/chat/'+thread+'?fund_code=THF').status_code,404)
+            client.cookies.set(CSRF_COOKIE,csrf)
+            headers={'Origin':'http://127.0.0.1:3071','X-CSRF-Token':csrf}
+            response=client.post('/chat',headers=headers,json={**self.body.model_dump(),'analysis_scope_key':'live'})
+            self.assertEqual(response.status_code,422)

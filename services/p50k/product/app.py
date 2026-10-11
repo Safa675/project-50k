@@ -53,6 +53,12 @@ def create_app(settings: Settings | None = None, readiness: Callable[[Settings],
     application.include_router(evidence_router)
     from p50k.product.watchlist_routes import router as watchlist_router
     application.include_router(watchlist_router)
+    from p50k.product.context_routes import router as context_router
+    application.include_router(context_router)
+    from p50k.product.fund_series_routes import router as fund_series_router
+    application.include_router(fund_series_router)
+    from p50k.product.agents.routes import router as agents_router
+    application.include_router(agents_router)
     application.add_middleware(TrustedHostMiddleware, allowed_hosts=list(config.allowed_hosts))
     public_paths = {"/health/live", "/health/ready"}
     public_paths.update({"/auth/csrf", "/auth/login"})
@@ -61,7 +67,7 @@ def create_app(settings: Settings | None = None, readiness: Callable[[Settings],
 
     @application.middleware("http")
     async def deny_unprotected_routes(request: Request, call_next):
-        if request.url.path not in public_paths:
+        if request.url.path not in public_paths and not (request.url.path=='/context' and request.method=='GET'):
             from p50k.product.auth import SESSION_COOKIE, AuthenticationError, AuthService, check_session_csrf
             try:
                 principal = await asyncio.to_thread(AuthService(config).authenticate, request.cookies.get(SESSION_COOKIE, ""))
@@ -73,7 +79,16 @@ def create_app(settings: Settings | None = None, readiness: Callable[[Settings],
             except Exception as error:
                 logging.getLogger(__name__).warning("session_unavailable", extra={"error_class": type(error).__name__})
                 return JSONResponse({"error": "SESSION_UNAVAILABLE"}, status_code=503, headers={"Cache-Control": "no-store"})
-        response = await call_next(request)
+        from p50k.product.analysis_context import COOKIE, use_analysis_date, validate_date
+        try:
+            selected=validate_date(request.cookies.get(COOKIE,config.analysis_date))
+            invalid_preference=False
+        except ValueError:
+            selected=validate_date(config.analysis_date)
+            invalid_preference=True
+        with use_analysis_date(selected):
+            response = await call_next(request)
+        if invalid_preference:response.delete_cookie(COOKIE,path='/')
         response.headers["Cache-Control"] = "no-store"
         response.headers["X-Content-Type-Options"] = "nosniff"
         response.headers["Referrer-Policy"] = "no-referrer"

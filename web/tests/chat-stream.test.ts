@@ -11,6 +11,14 @@ function response(parts: string[], newline = '\n'): Response {
 }
 
 describe('validated chat stream', () => {
+  it('reports the persisted thread immediately and rejects a mismatched final thread',async()=>{
+    const started={thread_id:result.thread_id,analysis_scope_key:'asof:2026-09-12'};
+    const frame=`event: thread\ndata: ${JSON.stringify(started)}\n\n`;
+    const seen:unknown[]=[];
+    expect(await readChatAnswer(response([frame,`event: answer\ndata: ${JSON.stringify(result)}\n\n`]),()=>undefined,()=>undefined,()=>undefined,item=>seen.push(item))).toEqual(result);
+    expect(seen).toEqual([started]);
+    await expect(readChatAnswer(response([frame,`event: answer\ndata: ${JSON.stringify({...result,thread_id:'00000000-0000-4000-8000-000000000002'})}\n\n`]),()=>undefined)).rejects.toMatchObject({code:'STREAM_INVALID'});
+  });
   it('shows a checked paragraph before completion, then requires a matching final answer', async () => {
     let send:ReadableStreamDefaultController<Uint8Array>;
     const encoder=new TextEncoder();
@@ -75,5 +83,14 @@ describe('validated chat stream', () => {
   it('bounds frames and tool activity before rendering content', async () => {
     await expect(readChatAnswer(response(['x'.repeat(32769)]), () => undefined)).rejects.toMatchObject({code: 'STREAM_INVALID'});
     await expect(readChatAnswer(response(['event: tool\ndata: {"name":"search_funds"}\n\n'.repeat(7)]), () => undefined)).rejects.toMatchObject({code: 'STREAM_INVALID'});
+  });
+
+  it('accepts the Raportör case tools and still rejects any other action', async () => {
+    const tools: string[] = [];
+    const frames = ['event: tool\ndata: {"name":"get_case_status"}\n\n', 'event: tool\ndata: {"name":"request_investigation"}\n\n',
+      `event: answer\ndata: ${JSON.stringify(result)}\n\n`];
+    expect(await readChatAnswer(response(frames), name => tools.push(name))).toEqual(result);
+    expect(tools).toEqual(['get_case_status', 'request_investigation']);
+    await expect(readChatAnswer(response(['event: tool\ndata: {"name":"close_case"}\n\n']), () => undefined)).rejects.toMatchObject({code: 'STREAM_INVALID'});
   });
 });

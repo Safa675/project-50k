@@ -21,7 +21,7 @@ export default async function Detail({params}: {params: Promise<{symbol: string}
   return <section><Link href="/stocks">← Hisse kataloğu</Link>
     <p className="eyebrow">{symbol} · BIST</p><div className="stock-heading"><AssetLogo kind="stock" code={symbol} name={data.stock.name} size={48} decorative/><h1>{data.stock.name}</h1></div>
     <p>Güncel BIST 30 kataloğu · Türk lirası.</p>
-    {latest&&<div className="stock-latest"><p>Son yayımlanmış kapanış</p><strong>{decimal(latest.close)} TL</strong><p>{dateTr(latest.effective_date)} · ForInvest</p></div>}
+    {!latest&&<p className="notice">Seçilen inceleme tarihinde kullanılabilir bir fiyat kaydı yok. Kaynaktan daha sonra alınan fiyatlar bu tarihe taşınmaz. Üstteki inceleme tarihinden güncel görünüme geçebilirsiniz.</p>}{latest&&<div className="stock-latest"><p>Son yayımlanmış kapanış</p><strong>{decimal(latest.close)} TL</strong><p>{dateTr(latest.effective_date)} · ForInvest</p></div>}
     <article><h2>Yayımlanmış günlük kapanış fiyatı</h2>
       <p>Bölünme ve temettü düzeltmesinin yapıldığı doğrulanmadı; bu durum fiyat karşılaştırmalarını sınırlayabilir.</p>
       <StockChart points={data.chart.points}/>

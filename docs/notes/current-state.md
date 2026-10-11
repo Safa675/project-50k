@@ -1,5 +1,69 @@
 # Project 50K: current state
 
+## Agent team release — 2026-10-11 about 08:10 Istanbul (newest; read first)
+
+- **Live product:** http://127.0.0.1:3070, with API 8770, running the images built from `product/build` commit
+  `7b5cf46` (DEC-035). The real database `p50k` has migrations through `013_agent_team.sql`. The default analysis
+  date is **12 September 2026**, and AI is live.
+- **The always-on agent team runs in the worker.**
+  - Nöbetçi scanned all 2,133 funds as of 12 September and opened 189 cases, the replay's any-triggered funds.
+  - Each case runs Hipotezci ∥ Şüpheci → Doğrulayıcı (code-computed tests) → Raportör, which files a proposal into
+    the existing human review.
+  - The daily budget bucket is `agents:YYYY-MM-DD` with a $3 cap; background pace is about one case every 5 minutes;
+    user requests jump the queue.
+  - The first real case was reported for $0.048.
+- **Web.**
+  - A mascot dock (placeholder art, per DEC-035) is on every page and opens the team panel: the five-agent graph,
+    the Raportör tab with per-fund or general persistent conversations, the Sıra queue, read-only workspaces and
+    `/ekip`.
+  - The "Fon hakkında sorularınız" section and the status chips are removed.
+- **Checks run:**
+  - 62 focused Python tests passed; 1 setup needs owner access and did not run, so it is not a pass.
+  - 49 web unit tests passed.
+  - 11 Playwright tests passed on the smoke stack (3071/8771, `p50k_dev`, AI off).
+  - Screenshots were checked.
+  - The adversarial reviewer pass was lost to usage limits.
+- **Known issues:** one worker heartbeat `_DeadlockError` at startup; non-fatal, and work continues.
+- **Demo:** a ~25-second screen recording (DEC-035 storyboard in `docs/notes/agent-team-design-2026-10-10.md`,
+  section 7).
+- **Next:**
+  1. Keep the team healthy and record.
+  2. Merge `product/build` into `main` through the integration worktree with protected-path checks.
+  3. Add stock checks for Nöbetçi with the Borsa İstanbul v2 source (after the recording).
+
+## Claude takeover checkpoint — 2026-10-10 about 21:45 Istanbul
+
+Read [the complete Claude handoff](../../plans/2026-10-10-claude-resume-handoff.md)
+before continuing. Main and the running product remain the released `9a2a993`
+merge (`84438f7` product code, `e65c8e6` verification). The app worktree contains
+new work being checkpointed separately; it has **not been deployed or merged**.
+
+Mirza's latest DEC-034 direction is product depth, persistent asset conversations,
+Enter-to-send, coherent catalog/results tabs, real monthly data and a genuine
+12 September review. He expressly deprioritized repeated Linux/backup meta work.
+
+The unchanged full-universe historical calculation has completed in the real DB:
+2,133 funds, 17,064 results, four of eight case funds triggered D1 (THF, TP2,
+PRY, PNU), 69 price-triggered funds overall. No later event was admitted; the
+other four case funds remain without a price trigger. See the linked replay notes.
+Existing KAP reports supply dated units/size for all eight case funds. New code
+connects that data and preserves chat by owner/fund/date. Migration 012 is applied
+only in synthetic `p50k_dev`; production remains at 11 migrations.
+
+Immediate checks at handoff: web typecheck passed; 30 web unit tests passed;
+29 targeted chat/history/KAP-series tests passed on isolated PostgreSQL in
+9.709 seconds with zero skips. The combined new API/UI images and historical
+browser flow remain unbuilt/unverified. No active download or paid job remains.
+
+An official BIST September 11 bulletin with prices and dated BIST 30 membership
+has been downloaded externally, but has **not** been admitted/imported. It offers
+a concrete next stock-history source; the existing capture-only stock protocol
+must not be backdated. Exact files and all remaining checks are in the handoff.
+
+Latest read-only real ledger: 32 paid calls, USD 0.2995650 booked, zero reserved;
+two succeeded jobs, none queued/running. Preserve the product database and all
+external files. The last backup predates the newly computed historical run.
+
 Updated 2026-10-10 (Europe/Istanbul), the Saturday of Startup Weekend Urla (9–11 October 2026). Start here.
 [codex-context-2026-10-07.md](codex-context-2026-10-07.md) keeps the detailed data-source facts (its section 5),
 the case study (section 6), the evaluation rules (section 7) and the do-not-claim list (section 11); those still

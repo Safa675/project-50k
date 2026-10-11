@@ -1,5 +1,8 @@
 # BlackSwan Figma implementation, 2026-10-10
 
+**Taking over in Claude?** Start with the [current detailed handoff](../../plans/2026-10-10-claude-resume-handoff.md).
+It preserves subsequent product work and distinguishes unfinished changes from this released milestone.
+
 The subsequent [nontechnical experience and streaming update](blackswan-user-experience-completion.md)
 records Mirza's later feedback, algorithm explanations, price display fixes and verified asset logos.
 

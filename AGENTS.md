@@ -1,5 +1,10 @@
 # Project 50K: instructions for coding agents
 
+**Latest takeover checkpoint:** read `plans/2026-10-10-claude-resume-handoff.md`
+in full. It separates the released app from unfinished date-context, chat-history
+and monthly-report integration. Follow DEC-034's product-first pacing; do not
+repeat broad Linux regressions or backup rehearsals for that unfinished slice.
+
 The current product and hackathon demo scope is **Turkish investment funds and Turkish stocks**, set by [DEC-032](docs/decisions/DEC-032-b2b-evidence-data-api.md) on 2026-10-10. The first demonstrated case is the historical fund case; Mirza requires real stock support in the hackathon demo too. Current BIST 30 catalog, daily closes, source evidence and corporate-action observations are implemented in isolated modules under a new committed stock protocol. Stock anomaly classification/AI is not implemented; existing fund protocols remain immutable. Crypto, US equities and on-chain remain postponed. DEC-032 supersedes DEC-024's stock postponement; DEC-024's fund-first history and the frozen handoff remain preserved.
 
 **Current direction (2026-10-10):**

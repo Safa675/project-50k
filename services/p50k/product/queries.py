@@ -18,6 +18,7 @@ from p50k.product.models import (
     Coverage, DailyChart, EventsPage, Fund, FundsPage, FundPriceSummary, PricePoint,
     RegulatoryEvent, Signal, SignalsPage, SourceReference,
 )
+from p50k.product.analysis_context import historical_mode, page_origin, run_day, run_origins
 
 
 def decimal_text(value: Decimal | str | int | None) -> str | None:
@@ -142,6 +143,7 @@ SIGNALS_CTE = """
         SELECT run.run_id, inputs.version_id FROM det.detector_runs run
         JOIN det.run_inputs inputs ON inputs.run_id = run.run_id
         WHERE run.origin = ANY(%s) AND run.cutoff IS NOT NULL AND run.cutoff <= %s
+            AND (%s::date IS NULL OR (run.cutoff AT TIME ZONE 'Europe/Istanbul')::date=%s::date)
             AND inputs.complete
         ORDER BY run.cutoff DESC, run.created_at DESC, run.run_id DESC LIMIT 1
     ), selected AS (
@@ -153,10 +155,13 @@ SIGNALS_CTE = """
         FROM det.signals signal
         JOIN latest_run ON latest_run.run_id = signal.run_id
         JOIN det.evidence_items item ON item.evidence_id = signal.evidence_id
+        JOIN ref.funds fund ON fund.fund_code=signal.fund_code
         WHERE signal.as_of <= %s
             AND (item.available_at <= %s OR (item.available_at IS NULL AND signal.state = 'ABSTAINED'))
             AND (%s::text IS NULL OR signal.fund_code = %s)
             AND (%s::text IS NULL OR signal.state = %s)
+            AND (fund.fund_code ILIKE %s OR fund.name ILIKE %s)
+            AND (%s::text IS NULL OR fund.category=%s)
     )
 """
 EVENTS_CTE = """
@@ -198,10 +203,13 @@ class FundQueries:
         total = self._count("SELECT count(*) AS total FROM ref.funds" + where, parameters)
         rows = self._rows("SELECT " + FUND_COLUMNS + " FROM ref.funds" + where
                           + " ORDER BY fund_code LIMIT %s OFFSET %s", parameters + (limit, offset))
+        if historical_mode():
+            for row in rows:row['tefas_status']=None
         return FundsPage(items=[Fund(**row) for row in rows], total=total, limit=limit, offset=offset)
 
     def fund(self, code: str) -> Fund | None:
         rows = self._rows("SELECT " + FUND_COLUMNS + " FROM ref.funds WHERE fund_code = %s", (code,))
+        if rows and historical_mode():rows[0]['tefas_status']=None
         return Fund(**rows[0]) if rows else None
 
     def chart(self, code: str, start: date, end: date, cutoff: datetime) -> DailyChart:
@@ -210,9 +218,12 @@ class FundQueries:
         return DailyChart(fund_code=code, start_date=start, end_date=end, cutoff=cutoff, points=points)
 
     def signals(self, code: str | None, state: str | None, as_of: date,
-                cutoff: datetime, limit: int, offset: int) -> SignalsPage:
-        origins = ['DELAYED','SYNTHETIC'] if getattr(getattr(self.connection,'info',None),'dbname',None)=='p50k_dev' else ['DELAYED']
-        parameters = (origins, cutoff, as_of, cutoff, code, code, state, state)
+                cutoff: datetime, limit: int, offset: int, query: str='', category: str|None=None) -> SignalsPage:
+        origins = run_origins(database=getattr(getattr(self.connection,'info',None),'dbname',None) or 'unknown')
+        # A retrospective read uses only the run of its cutoff's own day.
+        day = run_day(cutoff)
+        term='%'+query.replace('\\','\\\\').replace('%','\\%').replace('_','\\_')+'%'
+        parameters = (origins, cutoff, day, day, as_of, cutoff, code, code, state, state,term,term,category,category)
         total = self._count(SIGNALS_CTE + "SELECT count(*) AS total FROM selected", parameters)
         rows = self._rows(SIGNALS_CTE + "SELECT * FROM selected ORDER BY fund_code, detector_id LIMIT %s OFFSET %s",
                           parameters + (limit, offset))
@@ -226,7 +237,7 @@ class FundQueries:
             payload["thresholds"] = evidence_values(payload["thresholds"])
             payload["source_references"] = [source_reference(item) for item in payload["source_references"]]
             items.append(Signal(**payload))
-        return SignalsPage(items=items, total=total, limit=limit, offset=offset, cutoff=cutoff)
+        return SignalsPage(items=items, total=total, limit=limit, offset=offset, cutoff=cutoff, origin=page_origin())
 
     def events(self, code: str | None, as_of: date, cutoff: datetime,
                limit: int, offset: int) -> EventsPage:
@@ -250,4 +261,4 @@ class FundQueries:
                 bulletin_id=metadata.get("bulletin_id"), in_monitoring_scope=in_scope,
                 availability_unknown=availability_unknown,
             ))
-        return EventsPage(items=items, total=total, limit=limit, offset=offset, cutoff=cutoff)
+        return EventsPage(items=items, total=total, limit=limit, offset=offset, cutoff=cutoff, origin=page_origin())
