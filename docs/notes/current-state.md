@@ -32,6 +32,9 @@ and deployed on real 3070/8770; the team is running, AI is live and the default 
   rows across 945 funds, 1,259 locally indexed PDF records and 1,255 parsed period records across 101 funds. Product DB
   1,159,624,383 bytes (~1.16 GB). Raw folders 989,128,315 bytes; overnight 157,053,752 bytes (overlapping/cached copies,
   also including stocks). The 131 figure is the later SPK subset, not total coverage.
+- Saved initial100 membership inventory (read-only, no current reranking):100funds/115,371price rows;8laterSPK-listed
+  funds within that cohort/5,044rows. All131confirmedSPK-listed funds have78,970rows and are present in the catalog
+  and stored price universe. Initial100 has114,515non-null NAV observations,856missing,115,368distinct fund/date pairs.
 
 ## Sunday product release — 2026-10-11 about 11:35 Istanbul (earlier release)
 
