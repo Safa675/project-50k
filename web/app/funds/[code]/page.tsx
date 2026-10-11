@@ -12,7 +12,7 @@ import FundEvidence from '@/components/FundEvidence';
 import FundSections from '@/components/FundSections';
 import FundShare from '@/components/FundShare';
 import FundDecision from '@/components/FundDecision';
-import ChatPanel from '@/components/ChatPanel';
+import AgentPage from '@/components/agents/AgentPage';
 import WatchlistButton from '@/components/WatchlistButton';
 import styles from '@/components/Funds.module.css';
 
@@ -60,12 +60,10 @@ export default async function Detail({params}: {params: Promise<{code: string}>}
     <div className={styles.sectionTitle}><h2>Fon bilgileri</h2></div>
     <dl className={styles.facts}>
       <div><dt>Fon kodu</dt><dd>{code}</dd></div><div><dt>Fon türü · güncel katalog</dt><dd>{data.fund.category ?? 'Kategori bilinmiyor'}</dd></div>
-    </dl><details className="method-explanation"><summary>Bu sayfada hangi bilgiler var?</summary><p>Günlük fiyatlar ve tamamlanan fiyat karşılaştırmaları gösterilir. Pay sayısı, yatırımcı sayısı ve varlık dağılımı için tarihli kaynak kayıtları gerekir; güncel bir sayı geçmişe taşınmaz. Alınmış portföy raporları Kaynaklar bölümünden açılabilir.</p></details><div className={styles.reviewBlock}><FundDecision code={code}/></div>
+    </dl><details className="method-explanation"><summary>Bu sayfada hangi bilgiler var?</summary><p>Günlük fiyatlar ve tamamlanan fiyat karşılaştırmaları gösterilir. Pay sayısı, yatırımcı sayısı ve varlık dağılımı için tarihli kaynak kayıtları gerekir; güncel bir sayı geçmişe taşınmaz. Alınmış portföy raporları Kaynaklar bölümünden açılabilir.</p></details><div className={styles.reviewBlock} id="karar"><FundDecision code={code}/></div>
   </>;
   return <section className={styles.page} data-figma-node="21:206">
-    <div><FundTooltip pill title="Yayımlanmış arşiv verileri" text={`İnceleme sınırı: ${sourceTime(data.cutoff)}. Fiyatlar ve gelişmeler bu tarihe göre seçilir. Fon türü bilgisi güncel katalogdan gelir; geçmişteki sınıflandırma olarak yorumlanmaz.`}>
-      <img src="/figma/funds/clock.svg" alt=""/>{user.data_mode === 'SYNTHETIC' ? 'Örnek test verileri' : user.analysis_context?.mode==='historical'?'Tarihe göre inceleme':'Yayımlanmış veriler'}
-    </FundTooltip></div>
+    <AgentPage fundCode={code}/>
     <header className={styles.identity}>
       <div className={styles.identityText}><AssetLogo kind="fund" code={code} name={data.fund.name} size={48} decorative/><div><div className={styles.identityMeta}><span className={styles.code}>{code}</span><span>{data.fund.category ?? 'Kategori bilinmiyor'}</span></div><h1>{data.fund.name}</h1></div></div>
       <div className={styles.actions}><FundShare/><Link className={styles.iconButton} href="/notifications" aria-label="Bildirimler"><img src="/design/bell.svg" alt=""/></Link><WatchlistButton code={code}/></div>
@@ -80,7 +78,6 @@ export default async function Detail({params}: {params: Promise<{code: string}>}
           <div className={styles.dataRow}><dt>Kaynak dayanağı</dt><dd><FundTooltip align="end" title="Kaynak dayanağı" text="İncelemede kullanılan kaynak kayıtları burada listelenir. Aynı kaynağın birden fazla kaydı bulunabilir; kayıt sayısı güven puanı değildir.">{sourceCount} kaynak kaydı</FundTooltip></dd></div>
         </dl></div>
         <div className={styles.card} id="kap-reports"><h2>KAP raporları</h2>{documents.length ? <ul className={styles.sourceList}>{documents.slice(0, 3).map(item => <li key={item.document_key}><img src="/figma/funds/document.svg" alt=""/><div>{item.report_period ?? 'Dönemi belirtilmemiş'} portföy raporu<p className={styles.caption}>KAP · {dateTr(item.published_at)}</p></div>{item.source_url && <a href={item.source_url} target="_blank" rel="noreferrer">Aç</a>}</li>)}</ul> : <p className={styles.muted}>{documentResponse.ok ? 'Bu fon için alınmış KAP rapor kaydı bulunmuyor.' : 'KAP kaynak kayıtlarına şu anda erişilemiyor.'}</p>}<p className={styles.caption}>Raporların tarihleri ve bağlantıları Kaynaklar bölümünde.</p></div>
-        <ChatPanel key={`${code}:${user.analysis_context?.scope_key}`} code={code} drawer analysisScopeKey={user.analysis_context?.scope_key}/>
       </aside>
     </div>
 

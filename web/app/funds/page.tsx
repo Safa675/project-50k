@@ -4,7 +4,6 @@ import AssetLogo from '@/components/AssetLogo';
 import {requireUser, serverApi} from '@/lib/auth';
 import {FundSignal} from '@/lib/fund-display';
 import FundEvidence from '@/components/FundEvidence';
-import FundTooltip from '@/components/FundTooltip';
 import styles from '@/components/Funds.module.css';
 
 type Fund = {fund_code: string; name: string; category: string | null};
@@ -28,7 +27,7 @@ export default async function Funds({searchParams}:{searchParams:Promise<{q?:str
   const query=new URLSearchParams({q,limit:String(limit),offset:String(offset)});
   if(category)query.set('category',category);
   if(view==='developments')query.set('state','TRIGGERED');
-  const [response,categoriesResponse,user]=await Promise.all([serverApi(`${view==='catalog'?'/funds':'/signals'}?${query}`),serverApi('/fund-categories'),requireUser()]);
+  const [response,categoriesResponse]=await Promise.all([serverApi(`${view==='catalog'?'/funds':'/signals'}?${query}`),serverApi('/fund-categories'),requireUser()]);
   if(!response.ok)throw new Error(view==='catalog'?'Fon kataloğu şu anda yüklenemiyor.':'Gelişmeler şu anda yüklenemiyor.');
   const data=await response.json();
   if(!Array.isArray(data.items)||!Number.isInteger(data.total))throw new Error('Liste şu anda okunamıyor.');
@@ -37,7 +36,6 @@ export default async function Funds({searchParams}:{searchParams:Promise<{q?:str
   if(offset>0&&offset>=data.total)redirect(href(view,data.total?Math.floor((data.total-1)/limit)*limit:0));
   const filtered=!!q||!!category;
   return <section className={styles.page} data-figma-node="27:508">
-    {user.data_mode==='SYNTHETIC'&&<p className={styles.caption}>Örnek test verileri</p>}
     <h1>Keşfet</h1>
     <nav className={styles.viewTabs} aria-label="Keşfet görünümleri"><Link href={href('catalog')} className={view==='catalog'?styles.viewActive:undefined} aria-current={view==='catalog'?'page':undefined}>Tüm fonlar</Link><Link href={href('developments')} className={view==='developments'?styles.viewActive:undefined} aria-current={view==='developments'?'page':undefined}>Gelişmeler</Link></nav>
     <form className={styles.search} action="/funds"><input type="hidden" name="view" value={view}/><label><span className={styles.srOnly}>Fon kodu veya adı</span><img src="/design/search-large.svg" alt=""/><input name="q" defaultValue={q} maxLength={80} placeholder="Fon adı ya da kodu ara"/></label>{category&&<input type="hidden" name="category" value={category}/>}<button type="submit">Ara</button></form>

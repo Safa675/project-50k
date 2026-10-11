@@ -15,7 +15,7 @@ export class ChatError extends Error {
 
 const MAX_STREAM_BYTES = 256 * 1024;
 const MAX_FRAME_CHARS = 32768;
-const TOOL_NAMES = new Set(['search_funds', 'get_fund_profile', 'get_signals', 'get_decision']);
+const TOOL_NAMES = new Set(['search_funds', 'get_fund_profile', 'get_signals', 'get_decision', 'get_case_status', 'request_investigation']);
 
 function object(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);

@@ -57,6 +57,8 @@ def create_app(settings: Settings | None = None, readiness: Callable[[Settings],
     application.include_router(context_router)
     from p50k.product.fund_series_routes import router as fund_series_router
     application.include_router(fund_series_router)
+    from p50k.product.agents.routes import router as agents_router
+    application.include_router(agents_router)
     application.add_middleware(TrustedHostMiddleware, allowed_hosts=list(config.allowed_hosts))
     public_paths = {"/health/live", "/health/ready"}
     public_paths.update({"/auth/csrf", "/auth/login"})

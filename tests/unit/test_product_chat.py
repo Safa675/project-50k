@@ -72,7 +72,8 @@ class ChatBoundaryTests(unittest.TestCase):
                 stream.__iter__.return_value=iter([SimpleNamespace(type='response.completed',response=SimpleNamespace(status='completed',id='synthetic-call',usage=SimpleNamespace(input_tokens=10,output_tokens=10)))])
                 list(chat.model_call(Settings(),AIConfig(mode='live',key_file=key),[{'role':'user','content':'synthetic'}],20,current))
                 sent=factory.return_value.responses.create.call_args.kwargs
-                self.assertEqual({item['name'] for item in sent['tools']},{'get_signals','get_decision'})
+                # Identity tools stay hidden; the agent tools reveal no fund identity.
+                self.assertEqual({item['name'] for item in sent['tools']},{'get_signals','get_decision','get_case_status','request_investigation'})
 
     def test_private_secret_and_raw_numeric_questions_are_blocked_before_egress(self):
         for question in ('mail@example.invalid', 'TR123456789', 'sk-synthetic-secret', 'NAV 100,42',
@@ -161,7 +162,8 @@ class ChatBoundaryTests(unittest.TestCase):
                 request=factory.return_value.responses.create.call_args.kwargs
                 self.assertFalse(request['store'])
                 self.assertTrue(request['stream'])
-                self.assertEqual(len(request['tools']),4)
+                self.assertEqual(len(request['tools']),6)
+                self.assertIn('Raportör',request['instructions'])
                 self.assertTrue(request['text']['format']['strict'])
 
 

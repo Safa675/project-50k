@@ -17,6 +17,7 @@ from fastapi.openapi.docs import get_swagger_ui_html
 from fastapi.responses import HTMLResponse, JSONResponse
 from pydantic import AwareDatetime
 
+from p50k.product.analysis_context import current_cutoff, historical_mode, page_origin
 from p50k.product.archive import ISTANBUL
 from p50k.product.db import connect
 from p50k.product.models import EventsPage, FundDetail, FundsPage, SignalsPage
@@ -39,15 +40,21 @@ def get_queries(request: Request) -> Iterator[FundQueries]:
 
 
 def resolve_cutoff(cutoff: datetime | None) -> datetime:
+    """Apply an explicit cutoff only within the selected analysis.
+
+    A retrospective selection rejects any cutoff after its selected day. An
+    earlier explicit cutoff stays retrospective: observations are filtered at that
+    cutoff and detector results come only from the run computed for that cutoff's
+    own day, never from another day's run or the live run. The live selection keeps
+    the latest live run at or before an explicit cutoff.
+    """
     now = datetime.now(timezone.utc)
     if cutoff is None:
-        from p50k.product.analysis_context import current_cutoff
         return current_cutoff()
     if cutoff.tzinfo is None or cutoff.utcoffset() is None:
         raise HTTPException(status_code=422, detail="CUTOFF_REQUIRES_TIMEZONE")
     if cutoff > now:
         raise HTTPException(status_code=422, detail="FUTURE_CUTOFF_REJECTED")
-    from p50k.product.analysis_context import current_cutoff,historical_mode
     if historical_mode() and cutoff>current_cutoff():
         raise HTTPException(status_code=422,detail='CUTOFF_AFTER_SELECTED_DATE')
     return cutoff.astimezone(timezone.utc)
@@ -58,7 +65,10 @@ Code = Annotated[str, Path(pattern=r"^[A-Z0-9]{2,12}$")]
 Limit = Annotated[int, Query(ge=1, le=100)]
 Offset = Annotated[int, Query(ge=0, le=10000)]
 SignalsOffset = Annotated[int, Query(ge=0, le=50000)]
-Cutoff = Annotated[AwareDatetime | None, Query(description="Observation availability cutoff with explicit timezone; catalog metadata remains current.")]
+Cutoff = Annotated[AwareDatetime | None, Query(description=(
+    "Observation availability cutoff with explicit timezone; catalog metadata remains current. "
+    "With a retrospective analysis date selected, a later cutoff is rejected and an earlier one "
+    "uses only the retrospective run of its own day."))]
 router = APIRouter(dependencies=[Depends(require_session)])
 
 
@@ -88,7 +98,7 @@ event is under review and cannot trigger a confirmed regulatory signal.
     signals = reader.signals(fund_code, None, as_of, resolved, 100, 0).items
     events = reader.events(fund_code, as_of, resolved, 100, 0)
     return FundDetail(fund=fund, chart=chart, price_summary=price_summary_for(chart), signals=signals, coverage=coverage_for(signals),
-                      events=events.items, events_total=events.total, cutoff=resolved)
+                      events=events.items, events_total=events.total, cutoff=resolved, origin=page_origin())
 
 
 @router.get("/signals", response_model=SignalsPage, tags=["Evidence"])
@@ -98,7 +108,7 @@ def list_signals(reader: Reader,
                  cutoff: Cutoff = None, limit: Limit = 25, offset: SignalsOffset = 0,
                  q: Annotated[str,Query(max_length=80)]='',
                  category: Annotated[str|None,Query(min_length=1,max_length=200)]=None) -> SignalsPage:
-    """Latest complete DELAYED detector run; every figure is a development result."""
+    """Latest complete live run, or the selected day's retrospective run; every figure is a development result."""
     resolved = resolve_cutoff(cutoff)
     if q or category is not None:
         return reader.signals(fund_code,state,resolved.astimezone(ISTANBUL).date(),resolved,limit,offset,q.strip(),category)

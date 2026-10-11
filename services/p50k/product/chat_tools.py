@@ -24,6 +24,10 @@ class ChatContext:
     origin: str
     checksum: str
     reasons: dict[str, str] = field(default_factory=dict)
+    # Server-side request facts for the agent tools; never taken from the client body.
+    scope: str | None = None
+    user_id: str | None = None
+    team_case: dict | None = None
 
 
 def load_context(settings: Settings, code: str, evidence_id: str | None = None) -> ChatContext:
@@ -77,20 +81,46 @@ class SearchArguments(BaseModel):
 
 
 ARGUMENTS = {'search_funds':SearchArguments, 'get_fund_profile':FundArguments,
-             'get_signals':FundArguments, 'get_decision':FundArguments}
+             'get_signals':FundArguments, 'get_decision':FundArguments,
+             'get_case_status':FundArguments, 'request_investigation':FundArguments}
 TOOLS = [{'type':'function', 'name':name, 'description':description, 'strict':True,
           'parameters':ARGUMENTS[name].model_json_schema()} for name, description in (
     ('search_funds','Find up to five public fund catalog entries. Current metadata only.'),
     ('get_fund_profile','Read public name and category for the current thread fund.'),
     ('get_signals','Read deterministic evidence for the current thread fund; no raw prices.'),
-    ('get_decision','Read the effective enum and evidence IDs for the current evidence packet; no private review text.'))]
+    ('get_decision','Read the effective enum and evidence IDs for the current evidence packet; no private review text.'),
+    ('get_case_status','Read the agent team case for the current thread fund in the selected date: step statuses, '
+                       'validated team output with evidence aliases and categorical test outcomes.'),
+    ('request_investigation','Queue an investigation of the current thread fund by the agent team at user priority. '
+                             'Use only when the user asks for an investigation; deduplicated and rate-limited.'))]
+AGENT_TOOLS = {'get_case_status', 'request_investigation'}
+# Tools that reveal no identity, offered in historical (anonymous) views.
+HISTORICAL_TOOLS = {'get_signals', 'get_decision', *AGENT_TOOLS}
 
 
-def bounded_json(payload: Any) -> str:
+def bounded_json(payload: Any, limit: int = 4096) -> str:
     value = json.dumps(payload, ensure_ascii=False, separators=(',', ':'))
-    if len(value.encode()) > 4096:
+    if len(value.encode()) > limit:
         raise AIUnavailable('TOOL_OUTPUT_TOO_LARGE')
     return value
+
+
+def agent_tool(settings: Settings, scope: str | None, user_id: str | None, name: str, code: str,
+               packet: Packet | None = None, run_id: str | None = None) -> str:
+    """The two agent tools; request_investigation uses the same service and limits as POST /agents/requests."""
+    if not scope or not user_id:
+        raise AIUnavailable('TOOL_UNAVAILABLE')
+    import psycopg
+    from p50k.product.agents import service
+    try:
+        if name == 'get_case_status':
+            return bounded_json(service.case_status(settings, scope, code, packet, run_id), 8192)
+        outcome = service.request_investigation(settings, scope, user_id, code)
+    except service.AgentRequestError as error:
+        raise AIUnavailable(error.code) from None
+    except psycopg.Error:
+        raise AIUnavailable('TOOL_UNAVAILABLE') from None
+    return bounded_json({'queued': outcome['queued'], 'case_status': outcome['status'], 'outcome': outcome['outcome']})
 
 
 def invoke_tool(settings: Settings, context: ChatContext, name: str, raw: str) -> str:
@@ -105,6 +135,8 @@ def invoke_tool(settings: Settings, context: ChatContext, name: str, raw: str) -
     packet = context.packet
     if name != 'search_funds' and args.fund_code != packet.fund_code:
         raise AIUnavailable('TOOL_SCOPE_REJECTED')
+    if name in AGENT_TOOLS:
+        return agent_tool(settings, context.scope, context.user_id, name, packet.fund_code, packet, context.run_id)
     if name == 'get_fund_profile':
         return bounded_json({'fund_code':packet.fund_code, 'name':packet.fund_name,
                              'category':packet.category, 'metadata_scope':'CURRENT_CATALOG'})

@@ -7,6 +7,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query, Request
 from pydantic import BaseModel, ConfigDict, Field
 from psycopg.rows import dict_row
 
+from p50k.product.analysis_context import run_day, run_origins
 from p50k.product.archive import ISTANBUL
 from p50k.product.auth import Principal, require_session
 from p50k.product.db import connect
@@ -18,6 +19,10 @@ router = APIRouter(dependencies=[Depends(require_session)],tags=['Evidence detai
 
 
 def evidence_detail(reader: FundQueries, evidence_id: str, actor: str, cutoff: datetime) -> dict | None:
+    # Only evidence of the selected analysis is visible: live runs in the live view,
+    # and in a retrospective view only the run of the cutoff's own day.
+    origins=run_origins(database=getattr(getattr(reader.connection,'info',None),'dbname',None) or 'unknown')
+    day=run_day(cutoff)
     rows = reader._rows("""SELECT signal.fund_code,signal.detector_id,input.version_id,
         signal.run_id,signal.state,signal.reason,signal.value,signal.threshold,signal.evidence_id,
         signal.as_of,item.effective_date,item.origin,item.values,item.thresholds,item.unit,
@@ -25,10 +30,11 @@ def evidence_detail(reader: FundQueries, evidence_id: str, actor: str, cutoff: d
         FROM det.signals signal JOIN det.evidence_items item USING(evidence_id)
         JOIN det.detector_runs run ON run.run_id=signal.run_id
         JOIN det.run_inputs input ON input.run_id=run.run_id
-        WHERE signal.evidence_id=%s AND input.complete AND run.cutoff<=%s
+        WHERE signal.evidence_id=%s AND input.complete AND run.cutoff<=%s AND run.origin=ANY(%s)
+          AND (%s::date IS NULL OR (run.cutoff AT TIME ZONE 'Europe/Istanbul')::date=%s::date)
           AND signal.as_of<=%s AND (item.effective_date IS NULL OR item.effective_date<=%s)
           AND (item.available_at<=%s OR (item.available_at IS NULL AND signal.state='ABSTAINED'))
-        LIMIT 1""",(evidence_id,cutoff,cutoff.astimezone(ISTANBUL).date(),cutoff.astimezone(ISTANBUL).date(),cutoff))
+        LIMIT 1""",(evidence_id,cutoff,origins,day,day,cutoff.astimezone(ISTANBUL).date(),cutoff.astimezone(ISTANBUL).date(),cutoff))
     if not rows:
         return None
     row=rows[0]
@@ -38,9 +44,11 @@ def evidence_detail(reader: FundQueries, evidence_id: str, actor: str, cutoff: d
     row['source_references']=[source_reference(item) for item in row['source_references']]
     signal=Signal(**row)
     fund=reader.fund(signal.fund_code)
+    # "Current" means the run the evidence lists of this same selection would show.
     latest=reader.connection.execute("""SELECT run.run_id FROM det.detector_runs run
-        JOIN det.run_inputs input USING(run_id) WHERE input.complete AND run.origin=%s AND run.cutoff<=%s
-        ORDER BY run.cutoff DESC,run.created_at DESC,run.run_id DESC LIMIT 1""",(signal.origin,cutoff)).fetchone()
+        JOIN det.run_inputs input USING(run_id) WHERE input.complete AND run.origin=ANY(%s) AND run.cutoff<=%s
+          AND (%s::date IS NULL OR (run.cutoff AT TIME ZONE 'Europe/Istanbul')::date=%s::date)
+        ORDER BY run.cutoff DESC,run.created_at DESC,run.run_id DESC LIMIT 1""",(origins,cutoff,day,day)).fetchone()
     feedback=reader.connection.execute('SELECT helpful FROM b2b.evidence_feedback WHERE user_id=%s AND evidence_id=%s ORDER BY feedback_id DESC LIMIT 1',(actor,evidence_id)).fetchone()
     return {'fund':fund,'signal':signal,'cutoff':cutoff,'is_current':bool(latest and str(latest[0])==signal.run_id),
             'helpful':feedback[0] if feedback else None,'development_result':True,'rights_status':'UNREVIEWED'}

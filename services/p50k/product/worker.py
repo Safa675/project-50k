@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 import logging
+import os
 import signal
 import threading
 import time
@@ -22,6 +23,7 @@ def main() -> None:
     logger = logging.getLogger(__name__)
     heartbeat = Path("/tmp/p50k-worker-heartbeat")
     owner='worker:'+uuid4().hex
+    agent_owners: list[str] = []
     def keep_alive() -> None:
         while not stopped.is_set():
             try:
@@ -32,8 +34,25 @@ def main() -> None:
                 heartbeat.write_text(str(time.time()), encoding="ascii")
             except Exception as error:
                 logger.warning("worker_heartbeat_unavailable",extra={"error_class":type(error).__name__})
+            if agent_owners:
+                # Agent leases are renewed separately so a missing agent schema never stops the heartbeat.
+                try:
+                    from p50k.product.agents.store import extend_leases
+                    from p50k.product.db import connect
+                    with connect(settings) as connection:
+                        extend_leases(connection, agent_owners)
+                except Exception as error:
+                    logger.warning("agent_lease_unavailable",extra={"error_class":type(error).__name__})
             stopped.wait(10)
     threading.Thread(target=keep_alive,daemon=True).start()
+    if os.environ.get("P50K_AGENTS_ENABLED", "true").lower() in {"true", "1"}:
+        # DEC-035: the always-on agent team runs beside the existing jobs in this worker.
+        from p50k.product.agents.runtime import start as start_agents
+        try:
+            workers = min(4, max(1, int(os.environ.get("P50K_AGENT_WORKERS", "2"))))
+        except ValueError:
+            workers = 2
+        agent_owners.extend(start_agents(settings, owner, stopped, workers))
     while not stopped.is_set():
         try:
             import psycopg

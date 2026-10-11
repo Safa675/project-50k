@@ -3,7 +3,7 @@ import {notFound} from 'next/navigation';
 import {serverApi,requireUser} from '@/lib/auth';
 import {dateTr,decimal,reasonTr,stateTr} from '@/lib/client';
 import {signalName,sourceName} from '@/lib/fund-display';
-import ChatPanel from '@/components/ChatPanel';
+import AgentPage from '@/components/agents/AgentPage';
 import EvidenceFeedback from '@/components/EvidenceFeedback';
 import EvidenceTooltip from '@/components/EvidenceTooltip';
 import MethodExplanation from '@/components/MethodExplanation';
@@ -14,12 +14,12 @@ type Source={source_id:string;source_sha256:string;source_url:string|null;availa
 function Hover({children,text,direction='bottom'}:{children:React.ReactNode;text:string;direction?:'bottom'|'right'}){return <EvidenceTooltip text={text} direction={direction}>{children}</EvidenceTooltip>;}
 export default async function Development({params}:{params:Promise<{id:string}>}){
   const route=await params;let id:string;try{id=decodeURIComponent(route.id);}catch{notFound();}if(!id||id.length>100)notFound();
-  const [response,user]=await Promise.all([serverApi(`/evidence?evidence_id=${encodeURIComponent(id)}`),requireUser()]);
+  const [response]=await Promise.all([serverApi(`/evidence?evidence_id=${encodeURIComponent(id)}`),requireUser()]);
   if(response.status===404)notFound();if(!response.ok)throw new Error('Kanıt kaydına erişilemiyor.');
   const data=await response.json(),signal=data.signal,sources:Source[]=signal.source_references??[];
   const title=signalName(signal.detector_id);
   return <section className="evidence-detail" data-design-node="22:382">
-    <div><span className="evidence-mode"><img src="/figma/funds/clock.svg" alt=""/><Hover text="İnceleme tarihli kaynaklara dayanır. Kaynaktaki tarih ile bilginin alındığı gün farklı olabilir.">{dateTr(signal.as_of)} · İnceleme</Hover></span></div>
+    <AgentPage fundCode={data.fund.fund_code} evidenceId={signal.evidence_id} title={title}/>
     <Link className="evidence-back" href={`/funds/${data.fund.fund_code}`}><img src="/design/evidence/back.svg" alt=""/>{data.fund.name}</Link>
     {!data.is_current&&<p className="notice">Bu kayıt önceki bir değerlendirme çalışmasına aittir. Güncel sonuçlara fon sayfasından ulaşabilirsiniz.</p>}
     <div className="evidence-columns"><div className="evidence-main">
@@ -35,7 +35,6 @@ export default async function Development({params}:{params:Promise<{id:string}>}
     </div><aside className="evidence-aside">
       <article className="evidence-card"><h2>Kaynak</h2><p>{data.fund.name}</p>{sources.length?sources.map((source,index)=><div className="evidence-source" key={`${source.source_sha256}-${index}`}><strong>{sourceName(source.source_id)}</strong><dl className="evidence-measures"><div><dt>Gözlem</dt><dd>{dateTr(source.effective_date)}</dd></div><div><dt>İncelemede kullanılabildiği tarih</dt><dd>{source.available_at?new Date(source.available_at).toLocaleString('tr-TR',{timeZone:'Europe/Istanbul'}):'Zaman bilinmiyor'}</dd></div></dl>{source.source_url&&<a className="evidence-source-link" target="_blank" rel="noreferrer" href={source.source_url}><img src="/design/evidence/external.svg" alt=""/>Resmî kaynakta gör</a>}</div>):<p>Bu gösterge için uygun zamanlı kaynak referansı bulunmuyor.</p>}</article>
       <article className="evidence-card"><h2>Kanıt nasıl izlenir</h2><p>Her değerlendirme dayandığı kaynaklarla saklanır. İnsan incelemesi, yapay zekânın ilk önerisinin yanında korunur.</p><Link href={`/funds/${data.fund.fund_code}`}>Fonun diğer gelişmelerini incele</Link><p className="evidence-small">Kaynak izlenebilirliği bir olasılık veya yatırım değerlendirmesi değildir.</p></article>
-      <ChatPanel key={`${signal.evidence_id}:${user.analysis_context?.scope_key}`} code={data.fund.fund_code} drawer evidenceId={signal.evidence_id} contextTitle={title} analysisScopeKey={user.analysis_context?.scope_key}/>
     </aside></div>
   </section>;
 }

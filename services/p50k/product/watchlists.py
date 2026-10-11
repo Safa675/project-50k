@@ -41,9 +41,11 @@ def remove_fund(settings: Settings, user_id: str, code: str) -> dict[str, Any]:
 
 
 def _snapshot(connection: Any, settings: Settings, user_id: str, now: datetime) -> dict[str, Any]:
-    """One transaction snapshot; only the latest eligible complete run is shown."""
-    connection.execute("SET TRANSACTION ISOLATION LEVEL REPEATABLE READ READ ONLY")
-    connection.execute("SET LOCAL statement_timeout='5s'")
+    """One transaction snapshot; only the latest eligible complete run is shown.
+
+    A retrospective selection reads only the run of its own day, so saved funds
+    and notifications never show an older day's run or a live run.
+    """
     with connection.cursor(row_factory=dict_row) as cursor:
         cursor.execute("""SELECT run.run_id,run.created_at,inputs.as_of,run.cutoff
             FROM det.detector_runs run JOIN det.run_inputs inputs USING(run_id)
@@ -105,6 +107,8 @@ def _snapshot(connection: Any, settings: Settings, user_id: str, now: datetime) 
 
 def watchlist(settings: Settings, user_id: str, now: datetime | None = None) -> dict[str, Any]:
     with connect(settings) as connection:
+        connection.execute("SET TRANSACTION ISOLATION LEVEL REPEATABLE READ READ ONLY")
+        connection.execute("SET LOCAL statement_timeout='5s'")
         return _snapshot(connection, settings, user_id, now or current_cutoff(settings))
 
 

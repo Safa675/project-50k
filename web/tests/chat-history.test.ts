@@ -1,5 +1,5 @@
 import {describe,it,expect} from 'vitest';
-import {parseChatHistory,parseChatThreads,shouldSendOnEnter} from '../lib/chat-history';
+import {chatAssetQuery,parseChatHistory,parseChatThreads,shouldSendOnEnter} from '../lib/chat-history';
 
 const thread='00000000-0000-4000-8000-000000000001';
 const common={fund_code:'THF',analysis_scope_key:'asof:2026-09-12'};
@@ -17,6 +17,16 @@ describe('persisted chat boundaries',()=>{
     const item={thread_id:thread,title:'Synthetic question',created_at:'2026-10-10T12:00:00Z',last_message_at:'2026-10-10T12:00:01Z',message_count:2};
     expect(parseChatThreads({...common,items:[item]},'THF',common.analysis_scope_key).items).toEqual([item]);
     expect(()=>parseChatThreads({...common,items:Array.from({length:21},()=>item)},'THF')).toThrow();
+  });
+  it('keeps the Raportör general conversation apart from fund conversations',()=>{
+    const item={thread_id:thread,title:'Synthetic general question',created_at:'2026-10-10T12:00:00Z',last_message_at:null,message_count:2};
+    const general={fund_code:null,analysis_scope_key:'live',items:[item]};
+    expect(parseChatThreads(general,null,'live').items).toEqual([item]);
+    expect(()=>parseChatThreads(general,'THF','live')).toThrow();
+    expect(()=>parseChatThreads({...general,fund_code:'THF'},null,'live')).toThrow();
+    expect(parseChatHistory({fund_code:null,analysis_scope_key:'live',thread_id:thread,items:[message]},null,thread,'live')).toEqual([message]);
+    expect(chatAssetQuery(null)).toBe('');
+    expect(chatAssetQuery('THF')).toBe('fund_code=THF');
   });
   it('sends Enter, preserves Shift+Enter and never submits during IME composition',()=>{
     expect(shouldSendOnEnter({key:'Enter',shiftKey:false})).toBe(true);

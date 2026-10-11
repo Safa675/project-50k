@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException, Request, Query
 from pydantic import BaseModel, ConfigDict, Field
 from typing import Literal
 from p50k.product.auth import Principal, require_analyst, require_session
-from p50k.product.ai_client import AIConfig
+from p50k.product.ai_client import AIConfig, AIUnavailable
 from p50k.product.decisions import build_packet, decision_rows, review
 from p50k.product.queue import enqueue
 
@@ -32,6 +32,9 @@ def reevaluate(code: str, request: Request, _: Principal=Depends(require_analyst
         return {'job_id':enqueue(request.app.state.product_settings,code,digest)}
     except ValueError:
         raise HTTPException(404,'FUND_NOT_FOUND') from None
+    except AIUnavailable as error:
+        # No complete run of the selected day is available yet; nothing is queued.
+        raise HTTPException(409,str(error)) from None
 
 @router.post('/decisions/{decision_id}/reviews')
 def submit(decision_id: int, body: ReviewBody, request: Request, actor: Principal=Depends(require_analyst)):

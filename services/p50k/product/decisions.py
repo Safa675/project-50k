@@ -15,13 +15,17 @@ from p50k.product.analysis_context import current_cutoff,data_origins,historical
 
 PROMPT_VERSION=MATERIALITY_PROMPT_VERSION
 SCHEMA_VERSION=DECISION_SCHEMA_VERSION
+# Stored proposals rendered with the plain-language renderer. The agent team's
+# Raportör files with its own prompt version after the materiality-v4 validation.
+CHAT_RENDERED_PROMPTS=frozenset({'materiality-v2-plain-language','materiality-v3-plain-language',
+                                 'materiality-v4-scoped-evidence','agent-reporter-v1'})
 
 
 def render_proposal(text: str, packet: Packet, prompt_version: str | None) -> str:
     # Keep the original renderer for stored v1 proposals. Future prompt changes
     # must retain this explicit version mapping instead of silently reinterpreting
     # older output. Both renderers preserve the same numeric validation guard.
-    if prompt_version in {'materiality-v2-plain-language','materiality-v3-plain-language','materiality-v4-scoped-evidence'}:
+    if prompt_version in CHAT_RENDERED_PROMPTS:
         return render_chat(text, packet)
     return render(text, packet)
 
@@ -124,7 +128,8 @@ def decision_rows(settings: Settings, code: str | None=None, review_only: bool=F
         rows=connection.execute("""SELECT effective.fund_code,effective.packet_sha256,effective.decision_id,
             effective.effective_value,effective.effective_source,effective.review_id,effective.has_current_review,
             effective.stale_review_exists,decision.validation_state,decision.rationale,packet.payload,packet.allowed_options,decision.model_id,
-            decision.decision_value,actual_review.reason,actual_review.created_at,reviewer.email,decision.ai_mode,decision.prompt_version
+            decision.decision_value,actual_review.reason,actual_review.created_at,reviewer.email,decision.ai_mode,decision.prompt_version,
+            decision.method
             FROM (SELECT DISTINCT ON (value.fund_code) value.* FROM ai.effective_decisions value
                 JOIN ai.packets current_packet USING(packet_id)
                 WHERE value.origin=ANY(%s)
@@ -146,15 +151,28 @@ def decision_rows(settings: Settings, code: str | None=None, review_only: bool=F
             'rationale_tr':render_proposal(row[9],packet,row[18]) if row[9] else 'Yapay zekâ önerisi üretilemedi; insan incelemesi gerekli',
             'allowed_options':row[11],'evidence_ids':[item.evidence_id for item in packet.evidence],
             'original_value':row[13],'review_reason':row[14],'reviewed_at':row[15].isoformat() if row[15] else None,
-            'reviewer_email':row[16],'ai_mode':row[17]})
+            'reviewer_email':row[16],'ai_mode':row[17],
+            # The agent team's Raportör filed this proposal (the same human review applies).
+            'team_proposal':row[19]=='TEAM'})
     return results
 
 def review(settings: Settings, decision_id: int, actor: str, action: str, override: str | None, reason: str | None) -> int:
     if action not in {'ACCEPT','OVERRIDE','REJECT'} or (action!='ACCEPT' and not (reason and reason.strip())):
         raise ValueError('REVIEW_REASON_REQUIRED')
+    origins=data_origins(settings)
+    if settings.db_name=='p50k_dev':origins.append('SYNTHETIC')
+    cutoff=current_cutoff(settings)
     with connect(settings) as connection:
-        row=connection.execute('SELECT decision.packet_sha256,packet.allowed_options,decision.validation_state FROM ai.decisions decision JOIN ai.packets packet USING(packet_id) WHERE decision_id=%s',(decision_id,)).fetchone()
+        row=connection.execute('''SELECT decision.packet_sha256,packet.allowed_options,decision.validation_state,
+                packet.origin=ANY(%s) AND evidence.cutoff<=%s
+                  AND (NOT %s OR (evidence.cutoff AT TIME ZONE 'Europe/Istanbul')::date=%s)
+            FROM ai.decisions decision JOIN ai.packets packet USING(packet_id)
+            CROSS JOIN LATERAL (SELECT COALESCE(packet.cutoff,(packet.payload->>'cutoff')::timestamptz) AS cutoff) evidence
+            WHERE decision_id=%s''',(origins,cutoff,historical_mode(settings),cutoff.astimezone(ISTANBUL).date(),decision_id)).fetchone()
         if not row or (action=='OVERRIDE' and override not in row[1]) or (action=='ACCEPT' and row[2]!='VALID'):
             raise ValueError('REVIEW_NOT_ALLOWED')
+        # A decision is reviewed only within the analysis it belongs to, as shown.
+        if not row[3]:
+            raise ValueError('DECISION_OUTSIDE_SELECTED_DATE')
         return connection.execute('INSERT INTO ai.decision_reviews(decision_id,packet_sha256,action,override_value,reason,reviewer_id) VALUES (%s,%s,%s,%s,%s,%s) RETURNING review_id',
             (decision_id,row[0],action,override if action=='OVERRIDE' else None,reason,actor)).fetchone()[0]

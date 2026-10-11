@@ -84,4 +84,13 @@ describe('validated chat stream', () => {
     await expect(readChatAnswer(response(['x'.repeat(32769)]), () => undefined)).rejects.toMatchObject({code: 'STREAM_INVALID'});
     await expect(readChatAnswer(response(['event: tool\ndata: {"name":"search_funds"}\n\n'.repeat(7)]), () => undefined)).rejects.toMatchObject({code: 'STREAM_INVALID'});
   });
+
+  it('accepts the Raportör case tools and still rejects any other action', async () => {
+    const tools: string[] = [];
+    const frames = ['event: tool\ndata: {"name":"get_case_status"}\n\n', 'event: tool\ndata: {"name":"request_investigation"}\n\n',
+      `event: answer\ndata: ${JSON.stringify(result)}\n\n`];
+    expect(await readChatAnswer(response(frames), name => tools.push(name))).toEqual(result);
+    expect(tools).toEqual(['get_case_status', 'request_investigation']);
+    await expect(readChatAnswer(response(['event: tool\ndata: {"name":"close_case"}\n\n']), () => undefined)).rejects.toMatchObject({code: 'STREAM_INVALID'});
+  });
 });

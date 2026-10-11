@@ -8,7 +8,7 @@ from typing import Any, Literal
 from psycopg import Connection
 from psycopg.rows import dict_row
 from pydantic import AwareDatetime, BaseModel, ConfigDict, Field
-from p50k.product.analysis_context import historical_mode
+from p50k.product.analysis_context import historical_mode, run_day, selection
 
 
 class Contract(BaseModel):
@@ -157,6 +157,8 @@ class WorkflowQueries:
     def overview(self, cutoff: datetime, *, synthetic: bool = False) -> WorkflowOverview:
         origin = "SYNTHETIC" if synthetic else 'HISTORICAL_REPLAY' if historical_mode() else "DELAYED"
         wall_time=datetime.now(timezone.utc)
+        # A retrospective day reads only its own run, never an older day's run.
+        day = run_day(cutoff)
         catalog = self.rows("SELECT count(*) AS total FROM ref.funds")[0]["total"]
         runs = self.rows("""
             SELECT run.run_id::text, inputs.version_id, run.protocol_version,
@@ -167,8 +169,9 @@ class WorkflowQueries:
             WHERE run.origin = %s AND inputs.complete AND run.cutoff IS NOT NULL
                 AND run.cutoff <= %s AND run.created_at <= %s
                 AND version.calibration_cutoff <= run.cutoff
+                AND (%s::date IS NULL OR (run.cutoff AT TIME ZONE 'Europe/Istanbul')::date = %s::date)
             ORDER BY run.cutoff DESC, run.created_at DESC, run.run_id DESC LIMIT 1
-        """, (origin, cutoff, wall_time))
+        """, (origin, cutoff, wall_time, day, day))
         run = RunProvenance(**runs[0]) if runs else None
         evidence = EvidenceTotals(total=0, funds=0, triggered=0, not_triggered=0, abstained=0, attributes=0)
         decisions = DecisionTotals(packets=0, valid_live=0, valid_synthetic=0, valid_deterministic=0,
@@ -212,13 +215,16 @@ class WorkflowQueries:
             WHERE started_at<=%s ORDER BY started_at DESC, run_id DESC LIMIT 1
         """, (cutoff,))
         ingest = IngestStatus(**{**ingests[0], "counts": safe_ingest_counts(ingests[0]["counts"])}) if ingests else None
+        # Proposal jobs belong to the analysis selection that queued them; jobs
+        # queued before the scoped payload existed were live selections.
         jobs = JobTotals(**self.rows("""
             SELECT count(*) FILTER (WHERE status='READY') AS ready,
                 count(*) FILTER (WHERE status='RUNNING') AS running,
                 count(*) FILTER (WHERE status='SUCCEEDED') AS succeeded,
                 count(*) FILTER (WHERE status='FAILED') AS failed
             FROM ops.jobs WHERE job_type='ai_decide' AND created_at<=%s
-        """, (cutoff,))[0])
+                AND COALESCE(payload->>'analysis_date','live')=%s
+        """, (wall_time, selection()))[0])
         return WorkflowOverview(observed_at=cutoff, data_mode=origin, fund_catalog_count=catalog,
                                 run=run, evidence=evidence, decisions=decisions, latest_ingest=ingest,
                                 jobs=jobs, stocks=self.stock_availability(cutoff))
