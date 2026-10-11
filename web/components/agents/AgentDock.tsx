@@ -5,7 +5,7 @@ import {usePathname} from 'next/navigation';
 import {useEffect, useRef, useState} from 'react';
 import {createPortal} from 'react-dom';
 import type {User} from '@/lib/auth';
-import {AGENTS_OPEN, dockBadge, dockLabel, dockRing, fundFromPath} from '@/lib/agents';
+import {AGENTS_CLOSE, AGENTS_OPEN, dockBadge, dockLabel, dockRing, fundFromPath} from '@/lib/agents';
 import AgentTeamPanel, {type PanelDetail, type PanelTab} from './AgentTeamPanel';
 import {useAgentFeed, useAgentPage, useCompactPanel, usePageVisit, useReducedMotion} from './hooks';
 import Mascot from './Mascot';
@@ -76,7 +76,8 @@ function SignedInDock({user}: {user: User}) {
       if (detail?.question) window.setTimeout(() => conversation.current?.ask(detail.question!), 50);
     }
     window.addEventListener(AGENTS_OPEN, external);
-    return () => window.removeEventListener(AGENTS_OPEN, external);
+    window.addEventListener(AGENTS_CLOSE, close);
+    return () => {window.removeEventListener(AGENTS_OPEN, external); window.removeEventListener(AGENTS_CLOSE, close);};
   });
 
   function show(nextTab?: PanelTab) {
