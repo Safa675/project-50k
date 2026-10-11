@@ -47,6 +47,12 @@ Product PostgreSQL size: 1,159,624,383 bytes (~1.16 GB). Raw files: 989,128,315 
 Folder sizes overlap/caches and include stocks; they are not a unique-fund-data total. No real fund values were
 copied into this aggregate inventory or Git. All original files and database rows remain preserved.
 
+Saved original top100 membership, not current rankings:100funds/115,371stored daily rows, including114,515non-null
+NAV observations and856missing rows;115,368distinct fund/date pairs plus3additional versions. The eight later
+SPK-listed funds in that original cohort account for5,044rows. Across the full database all131confirmedSPK-listed
+funds have price history, totaling78,970rows; all131 also belong to the2,133-fund catalog. These are stored-history
+counts, not a claim that every row is usable in the12September cutoff or that every liquidation is completed.
+
 This supersedes the unfinished status in the 10:40 Claude handoff, while preserving that handoff and its detailed
 sprint briefs. The first release commit is `569c2db`; the final method spacing correction and this record follow it.
 Mirza's completion deadline remains **12:30 Istanbul**, before the **13:00 code freeze**.
