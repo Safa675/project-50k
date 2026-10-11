@@ -8,6 +8,7 @@ Newest first within each person. Times are Europe/Istanbul.
 
 | Since | Type | Ask | Status |
 |---|---|---|---|
+| 2026-10-11 | Video decisions | Format, language/audio and fresh investigation versus existing report | Closed: Mirza selected 16:9, short Turkish captions, no voiceover/music, subtle effects, and a fresh THF investigation with its actual result. Proposed 45-second shot order and Claude prompt are saved under plans; no recording has run yet |
 | 2026-10-11 | Design assets | Use Mirza's supplied `blackswan-maskotlar-svg.zip` for the agent team | Closed: six static SVGs inspected, copied into `web/public/agent-logos/`, and used by the dock, team and method pages |
 | 2026-10-10 | Product decision | Make the product understandable for nontechnical users and explain how conclusions are reached | Closed in DEC-033: plain-language UI, method/result disclosures, dated last-known prices, genuine logos and validated streaming chat implemented; internals remain in audit/API records |
 | 2026-10-10 | Delegation | Handle all Git work, including pushes and safe pulls | Confirmed: Codex owns commits, merge commits, pushes and protected-path-checked pulls. Mirza need not perform routine Git steps |
