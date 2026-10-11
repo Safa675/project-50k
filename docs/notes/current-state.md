@@ -1,5 +1,25 @@
 # Project 50K: current state
 
+## Full-cohort evaluation completed - 2026-10-11 13:35:48 Istanbul
+
+See [the verified agent results](agent-cohort-results-2026-10-11.md). All original
+100 funds selected; 98 completed four live AI stages, two failed output validation.
+Seven further-review recommendations: four of the eight later SPK funds (THF, TP2,
+PRY, PNU) and three outside that list. DFI, DOH and KHA had insufficient evidence;
+TLY was not recommended for escalation. All eight have complete four-stage reviews.
+The actual agent figure is 4/8; the separate combined research figure remains 5/8.
+
+Six existing first reports were retained and 94 reviews processed now. Two old
+reports predate the monthly test; 96 cases have both four AI stages and all five
+current tests. Runtime 800 seconds, additional API cost USD 3.4889325, zero remaining
+reservations. Both isolated operators exited zero; no selected work remains queued.
+No production queue/budget/browser/service changes and no code changes were made.
+Claude's video recording remains separate. Include the isolated extra cost in future
+project-wide accounting, without duplicating copied historical spend. The local
+artifact path below retains the final JSON, manifests, scripts and database exports.
+Next: use the accurate pitch figures; preserve freeze and recording. Validation
+failures can be investigated in a later authorized product slice.
+
 ## Full-cohort agent evaluation running - 2026-10-11 13:22 Istanbul
 
 Mirza requested actual agent-workflow measurements for ALL original 100 funds and

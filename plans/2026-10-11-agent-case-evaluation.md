@@ -22,6 +22,13 @@ zero in-flight reservations at admission. The production allowance remains avail
 to the recording. Reconcile isolated additional usage separately and retain results
 outside Git. Product code and both existing demo stacks remain untouched.
 
+Scheduling-only acceleration at about 13:25 Istanbul: two additional bounded workers
+join the same fixed cases, for four total. The separate `sidecar-start.json` records
+this change without altering the original selection manifest. All workers share the
+normal atomic task leases and USD 5 allowance; the original 45-minute admission
+deadline is retained. Models, evidence, prompts, decisions and success criteria do
+not change. Wait for both operators' admitted calls to settle before final evaluation.
+
 ## Scope correction authorized before execution
 
 Mirza explicitly clarified: run the FULL original 100 through the agent review, not
