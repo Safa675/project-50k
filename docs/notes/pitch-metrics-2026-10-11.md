@@ -48,6 +48,41 @@ combined method without a before/after story implying that the first method was 
 
 ## Suggested pitch wording
 
+### Turkish copy and the five case funds
+
+Verified against both the real evaluation and the saved SPK case list. Names match the product catalog.
+
+| Code | Fund name | Combined-study signal |
+|---|---|---|
+| THF | Tera Portföy Hisse Senedi (TL) Fonu (Hisse Senedi Yoğun Fon) | Price checks and monthly portfolio-report check |
+| TP2 | Tera Portföy Para Piyasası (TL) Fonu | Price checks |
+| PRY | Pusula Portföy Para Piyasası (TL) Fonu | Price checks |
+| PNU | Pusula Portföy İkinci Para Piyasası (TL) Fonu | Price checks |
+| KHA | Pardus Portföy İkinci Hisse Senedi (TL) Fonu (Hisse Senedi Yoğun Fon) | Monthly portfolio-report check |
+
+DFI, DOH and TLY were not flagged by this combined historical rule. These names identify study results, not findings
+of wrongdoing. The five-fund result is not a count of funds detected by the deployed agent trigger alone.
+
+Suggested Turkish product headline:
+
+**BlackSwan: Veriyi tarar. Bulguyu inceler. Son sözü insana bırakır.**
+
+Supporting product sentence:
+
+**BlackSwan, fonlardaki sıra dışı hareketleri kaynaklarıyla inceler; yapay zekâ ekibi bulguları gerekçeli raporlara dönüştürür. Kararın kontrolü insanda kalır.**
+
+Suggested case-study headline:
+
+**Tarihsel çalışmamızdaki 8 tasfiye vakasının 5'inde inceleme sinyali.**
+
+Full case-study sentence:
+
+**Geriye dönük fiyat ve portföy analizimizde, ilk 100 fonluk grupta tasfiye kararı verilen 8 fonun 5'i inceleme için işaretlendi.**
+
+Nearby context for that headline: **İlk 100 fonluk gruptaki 8 tasfiye vakası incelendi. Tarihsel araştırma sonucudur; bağımsız doğrulama yapılmamıştır. Geniş karşılaştırma: 24/131 fon.**
+The main copy describes the combined method without implying a live early prediction or portraying the price method
+as an error later repaired. Its separate research status remains in the slide footnote and explanation.
+
 Lead with the demonstrated workflow:
 
 "We screened 2,133 funds and completed 72 AI-team investigations, with findings linked to sources and ready for
