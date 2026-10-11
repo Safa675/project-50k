@@ -1,5 +1,38 @@
 # Real agent evaluation of the original 100-fund cohort
 
+## Scope correction authorized before execution
+
+Mirza explicitly clarified: run the FULL original 100 through the agent review, not
+only the eight known case funds. No focused-eight requests had been submitted.
+He approved up to USD 5 additional spend for this batch: today's agent ceiling may
+increase from USD 5.25 to USD 10.25, still inside the USD 25 project target. Do not
+alter the project's target or future-day default. Reconcile actual batch costs afterward.
+
+This supersedes the focused execution scope below, but preserves its fixed positive
+definition and all cutoff/provenance rules. The batch gives every saved cohort member
+the same review opportunity regardless of the later label. For each fund, select its
+first existing case on the exact run, or create exactly one user-requested case if
+none exists. Freeze those case IDs before examining outcomes; reuse finished cases
+and complete pending ones. Do not select the best of repeated rounds. Human reviews
+and later rounds remain intact and separate from the selected original AI proposal.
+
+This is a user-requested operational batch, not a new automatic discovery mechanism.
+Record a request audit for each new/promoted case and preserve original opened_by.
+Use the same installed case-creation/task/runtime functions, models, prompts, evidence
+admission, validators and workers. A bounded local operator batch can submit the cohort
+without changing the interactive endpoint's ten-requests-per-hour limit. Protect the
+product's existing interactive API/auth/rate limits and pause/budget/lease mechanisms.
+
+Report TWO views: (1) the agent-assisted full-100 review result and (2) the automatic
+screening-to-agent result from first sentinel cases. Also report all four review
+categories, incomplete/failed stages, live-call coverage and test coverage; never call
+a report fully AI-reviewed merely because the final reporter succeeded.
+
+Preflight: six original-cohort funds have finished review-role tasks, two original
+automatic cases are open, and 92 need a first case. Recent live task medians total
+about 25 seconds per fund with two workers. Expected remaining runtime is 25-45
+minutes and additional paid usage roughly USD 3-4, subject to failures/retries.
+
 Authorized by Mirza on 2026-10-11 after code freeze. Product code stays frozen.
 He requested actual agent-workflow results for the eight later SPK liquidation-order
 funds inside the saved original 100, and a realistic time estimate.
