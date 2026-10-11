@@ -10,6 +10,10 @@ superseded. `plans/2026-10-11-demo-video-plan.md` holds the proposed 45-second s
 `plans/2026-10-11-claude-demo-video-prompt.md` is the production handoff. This step only writes planning documents;
 no new investigation or video recording has been executed. The product remains frozen.
 Pitch-ready plain-language figures and denominator explanations are saved in `docs/notes/pitch-metrics-2026-10-11.md`.
+Pitch correction at approximately12:54:2,133funds were screened by fixed checks;72completed all four AI-review
+stages,73had valid team reports (one without every AI stage complete), and1team proposal had a human review. Never
+claim all2,133went through the full AI/human pipeline. These are activity counts, not validated detection success.
+Describe the price/portfolio combination as a separate historical study, without a misleading before/after story.
 
 ## Final continuation — 2026-10-11 about 12:15 Istanbul (newest)
 
