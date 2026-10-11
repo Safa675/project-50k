@@ -18,7 +18,7 @@ export function StageTicker({team, now}: {team: TeamSnapshot | null; now: number
       <span className="ag-kind">{kindLabel(link.kind)}</span><span className="ag-muted">{relativeTime(link.at, now)}</span></p> :
       <p className="ag-muted">{team ? 'Henüz kayıtlı bir ekip etkileşimi yok.' : ''}</p>}
     {team && <p className="ag-ticker-counts"><span><strong>{team.counts.open_cases.toLocaleString('tr-TR')}</strong> açık vaka</span>
-      <span><strong>{team.counts.running.toLocaleString('tr-TR')}</strong> çalışan</span><span><strong>{team.counts.queued.toLocaleString('tr-TR')}</strong> sırada</span>
+      <span><strong>{working.length.toLocaleString('tr-TR')}</strong> çalışan</span><span><strong>{team.counts.queued.toLocaleString('tr-TR')}</strong> sırada</span>
       <span>Bugün <strong>{team.counts.done_today.toLocaleString('tr-TR')}</strong> tamamlandı</span></p>}
     <p className="sr-only" aria-live="polite" aria-atomic="true">{announcement}</p>
   </div>;

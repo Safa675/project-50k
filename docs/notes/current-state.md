@@ -1,6 +1,25 @@
 # Project 50K: current state
 
-## Agent team release — 2026-10-11 about 08:10 Istanbul (newest; read first)
+## Review rounds and full test battery — 2026-10-11 about 08:30 Istanbul (newest; read first)
+
+- **Live product (3070/8770)** runs images built from the `product/build` commit after `950678f`. The rollback images
+  are tagged `p50k-product-api:rollback-0815` and `p50k-product-web:rollback-0815`.
+- **Changes** (DEC-035 addendum):
+  - Doğrulayıcı runs every standard test after Şüpheci's picks.
+  - A request on a reported case that no human has reviewed opens a new review round.
+  - Fund pages label team proposals "Ajan ekibinin Raportör önerisi".
+  - The panel's worker count matches the agent cards.
+- **THF's second round** (user request, live AI) is reported. Its monthly-report test flags the August report,
+  published 2 September 2026, as a notable change in units and total value, the jump recorded in
+  `codex-context-2026-10-07.md`. The case flow shows the code-computed figures, and the new proposal awaits human
+  review. The first round is closed but kept.
+- **Checks run:**
+  - 40 focused Python tests passed: agents, agent database, analysis scope and decisions.
+  - Web typecheck and 49 unit tests passed.
+  - 10 agent Playwright tests passed on smoke.
+  - Real-product screenshots were checked.
+
+## Agent team release — 2026-10-11 about 08:10 Istanbul
 
 - **Live product:** http://127.0.0.1:3070, with API 8770, running the images built from `product/build` commit
   `7b5cf46` (DEC-035). The real database `p50k` has migrations through `013_agent_team.sql`. The default analysis

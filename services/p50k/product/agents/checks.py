@@ -293,6 +293,18 @@ def tr_percent(value: str | None) -> str:
     return ('-%' if number < 0 else '%') + text
 
 
+def tr_change(label: str, value: str) -> str:
+    """A signed change in words; a rise of 100 % or more also gives the multiple."""
+    number = Decimal(value)
+    if number == 0:
+        return f'{label} değişmemiş'
+    text = f"{label} {tr_percent(str(abs(number)))} {'artmış' if number > 0 else 'azalmış'}"
+    if number >= 100:
+        multiple = (1 + number / 100).quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)
+        text += f" (yaklaşık {format(multiple, 'f').replace('.', ',')} katına çıkmış)"
+    return text
+
+
 def describe(item: dict[str, Any]) -> str:
     """Server-written result sentence; numbers come only from the computed payload."""
     name = TESTS[item['test']][0]
@@ -318,13 +330,10 @@ def describe(item: dict[str, Any]) -> str:
         return (f"{name}: son {values['rows']} fiyat kaydından {values['missing_rows']} tanesinde fiyat yok, "
                 f"{values['ambiguous_rows']} tanesinde çelişkili kayıt var. {last} {finding}")
     if item['test'] == 'kap_monthly_change':
-        parts = []
-        if 'total_value_change_pct' in values:
-            parts.append(f"toplam değer {tr_percent(values['total_value_change_pct'])}")
-        if 'units_change_pct' in values:
-            parts.append(f"pay sayısı {tr_percent(values['units_change_pct'])}")
+        parts = [tr_change(label, values[key]) for key, label in (('total_value_change_pct', 'toplam değer'),
+                                                                   ('units_change_pct', 'pay sayısı')) if key in values]
         return (f"{name}: {tr_period(values['previous_period'])} ve {tr_period(values['latest_period'])} aylık raporları "
-                f"arasında {' ve '.join(parts)} değişmiş. Raporlar {tr_date(values['previous_published_at'])} ve "
+                f"arasında {', '.join(parts)}. Raporlar {tr_date(values['previous_published_at'])} ve "
                 f"{tr_date(values['latest_published_at'])} tarihlerinde yayımlanmış. {finding}")
     return (f"{name}: seçili tarihe kadar kullanılabilir {values['records']} resmî kayıt bulundu; "
             f"{values['confirmed_records']} tanesi doğrulanmış. {finding}")

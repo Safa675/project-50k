@@ -266,9 +266,50 @@ class AgentTeamDatabaseTests(unittest.TestCase):
                                         json.dumps({'fund_code': self.code['B']})))['case']
         self.assertEqual((status['status'], status['decision']['effective']), ('reported', 'MATERIAL'))
         self.assertTrue(status['hypotheses'][0]['text'].startswith('{{ev:e'))
-        self.assertEqual({item['outcome'] for item in status['test_results']}, {'unavailable'})
+        # The verifier runs every standard test, not only the skeptic's picks.
+        self.assertEqual(len(status['test_results']), 5)
+        self.assertEqual({item['outcome'] for item in status['test_results'] if item['test'] != 'regulatory_event'},
+                         {'unavailable'})
         self.assertNotIn(self.code['B'], json.dumps(status, ensure_ascii=False))
         self.assertNotIn('ev:agents:', json.dumps(status, ensure_ascii=False))
+
+    def test_a_request_on_a_reported_case_opens_a_new_round_unless_a_human_reviewed_it(self):
+        sentinel.scan(self.settings, self.scope)
+        config = AgentConfig(mode='mock', case_gap_seconds=0)
+        for _ in range(20):
+            if runtime.run_one(self.settings, config, 'synthetic:round') is None:
+                break
+        case_b, decision_b = self.case_row('B', 'case_id,decision_id')
+        case_c = str(self.case_row('C')[0])
+        with use_analysis_date(self.day.isoformat()):
+            decisions.review(self.settings, decision_b, self.user, 'ACCEPT', None, None)
+        kept = service.request_investigation(self.settings, self.scope, self.user, self.code['B'])
+        self.assertEqual((kept['case_id'], kept['outcome'], kept['status'], kept['queued']),
+                         (str(case_b), 'unchanged', 'reported', False))
+        self.assertIn('son söz insanda', kept['message_tr'])
+        again = service.request_investigation(self.settings, self.scope, self.user, self.code['C'])
+        self.assertEqual((again['outcome'], again['status'], again['queued']), ('reopened', 'open', True))
+        self.assertNotEqual(again['case_id'], case_c)
+        with connect(self.settings) as connection:
+            old = connection.execute('SELECT status,closed_at IS NOT NULL,decision_id IS NOT NULL FROM agents.cases WHERE case_id=%s',
+                                     (case_c,)).fetchone()
+            new = connection.execute('SELECT opened_by,priority,title_tr FROM agents.cases WHERE case_id=%s',
+                                     (again['case_id'],)).fetchone()
+            notes = connection.execute("SELECT from_role,to_role FROM agents.messages WHERE case_id=%s AND kind='note'",
+                                       (case_c,)).fetchall()
+            stored = connection.execute('SELECT outcome FROM agents.requests WHERE case_id=%s',
+                                        (again['case_id'],)).fetchall()
+            tasks = dict(connection.execute('SELECT role,status FROM agents.tasks WHERE case_id=%s',
+                                            (again['case_id'],)).fetchall())
+        self.assertEqual(old, ('closed', True, True))
+        self.assertEqual(new[:2], ('user', 100))
+        self.assertTrue(new[2].startswith('Kullanıcı isteğiyle yeniden inceleme'))
+        self.assertEqual(notes, [('reporter', 'team')])
+        self.assertEqual(stored, [('opened',)])
+        self.assertEqual(tasks, {role: 'queued' for role in ('hypothesizer', 'skeptic', 'verifier', 'reporter')})
+        repeat = service.request_investigation(self.settings, self.scope, self.user, self.code['C'])
+        self.assertEqual((repeat['case_id'], repeat['outcome']), (again['case_id'], 'unchanged'))
+        self.assertIsNotNone(service.case_detail(self.settings, self.scope, case_c))
 
     def test_ai_off_still_runs_the_deterministic_steps(self):
         sentinel.scan(self.settings, self.scope)

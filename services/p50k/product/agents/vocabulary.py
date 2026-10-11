@@ -91,6 +91,9 @@ DECISION_TR = {
     'UNDECIDED': 'Karar verilmedi',
 }
 REQUEST_NOTE_TR = 'Raportör, kullanıcının inceleme isteğini ekibin sırasına öncelikli olarak ekledi.'
+REOPEN_NOTE_TR = ('Raportör, kullanıcının isteğiyle bu fonu yeniden incelemeye aldı; '
+                  'önceki vaka, raporu ve karar önerisi kayıtlı kalır.')
+REOPEN_CLOSE_NOTE_TR = 'Kullanıcının isteğiyle bu fon için yeni bir inceleme turu açıldı; bu vaka kayıtlı olarak kapandı.'
 AI_OFF_ACTIVITY_TR = 'Yapay zekâ kapalı; kural tabanlı adımlar çalışmaya devam ediyor.'
 
 PAGE_VISIT_PRIORITY = 70
