@@ -10,7 +10,7 @@
 .card{width:min(100%,560px);padding:40px;border:1px solid var(--bs-border);border-radius:24px;background:var(--bs-card);box-shadow:0 20px 60px #0002}
 .introduction h1{margin:0;font-size:32px;line-height:1.2;letter-spacing:-.5px;font-weight:500}
 .introduction p{margin:14px 0 0;font-size:16px;line-height:25px;color:var(--bs-muted)}
-.form{display:flex;flex-direction:column;gap:22px;margin-top:32px}
+.form{display:flex;flex-direction:column;align-items:stretch;gap:22px;margin-top:32px}
 .form label{display:flex;flex-direction:column;gap:9px;font-size:15px;line-height:22px;font-weight:500;color:var(--bs-text)}
 .form input{display:block;width:100%;height:56px;min-height:56px;padding:0 16px;border:1px solid var(--bs-border);border-radius:12px;background:var(--bs-surface);color:var(--bs-text);font:inherit;font-weight:400;font-size:16px}
 .form input:focus{border-color:var(--bs-accent-text)}

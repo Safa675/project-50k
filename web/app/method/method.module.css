@@ -7,7 +7,7 @@
 .content{width:100%;gap:40px}
 .page section{gap:24px;padding-top:32px}
 .page section>p{color:var(--bs-muted);font-size:14px;line-height:22px}
-.page .workflow{padding:28px;border:1px solid var(--bs-border);border-radius:20px;background:var(--bs-card);gap:24px}
+.page .workflow:first-of-type{padding:28px;border:1px solid var(--bs-border);border-radius:20px;background:var(--bs-card);gap:24px}
 .sectionIntro{display:flex;justify-content:space-between;align-items:flex-start;gap:32px}
 .sectionIntro>p{max-width:390px;margin:0!important;font-size:14px;line-height:22px;color:var(--bs-muted)}
 .page .sectionIntro h2{font-size:25px;line-height:32px}
@@ -65,12 +65,12 @@
 @media(max-width:1050px){
   .pipeline{gap:20px}.phase:not(:last-child)::after{left:calc(100% + 3px)}
   .parallel .step{display:flex}.parallel .portrait{width:64px;height:64px}.parallel .portrait img{width:60px;height:60px}
-  .page .workflow{padding:24px}.sectionIntro{flex-direction:column;gap:12px}.sectionIntro>p{max-width:600px}
+  .page .workflow:first-of-type{padding:24px}.sectionIntro{flex-direction:column;gap:12px}.sectionIntro>p{max-width:600px}
   .evidenceTrail{grid-template-columns:minmax(0,1fr);gap:18px}
 }
 @media(max-width:700px){
   .page{padding-top:20px}.page .hero{padding:20px 0 32px}.hero h1{font-size:40px;letter-spacing:-1px}
-  .page .workflow{padding:20px}.page .sectionIntro h2{font-size:23px;line-height:30px}
+  .page .workflow:first-of-type{padding:20px}.page .sectionIntro h2{font-size:23px;line-height:30px}
   .input{gap:8px}.sourceCaption{flex-basis:100%;margin-bottom:4px}.sourceNote{flex-basis:100%;margin:4px 0 0}
   .pipeline{grid-template-columns:minmax(0,1fr);gap:28px}
   .phase{gap:10px;padding:0 0 24px;border-bottom:1px solid var(--bs-divider)}
