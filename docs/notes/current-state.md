@@ -1,6 +1,18 @@
 # Project 50K: current state
 
-## Review rounds and full test battery — 2026-10-11 about 08:30–09:35 Istanbul (newest; read first)
+## Codex handoff — 2026-10-11 about 10:40 Istanbul (newest; read first)
+
+Claude's usage limit ran out mid-sprint. Read `plans/2026-10-11-codex-handoff-prompt.md`.
+- **Open requests from Mirza (09:35 and 09:40):** eleven workstreams, specified in `plans/2026-10-11-sprint-briefs.md`:
+  - agent panel height, `/review`, `/method`, `/sonuclar` success metrics, the fund warning card, stocks from the official
+    BIST bulletins, demo mode, the avatar photo, the tab icon, and the date chip without "Retrospektif inceleme".
+  - Partial code is a WIP checkpoint on `product/build`, not deployed and not merged.
+- **Agent budget:** failed model calls were booked at their maximum, so a network outage blocked the team. Today's
+  agent cap is compensated to $5.25 (actual spend $0.77). The real fix in `llm.py` is pending.
+- **Data:** 50 official Borsa İstanbul daily bulletins (3 August to 9 October) are downloaded outside git under
+  `~/.local/share/project-50k/overnight/2026-10-11/bist/thb/`. They are not imported yet.
+
+## Review rounds and full test battery — 2026-10-11 about 08:30–09:35 Istanbul
 
 - **Live product (3070/8770)** runs images built from `product/build` `fd03482` (main `a5e01d1`). The rollback images
   from before this section are tagged `p50k-product-api:rollback-0815` and `p50k-product-web:rollback-0815`.

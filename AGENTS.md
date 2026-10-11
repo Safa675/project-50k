@@ -1,6 +1,6 @@
 # Project 50K: instructions for coding agents
 
-**Latest takeover checkpoint:** read `plans/2026-10-10-claude-resume-handoff.md`
+**Latest takeover checkpoint:** read `plans/2026-10-11-codex-handoff-prompt.md` (2026-10-11 10:40); earlier: `plans/2026-10-10-claude-resume-handoff.md`
 in full. It separates the released app from unfinished date-context, chat-history
 and monthly-report integration. Follow DEC-034's product-first pacing; do not
 repeat broad Linux regressions or backup rehearsals for that unfinished slice.
@@ -35,7 +35,7 @@ The current product and hackathon demo scope is **Turkish investment funds and T
   - **The $25 OpenAI budget is a target, not a hard cap.** Don't waste it; raise it only with a valid reason and Mirza's OK.
   - **The plan is confirmed by delegation.** Confirm items that serve the team's interest yourself; ask Mirza only about problematic ones, with clear options and a recommendation.
   - **Persistent reminders.** If Mirza misses something important (an unanswered question or unconfirmed information that affects everything), raise it again in every reply until he answers. Only for truly critical items.
-- **Start here if you are Codex taking over:** `plans/2026-10-10-codex-handoff-prompt.md`.
+- **Start here if you are Codex taking over:** `plans/2026-10-11-codex-handoff-prompt.md` (newest; specs in `plans/2026-10-11-sprint-briefs.md`). Older: `plans/2026-10-10-codex-handoff-prompt.md`.
 
 ## Read first, in this order
 
