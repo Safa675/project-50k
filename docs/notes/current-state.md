@@ -1,5 +1,36 @@
 # Project 50K: current state
 
+## Agent team release — 2026-10-11 about 08:10 Istanbul (newest; read first)
+
+- **Live product:** http://127.0.0.1:3070, with API 8770, running the images built from `product/build` commit
+  `7b5cf46` (DEC-035). The real database `p50k` has migrations through `013_agent_team.sql`. The default analysis
+  date is **12 September 2026**, and AI is live.
+- **The always-on agent team runs in the worker.**
+  - Nöbetçi scanned all 2,133 funds as of 12 September and opened 189 cases, the replay's any-triggered funds.
+  - Each case runs Hipotezci ∥ Şüpheci → Doğrulayıcı (code-computed tests) → Raportör, which files a proposal into
+    the existing human review.
+  - The daily budget bucket is `agents:YYYY-MM-DD` with a $3 cap; background pace is about one case every 5 minutes;
+    user requests jump the queue.
+  - The first real case was reported for $0.048.
+- **Web.**
+  - A mascot dock (placeholder art, per DEC-035) is on every page and opens the team panel: the five-agent graph,
+    the Raportör tab with per-fund or general persistent conversations, the Sıra queue, read-only workspaces and
+    `/ekip`.
+  - The "Fon hakkında sorularınız" section and the status chips are removed.
+- **Checks run:**
+  - 62 focused Python tests passed; 1 setup needs owner access and did not run, so it is not a pass.
+  - 49 web unit tests passed.
+  - 11 Playwright tests passed on the smoke stack (3071/8771, `p50k_dev`, AI off).
+  - Screenshots were checked.
+  - The adversarial reviewer pass was lost to usage limits.
+- **Known issues:** one worker heartbeat `_DeadlockError` at startup; non-fatal, and work continues.
+- **Demo:** a ~25-second screen recording (DEC-035 storyboard in `docs/notes/agent-team-design-2026-10-10.md`,
+  section 7).
+- **Next:**
+  1. Keep the team healthy and record.
+  2. Merge `product/build` into `main` through the integration worktree with protected-path checks.
+  3. Add stock checks for Nöbetçi with the Borsa İstanbul v2 source (after the recording).
+
 ## Claude takeover checkpoint — 2026-10-10 about 21:45 Istanbul
 
 Read [the complete Claude handoff](../../plans/2026-10-10-claude-resume-handoff.md)
