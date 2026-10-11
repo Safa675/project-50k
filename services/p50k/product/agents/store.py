@@ -143,12 +143,12 @@ def raise_case(connection, case_id: str, priority: int, *, user: str | None = No
         (priority, user, case_id, MAX_ATTEMPTS))
 
 
-def close_case(connection, case_id: str, note: str) -> None:
+def close_case(connection, case_id: str, note: str, from_role: str = 'sentinel') -> None:
     connection.execute("""UPDATE agents.tasks SET status='skipped',finished_at=clock_timestamp(),error_class='CASE_CLOSED'
         WHERE case_id=%s AND status IN ('queued','waiting_budget')""", (case_id,))
     connection.execute("UPDATE agents.cases SET status='closed',closed_at=clock_timestamp() WHERE case_id=%s AND status<>'closed'",
                        (case_id,))
-    add_message(connection, case_id, None, 'sentinel', 'team', 'note', note)
+    add_message(connection, case_id, None, from_role, 'team', 'note', note)
 
 
 @dataclass(frozen=True)

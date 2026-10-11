@@ -50,3 +50,17 @@ The pitch demo is a **screen recording of about 25 seconds**, not a live demo. S
 recordable flow on real 12 September data, with agent cases already processed by the real pipeline. Live-demo
 safeguards such as latency and on-stage fallbacks matter less. No mock or staged content appears in the recording
 (DEC-030); the only exception is the mascot art.
+
+## Addendum: full test battery and new review rounds (2026-10-11 about 08:30)
+
+- **Doğrulayıcı runs every standard test.** Şüpheci still picks the tests it considers decisive, and they run
+  first; the other standard tests now run too. They are deterministic SQL and cost nothing. This change came after
+  THF's first report left out the monthly-report test because Şüpheci had not picked it. The change applies to
+  every case, and the test parameters fixed on 2026-10-10 did not change.
+- **A new review round on request.** When a user asks the Raportör to investigate a fund whose case is already
+  reported, the reported case closes and a new user case opens at user priority. The closed case, its messages and
+  its proposal stay in the records. If a human has already reviewed the proposal, no new round opens, because the
+  last word is the human's. The existing rate limits apply.
+- **Monthly-report changes in words.** A rise of 100 % or more also shows the multiple; for example, a 220 % rise
+  reads "yaklaşık 3,2 katına çıkmış". The server writes the sentence from code-computed values; models still see only the categorical
+  outcome (DEC-031).

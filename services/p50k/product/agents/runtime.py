@@ -54,7 +54,11 @@ def load_case(settings: Settings, task: store.Task) -> roles.CaseContext:
 
 
 def verifier_tests(settings: Settings, task: store.Task, owner: str, case: roles.CaseContext) -> list[tuple[str, dict]]:
-    """Run the requested deterministic tests once per task, storing results before any model call."""
+    """Run the skeptic's requested tests first, then every other standard test, once per task.
+
+    The tests are deterministic and cost nothing, so a test the skeptic did not pick still
+    informs the ratings; results are stored before any model call.
+    """
     with connect(settings) as connection:
         connection.execute("SET LOCAL statement_timeout='20s'")
         stored = connection.execute("""SELECT payload FROM agents.messages WHERE task_id=%s AND kind='test_result'
@@ -65,13 +69,14 @@ def verifier_tests(settings: Settings, task: store.Task, owner: str, case: roles
         requested = [test for test in (plans[-1].get('tests', []) if plans else []) if test in checks.TESTS]
         context = checks.CheckContext(case.fund_code, case.category, case.run, tuple(case.chat.packet.evidence))
         results = [(f't{index + 1}', checks.run_check(connection, test, context))
-                   for index, test in enumerate(requested or checks.DEFAULT_TESTS)]
+                   for index, test in enumerate(dict.fromkeys([*requested, *checks.DEFAULT_TESTS]))]
         if not store.owns(connection, task, owner):
             raise roles.Skip('LEASE_LOST')
         for reference, item in results:
             store.add_message(connection, task.case_id, task.task_id, 'verifier', 'team', 'test_result',
                               checks.describe(item), {'ref': reference, 'test': item['test'],
-                              'name_tr': checks.TESTS[item['test']][0], 'outcome': item['outcome'], 'result': item})
+                              'name_tr': checks.TESTS[item['test']][0], 'outcome': item['outcome'],
+                              'requested': item['test'] in requested, 'result': item})
     return results
 
 

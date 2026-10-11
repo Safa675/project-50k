@@ -92,7 +92,8 @@ TOOLS = [{'type':'function', 'name':name, 'description':description, 'strict':Tr
     ('get_case_status','Read the agent team case for the current thread fund in the selected date: step statuses, '
                        'validated team output with evidence aliases and categorical test outcomes.'),
     ('request_investigation','Queue an investigation of the current thread fund by the agent team at user priority. '
-                             'Use only when the user asks for an investigation; deduplicated and rate-limited.'))]
+                             'Use only when the user asks for an investigation or a new review round; a reported '
+                             'case that no human has reviewed starts a new round. Deduplicated and rate-limited.'))]
 AGENT_TOOLS = {'get_case_status', 'request_investigation'}
 # Tools that reveal no identity, offered in historical (anonymous) views.
 HISTORICAL_TOOLS = {'get_signals', 'get_decision', *AGENT_TOOLS}

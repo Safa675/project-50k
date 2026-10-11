@@ -15,7 +15,8 @@ from uuid import UUID
 from p50k.product.agents import llm, store
 from p50k.product.agents.config import AgentConfig
 from p50k.product.agents.vocabulary import (ACTIVITY_TR, AI_OFF_ACTIVITY_TR, AI_ROLES, CASE_STATUS_TR, COUNTER_TYPE_TR,
-                                            DECISION_TR, HYPOTHESIS_TYPE_TR, PAGE_VISIT_PRIORITY, REQUEST_NOTE_TR,
+                                            DECISION_TR, HYPOTHESIS_TYPE_TR, PAGE_VISIT_PRIORITY, REOPEN_CLOSE_NOTE_TR,
+                                            REOPEN_NOTE_TR, REQUEST_NOTE_TR,
                                             ROLE_DESCRIPTIONS, ROLE_NAMES, ROLES, TASK_STATUS_TR, USER_PRIORITY,
                                             VERDICT_TR, WAIT_REASON_TR)
 from p50k.product.analysis_context import use_analysis_date
@@ -404,6 +405,7 @@ def fund_note(signals, case) -> dict[str, Any]:
                             'prompt_tr': 'Bu fon için hangi ölçümler incelendi ve ne gösteriyor?'})
     if case and case[1] == 'reported':
         suggestions.append({'label_tr': 'Ekibin raporunu özetle', 'prompt_tr': 'Ekibin bu fon için yazdığı raporu özetler misin?'})
+        suggestions.append({'label_tr': 'Ekibe yeniden incelet', 'prompt_tr': 'Bu fonu ekibe yeniden inceletir misin?'})
     elif case:
         suggestions.append({'label_tr': 'Ekip ne buldu?',
                             'prompt_tr': 'Ekibin bu fon için incelemesi hangi aşamada ve şimdiye kadar ne buldu?'})
@@ -431,7 +433,12 @@ def general_note(kind: str, open_cases: int, reported: int) -> dict[str, Any]:
 # ---------- The one bounded action: queue an investigation ----------
 
 def request_investigation(settings: Settings, scope: str, user_id: str, fund_code: str) -> dict[str, Any]:
-    """Open a case or raise it to user priority; deduplicated and at most ten per user per hour."""
+    """Open a case, raise it to user priority or start a new round for a reported case.
+
+    A reported case whose proposal no human has reviewed is closed with its records kept and
+    a fresh user case is opened; a human-reviewed case stays as it is, since the human has
+    the last word. Deduplicated and at most ten per user per hour.
+    """
     if not isinstance(fund_code, str) or not FUND.fullmatch(fund_code):
         raise AgentRequestError('FUND_NOT_FOUND', 404)
     with use_analysis_date(store.scope_date(scope)), connect(settings) as connection:
@@ -439,7 +446,7 @@ def request_investigation(settings: Settings, scope: str, user_id: str, fund_cod
         connection.execute('SELECT pg_advisory_xact_lock(hashtextextended(%s,%s))', (user_id, store.REQUEST_LOCK))
         if not connection.execute('SELECT 1 FROM ref.funds WHERE fund_code=%s', (fund_code,)).fetchone():
             raise AgentRequestError('FUND_NOT_FOUND', 404)
-        case = connection.execute("""SELECT case_id,status FROM agents.cases
+        case = connection.execute("""SELECT case_id,status,decision_id FROM agents.cases
             WHERE analysis_scope_key=%s AND fund_code=%s AND status<>'closed'""", (scope, fund_code)).fetchone()
         if case and connection.execute(f"""SELECT 1 FROM agents.requests WHERE user_id=%s AND kind='investigate'
                 AND case_id=%s AND created_at>now()-interval '{REQUEST_REPEAT_MINUTES} minutes' LIMIT 1""",
@@ -449,40 +456,63 @@ def request_investigation(settings: Settings, scope: str, user_id: str, fund_cod
             AND created_at>now()-interval '1 hour'""", (user_id,)).fetchone()[0]
         if used >= REQUEST_LIMIT_PER_HOUR:
             raise AgentRequestError('AGENT_REQUEST_LIMIT', 429)
+        reviewed = False
         if case:
             case_id, status = str(case[0]), case[1]
             outcome = 'unchanged'
             if status in {'open', 'investigating'}:
                 store.raise_case(connection, case_id, USER_PRIORITY, user=user_id)
                 outcome = 'raised'
+            elif status == 'reported':
+                reviewed = bool((decision_view(connection, case[2]) or {}).get('human_reviewed'))
+                if not reviewed:
+                    store.close_case(connection, case_id, REOPEN_CLOSE_NOTE_TR, from_role='reporter')
+                    case_id = open_user_case(connection, settings, scope, fund_code, user_id, again=True)
+                    status, outcome = 'open', 'reopened'
         else:
-            run = store.scope_run(connection, settings)
-            if not run or not connection.execute('SELECT 1 FROM det.signals WHERE run_id=%s AND fund_code=%s LIMIT 1',
-                                                 (run.run_id, fund_code)).fetchone():
-                raise AgentRequestError('EVIDENCE_UNAVAILABLE', 409)
-            entries = [entry for entry in store.triggered_funds(connection, run) if entry['fund_code'] == fund_code]
-            labels = list(dict.fromkeys(store.label(item) for item in (entries[0]['detectors'] if entries else [])))
-            title = ('Kullanıcı isteğiyle inceleme' + (': ' + ', '.join(labels) if labels else ''))[:240]
-            case_id = store.open_case(connection, scope=scope, fund_code=fund_code, run=run, opened_by='user',
-                                      priority=USER_PRIORITY, title=title, requested_by=user_id,
-                                      opening_note=REQUEST_NOTE_TR,
-                                      payload={'run_id': run.run_id, 'requested': True,
-                                               'evidence_ids': entries[0]['evidence_ids'] if entries else [],
-                                               'detectors': entries[0]['detectors'] if entries else []})
-            if case_id is None:
-                raise AgentRequestError('AGENT_REQUEST_CONFLICT', 409)
+            case_id = open_user_case(connection, settings, scope, fund_code, user_id)
             status, outcome = 'open', 'opened'
+        # The stored outcome keeps the original vocabulary: a new round opens a new case.
         connection.execute("""INSERT INTO agents.requests(user_id,analysis_scope_key,fund_code,kind,case_id,outcome)
-            VALUES (%s,%s,%s,'investigate',%s,%s)""", (user_id, scope, fund_code, case_id, outcome))
-    return result(case_id, status, outcome)
+            VALUES (%s,%s,%s,'investigate',%s,%s)""",
+            (user_id, scope, fund_code, case_id, 'opened' if outcome == 'reopened' else outcome))
+    return result(case_id, status, outcome, reviewed=reviewed)
 
 
-def result(case_id: str, status: str, outcome: str) -> dict[str, Any]:
+def open_user_case(connection, settings: Settings, scope: str, fund_code: str, user_id: str, *,
+                   again: bool = False) -> str:
+    run = store.scope_run(connection, settings)
+    if not run or not connection.execute('SELECT 1 FROM det.signals WHERE run_id=%s AND fund_code=%s LIMIT 1',
+                                         (run.run_id, fund_code)).fetchone():
+        raise AgentRequestError('EVIDENCE_UNAVAILABLE', 409)
+    entries = [entry for entry in store.triggered_funds(connection, run) if entry['fund_code'] == fund_code]
+    labels = list(dict.fromkeys(store.label(item) for item in (entries[0]['detectors'] if entries else [])))
+    title = (('Kullanıcı isteğiyle yeniden inceleme' if again else 'Kullanıcı isteğiyle inceleme')
+             + (': ' + ', '.join(labels) if labels else ''))[:240]
+    case_id = store.open_case(connection, scope=scope, fund_code=fund_code, run=run, opened_by='user',
+                              priority=USER_PRIORITY, title=title, requested_by=user_id,
+                              opening_note=REOPEN_NOTE_TR if again else REQUEST_NOTE_TR,
+                              payload={'run_id': run.run_id, 'requested': True, 'again': again,
+                                       'evidence_ids': entries[0]['evidence_ids'] if entries else [],
+                                       'detectors': entries[0]['detectors'] if entries else []})
+    if case_id is None:
+        raise AgentRequestError('AGENT_REQUEST_CONFLICT', 409)
+    return case_id
+
+
+def result(case_id: str, status: str, outcome: str, *, reviewed: bool = False) -> dict[str, Any]:
     queued = status in {'open', 'investigating'}
+    if outcome == 'reopened':
+        message = 'Ekip bu fonu yeniden incelemek için yeni bir vaka açtı; önceki rapor ve karar önerisi kayıtlı kalır.'
+    elif queued:
+        message = 'İstek ekibin sırasına öncelikli olarak eklendi.'
+    elif reviewed:
+        message = ('Ekibin bu fon için önerisi insan tarafından incelendi; son söz insanda olduğu için '
+                   'yeni bir inceleme açılmadı.')
+    else:
+        message = 'Ekip bu fon için raporunu zaten yazdı; karar önerisi insan incelemesinde.'
     return {'case_id': case_id, 'queued': queued, 'status': status, 'status_tr': CASE_STATUS_TR[status],
-            'outcome': outcome,
-            'message_tr': ('İstek ekibin sırasına öncelikli olarak eklendi.' if queued else
-                           'Ekip bu fon için raporunu zaten yazdı; karar önerisi insan incelemesinde.')}
+            'outcome': outcome, 'message_tr': message}
 
 
 # ---------- Case status for the Raportör (number-free, aliased evidence) ----------

@@ -45,7 +45,7 @@ export default function ReporterTab({fundCode, evidenceId, path, scopeKey, note,
         {data.suggestions.map(item => <button key={item.prompt_tr} type="button" className="ag-chip" onClick={() => conversation.current?.ask(item.prompt_tr)}>
           <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>{item.label_tr}</button>)}
       </div>}
-      {openCase && <div className="ag-brief-case"><span>Ekip bu fon için bir vaka yürütüyor: <strong>{caseStatusLabel(openCase.status)}</strong></span>
+      {openCase && <div className="ag-brief-case"><span>Ekibin bu fondaki vakası: <strong>{caseStatusLabel(openCase.status)}</strong></span>
         <button type="button" className="ag-link" onClick={() => onOpenCase(openCase.case_id)}>Vakanın akışını izle</button></div>}
       {fundCode && <div className="ag-request">
         <button type="button" className="ag-primary" disabled={request.status === 'busy'} onClick={() => void investigate()}>
