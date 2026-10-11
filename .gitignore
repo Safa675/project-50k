@@ -33,3 +33,8 @@ research/events/*/raw/
 *.sqlite3-*
 *.dump
 /compose.override.yaml
+
+# Team profile photos ship in the web image but stay out of git.
+web/public/avatars/*.jpg
+web/public/avatars/*.png
+web/public/avatars/*.webp

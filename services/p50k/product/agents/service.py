@@ -580,3 +580,116 @@ def case_status(settings: Settings, scope: str, fund_code: str, packet=None, run
     view.update(hypotheses=hypotheses[:3], counter_explanations=counters[:3], test_results=tests[:5],
                 ratings=ratings[:6], report=report)
     return {'case': view}
+
+
+# ---------- Fund page summary (read-only, no model) ----------
+
+# Test outcomes worth showing on the fund page, in display order; "nothing found" outcomes stay in the case flow.
+SUMMARY_TESTS = {
+    'kap_monthly_change': {'notable_change'},
+    'regulatory_event': {'confirmed_event', 'candidate_only'},
+    'peer_window': {'above_peers', 'below_peers'},
+    'data_quality': {'issues_found'},
+    'category_move': {'widespread', 'mixed', 'isolated'},
+}
+SUMMARY_TEST_LIMIT = 3
+
+
+def summary_highlights(rows) -> list[dict[str, str]]:
+    """The latest stored result per test whose outcome is notable, as its server-rendered sentence."""
+    from p50k.product.agents import checks
+    latest: dict[str, tuple[str, str]] = {}
+    for test, outcome, body in rows:
+        if test in SUMMARY_TESTS and isinstance(body, str) and body.strip():
+            latest[test] = (outcome, body.strip())
+    items = []
+    for test, notable in SUMMARY_TESTS.items():
+        if test not in latest or latest[test][0] not in notable:
+            continue
+        outcome, body = latest[test]
+        name = checks.TESTS[test][0]
+        detail = body[len(name) + 2:] if body.startswith(name + ': ') else body
+        items.append({'test': test, 'outcome': outcome, 'name_tr': name, 'detail_tr': detail})
+    return items[:SUMMARY_TEST_LIMIT]
+
+
+def summary_stage(status: str, steps: list[dict[str, Any]], decision: dict[str, Any] | None) -> str:
+    if status == 'reported':
+        if decision and decision['human_reviewed']:
+            return 'Raportör raporu yazdı; karar önerisi insan tarafından incelendi.'
+        return 'Raportör raporu yazdı; karar önerisi insan incelemesini bekliyor.'
+    running = [step['role_tr'] for step in steps if step['status'] == 'running']
+    if running:
+        return f'{running[0]} şu anda vaka üzerinde çalışıyor.'
+    if any(step['status'] == 'waiting_budget' for step in steps):
+        return 'Yapay zekâ adımları günlük bütçenin açılmasını bekliyor; vaka kayıtlı ve sırasında.'
+    done = sum(step['status'] in {'done', 'skipped'} for step in steps)
+    if status == 'open' and not done:
+        return 'Vaka ekibin sırasında; inceleme henüz başlamadı.'
+    return f'Ekip vakayı inceliyor: {len(steps)} adımdan {done} tanesi tamamlandı.'
+
+
+def fund_summary(settings: Settings, scope: str, fund_code: str) -> dict[str, Any] | None:
+    """What the fund page shows first: the view's triggered measurements, the team's case and its decision state.
+
+    Read-only and model-free. Measurements use the sentinel's admission rule on this view's
+    exact run; case texts are the stored server-rendered sentences. None for an unknown fund.
+    """
+    from p50k.product.chat_language import evidence_fact, label
+    from p50k.product.egress import Evidence
+    if not isinstance(fund_code, str) or not FUND.fullmatch(fund_code):
+        return None
+    with connect(settings) as connection:
+        read_only(connection)
+        if not connection.execute('SELECT 1 FROM ref.funds WHERE fund_code=%s', (fund_code,)).fetchone():
+            return None
+        with use_analysis_date(store.scope_date(scope)):
+            run = store.scope_run(connection, settings)
+        rows = connection.execute("""SELECT signal.detector_id,signal.state,signal.value,signal.threshold,signal.evidence_id,
+                item.effective_date,COALESCE(item.available_at<=%s,false)
+            FROM det.signals signal JOIN det.evidence_items item USING(evidence_id)
+            WHERE signal.run_id=%s AND signal.fund_code=%s AND signal.as_of<=%s
+              AND NOT COALESCE((item.metadata->>'is_attribute')::boolean,false)
+              AND (item.available_at<=%s OR (item.available_at IS NULL AND signal.state='ABSTAINED'))
+            ORDER BY signal.detector_id""", (run.cutoff, run.run_id, fund_code, run.as_of, run.cutoff)).fetchall() \
+            if run else []
+        case = connection.execute("""SELECT case_id,status,opened_by,opened_at,decision_id FROM agents.cases
+            WHERE analysis_scope_key=%s AND fund_code=%s AND status<>'closed'""", (scope, fund_code)).fetchone()
+        tasks, tests, decision = [], [], None
+        if case:
+            tasks = connection.execute("SELECT role,status FROM agents.tasks WHERE case_id=%s AND role<>'sentinel'",
+                                       (case[0],)).fetchall()
+            tests = connection.execute("""SELECT payload->>'test',payload->>'outcome',body_tr FROM agents.messages
+                WHERE case_id=%s AND kind='test_result' ORDER BY message_id""", (case[0],)).fetchall()
+            decision = decision_view(connection, case[4])
+    triggered = []
+    for detector, state, value, threshold, evidence_id, effective, admitted in rows:
+        if state != 'TRIGGERED' or not admitted:
+            continue
+        item = Evidence(evidence_id=evidence_id, detector_id=detector, state=state,
+                        value=None if value is None else str(value), threshold=None if threshold is None else str(threshold),
+                        effective_date=effective.isoformat() if effective else None, is_attribute=False)
+        triggered.append({'detector_id': detector, 'evidence_id': evidence_id, 'label_tr': label(item),
+                          'fact_tr': evidence_fact(item), 'effective_date': item.effective_date})
+    triggered.sort(key=lambda entry: (entry['detector_id'] != 'AN-FND-005', entry['detector_id']))
+    if run is None:
+        calculation = 'none'
+    elif not rows:
+        calculation = 'not_covered'
+    elif triggered:
+        calculation = 'triggered'
+    elif all(row[1] == 'ABSTAINED' for row in rows):
+        calculation = 'limited'
+    else:
+        calculation = 'clear'
+    case_view = None
+    if case:
+        steps = [{'role': role, 'role_tr': ROLE_NAMES[role], 'status': status, 'status_tr': TASK_STATUS_TR[status]}
+                 for role, status in sorted(tasks, key=lambda item: ROLE_ORDER[item[0]])]
+        case_view = {'case_id': str(case[0]), 'status': case[1], 'status_tr': CASE_STATUS_TR[case[1]],
+                     'opened_by': case[2], 'opened_at': iso(case[3]), 'steps': steps,
+                     'stage_tr': summary_stage(case[1], steps, decision), 'highlights': summary_highlights(tests),
+                     'tests_run': len({row[0] for row in tests if row[0]}), 'decision': decision}
+    return {'fund_code': fund_code, 'scope': scope, 'calculation': calculation,
+            'as_of': run.as_of.isoformat() if run else None, 'measured': len(rows), 'triggered': triggered,
+            'case': case_view}

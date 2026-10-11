@@ -51,6 +51,9 @@ class DecisionFlowTests(TestCase):
         self.assertEqual(effective['effective_value'],changed)
         self.assertEqual(effective['review_id'],review_id)
         self.assertEqual(effective['decided_by'],'HUMAN')
+        # The review queue names the fund from the catalog.
+        self.assertEqual(effective['fund_name'],'Synthetic review fund')
+        self.assertFalse(any(item['fund_code']==code for item in decision_rows(settings,review_only=True)))
         with self.assertRaises(ValueError):review(settings,first['decision_id'],str(actor),'OVERRIDE',changed,'')
         review(settings,first['decision_id'],str(actor),'REJECT',None,'Synthetic rejection')
         self.assertEqual(decision_rows(settings,code)[0]['effective_value'],'UNDECIDED')

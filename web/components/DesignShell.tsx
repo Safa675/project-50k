@@ -2,8 +2,9 @@
 
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
-import {useEffect,useState} from 'react';
+import {useEffect,useRef,useState} from 'react';
 import type {User} from '@/lib/auth';
+import {accountInitials,avatarSource} from '@/lib/avatar';
 import {NOTIFICATIONS_CHANGED} from '@/lib/notification-events';
 import SessionActions from './SessionActions';
 import DateContextControl from './DateContextControl';
@@ -19,6 +20,13 @@ export function ThemeToggle(){
 
 export function SearchField({large=false,defaultValue=''}:{large?:boolean;defaultValue?:string}){
   return <form action="/funds" role="search" className={`bs-search${large?' bs-search-large':''}`}><img src={`/design/search-${large?'large':'small'}.svg`} alt=""/><label className="sr-only" htmlFor={large?'bs-hero-search':'bs-header-search'}>Fon adı ya da kodu ara</label><input id={large?'bs-hero-search':'bs-header-search'} name="q" type="search" maxLength={80} defaultValue={defaultValue} placeholder="Fon adı ya da kodu ara"/><button className="sr-only" type="submit">{large?'Fonları ara':'Katalogda ara'}</button></form>;
+}
+
+// A profile photo replaces the initials when one is set; a photo that fails to load (even before hydration) falls back to initials.
+function AccountBadge({user}:{user:User}){
+  const source=avatarSource(user.avatar_path),image=useRef<HTMLImageElement|null>(null),[failed,setFailed]=useState(false);
+  useEffect(()=>{const current=image.current;setFailed(!!current&&current.complete&&current.naturalWidth===0);},[source]);
+  return <span className={source&&!failed?'bs-account-photo':undefined}>{source&&!failed?<img ref={image} src={source} alt="" width={32} height={32} decoding="async" onError={()=>setFailed(true)}/>:accountInitials(user.email)}</span>;
 }
 
 export function SiteHeader({user}:{user?:User}){
@@ -37,8 +45,8 @@ export function SiteHeader({user}:{user?:User}){
     refresh();window.addEventListener(NOTIFICATIONS_CHANGED,refresh);
     return()=>{controller?.abort();window.removeEventListener(NOTIFICATIONS_CHANGED,refresh);};
   },[user?.user_id,pathname]);
-  const links=[['/funds','Keşfet'],['/stocks','Hisseler'],['/watchlist','Takip listem'],['/method','Yöntem']];
-  return <header className="bs-header"><Link href="/" className="bs-brand" aria-label="BlackSwan ana sayfa"><span className="bs-logo"><img src={user?'/design/logo-auth.svg':'/design/logo.svg'} alt=""/></span><span><span className="bs-brand-light">Black</span><span className="bs-brand-medium">Swan</span></span></Link><nav className="bs-nav" aria-label="Ana gezinme">{links.map(([href,label])=><Link key={href} href={href} aria-current={pathname===href||pathname.startsWith(href+'/')?'page':undefined}>{label}</Link>)}</nav><div className="bs-header-search"><SearchField/></div><div className="bs-header-actions"><DateContextControl initial={user?.analysis_context} canChange={!!user}/><ThemeToggle/>{user?<><Link href="/notifications" className="bs-icon-button bs-notifications-link" aria-label={unread?`Bildirimler, ${unread} okunmamış`:'Bildirimler'}><img src="/design/bell.svg" alt=""/>{unread>0&&<img className="bs-notification-dot" src="/design/unread-dot.svg" alt=""/>}</Link><details className="bs-account"><summary aria-label="Hesap ve çalışma alanı"><span>{user.email.slice(0,2).toLocaleUpperCase('tr-TR')}</span></summary><div className="bs-account-menu"><p>{user.email}</p><Link href="/stocks">BIST 30 hisseleri</Link><Link href="/ekip">Ajan ekibi</Link><Link href="/workflow">İş akışı ve API</Link>{user.role!=='viewer'&&<Link href="/review">İnceleme kuyruğu</Link>}<SessionActions/></div></details></>:<Link href="/login" className="bs-button bs-button-small bs-button-secondary">Giriş yap</Link>}</div></header>;
+  const links=[['/funds','Keşfet'],['/stocks','Hisseler'],['/watchlist','Takip listem'],['/method','Yöntem'],['/sonuclar','Sonuçlar']];
+  return <header className="bs-header"><Link href="/" className="bs-brand" aria-label="BlackSwan ana sayfa"><span className="bs-logo"><img src={user?'/design/logo-auth.svg':'/design/logo.svg'} alt=""/></span><span><span className="bs-brand-light">Black</span><span className="bs-brand-medium">Swan</span></span></Link><nav className="bs-nav" aria-label="Ana gezinme">{links.map(([href,label])=><Link key={href} href={href} aria-current={pathname===href||pathname.startsWith(href+'/')?'page':undefined}>{label}</Link>)}</nav><div className="bs-header-search"><SearchField/></div><div className="bs-header-actions"><DateContextControl initial={user?.analysis_context} canChange={!!user}/><ThemeToggle/>{user?<><Link href="/notifications" className="bs-icon-button bs-notifications-link" aria-label={unread?`Bildirimler, ${unread} okunmamış`:'Bildirimler'}><img src="/design/bell.svg" alt=""/>{unread>0&&<img className="bs-notification-dot" src="/design/unread-dot.svg" alt=""/>}</Link><details className="bs-account"><summary aria-label="Hesap ve çalışma alanı"><AccountBadge user={user}/></summary><div className="bs-account-menu"><p>{user.email}</p><Link href="/stocks">BIST 30 hisseleri</Link><Link href="/ekip">Ajan ekibi</Link><Link href="/workflow">İş akışı ve API</Link>{user.role!=='viewer'&&<Link href="/review">İnceleme kuyruğu</Link>}<SessionActions/></div></details></>:<Link href="/login" className="bs-button bs-button-small bs-button-secondary">Giriş yap</Link>}</div></header>;
 }
 
 export function SiteFooter({dataMode}:{dataMode?:string}){

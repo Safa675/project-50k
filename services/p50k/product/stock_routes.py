@@ -10,6 +10,7 @@ import psycopg
 from fastapi import APIRouter, Depends, HTTPException, Path, Query, Request
 from pydantic import AwareDatetime
 
+from p50k.product.analysis_context import historical_mode
 from p50k.product.archive import ISTANBUL
 from p50k.product.auth import require_session
 from p50k.product.db import connect
@@ -29,7 +30,7 @@ def get_stock_queries(request: Request) -> Iterator[StockQueries]:
 
 
 Reader = Annotated[StockQueries, Depends(get_stock_queries)]
-Cutoff = Annotated[AwareDatetime | None, Query(description="Availability cutoff with timezone; index membership is current metadata.")]
+Cutoff = Annotated[AwareDatetime | None, Query(description="Availability cutoff with timezone; dated membership comes only from bulletins available by then.")]
 router = APIRouter(dependencies=[Depends(require_session)], tags=["Stocks"])
 
 
@@ -37,14 +38,14 @@ router = APIRouter(dependencies=[Depends(require_session)], tags=["Stocks"])
 def list_stocks(reader: Reader, q: Annotated[str, Query(max_length=80)]="",
                 limit: Annotated[int, Query(ge=1,le=30)]=30,
                 offset: Annotated[int, Query(ge=0,le=30)]=0) -> StocksPage:
-    return reader.stocks(q.strip(),limit,offset,resolve_cutoff(None))
+    return reader.stocks(q.strip(),limit,offset,resolve_cutoff(None),dated=historical_mode())
 
 
 @router.get("/stocks/{symbol}", response_model=StockDetail)
 def stock_detail(symbol: Annotated[str, Path(pattern=r"^[A-Z][A-Z0-9]{1,11}$")], reader: Reader,
                  days: Annotated[int, Query(ge=1,le=731)]=365, cutoff: Cutoff=None) -> StockDetail:
     resolved = resolve_cutoff(cutoff)
-    stock = reader.stock(symbol)
+    stock = reader.stock(symbol,resolved)
     if stock is None:
         raise HTTPException(404,"STOCK_NOT_FOUND")
     end = resolved.astimezone(ISTANBUL).date()

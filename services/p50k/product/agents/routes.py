@@ -85,6 +85,19 @@ def workspace(role: str, request: Request, limit: int = Query(default=20, ge=1, 
         raise unavailable(error) from None
 
 
+@router.get('/funds/{fund_code}/summary')
+def fund_summary(fund_code: str, request: Request, actor: Principal = Depends(require_session)):
+    """The fund page's top summary for the request's view; read-only, nothing goes to a model."""
+    settings, scope = context(request)
+    try:
+        summary = service.fund_summary(settings, scope, fund_code)
+    except psycopg.Error as error:
+        raise unavailable(error) from None
+    if summary is None:
+        raise HTTPException(404, 'FUND_NOT_FOUND')
+    return summary
+
+
 @router.post('/page-visit')
 def page_visit(body: PageVisitBody, request: Request, actor: Principal = Depends(require_session)):
     settings, scope = context(request)

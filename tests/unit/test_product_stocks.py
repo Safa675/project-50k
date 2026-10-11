@@ -111,10 +111,10 @@ class StockAdmissionTests(unittest.TestCase):
 
 class SyntheticStockQueries:
     def __init__(self):self.calls=[]
-    def stocks(self,q,limit,offset,cutoff):
+    def stocks(self,q,limit,offset,cutoff,*,dated=False):
         self.calls.append((q,limit,offset))
         return StocksPage(items=[StockListing(symbol="TESTA",name="Synthetic stock",last_date=date(2020,1,3),last_close=None)],total=1,limit=limit,offset=offset,catalog_captured_at=CUTOFF)
-    def stock(self,symbol):
+    def stock(self,symbol,cutoff=None):
         return StockInstrument(symbol=symbol,name="Synthetic stock") if symbol=="TESTA" else None
     def detail(self,stock,start,end,cutoff):
         self.calls.append((stock.symbol,start,end,cutoff))

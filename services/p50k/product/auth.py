@@ -31,6 +31,8 @@ LOGIN_WINDOW = timedelta(minutes=15)
 LOGIN_CSRF_LIFETIME = 600
 TOKEN_PATTERN = re.compile(r"^[A-Za-z0-9_-]{43}$")
 EMAIL_PATTERN = re.compile(r"^[^\s@]+@[^\s@]+\.[^\s@]+$")
+# Same-origin static photo path; migration 014 enforces the identical CHECK.
+AVATAR_PATH_PATTERN = re.compile(r"^/avatars/[a-z0-9][a-z0-9-]{0,39}\.(jpg|png|webp)$")
 HASHER = PasswordHasher(time_cost=3, memory_cost=65536, parallelism=2, hash_len=32, salt_len=16, type=Type.ID)
 
 
@@ -47,9 +49,10 @@ class Principal:
     role: Literal["viewer", "analyst", "admin"]
     session_id: str
     csrf_sha256: str
+    avatar_path: str | None = None
 
-    def user(self) -> dict[str, str]:
-        return {"user_id": self.user_id, "email": self.email, "role": self.role}
+    def user(self) -> dict[str, str | None]:
+        return {"user_id": self.user_id, "email": self.email, "role": self.role, "avatar_path": self.avatar_path}
 
 
 def normalized_email(value: str) -> str:
@@ -158,7 +161,8 @@ class AuthService:
         now = now or datetime.now(timezone.utc)
         with connect(self.settings) as connection:
             row = connection.execute("""
-                SELECT session.session_id,session.csrf_sha256,person.user_id,person.email,person.role
+                SELECT session.session_id,session.csrf_sha256,person.user_id,person.email,person.role,
+                    person.avatar_path
                 FROM auth.sessions session JOIN auth.users person USING(user_id)
                 WHERE session.token_sha256=%s AND session.revoked_at IS NULL
                     AND person.disabled_at IS NULL AND session.expires_at>%s
@@ -169,7 +173,7 @@ class AuthService:
                 raise AuthenticationError()
             connection.execute("""UPDATE auth.sessions SET last_seen_at=%s
                 WHERE session_id=%s AND revoked_at IS NULL""", (now, row[0]))
-        return Principal(str(row[2]), row[3], row[4], str(row[0]), row[1])
+        return Principal(str(row[2]), row[3], row[4], str(row[0]), row[1], row[5])
 
     def login(self, email: str, password: SecretStr, ip: str, previous_token: str = "",
               now: datetime | None = None) -> tuple[Principal, str, str]:
@@ -188,7 +192,7 @@ class AuthService:
             """, (email_sha, ip_sha, now - LOGIN_WINDOW, email_sha, ip_sha)).fetchone()
             if count[0] >= 5 or count[1] >= 20:
                 raise AuthenticationError("LOGIN_THROTTLED", 429)
-            row = connection.execute("SELECT user_id,email,role,password_hash,disabled_at FROM auth.users WHERE email=%s FOR UPDATE", (email,)).fetchone()
+            row = connection.execute("SELECT user_id,email,role,password_hash,disabled_at,avatar_path FROM auth.users WHERE email=%s FOR UPDATE", (email,)).fetchone()
             valid = verify_password(row[3] if row else None, password, pepper)
             valid = valid and row is not None and row[4] is None
             connection.execute("INSERT INTO auth.login_attempts (email_sha256,ip_sha256,succeeded,created_at) VALUES (%s,%s,%s,%s)",
@@ -209,7 +213,7 @@ class AuthService:
                 """, (row[0], digest_token(token), digest_token(csrf), now, now + ABSOLUTE_LIFETIME, now)).fetchone()[0]
                 connection.execute("INSERT INTO ops.audit_log (action,actor_id,target_type,target_id) VALUES ('LOGIN_SUCCESS',%s,'SESSION',%s)",
                                    (row[0], str(session_id)))
-                principal = Principal(str(row[0]), row[1], row[2], str(session_id), digest_token(csrf))
+                principal = Principal(str(row[0]), row[1], row[2], str(session_id), digest_token(csrf), row[5])
         if failed:
             raise AuthenticationError("INVALID_CREDENTIALS")
         return principal, token, csrf

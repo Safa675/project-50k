@@ -3,7 +3,7 @@ import {redirect} from 'next/navigation';
 import {apiOrigin} from './proxy';
 
 export type AnalysisContext={as_of_date:string;cutoff:string;mode:'historical'|'live';scope_key:string;today:string;timezone:string};
-export type User = {user_id: string; email: string; role: 'viewer'|'analyst'|'admin'; data_mode:string;analysis_context?:AnalysisContext};
+export type User = {user_id: string; email: string; role: 'viewer'|'analyst'|'admin'; avatar_path?: string|null; data_mode:string;analysis_context?:AnalysisContext};
 export async function serverApi(path: string): Promise<Response> {
   const jar = await cookies();
   return fetch(`${apiOrigin()}${path}`, {headers: {Cookie: jar.toString()}, cache: 'no-store', signal: AbortSignal.timeout(10000)});
