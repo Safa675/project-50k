@@ -17,7 +17,7 @@
   - **The $25 OpenAI budget is a target, not a hard cap.** Don't waste it; raise it only with a valid reason and Mirza's OK.
   - **The plan is confirmed by delegation.** Confirm items that serve the team's interest yourself; ask Mirza only about problematic ones, with clear options and a recommendation.
   - **Persistent reminders.** If Mirza misses something important (an unanswered question or unconfirmed information that affects everything), raise it again in every reply until he answers. Only for truly critical items.
-- **Codex handoff:** `plans/2026-10-10-codex-handoff-prompt.md` holds the full state and next steps as of 2026-10-10 14:35.
+- **Codex handoff (newest):** `plans/2026-10-11-codex-handoff-prompt.md` holds the full state, open workstreams and next steps as of 2026-10-11 10:40; specs are in `plans/2026-10-11-sprint-briefs.md`. The 2026-10-10 handoffs are history.
 - **Read before product work:**
   - `docs/notes/product-direction.md` (insurance policies or B2B anomaly data; still open);
   - `docs/notes/team-asks.md` (open asks: add yours);
