@@ -141,6 +141,22 @@ const noteCache = new Map<string, {at: number; data: PageVisit}>();
 
 export function usePageVisit(enabled: boolean, path: string, fundCode: string | null, version = 0): PageNoteState {
   const [state, setState] = useState<PageNoteState>({status: 'idle', data: null});
+  // A request (from the button or the Raportör's tool) or a case still in progress refreshes the note,
+  // so its case link follows a new review round and its status keeps up with the team.
+  const [refresh, setRefresh] = useState(0);
+  useEffect(() => {
+    const listener = () => {noteCache.clear(); setRefresh(value => value + 1);};
+    window.addEventListener(AGENTS_REFRESH, listener);
+    return () => window.removeEventListener(AGENTS_REFRESH, listener);
+  }, []);
+  const pending = state.data?.case?.status === 'open' || state.data?.case?.status === 'investigating';
+  useEffect(() => {
+    if (!enabled || !pending) return;
+    const timer = window.setInterval(() => {
+      if (!document.hidden) {noteCache.delete(`${path}|${fundCode ?? ''}`); setRefresh(value => value + 1);}
+    }, 15000);
+    return () => window.clearInterval(timer);
+  }, [enabled, pending, path, fundCode]);
   useEffect(() => {
     if (!enabled) {setState({status: 'idle', data: null}); return;}
     const key = `${path}|${fundCode ?? ''}`;
@@ -160,6 +176,6 @@ export function usePageVisit(enabled: boolean, path: string, fundCode: string | 
       }
     }, 350);
     return () => {cancelled = true; window.clearTimeout(timer);};
-  }, [enabled, path, fundCode, version]);
+  }, [enabled, path, fundCode, version, refresh]);
   return state;
 }
