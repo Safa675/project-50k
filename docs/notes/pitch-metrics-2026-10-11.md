@@ -3,18 +3,38 @@
 Verified against the real product database and the unchanged evaluation plus isolated monthly experiment on
 2026-10-11. Use everyday language and keep the method label attached to each result.
 
-## Recommended figures
+## Correction: screening is not a completed agent investigation
+
+Mirza challenged the earlier pitch framing on 2026-10-11. The 2,133 figure was too easy to read as completion of the
+whole pipeline. It is the fixed-check screening universe, not a count of completed AI or human investigations.
+The table below is a read-only runtime snapshot at approximately 12:54 Istanbul; activity counts can increase.
+
+| Processing stage | Verified count |
+|---|---:|
+| Funds with stored fixed-check screening results for the September12 view | 2,133 |
+| Funds with all four AI-review stages completed and a valid team report | 72 |
+| Funds with a valid team report, including one without all four AI stages completed | 73 |
+| Team proposals with a recorded human review in this analysis scope | 1 |
+
+These are activity counts. Completing a report is not proof that its conclusion is correct, and a valid report is
+not independent validation of detection quality. Do not describe 2,133 as fully processed through the agent team,
+or 72 as successful predictions. Screening routes flagged or user-requested cases into deeper investigation.
+
+## Product proof and historical study figures
 
 | Slide figure | Plain-language meaning |
 |---|---|
-| **2,133 funds** | Funds in the historical analysis universe. |
+| **2,133 funds screened** | Funds processed by the fixed checks, before the AI-team review. |
+| **72 completed AI investigations** | All four AI-review stages completed, at the snapshot above. This is workflow completion, not an accuracy score. |
 | **1.75 million daily records** | Stored fund observations across 2,131 funds. This is archive size, not a claim that all records were available on the analysis date. |
 | **7.6×** | In the historical comparison, funds later listed by SPK were flagged by the price checks 7.6 times as often as other funds: 17.6% versus 2.3%. |
-| **4 of 8 → 5 of 8** | Among the eight later-listed funds in the original 100-fund cohort, the price checks flagged four; adding the separate monthly-report experiment brings that to five. |
-| **23 of 131 → 24 of 131** | In the wider SPK-list comparison, the original price checks flagged 23 funds; the separate price-plus-monthly experiment flags 24 (17.6% → 18.3%). |
+| **5 of 8 case-study funds** | In a separately evaluated historical study, combined price and portfolio-report checks flagged five of the eight later-listed funds in the original 100-fund cohort. |
+| **24 of 131 in the wider comparison** | The same combined historical method flags 24 funds in the wider SPK-list cohort (18.3%). |
 
 The five-of-eight figure is a case-study subset. Show the wider 131-fund result alongside it; do not present it as
-the result for the entire fund universe.
+the result for the entire fund universe. The monthly rule is a separate evaluated component and is not yet an input
+to the live agent workflow. Price changes and changes in a fund's size are different observations; describe the
+combined method without a before/after story implying that the first method was erroneous.
 
 ## Useful supporting figures
 
@@ -28,15 +48,25 @@ the result for the entire fund universe.
 
 ## Suggested pitch wording
 
-"Our historical analysis covers 2,133 funds. In the development test, price checks flagged funds later listed by SPK
-7.6 times as often as other funds. Adding a monthly-report check increased the flagged cases in our original
-eight-case group from four to five; across the wider list, the combined result was 24 of 131."
+Lead with the demonstrated workflow:
+
+"We screened 2,133 funds and completed 72 AI-team investigations, with findings linked to sources and ready for
+human review. BlackSwan makes the path from a flagged observation to a reviewable report visible."
+
+If the historical study is included:
+
+"In a separate historical study, combined price and portfolio-report checks highlighted five of eight case-study
+funds. The wider comparison identified 24 of the 131 funds later listed by SPK."
+
+Do not lead with an accuracy claim: these results do not yet demonstrate reliable future prediction across the
+whole product universe. Analyst agreement, review time saved and performance on genuinely new cases still need
+to be measured before they can be claimed as success metrics.
 
 Short slide footnote:
 
-**Historical development results; not independently validated. Monthly-report rule shown as a separate experiment.**
+**Historical development study; not independently validated. Combined research method evaluated separately from the live agent workflow.**
 
-Optional Turkish slide footnote: **Geçmiş verilerle geliştirme testi; bağımsız doğrulama değildir. Aylık rapor kuralı ayrı bir deneydir.**
+Optional Turkish slide footnote: **Geçmiş verilerle geliştirme çalışması; bağımsız doğrulama değildir. Birleşik araştırma yöntemi canlı ajan akışından ayrı değerlendirilmiştir.**
 
 ## Keep the counts consistent
 
