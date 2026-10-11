@@ -1,9 +1,18 @@
 # Project 50K: current state
 
-## Review rounds and full test battery — 2026-10-11 about 08:30 Istanbul (newest; read first)
+## Review rounds and full test battery — 2026-10-11 about 08:30–09:35 Istanbul (newest; read first)
 
-- **Live product (3070/8770)** runs images built from the `product/build` commit after `950678f`. The rollback images
-  are tagged `p50k-product-api:rollback-0815` and `p50k-product-web:rollback-0815`.
+- **Live product (3070/8770)** runs images built from `product/build` `fd03482` (main `a5e01d1`). The rollback images
+  from before this section are tagged `p50k-product-api:rollback-0815` and `p50k-product-web:rollback-0815`.
+- **Later the same morning:**
+  - A step whose model call fails retries after a minute, up to the attempt limit. The laptop slept from 08:25 to
+    09:02, which broke in-flight calls; case AJ1 was retried through a user request.
+  - The Raportör's page note refreshes after requests and while the case runs, so its case link follows a new round.
+  - "İnsan kararına git" closes the panel.
+  - The workspace page shows the agent team's progress.
+- **Draft recording** (outside git): `C:\Users\mirza\Desktop\Hackathon\recordings\BlackSwan-demo-draft.mp4`, about
+  46 seconds. It is a scripted capture of the real product with live AI, and the team's working time plays 8× faster
+  under an on-screen label.
 - **Changes** (DEC-035 addendum):
   - Doğrulayıcı runs every standard test after Şüpheci's picks.
   - A request on a reported case that no human has reviewed opens a new review round.
