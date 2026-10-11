@@ -92,7 +92,7 @@ class AIConfig:
                    input_price=Decimal(os.environ.get('P50K_AI_INPUT_USD_PER_MILLION','2.5')),
                    output_price=Decimal(os.environ.get('P50K_AI_OUTPUT_USD_PER_MILLION','10')))
 
-def reserve(settings: Settings, bucket: str, amount: Decimal) -> str:
+def reserve(settings: Settings, bucket: str, amount: Decimal, *, protected_usd: Decimal = Decimal(0)) -> str:
     with connect(settings) as connection:
         connection.execute("SET LOCAL statement_timeout='5s'")
         connection.execute("SET LOCAL lock_timeout='3s'")
@@ -104,7 +104,8 @@ def reserve(settings: Settings, bucket: str, amount: Decimal) -> str:
             connection.execute('UPDATE ai.reservations SET settled_at=clock_timestamp(),settled_usd=amount_usd WHERE reservation_id=%s',(row[0],))
         if bucket=='tuning' and connection.execute("SELECT count(*) FROM ai.reservations WHERE bucket='tuning'").fetchone()[0]>=20:
             raise AIUnavailable('TUNING_CALL_LIMIT')
-        row = connection.execute('UPDATE ai.budget_buckets SET reserved_usd=reserved_usd+%s WHERE bucket=%s AND enabled AND spent_usd+reserved_usd+%s<=cap_usd RETURNING bucket',(amount,bucket,amount)).fetchone()
+        protected_usd = max(Decimal(0), protected_usd)
+        row = connection.execute('UPDATE ai.budget_buckets SET reserved_usd=reserved_usd+%s WHERE bucket=%s AND enabled AND spent_usd+reserved_usd+%s<=cap_usd-%s RETURNING bucket',(amount,bucket,amount,protected_usd)).fetchone()
         if not row:
             raise AIUnavailable('BUDGET_UNAVAILABLE')
         return str(connection.execute("INSERT INTO ai.reservations(bucket,amount_usd,expires_at) VALUES (%s,%s,now()+interval '5 minutes') RETURNING reservation_id",(bucket,amount)).fetchone()[0])

@@ -51,7 +51,7 @@ export default function ReporterTab({fundCode, evidenceId, path, scopeKey, note,
         <button type="button" className="ag-primary" disabled={request.status === 'busy'} onClick={() => void investigate()}>
           {request.status === 'busy' ? 'İstek gönderiliyor…' : openCase ? 'İncelemeyi öne al' : 'Ekipten inceleme iste'}</button>
         <p className="ag-muted">{openCase ? 'Vaka kullanıcı isteği önceliğine alınır ve sıradaki işlerin önüne geçer.' :
-          'Raportör isteğinizi ekibin sırasına ekler. Nöbetçi, Hipotezci, Şüpheci ve Doğrulayıcı sırayla çalışır; sonuç insan incelemesine sunulur.'}</p>
+          'Raportör isteğinizi ekibin sırasına ekler. Hipotezci ile Şüpheci aynı anda açıklamaları sorgular; Doğrulayıcı testleri çalıştırır, Raportör sonucu insan incelemesine sunar.'}</p>
         <p className="ag-request-state" role="status">{request.status === 'done' ? 'İsteğiniz ekibin sırasına alındı.' : ''}</p>
         {request.status === 'done' && request.caseId && <button type="button" className="ag-link" onClick={() => onOpenCase(request.caseId!)}>Vakanın akışını izle</button>}
         {request.status === 'error' && <p className="ag-alert" role="alert">{request.message}</p>}

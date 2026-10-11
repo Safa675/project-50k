@@ -31,6 +31,8 @@ test('the panel opens on the live team, shows the workflow and traps focus until
   await openPanel(page);
   const dialog = panel(page);
   await expect(dialog).toHaveAttribute('aria-modal', 'true');
+  const expand = dialog.getByRole('button', {name: 'Ekibi genişlet'});
+  if (await expand.isVisible()) await expand.click();
   const stage = dialog.getByRole('list', {name: 'Ekibin iş akışı'});
   for (const name of ['Nöbetçi', 'Hipotezci', 'Şüpheci', 'Doğrulayıcı', 'Raportör', 'İnsan kararı']) {
     await expect(stage.getByText(name, {exact: true})).toBeVisible();
@@ -80,7 +82,7 @@ test('selecting an agent opens its read-only workspace, also as a full page', as
   await panel(page).getByRole('button', {name: /^Şüpheci: .*Çalışma alanını aç\.$/}).click();
   const workspace = panel(page).getByRole('tabpanel');
   await expect(workspace.getByRole('heading', {name: 'Şüpheci'})).toBeVisible();
-  await expect(workspace.getByText('Salt okunur çalışma alanı', {exact: false})).toBeVisible();
+  await expect(workspace.getByText('Ekip çalışması', {exact: true})).toBeVisible();
   await expect(workspace.getByRole('textbox')).toHaveCount(0);
   await workspace.getByRole('link', {name: 'Çalışma alanını tam sayfada aç'}).click();
   await expect(page).toHaveURL(/\/ekip\/supheci$/);
@@ -182,4 +184,56 @@ test('the bottom sheet fits a 390 px screen without horizontal scrolling', async
   await expect(panel(page).getByRole('log', {name: 'Raportör ile sohbet'})).toContainText('Sentetik Raportör yanıtı: Kısa bir soru');
   await panel(page).getByRole('button', {name: 'Ajan ekibi panelini kapat'}).click();
   await expect(panel(page)).toHaveCount(0);
+});
+
+test('the expanded team gives the conversation 320 px at 712 px height and remembers the graph toggle', async ({page}) => {
+  await page.setViewportSize({width: 1480, height: 712});
+  await mockAgents(page);
+  await login(page);
+  await page.goto('/funds/THF');
+  await openPanel(page);
+  const dialog = panel(page);
+  await expect(dialog.getByRole('button', {name: 'Ekibi daralt'})).toHaveAttribute('aria-expanded', 'true');
+  await dialog.getByRole('tab', {name: 'Raportör'}).click();
+  await expect.poll(async () => (await dialog.getByRole('log', {name: 'Raportör ile sohbet'}).boundingBox())?.height ?? 0).toBeGreaterThanOrEqual(320);
+  await expect.poll(async () => {
+    const input = await dialog.getByLabel('Raportöre sorunuz').boundingBox(), bounds = await dialog.boundingBox();
+    return Boolean(input && bounds && input.y + input.height <= bounds.y + bounds.height);
+  }).toBe(true);
+  await dialog.getByRole('button', {name: 'Ekibi daralt'}).click();
+  await expect(dialog.getByRole('button', {name: 'Ekibi genişlet'})).toHaveAttribute('aria-expanded', 'false');
+  await page.reload();
+  await openPanel(page);
+  await expect(panel(page).getByRole('button', {name: 'Ekibi genişlet'})).toHaveAttribute('aria-expanded', 'false');
+});
+
+test('the larger mascot drags without opening, keeps its position and supports keyboard reset', async ({page}) => {
+  await page.setViewportSize({width: 1480, height: 712});
+  await mockAgents(page);
+  await login(page);
+  await page.goto('/funds/THF');
+  const button = fab(page);
+  const initial = await button.boundingBox();
+  expect(initial?.width).toBe(96);
+  if (!initial) throw new Error('Mascot position unavailable');
+  await page.mouse.move(initial.x + initial.width / 2, initial.y + initial.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(100, 100, {steps: 8});
+  await page.mouse.up();
+  await expect(panel(page)).toHaveCount(0);
+  const moved = await button.boundingBox();
+  expect(moved && moved.x < 100 && moved.y < 100).toBe(true);
+  await page.reload();
+  await expect.poll(async () => Math.round((await button.boundingBox())?.x ?? -1)).toBe(Math.round(moved!.x));
+  await button.focus();
+  await button.press('ArrowLeft');
+  await expect.poll(async () => Math.round((await button.boundingBox())?.x ?? -1)).toBe(Math.max(12, Math.round(moved!.x) - 20));
+  await button.press('Home');
+  await expect.poll(async () => Math.round((await button.boundingBox())?.x ?? -1)).toBe(Math.round(initial.x));
+  await button.press('ArrowLeft');
+  await button.press('Enter');
+  await expect.poll(async () => {
+    const bounds = await panel(page).boundingBox();
+    return Boolean(bounds && bounds.x >= 0 && bounds.y >= 0 && bounds.x + bounds.width <= 1480 && bounds.y + bounds.height <= 712);
+  }).toBe(true);
 });

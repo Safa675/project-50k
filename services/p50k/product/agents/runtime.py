@@ -23,6 +23,7 @@ from p50k.product.settings import Settings
 
 logger = logging.getLogger(__name__)
 RETRY_DELAY = timedelta(seconds=60)
+CONNECTION_RETRY_DELAY = timedelta(minutes=5)
 SCAN_CHECK_SECONDS = 5
 RESUME_SECONDS = 60
 VERIFIER_AI_OFF_TR = 'Testler kodla çalıştırıldı. Yapay zekâ kapalı olduğu için açıklamalar değerlendirilmedi.'
@@ -115,6 +116,12 @@ def complete(settings: Settings, config: AgentConfig, task: store.Task, owner: s
         connection.execute("SET LOCAL statement_timeout='10s'")
         if not store.owns(connection, task, owner):
             return False
+        # owns() holds the task row lock. A concurrent user promotion is either
+        # visible here or happens after finish(), which resets its budget wait.
+        if config.demo and status == 'waiting_budget' and error_class == 'DAILY_BUDGET' and task.source != 'user':
+            source = connection.execute('SELECT source FROM agents.tasks WHERE task_id=%s', (task.task_id,)).fetchone()
+            if source and source[0] == 'user':
+                not_before = datetime.now(timezone.utc)
         if outcome:
             for message in outcome.messages:
                 store.add_message(connection, task.case_id, task.task_id, task.role, message['to_role'], message['kind'],
@@ -148,16 +155,17 @@ def retry_later(settings: Settings, config: AgentConfig, task: store.Task, owner
 
     Only a call failure retries, and only below the attempt limit; invalid output fails at once.
     """
-    if failure.code != 'MODEL_CALL_FAILED' or task.attempts >= store.MAX_ATTEMPTS:
+    if failure.code not in {'MODEL_CALL_FAILED','MODEL_CONNECTION_FAILED'} or task.attempts >= store.MAX_ATTEMPTS:
         return False
+    delay = CONNECTION_RETRY_DELAY * (2 ** max(0,task.attempts-1)) if failure.code=='MODEL_CONNECTION_FAILED' else RETRY_DELAY
     complete(settings, config, task, owner, 'queued', error_class=failure.code, calls=failure.calls,
-             cost=failure.cost, not_before=datetime.now(timezone.utc) + RETRY_DELAY)
+             cost=failure.cost, not_before=datetime.now(timezone.utc) + delay)
     return True
 
 
 def execute(settings: Settings, config: AgentConfig, task: store.Task, owner: str) -> str:
     """Run one claimed task inside its case's analysis view. Returns the final task status."""
-    with use_analysis_date(store.scope_date(task.scope)):
+    with use_analysis_date(store.scope_date(task.scope)), llm.task_budget(task.source == 'user'):
         try:
             case = load_case(settings, task)
             if task.role == 'hypothesizer':
@@ -251,7 +259,7 @@ def loop(settings: Settings, owner: str, stopped: threading.Event, *, scan: bool
             config = AgentConfig.from_env()
             if scan and time.monotonic() - scanned >= SCAN_CHECK_SECONDS:
                 scanned = time.monotonic()
-                sentinel.tick(settings)
+                sentinel.tick(settings, config)
                 if config.mode != 'off' and time.monotonic() - resumed >= RESUME_SECONDS:
                     resumed = time.monotonic()
                     with connect(settings) as connection:

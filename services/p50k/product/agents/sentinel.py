@@ -6,6 +6,7 @@ import logging
 from typing import Any
 
 from p50k.product.agents import store
+from p50k.product.agents.config import AgentConfig
 from p50k.product.agents.vocabulary import REGULATORY_BONUS
 from p50k.product.analysis_context import use_analysis_date, validate_date
 from p50k.product.db import connect
@@ -74,11 +75,55 @@ def is_due(connection, settings: Settings, scope: str) -> bool:
     return (run.run_id if run else None) != (str(last[0]) if last[0] else None)
 
 
-def scan(settings: Settings, scope: str) -> dict[str, Any]:
+def reopen_idle_case(connection, scope: str, run: store.Run, config: AgentConfig) -> str | None:
+    """Open one genuinely new review round, preserving every prior report and decision.
+
+    Only an idle scope and an old, unreviewed proposal on the exact run qualify.
+    The scan lock serializes background rounds; the decision lock serializes reviews.
+    No stored model output is copied into the new round.
+    """
+    if not config.demo or config.mode != 'live':
+        return None
+    if connection.execute("""SELECT 1 FROM agents.tasks task JOIN agents.cases item USING(case_id)
+            WHERE item.analysis_scope_key=%s AND item.status<>'closed'
+              AND task.status IN ('queued','running','waiting_budget') LIMIT 1""", (scope,)).fetchone():
+        return None
+    row = connection.execute("""SELECT item.case_id,item.fund_code,item.priority,decision.decision_id,decision.packet_id
+        FROM agents.cases item JOIN ai.decisions decision USING(decision_id)
+        WHERE item.analysis_scope_key=%s AND item.status='reported' AND item.detector_run_id=%s
+          AND NOT EXISTS (SELECT 1 FROM ai.decision_reviews review JOIN ai.decisions reviewed USING(decision_id)
+                          WHERE reviewed.packet_id=decision.packet_id)
+          AND (SELECT max(task.finished_at) FROM agents.tasks task WHERE task.case_id=item.case_id)
+              < now()-make_interval(mins=>%s)
+        ORDER BY item.opened_at,item.case_id LIMIT 1 FOR UPDATE OF item""",
+        (scope, run.run_id, config.rereview_minutes)).fetchone()
+    if not row:
+        return None
+    # The append-only decision table has no UPDATE grant; share the review's lock.
+    connection.execute('SELECT pg_advisory_xact_lock(hashtextextended(%s,0))',
+                       ('p50k:packet-review:' + str(row[4]),))
+    connection.execute('SELECT pg_advisory_xact_lock(hashtextextended(%s,0))',
+                       ('p50k:decision-review:' + str(row[3]),))
+    # A review may have committed while the lock was being acquired.
+    if connection.execute('''SELECT 1 FROM ai.decision_reviews review JOIN ai.decisions reviewed USING(decision_id)
+                             WHERE reviewed.packet_id=%s LIMIT 1''', (row[4],)).fetchone():
+        return None
+    note = 'Nöbetçi önceki raporu koruyarak bu fon için yeni bir inceleme turu açtı; yeni açıklamalar ve testler yeniden üretilecek.'
+    entry = next((item for item in store.triggered_funds(connection, run) if item['fund_code'] == row[1]), None)
+    store.close_case(connection, str(row[0]), note)
+    return store.open_case(connection, scope=scope, fund_code=row[1], run=run, opened_by='sentinel',
+        priority=min(row[2], 60), title='Nöbetçi tarafından yeniden inceleme', opening_note=note,
+        payload={'run_id': run.run_id, 'previous_case_id': str(row[0]), 'again': True,
+                 'evidence_ids': entry['evidence_ids'] if entry else [],
+                 'detectors': entry['detectors'] if entry else []})
+
+
+def scan(settings: Settings, scope: str, config: AgentConfig | None = None) -> dict[str, Any]:
     """Open or refresh cases for TRIGGERED evidence in this view's exact run; no LLM."""
     started = datetime.now(timezone.utc)
     opened = refreshed = funds = 0
     run = None
+    reopened = None
     with use_analysis_date(store.scope_date(scope)), connect(settings) as connection:
         connection.execute("SET LOCAL statement_timeout='30s'")
         connection.execute('SELECT pg_advisory_xact_lock(hashtextextended(%s,%s))', (scope, SCAN_LOCK))
@@ -119,6 +164,9 @@ def scan(settings: Settings, scope: str) -> dict[str, Any]:
                              'detectors': entry['detectors'], 'regulatory': entry['regulatory']})
                 if created:
                     opened += 1
+            if config:
+                reopened = reopen_idle_case(connection, scope, run, config)
+                opened += int(reopened is not None)
         connection.execute("""INSERT INTO agents.sentinel_scans
             (analysis_scope_key,detector_run_id,funds_scanned,cases_opened,cases_refreshed,started_at,finished_at)
             VALUES (%s,%s,%s,%s,%s,%s,clock_timestamp())""",
@@ -127,7 +175,7 @@ def scan(settings: Settings, scope: str) -> dict[str, Any]:
             'cases_opened': opened, 'cases_refreshed': refreshed}
 
 
-def tick(settings: Settings) -> list[dict[str, Any]]:
+def tick(settings: Settings, config: AgentConfig | None = None) -> list[dict[str, Any]]:
     results = []
     with connect(settings) as connection:
         connection.execute("SET LOCAL statement_timeout='5s'")
@@ -135,7 +183,7 @@ def tick(settings: Settings) -> list[dict[str, Any]]:
         due = [scope for scope in scopes if is_due(connection, settings, scope)]
     for scope in due:
         try:
-            results.append(scan(settings, scope))
+            results.append(scan(settings, scope, config))
         except Exception as error:
             logging.getLogger(__name__).warning('sentinel_scan_failed', extra={'error_class': type(error).__name__})
     return results

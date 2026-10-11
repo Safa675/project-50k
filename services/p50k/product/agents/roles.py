@@ -252,7 +252,9 @@ def run_ai(settings: Settings, config: AgentConfig, role: str, payload: dict, sc
         except llm.CallFailed as failure:
             calls.append(failure.call_id)
             cost += failure.cost
-            error = 'MODEL_CALL_FAILED'
+            error = failure.code
+            if error == 'MODEL_CONNECTION_FAILED':
+                raise Failed(error, calls, cost) from None
             continue
         except AIUnavailable:
             raise Skip('AI_UNAVAILABLE') from None

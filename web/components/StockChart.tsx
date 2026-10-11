@@ -1,9 +1,5 @@
 import {dateTr, decimal} from '@/lib/client';
-import {StockPoint, stockSeries} from '@/lib/stock-chart';
-
-function availableTime(value: string|null): string {
-  return value ? new Intl.DateTimeFormat('tr-TR', {dateStyle: 'medium', timeStyle: 'short', timeZone: 'Europe/Istanbul'}).format(new Date(value)) : 'Zaman bilinmiyor';
-}
+import {StockPoint, stockAvailableTime, stockSeries, stockSourceLabel} from '@/lib/stock-chart';
 
 export default function StockChart({points}: {points: StockPoint[]}) {
   const segments = stockSeries(points);
@@ -24,8 +20,8 @@ export default function StockChart({points}: {points: StockPoint[]}) {
         <tbody>{points.map(point => <tr key={point.effective_date}>
           <td><time dateTime={point.effective_date}>{dateTr(point.effective_date)}</time></td>
           <td>{point.ambiguous_revision ? 'Kaynaklarda farklı fiyatlar var' : decimal(point.close)}</td>
-          <td><time dateTime={point.available_at ?? undefined}>{availableTime(point.available_at)}</time></td>
-          <td>ForInvest</td>
+          <td><time dateTime={point.available_at ?? undefined}>{stockAvailableTime(point.available_at)}</time></td>
+          <td>{stockSourceLabel(point.source_id)}</td>
         </tr>)}</tbody></table></div>
     </details>}
   </>;

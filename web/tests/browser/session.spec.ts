@@ -13,10 +13,14 @@ test('login, fund evidence, human review and logout use the isolated real backen
   await page.getByRole('link',{name:'THF',exact:true}).click();
   await expect(page.getByRole('heading',{name:'Yayımlanmış günlük birim fiyat'})).toBeVisible();
   await expect(page.getByRole('heading',{name:'İnceleme kararı',exact:true})).toBeVisible();
-  await page.getByLabel('İnceleme işlemi').selectOption('OVERRIDE');
-  await page.getByLabel('Değiştirilen karar').selectOption('MATERIAL');
+  await page.getByRole('button',{name:'Değiştir',exact:true}).click();
+  await page.getByLabel('Yeni karar').selectOption('MATERIAL');
   await page.getByLabel('Gerekçe',{exact:true}).fill('Synthetic browser review reason');
-  await Promise.all([page.waitForEvent('domcontentloaded'),page.getByRole('button',{name:'İncelemeyi kaydet',exact:true}).click()]);
+  const [reviewResponse]=await Promise.all([
+    page.waitForResponse(response=>response.url().includes('/api/p/decisions/')&&response.url().endsWith('/reviews')&&response.request().method()==='POST'),
+    page.getByRole('button',{name:'Değişikliği kaydet',exact:true}).click(),
+  ]);
+  expect(reviewResponse.status()).toBe(200);
   await expect(page.getByText('Etkin karar insan incelemesine dayanıyor.',{exact:true})).toBeVisible();
   await page.getByLabel('Hesap ve çalışma alanı').click();
   await page.getByRole('button',{name:'Çıkış yap',exact:true}).click();

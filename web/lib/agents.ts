@@ -420,7 +420,7 @@ export function scopeLabel(scope: string | null): {date: string | null; mode: st
   const day = match ? new Date(`${match[1]}T12:00:00+03:00`) : null;
   if (!day || !Number.isFinite(day.getTime())) return {date: null, mode: 'İnceleme tarihi bilinmiyor'};
   return {date: new Intl.DateTimeFormat('tr-TR', {day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Istanbul'}).format(day),
-    mode: 'Retrospektif inceleme'};
+    mode: 'İnceleme tarihi'};
 }
 export function fundFromPath(path: string): string | null {
   const match = /^\/funds\/([A-Z0-9]{2,12})\/?$/.exec(path);

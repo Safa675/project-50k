@@ -2,10 +2,18 @@
 from __future__ import annotations
 
 from datetime import date, datetime, time, timedelta, timezone
+from contextlib import contextmanager
+from contextvars import ContextVar
 from decimal import Decimal
 import json
+import socket
 
-from openai import OpenAI
+from openai import OpenAI, APIConnectionError, APITimeoutError
+import httpx2
+try:
+    import httpx
+except ImportError:
+    httpx = httpx2
 
 from p50k.product.agents.config import AgentConfig, RoleModel
 from p50k.product.agents.vocabulary import FAST_ROLES
@@ -16,6 +24,40 @@ from p50k.product.settings import Settings
 
 MAX_INPUT_BYTES = 24576
 TOTAL_TARGET_RETRY = timedelta(minutes=15)
+USER_REQUEST: ContextVar[bool] = ContextVar('agent_user_request', default=False)
+
+
+@contextmanager
+def task_budget(user_request: bool):
+    token = USER_REQUEST.set(user_request)
+    try:
+        yield
+    finally:
+        USER_REQUEST.reset(token)
+
+
+def request_not_sent(error: Exception) -> bool:
+    """Only proven connection establishment/DNS failures are free of remote usage.
+
+    Read/write/protocol errors and timeouts remain uncertain and retain the
+    reservation. The installed SDK uses httpx2; accept httpx for older transports.
+    """
+    if not isinstance(error, APIConnectionError) or isinstance(error, APITimeoutError):
+        return False
+    chain: list[BaseException] = []
+    pending: list[BaseException] = [error]
+    while pending:
+        current = pending.pop()
+        if any(current is item for item in chain):
+            continue
+        chain.append(current)
+        pending.extend(item for item in (current.__cause__, current.__context__) if item is not None)
+    uncertain = (TimeoutError, httpx.TimeoutException, httpx2.TimeoutException,
+                 httpx.ReadError, httpx.WriteError, httpx.ProtocolError,
+                 httpx2.ReadError, httpx2.WriteError, httpx2.ProtocolError)
+    if any(isinstance(item, uncertain) for item in chain):
+        return False
+    return any(isinstance(item,(socket.gaierror,httpx.ConnectError,httpx2.ConnectError)) for item in chain)
 
 
 class BudgetWait(Exception):
@@ -66,7 +108,8 @@ def reserve_agent_budget(settings: Settings, config: AgentConfig, amount: Decima
     if Decimal(total) + amount > config.total_target_usd:
         raise BudgetWait('TOTAL_TARGET', datetime.now(timezone.utc) + TOTAL_TARGET_RETRY)
     try:
-        return reserve(settings, bucket, amount)
+        protected = config.background_reserve_usd if config.demo and not USER_REQUEST.get() else Decimal(0)
+        return reserve(settings, bucket, amount, protected_usd=protected)
     except AIUnavailable as error:
         if str(error) == 'BUDGET_UNAVAILABLE':
             raise BudgetWait('DAILY_BUDGET', next_budget_day()) from None
@@ -93,6 +136,7 @@ def call(settings: Settings, config: AgentConfig, role: str, *, instructions: st
                + Decimal(model.max_output_tokens) * model.output_price) / Decimal(1000000)
     reservation = reserve_agent_budget(settings, config, maximum)
     response = None
+    booked = maximum
     try:
         client = OpenAI(api_key=config.key_file.read_text(encoding='utf-8').strip(), max_retries=0,
                         timeout=config.timeout_seconds)
@@ -103,6 +147,7 @@ def call(settings: Settings, config: AgentConfig, role: str, *, instructions: st
             raise AIUnavailable('MODEL_INCOMPLETE')
         cost = (Decimal(response.usage.input_tokens) * model.input_price
                 + Decimal(response.usage.output_tokens) * model.output_price) / Decimal(1000000)
+        booked = cost
         settle(settings, reservation, cost)
         with connect(settings) as connection:
             connection.execute("SET LOCAL statement_timeout='5s'")
@@ -111,7 +156,9 @@ def call(settings: Settings, config: AgentConfig, role: str, *, instructions: st
                 (response.id, reservation, model.model, prompt_version, schema_version,
                  response.usage.input_tokens, response.usage.output_tokens, cost))
         return response.output_text, response.id, cost, model.model
-    except Exception:
-        settle(settings, reservation, maximum)
-        raise CallFailed('MODEL_CALL_FAILED', getattr(response, 'id', None) or 'reservation:' + reservation,
-                         maximum) from None
+    except Exception as error:
+        unsent = response is None and request_not_sent(error)
+        booked = Decimal(0) if unsent else booked
+        settle(settings, reservation, booked)
+        raise CallFailed('MODEL_CONNECTION_FAILED' if unsent else 'MODEL_CALL_FAILED',
+                         getattr(response, 'id', None) or 'reservation:' + reservation, booked) from None

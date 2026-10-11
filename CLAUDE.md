@@ -1,11 +1,11 @@
 # Project 50K — Claude Code entry
 
-## Current direction: DEC-028 and DEC-029 (2026-10-10)
+## Current direction: DEC-028 through DEC-036 (2026-10-11)
 
 - **Team.** Mirza is the technical lead: all development and data gathering. Safa is the business person and repository owner; he only pulls. Barış designs the pitch deck and the website's design system.
-- **Build target.** A deploy-ready full-stack product (frontend, backend, PostgreSQL, worker, all connected) that runs on localhost with real data. It is not deployed. Code freeze: Sunday 2026-10-11 13:00.
+- **Build target.** A full-stack product (frontend, backend, PostgreSQL, worker, all connected), deployed locally on 3070/8770 with real data. Mirza's completion deadline is Sunday 2026-10-11 12:30; code freeze is 13:00. Work only in `project-50k-app` on `product/build`; merge through the integration worktree and preserve the fallback on 3060/8767/8768.
 - **AI-native, never forget.**
-  - An LLM (OpenAI API, Mirza's key in a gitignored `.env`, $25 limit) decides responsibly from deterministic detector evidence, and users chat with it in the UI.
+  - An LLM (OpenAI API, the supplied key in gitignored `secrets/openai_api_key`, $25 target under DEC-030) decides from deterministic detector evidence, and users chat with it in the UI. Never print the key or ask Mirza to supply it again.
   - Detectors compute every score.
   - Every LLM decision is stored with its evidence, and a human must be able to override it.
 - **Stack.** Plain PostgreSQL with the product's own email/password auth, in Docker.
@@ -19,15 +19,15 @@
   - **Persistent reminders.** If Mirza misses something important (an unanswered question or unconfirmed information that affects everything), raise it again in every reply until he answers. Only for truly critical items.
 - **Codex handoff (newest):** `plans/2026-10-11-codex-handoff-prompt.md` holds the full state, open workstreams and next steps as of 2026-10-11 10:40; specs are in `plans/2026-10-11-sprint-briefs.md`. The 2026-10-10 handoffs are history.
 - **Read before product work:**
-  - `docs/notes/product-direction.md` (insurance policies or B2B anomaly data; still open);
+  - `docs/notes/product-direction.md` (DEC-032: B2B evidence data/API for banks and financial institutions; insurance permanently deferred);
   - `docs/notes/team-asks.md` (open asks: add yours);
   - the current plan in `plans/`.
 
-## Current scope: DEC-024 (2026-10-06)
+## Current scope: DEC-032 and DEC-036
 
-Read `docs/decisions/DEC-024-turkish-funds-first.md` before any task. The active scope is **Turkish investment funds only**. BIST, crypto, US equities and on-chain are postponed, not dropped.
+The active scope is **Turkish investment funds and stocks** (DEC-032). The historical fund case is first; current BIST 30 daily charts and official dated BIST 30 membership/closes are implemented under DEC-036. Stock anomaly classification/AI remains unimplemented. Crypto, US equities and on-chain remain postponed. DEC-024's fund-first history and frozen files are preserved.
 
-The handoff instructions imported below, and the handoff's own `CLAUDE.md`, `START_HERE.md`, `PRODUCT.md`, `research/USER_DECISIONS_2026-10-02.md` and docs 04, 21, 22, 23 and 25, say the four-market/on-chain target is binding and that a reduced target is not approved. DEC-024 supersedes those statements. Everything else in the handoff still applies as a guide (DEC-028): the TRY 5,000 cumulative ceiling, no service accounts beyond the OpenAI key DEC-028 authorizes, G01's status as recorded in DEC-027, the integrity rules (binding), and all 284 requirement IDs `NOT_IMPLEMENTED` until delivered and tested.
+The imported frozen handoff's wider market/on-chain target is superseded by DEC-024 and then DEC-032. Other handoff requirements remain guides under DEC-028; integrity rules remain binding. Preserve the TRY 5,000 ceiling, authorized-account limits, DEC-027's G01 status, and honest requirement completion records. No host `npm run build`, no `down -v`, no edits to sealed detector code/protocols or `raw/`.
 
 ## Repository layout
 

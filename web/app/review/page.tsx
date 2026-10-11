@@ -1,4 +1,32 @@
 import Link from 'next/link';
 import {requireUser,serverApi} from '@/lib/auth';
-import DecisionPanel,{Decision} from '@/components/DecisionPanel';
-export default async function Review(){const user=await requireUser();if(user.role==='viewer')return <section><h1>İnceleme yetkisi gerekiyor</h1><p>Bu bölüm analist ve yönetici kullanıcılar içindir.</p></section>;const response=await serverApi('/review');if(!response.ok)throw new Error('İnceleme kuyruğu yüklenemiyor.');const {items}=await response.json();return <section><h1>İnceleme kuyruğu</h1><p>Yapay zekâ kararını kabul edin, gerekçeyle değiştirin veya reddedin. Önceki kararlar korunur.</p>{items.length?items.map((decision:Decision)=><article key={decision.packet_sha256??decision.fund_code}><Link href={`/funds/${decision.fund_code}`}>{decision.fund_code}</Link><DecisionPanel decision={decision} canReview/></article>):<p>İnceleme bekleyen karar bulunmuyor.</p>}</section>;}
+import {dateTr} from '@/lib/client';
+import ReviewQueue from '@/components/review/ReviewQueue';
+import type {Decision} from '@/components/review/review-logic';
+import styles from '@/components/review/review.module.css';
+
+/** The analyst review queue: pending proposals of the selected analysis, and the ones a human already reviewed. */
+export default async function Review({searchParams}:{searchParams:Promise<{durum?:string|string[]}>}){
+  const user=await requireUser();
+  if(user.role==='viewer')return <section className={styles.page}><header className={styles.header}><h1>İnceleme yetkisi gerekiyor</h1><p className={styles.intro}>Bu bölüm analist ve yönetici kullanıcılar içindir.</p></header></section>;
+  const reviewedTab=(await searchParams).durum==='incelenen';
+  const [queueResponse,allResponse]=await Promise.all([serverApi('/review'),serverApi('/decisions')]);
+  if(!queueResponse.ok)throw new Error('İnceleme kuyruğu yüklenemiyor.');
+  const pending:Decision[]=(await queueResponse.json()).items;
+  const reviewed:Decision[]|null=allResponse.ok?((await allResponse.json()).items as Decision[]).filter(item=>item.has_current_review):null;
+  const context=user.analysis_context;
+  return <section className={styles.page}>
+    <header className={styles.header}>
+      <h1>İnceleme kuyruğu</h1>
+      <p className={styles.intro}>Yapay zekâ ve ajan ekibi önerilerini kabul edin, gerekçeyle değiştirin veya reddedin. Her inceleme kaydedilir; önceki kararlar korunur. Bir öneri yalnızca incelenmesi gereken bir durumu gösterir, usulsüzlük anlamına gelmez.</p>
+      {context&&<p className={styles.context}>Seçili analiz tarihi: {dateTr(context.as_of_date)}. Kuyrukta yalnızca bu analize ait öneriler yer alır.</p>}
+    </header>
+    <nav className={styles.tabs} aria-label="İnceleme durumu">
+      <Link className={styles.tab} href="/review" aria-current={reviewedTab?undefined:'page'}>Bekleyen <span className={styles.count}>{pending.length}</span></Link>
+      <Link className={styles.tab} href="/review?durum=incelenen" aria-current={reviewedTab?'page':undefined}>İncelenen {reviewed&&<span className={styles.count}>{reviewed.length}</span>}</Link>
+    </nav>
+    {reviewedTab&&!reviewed
+      ?<div className={styles.empty} role="alert"><p>İncelenen kayıtlar şu anda yüklenemiyor. Sayfayı yenileyip yeniden deneyin.</p><Link href="/review">Bekleyen önerilere dönün</Link></div>
+      :<ReviewQueue key={reviewedTab?'reviewed':'pending'} items={reviewedTab?reviewed??[]:pending} reviewedTab={reviewedTab}/>}
+  </section>;
+}

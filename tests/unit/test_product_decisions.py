@@ -8,6 +8,8 @@ from unittest.mock import patch
 import unittest
 from uuid import uuid4
 from psycopg.errors import CheckViolation
+from psycopg.types.json import Jsonb
+from p50k.product.analysis_context import use_analysis_date
 from p50k.product.ai_client import AIConfig,AIUnavailable
 from p50k.product.archive import ISTANBUL
 from p50k.product.db import connect
@@ -20,6 +22,46 @@ from p50k.product.ai_worker import step
 
 @unittest.skipUnless(os.environ.get('P50K_TEST_DATABASE')=='1','Requires isolated p50k_dev')
 class DecisionFlowTests(TestCase):
+    def test_review_is_scoped_to_the_selected_day_and_preserves_original_proposals(self):
+        settings=Settings.from_env()
+        self.assertEqual(settings.db_name,'p50k_dev')
+        code='RV'+uuid4().hex[:10].upper()
+        checksum=sha256(code.encode()).hexdigest()
+        decisions={}
+        with connect(settings) as connection:
+            connection.execute("INSERT INTO ref.funds(fund_code,name,category,source_sha256) VALUES (%s,'Synthetic dated review fund','Synthetic dated review category',%s)",(code,checksum))
+            actor=connection.execute("INSERT INTO auth.users(email,password_hash) VALUES (%s,'synthetic-hash') RETURNING user_id",(uuid4().hex+'@example.invalid',)).fetchone()[0]
+            for day in (11,12,13):
+                cutoff=datetime(2026,9,day,23,59,59,tzinfo=ISTANBUL)
+                digest=sha256((code+str(day)).encode()).hexdigest()
+                options=['MATERIAL','INSUFFICIENT_EVIDENCE']
+                payload={'fund_code':code,'fund_name':'Synthetic dated review fund','category':'Synthetic dated review category',
+                    'as_of':cutoff.date().isoformat(),'evidence':[],'allowed_options':options,'cutoff':cutoff.isoformat()}
+                packet_id=connection.execute("INSERT INTO ai.packets(fund_code,packet_sha256,origin,as_of,cutoff,payload,allowed_options) VALUES (%s,%s,'SYNTHETIC',%s,%s,%s,%s) RETURNING packet_id",
+                    (code,digest,cutoff.date(),cutoff,Jsonb(payload),Jsonb(options))).fetchone()[0]
+                decisions[day]=connection.execute("""INSERT INTO ai.decisions(packet_id,fund_code,packet_sha256,decision_value,
+                    validation_state,evidence_ids,model_id,prompt_version,schema_version,ai_mode,call_id)
+                    VALUES (%s,%s,%s,'MATERIAL','VALID','[]','synthetic','synthetic','synthetic','off',%s) RETURNING decision_id""",
+                    (packet_id,code,digest,'synthetic-review:'+uuid4().hex)).fetchone()[0]
+        with use_analysis_date('2026-09-12'):
+            self.assertEqual(decision_rows(settings,code)[0]['decision_id'],decisions[12])
+            for day in (11,13):
+                with self.assertRaisesRegex(ValueError,'DECISION_OUTSIDE_SELECTED_DATE'):
+                    review(settings,decisions[day],str(actor),'ACCEPT',None,None)
+            for action in ('OVERRIDE','REJECT'):
+                with self.assertRaisesRegex(ValueError,'REVIEW_REASON_REQUIRED'):
+                    review(settings,decisions[12],str(actor),action,'INSUFFICIENT_EVIDENCE','  ')
+            with self.assertRaisesRegex(ValueError,'REVIEW_NOT_ALLOWED'):
+                review(settings,decisions[12],str(actor),'OVERRIDE','DATA_ISSUE','Synthetic reason')
+            accepted=review(settings,decisions[12],str(actor),'ACCEPT',None,None)
+            current=decision_rows(settings,code)[0]
+            self.assertEqual((current['effective_value'],current['has_current_review'],current['review_id']),('MATERIAL',True,accepted))
+            rejected=review(settings,decisions[12],str(actor),'REJECT',None,'Synthetic reason')
+            self.assertEqual(decision_rows(settings,code)[0]['effective_value'],'UNDECIDED')
+        with connect(settings) as connection:
+            self.assertEqual(connection.execute('SELECT decision_value FROM ai.decisions WHERE decision_id=%s',(decisions[12],)).fetchone()[0],'MATERIAL')
+            self.assertEqual(connection.execute('SELECT review_id FROM ai.decision_reviews WHERE decision_id=%s ORDER BY review_id',(decisions[12],)).fetchall(),[(accepted,),(rejected,)])
+
     def test_immutable_mock_proposal_human_override_and_cache_survive_rerun(self):
         settings=Settings.from_env()
         self.assertEqual(settings.db_name,'p50k_dev')
@@ -40,9 +82,12 @@ class DecisionFlowTests(TestCase):
             self.assertTrue(step(settings,'synthetic-flow-worker'))
         with connect(settings) as connection:
             self.assertEqual(connection.execute('SELECT status FROM ops.jobs WHERE job_id=%s',(job,)).fetchone()[0],'SUCCEEDED')
-            decision_id,validation=connection.execute('SELECT decision_id,validation_state FROM ai.decisions WHERE packet_id=%s ORDER BY decision_id DESC LIMIT 1',(packet_id,)).fetchone()
+            decision_id,validation,original=connection.execute('SELECT decision_id,validation_state,decision_value FROM ai.decisions WHERE packet_id=%s ORDER BY decision_id DESC LIMIT 1',(packet_id,)).fetchone()
         first={'decision_id':decision_id,'validation_state':validation}
         self.assertEqual(first['validation_state'],'VALID')
+        accepted=review(settings,first['decision_id'],str(actor),'ACCEPT',None,None)
+        self.assertEqual(decision_rows(settings,code)[0]['review_id'],accepted)
+        self.assertEqual(decision_rows(settings,code)[0]['effective_value'],original)
         changed=next(option for option in packet.allowed_options if option!='INSUFFICIENT_EVIDENCE')
         review_id=review(settings,first['decision_id'],str(actor),'OVERRIDE',changed,'Synthetic human reason')
         repeated=evaluate(settings,code,AIConfig(mode='mock'))
@@ -51,6 +96,9 @@ class DecisionFlowTests(TestCase):
         self.assertEqual(effective['effective_value'],changed)
         self.assertEqual(effective['review_id'],review_id)
         self.assertEqual(effective['decided_by'],'HUMAN')
+        # The review queue names the fund from the catalog.
+        self.assertEqual(effective['fund_name'],'Synthetic review fund')
+        self.assertFalse(any(item['fund_code']==code for item in decision_rows(settings,review_only=True)))
         with self.assertRaises(ValueError):review(settings,first['decision_id'],str(actor),'OVERRIDE',changed,'')
         review(settings,first['decision_id'],str(actor),'REJECT',None,'Synthetic rejection')
         self.assertEqual(decision_rows(settings,code)[0]['effective_value'],'UNDECIDED')

@@ -1,5 +1,5 @@
 import {describe, expect, it} from 'vitest';
-import {StockPoint, stockSeries} from '../lib/stock-chart';
+import {StockPoint, stockAvailableTime, stockSeries, stockSourceLabel} from '../lib/stock-chart';
 
 function point(close: string|null, ambiguous_revision = false): StockPoint {
   return {effective_date: '2000-01-03', close, ambiguous_revision, available_at: '2000-01-03T18:10:00+03:00', source_sha256: 'a'.repeat(64)};
@@ -18,5 +18,14 @@ describe('daily stock chart evidence', () => {
   });
   it('does not draw missing, invalid or ambiguous prices as zero values', () => {
     expect(stockSeries([point(null), point('100', true), point('NaN'), point('0'), point('-2')])).toEqual([]);
+  });
+  it('names the actual price source and keeps unavailable source metadata explicit', () => {
+    expect(stockSourceLabel('borsaistanbul-thb')).toBe('Borsa İstanbul günlük bülteni');
+    expect(stockSourceLabel('forinvest')).toBe('ForInvest');
+    expect(stockSourceLabel(null)).toBe('Kaynak belirtilmedi');
+    expect(stockSourceLabel('unknown-provider')).toBe('Kaynak belirtilmedi');
+    expect(stockAvailableTime('2020-01-02T15:28:00Z')).toContain('18:28');
+    expect(stockAvailableTime(null)).toBe('Zaman bilinmiyor');
+    expect(stockAvailableTime('bad timestamp')).toBe('Zaman bilinmiyor');
   });
 });

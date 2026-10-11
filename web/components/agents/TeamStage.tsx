@@ -55,9 +55,9 @@ export function stageAgents(team: TeamSnapshot | null): TeamAgent[] {
     {role, name_tr: ROLE_META[role].name, state: 'unknown', activity_tr: null, case_id: null, fund_code: null, fund_name: null, since: null});
 }
 
-export default function TeamStage({team, status, reducedMotion, selected, onSelect, onTalk, reviewHref}: {
+export default function TeamStage({team, status, reducedMotion, selected, onSelect, onTalk, reviewHref, strip = false}: {
   team: TeamSnapshot | null; status: FeedStatus; reducedMotion: boolean; selected?: AgentRole | null;
-  onSelect: (role: AgentRole) => void; onTalk?: () => void; reviewHref: string;
+  onSelect: (role: AgentRole) => void; onTalk?: () => void; reviewHref: string; strip?: boolean;
 }) {
   const stage = useRef<HTMLDivElement | null>(null);
   const nodes = useRef<Partial<Record<AgentRole | 'human', HTMLElement | null>>>({});
@@ -88,10 +88,10 @@ export default function TeamStage({team, status, reducedMotion, selected, onSele
     observer.observe(element);
     for (const node of Object.values(nodes.current)) if (node) observer.observe(node);
     return () => {cancelAnimationFrame(frame); observer.disconnect();};
-  }, [signature]);
+  }, [signature, strip]);
 
   const unavailable = !team && status !== 'loading';
-  return <div className={`ag-stage${unavailable ? ' is-unavailable' : ''}${!team && status === 'loading' ? ' is-loading' : ''}`} ref={stage}>
+  return <div className={`ag-stage${strip ? ' is-strip' : ''}${unavailable ? ' is-unavailable' : ''}${!team && status === 'loading' ? ' is-loading' : ''}`} ref={stage}>
     <svg className="ag-edges" width={geometry.width} height={geometry.height} viewBox={`0 0 ${geometry.width || 1} ${geometry.height || 1}`} aria-hidden="true" focusable="false">
       {STAGE_EDGES.map(edge => {
         const d = geometry.paths[edge.key];
@@ -118,7 +118,7 @@ export default function TeamStage({team, status, reducedMotion, selected, onSele
           <button type="button" className="ag-node-main" onClick={() => onSelect(agent.role)} title={meta.short}
             aria-label={`${agent.name_tr}: ${meta.short}. ${state}. ${detail}${fund ? `. Fon: ${fund}` : ''}. Çalışma alanını aç.`}>
             <span className="ag-node-head">
-              <span className={`ag-avatar ag-avatar-${agent.role}`}><RoleGlyph role={agent.role} size={agent.role === 'reporter' ? 26 : 16}/></span>
+              <span className={`ag-avatar ag-avatar-${agent.role}`}><RoleGlyph role={agent.role} size={agent.role === 'reporter' ? 36 : 28}/></span>
               <span className="ag-node-name"><strong>{agent.name_tr}</strong>
                 <span className="ag-node-state"><span className="ag-dot" aria-hidden="true"/><span className="ag-node-state-text">{state}{agent.since && agent.state === 'working' && team ?
                   <span className="ag-node-since"> · {relativeTime(agent.since, team.now)}</span> : null}</span></span></span>

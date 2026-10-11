@@ -16,6 +16,7 @@ from uuid import uuid4
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
+from p50k.product.analysis_context import use_analysis_date
 from p50k.product.archive import sha256_file
 from p50k.product.stock_import import import_stocks, seed_browser_stock, stock_decimal, verify_manifest
 from p50k.product.stock_routes import get_stock_queries, require_session, router
@@ -110,14 +111,19 @@ class StockAdmissionTests(unittest.TestCase):
 
 
 class SyntheticStockQueries:
-    def __init__(self):self.calls=[]
-    def stocks(self,q,limit,offset,cutoff):
+    def __init__(self):
+        self.calls=[]
+        self.membership_modes=[]
+    def stocks(self,q,limit,offset,cutoff,*,dated=False):
         self.calls.append((q,limit,offset))
+        self.membership_modes.append(("list",dated))
         return StocksPage(items=[StockListing(symbol="TESTA",name="Synthetic stock",last_date=date(2020,1,3),last_close=None)],total=1,limit=limit,offset=offset,catalog_captured_at=CUTOFF)
-    def stock(self,symbol):
+    def stock(self,symbol,cutoff=None,*,dated=False):
+        self.membership_modes.append(("stock",dated))
         return StockInstrument(symbol=symbol,name="Synthetic stock") if symbol=="TESTA" else None
-    def detail(self,stock,start,end,cutoff):
+    def detail(self,stock,start,end,cutoff,*,dated=False):
         self.calls.append((stock.symbol,start,end,cutoff))
+        self.membership_modes.append(("detail",dated))
         return StockDetail(stock=stock,chart=StockChart(start_date=start,end_date=end,cutoff=cutoff,points=[]),signals=[],price_adjustment="UNVERIFIED",cutoff=cutoff)
 
 
@@ -160,6 +166,22 @@ class StockRouteTests(unittest.TestCase):
             self.assertEqual(self.client.get("/stocks/TESTA",params=params).status_code,422)
         self.assertEqual(self.client.get("/stocks/MISSING").status_code,404)
         self.assertEqual(self.client.get("/stocks/invalid").status_code,422)
+
+    def test_selected_historical_day_and_explicit_cutoff_require_dated_membership(self):
+        self.authenticate()
+        with use_analysis_date("2026-09-12"):
+            self.assertEqual(self.client.get("/stocks").status_code,200)
+            self.assertEqual(self.client.get("/stocks/TESTA").status_code,200)
+        self.assertEqual(self.reader.membership_modes,[("list",True),("stock",True),("detail",True)])
+        self.reader.membership_modes.clear()
+        with use_analysis_date("live"):
+            self.assertEqual(self.client.get("/stocks/TESTA",params={"cutoff":CUTOFF.isoformat()}).status_code,200)
+        self.assertEqual(self.reader.membership_modes,[("stock",True),("detail",True)])
+        self.reader.membership_modes.clear()
+        with use_analysis_date("live"):
+            self.assertEqual(self.client.get("/stocks").status_code,200)
+            self.assertEqual(self.client.get("/stocks/TESTA").status_code,200)
+        self.assertEqual(self.reader.membership_modes,[("list",False),("stock",False),("detail",False)])
 
 
 @unittest.skipUnless(os.environ.get("P50K_TEST_DATABASE")=="1","requires isolated PostgreSQL p50k_dev")
