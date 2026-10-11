@@ -1,5 +1,27 @@
 # Real agent evaluation of the original 100-fund cohort
 
+## Recording isolation (latest instruction, before batch admission)
+
+Mirza confirmed Claude is recording the real demo now and explicitly required no
+interference. No additional production cases or budget changes had been submitted.
+Run the evaluation on a point-in-time database copy in `p50k-evaluation-db`, using
+the exact running product image, a separate Docker network/volume and no host ports.
+Only the ordinary database snapshot export reads production; do not use the browser,
+change production tasks/budgets, restart services or alter the recording's case.
+
+Use two bounded task runners with the existing runtime/model/validation functions.
+Limit only scheduling to the frozen 100 selected case IDs; do not run the cloned
+autonomous scanner or ordinary unrelated background queues. Record the operator
+scheduling restriction in the local manifest. Model inputs and decision rules stay
+unchanged. Existing reported cases are snapshot records, new results are real calls
+in the isolated copy and must never be described as newly created on the demo site.
+
+Reserve the approved additional USD 5 only for this copy: its daily cap is copied
+spent plus USD 5 (no higher than USD 10.25). Preserve copied spend history; require
+zero in-flight reservations at admission. The production allowance remains available
+to the recording. Reconcile isolated additional usage separately and retain results
+outside Git. Product code and both existing demo stacks remain untouched.
+
 ## Scope correction authorized before execution
 
 Mirza explicitly clarified: run the FULL original 100 through the agent review, not

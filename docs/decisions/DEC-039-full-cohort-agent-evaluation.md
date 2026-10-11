@@ -19,3 +19,10 @@ Mirza, 2026-10-11, after code freeze.
   `plans/2026-10-11-agent-case-evaluation.md`, committed before the batch is submitted.
 
 This authorizes an operational evaluation, not a validated-accuracy claim or a code release.
+
+Subsequent instruction before admission: Claude is recording the demo; do not interfere.
+Run this batch on an isolated snapshot with the exact installed product image and no
+published ports. Production queue, allowance, services and browser remain untouched.
+The isolated daily cap is copied booked spend plus the approved USD 5, bounded by
+USD 10.25; this leaves the production remainder for the recording. No results from
+the isolated run are silently written back to the live product.
