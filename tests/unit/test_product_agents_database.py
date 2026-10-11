@@ -311,6 +311,37 @@ class AgentTeamDatabaseTests(unittest.TestCase):
         self.assertEqual((repeat['case_id'], repeat['outcome']), (again['case_id'], 'unchanged'))
         self.assertIsNotNone(service.case_detail(self.settings, self.scope, case_c))
 
+    def test_a_failed_model_call_is_retried_later_until_the_attempt_limit(self):
+        sentinel.scan(self.settings, self.scope)
+        config = AgentConfig(mode='mock', case_gap_seconds=0)
+        failure = roles.Failed('MODEL_CALL_FAILED', ['synthetic:failed-call'], Decimal('0'))
+        case_id = str(self.case_row('A')[0])
+        with connect(self.settings) as connection:
+            task_id = str(connection.execute("SELECT task_id FROM agents.tasks WHERE case_id=%s AND role='hypothesizer'",
+                                             (case_id,)).fetchone()[0])
+        statuses = []
+        with patch.object(roles, 'hypothesizer', side_effect=failure):
+            for _ in range(store.MAX_ATTEMPTS):
+                with connect(self.settings) as connection:
+                    connection.execute("""UPDATE agents.tasks SET not_before=clock_timestamp()+interval '1 hour'
+                        WHERE status='queued' AND task_id<>%s AND case_id IN
+                            (SELECT case_id FROM agents.cases WHERE analysis_scope_key=%s)""", (task_id, self.scope))
+                    connection.execute('UPDATE agents.tasks SET not_before=clock_timestamp() WHERE task_id=%s', (task_id,))
+                statuses.append(runtime.run_one(self.settings, config, 'synthetic:retry'))
+                with connect(self.settings) as connection:
+                    waiting = connection.execute('SELECT not_before>clock_timestamp() FROM agents.tasks WHERE task_id=%s',
+                                                 (task_id,)).fetchone()[0]
+                if statuses[-1] == 'queued':
+                    self.assertTrue(waiting)
+        with connect(self.settings) as connection:
+            row = connection.execute('SELECT status,attempts,error_class FROM agents.tasks WHERE task_id=%s',
+                                     (task_id,)).fetchone()
+            notes = [item[0] for item in connection.execute(
+                "SELECT body_tr FROM agents.messages WHERE case_id=%s AND kind='note'", (case_id,)).fetchall()]
+        self.assertEqual(statuses, ['queued'] * (store.MAX_ATTEMPTS - 1) + ['failed'])
+        self.assertEqual(row, ('failed', store.MAX_ATTEMPTS, 'MODEL_CALL_FAILED'))
+        self.assertEqual(notes.count(FAILED_STEP_TR), 1)
+
     def test_ai_off_still_runs_the_deterministic_steps(self):
         sentinel.scan(self.settings, self.scope)
         config = AgentConfig(mode='off', case_gap_seconds=0)

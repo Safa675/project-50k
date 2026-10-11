@@ -142,6 +142,19 @@ def complete(settings: Settings, config: AgentConfig, task: store.Task, owner: s
                             cost=cost, error_class=error_class, not_before=not_before)
 
 
+def retry_later(settings: Settings, config: AgentConfig, task: store.Task, owner: str,
+                failure: roles.Failed) -> bool:
+    """A model call that failed twice (network loss, a sleeping machine) waits and retries.
+
+    Only a call failure retries, and only below the attempt limit; invalid output fails at once.
+    """
+    if failure.code != 'MODEL_CALL_FAILED' or task.attempts >= store.MAX_ATTEMPTS:
+        return False
+    complete(settings, config, task, owner, 'queued', error_class=failure.code, calls=failure.calls,
+             cost=failure.cost, not_before=datetime.now(timezone.utc) + RETRY_DELAY)
+    return True
+
+
 def execute(settings: Settings, config: AgentConfig, task: store.Task, owner: str) -> str:
     """Run one claimed task inside its case's analysis view. Returns the final task status."""
     with use_analysis_date(store.scope_date(task.scope)):
@@ -180,6 +193,8 @@ def execute(settings: Settings, config: AgentConfig, task: store.Task, owner: st
                 try:
                     outcome = roles.reporter(settings, config, case, hypotheses, counters, tests, ratings)
                 except roles.Failed as failure:
+                    if retry_later(settings, config, task, owner, failure):
+                        return 'queued'
                     complete(settings, config, task, owner, 'failed', error_class=failure.code, calls=failure.calls,
                              cost=failure.cost, notes=[('human', FAILED_STEP_TR, {'reason': failure.code})],
                              case=case, filing=(packet_id, digest, None))
@@ -195,6 +210,8 @@ def execute(settings: Settings, config: AgentConfig, task: store.Task, owner: st
                      notes=[('team', note, {'reason': skip.code})] if note else [])
             return 'skipped'
         except roles.Failed as failure:
+            if retry_later(settings, config, task, owner, failure):
+                return 'queued'
             complete(settings, config, task, owner, 'failed', error_class=failure.code, calls=failure.calls,
                      cost=failure.cost, notes=[('human', FAILED_STEP_TR, {'reason': failure.code})])
             return 'failed'
