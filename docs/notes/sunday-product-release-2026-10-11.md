@@ -1,5 +1,52 @@
 # Sunday product release — 2026-10-11
 
+## Final user additions, deployed before 12:30
+
+DEC-037 records the additional authorization. Migration015 adds persistent, audited admin team pause/resume.
+No new scans, claims or agent calls start while paused; admitted work finishes. Queues/messages/decisions remain
+intact and the worker heartbeat keeps advancing. Real production stays running; only smoke was paused in tests.
+
+`/results` is canonical, with query-preserving permanent `/sonuclar` redirect. Review is in the analyst/admin navbar,
+shows manager logos and explicit provenance, and prioritizes live TEAM proposals before the 100-record limit.
+Fund-side source cards align at the top, use their full content width and show already eligible monthly data.
+
+New metrics show baseline assessed coverage and the eight case funds. The separately labelled monthly experiment
+uses the fixed, pre-analysis `100ddfb` protocol: both reported size and units must double or halve in the same
+direction over consecutive eligible months. Its real result:101 assessed / 2,133,3 flags,2 later-listed; KHA adds one to the
+price baseline, giving a separate 24/131 and 5/8 union. Original 23/131, 4/8 and all detector thresholds/results remain
+unchanged. This is development evidence with narrow coverage, not validated performance; it does not enter agent input.
+
+Additional exact checks:
+
+- `test_product_agent_control_database test_product_agent_control test_product_agent_connection_budget test_product_agents`
+  on smoke: 25 tests passed, no skips, 1.223 s (includes3DBcontroltests).
+- `test_product_kap_experiment test_product_kap_experiment_database` on smoke: 8 passed, no skips, 1.337 s.
+- Review limit/current-packet regression: 2 passed, no skips, 1.078 s; targeted results/review Vitest: 15 passed.
+- Current full web units: 12 files / 73 passed; Docker API/web build passed.
+- Opt-in `P50K_CONTROL_SMOKE=1` browser control test: 1 passed, 8.4 s; actual PAUSE/RESUME, normal CSRF/auth,
+  heartbeat advanced while paused, API healthy, composer visible and chat>=320px. Finally resumed `p50k_dev`.
+- Final 52-view production audit:zero HTTP/overflow/raw-ID/JavaScript issues. Compiled THF/AAL: 6 views and 334.5 px chat,
+  plus 10 focused results/review API/redirect/theme/width checks, passed. No real reviews or paid test chats.
+
+Final screenshots and verdict JSON are retained outside Git at
+`C:/Users/mirza/AppData/Local/Temp/p50k-release-20261011-final/`. Earlier ignored QA images were cleaned by a test
+runner; the final audit regenerated them outside that cleanup path. Original market data/history/assets remain intact.
+
+The final merge guard allows only the **newly added** experimental protocol, byte-equal to its preregistration commit;
+every previously committed protected file remains blocked. No existing protocol is edited and no calibration changed.
+
+### Fund inventory measured at 12:17
+
+The catalog/analysis cohort is 2,133 funds. Stored daily observations total 1,755,010 across 2,131 funds (7 October
+2021–9 October 2026); rows include source missing values and the September view admits only eligible history.
+KAP metadata: 12,111 records across 945 funds; 1,259 locally indexed PDF records; 1,255 parsed period records across 101 funds.
+The later SPK liquidation-order cohort is 131 funds, a subset; 8 are the primary case funds. September-eligible parsed
+monthly coverage is 101 funds. No eligible historical TEFAS snapshot supplies September investor counts.
+
+Product PostgreSQL size: 1,159,624,383 bytes (~1.16 GB). Raw files: 989,128,315 bytes; overnight folders: 157,053,752 bytes.
+Folder sizes overlap/caches and include stocks; they are not a unique-fund-data total. No real fund values were
+copied into this aggregate inventory or Git. All original files and database rows remain preserved.
+
 This supersedes the unfinished status in the 10:40 Claude handoff, while preserving that handoff and its detailed
 sprint briefs. The first release commit is `569c2db`; the final method spacing correction and this record follow it.
 Mirza's completion deadline remains **12:30 Istanbul**, before the **13:00 code freeze**.
@@ -132,7 +179,7 @@ completed on the real DB. The original files, ForInvest rows, fund history and p
 
 ## Changed-file manifest
 
-Paths shipped by this morning's sprint since the last deployed `fd03482`, including preserved handoff records:
+Current paths shipped since the last deployed `fd03482` (including preserved handoff records):
 
 ```text
 .gitignore
@@ -140,7 +187,9 @@ AGENTS.md
 CLAUDE.md
 compose.yaml
 db/migrations/014_user_avatar.sql
+db/migrations/015_agent_control.sql
 docs/decisions/DEC-036-official-bist-daily-bulletin.md
+docs/decisions/DEC-037-team-control-and-monthly-development-experiment.md
 docs/notes/current-state.md
 docs/notes/product-direction.md
 docs/notes/retrospective-evaluation.md
@@ -148,7 +197,9 @@ docs/notes/sunday-product-release-2026-10-11.md
 docs/notes/team-asks.md
 plans/2026-10-11-codex-handoff-prompt.md
 plans/2026-10-11-sprint-briefs.md
+research/events/2026-09-17-spk-liquidations/kap_monthly_scale_v1/PROTOCOL.md
 services/p50k/product/agents/config.py
+services/p50k/product/agents/control.py
 services/p50k/product/agents/llm.py
 services/p50k/product/agents/roles.py
 services/p50k/product/agents/routes.py
@@ -163,16 +214,22 @@ services/p50k/product/auth_cli.py
 services/p50k/product/decisions.py
 services/p50k/product/evaluation.py
 services/p50k/product/evaluation_routes.py
+services/p50k/product/kap_experiment.py
 services/p50k/product/stock_bulletin.py
 services/p50k/product/stock_routes.py
 services/p50k/product/stocks.py
 tests/unit/test_product_agent_connection_budget.py
+tests/unit/test_product_agent_control.py
+tests/unit/test_product_agent_control_database.py
 tests/unit/test_product_agent_demo.py
+tests/unit/test_product_agents.py
 tests/unit/test_product_auth.py
 tests/unit/test_product_decisions.py
 tests/unit/test_product_evaluation.py
 tests/unit/test_product_evaluation_database.py
 tests/unit/test_product_fund_summary.py
+tests/unit/test_product_kap_experiment.py
+tests/unit/test_product_kap_experiment_database.py
 tests/unit/test_product_stock_bulletin.py
 tests/unit/test_product_stocks.py
 web/app/apple-icon.png
@@ -183,11 +240,14 @@ web/app/login/login.module.css
 web/app/login/page.tsx
 web/app/method/method.module.css
 web/app/method/page.tsx
+web/app/results/ResultsReport.tsx
+web/app/results/layout.tsx
+web/app/results/page.tsx
+web/app/results/results-logic.ts
+web/app/results/results.module.css
 web/app/review/page.tsx
-web/app/sonuclar/ResultsReport.tsx
 web/app/sonuclar/layout.tsx
 web/app/sonuclar/page.tsx
-web/app/sonuclar/results.module.css
 web/app/stocks/[symbol]/page.tsx
 web/app/stocks/page.tsx
 web/components/DateContextControl.tsx
@@ -196,6 +256,9 @@ web/components/DesignShell.tsx
 web/components/FundAlert.module.css
 web/components/FundAlert.tsx
 web/components/FundReportSeries.tsx
+web/components/Funds.module.css
+web/components/KapExperiment.module.css
+web/components/KapExperiment.tsx
 web/components/StockChart.tsx
 web/components/agents/AgentDock.tsx
 web/components/agents/AgentTeamPanel.tsx
@@ -223,8 +286,10 @@ web/public/agent-logos/blackswan-nobetci.svg
 web/public/agent-logos/blackswan-raportor.svg
 web/public/agent-logos/blackswan-supheci.svg
 web/public/agent-logos/blackswan.svg
+web/tests/agent-control.test.ts
 web/tests/agents.test.ts
 web/tests/avatar.test.ts
+web/tests/browser/agent-control.spec.ts
 web/tests/browser/agent-fixtures.ts
 web/tests/browser/agents.spec.ts
 web/tests/browser/session.spec.ts

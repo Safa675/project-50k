@@ -1,7 +1,8 @@
 'use client';
 import Link from 'next/link';
-import {useState} from 'react';
+import {useState,type ReactNode} from 'react';
 import {dateTr} from '../../lib/client';
+import {assessedCoverage,caseFundBreakdown} from './results-logic';
 import styles from './results.module.css';
 
 type View='price'|'all'|'data_quality';
@@ -25,10 +26,11 @@ function FundList({title,description,rows,report,view}:{title:string;description
 }
 
 /** This page alone compares later public events with an immutable earlier scan. */
-export default function ResultsReport({report}:{report:Report}){
+export default function ResultsReport({report,experimentPanel}:{report:Report;experimentPanel?:ReactNode}){
   const [view,setView]=useState<View>('price');
   if(report.ground_truth.listed_total===0)return <div className={styles.page}><header className={styles.hero}><Stamp>Geriye dönük karşılaştırma</Stamp><h1>Karşılaştırma verisi eksik</h1><p>12 Eylül taraması kayıtlı; ancak karşılaştırma için gereken SPK tasfiye listesinin doğrulanmış kayıtları bulunmuyor. Bu nedenle sonuçlar ve oranlar hesaplanamıyor.</p><Link href="/method">Yöntemi inceleyin</Link></header></div>;
   const summary=report.summaries[view],counts=summary.counts;
+  const coverage=assessedCoverage(report.summaries.price.counts),cases=caseFundBreakdown(report.funds);
   const rows=(outcome:Outcome)=>report.funds.filter(fund=>fund.outcomes[view]===outcome);
   const width=(value:number)=>counts.listed_funds?`${100*value/counts.listed_funds}%`:'0%';
   const cutoff=new Intl.DateTimeFormat('tr-TR',{dateStyle:'long',timeStyle:'short',timeZone:'Europe/Istanbul'}).format(new Date(report.run.cutoff));
@@ -43,10 +45,18 @@ export default function ResultsReport({report}:{report:Report}){
       <article className={styles.metric}><span>Listede olmayan işaretli fon</span><strong>{number(counts.flagged_outside)}</strong><p>İşaretlendi, fakat bu tasfiye listesinde yer almadı. Bu, bulgunun yanlış olduğu anlamına gelmez.</p></article>
       <article className={styles.metric}><span>Değerlendirilemeyen</span><strong>{number(counts.listed_not_assessable+counts.other_not_assessable)}</strong><p>{number(counts.listed_not_assessable)} tanesi SPK listesinde. Yeterli sonuç olmayan fonlar, “değişim yok” sayılmadı.</p></article>
     </div>
+    <section className={styles.coverage} aria-labelledby="coverage-title"><div><h2 id="coverage-title">Fiyat değerlendirmesi kapsamı</h2><div className={styles.coverageValue}><strong>{percent(coverage.percent)}</strong><span>{coverage.assessed===null?'Kapsam hesaplanamadı':<>{number(coverage.assessed)} / {number(coverage.scanned)} fon</>}</span></div><p>En az bir fiyat davranışı kontrolü için sonuç üretilebilen fonların payı.</p></div><div className={styles.coverageDetail}><p>{coverage.notAssessable===null?'Değerlendirilemeyen fon sayısı hesaplanamadı.':<><strong>{number(coverage.notAssessable)}</strong> fon yeterli fiyat verisi olmadığı için değerlendirilemedi.</>}</p><p>Bu kapsam oranı, 12 Eylül taramasındaki veri yeterliliğini gösterir. Fiyat kontrollerinin işaretleri ve sonradan yayımlanan SPK listesi aşağıda ayrı karşılaştırılır.</p></div></section>
     <div className={styles.comparisons}>
       <section className={styles.breakdown} aria-labelledby="listed-breakdown"><h2 id="listed-breakdown">Listedeki fonların ne kadarı görüldü?</h2><p>{number(counts.listed_funds)} fonun {number(counts.caught)} tanesi işaretlendi: <strong>{percent(summary.detection_rate.percent)}</strong>.</p><div className={styles.stacked} aria-hidden="true"><span className={styles.caught} style={{width:width(counts.caught)}}/><span className={styles.missed} style={{width:width(counts.missed)}}/><span className={styles.unknown} style={{width:width(counts.listed_not_assessable)}}/></div><ul className={styles.legend}><li><i className={styles.caught}/><span>İşaretlenen</span><strong>{number(counts.caught)}</strong></li><li><i className={styles.missed}/><span>Kaçırılan</span><strong>{number(counts.missed)}</strong></li><li><i className={styles.unknown}/><span>Değerlendirilemeyen</span><strong>{number(counts.listed_not_assessable)}</strong></li></ul><p className={styles.note}>İşaretlenen tüm fonların {percent(summary.on_list_share.percent)} kadarı bu listede yer aldı ({number(counts.caught)} / {number(counts.flagged)}).</p></section>
       <section className={styles.breakdown} aria-labelledby="relative-comparison"><h2 id="relative-comparison">İki grup arasında ne fark vardı?</h2>{summary.times_more_often!==null?<p>{Number(summary.times_more_often)>=1?<>Listedeki fonlar diğer fonlara göre <strong>{decimal(summary.times_more_often)} kat</strong> daha sık işaretlendi.</>:<>Listedeki fonların işaretlenme oranı, diğer fonların oranının <strong>{decimal(summary.times_more_often)} katıydı</strong>.</>}</p>:<p>İki grubun işaretlenme oranları arasında karşılaştırma yapmak için yeterli sonuç yok.</p>}<ComparisonBar label="SPK listesinde yer alanlar" rate={summary.detection_rate}/><ComparisonBar label="Listede yer almayanlar" rate={summary.other_flag_rate}/><p className={styles.note}>Bu oran geçmişteki bu grubu anlatır; gelecekteki bir olayın olasılığı değildir.</p></section>
     </div>
+    {cases.available>0&&<section className={styles.cases} aria-labelledby="case-funds-title"><div className={styles.sectionHeading}><h2 id="case-funds-title">Sekiz vaka fonunda fiyat kontrolleri</h2><span>Olaydan sonra yapılan karşılaştırma</span></div><p className={styles.note}>Vaka incelemesinde ele alınan sekiz fonun aynı 12 Eylül taramasındaki sonuçları. Bunlar geliştirme sonuçlarıdır; ayrı bir doğrulama grubu değildir.</p><div className={styles.caseStats}>
+      <article className={styles.caseStat}><span>Benzer fonlardan ayrışma</span><strong>{number(cases.d1Flagged)} <small>/ {number(cases.total)}</small></strong></article>
+      <article className={styles.caseStat}><span>Fiyat kontrollerinde işaretlenen</span><strong>{number(cases.caught)} <small>/ {number(cases.total)}</small></strong></article>
+      <article className={styles.caseStat}><span>İşaretlenmeyen</span><strong>{number(cases.missed)}</strong></article>
+      <article className={styles.caseStat}><span>Değerlendirilemeyen</span><strong>{number(cases.notAssessable)}</strong></article>
+    </div><div className={styles.caseTable} role="region" aria-label="Vaka fonlarının karşılaştırması" tabIndex={0}><table><caption className="sr-only">Sekiz vaka fonunun fiyat kontrolü sonuçları</caption><thead><tr><th scope="col">Fon</th><th scope="col">Benzer fonlardan ayrışma</th><th scope="col">Fiyat kontrolleri</th></tr></thead><tbody>{cases.rows.map(row=><tr key={row.code}><td>{row.fund?<Link href={row.fund.href}><strong>{row.code}</strong><span>{row.fund.name}</span></Link>:<strong>{row.code}</strong>}</td><td className={row.d1Flagged?styles.marked:undefined}>{row.d1Flagged===null?'Kayıt bulunamadı':row.d1Flagged?'İşaretlendi':'İşaret kaydı yok'}</td><td className={row.outcome==='caught'?styles.marked:row.outcome==='not_assessable'||row.outcome==='missing'?styles.notAssessable:undefined}>{{caught:'İşaretlendi',missed:'İşaretlenmedi',not_assessable:'Değerlendirilemedi',missing:'Tarama kaydı bulunamadı'}[row.outcome]}</td></tr>)}</tbody></table></div><p className={styles.note}>Benzer fonlardan ayrışma sütunu yalnızca bu kontrolün işaret kayıtlarını gösterir. İşaret kaydı bulunmaması, o kontrolün yeterli veriyle tamamlandığı anlamına gelmez.</p>{cases.missing>0&&<p className={styles.note}>{number(cases.missing)} fonun tarama kaydı bu raporda bulunamadı; eksik kayıtlar işaretlenmeyenlere eklenmedi.</p>}</section>}
+    {experimentPanel&&<div className={styles.experimentSlot}>{experimentPanel}</div>}
     <section className={styles.funds} aria-labelledby="fund-list"><div className={styles.sectionHeading}><h2 id="fund-list">Hangi fonlar?</h2><span>Seçili kontrol grubuna göre</span></div>
       <FundList title="Önceden işaretlenenler" description="SPK listesinde yer alan ve taramada inceleme sınırını aşan fonlar." rows={rows('caught')} report={report} view={view}/>
       <FundList title="Kaçırılanlar" description="SPK listesinde yer alan, ancak sonuç üretilen kontrollerde inceleme sınırını aşmayan fonlar." rows={rows('missed')} report={report} view={view}/>

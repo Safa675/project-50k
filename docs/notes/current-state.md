@@ -1,6 +1,39 @@
 # Project 50K: current state
 
-## Sunday product release — 2026-10-11 about 11:35 Istanbul (newest; read first)
+## Final continuation — 2026-10-11 about 12:15 Istanbul (newest)
+
+Read [the complete Sunday release record](sunday-product-release-2026-10-11.md) and
+[DEC-037](../decisions/DEC-037-team-control-and-monthly-development-experiment.md). All late requests are implemented
+and deployed on real 3070/8770; the team is running, AI is live and the default date remains 12 September.
+
+- Migration **015** is applied to real and smoke. Admins have **Durdur / Devam et** in the panel. Pause blocks new
+  team work, preserves in-flight completion, and is recorded in an append-only audit. Actual smoke HTTP/browser
+  pause/resume passed, including a heartbeat that advanced while paused; smoke was resumed afterward.
+- **`/results` is canonical**; `/sonuclar` redirects permanently. Review is in the analyst/admin navbar, uses real
+  manager logos and explicit proposal provenance, and live TEAM output gets priority before the bounded queue limit.
+- Fund summary/source sidebar now align at the top on desktop. THF/AAL have real monthly graphs and KAP links;
+  empty-looking areas were inherited CSS layout defects, not missing data. No new data import was needed.
+- Baseline price comparison remains **23/131** and **4/8** case funds. Its assessable coverage is **92.7%**. The separate
+  preregistered monthly KAP development experiment assesses **101/2,133**, flags three (two later listed) and adds
+  **KHA** relative to price checks: separate union **24/131**, **5/8**. It does not feed the live agents or change baseline
+  figures. No held-out validation or proven early-warning claim. Protocol was fixed in `100ddfb` before calculation.
+- Additional focused checks: control/agents/connection **25 passed**, experiment pure+DB **8 passed**, all web units
+  **73 passed**, control smoke browser **1 passed**, review/results targeted **15 passed**. Docker API/web builds pass.
+  The final 52-view major-release audit is clean; compiled fund/controls/results/review checks also passed.
+- Final screenshots/JSON are outside Git at `C:/Users/mirza/AppData/Local/Temp/p50k-release-20261011-final/`; QA cleanup
+  had removed earlier ignored captures, so the final major-release audit regenerated them in this retained folder.
+  Original data, source assets, database history and protocols were unaffected.
+- Recording-ready flow: **THF**, its monthly graph and source links, the five real stored code tests, live Raportör
+  proposal and human-review screen, followed by `/results` and official stock history. TP2 is a useful comparison.
+  Do not present DFI's user-requested case as an automatic detector discovery. Stock anomaly/AI remains unimplemented.
+- The final Git landing is recorded in merge history; scoped product work is complete. Preserve the fallback and all
+  existing immutable paths. No new detector work before freeze; next action is recording.
+- Data inventory measured at 12:17: catalog 2,133; daily observations 1,755,010 across 2,131 funds; KAP metadata 12,111
+  rows across 945 funds, 1,259 locally indexed PDF records and 1,255 parsed period records across 101 funds. Product DB
+  1,159,624,383 bytes (~1.16 GB). Raw folders 989,128,315 bytes; overnight 157,053,752 bytes (overlapping/cached copies,
+  also including stocks). The 131 figure is the later SPK subset, not total coverage.
+
+## Sunday product release — 2026-10-11 about 11:35 Istanbul (earlier release)
 
 The morning's nine takeover priorities are implemented and running. The original 10:40 handoff below is history,
 not a pending WIP instruction. Read [the full release/continuation record](sunday-product-release-2026-10-11.md)

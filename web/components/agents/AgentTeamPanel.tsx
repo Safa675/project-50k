@@ -3,7 +3,8 @@
 import Link from 'next/link';
 import {useEffect, useId, useRef, useState, type KeyboardEvent as ReactKeyboardEvent, type RefObject} from 'react';
 import type {User} from '@/lib/auth';
-import {type AgentRole, ROLE_META, type TeamSnapshot, budgetView, relativeTime, scopeLabel, usd} from '@/lib/agents';
+import {post} from '@/lib/client';
+import {type AgentRole, ROLE_META, type TeamControl, type TeamSnapshot, budgetView, parseTeamControl, relativeTime, scopeLabel, usd} from '@/lib/agents';
 import AgentQueue from './AgentQueue';
 import {CaseTimeline, RoleWorkspace} from './AgentWorkspace';
 import type {AgentFeed, PageNoteState} from './hooks';
@@ -42,6 +43,9 @@ export default function AgentTeamPanel({state, onClose, onClosed, user, feed, no
   const titleId = useId(), baseId = useId();
   const [now, setNow] = useState(() => Date.now());
   const [expanded, setExpanded] = useState(true);
+  const [controlOverride, setControlOverride] = useState<TeamControl | null>(null);
+  const [controlBusy, setControlBusy] = useState(false);
+  const [controlError, setControlError] = useState<string | null>(null);
   useEffect(() => {
     try {
       const stored = window.localStorage.getItem(`blackswan-team-expanded-v2:${user.user_id}`);
@@ -51,6 +55,23 @@ export default function AgentTeamPanel({state, onClose, onClosed, user, feed, no
   useEffect(() => {setNow(Date.now());}, [feed.team, feed.updatedAt]);
   const open = state === 'open';
   const team = feed.team;
+  const teamControl = controlOverride ?? team?.control ?? null;
+  useEffect(() => {
+    if (team?.control && controlOverride && Date.parse(team.control.changed_at) >= Date.parse(controlOverride.changed_at)) {
+      setControlOverride(null);
+    }
+  }, [team?.control, controlOverride]);
+  async function toggleControl() {
+    if (!teamControl || controlBusy || user.role !== 'admin') return;
+    setControlBusy(true); setControlError(null);
+    try {
+      const response = await post('/agents/control', {action: teamControl.paused ? 'RESUME' : 'PAUSE'});
+      if (!response.ok) throw new Error('CONTROL_UNAVAILABLE');
+      setControlOverride(parseTeamControl(await response.json()));
+      feed.refresh();
+    } catch {setControlError('Ekibin durumu değiştirilemedi. Yeniden deneyin.');}
+    finally {setControlBusy(false);}
+  }
   const scope = scopeLabel(team?.scope ?? user.analysis_context?.scope_key ?? null);
   const tabs: {id: PanelTab; label: string}[] = [
     ...(compact ? [{id: 'team' as const, label: 'Ekip'}] : []),
@@ -114,7 +135,9 @@ export default function AgentTeamPanel({state, onClose, onClosed, user, feed, no
   const stage = <TeamStage team={team} status={feed.teamStatus} reducedMotion={reducedMotion} onSelect={select}
     selected={detail?.kind === 'agent' ? detail.role : null} onTalk={() => setTab('reporter')} reviewHref={reviewHref} strip={!compact && strip}/>;
   const liveText = feed.teamStatus === 'loading' && !team ? 'Bağlanıyor…' : !team ? 'Ekibin durumu alınamıyor' :
-    feed.stale ? 'Bağlantı yeniden deneniyor' : `Canlı · ${feed.updatedAt ? relativeTime(new Date(feed.updatedAt).toISOString(), now) : 'az önce'} güncellendi`;
+    feed.stale ? 'Bağlantı yeniden deneniyor' : teamControl?.paused ?
+      (teamControl.finishing ? 'Durduruldu · süren işler tamamlanıyor' : 'Ekip durduruldu · sıra korunuyor') :
+    `Canlı · ${feed.updatedAt ? relativeTime(new Date(feed.updatedAt).toISOString(), now) : 'az önce'} güncellendi`;
 
   return <div className="ag-layer" data-state={state} hidden={state === 'closed'}>
     <div className="ag-backdrop" onClick={onClose} aria-hidden="true"/>
@@ -129,11 +152,16 @@ export default function AgentTeamPanel({state, onClose, onClosed, user, feed, no
         <div className="ag-head-meta">
           <div className="ag-head-date"><span className="ag-label">İnceleme tarihi</span><strong>{scope.date ?? scope.mode}</strong></div>
           <BudgetMeter team={team}/>
+          {user.role === 'admin' && <div className="ag-team-control"><button type="button" className="ag-ghost"
+            disabled={!teamControl || controlBusy || feed.stale} onClick={() => void toggleControl()}
+            title="Tüm inceleme tarihlerindeki ajan ekibini yönetir; sürmekte olan işler tamamlanır">
+            {controlBusy ? 'Kaydediliyor…' : teamControl?.paused ? 'Devam et' : 'Durdur'}</button></div>}
         </div>
         <button type="button" className="ag-close" aria-label="Ajan ekibi panelini kapat" onClick={onClose}>
           <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </button>
       </div>
+      {controlError && <p className="ag-alert ag-control-error" role="alert">{controlError}</p>}
       {!compact && <div className={`ag-stage-wrap ag-panel-stage${strip ? ' is-strip' : ''}`} id={`${baseId}-team`}>{stage}{!strip && <Ticker team={team} now={now}/>}
         {!team && feed.teamStatus !== 'loading' && <div className="ag-stage-error" role="status"><span>Ekibin canlı durumu şu anda alınamıyor. Bağlantı kendiliğinden yeniden denenecek.</span>
           <button type="button" className="ag-ghost" onClick={feed.refresh}>Şimdi dene</button></div>}</div>}

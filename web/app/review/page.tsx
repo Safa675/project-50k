@@ -18,7 +18,7 @@ export default async function Review({searchParams}:{searchParams:Promise<{durum
   return <section className={styles.page}>
     <header className={styles.header}>
       <h1>İnceleme kuyruğu</h1>
-      <p className={styles.intro}>Yapay zekâ ve ajan ekibi önerilerini kabul edin, gerekçeyle değiştirin veya reddedin. Her inceleme kaydedilir; önceki kararlar korunur. Bir öneri yalnızca incelenmesi gereken bir durumu gösterir, usulsüzlük anlamına gelmez.</p>
+      <p className={styles.intro}>Ajan ekibinin ve yapay zekânın önerileri, kurala dayalı sonuçlardan ayrı gösterilir. Son karar insanda: öneriyi kabul edin, gerekçeyle değiştirin veya reddedin. Her inceleme kaydedilir; ilk öneri ve önceki kararlar korunur. Bir öneri usulsüzlük tespiti değildir.</p>
       {context&&<p className={styles.context}>Seçili analiz tarihi: {dateTr(context.as_of_date)}. Kuyrukta yalnızca bu analize ait öneriler yer alır.</p>}
     </header>
     <nav className={styles.tabs} aria-label="İnceleme durumu">

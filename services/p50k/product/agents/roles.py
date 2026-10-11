@@ -14,7 +14,7 @@ from uuid import uuid4
 
 from pydantic import BaseModel, ConfigDict, Field
 
-from p50k.product.agents import checks, llm
+from p50k.product.agents import checks, control, llm
 from p50k.product.agents.config import AgentConfig
 from p50k.product.agents.store import Run
 from p50k.product.agents.vocabulary import (COUNTER_TYPES, COUNTER_TYPE_TR, DECISION_MEANINGS, HYPOTHESIS_TYPES,
@@ -247,6 +247,8 @@ def run_ai(settings: Settings, config: AgentConfig, role: str, payload: dict, sc
             text, call_id, spent, model = llm.call(settings, config, role, instructions=INSTRUCTIONS[role],
                 payload=request, schema=schema, schema_name='agent_' + role, prompt_version=PROMPT_VERSIONS[role],
                 schema_version=SCHEMA_VERSIONS[role])
+        except control.TeamPaused:
+            raise control.TeamPaused(calls, cost) from None
         except llm.BudgetWait as wait:
             raise llm.BudgetWait(wait.reason, wait.until, calls, cost) from None
         except llm.CallFailed as failure:

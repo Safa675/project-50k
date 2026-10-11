@@ -1,5 +1,15 @@
 # Codex handoff — Sunday 2026-10-11, about 10:40 Istanbul
 
+## Final continuation — 2026-10-11 about 12:15 Istanbul
+
+Read the newest `docs/notes/current-state.md` first. Migration015, persistent admin team pause/resume, Review navbar
+and logos/source grouping, full fund-sidecard layout, canonical `/results` plus old-link redirect, coverage/eight-case
+metrics, and the separately preregistered KAP experiment are deployed and checked. See DEC-037 and the release record.
+Baseline23/131 and4/8 remain unchanged; separate price+monthly union24/131 and5/8, with only101funds assessable.
+The experiment does not feed the agents or change the old run. Its new protocol100ddfb was committed before analysis;
+existing immutable paths remain untouched. No OpenAI key request, duplicate import, recalibration or broad regression.
+Complete the final protected Git landing if it has not happened, then record the ready THF flow. Deadline12:30 remains.
+
 ## Continuation update — 2026-10-11 about 11:35 Istanbul
 
 The nine priorities below have been implemented and deployed. Core release `569c2db` was merged/pushed as `ac3cd26`

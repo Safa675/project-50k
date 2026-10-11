@@ -223,7 +223,7 @@ class ScopeAndAccessTests(unittest.TestCase):
         with TestClient(create_app(), base_url='http://localhost') as client:
             for method, path in (('get', '/agents/team'), ('get', '/agents/queue'), ('get', f'/agents/cases/{uuid4()}'),
                                  ('get', '/agents/workspace/reporter'), ('post', '/agents/page-visit'),
-                                 ('post', '/agents/requests')):
+                                 ('post', '/agents/requests'), ('post', '/agents/control')):
                 with self.subTest(path=path):
                     self.assertEqual(getattr(client, method)(path).status_code, 401)
 

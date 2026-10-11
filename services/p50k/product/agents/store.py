@@ -13,6 +13,7 @@ from uuid import uuid4
 
 from psycopg.types.json import Jsonb
 
+from p50k.product.agents import control
 from p50k.product.agents.vocabulary import ROLES, TASK_TITLES, FAILED_STEP_TR
 from p50k.product.analysis_context import current_cutoff, data_origins, historical_mode, validate_date
 from p50k.product.archive import ISTANBUL
@@ -188,6 +189,8 @@ RETURNING task.task_id,task.case_id,task.role,task.attempts,task.priority,task.s
 def claim(connection, owner: str, gap_seconds: int) -> Task | None:
     """Highest-priority ready task, with background pacing and an exclusive lease."""
     connection.execute("SET LOCAL statement_timeout='5s'")
+    if not control.allows_new_work(connection):
+        return None
     connection.execute('SELECT pg_advisory_xact_lock(%s)', (CLAIM_LOCK,))
     exhausted = connection.execute("""UPDATE agents.tasks SET status='failed',lease_owner=NULL,lease_until=NULL,
             finished_at=clock_timestamp(),error_class='ATTEMPTS_EXHAUSTED'
@@ -218,7 +221,8 @@ def finish(connection, task: Task, owner: str, status: str, *, call_id: str | No
             lease_owner=NULL,lease_until=NULL,call_id=COALESCE(%(call)s,call_id),
             cost_usd=CASE WHEN %(cost)s::numeric IS NULL THEN cost_usd ELSE COALESCE(cost_usd,0)+%(cost)s::numeric END,
             error_class=%(error)s,not_before=COALESCE(%(not_before)s::timestamptz,not_before),
-            attempts=CASE WHEN %(status)s='waiting_budget' THEN GREATEST(attempts-1,0) ELSE attempts END
+            attempts=CASE WHEN %(status)s='waiting_budget' OR %(error)s='TEAM_PAUSED'
+                THEN GREATEST(attempts-1,0) ELSE attempts END
         WHERE task_id=%(task)s AND status='running' AND lease_owner=%(owner)s RETURNING task_id""",
         {'status': status, 'call': call_id, 'cost': cost, 'error': error_class, 'not_before': not_before,
          'task': task.task_id, 'owner': owner}).fetchone()

@@ -10,7 +10,7 @@ from unittest import TestCase
 from unittest.mock import patch
 import httpx2
 from openai import APIConnectionError,APITimeoutError
-from p50k.product.agents import llm,roles,runtime,store
+from p50k.product.agents import control,llm,roles,runtime,store
 from p50k.product.agents.config import AgentConfig
 from p50k.product.settings import Settings
 httpx=llm.httpx
@@ -38,7 +38,7 @@ class ConnectionBudgetTests(TestCase):
             key=Path(folder)/'synthetic-key';key.write_text('synthetic-credential',encoding='utf-8')
             config=AgentConfig(mode='live',key_file=key)
             for cause,code in ((httpx2.ConnectError('synthetic'),'MODEL_CONNECTION_FAILED'),(httpx2.ReadTimeout('synthetic'),'MODEL_CALL_FAILED')):
-                with patch.object(llm,'OpenAI') as sdk,patch.object(llm,'reserve_agent_budget',return_value='synthetic-reservation') as reserved,patch.object(llm,'settle') as settled:
+                with patch.object(control,'require_running'),patch.object(llm,'OpenAI') as sdk,patch.object(llm,'reserve_agent_budget',return_value='synthetic-reservation') as reserved,patch.object(llm,'settle') as settled:
                     sdk.return_value.responses.create.side_effect=wrapped(cause)
                     with self.assertRaises(llm.CallFailed) as raised:
                         llm.call(Settings(),config,'hypothesizer',instructions='Synthetic',payload={},schema={},schema_name='test',prompt_version='test',schema_version='test')

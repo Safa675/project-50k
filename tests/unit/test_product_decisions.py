@@ -22,6 +22,35 @@ from p50k.product.ai_worker import step
 
 @unittest.skipUnless(os.environ.get('P50K_TEST_DATABASE')=='1','Requires isolated p50k_dev')
 class DecisionFlowTests(TestCase):
+    def test_live_team_proposal_is_visible_before_the_hundred_row_queue_limit(self):
+        settings=Settings.from_env()
+        self.assertEqual(settings.db_name,'p50k_dev')
+        suffix=uuid4().hex[:6].upper()
+        cutoff=datetime(2026,8,2,23,59,59,tzinfo=ISTANBUL)
+        team_code='QZ'+suffix+'999'
+        with connect(settings) as connection:
+            for index in range(102):
+                code=team_code if index==101 else 'QF'+suffix+f'{index:03d}'
+                digest=sha256(code.encode()).hexdigest()
+                payload={'fund_code':code,'fund_name':'Synthetic queue priority fund','category':'Synthetic queue category',
+                    'as_of':cutoff.date().isoformat(),'evidence':[],'allowed_options':['MATERIAL','INSUFFICIENT_EVIDENCE'],'cutoff':cutoff.isoformat()}
+                connection.execute("INSERT INTO ref.funds(fund_code,name,category,source_sha256) VALUES (%s,'Synthetic queue priority fund','Synthetic queue category',%s)",(code,digest))
+                packet_id=connection.execute("INSERT INTO ai.packets(fund_code,packet_sha256,origin,as_of,cutoff,payload,allowed_options) VALUES (%s,%s,'SYNTHETIC',%s,%s,%s,%s) RETURNING packet_id",
+                    (code,digest,cutoff.date(),cutoff,Jsonb(payload),Jsonb(payload['allowed_options']))).fetchone()[0]
+                team=index==101
+                connection.execute("""INSERT INTO ai.decisions(packet_id,fund_code,packet_sha256,decision_value,
+                    validation_state,evidence_ids,rationale,model_id,prompt_version,schema_version,ai_mode,call_id,method)
+                    VALUES (%s,%s,%s,%s,'VALID','[]','Synthetic queue rationale',%s,'synthetic','synthetic',%s,%s,%s)""",
+                    (packet_id,code,digest,'MATERIAL' if team else 'INSUFFICIENT_EVIDENCE',
+                     'synthetic-fixture-model' if team else 'deterministic','live' if team else 'off','synthetic-priority:'+uuid4().hex,'TEAM' if team else 'SINGLE'))
+        with use_analysis_date('2026-08-02'):
+            pending=decision_rows(settings,review_only=True)
+            self.assertEqual(len(pending),100)
+            self.assertEqual(pending[0]['fund_code'],team_code)
+            self.assertTrue(pending[0]['team_proposal'])
+            self.assertEqual(pending[0]['ai_mode'],'live')
+            self.assertEqual(pending[0]['decided_by'],'AI')
+
     def test_review_is_scoped_to_the_selected_day_and_preserves_original_proposals(self):
         settings=Settings.from_env()
         self.assertEqual(settings.db_name,'p50k_dev')

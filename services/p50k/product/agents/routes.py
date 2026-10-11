@@ -12,10 +12,10 @@ import psycopg
 from fastapi import APIRouter, Depends, HTTPException, Query, Request
 from pydantic import BaseModel, ConfigDict, Field
 
-from p50k.product.agents import service
+from p50k.product.agents import control, service
 from p50k.product.agents.vocabulary import ROLES
 from p50k.product.analysis_context import analysis_scope_key
-from p50k.product.auth import Principal, require_session
+from p50k.product.auth import Principal, require_admin, require_session
 
 router = APIRouter(prefix='/agents', tags=['agents'])
 logger = logging.getLogger(__name__)
@@ -33,6 +33,11 @@ class RequestBody(BaseModel):
     kind: Literal['investigate']
 
 
+class ControlBody(BaseModel):
+    model_config = ConfigDict(extra='forbid', strict=True)
+    action: Literal['PAUSE', 'RESUME']
+
+
 def context(request: Request) -> tuple:
     settings = request.app.state.product_settings
     return settings, analysis_scope_key(settings)
@@ -48,6 +53,15 @@ def team(request: Request, actor: Principal = Depends(require_session)):
     settings, scope = context(request)
     try:
         return service.team(settings, scope)
+    except psycopg.Error as error:
+        raise unavailable(error) from None
+
+
+@router.post('/control')
+def team_control(body: ControlBody, request: Request, actor: Principal = Depends(require_admin)):
+    settings, _ = context(request)
+    try:
+        return control.set_state(settings, actor.user_id, actor.role, body.action)
     except psycopg.Error as error:
         raise unavailable(error) from None
 

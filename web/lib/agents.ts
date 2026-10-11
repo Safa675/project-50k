@@ -16,8 +16,9 @@ export type TeamAgent = {role: AgentRole; name_tr: string; state: AgentState; ac
 export type TeamLink = {from: Participant; to: Participant; kind: MessageKind; at: string; case_id: string | null};
 export type TeamBudget = {day: string | null; cap_usd: number | null; spent_usd: number; reserved_usd: number; state: string | null};
 export type TeamCounts = {open_cases: number; queued: number; running: number; done_today: number};
+export type TeamControl = {paused: boolean; changed_at: string; running_tasks: number; finishing: boolean};
 export type TeamSnapshot = {scope: string | null; now: string; budget: TeamBudget | null; agents: TeamAgent[];
-  links: TeamLink[]; counts: TeamCounts};
+  links: TeamLink[]; counts: TeamCounts; control?: TeamControl | null};
 export type QueueItem = {task_id: string; case_id: string | null; fund_code: string | null; fund_name: string | null;
   role: AgentRole; title_tr: string; status: TaskStatus; priority: number; source: 'system' | 'user';
   created_at: string | null; started_at: string | null; finished_at: string | null};
@@ -91,6 +92,16 @@ function parseLink(value: unknown): TeamLink | null {
     kind: typeof value.kind === 'string' && KINDS.has(value.kind) ? value.kind as MessageKind : 'unknown'};
 }
 
+export function parseTeamControl(value: unknown): TeamControl {
+  if (!record(value) || typeof value.paused !== 'boolean' || !time(value.changed_at) ||
+      typeof value.running_tasks !== 'number' || !Number.isSafeInteger(value.running_tasks) || value.running_tasks < 0 ||
+      typeof value.finishing !== 'boolean' || value.finishing !== (value.paused && value.running_tasks > 0)) {
+    throw new AgentDataError('TEAM_CONTROL_INVALID');
+  }
+  return {paused: value.paused, changed_at: value.changed_at as string,
+    running_tasks: value.running_tasks, finishing: value.finishing};
+}
+
 export function parseTeam(value: unknown): TeamSnapshot {
   if (!record(value) || !Array.isArray(value.agents)) throw new AgentDataError('TEAM_INVALID');
   const now = time(value.now);
@@ -106,6 +117,7 @@ export function parseTeam(value: unknown): TeamSnapshot {
     reserved_usd: money(value.budget.reserved_usd) ?? 0, state: text(value.budget.state, 40)} : null;
   const counts = record(value.counts) ? value.counts : {};
   return {scope: typeof value.scope === 'string' && SCOPE.test(value.scope) ? value.scope : null, now, budget, agents, links,
+    control: value.control === undefined ? null : parseTeamControl(value.control),
     counts: {open_cases: count(counts.open_cases), queued: count(counts.queued), running: count(counts.running),
       done_today: count(counts.done_today)}};
 }
@@ -335,7 +347,8 @@ export function dockBadge(queue: QueueItem[] | null, page: PageVisit | null, pag
 }
 export function dockLabel(ring: DockRing, team: TeamSnapshot | null, badge: DockBadge): string {
   const working = team?.agents.filter(agent => agent.state === 'working').length ?? 0;
-  const state = ring === 'working' ? (working === 1 ? 'bir ajan çalışıyor' : `${working} ajan çalışıyor`) :
+  const state = team?.control?.paused ? (team.control.finishing ? 'ekip durduruldu, sürmekte olan işler tamamlanıyor' : 'ekip durduruldu') :
+    ring === 'working' ? (working === 1 ? 'bir ajan çalışıyor' : `${working} ajan çalışıyor`) :
     ring === 'idle' ? 'ekip beklemede' : ring === 'waiting_budget' ? 'ekip bütçe bekliyor' :
     ring === 'off' ? 'yapay zekâ kapalı' : ring === 'loading' ? 'durum yükleniyor' : 'durum alınamadı';
   return `Ajan ekibi ve Raportör, ${state}${badge ? `. ${badge.label}` : ''}`;

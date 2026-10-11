@@ -119,6 +119,7 @@ def reserve_agent_budget(settings: Settings, config: AgentConfig, amount: Decima
 def call(settings: Settings, config: AgentConfig, role: str, *, instructions: str, payload: dict,
          schema: dict, schema_name: str, prompt_version: str, schema_version: str) -> tuple[str, str, Decimal, str]:
     """One strict-schema call. Returns output text, call ID, booked cost and model."""
+    from p50k.product.agents import control
     model = role_model(config, role)
     if config.mode != 'live':
         raise AIUnavailable('AI_OFF')
@@ -128,6 +129,7 @@ def call(settings: Settings, config: AgentConfig, role: str, *, instructions: st
         raise AIUnavailable('KEY_UNAVAILABLE')
     if not model.priced:
         raise AIUnavailable('MODEL_PRICING_UNCONFIGURED')
+    control.require_running(settings)
     body = json.dumps(payload, ensure_ascii=False, separators=(',', ':'))
     if len(body.encode()) > MAX_INPUT_BYTES:
         raise AIUnavailable('INPUT_REJECTED')

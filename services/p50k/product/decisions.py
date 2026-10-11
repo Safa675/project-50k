@@ -142,14 +142,18 @@ def decision_rows(settings: Settings, code: str | None=None, review_only: bool=F
             LEFT JOIN auth.users reviewer ON reviewer.user_id=actual_review.reviewer_id
             LEFT JOIN ref.funds fund ON fund.fund_code=effective.fund_code
             WHERE (%s::text IS NULL OR effective.fund_code=%s) AND (%s=false OR NOT effective.has_current_review)
-              AND packet.origin=ANY(%s) ORDER BY effective.fund_code LIMIT 100""",(origins,cutoff,historical_mode(settings),cutoff.astimezone(ISTANBUL).date(),code,code,review_only,origins)).fetchall()
+              AND packet.origin=ANY(%s)
+            ORDER BY effective.has_current_review DESC,
+                CASE WHEN decision.method='TEAM' AND decision.ai_mode='live' THEN 0
+                     WHEN decision.ai_mode='live' THEN 1 ELSE 2 END,
+                decision.created_at DESC NULLS LAST,effective.fund_code LIMIT 100""",(origins,cutoff,historical_mode(settings),cutoff.astimezone(ISTANBUL).date(),code,code,review_only,origins)).fetchall()
     results=[]
     for row in rows:
         packet=Packet.model_validate({key:row[10][key] for key in Packet.model_fields})
         results.append({'fund_code':row[0],'packet_sha256':row[1],'decision_id':row[2],
             'effective_value':row[3],'decided_by':'DETERMINISTIC' if row[4]!='HUMAN' and row[12]=='deterministic' else row[4],'review_id':row[5],'has_current_review':row[6],
             'stale_review_exists':row[7],'validation_state':row[8],
-            'rationale_tr':render_proposal(row[9],packet,row[18]) if row[9] else 'Yapay zekâ önerisi üretilemedi; insan incelemesi gerekli',
+            'rationale_tr':render_proposal(row[9],packet,row[18]) if row[9] else 'Geçerli bir öneri üretilemedi; insan incelemesi gerekli',
             'allowed_options':row[11],'evidence_ids':[item.evidence_id for item in packet.evidence],
             'original_value':row[13],'review_reason':row[14],'reviewed_at':row[15].isoformat() if row[15] else None,
             'reviewer_email':row[16],'ai_mode':row[17],

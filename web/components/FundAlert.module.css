@@ -1,17 +1,16 @@
 /* Fund page summary: one calm card under the price header; no nested cards. */
-.alert{display:flex;flex-direction:column;gap:20px;padding:24px;border:1px solid var(--bs-border);border-left:4px solid var(--bs-attention);border-radius:16px;background:var(--bs-card);color:var(--bs-text);min-width:0}
-.head{display:flex;gap:16px;align-items:flex-start;min-width:0}
+.alert{display:flex;flex-direction:column;gap:20px;padding:24px;border:1px solid var(--bs-border);border-left:4px solid var(--bs-attention);border-radius:16px;background:var(--bs-card);color:var(--bs-text);min-width:0;max-width:none;flex:none}
+.head{display:flex;flex-direction:row;justify-content:flex-start;gap:16px;align-items:flex-start;min-width:0;border:0;padding:0}
 .head>div{min-width:0}
 .mark{flex:none;display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:999px;background:var(--bs-attention-bg);color:var(--bs-attention)}
 .mark svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8}
 .kicker{margin:0 0 4px;font-size:13px;line-height:20px;color:var(--bs-attention);font-weight:500}
-.alert h2{margin:0;font-size:22px;line-height:30px;font-weight:500;letter-spacing:-.2px}
+.alert .head h2{margin:0;font-size:22px;line-height:30px;font-weight:500;letter-spacing:-.2px}
 .lead{margin:6px 0 0;font-size:15px;line-height:24px;color:var(--bs-muted);max-width:72ch}
-.body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0;border-top:1px solid var(--bs-divider)}
+.body{display:grid;grid-template-columns:minmax(0,1fr);gap:20px;border-top:1px solid var(--bs-divider)}
 .single{display:block;border-top:1px solid var(--bs-divider)}
 .measures,.team{display:flex;flex-direction:column;gap:12px;padding-top:20px;min-width:0}
-.body .measures{padding-right:24px}
-.body .team{padding-left:24px;border-left:1px solid var(--bs-divider)}
+.body .team{border-top:1px solid var(--bs-divider)}
 .alert h3{margin:0;font-size:14px;line-height:20px;font-weight:500;color:var(--bs-muted)}
 .measures ul,.tests ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
 .measures li,.tests li{display:flex;flex-direction:column;gap:2px;min-width:0;overflow-wrap:anywhere}
@@ -33,24 +32,19 @@
 .actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .actions :global(.bs-button){min-height:40px;padding:0 16px}
 .actions a:focus-visible,.actions button:focus-visible{outline:2px solid var(--bs-accent-text);outline-offset:3px}
-.quiet{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border:1px solid var(--bs-divider);border-radius:12px;background:var(--bs-card);min-width:0;flex-wrap:wrap}
+.quiet{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border:1px solid var(--bs-divider);border-radius:12px;background:var(--bs-card);min-width:0;max-width:none;flex:none;flex-wrap:wrap}
 .quietMark{flex:none;width:8px;height:8px;margin-top:8px;border-radius:999px;background:var(--bs-subtle)}
 .quietText{flex:1 1 320px;min-width:0}
-.quiet h2{margin:0;font-size:15px;line-height:22px;font-weight:500}
+.quiet .quietText h2{margin:0;font-size:15px;line-height:22px;font-weight:500}
 .quiet p{margin:2px 0 0;font-size:14px;line-height:21px;color:var(--bs-muted)}
 .quietCase strong{color:var(--bs-text);font-weight:500}
 .quiet .actions{flex:0 1 auto}
-@media(max-width:760px){
-  .body{grid-template-columns:minmax(0,1fr)}
-  .body .measures{padding-right:0}
-  .body .team{padding-left:0;border-left:0;border-top:1px solid var(--bs-divider);margin-top:20px}
-}
 @media(max-width:540px){
   .alert{padding:20px 16px;gap:16px}
   .head{gap:12px}
   .mark{width:32px;height:32px}
   .mark svg{width:18px;height:18px}
-  .alert h2{font-size:19px;line-height:26px}
+  .alert .head h2{font-size:19px;line-height:26px}
   .lead{font-size:14px;line-height:22px}
   .actions{flex-direction:column;align-items:stretch}
   .actions :global(.bs-button){width:100%}

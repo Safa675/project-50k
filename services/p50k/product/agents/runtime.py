@@ -11,7 +11,7 @@ from uuid import uuid4
 
 from psycopg.types.json import Jsonb
 
-from p50k.product.agents import checks, llm, roles, sentinel, store
+from p50k.product.agents import checks, control, llm, roles, sentinel, store
 from p50k.product.agents.config import AgentConfig
 from p50k.product.agents.vocabulary import FAILED_STEP_TR, SKIP_NOTES
 from p50k.product.ai_client import AIUnavailable
@@ -212,6 +212,10 @@ def execute(settings: Settings, config: AgentConfig, task: store.Task, owner: st
                 return 'done'
             else:
                 raise roles.Skip('ROLE_NOT_RUNNABLE')
+        except control.TeamPaused as paused:
+            complete(settings, config, task, owner, 'queued', error_class='TEAM_PAUSED',
+                     calls=paused.calls, cost=paused.cost)
+            return 'queued'
         except roles.Skip as skip:
             note = SKIP_NOTES.get(skip.code)
             complete(settings, config, task, owner, 'skipped', error_class=skip.code,
@@ -263,7 +267,8 @@ def loop(settings: Settings, owner: str, stopped: threading.Event, *, scan: bool
                 if config.mode != 'off' and time.monotonic() - resumed >= RESUME_SECONDS:
                     resumed = time.monotonic()
                     with connect(settings) as connection:
-                        store.resume_skipped(connection)
+                        if control.allows_new_work(connection):
+                            store.resume_skipped(connection)
             worked = run_one(settings, config, owner) is not None
         except Exception as error:
             logger.warning('agent_loop_unavailable', extra={'error_class': type(error).__name__})
