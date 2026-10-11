@@ -13,7 +13,7 @@ export type AgentMock = {pageVisits: {path: string; fund_code: string | null}[];
 export function team(options: AgentMockOptions = {}) {
   const working = !options.idle;
   return {
-    scope: 'live', now: new Date().toISOString(),
+    scope: 'asof:2026-09-12', now: new Date().toISOString(),
     budget: {day: new Date().toISOString().slice(0, 10), cap_usd: '3.00', spent_usd: options.budgetExhausted ? '3.00' : '0.42', reserved_usd: options.budgetExhausted ? '0' : '0.08',
       state: options.budgetExhausted ? 'exhausted' : 'open'},
     agents: [
@@ -102,13 +102,13 @@ export async function mockAgents(page: Page, options: AgentMockOptions = {}): Pr
   let counter = 0;
   await page.route('**/api/p/chat/threads**', route => {
     const fund = new URL(route.request().url()).searchParams.get('fund_code');
-    return route.fulfill({json: {fund_code: fund, analysis_scope_key: 'live', items: conversations.filter(item => item.fund_code === fund).slice().reverse()
+    return route.fulfill({json: {fund_code: fund, analysis_scope_key: 'asof:2026-09-12', items: conversations.filter(item => item.fund_code === fund).slice().reverse()
       .map(item => ({thread_id: item.thread_id, title: String(item.items[0]?.content ?? ''), created_at: ago(60), last_message_at: ago(30), message_count: item.items.length}))}});
   });
   await page.route(/\/api\/p\/chat\/[a-f0-9-]{36}(\?|$)/, route => {
     const url = new URL(route.request().url()), id = url.pathname.split('/').at(-1), fund = url.searchParams.get('fund_code');
     const item = conversations.find(entry => entry.thread_id === id && entry.fund_code === fund);
-    return item ? route.fulfill({json: {thread_id: id, fund_code: fund, analysis_scope_key: 'live', items: item.items}}) : route.fulfill({status: 404, json: {detail: 'THREAD_NOT_FOUND'}});
+    return item ? route.fulfill({json: {thread_id: id, fund_code: fund, analysis_scope_key: 'asof:2026-09-12', items: item.items}}) : route.fulfill({status: 404, json: {detail: 'THREAD_NOT_FOUND'}});
   });
   await page.route('**/api/p/chat', route => {
     const body = route.request().postDataJSON();
@@ -119,7 +119,7 @@ export async function mockAgents(page: Page, options: AgentMockOptions = {}): Pr
     item.items.push({role: 'user', content: body.question, evidence_ids: [], message_id: String(item.items.length + 1), created_at: ago(1), status: 'VALID'},
       {role: 'assistant', content, evidence_ids: ['ev:synthetic-agent'], message_id: String(item.items.length + 2), created_at: ago(0), status: 'VALID'});
     return route.fulfill({contentType: 'text/event-stream', body:
-      `event: thread\ndata: ${JSON.stringify({thread_id: item.thread_id, analysis_scope_key: 'live'})}\n\n` +
+      `event: thread\ndata: ${JSON.stringify({thread_id: item.thread_id, analysis_scope_key: 'asof:2026-09-12'})}\n\n` +
       'event: tool\ndata: {"name":"get_case_status"}\n\n' +
       `event: paragraph\ndata: ${JSON.stringify({index: 0, content, evidence_ids: ['ev:synthetic-agent']})}\n\n` +
       `event: answer\ndata: ${JSON.stringify({thread_id: item.thread_id, content, evidence_ids: ['ev:synthetic-agent'], evidence_labels: {'ev:synthetic-agent': 'Sentetik kanıt'}, model: 'synthetic-browser-model'})}\n\n`});

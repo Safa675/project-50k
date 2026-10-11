@@ -168,10 +168,17 @@ def review(settings: Settings, decision_id: int, actor: str, action: str, overri
     with connect(settings) as connection:
         row=connection.execute('''SELECT decision.packet_sha256,packet.allowed_options,decision.validation_state,
                 packet.origin=ANY(%s) AND evidence.cutoff<=%s
-                  AND (NOT %s OR (evidence.cutoff AT TIME ZONE 'Europe/Istanbul')::date=%s)
+                  AND (NOT %s OR (evidence.cutoff AT TIME ZONE 'Europe/Istanbul')::date=%s),decision.packet_id
             FROM ai.decisions decision JOIN ai.packets packet USING(packet_id)
             CROSS JOIN LATERAL (SELECT COALESCE(packet.cutoff,(packet.payload->>'cutoff')::timestamptz) AS cutoff) evidence
             WHERE decision_id=%s''',(origins,cutoff,historical_mode(settings),cutoff.astimezone(ISTANBUL).date(),decision_id)).fetchone()
+        if not row:
+            raise ValueError('REVIEW_NOT_ALLOWED')
+        # Shared with automatic re-review, including later proposals using the
+        # same immutable evidence. Acquire packet then decision locks consistently.
+        # Immutable records have no UPDATE grant; these locks need none.
+        for key in ('p50k:packet-review:'+str(row[4]),'p50k:decision-review:'+str(decision_id)):
+            connection.execute('SELECT pg_advisory_xact_lock(hashtextextended(%s,0))',(key,))
         if not row or (action=='OVERRIDE' and override not in row[1]) or (action=='ACCEPT' and row[2]!='VALID'):
             raise ValueError('REVIEW_NOT_ALLOWED')
         # A decision is reviewed only within the analysis it belongs to, as shown.

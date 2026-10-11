@@ -55,7 +55,8 @@ export function parseFundSummary(value: unknown): FundSummary | null {
     const detector = text(item.detector_id, 30), label = text(item.label_tr, 120);
     return detector && label ? [{detector_id: detector, label_tr: label, fact_tr: text(item.fact_tr, 400), effective_date: day(item.effective_date)}] : [];
   });
-  const calculation = value.calculation === 'triggered' && !triggered.length ? 'clear' : value.calculation as Calculation;
+  if (value.calculation === 'triggered' && !triggered.length) return null;
+  const calculation = value.calculation as Calculation;
   return {calculation, as_of: day(value.as_of), triggered, team: value.case === null ? null : parseCase(value.case) ?? null};
 }
 

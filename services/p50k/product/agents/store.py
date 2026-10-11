@@ -134,7 +134,8 @@ def raise_case(connection, case_id: str, priority: int, *, user: str | None = No
             WHERE case_id=%s AND status IN ('queued','waiting_budget','running')""", (priority, case_id))
         return
     connection.execute("""UPDATE agents.tasks SET priority=GREATEST(priority,%s),source='user',
-            requested_by=COALESCE(requested_by,%s)
+            requested_by=COALESCE(requested_by,%s),
+            not_before=CASE WHEN status='waiting_budget' THEN clock_timestamp() ELSE not_before END
         WHERE case_id=%s AND status IN ('queued','waiting_budget','running')""", (priority, user, case_id))
     connection.execute("""UPDATE agents.tasks SET status='queued',priority=GREATEST(priority,%s),source='user',
             requested_by=COALESCE(requested_by,%s),not_before=clock_timestamp(),finished_at=NULL,error_class=NULL

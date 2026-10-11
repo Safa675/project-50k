@@ -9,7 +9,7 @@
 .ag-layer button,.ag-page button,.ag-dock button{font:inherit;letter-spacing:0}
 .ag-label{font-size:11px;line-height:16px;letter-spacing:.3px;text-transform:uppercase;color:var(--bs-subtle);font-weight:500}
 
-/* ---------- Mascot (placeholder art, DEC-035) ---------- */
+/* ---------- Supplied BlackSwan mascot art ---------- */
 .ag-mascot{display:block}
 .ag-mascot-body{fill:#f2f2f3}
 .ag-mascot-neck{stroke:#f2f2f3}
@@ -453,3 +453,146 @@ button.ag-task-row:focus-visible{outline:2px solid var(--bs-accent-text);outline
   .ag-edge-flow{stroke-dasharray:none;opacity:.8}
   .ag-msg.is-streaming p::after{animation:none!important;visibility:visible}
 }
+
+/* The supplied pixel mascots need a light disc to preserve their original dark artwork. */
+.ag-mascot,.ag-role-art{display:block;object-fit:contain;flex:none}
+.ag-fab-face,.ag-head-mascot,.ag-avatar:not(.ag-avatar-human),.ag-msg-avatar,
+.ag-chat-empty .ag-mascot,.ag-tab .ag-mascot{background:#f3f2ee}
+.ag-avatar:has(.ag-role-art) .ag-role-art{width:92%;height:92%;max-width:none;max-height:none}
+.ag-fab-face .ag-mascot{width:46px;height:46px}
+.ag-fab.is-open{opacity:0;pointer-events:none}
+.ag-head-mascot .ag-mascot{width:36px;height:36px}
+.ag-msg-avatar .ag-mascot{width:27px;height:27px}
+.ag-node.is-working .ag-avatar:not(.ag-avatar-human){background:#f3f2ee;box-shadow:0 0 0 2px var(--ag-accent-line)}
+
+/* Compact workflow leaves the conversation and case workspace most of the panel. */
+.ag-panel{bottom:24px;height:min(880px,92dvh)}
+.ag-panel-stage{height:min(280px,32dvh);transition:height .25s var(--ag-ease),opacity .25s var(--ag-ease);max-height:340px;overflow:auto}
+.ag-panel-stage.is-strip{height:68px;max-height:82px;overflow:hidden}
+.ag-panel-stage .ag-stage-grid{animation:ag-fade .22s ease both}
+.ag-stage.is-strip{padding:8px 20px}
+.ag-stage.is-strip .ag-stage-grid{grid-template-columns:repeat(6,minmax(0,1fr));grid-template-rows:1fr;gap:18px;align-items:stretch}
+.ag-stage.is-strip .ag-node{grid-column:auto;grid-row:1;justify-self:stretch;width:auto;margin:0;border-radius:12px}
+.ag-stage.is-strip .ag-node-main{padding:9px 10px;gap:0;height:100%}
+.ag-stage.is-strip .ag-node-head{gap:8px}
+.ag-stage.is-strip .ag-node-name strong{font-size:12px;line-height:18px}
+.ag-stage.is-strip .ag-node-state{font-size:10px;line-height:14px;gap:4px}
+.ag-stage.is-strip .ag-avatar{width:32px;height:32px}
+.ag-stage.is-strip .ag-node-activity,.ag-stage.is-strip .ag-node-fund,.ag-stage.is-strip .ag-node-eyebrow,
+.ag-stage.is-strip .ag-node-talk,.ag-stage.is-strip .ag-node-since{display:none}
+.ag-stage.is-strip .ag-node-reporter{box-shadow:0 0 0 2px var(--ag-accent-soft)}
+.ag-team-toggle{display:inline-flex;align-items:center;gap:8px;min-height:32px;padding:4px 12px;margin-left:auto;border:0;background:transparent;color:var(--bs-muted);font-size:12px;white-space:nowrap;cursor:pointer}
+.ag-team-toggle:hover{color:var(--bs-text);background:var(--bs-surface)}
+.ag-team-toggle:focus-visible{outline:2px solid var(--bs-accent-text);outline-offset:-2px}
+.ag-panel .ag-tab{min-height:40px}
+.ag-panel .ag-view:has(.ag-reporter){padding:12px 20px}
+.ag-panel .ag-chat{gap:6px}
+.ag-panel .ag-chat-bar{padding-bottom:6px;flex:none}
+.ag-panel .ag-chat-foot{flex:none}
+.ag-panel .ag-composer textarea{max-height:100px}
+.ag-panel .ag-transcript{min-height:0}
+@media(min-width:1024px) and (min-height:680px) and (max-height:899px){
+  .ag-panel.has-team-strip .ag-transcript{min-height:320px}
+  .ag-panel.has-team-strip .ag-head{padding-top:10px;padding-bottom:10px}
+  .ag-panel.has-team-strip .ag-stage.is-strip{padding-top:6px;padding-bottom:6px}
+}
+@media(max-width:1023px){
+  .ag-panel{left:16px;right:16px;bottom:20px;height:92dvh}
+  .ag-panel .ag-view:has(.ag-reporter){overflow:hidden;padding:12px 16px}
+  .ag-panel .ag-reporter{height:100%;min-height:0;gap:12px}
+  .ag-panel .ag-brief{flex:none;max-height:110px;min-height:44px;overflow:auto;padding:12px;-webkit-mask-image:none;mask-image:none}
+  .ag-panel .ag-chat{height:100%;min-height:0;flex:1}
+  .ag-panel .ag-transcript{flex:1;min-height:0;overflow:auto}
+  .ag-panel .ag-composer{position:static;box-shadow:none}
+  .ag-panel .ag-chat-foot{padding-bottom:0}
+}
+@media(max-width:639px){
+  .ag-panel{left:0;right:0;bottom:0;height:94dvh}
+  .ag-panel .ag-head-meta{gap:8px}
+  .ag-panel .ag-head-date{padding-right:8px;border-right:0}
+  .ag-panel .ag-head-date strong{font-size:12px}
+  .ag-panel .ag-budget strong{font-size:11px}
+  .ag-panel .ag-meter{min-width:60px}
+  .ag-panel .ag-label{font-size:10px}
+  .ag-panel .ag-chat-threads select{font-size:12px}
+  .ag-panel .ag-chat-bar{gap:6px}
+  .ag-panel .ag-chat-bar .ag-ghost{padding:0 10px;font-size:12px}
+}
+@media(prefers-reduced-motion:reduce){.ag-panel-stage{transition:none}}
+
+/* A larger movable mascot; pointer dragging and keyboard movement share one saved position. */
+.ag-fab{width:96px;height:96px;min-height:96px;touch-action:none;user-select:none;cursor:grab}
+.ag-fab-face{width:84px;height:84px}
+.ag-fab-face .ag-mascot{width:76px;height:76px}
+.ag-dock[data-dragging="true"] .ag-fab{cursor:grabbing;transform:none;transition:none}
+.ag-signin{bottom:112px}
+
+/* Expanded workflow is the default. Density follows height while keeping every role visible. */
+.ag-panel{height:min(880px,calc(100dvh - 16px));bottom:8px}
+.ag-panel-stage{height:236px;max-height:236px}
+.ag-panel-stage .ag-stage:not(.is-strip){padding:14px 18px 8px}
+.ag-panel-stage .ag-stage-grid{column-gap:28px;row-gap:6px}
+.ag-panel-stage .ag-node-main{padding:10px 12px;gap:6px}
+.ag-panel-stage .ag-node-hypothesizer .ag-node-main,.ag-panel-stage .ag-node-skeptic .ag-node-main{padding:7px 10px;gap:4px}
+.ag-panel-stage .ag-node-reporter .ag-node-main{padding:13px 12px 6px}
+.ag-panel-stage .ag-node-talk{min-height:28px;font-size:12px;margin:0 12px 10px;padding:0 10px}
+.ag-panel-stage .ag-node-name strong{font-size:13px;line-height:18px}
+.ag-panel-stage .ag-node-state{font-size:11px;line-height:15px}
+.ag-panel-stage .ag-ticker{padding:0 18px 10px;font-size:11px}
+.ag-panel-stage .ag-ticker-counts{gap:10px}
+.ag-panel .ag-chat{gap:4px}
+.ag-panel .ag-view:has(.ag-reporter){padding:8px 20px}
+.ag-panel .ag-chat-bar{padding-bottom:4px}
+.ag-panel .ag-chat-threads select{min-height:32px;padding:5px 12px}
+.ag-panel .ag-chat-bar .ag-ghost{min-height:32px}
+.ag-panel .ag-composer{padding:4px 4px 4px 14px}
+.ag-panel .ag-composer textarea{min-height:32px;padding:6px 0}
+.ag-panel .ag-send{width:34px;height:34px;min-height:34px}
+@media(min-width:1024px) and (max-height:899px){
+  .ag-panel .ag-head{padding:6px 12px 6px 20px}
+  .ag-panel .ag-head-title h2{font-size:16px;line-height:21px}
+  .ag-panel .ag-head-sub{font-size:11px;line-height:15px}
+  .ag-panel .ag-tab{min-height:36px}
+  .ag-panel-stage{height:144px;max-height:144px}
+  .ag-panel-stage .ag-stage:not(.is-strip){padding:7px 18px 6px}
+  .ag-panel-stage .ag-node-head{gap:8px}
+  .ag-panel-stage .ag-node-hypothesizer .ag-avatar,.ag-panel-stage .ag-node-skeptic .ag-avatar{width:28px;height:28px}
+  .ag-panel-stage .ag-node-hypothesizer .ag-node-main,.ag-panel-stage .ag-node-skeptic .ag-node-main{padding:6px 10px;gap:4px}
+  .ag-panel-stage .ag-node-activity{-webkit-line-clamp:1;font-size:11px;line-height:15px}
+  .ag-panel-stage .ag-node-fund,.ag-panel-stage .ag-node-since,.ag-panel-stage .ag-ticker{display:none}
+  .ag-panel-stage .ag-node-reporter .ag-node-main{padding-top:12px}
+  .ag-panel-stage .ag-node-eyebrow{font-size:10px;line-height:14px;padding:2px 7px}
+  .ag-panel-stage .ag-node-talk{min-height:26px;margin-bottom:7px}
+  .ag-panel .ag-transcript{min-height:320px}
+}
+.ag-panel-stage.is-strip{height:68px;max-height:82px}
+.ag-panel-stage.is-strip .ag-stage-grid{column-gap:18px}
+@media(max-width:1023px){
+  .ag-panel .ag-view:has(.ag-reporter){padding:10px 16px}
+  .ag-panel .ag-brief{max-height:104px}
+}
+@media(max-width:639px){
+  .ag-fab{width:84px;height:84px;min-height:84px}
+  .ag-fab-face{width:74px;height:74px}
+  .ag-fab-face .ag-mascot{width:68px;height:68px}
+  .ag-panel{height:94dvh;bottom:0}
+  .ag-signin{bottom:100px}
+}
+
+/* Section resets must not strip workspace card padding or reintroduce list markers. */
+.ag-layer .ag-block,.ag-page .ag-block{padding:20px;gap:14px;min-width:0}
+.ag-layer .ag-block h3,.ag-page .ag-block h3{font-size:14px;line-height:20px;text-transform:none;letter-spacing:0;color:var(--bs-text)}
+.ag-layer .ag-timeline,.ag-page .ag-timeline,.ag-layer .ag-task-lines,.ag-page .ag-task-lines{list-style:none;padding:0;margin:0;min-width:0}
+.ag-layer .ag-timeline-item,.ag-page .ag-timeline-item{list-style:none;display:flex;min-width:0;gap:12px;padding:0 0 14px;border-bottom:1px solid var(--bs-divider)}
+.ag-timeline-item:last-child{border-bottom:0;padding-bottom:0}
+.ag-timeline-item::marker,.ag-task-line::marker{content:''}
+.ag-timeline-head{row-gap:4px;overflow-wrap:anywhere}
+.ag-timeline-head time{font-size:10px}
+.ag-timeline-text{overflow-wrap:anywhere;word-break:normal}
+.ag-output-block .ag-timeline{max-height:620px;overflow:auto;scrollbar-gutter:stable;padding-right:8px!important}
+.ag-panel .ag-output-block .ag-timeline{max-height:360px}
+.ag-task-line{padding:9px 0;border-bottom:1px solid var(--bs-divider)}
+.ag-task-line:last-child{border-bottom:0}
+.ag-task-line .ag-task-title{white-space:normal;overflow-wrap:anywhere;min-width:0;flex-basis:55%}
+.ag-workspace-head>div{min-width:0}
+@media(max-width:760px){.ag-layer .ag-block,.ag-page .ag-block{padding:16px}.ag-output-block .ag-timeline{max-height:none;overflow:visible}}

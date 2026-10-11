@@ -133,6 +133,8 @@ def read_bulletin(path: Path, capture: Capture) -> Bulletin:
     if not name:
         raise ValueError("File is not a session-1 daily bulletin")
     trade_date = datetime.strptime(name[1],"%Y%m%d").date()
+    if capture.captured_at.astimezone(ISTANBUL).date()<trade_date:
+        raise ValueError("Bulletin capture predates the trade date")
     official = OFFICIAL_URL.fullmatch(capture.url)
     if not official or official[3]!=path.name or (official[1],official[2])!=(f"{trade_date:%Y}",f"{trade_date:%m}"):
         raise ValueError("Bulletin URL does not follow the official path pattern")
@@ -205,25 +207,43 @@ def read_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def read_folder(folder: Path) -> tuple[list[Bulletin],list[dict[str,Any]]]:
-    """Read every captured bulletin listed in folder/manifest.json; report entries without a file."""
-    manifest = read_json(folder/"manifest.json")
+def read_manifest(path: Path) -> tuple[list[Bulletin],list[dict[str,Any]]]:
+    """Validate the whole manifest before admitting any file, keeping documented gaps."""
+    manifest = read_json(path)
     entries = manifest.get("entries") if isinstance(manifest,dict) else None
     if not isinstance(entries,list) or len(entries)>MAX_FILES*2:
         raise ValueError("Bulletin manifest has no bounded entry list")
+    if manifest.get("source") not in (None,SOURCE_ID):
+        raise ValueError("Bulletin manifest names a different source")
     bulletins,gaps = [],[]
+    dates: set[date] = set()
     for entry in entries:
-        file_name = entry.get("file") if isinstance(entry,dict) else None
+        if not isinstance(entry,dict):
+            raise ValueError("Bulletin manifest entry is not an object")
+        trade_date = date.fromisoformat(entry.get("trade_date", ""))
+        if entry.get("trade_date")!=trade_date.isoformat() or trade_date in dates:
+            raise ValueError("Bulletin manifest has an invalid or duplicate trade date")
+        dates.add(trade_date)
+        file_name = entry.get("file")
         if not file_name:
-            gaps.append({"trade_date":entry.get("trade_date") if isinstance(entry,dict) else None,
-                         "reason":(entry.get("skipped") or entry.get("error") or "no file") if isinstance(entry,dict) else "invalid entry"})
+            if entry.get("status")==200:
+                raise ValueError("Successful bulletin capture has no file")
+            gaps.append({"trade_date":trade_date.isoformat(),"reason":entry.get("skipped") or entry.get("error") or "no file"})
             continue
         if not isinstance(file_name,str) or Path(file_name).name!=file_name or not ZIP_NAME.fullmatch(file_name):
             raise ValueError("Bulletin manifest names an unsafe file")
-        bulletins.append(read_bulletin(folder/file_name,load_capture(entry)))
+        bulletin = read_bulletin(path.parent/file_name,load_capture(entry))
+        if trade_date!=bulletin.trade_date:
+            raise ValueError("Bulletin manifest trade date differs from its file")
+        bulletins.append(bulletin)
     if len(bulletins)>MAX_FILES or len({item.file_name for item in bulletins})!=len(bulletins):
         raise ValueError("Bulletin manifest lists too many or duplicate files")
-    return bulletins,gaps
+    return sorted(bulletins,key=lambda item:item.trade_date),gaps
+
+
+def read_folder(folder: Path) -> tuple[list[Bulletin],list[dict[str,Any]]]:
+    """Read every captured bulletin listed in folder/manifest.json."""
+    return read_manifest(folder/"manifest.json")
 
 
 def summary(bulletins: list[Bulletin]) -> dict[str,Any]:
@@ -290,6 +310,7 @@ def main(argv: list[str] | None=None) -> int:
     inputs = command.add_mutually_exclusive_group(required=True)
     inputs.add_argument("--zip",type=Path,help="One bulletin ZIP; requires --capture-json")
     inputs.add_argument("--folder",type=Path,help="Folder holding bulletin ZIPs and manifest.json")
+    inputs.add_argument("--manifest",type=Path,help="Manifest whose bulletin ZIPs are in the same folder")
     command.add_argument("--capture-json",type=Path)
     command.add_argument("--dry-run",action="store_true")
     args = parser.parse_args(argv)
@@ -299,7 +320,9 @@ def main(argv: list[str] | None=None) -> int:
                 raise ValueError("--zip requires --capture-json")
             bulletins,gaps = [read_bulletin(args.zip,load_capture(read_json(args.capture_json)))],[]
         else:
-            bulletins,gaps = read_folder(args.folder)
+            if args.capture_json is not None:
+                raise ValueError("--capture-json is only valid with --zip")
+            bulletins,gaps = read_manifest(args.manifest) if args.manifest is not None else read_folder(args.folder)
         if args.dry_run:
             print(json.dumps({**summary(bulletins),"gaps":gaps,"dry_run":True}))
             return 0

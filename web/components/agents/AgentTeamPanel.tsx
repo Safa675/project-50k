@@ -11,6 +11,7 @@ import Mascot from './Mascot';
 import ReporterTab from './ReporterTab';
 import type {ConversationHandle} from './ReporterConversation';
 import TeamStage, {StageTicker as Ticker} from './TeamStage';
+import {panelPlacement, type DockPoint, type DockViewport} from './dock-position';
 
 export type PanelTab = 'team' | 'reporter' | 'queue' | 'detail';
 export type PanelDetail = {kind: 'agent'; role: AgentRole} | {kind: 'case'; caseId: string};
@@ -30,15 +31,23 @@ export function BudgetMeter({team}: {team: TeamSnapshot | null}) {
 }
 
 export default function AgentTeamPanel({state, onClose, onClosed, user, feed, note, path, fundCode, evidenceId, compact, reducedMotion,
-  tab, setTab, detail, openDetail, conversation, returnFocus}: {
+  tab, setTab, detail, openDetail, conversation, returnFocus, anchor, viewport}: {
   state: 'open' | 'closing' | 'closed'; onClose: () => void; onClosed: () => void; user: User; feed: AgentFeed; note: PageNoteState;
   path: string; fundCode: string | null; evidenceId?: string; compact: boolean; reducedMotion: boolean; tab: PanelTab;
   setTab: (tab: PanelTab) => void; detail: PanelDetail | null; openDetail: (detail: PanelDetail | null) => void;
   conversation: RefObject<ConversationHandle | null>; returnFocus: RefObject<HTMLElement | null>;
+  anchor?: DockPoint | null; viewport?: DockViewport | null;
 }) {
   const panel = useRef<HTMLDivElement | null>(null);
   const titleId = useId(), baseId = useId();
   const [now, setNow] = useState(() => Date.now());
+  const [expanded, setExpanded] = useState(true);
+  useEffect(() => {
+    try {
+      const stored = window.localStorage.getItem(`blackswan-team-expanded-v2:${user.user_id}`);
+      setExpanded(stored !== 'false');
+    } catch {setExpanded(true);}
+  }, [user.user_id]);
   useEffect(() => {setNow(Date.now());}, [feed.team, feed.updatedAt]);
   const open = state === 'open';
   const team = feed.team;
@@ -50,6 +59,13 @@ export default function AgentTeamPanel({state, onClose, onClosed, user, feed, no
     ...(detail ? [{id: 'detail' as const, label: detail.kind === 'agent' ? ROLE_META[detail.role].name : 'Vaka akışı'}] : []),
   ];
   const active = tabs.some(item => item.id === tab) ? tab : 'reporter';
+  const strip = !expanded;
+  const placement = anchor && viewport && viewport.width >= 640 ? panelPlacement(anchor, viewport) : undefined;
+  function toggleTeam() {
+    const next = strip;
+    setExpanded(next);
+    try {window.localStorage.setItem(`blackswan-team-expanded-v2:${user.user_id}`, String(next));} catch {/* Layout works without storage. */}
+  }
 
   // Focus trap, Esc to close and body scroll lock while the dialog is open.
   useEffect(() => {
@@ -96,13 +112,13 @@ export default function AgentTeamPanel({state, onClose, onClosed, user, feed, no
   const openCase = (caseId: string) => {openDetail({kind: 'case', caseId}); setTab('detail');};
   const reviewHref = user.role === 'viewer' ? '/method#evidence' : '/review';
   const stage = <TeamStage team={team} status={feed.teamStatus} reducedMotion={reducedMotion} onSelect={select}
-    selected={detail?.kind === 'agent' ? detail.role : null} onTalk={() => setTab('reporter')} reviewHref={reviewHref}/>;
+    selected={detail?.kind === 'agent' ? detail.role : null} onTalk={() => setTab('reporter')} reviewHref={reviewHref} strip={!compact && strip}/>;
   const liveText = feed.teamStatus === 'loading' && !team ? 'Bağlanıyor…' : !team ? 'Ekibin durumu alınamıyor' :
     feed.stale ? 'Bağlantı yeniden deneniyor' : `Canlı · ${feed.updatedAt ? relativeTime(new Date(feed.updatedAt).toISOString(), now) : 'az önce'} güncellendi`;
 
   return <div className="ag-layer" data-state={state} hidden={state === 'closed'}>
     <div className="ag-backdrop" onClick={onClose} aria-hidden="true"/>
-    <div ref={panel} className="ag-panel" role="dialog" aria-modal="true" aria-labelledby={titleId} id="ag-team-panel">
+    <div ref={panel} className={`ag-panel${strip ? ' has-team-strip' : ''}`} style={placement} role="dialog" aria-modal="true" aria-labelledby={titleId} id="ag-team-panel">
       <div className="ag-handle" aria-hidden="true"/>
       <div className="ag-head">
         <div className="ag-head-title">
@@ -111,14 +127,14 @@ export default function AgentTeamPanel({state, onClose, onClosed, user, feed, no
             <p className="ag-head-sub"><span className={`ag-live${team && !feed.stale ? ' is-live' : ''}`} aria-hidden="true"/>{liveText}</p></div>
         </div>
         <div className="ag-head-meta">
-          <div className="ag-head-date"><span className="ag-label">İnceleme tarihi</span><strong>{scope.date ?? scope.mode}</strong>{scope.date && <span className="ag-muted">{scope.mode}</span>}</div>
+          <div className="ag-head-date"><span className="ag-label">İnceleme tarihi</span><strong>{scope.date ?? scope.mode}</strong></div>
           <BudgetMeter team={team}/>
         </div>
         <button type="button" className="ag-close" aria-label="Ajan ekibi panelini kapat" onClick={onClose}>
           <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </button>
       </div>
-      {!compact && <div className="ag-stage-wrap">{stage}<Ticker team={team} now={now}/>
+      {!compact && <div className={`ag-stage-wrap ag-panel-stage${strip ? ' is-strip' : ''}`} id={`${baseId}-team`}>{stage}{!strip && <Ticker team={team} now={now}/>}
         {!team && feed.teamStatus !== 'loading' && <div className="ag-stage-error" role="status"><span>Ekibin canlı durumu şu anda alınamıyor. Bağlantı kendiliğinden yeniden denenecek.</span>
           <button type="button" className="ag-ghost" onClick={feed.refresh}>Şimdi dene</button></div>}</div>}
       {!team && compact && feed.teamStatus !== 'loading' && active !== 'team' && <div className="ag-stage-error is-inline" role="status"><span>Ekibin canlı durumu şu anda alınamıyor.</span>
@@ -132,6 +148,8 @@ export default function AgentTeamPanel({state, onClose, onClosed, user, feed, no
         </button>)}
         {active === 'detail' && <button type="button" className="ag-tab-close" aria-label="Çalışma alanını kapat" onClick={() => {openDetail(null); setTab('reporter');}}>
           <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>}
+        {!compact && <button type="button" className="ag-team-toggle" aria-expanded={!strip} aria-controls={`${baseId}-team`} onClick={toggleTeam}>
+          {strip ? 'Ekibi genişlet' : 'Ekibi daralt'}<span aria-hidden="true">{strip ? '↗' : '↙'}</span></button>}
       </div>
       <div className="ag-body" role="tabpanel" id={`${baseId}-panel`} aria-labelledby={`${baseId}-tab-${active}`}>
         {active === 'team' && compact && <div className="ag-view ag-view-team"><div className="ag-stage-wrap is-compact">{stage}<Ticker team={team} now={now}/>

@@ -45,8 +45,9 @@ def list_stocks(reader: Reader, q: Annotated[str, Query(max_length=80)]="",
 def stock_detail(symbol: Annotated[str, Path(pattern=r"^[A-Z][A-Z0-9]{1,11}$")], reader: Reader,
                  days: Annotated[int, Query(ge=1,le=731)]=365, cutoff: Cutoff=None) -> StockDetail:
     resolved = resolve_cutoff(cutoff)
-    stock = reader.stock(symbol,resolved)
+    dated = historical_mode() or cutoff is not None
+    stock = reader.stock(symbol,resolved,dated=dated)
     if stock is None:
         raise HTTPException(404,"STOCK_NOT_FOUND")
     end = resolved.astimezone(ISTANBUL).date()
-    return reader.detail(stock,end-timedelta(days=days-1),end,resolved)
+    return reader.detail(stock,end-timedelta(days=days-1),end,resolved,dated=dated)

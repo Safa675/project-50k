@@ -88,6 +88,7 @@ class ReportTests(unittest.TestCase):
         self.assertEqual(rows['C']['outcomes']['all'], 'listed_not_assessable')
         self.assertEqual(rows['D']['outcomes'], {'all': 'flagged_outside', 'price': 'quiet', 'data_quality': 'flagged_outside'})
         self.assertEqual(self.report['ground_truth']['listed_total'], 4)
+        self.assertTrue(self.report['ground_truth']['records_available'])
         self.assertEqual(self.report['ground_truth']['outside_scan'], [{'fund_code': 'Z', 'name': 'Synthetic fund Z'}])
         self.assertEqual(set(self.report['detectors']), {'D1', 'D4', 'AN-DQ-002'})
         self.assertEqual(self.report['detectors']['D1']['family'], 'price')
@@ -103,6 +104,7 @@ class ReportTests(unittest.TestCase):
         self.assertIsNone(summary['detection_rate']['percent'])
         self.assertIsNone(summary['times_more_often'])
         self.assertEqual(report['funds'], [])
+        self.assertFalse(report['ground_truth']['records_available'])
 
     def test_scan_cutoff_is_the_end_of_the_istanbul_day(self):
         cutoff = evaluation.scan_cutoff()

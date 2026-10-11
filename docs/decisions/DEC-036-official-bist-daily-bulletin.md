@@ -47,6 +47,9 @@ dates each file. That gives dated closes and a dated BIST 30 membership without 
 
 ## Effect
 
-`services/p50k/product/stock_bulletin.py` imports one bulletin (`--zip` and `--capture-json`) or a downloaded folder
-with its `manifest.json` (`--folder`); re-runs insert nothing new. No migration is needed: the bulletin uses the
+`services/p50k/product/stock_bulletin.py` imports one bulletin (`--zip` and `--capture-json`), a downloaded folder
+with its `manifest.json` (`--folder`), or a manifest beside its ZIPs (`--manifest`). It validates every listed file
+before starting the database transaction; duplicate dates, mismatched manifest dates and successful captures
+without a file reject the batch. Documented weekends or failed captures remain gaps in the import report.
+Re-runs insert nothing new. No migration is needed: the bulletin uses the
 existing `obs.stock_prices` and `ref.stock_instruments` tables and registers itself in `ref.sources`.

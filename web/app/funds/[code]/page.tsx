@@ -12,6 +12,7 @@ import FundEvidence from '@/components/FundEvidence';
 import FundSections from '@/components/FundSections';
 import FundShare from '@/components/FundShare';
 import FundDecision from '@/components/FundDecision';
+import FundAlert from '@/components/FundAlert';
 import AgentPage from '@/components/agents/AgentPage';
 import WatchlistButton from '@/components/WatchlistButton';
 import styles from '@/components/Funds.module.css';
@@ -33,7 +34,7 @@ function EvidenceSources({signals,events,documents}:{signals:FundSignal[];events
 export default async function Detail({params}: {params: Promise<{code: string}>}) {
   const {code} = await params;
   if (!/^[A-Z0-9]{2,12}$/.test(code)) notFound();
-  const [response, documentResponse, seriesResponse, user] = await Promise.all([serverApi(`/funds/${code}?days=731`), serverApi(`/funds/${code}/documents?limit=20`), serverApi(`/funds/${code}/series?limit=60`), requireUser()]);
+  const [response, documentResponse, seriesResponse, summaryResponse, user] = await Promise.all([serverApi(`/funds/${code}?days=731`), serverApi(`/funds/${code}/documents?limit=20`), serverApi(`/funds/${code}/series?limit=60`), serverApi(`/agents/funds/${code}/summary`).catch(()=>null), requireUser()]);
   if (response.status === 404) notFound();
   if (!response.ok) throw new Error('Fon verilerine şu anda erişilemiyor.');
   const data = await response.json();
@@ -43,6 +44,7 @@ export default async function Detail({params}: {params: Promise<{code: string}>}
   const reportPoints:FundReportPoint[]=Array.isArray(reportData?.items)?reportData.items:[];
   const points: FundPoint[] = data.chart.points;
   const signals: FundSignal[] = data.signals;
+  const summary = summaryResponse?.ok ? await summaryResponse.json().catch(()=>null) : null;
   const newest = data.price_summary?.latest_observation ?? points.at(-1);
   const latest:FundPoint|undefined = data.price_summary?.last_available ?? latestKnownNav(points);
   const document = documents[0];
@@ -69,6 +71,7 @@ export default async function Detail({params}: {params: Promise<{code: string}>}
       <div className={styles.actions}><FundShare/><Link className={styles.iconButton} href="/notifications" aria-label="Bildirimler"><img src="/design/bell.svg" alt=""/></Link><WatchlistButton code={code}/></div>
     </header>
     <div className={styles.priceSummary}><p className={styles.muted}><FundTooltip title="Fon pay fiyatı" text="Fonun yayımlanmış günlük birim pay değeri. Gün içi işlem fiyatı değildir. Kaynakta sıfır veya eksik gelen değerler kullanılmaz.">Günlük fon pay fiyatı</FundTooltip></p><div className={styles.priceLine}><span className={styles.priceValue}>{latest ? decimal(latest.nav) : 'Bu dönemde fiyat kaydı yok'}</span><span className={styles.muted}>{latest ? `${dateTr(latest.effective_date)} · TEFAS` : 'Bu dönemde yayımlanmış fiyat yok'}</span></div>{latest&&newest&&(newest.nav===null||newest.ambiguous_revision)&&<p className={styles.caption}>Son kayıtta ({dateTr(newest.effective_date)}) kullanılabilir fiyat yok. Gösterilen son fiyatın tarihi {dateTr(latest.effective_date)}.</p>}</div>
+    <FundAlert summary={summary} signals={signals} canReview={user.role!=='viewer'}/>
     <div className={styles.columns}>
       <div className={styles.mainColumn}><FundSections overview={overview} evidence={<><div className={styles.sectionTitle}><h2>Gelişmeler</h2></div><FundEvidence signals={findings}/></>} sources={<EvidenceSources signals={signals} events={data.events} documents={documents}/>}/></div>
       <aside className={styles.sidebar}>

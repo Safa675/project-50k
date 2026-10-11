@@ -13,6 +13,7 @@ from dataclasses import dataclass
 from datetime import date, datetime, time
 from decimal import ROUND_HALF_UP, Decimal
 from typing import Any, Iterable
+from urllib.parse import urlparse
 
 from p50k.product.archive import ISTANBUL
 from p50k.product.chat_language import DEFINITIONS
@@ -128,7 +129,7 @@ def build_report(run: dict[str, Any], funds: list[FundSignals], events: dict[str
     listed = set(events) & scanned
     outside = [{'fund_code': code, 'name': events[code]} for code in sorted(set(events) - scanned)]
     rows = fund_rows(funds, listed)
-    return {'run': run, 'ground_truth': {**ground_truth, 'listed_total': len(events), 'outside_scan': outside},
+    return {'run': run, 'ground_truth': {**ground_truth, 'listed_total': len(events), 'records_available': bool(events), 'outside_scan': outside},
             'summaries': {view: summarize(funds, listed, view) for view in VIEWS},
             'funds': rows, 'detectors': detector_labels(rows),
             'method': {'excluded_detectors': [REGULATORY], 'price_detectors': sorted(PRICE_DETECTORS),
@@ -164,28 +165,34 @@ def read_funds(connection, run_id: str, as_of: str, cutoff: str) -> list[FundSig
               FILTER (WHERE signal.state IN ('TRIGGERED','NOT_TRIGGERED') AND admissible.ok),'{}')
         FROM det.signals signal JOIN det.evidence_items item USING(evidence_id)
         JOIN ref.funds fund ON fund.fund_code=signal.fund_code
+        JOIN det.detector_runs run ON run.run_id=signal.run_id
         CROSS JOIN LATERAL (SELECT signal.detector_id<>%s AND signal.as_of<=%s::date
+            AND item.run_id=signal.run_id AND item.fund_code=signal.fund_code
+            AND item.detector_id=signal.detector_id AND item.origin=run.origin
+            AND (item.effective_date IS NULL OR item.effective_date<=%s::date)
             AND NOT COALESCE((item.metadata->>'is_attribute')::boolean,false)
             AND item.available_at IS NOT NULL AND item.available_at<=%s::timestamptz AS ok) admissible
         WHERE signal.run_id=%s
         GROUP BY signal.fund_code,fund.name ORDER BY signal.fund_code""",
-        (REGULATORY, as_of, cutoff, run_id)).fetchall()
+        (REGULATORY, as_of, as_of, cutoff, run_id)).fetchall()
     return [FundSignals(row[0], row[1], frozenset(row[2]), frozenset(row[3])) for row in rows]
 
 
-def read_events(connection) -> tuple[dict[str, str], dict[str, Any]]:
+def read_events(connection, include_synthetic: bool = False) -> tuple[dict[str, str], dict[str, Any]]:
     """Confirmed liquidation orders of 17 September, one per fund; candidate copies never count."""
     rows = connection.execute("""SELECT event.fund_code,fund.name,event.metadata->>'bulletin_id',
             event.metadata->>'publication_date',event.metadata->>'source_url',event.published_at
         FROM obs.regulatory_events event JOIN ref.funds fund USING(fund_code)
         WHERE event.event_type=%s AND event.status='CONFIRMED' AND event.effective_date=%s
-        ORDER BY event.fund_code,event.event_id""", (EVENT_TYPE, EVENT_DATE)).fetchall()
+          AND (event.origin<>'SYNTHETIC' OR %s)
+        ORDER BY event.fund_code,event.event_id""", (EVENT_TYPE, EVENT_DATE, include_synthetic)).fetchall()
     events = {row[0]: row[1] for row in rows}
     ground_truth = {'source': 'SPK', 'event_type': EVENT_TYPE, 'status': 'CONFIRMED', 'decision_date': EVENT_DATE.isoformat(),
                     'decision_references': list(DECISION_REFERENCES),
                     'bulletins': sorted({row[2] for row in rows if row[2]}),
                     'publication_dates': sorted({row[3] for row in rows if row[3]}),
-                    'source_urls': sorted({row[4] for row in rows if row[4] and row[4].startswith('https://')}),
+                    'source_urls': sorted({row[4] for row in rows if row[4] and
+                        urlparse(row[4]).scheme == 'https' and urlparse(row[4]).hostname in {'spk.gov.tr', 'www.spk.gov.tr', 'spk.gov.tr.'}}),
                     'publication_time_known': bool(rows) and all(row[5] is not None for row in rows),
                     'published_after_scan': EVENT_DATE > SCAN_DAY}
     return events, ground_truth
@@ -197,5 +204,5 @@ def retrospective(connection, *, version_id: str, include_synthetic: bool) -> di
     if run is None:
         return None
     funds = read_funds(connection, run['run_id'], run['as_of'], run['cutoff'])
-    events, ground_truth = read_events(connection)
+    events, ground_truth = read_events(connection, include_synthetic)
     return build_report(run, funds, events, ground_truth)

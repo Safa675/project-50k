@@ -1,6 +1,6 @@
 # Project 50K: instructions for coding agents
 
-**Latest takeover checkpoint:** read `plans/2026-10-11-codex-handoff-prompt.md` (2026-10-11 10:40); earlier: `plans/2026-10-10-claude-resume-handoff.md`
+**Latest takeover checkpoint:** read the newest status in `docs/notes/current-state.md`, then `plans/2026-10-11-codex-handoff-prompt.md` and its Sunday release update; earlier: `plans/2026-10-10-claude-resume-handoff.md`
 in full. It separates the released app from unfinished date-context, chat-history
 and monthly-report integration. Follow DEC-034's product-first pacing; do not
 repeat broad Linux regressions or backup rehearsals for that unfinished slice.

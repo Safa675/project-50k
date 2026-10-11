@@ -48,7 +48,7 @@ export function TeamOverviewPage({userId, reviewHref, scopeKey}: {userId: string
         <p className="ag-muted">Nöbetçi fonları sürekli tarar ve vaka açar. Hipotezci ile Şüpheci aynı anda açıklama ve karşı açıklama yazar, Doğrulayıcı bunları kodla hesaplanan testlerle sınar, Raportör de denetlenebilir bir rapor hazırlar. Son karar her zaman insandadır. Bu sayfa salt okunurdur; Raportörle sağ alttaki düğmeden konuşabilirsiniz.</p>
       </div>
       <div className="ag-page-meta">
-        <div className="ag-head-date"><span className="ag-label">İnceleme tarihi</span><strong>{scope.date ?? scope.mode}</strong>{scope.date && <span className="ag-muted">{scope.mode}</span>}</div>
+        <div className="ag-head-date"><span className="ag-label">İnceleme tarihi</span><strong>{scope.date ?? scope.mode}</strong></div>
         <BudgetMeter team={feed.team}/>
       </div>
     </header>

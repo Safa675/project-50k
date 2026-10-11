@@ -15,6 +15,7 @@ from uuid import uuid4
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 from psycopg.types.json import Jsonb
+from psycopg.errors import CheckViolation
 
 from p50k.product import evaluation
 from p50k.product.archive import ISTANBUL
@@ -45,11 +46,21 @@ def seed_run(connection, funds: dict[str, list[tuple]]) -> str:
         for detector, state, *flags in items:
             late, attribute = (list(flags) + [False, False])[:2]
             evidence = 'ev:evaluation:' + uuid4().hex
-            connection.execute("""INSERT INTO det.evidence_items(evidence_id,fund_code,run_id,detector_id,origin,
+            statement = """INSERT INTO det.evidence_items(evidence_id,fund_code,run_id,detector_id,origin,
                 effective_date,available_at,unit,values,thresholds,triggered,state,source_references,metadata)
-                VALUES (%s,%s,%s,%s,'SYNTHETIC',%s,%s,'synthetic','{}','{}',%s,%s,'[]',%s)""",
-                (evidence, code, run, detector, AS_OF, cutoff + timedelta(days=2) if late else cutoff - timedelta(hours=2),
-                 {'TRIGGERED': True, 'NOT_TRIGGERED': False}.get(state), state, Jsonb({'is_attribute': True} if attribute else {})))
+                VALUES (%s,%s,%s,%s,'SYNTHETIC',%s,%s,'synthetic','{}','{}',%s,%s,'[]',%s)"""
+            values = (evidence, code, run, detector, AS_OF, cutoff + timedelta(days=2) if late else cutoff - timedelta(hours=2),
+                      {'TRIGGERED': True, 'NOT_TRIGGERED': False}.get(state), state, Jsonb({'is_attribute': True} if attribute else {}))
+            if late:
+                # Stored replay evidence is already guarded against look-ahead.
+                # Verify that guard instead of bypassing it to construct a fixture.
+                try:
+                    with connection.transaction():
+                        connection.execute(statement, values)
+                except CheckViolation:
+                    continue
+                raise AssertionError('Future evidence was admitted to the stored scan')
+            connection.execute(statement, values)
             connection.execute("""INSERT INTO det.signals(run_id,fund_code,detector_id,state,reason,value,threshold,
                 evidence_id,as_of) VALUES (%s,%s,%s,%s,'SYNTHETIC',%s,%s,%s,%s)""",
                 (run, code, detector, state, Decimal('2') if state == 'TRIGGERED' else Decimal('1'), Decimal('1.5'),
@@ -78,8 +89,8 @@ class RetrospectiveDatabaseTests(unittest.TestCase):
         if self.settings.db_name != 'p50k_dev':
             raise RuntimeError('Synthetic evaluation tests require p50k_dev')
         tag = uuid4().hex[:7].upper()
-        self.code = {name: 'EV' + name + tag for name in ('CAUGHT', 'REG', 'NA', 'DQ', 'OUT', 'QUIET', 'OTHERNA', 'LATE',
-                                                         'CAND', 'DATE', 'GONE')}
+        self.code = {name: 'EV' + str(index).zfill(2) + tag for index, name in enumerate(
+            ('CAUGHT', 'REG', 'NA', 'DQ', 'OUT', 'QUIET', 'OTHERNA', 'LATE', 'CAND', 'DATE', 'GONE'))}
         with connect(self.settings) as connection:
             for code in self.code.values():
                 connection.execute('INSERT INTO ref.funds(fund_code,name,category,source_sha256) VALUES (%s,%s,%s,%s)',
@@ -135,7 +146,7 @@ class RetrospectiveDatabaseTests(unittest.TestCase):
         self.assertNotIn(self.code['CAND'], [item['fund_code'] for item in truth['outside_scan']])
         self.assertIn('2026-61', truth['bulletins'])
         self.assertEqual((truth['status'], truth['decision_date']), ('CONFIRMED', '2026-09-17'))
-        self.assertNotIn('https://example.invalid/synthetic.pdf', truth['source_urls'][:0])
+        self.assertNotIn('https://example.invalid/synthetic.pdf', truth['source_urls'])
 
     def test_replay_runs_need_the_current_detector_version(self):
         with connect(self.settings) as connection:

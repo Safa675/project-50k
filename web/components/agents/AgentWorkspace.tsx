@@ -56,7 +56,7 @@ function Timeline({items, role, now}: {items: AgentMessage[]; role?: AgentRole; 
         {(message.hypothesis_type || message.verdict) && <p className="ag-chips">{message.hypothesis_type && <span className="ag-tag">{message.hypothesis_type}</span>}
           {message.verdict && <span className={`ag-tag ag-verdict`}>{message.verdict}</span>}</p>}
         <p className="ag-timeline-text">{message.body_tr}</p>
-        <p className="ag-timeline-origin">{message.ai_written ? 'Yapay zekâ yazdı; metin sunucu denetiminden geçti.' : 'Kural tabanlı adım; yapay zekâ kullanılmadı.'}
+        <p className="ag-timeline-origin">{message.ai_written ? 'Ajan değerlendirmesi' : message.kind === 'test_result' ? 'Hesaplanan sonuç' : 'Ekip kaydı'}
           {message.fund_code && <> · <Link href={`/funds/${message.fund_code}`}>{message.fund_code}</Link></>}</p>
       </div>
     </li>;
@@ -82,7 +82,7 @@ export function RoleWorkspace({role, onOpenCase, standalone = false}: {role: Age
   return <div className={`ag-workspace${standalone ? ' is-standalone' : ''}`}>
     <div className="ag-workspace-head">
       <span className={`ag-avatar ag-avatar-lg ag-avatar-${role}`} aria-hidden="true"><RoleGlyph role={role} size={role === 'reporter' ? 34 : 24}/></span>
-      <div><p className="ag-eyebrow">Salt okunur çalışma alanı{meta.ai ? ' · Yapay zekâ kullanır' : ' · Kural tabanlı, yapay zekâ kullanmaz'}</p>
+      <div><p className="ag-eyebrow">Ekip çalışması</p>
         <Heading>{meta.name}</Heading><p className="ag-muted">{meta.description}</p></div>
     </div>
     {state.status === 'loading' && !data && <p className="ag-empty" role="status">Çalışma alanı yükleniyor…</p>}
@@ -107,7 +107,7 @@ export function RoleWorkspace({role, onOpenCase, standalone = false}: {role: Age
           <ul className="ag-task-lines">{data.tasks.slice(0, 8).map(task => <TaskLine key={task.task_id} task={task} now={now}/>)}</ul></section>}
       </div>
       <div className="ag-workspace-col">
-        <section className="ag-block" aria-labelledby={`ag-outputs-${role}`}><h3 id={`ag-outputs-${role}`}>Doğrulanmış çıktılar ve ekip içi yazışma</h3>
+        <section className="ag-block ag-output-block" aria-labelledby={`ag-outputs-${role}`}><h3 id={`ag-outputs-${role}`}>Çıktılar ve ekip yazışmaları</h3>
           {outgoing.length === 0 && incoming.length === 0 ? <p className="ag-muted">Bu ajanın henüz kayıtlı bir çıktısı yok.</p> : <Timeline items={data.messages} role={role} now={now}/>}
         </section>
       </div>

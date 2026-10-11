@@ -16,7 +16,7 @@ from uuid import uuid4
 import zipfile
 
 from p50k.product.stock_bulletin import (
-    FALLBACK_RULE, RULE, SOURCE_ID, load_capture, main, read_bulletin, read_folder, summary,
+    FALLBACK_RULE, RULE, SOURCE_ID, load_capture, main, read_bulletin, read_folder, read_manifest, summary,
 )
 
 HEADER = ["TRADE DATE", "INSTRUMENT SERIES CODE", "INSTRUMENT NAME", "INSTRUMENT GROUP", "BIST 30 INDEX", "SUSPENDED",
@@ -92,7 +92,8 @@ class BulletinParsingTests(unittest.TestCase):
                 self.read(**options)
         path, capture = write_bulletin(self.root)
         for change in ({"sha256": "0" * 64}, {"url": "https://example.com/data/thb/2020/01/thb202001021.zip"},
-                       {"url": "https://borsaistanbul.com/data/thb/2020/02/thb202001021.zip"}, {"status": 404}):
+                       {"url": "https://borsaistanbul.com/data/thb/2020/02/thb202001021.zip"}, {"status": 404},
+                       {"captured_at": "2020-01-01T12:00:00+00:00"}):
             with self.subTest(change=change), self.assertRaises(ValueError):
                 read_bulletin(path, load_capture({**capture, **change}))
         with self.assertRaises(ValueError):
@@ -115,6 +116,31 @@ class BulletinParsingTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             read_folder(self.root)
 
+    def test_manifest_rejects_duplicate_dates_wrong_dates_sources_and_lost_files(self):
+        _, capture = write_bulletin(self.root)
+        for manifest in ({"entries": [capture, capture]},
+                         {"entries": [{**capture, "trade_date": "2020-01-03"}]},
+                         {"entries": [{**capture, "file": None}]},
+                         {"entries": [None]},
+                         {"source": "other-source", "entries": [capture]}):
+            with self.subTest(manifest=manifest):
+                path = self.root / "manifest.json"
+                path.write_text(json.dumps(manifest), encoding="utf-8")
+                with self.assertRaises(ValueError):
+                    read_manifest(path)
+
+    def test_archive_cannot_admit_extra_members_or_a_path_instead_of_its_csv(self):
+        for inner_names in (["thb202001021.csv", "extra.py"], ["../thb202001021.csv"]):
+            path, capture = write_bulletin(self.root)
+            with zipfile.ZipFile(path) as archive:
+                content = archive.read(archive.namelist()[0])
+            with zipfile.ZipFile(path, "w") as archive:
+                for name in inner_names:
+                    archive.writestr(name, content)
+            capture["sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
+            with self.subTest(names=inner_names), self.assertRaises(ValueError):
+                read_bulletin(path, load_capture(capture))
+
     def test_cli_dry_run_reports_without_database(self):
         path, capture = write_bulletin(self.root)
         record = self.root / "capture.json"
@@ -126,6 +152,19 @@ class BulletinParsingTests(unittest.TestCase):
         result = json.loads(output.getvalue())
         self.assertEqual((result["bulletins"], result["rows"], result["dry_run"]), (1, 30, True))
         self.assertEqual(main(["import", "--zip", str(path), "--dry-run"]), 1)
+
+    def test_folder_and_manifest_cli_dry_runs_share_validation_and_need_no_database(self):
+        entries = [write_bulletin(self.root, trade)[1] for trade in (date(2020, 1, 3), date(2020, 1, 2))]
+        path = self.root / "manifest.json"
+        path.write_text(json.dumps({"source": SOURCE_ID, "entries": entries}), encoding="utf-8")
+        from contextlib import redirect_stdout
+        for flag, value in (("--folder", self.root), ("--manifest", path)):
+            output = io.StringIO()
+            with redirect_stdout(output):
+                self.assertEqual(main(["import", flag, str(value), "--dry-run"]), 0)
+            result = json.loads(output.getvalue())
+            self.assertEqual((result["bulletins"], result["rows"], result["trade_dates"]), (2, 60, ["2020-01-02", "2020-01-03"]))
+        self.assertEqual(main(["import", "--folder", str(self.root), "--capture-json", str(path), "--dry-run"]), 1)
 
 
 @unittest.skipUnless(os.environ.get("P50K_TEST_DATABASE") == "1", "requires isolated PostgreSQL p50k_dev")
@@ -179,7 +218,7 @@ class BulletinDatabaseTests(unittest.TestCase):
         available = self.bulletin.available_at
         before = self.reader.stocks("", 30, 0, available - timedelta(seconds=1), dated=True)
         self.assertNotEqual(before.membership_source_sha256, self.bulletin.zip_sha256)
-        self.assertIsNone(self.reader.stock(self.members[0], available - timedelta(seconds=1)))
+        self.assertIsNone(self.reader.stock(self.members[0], available - timedelta(seconds=1), dated=True))
         after = self.reader.stocks("", 30, 0, available + timedelta(minutes=1), dated=True)
         self.assertEqual((after.universe, after.membership_date, after.total), ("BIST30_DATED_BULLETIN", self.trade, 30))
         self.assertEqual(after.membership_source_sha256, self.bulletin.zip_sha256)
@@ -192,6 +231,11 @@ class BulletinDatabaseTests(unittest.TestCase):
         live = self.reader.stocks("", 30, 0, available + timedelta(minutes=1), dated=False)
         self.assertEqual(live.universe, "BIST30_CURRENT_CATALOG")
         self.assertNotIn(self.members[0], [entry.symbol for entry in live.items])
+        self.assertIsNone(self.reader.stock(self.members[0], available + timedelta(minutes=1)))
+        self.assertEqual(self.reader.stock(self.members[0], available + timedelta(minutes=1), dated=True).symbol, self.members[0])
+        unavailable = self.reader.stocks("", 30, 0, datetime(1900,1,1,tzinfo=timezone.utc), dated=True)
+        self.assertEqual((unavailable.items,unavailable.total,unavailable.universe),([],0,"BIST30_DATED_BULLETIN"))
+        self.assertIsNone(unavailable.catalog_captured_at)
 
     def test_official_close_is_preferred_and_each_point_names_its_source(self):
         self.do_import()
@@ -201,7 +245,7 @@ class BulletinDatabaseTests(unittest.TestCase):
             origin,available_at,observed_at,availability_rule,price_adjustment) VALUES(%s,%s,99,'forinvest',%s,%s,'SYNTHETIC',%s,%s,
             'synthetic_capture','UNVERIFIED'),(%s,%s,98,'forinvest',%s,%s,'SYNTHETIC',%s,%s,'synthetic_capture','UNVERIFIED')""",
             (symbol, self.trade, checksum, checksum, later, later, symbol, self.trade + timedelta(days=1), checksum, checksum, later, later))
-        stock = self.reader.stock(symbol, later)
+        stock = self.reader.stock(symbol, later, dated=True)
         detail = self.reader.detail(stock, self.trade - timedelta(days=5), self.trade + timedelta(days=1), later)
         self.assertEqual([(point.effective_date, point.close, point.source_id) for point in detail.chart.points],
                          [(self.trade, "10.5", SOURCE_ID), (self.trade + timedelta(days=1), "98", "forinvest")])
@@ -209,8 +253,26 @@ class BulletinDatabaseTests(unittest.TestCase):
         self.assertIsNone(detail.chart.points[1].change_pct)
         self.assertEqual(detail.price_adjustment, "MIXED")
         self.assertEqual(detail.dated_member_on, self.trade)
+        preserved = self.connection.execute("SELECT close,available_at FROM obs.stock_prices WHERE symbol=%s AND source_id='forinvest' ORDER BY effective_date",(symbol,)).fetchall()
+        self.assertEqual([(str(row[0]),row[1]) for row in preserved],[("99",later),("98",later)])
         early = self.reader.detail(stock, self.trade - timedelta(days=5), self.trade, self.bulletin.available_at - timedelta(seconds=1))
         self.assertEqual(early.chart.points, [])
+
+    def test_latest_dated_membership_excludes_removed_members_and_future_publication(self):
+        self.do_import()
+        replacement = symbols("Z" + uuid4().hex[:6].upper())
+        next_trade = self.trade + timedelta(days=1)
+        path, capture = write_bulletin(self.root, next_trade, replacement)
+        next_bulletin = read_bulletin(path, load_capture(capture))
+        from p50k.product.stock_bulletin import import_bulletins
+        import_bulletins(self.connection, [next_bulletin], origin="SYNTHETIC")
+        before = next_bulletin.available_at - timedelta(seconds=1)
+        self.assertEqual(self.reader.stocks("", 30, 0, before, dated=True).membership_date, self.trade)
+        self.assertIsNone(self.reader.stock(replacement[0], before, dated=True))
+        after = next_bulletin.available_at + timedelta(seconds=1)
+        self.assertEqual(self.reader.stocks("", 30, 0, after, dated=True).membership_date, next_trade)
+        self.assertIsNone(self.reader.stock(self.members[0], after, dated=True))
+        self.assertEqual(self.reader.stock(replacement[0], after, dated=True).symbol, replacement[0])
 
 
 if __name__ == "__main__":

@@ -168,7 +168,7 @@ class StockQueries:
         """Current catalog, or in a retrospective view the dated bulletin membership at the cutoff."""
         term = "%" + query.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_") + "%"
         where = " WHERE symbol ILIKE %s OR name ILIKE %s"
-        captured = self._rows(CATALOG_CTE + "SELECT captured_at FROM catalog", ())
+        captured = self._rows(CATALOG_CTE + "SELECT captured_at FROM catalog", ()) if not dated else []
         catalog_captured_at = captured[0]["captured_at"] if captured else None
         bulletin = self._rows(BULLETIN_CTE + "SELECT * FROM bulletin", (cutoff,)) if dated else []
         if bulletin:
@@ -183,6 +183,9 @@ class StockQueries:
                               metadata_current_only=False, catalog_captured_at=catalog_captured_at,
                               membership_date=bulletin[0]["effective_date"], membership_available_at=bulletin[0]["available_at"],
                               membership_source_sha256=bulletin[0]["source_sha256"])
+        if dated:
+            return StocksPage(items=[], total=0, limit=limit, offset=offset, universe="BIST30_DATED_BULLETIN",
+                              metadata_current_only=False, catalog_captured_at=None)
         total = self._rows(CATALOG_CTE + "SELECT count(*) total FROM members" + where, (term, term))[0]["total"]
         members = self._rows(CATALOG_CTE + "SELECT * FROM members" + where + " ORDER BY symbol LIMIT %s OFFSET %s", (term, term, limit, offset))
         statement = PRICE_SQL.replace("latest.effective_date,latest.source_sha256 DESC", "latest.effective_date DESC,latest.source_sha256 DESC") + " LIMIT 1"
@@ -196,17 +199,17 @@ class StockQueries:
                                       last_close=decimal_text(latest["close"]) if latest else None, **extra))
         return StocksPage(items=items, total=total, limit=limit, offset=offset, catalog_captured_at=catalog_captured_at)
 
-    def stock(self, symbol: str, cutoff: datetime | None=None) -> StockInstrument | None:
-        """A current catalog member, or an instrument with official bulletin rows available at the cutoff."""
+    def stock(self, symbol: str, cutoff: datetime | None=None, *, dated: bool=False) -> StockInstrument | None:
+        """A member of the current catalog or the latest eligible dated bulletin."""
+        if dated:
+            if cutoff is None:
+                raise ValueError("Dated membership requires an availability cutoff")
+            rows = self._rows(BULLETIN_CTE + "SELECT symbol,name,exchange,currency FROM members WHERE symbol=%s", (cutoff, symbol))
+            return StockInstrument(**rows[0]) if rows else None
         rows = self._rows(CATALOG_CTE + "SELECT * FROM members WHERE symbol=%s", (symbol,))
-        if not rows and cutoff is not None:
-            rows = self._rows("""SELECT instrument.symbol,instrument.name,instrument.exchange,instrument.currency
-                FROM ref.stock_instruments instrument WHERE instrument.symbol=%s AND EXISTS(
-                    SELECT 1 FROM obs.stock_prices price WHERE price.symbol=instrument.symbol
-                    AND price.source_id='borsaistanbul-thb' AND price.available_at<=%s)""", (symbol, cutoff))
         return StockInstrument(**rows[0]) if rows else None
 
-    def detail(self, stock: StockInstrument, start: date, end: date, cutoff: datetime) -> StockDetail:
+    def detail(self, stock: StockInstrument, start: date, end: date, cutoff: datetime, *, dated: bool=False) -> StockDetail:
         rows = self._rows(PRICE_SQL, (stock.symbol, start, end, cutoff))
         adjustments = {row.pop("price_adjustment") for row in rows}
         points = []
@@ -222,7 +225,8 @@ class StockQueries:
         actions=[StockAction(event_id=row["event_id"],effective_date=row["effective_date"],
                              available_at=row["available_at"],source_sha256=row["source_sha256"],
                              payload=row["metadata"].get("provider_payload",{})) for row in action_rows]
-        return StockDetail(stock=stock,
+        return StockDetail(stock=stock, universe="BIST30_DATED_BULLETIN" if dated else "BIST30_CURRENT_CATALOG",
+                           metadata_current_only=not dated,
                            chart=StockChart(start_date=start,end_date=end,cutoff=cutoff,points=points),
                            signals=[], price_adjustment=adjustment, cutoff=cutoff,
                            corporate_actions=actions,corporate_actions_total=total,

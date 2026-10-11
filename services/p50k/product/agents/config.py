@@ -36,10 +36,14 @@ class AgentConfig:
     total_target_usd: Decimal = Decimal('25')
     case_gap_seconds: int = 300
     timeout_seconds: int = 60
+    demo: bool = False
+    background_reserve_usd: Decimal = Decimal('0.25')
+    rereview_minutes: int = 30
 
     @classmethod
     def from_env(cls, environ: Mapping[str, str] | None = None) -> 'AgentConfig':
         env = os.environ if environ is None else environ
+        demo = env.get('P50K_AGENT_DEMO', '0') == '1'
         base = env.get('P50K_AI_MODEL', DEFAULT_MODEL)
         base_in = _decimal(env.get('P50K_AI_INPUT_USD_PER_MILLION'))
         base_out = _decimal(env.get('P50K_AI_OUTPUT_USD_PER_MILLION'))
@@ -61,7 +65,10 @@ class AgentConfig:
                    fast=role('FAST', 1200), strong=role('STRONG', 2000),
                    daily_cap_usd=_decimal(env.get('P50K_AGENT_DAILY_CAP_USD')) or Decimal('3.00'),
                    total_target_usd=_decimal(env.get('P50K_AI_TOTAL_TARGET_USD')) or Decimal('25'),
-                   case_gap_seconds=_integer(env.get('P50K_AGENT_CASE_GAP_SECONDS'), 300, 0, 86400))
+                   case_gap_seconds=_integer(env.get('P50K_AGENT_CASE_GAP_SECONDS'), 120 if demo else 300, 0, 86400),
+                   demo=demo,
+                   background_reserve_usd=_decimal(env.get('P50K_AGENT_BACKGROUND_RESERVE_USD')) or Decimal('0.25'),
+                   rereview_minutes=_integer(env.get('P50K_AGENT_REREVIEW_MINUTES'), 30, 1, 1440))
 
 
 def _decimal(value: str | None) -> Decimal | None:

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="308" height="256" viewBox="0 -4 308 256" role="img" aria-label="BlackSwan Şüpheci">
+  <title>BlackSwan — Şüpheci</title>
+  <path d="M107 15C107 7 112 3 119 3C126 3 131 7 131 13C131 19 126 21 122 24C120 25.5 119 27 119 31" fill="none" stroke="#9B6FD6" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="119" cy="41" r="4.5" fill="#9B6FD6"/>
+  <g shape-rendering="crispEdges">
+    <g fill="#141413">
+      <rect x="98" y="56" width="42" height="14"/>
+      <rect x="84" y="70" width="70" height="28"/>
+      <rect x="126" y="98" width="28" height="56"/>
+      <rect x="266" y="112" width="14" height="14"/>
+      <rect x="224" y="126" width="56" height="14"/>
+      <rect x="182" y="140" width="98" height="14"/>
+      <rect x="112" y="154" width="168" height="14"/>
+      <rect x="98" y="168" width="182" height="28"/>
+      <rect x="112" y="196" width="154" height="14"/>
+      <rect x="126" y="210" width="126" height="14"/>
+    </g>
+    <rect x="56" y="84" width="28" height="14" fill="#9B6FD6"/>
+    <rect x="98" y="70" width="14" height="14" fill="#F3F2EE"/>
+    <g fill="#DCDFFA">
+      <rect x="84" y="238" width="42" height="14"/>
+      <rect x="154" y="238" width="56" height="14"/>
+      <rect x="238" y="238" width="42" height="14"/>
+    </g>
+  </g>
+</svg>

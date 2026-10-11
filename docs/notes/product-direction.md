@@ -10,24 +10,25 @@ status; insurance is permanently deferred and is no longer an implementation pat
   institutions. The buyer class and revenue direction are decided; pricing, a pilot and customer demand remain
   hypotheses to test.
 - **Asset focus.** Turkish funds and Turkish stocks. Start with the existing historical fund case. Mirza confirmed
-  that stocks must also work in the hackathon demo; stock support is required, not yet implemented. Build it on
-  resume with real entitled data and new stock-specific evidence rules, preserving immutable fund protocols.
-- **Alignment pause.** Finish the immediate chat/import/documentation block, then stop until Mirza resumes.
-  Do not start a new stock feature during this requested pause.
+  that stocks must also work in the hackathon demo. Daily charts, source evidence, current BIST 30 and official
+  dated membership/closes are implemented under DEC-036. Stock anomaly classification/AI remains unimplemented;
+  immutable fund protocols and the original stock capture-time protocol remain preserved.
+- **Alignment pause.** Closed: Mirza resumed and authorized parallel product work. The current completion deadline
+  is Sunday 2026-10-11 12:30, before the 13:00 code freeze.
 - **Institutional workflow.** Deterministic detectors produce evidence, agents explain and assess it, and human
   reviewers can override every decision. Preserve the original decision, evidence references and review trail.
 - **Insurance.** Permanently deferred. Build no insurance screens, eligibility checks, policy writer, policy PDFs
   or insurer-review print view.
 - **Publication.** Commercial data rights remain unreviewed. Real data stays on localhost; the revenue direction
   does not authorize resale, deployment or a claim that institutions already want to buy it.
-- **Design.** Mirza will supply the design system and logos soon; existing approved tokens and the text wordmark
-  remain until then.
+- **Design.** All 22 supplied Figma frames were read and implemented; the supplied SVG agent mascots replace the
+  earlier temporary art. Existing approved dark/light tokens remain the design system.
 
 ## What stays constant
 
 - **The core.** Scientific, mathematical anomaly evidence for Turkish funds and stocks, with the historical fund
-  case implemented first. Stock support is required in the hackathon demo; implementation and entitled sources
-  still need work after the alignment pause.
+  case implemented first. The stock price/membership slice uses real sources and dated admission rules;
+  stock anomaly classifiers and commercial redistribution rights still need work.
 - **AI-native.** An LLM decides from the deterministic detector evidence, a human can override every decision,
   and users talk to the LLM in the product (DEC-028).
 - **Data scope.** Every downloaded fund is in scope (DEC-029). Each detector result is a development result, not a

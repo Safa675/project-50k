@@ -174,7 +174,7 @@ describe('polling, scope and paths', () => {
     expect(pollDelay(false, false, 9)).toBe(120000);
   });
   it('names the analysis date in Turkish and recognises fund pages', () => {
-    expect(scopeLabel('asof:2026-09-12')).toEqual({date: '12 Eylül 2026', mode: 'Retrospektif inceleme'});
+    expect(scopeLabel('asof:2026-09-12')).toEqual({date: '12 Eylül 2026', mode: 'İnceleme tarihi'});
     expect(scopeLabel('live')).toEqual({date: null, mode: 'Güncel görünüm'});
     expect(fundFromPath('/funds/SYN1')).toBe('SYN1');
     expect(fundFromPath('/funds')).toBeNull();

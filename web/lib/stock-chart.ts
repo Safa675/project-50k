@@ -4,7 +4,19 @@ export type StockPoint = {
   available_at: string|null;
   source_sha256: string;
   ambiguous_revision: boolean;
+  source_id?: string|null;
 };
+
+export function stockSourceLabel(source: string|null|undefined): string {
+  return source === 'borsaistanbul-thb' ? 'Borsa İstanbul günlük bülteni' : source === 'forinvest' ? 'ForInvest' : 'Kaynak belirtilmedi';
+}
+
+export function stockAvailableTime(value: string|null|undefined): string {
+  const parsed = value ? new Date(value) : null;
+  return parsed && Number.isFinite(parsed.getTime())
+    ? new Intl.DateTimeFormat('tr-TR', {dateStyle: 'medium', timeStyle: 'short', timeZone: 'Europe/Istanbul'}).format(parsed)
+    : 'Zaman bilinmiyor';
+}
 
 type Coordinate = {x: number; y: number};
 export function stockSeries(points: StockPoint[]): Coordinate[][] {
