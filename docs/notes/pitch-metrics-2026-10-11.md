@@ -1,5 +1,31 @@
 # BlackSwan pitch metrics — real historical data
 
+## Latest: actual full-cohort agent run, completed 13:35 Istanbul
+
+Use the [verified agent evaluation](agent-cohort-results-2026-10-11.md) when describing
+the working agent pipeline. All original 100 funds were selected for review; 98
+completed all four real AI stages, and two had output-validation failures. Seven
+received further-review recommendations: four of the eight later liquidation-order
+funds (THF, TP2, PRY, PNU) and three of the other 92. The four not flagged were DFI,
+DOH and KHA (insufficient evidence), and TLY (no escalation recommended).
+
+This used the same deployed agent code in an isolated snapshot to protect Claude's
+video recording. Six original reports were reused and 94 reviews processed now;
+runtime 13 minutes 20 seconds, additional API cost USD 3.4889325. The live demo's
+records were not changed. Two reused reports predate the monthly test: 96 of the
+100 have both full AI-stage completion and all five current code tests.
+
+Pitch sentence: **12 Eylül'de bilinebilen verilerle yaptığımız 100 fonluk tarihsel
+testte, ajan ekibimiz 7 fonu ileri incelemeye ayırdı. Bu 7 fonun 4'ü, 17 Eylül'de
+tasfiye kararı verilen 8 fon arasındaydı.**
+
+Context: **Geriye dönük geliştirme testidir; bağımsız doğrulama yapılmamıştır.
+Dört ajan adımı 98 fonda tamamlandı; 2 fonda teknik doğrulama hatası oluştu.**
+
+The earlier 5/8 below remains a SEPARATE combined price/portfolio research result.
+Do not substitute it for the actual agent result of 4/8. Do not call the three
+outside-list recommendations proven errors, or claim validated prediction accuracy.
+
 Verified against the real product database and the unchanged evaluation plus isolated monthly experiment on
 2026-10-11. Use everyday language and keep the method label attached to each result.
 
