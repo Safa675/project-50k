@@ -429,6 +429,8 @@ export function fundFromPath(path: string): string | null {
 
 export const AGENTS_REFRESH = 'blackswan-agents-refresh';
 export const AGENTS_OPEN = 'blackswan-agents-open';
+/** Closes the panel, e.g. when a link inside it points at a section of the current page. */
+export const AGENTS_CLOSE = 'blackswan-agents-close';
 
 export function requestError(status: number, code?: string | null): string {
   if (status === 401) return 'Oturumunuz sona erdi. Yeniden giriş yapın.';

@@ -19,8 +19,15 @@ const ingestStatus:Record<string,string> = {RUNNING:'İçe aktarım sürüyor',S
 const ingestTable:Record<string,string> = {'ref.funds':'Fon kataloğu','obs.fund_prices':'Günlük fon fiyatı','obs.fund_snapshots':'Fon anlık kaydı','obs.kap_documents':'KAP belgesi','obs.kap_series':'KAP rapor serisi','obs.regulatory_events':'Düzenleyici olay','ref.stock_instruments':'Hisse kataloğu','obs.stock_prices':'Günlük hisse fiyatı',stocks:'Hisse verileri'};
 const countLabel:Record<string,string> = {input:'Okunan',inserted:'Eklenen',missing:'Eksik',non_null:'Mevcut',instruments:'Hisseler',prices:'Fiyat kayıtları',actions:'Kurumsal olaylar',inserted_prices:'Eklenen fiyatlar',missing_prices:'Eksik fiyatlar',inserted_actions:'Eklenen olaylar'};
 
+type TeamCounts = {open_cases:number;queued:number;running:number;done_today:number};
+async function teamCounts():Promise<TeamCounts|null>{
+  try{const response=await serverApi('/agents/team');if(!response.ok)return null;const counts=(await response.json())?.counts;
+    return counts&&['open_cases','queued','done_today'].every(key=>Number.isInteger(counts[key]))?counts as TeamCounts:null;}
+  catch{return null;}
+}
+
 export default async function Workflow(){
-  const [user,response]=await Promise.all([requireUser(),serverApi('/workflow')]);
+  const [user,response,team]=await Promise.all([requireUser(),serverApi('/workflow'),teamCounts()]);
   if(!response.ok)throw new Error('İş akışı bilgisi alınamadı.');
   const data=await response.json() as Overview;
   if(!data.evidence||!data.decisions||!data.jobs||!data.stocks||!Number.isInteger(data.fund_catalog_count))throw new Error('İş akışı bilgisi okunamadı.');
@@ -34,7 +41,7 @@ export default async function Workflow(){
       <li><span className="eyebrow">04 · ERİŞİM</span><h2>Kurumunuzla bağlantı</h2><p>Fonlar, fiyatlar ve gelişmeler API üzerinden de okunabilir. Erişim için oturum açılması gerekir.</p><a href="http://127.0.0.1:8770/docs" target="_blank" rel="noreferrer">API belgelerini aç</a></li>
     </ol>
     <article><h2>Fonlarda son durum</h2><p>Katalogda {number(data.fund_catalog_count)} fon bulunuyor. Son incelemelerde:</p><dl className={styles.metrics}><div><dt>İnceleme gereken değişim</dt><dd>{number(data.evidence.triggered)}</dd></div><div><dt>İnceleme sınırı aşılmadı</dt><dd>{number(data.evidence.not_triggered)}</dd></div><div><dt>Bilgi yetersiz</dt><dd>{number(data.evidence.abstained)}</dd></div></dl>{data.run?<p className="muted">İncelenen son veri tarihi: {dateTr(data.run.as_of)} · İnceleme zamanı: {time(data.run.created_at)}</p>:<p>Henüz tamamlanmış bir fon incelemesi yok.</p>}<p className="muted">Sayılar ayrı inceleme sonuçlarını gösterir; aynı fon birden fazla incelemede yer alabilir.</p></article>
-    <article><div className={styles.row}><h2>BIST 30 hisseleri</h2><Link href="/stocks">Hisseleri aç</Link></div>{data.stocks.state==='DAILY_PRICES_AVAILABLE'?<p>{number(data.stocks.symbols_with_prices)} hisse için {number(data.stocks.price_observations)} günlük fiyat kaydı mevcut.</p>:<p>Hisse fiyatları henüz alınamadı.</p>}{data.stocks.catalog_captured_at&&<p className="muted">Katalog tarihi: {time(data.stocks.catalog_captured_at)}. Hisselerin günlük fiyatları ve kaynakları incelenebilir.</p>}</article>
-    <article><h2>İncelemelerin ilerleyişi</h2><dl className={styles.metrics}><div><dt>Sırada</dt><dd>{number(data.jobs.ready)}</dd></div><div><dt>İnceleniyor</dt><dd>{number(data.jobs.running)}</dd></div><div><dt>Tamamlandı</dt><dd>{number(data.jobs.succeeded)}</dd></div>{data.jobs.failed>0&&<div><dt>Tamamlanamadı</dt><dd>{number(data.jobs.failed)}</dd></div>}</dl>{data.latest_ingest&&<p className="muted">{ingestStatus[data.latest_ingest.status]??'Veri alımı kontrol ediliyor'}{data.latest_ingest.finished_at&&` · ${time(data.latest_ingest.finished_at)}`}</p>}</article>
+    <article><div className={styles.row}><h2>BIST 30 hisseleri</h2><Link href="/stocks">Hisseleri aç</Link></div>{data.stocks.state==='DAILY_PRICES_AVAILABLE'?<p>{number(data.stocks.symbols_with_prices)} hisse için {number(data.stocks.price_observations)} günlük fiyat kaydı mevcut.</p>:<p>Seçili tarih için kullanılabilir hisse fiyatı yok.</p>}{data.stocks.catalog_captured_at&&<p className="muted">Katalog tarihi: {time(data.stocks.catalog_captured_at)}. Hisselerin günlük fiyatları ve kaynakları incelenebilir.</p>}</article>
+    <article><div className={styles.row}><h2>İncelemelerin ilerleyişi</h2>{team&&<Link href="/ekip">Ajan ekibini aç</Link>}</div>{team?<dl className={styles.metrics}><div><dt>Açık vaka</dt><dd>{number(team.open_cases)}</dd></div><div><dt>Sıradaki ajan görevi</dt><dd>{number(team.queued)}</dd></div><div><dt>Bugün tamamlanan görev</dt><dd>{number(team.done_today)}</dd></div></dl>:<dl className={styles.metrics}><div><dt>Sırada</dt><dd>{number(data.jobs.ready)}</dd></div><div><dt>İnceleniyor</dt><dd>{number(data.jobs.running)}</dd></div><div><dt>Tamamlandı</dt><dd>{number(data.jobs.succeeded)}</dd></div>{data.jobs.failed>0&&<div><dt>Tamamlanamadı</dt><dd>{number(data.jobs.failed)}</dd></div>}</dl>}{data.latest_ingest&&<p className="muted">{ingestStatus[data.latest_ingest.status]??'Veri alımı kontrol ediliyor'}{data.latest_ingest.finished_at&&` · ${time(data.latest_ingest.finished_at)}`}</p>}</article>
   </section>;
 }

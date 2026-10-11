@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import {useEffect, useState} from 'react';
-import {AGENT_ROLES, type AgentMessage, type AgentRole, type CaseDetail, HUMAN_META, type QueueItem, ROLE_META, type Workspace, caseStatusLabel,
+import {AGENTS_CLOSE, AGENT_ROLES, type AgentMessage, type AgentRole, type CaseDetail, HUMAN_META, type QueueItem, ROLE_META, type Workspace, caseStatusLabel,
   clockTime, kindLabel, parseCase, parseWorkspace, participantName, relativeTime, taskStatusLabel} from '@/lib/agents';
 import RoleGlyph from './RoleGlyph';
 
@@ -144,7 +144,8 @@ export function CaseTimeline({caseId}: {caseId: string}) {
       </li></ol>
     {data.case.has_decision && data.case.fund_code && <div className="ag-decision">
       <p>Raportörün önerisi insan incelemesine sunuldu. Bir analist öneriyi kabul edebilir, gerekçesiyle değiştirebilir veya reddedebilir; yapay zekânın ilk önerisi her durumda korunur.</p>
-      <Link className="ag-primary" href={`/funds/${data.case.fund_code}#karar`}>İnsan kararına git</Link>
+      <Link className="ag-primary" href={`/funds/${data.case.fund_code}#karar`}
+        onClick={() => window.dispatchEvent(new Event(AGENTS_CLOSE))}>İnsan kararına git</Link>
     </div>}
     <Timeline items={data.messages} now={now}/>
   </div>;
