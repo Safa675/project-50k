@@ -72,10 +72,14 @@ def create_app(settings: Settings | None = None, readiness: Callable[[Settings],
         if request.url.path not in public_paths and not (request.url.path=='/context' and request.method=='GET'):
             from p50k.product.auth import SESSION_COOKIE, AuthenticationError, AuthService, check_session_csrf
             try:
-                principal = await asyncio.to_thread(AuthService(config).authenticate, request.cookies.get(SESSION_COOKIE, ""))
-                request.state.principal = principal
-                if request.method not in {"GET", "HEAD", "OPTIONS"}:
-                    check_session_csrf(request, config, principal)
+                if config.local_open_email:
+                    # Single-user local mode: no login; every request acts as one existing user.
+                    request.state.principal = await asyncio.to_thread(AuthService(config).local_principal, config.local_open_email)
+                else:
+                    principal = await asyncio.to_thread(AuthService(config).authenticate, request.cookies.get(SESSION_COOKIE, ""))
+                    request.state.principal = principal
+                    if request.method not in {"GET", "HEAD", "OPTIONS"}:
+                        check_session_csrf(request, config, principal)
             except AuthenticationError as error:
                 return JSONResponse({"error": error.code}, status_code=error.status, headers={"Cache-Control": "no-store"})
             except Exception as error:

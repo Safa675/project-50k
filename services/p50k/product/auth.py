@@ -25,6 +25,7 @@ from p50k.product.settings import Settings
 SESSION_COOKIE = "p50k_session"
 CSRF_COOKIE = "p50k_csrf"
 LOGIN_CSRF_COOKIE = "p50k_login_csrf"
+LOCAL_SESSION_ID = "local-open-mode"
 ABSOLUTE_LIFETIME = timedelta(hours=12)
 IDLE_LIFETIME = timedelta(hours=2)
 LOGIN_WINDOW = timedelta(minutes=15)
@@ -174,6 +175,15 @@ class AuthService:
             connection.execute("""UPDATE auth.sessions SET last_seen_at=%s
                 WHERE session_id=%s AND revoked_at IS NULL""", (now, row[0]))
         return Principal(str(row[2]), row[3], row[4], str(row[0]), row[1], row[5])
+
+    def local_principal(self, email: str) -> Principal:
+        """Single-user local mode: act as one existing enabled user, with no session row or cookie."""
+        with connect(self.settings) as connection:
+            row = connection.execute("""SELECT user_id,email,role,avatar_path FROM auth.users
+                WHERE email=%s AND disabled_at IS NULL""", (normalized_email(email),)).fetchone()
+        if row is None:
+            raise AuthenticationError("LOCAL_USER_MISSING", 503)
+        return Principal(str(row[0]), row[1], row[2], LOCAL_SESSION_ID, "", row[3])
 
     def login(self, email: str, password: SecretStr, ip: str, previous_token: str = "",
               now: datetime | None = None) -> tuple[Principal, str, str]:

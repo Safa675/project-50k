@@ -63,6 +63,61 @@ class AuthUnitTests(unittest.TestCase):
             self.assertEqual(client.post("/auth/logout").status_code, 401)
 
 
+class LocalOpenModeTests(unittest.TestCase):
+    """Single-user local mode: opt-in, off by default, one existing enabled user, no cookie or CSRF."""
+    EMAIL = "synthetic-local@example.invalid"
+
+    def client(self, **values):
+        settings = Settings.from_env({"P50K_LOCAL_OPEN_EMAIL": self.EMAIL} if values.get("enabled", True) else {})
+        return TestClient(create_app(settings, readiness=lambda _: True), base_url="http://127.0.0.1:3071")
+
+    def test_mode_is_off_unless_explicitly_configured(self):
+        self.assertEqual(Settings.from_env({}).local_open_email, "")
+        self.assertEqual(Settings().local_open_email, "")
+        with self.client(enabled=False) as client:
+            self.assertEqual(client.get("/auth/me").status_code, 401)
+
+    def test_configured_email_is_normalized_and_validated(self):
+        self.assertEqual(Settings.from_env({"P50K_LOCAL_OPEN_EMAIL": " Local@Example.Invalid "}).local_open_email,
+                         "local@example.invalid")
+        with self.assertRaises(ValueError):
+            Settings.from_env({"P50K_LOCAL_OPEN_EMAIL": "not-an-email"})
+
+    def test_requests_act_as_the_local_user_without_cookie_or_csrf(self):
+        principal = Principal(str(uuid4()), self.EMAIL, "admin", "local-open-mode", "", None)
+        with patch("p50k.product.auth.AuthService.local_principal", return_value=principal) as lookup, \
+                patch("p50k.product.auth.AuthService.authenticate") as authenticate, \
+                self.client() as client:
+            me = client.get("/auth/me")
+            self.assertEqual(me.status_code, 200, me.text)
+            self.assertEqual(me.json()["user"]["email"], self.EMAIL)
+            self.assertEqual(me.json()["user"]["role"], "admin")
+            # A mutating request without session or CSRF cookie reaches validation instead of 401/403.
+            self.assertEqual(client.post("/auth/password", json={}).status_code, 422)
+            self.assertEqual(client.post("/auth/logout").json(), {"logged_out": False, "local_open": True})
+        lookup.assert_called_with(self.EMAIL)
+        authenticate.assert_not_called()
+
+    def test_missing_local_user_fails_closed_with_service_unavailable(self):
+        with patch("p50k.product.auth.connect", return_value=FakeConnection()), self.client() as client:
+            response = client.get("/auth/me")
+        self.assertEqual(response.status_code, 503)
+        self.assertEqual(response.json(), {"error": "LOCAL_USER_MISSING"})
+
+    def test_local_principal_reads_one_enabled_user_by_normalized_email(self):
+        user_id = str(uuid4())
+        connection = FakeConnection()
+        connection.execute = lambda statement, params=(): (
+            connection.calls.append((" ".join(statement.split()), params)),
+            type("Cursor", (), {"fetchone": staticmethod(lambda: (user_id, self.EMAIL, "analyst", None))})())[1]
+        with patch("p50k.product.auth.connect", return_value=connection):
+            principal = AuthService(Settings()).local_principal("  " + self.EMAIL.upper() + " ")
+        self.assertEqual((principal.user_id, principal.role, principal.avatar_path), (user_id, "analyst", None))
+        statement, params = connection.calls[0]
+        self.assertIn("disabled_at IS NULL", statement)
+        self.assertEqual(params, (self.EMAIL,))
+
+
 class AvatarUnitTests(unittest.TestCase):
     def test_avatar_paths_are_same_origin_static_files_only(self):
         for value in ("/avatars/mirza.jpg", "/avatars/a.png", "/avatars/team-1.webp", "/avatars/" + "a" * 40 + ".jpg"):
