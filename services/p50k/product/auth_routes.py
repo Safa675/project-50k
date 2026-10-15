@@ -53,6 +53,8 @@ def me(request: Request, principal: Principal = Depends(require_session)):
 
 @router.post("/logout")
 def logout(request: Request, response: Response, principal: Principal = Depends(require_session)):
+    if request.app.state.product_settings.local_open_email:
+        return {"logged_out": False, "local_open": True}  # no session exists to revoke in single-user local mode
     AuthService(request.app.state.product_settings).logout(principal)
     for name in (SESSION_COOKIE, CSRF_COOKIE, LOGIN_CSRF_COOKIE):
         response.delete_cookie(name, path="/")

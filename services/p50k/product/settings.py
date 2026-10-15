@@ -37,6 +37,8 @@ class Settings:
     auth_pepper_file: Path = Path("/run/secrets/auth_pepper")
     cookie_secure: bool = False
     trusted_proxy_hosts: tuple[str, ...] = ("web",)
+    # Single-user local mode: when set, every request acts as this existing user and login is not required.
+    local_open_email: str = ""
 
     @classmethod
     def from_env(cls, environ: Mapping[str, str] | None = None) -> Settings:
@@ -59,6 +61,7 @@ class Settings:
             auth_pepper_file=Path(env.get("P50K_AUTH_PEPPER_FILE", "/run/secrets/auth_pepper")),
             cookie_secure=_boolean(env.get("P50K_COOKIE_SECURE", "false"), "P50K_COOKIE_SECURE"),
             trusted_proxy_hosts=tuple(env.get("P50K_TRUSTED_PROXY_HOSTS", "web").split(",")),
+            local_open_email=env.get("P50K_LOCAL_OPEN_EMAIL", "").strip().lower(),
         )
         settings.validate()
         return settings
@@ -77,6 +80,8 @@ class Settings:
                 raise ValueError("Origins must be explicit loopback HTTP origins")
             if parsed.username or parsed.password or parsed.path or parsed.query or parsed.fragment or parsed.port is None:
                 raise ValueError("Origins must contain only scheme, loopback host and port")
+        if self.local_open_email and not re.fullmatch(r"[^\s@]+@[^\s@]+\.[^\s@]+", self.local_open_email):
+            raise ValueError("Local open mode needs the email of an existing user")
         if self.test_endpoints and self.db_name != "p50k_dev":
             raise ValueError("Proxy test endpoints require the isolated p50k_dev database")
         if self.ai_mode not in {"off", "mock", "live"}:
